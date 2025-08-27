@@ -4,8 +4,8 @@
 
 ## 📌 Datos del Estudiante
 
-- **Nombre y Apellido:**  
-- **Número de Matrícula:**  
+- **Nombre y Apellido:** Fiorella Mosca
+- **Número de Matrícula:** 154108 
 - **Carrera:** Tecnicatura Universitaria en Programación de Sistemas  
 - **Materia:** Programación Web I  
 - **Profesor:** Lic. Matías Velasquez  
@@ -16,41 +16,33 @@
 
 ## 📂 Rama de trabajo
 
-- **Nombre de la rama:** `feature/<rol>-<descripcion>`  
-  _Ejemplo: `feature/frontend-add-html-structure`_
+- **Nombre de la rama:** `feature/coordinador-setup-repo-and-pages`
 
 ---
 
 ## 📝 Descripción del trabajo realizado
 
-_Describir brevemente qué tareas se llevaron a cabo en esta rama, qué archivos se modificaron o agregaron, y qué objetivo se cumplió según el rol asignado._
+En esa rama solo se modificaron los archivos de documentacion, ya que todo el proceso de configuracion fue armado cuando se creo el repositorio para que todos los participantes del equipo puedan trabajar con el repositorio bien configurado. 
 
 ---
 
 ## 📄 Archivos modificados / agregados
 
-- `README.md`  
-- `index.html`  
-- `docs/01-mockup/mockup.png`  
-- `docs/02-prompts/prompt-01.md`  
-_(Agregar o eliminar según corresponda)_
 
 ---
 
 ## ✅ Checklist
 
-- [ ] Trabajé sobre una rama `feature/` creada a partir de `develop`
-- [ ] Realicé commits claros y explicativos
-- [ ] Completé mi sección asignada según el rol
-- [ ] Actualicé el archivo `changelog.md` con el resumen de esta PR
+- [✅] Trabajé sobre una rama `feature/` creada a partir de `develop`
+- [✅] Realicé commits claros y explicativos
+- [✅] Completé mi sección asignada según el rol
+- [✅] Actualicé el archivo `changelog.md` con el resumen de esta PR
 - [ ] Solicité revisión al Coordinador/DevOps
-- [ ] La PR incluye solo cambios relacionados con mi tarea asignada
+- [✅] La PR incluye solo cambios relacionados con mi tarea asignada
 
 ---
 
 ## 🧠 Comentarios adicionales
-
-_(Opcional – Aclaraciones, dificultades encontradas, sugerencias, etc.)_
 
 ---
 

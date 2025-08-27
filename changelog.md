@@ -7,8 +7,8 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 ## [Unreleased]
 
 ### Added
-- [feature/estructura-base] Estructura inicial del proyecto.  
-  PR: [#1](link) - @usuario1 (Coordinador / DevOps)
+- [feature/coordinador-setup-repo-and-pages] Estructura inicial del proyecto.  
+  PR: [#1](https://github.com/fioremos/simulador-planificacion-financiera/pull/2) - @fioremos (Coordinador / DevOps)
 
 - [feature/ia-prompts] Documentación de 5 prompts de IA.  
   PR: [#4](link) - @usuario4 (Especialista en IA)
