@@ -14,8 +14,8 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   PR: [#4](link) - @ulisesc11 (Especialista en IA)
 
 ### Changed
-- [feature/readme-y-mockup] Actualización README.md con mockup.  
-  PR: [#3](link) - @usuario3 (Documentador / Diseñador UX)
+- [feature/readme-y-mockup] Creación de README.md y diseño de mockup inicial en Figma (docs/01-mockup/).  
+  PR: [#3](link) - @skalapuj (Documentador / Diseñador UX)
 
 - [feature/index-html] Estructura HTML5 básica.  
   PR: [#1](feature/frontend-add-html-structure) - @MNEscobar (Desarrollador Frontend)

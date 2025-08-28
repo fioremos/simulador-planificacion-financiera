@@ -39,6 +39,11 @@ Visualmente, el sistema deberá contar con:
 
 Esta maqueta refleja el **qué** queremos lograr en términos visuales, sin definir aún el **cómo** se implementará técnicamente.
 
+### 🔗 Acceso al mockup
+El diseño preliminar de la aplicación se encuentra disponible en Figma en el siguiente enlace: 
+- [Ver mockup en Figma](https://www.figma.com/design/hbgGq77CAkDgbxAwc45AII/Simulador-de-planificaci%C3%B3n-financiera?node-id=0-1&t=ZH1SSly6d7Zphetx-1)
+
+
 ## ✅ Objetivos de esta entrega
 Esta entrega tiene como propósito presentar la primera versión del proyecto, estableciendo una base sólida sobre la cual se desarrollará el simulador de planificación financiera. 
 Esta versión inicial establece la base técnica, visual y documental para el desarrollo futuro.
