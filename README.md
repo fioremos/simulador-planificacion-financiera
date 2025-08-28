@@ -79,7 +79,7 @@ El resultado esperado es un repositorio bien organizado en GitHub, con una estru
 |------------------------|-----------------|----------------|-----------------------------------------|
 |    Sol Ailen Kalpuj    |      154106     |   @skalapuj    |      Documentador / Diseñador UX        |
 |     Fiorella Mosca     |      154108     |   @fioremos    |         Coordinador / DevOps            | 
-| Matías Nicolás Escobar |      XXXXXX     |   @MNEscobar   |         Desarrollador Frontend          |  
+| Matías Nicolás Escobar |      151251     |   @MNEscobar   |         Desarrollador Frontend          |  
 |     Ulises Capriles    |      146291     |   @UlisesC11   | Especialista en IA y Prompt Engineering |  
 
 <pre>
