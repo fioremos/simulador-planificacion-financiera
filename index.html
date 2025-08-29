@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FunGrow</title>
+</head>
+<body>
+    <!-- PANTALLA DE LOGIN -->
+    <section id="login" class="screen">
+        <div class="login-container">
+            <h1>FinGrow</h1>
+            <p>Organiza tus finanzas fácil y rápido</p>
+
+            <form id="login-form">
+                <input type="text" placeholder="Usuario" required>
+                <input type="password" placeholder="Contraseña" required>
+                <button type="submit">Iniciar sesión</button>
+                <button type="button">Registrarse</button>
+                <button type="button">Continuar con Google</button>
+            </form>
+        </div>
+    </section>
+
+
+    <!-- DASHBOARD PRINCIPAL -->
+    <!-- Se aplica CSS para estructura, colores y JS para manejar la navegación -->
+    <section id="dashboard" class="screen" style="display:none;">
+        <!-- BARRA DE NAVEGACIÓN -->
+        <aside class="sidebar">
+            <h2>FinGrow</h2>
+            <nav>
+                <ul>
+                    <li><a href="#dashboard">Dashboard</a></li>
+                    <li><a href="#ingresos-gastos">Ingresos y Gastos</a></li>
+                    <li><a href="#metas">Metas de ahorro</a></li>
+                    <li><a href="#inversiones">Inversiones</a></li>
+                    <li><a href="#reportes">Reportes y Estadísticas</a></li>
+                    <li><a href="#historial">Historial y Auditoría</a></li>
+                    <li><a href="#exportar">Exportación de Datos</a></li>
+                    <li><a href="#configuracion">Configuración</a></li>
+                </ul>
+            </nav>
+            <button class="logout">Cerrar Sesión</button>
+        </aside>
+
+        <!-- CONTENIDO PRINCIPAL -->
+        <main class="content">
+            <!-- Resumen financiero -->
+            <section id="resumen-financiero">
+                <h3>Resumen financiero</h3>
+                <div class="chart"><!-- Gráficos con JS --></div>
+                <p>Disponible: <strong>$50.258,85</strong></p>
+            </section>
+
+            <!-- Últimos movimientos -->
+            <section id="ultimos-movimientos">
+                <h3>Últimos movimientos</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Categoría</th>
+                            <th>Monto</th>
+                            <th>Nota</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Ene 31</td>
+                            <td>PC</td>
+                            <td>$14.500</td>
+                            <td>-</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </main>
+    </section>
+
+    <!-- GESTIÓN DE INGRESOS Y GASTOS -->
+    <section id="ingresos-gastos" class="screen" style="display:none;">
+        <h2>Gestión de ingresos y gastos</h2>
+        <form id="form-ingresos">
+            <label>Fecha: <input type="date" required></label>
+            <label>Categoría: <input type="text" required></label>
+            <label>Monto: <input type="number" required></label>
+            <button type="submit">Agregar</button>
+        </form>
+        <table>
+            <thead>
+                <tr>
+                    <th>Fecha</th>
+                    <th>Categoría</th>
+                    <th>Monto</th>
+                    <th>Tipo</th>
+                </tr>
+            </thead>
+            <tbody><!-- Agregar JS --></tbody>
+        </table>
+    </section>
+
+    <!-- METAS DE AHORRO -->
+    <section id="metas" class="screen" style="display:none;">
+        <h2>Metas de ahorro</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Meta</th>
+                    <th>Objetivo</th>
+                    <th>Restante</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Viaje</td>
+                    <td>$700.000</td>
+                    <td>$210.000</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <!-- INVERSIONES -->
+    <section id="inversiones" class="screen" style="display:none;">
+        <h2>Inversiones</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Activo</th>
+                    <th>Precio</th>
+                    <th>Cambio</th>
+                </tr>
+            </thead>
+            <tbody><!-- Datos de inversión con JS --></tbody>
+        </table>
+        <div class="grafico-inversiones"><!-- Gráfico con JS --></div>
+    </section>
+
+    <!-- REPORTES Y ESTADÍSTICAS -->
+
+    <section id="reportes" class="screen" style="display:none;">
+        <h2>Reportes y estadísticas</h2>
+        <div class="grafico-reportes"><!-- Gráficos con JS --></div>
+    </section>
+
+    <!-- HISTORIAL Y AUDITORÍA -->
+    <section id="historial" class="screen" style="display:none;">
+        <h2>Historial y Auditoría</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Fecha</th>
+                    <th>Acción</th>
+                    <th>Resultado</th>
+                </tr>
+            </thead>
+            <tbody><!-- Se llenará con JS --></tbody>
+        </table>
+    </section>
+
+    <!-- EXPORTACIÓN DE DATOS -->
+    <section id="exportar" class="screen" style="display:none;">
+        <h2>Exportación de datos</h2>
+        <form id="form-exportar">
+            <fieldset>
+                <legend>Datos a exportar</legend>
+                <label><input type="checkbox"> Ingresos y Gastos</label>
+                <label><input type="checkbox"> Metas</label>
+                <label><input type="checkbox"> Inversiones</label>
+                <label><input type="checkbox"> Reportes</label>
+                <label><input type="checkbox"> Auditoría</label>
+            </fieldset>
+            <fieldset>
+                <legend>Tipo de archivo</legend>
+                <label><input type="radio" name="tipo"> CSV</label>
+                <label><input type="radio" name="tipo"> XLSX</label>
+                <label><input type="radio" name="tipo"> PDF</label>
+            </fieldset>
+            <button type="submit">Exportar</button>
+        </form>
+    </section>
+
+    <!-- CONFIGURACIÓN DE USUARIO -->
+    <section id="configuracion" class="screen" style="display:none;">
+        <h2>Configuración de usuario</h2>
+        <form id="form-config">
+            <label>Nombre: <input type="text" required></label>
+            <label>Email: <input type="email" required></label>
+            <label>Contraseña: <input type="password" required></label>
+            <button type="submit">Actualizar</button>
+        </form>
+        <h3>Preferencias</h3>
+        <label><input type="checkbox"> Notificaciones por correo</label>
+    </section>
+</body>
+</html>
