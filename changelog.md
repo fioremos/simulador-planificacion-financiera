@@ -18,7 +18,7 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   PR: [#3](link) - @usuario3 (Documentador / Diseñador UX)
 
 - [feature/index-html] Estructura HTML5 básica.  
-  PR: [#2](link) - @usuario2 (Desarrollador Frontend)
+  PR: [#1](feature/frontend-add-html-structure) - @MNEscobar (Desarrollador Frontend)
 
 ### Fixed
 - [feature/fix-rutas] Corrección de rutas en README.md.  
