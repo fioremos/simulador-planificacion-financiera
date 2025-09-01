@@ -11,7 +11,7 @@ Donde habran 9 pantallas diferentes navegables mediante un sidebar, estas pantal
 ```
 
 **Captura de pantalla del prompt solicitado:**  
-![alt text](image-4.png)
+![alt text](image.png)
 
 **Resultado esperado:**  
 Una guia basica para poder ir estructurando la base de la pagina con sus diferentes secciones/pantallas navegables.  
@@ -20,7 +20,7 @@ Una guia basica para poder ir estructurando la base de la pagina con sus diferen
 Una guia con razonamiento paso a paso sobre decisiones de diseño. Estructura global y esqueleto HTML5
 
 **Captura de pantalla del resultado obtenido:**  
-![alt text](image-5.png)
+![alt text](image-1.png)
 
 **Correcciones manuales realizadas:**
 * Se ajusto el contenido para ser adaptado al proyecto

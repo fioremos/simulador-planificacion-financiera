@@ -10,7 +10,7 @@ razona paso a paso y genera una guia para integrar bibliotecas de gráficos (Cha
 ```
 
 **Captura de pantalla del prompt solicitado:**  
-![alt text](image-11.png)
+![alt text](image-8.png)
 
 **Resultado esperado:**  
 * Componente React funcional listo para usar.
@@ -22,7 +22,7 @@ razona paso a paso y genera una guia para integrar bibliotecas de gráficos (Cha
 * Gráfico lineal renderiza correctamente con datos simulados.
 
 **Captura de pantalla del resultado obtenido:**  
-![alt text](image-12.png)
+![alt text](image-9.png)
 
 **Correcciones manuales realizadas:**  
 * Ajuste los nombres de props de labels y valores para que fueran consistentes con los datos del proyecto.
