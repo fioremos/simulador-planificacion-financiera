@@ -10,7 +10,7 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 - [feature/coordinador-setup-repo-and-pages] Estructura inicial del proyecto.  
   PR: [#1](https://github.com/fioremos/simulador-planificacion-financiera/pull/2) - @fioremos (Coordinador / DevOps)
 
-- [feature/ia-add-prompts-1-to-5] Documentación de 5 prompts de IA.
+- [feature/ia-add-prompts-1-to-5] Documentación de 5 prompts de IA.  
   PR: [#4](link) - @ulisesc11 (Especialista en IA)
 
 ### Changed
