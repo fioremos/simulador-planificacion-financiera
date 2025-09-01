@@ -10,7 +10,7 @@ Actua como un desarrollador web senior y explica como estructurar estilos CSS3 y
 ```
 
 **Captura de pantalla del prompt solicitado:**  
-![alt text](image-6.png)
+![alt text](image-4.png)
 
 **Resultado esperado:**  
 Obtener una guía clara y profesional sobre como organizar los estilos CSS3 y plantear un diseño responsive
@@ -21,7 +21,7 @@ Obtener una guía clara y profesional sobre como organizar los estilos CSS3 y pl
 * Ejemplo de media queries mobile-first para sidebar responsive.
 
 **Captura de pantalla del resultado obtenido:**  
-![alt text](image-7.png)
+![alt text](image-5.png)
 
 **Correcciones manuales realizadas:**
 * Se ajusto el contenido para ser adaptado al proyecto.  
