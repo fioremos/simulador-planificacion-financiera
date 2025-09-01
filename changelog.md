@@ -10,8 +10,8 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 - [feature/estructura-base] Estructura inicial del proyecto.  
   PR: [#1](link) - @usuario1 (Coordinador / DevOps)
 
-- [feature/ia-prompts] Documentación de 5 prompts de IA.  
-  PR: [#4](link) - @usuario4 (Especialista en IA)
+- [feature/ia-add-prompts-1-to-5] Documentación de 5 prompts de IA.
+  PR: [#4](link) - @ulisesc11 (Especialista en IA)
 
 ### Changed
 - [feature/readme-y-mockup] Actualización README.md con mockup.  
