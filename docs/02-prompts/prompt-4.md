@@ -1,16 +1,16 @@
-# Prompt 4
+# Prompt 4  
 
 **Modelo:**  gpt-5-mini (OpenAI)  
-**Metodo de Prompt:** Chain-of-thought prompting
+**Método de Prompt:** Chain-of-thought prompting  
 
-**Prompt exacto en texto:**
+**Prompt exacto en texto:**  
 
 ``` bash
-razona paso a paso y genera una guia para integrar OAuth (Google) para un proyecto llamado "Simulador de Planificación Financiera"
+Razoná paso a paso y genera una guía para integrar OAuth (Google) para un proyecto llamado "Simulador de Planificación Financiera".
 ```
 
 **Captura de pantalla del prompt solicitado:**  
-![alt text](image-7.png)
+![Captura del prompt](..\02-prompts\capturas\prompt-4\prompt.png)  
 
 **Resultado esperado:**  
 Una guía completa, paso a paso, que permita a un desarrollador integrar OAuth de Google en su proyecto web.  
@@ -20,12 +20,12 @@ Una guía completa, paso a paso, que permita a un desarrollador integrar OAuth d
 * Instrucciones detalladas de configuración en Google Cloud Console.  
 
 **Captura de pantalla del resultado obtenido:**  
-![alt text](image-6.png)
+![Captura del resultado](..\02-prompts\capturas\prompt-4\resultado.png)  
 
 **Correcciones manuales realizadas:**
-* Se ajusto el contenido para ser adaptado al proyecto.  
+* Se ajustó el contenido para ser adaptado al proyecto.  
 
-**Aplicacion en el proyecto:**  
-Archivo `frontend/login.html` - boton "iniciar sesion con Google"  
-Archivo `backend/server.js`  - endpoints  
-Archivo `.env` - variables de entorno
+**Aplicación en el proyecto:**  
+Archivo `frontend/login.html` - boton "iniciar sesión con Google".  
+Archivo `backend/server.js`  - endpoints.  
+Archivo `.env` - variables de entorno.  
