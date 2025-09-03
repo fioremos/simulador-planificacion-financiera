@@ -1,29 +1,28 @@
 # Prompt 1
 
 **Modelo:** gpt-5-mini (OpenAI)   
-**Metodo de Prompt:** Chain-of-thought prompting  
+**Método de Prompt:** Chain-of-thought prompting  
 
 **Prompt exacto en texto:**
 
 ``` bash
-razona paso a paso y genera una guia para estructurar el HTML5 para una pagina de "simulador de planificacion financiera". 
-Donde habran 9 pantallas diferentes navegables mediante un sidebar, estas pantallas son las siguientes: Login. Dashboard Principal. Ingresos y Gastos. Metas de ahorro. Inversiones. Reportes. Historial y Auditoria. Exportacion de Datos. Configuracion de Usuario.
+Razoná paso a paso y genera una guía para estructurar el HTML5 para una página de "Simulador de Planificación Financiera", donde habrán 9 pantallas diferentes navegables mediante un sidebar. Estas pantallas son las siguientes: Login. Dashboard Principal. Ingresos y Gastos. Metas de ahorro. Inversiones. Reportes. Historial y Auditoria. Exportación de Datos. Configuración de Usuario.
 ```
 
 **Captura de pantalla del prompt solicitado:**  
-![alt text](image.png)
+![Captura del prompt](..\02-prompts\capturas\prompt-1\prompt.png)  
 
 **Resultado esperado:**  
-Una guia basica para poder ir estructurando la base de la pagina con sus diferentes secciones/pantallas navegables.  
+Una guía básica para poder ir estructurando la base de la página con sus diferentes secciones/pantallas navegables.  
 
 **Resultado obtenido:**  
-Una guia con razonamiento paso a paso sobre decisiones de diseño. Estructura global y esqueleto HTML5
+Una guía con razonamiento paso a paso sobre decisiones de diseño. Estructura global y esqueleto HTML5.  
 
 **Captura de pantalla del resultado obtenido:**  
-![alt text](image-1.png)
+![Captura del resultado](..\02-prompts\capturas\prompt-1\resultado.png)  
 
 **Correcciones manuales realizadas:**
-* Se ajusto el contenido para ser adaptado al proyecto
+* Se ajustó el contenido para ser adaptado al proyecto.  
 
-**Aplicacion en el proyecto:**  
-Archivo `index.html`
+**Aplicación en el proyecto:**  
+Archivo `index.html`  
