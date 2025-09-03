@@ -10,7 +10,7 @@ Razoná paso a paso y genera una guía para integrar bibliotecas de gráficos (C
 ```
 
 **Captura de pantalla del prompt solicitado:**  
-![Captura del prompt](..\02-prompts\capturas\prompt-5\prompt.png)  
+![Captura del prompt](../02-prompts/capturas/prompt-5/prompt.png)  
 
 **Resultado esperado:**   
 * Componente React funcional listo para usar.  
@@ -22,7 +22,7 @@ Razoná paso a paso y genera una guía para integrar bibliotecas de gráficos (C
 * Gráfico lineal renderiza correctamente con datos simulados.  
 
 **Captura de pantalla del resultado obtenido:**  
-![Captura del resultado](..\02-prompts\capturas\prompt-5\resultado.png)  
+![Captura del resultado](../02-prompts/capturas/prompt-5/resultado.png)  
 
 **Correcciones manuales realizadas:**  
 * Ajuste los nombres de props de labels y valores para que fueran consistentes con los datos del proyecto.  
