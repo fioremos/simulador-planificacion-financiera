@@ -10,7 +10,7 @@ Razoná paso a paso y genera una guía para estructurar el HTML5 para una págin
 ```
 
 **Captura de pantalla del prompt solicitado:**  
-![Captura del prompt](..\02-prompts\capturas\prompt-1\prompt.png)  
+![Captura del prompt](../02-prompts/capturas/prompt-1/prompt.png)  
 
 **Resultado esperado:**  
 Una guía básica para poder ir estructurando la base de la página con sus diferentes secciones/pantallas navegables.  
@@ -19,7 +19,7 @@ Una guía básica para poder ir estructurando la base de la página con sus dife
 Una guía con razonamiento paso a paso sobre decisiones de diseño. Estructura global y esqueleto HTML5.  
 
 **Captura de pantalla del resultado obtenido:**  
-![Captura del resultado](..\02-prompts\capturas\prompt-1\resultado.png)  
+![Captura del resultado](../02-prompts/capturas/prompt-1/resultado.png)  
 
 **Correcciones manuales realizadas:**
 * Se ajustó el contenido para ser adaptado al proyecto.  
