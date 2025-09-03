@@ -10,7 +10,7 @@ Actúa cómo un desarrollador web sr y explica como estructurar estilos CSS3 y d
 ```
 
 **Captura de pantalla del prompt solicitado:**  
-![Captura del prompt](..\02-prompts\capturas\prompt-3\prompt.png)   
+![Captura del prompt](../02-prompts/capturas/prompt-3/prompt.png)   
 
 **Resultado esperado:**  
 Obtener una guía clara y profesional sobre como organizar los estilos CSS3 y plantear un diseño responsivo.  
@@ -21,7 +21,7 @@ Obtener una guía clara y profesional sobre como organizar los estilos CSS3 y pl
 * Ejemplo de media queries mobile-first para sidebar responsive.  
 
 **Captura de pantalla del resultado obtenido:**  
-![Captura del resultado](..\02-prompts\capturas\prompt-3\resultado.png)  
+![Captura del resultado](../02-prompts/capturas/prompt-3/resultado.png)  
 
 **Correcciones manuales realizadas:**
 * Se ajustó el contenido para ser adaptado al proyecto.  
