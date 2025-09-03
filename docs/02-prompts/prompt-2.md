@@ -10,7 +10,7 @@ Actúa como un diseñador web y genera un dashboard para un proyecto de "Simulad
 ```
 
 **Captura de pantalla del prompt solicitado:**  
-![Captura del prompt](..\02-prompts\capturas\prompt-2\prompt.png)  
+![Captura del prompt](../02-prompts/capturas/prompt-2/prompt.png)  
 
 **Resultado esperado:**  
 HTML semántico y limpio que funcione como dashboard principal.  
@@ -19,7 +19,7 @@ HTML semántico y limpio que funcione como dashboard principal.
 HTML válido, pero con estilos inline donde estos deberán estar definidos en su carpeta de CSS correspondiente.   
 
 **Captura de pantalla del resultado obtenido:**  
-![Captura del resultado](..\02-prompts\capturas\prompt-2\resultado.png)  
+![Captura del resultado](../02-prompts/capturas/prompt-2/resultado.png)  
 
 **Correcciones manuales realizadas:**
 * Se eliminarán estilos inline.  
