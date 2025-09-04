@@ -7,8 +7,8 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 ## [Unreleased]
 
 ### Added
-- [feature/estructura-base] Estructura inicial del proyecto.  
-  PR: [#1](link) - @usuario1 (Coordinador / DevOps)
+- [feature/coordinador-setup-repo-and-pages] Estructura inicial del proyecto.  
+  PR: [#1](https://github.com/fioremos/simulador-planificacion-financiera/pull/2) - @fioremos (Coordinador / DevOps)
 
 - [feature/ia-add-prompts-1-to-5] Documentación de 5 prompts de IA.  
   PR: [#4](link) - @ulisesc11 (Especialista en IA)
@@ -18,7 +18,7 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   PR: [#3](link) - @usuario3 (Documentador / Diseñador UX)
 
 - [feature/index-html] Estructura HTML5 básica.  
-  PR: [#2](link) - @usuario2 (Desarrollador Frontend)
+  PR: [#1](feature/frontend-add-html-structure) - @MNEscobar (Desarrollador Frontend)
 
 ### Fixed
 - [feature/fix-rutas] Corrección de rutas en README.md.  
