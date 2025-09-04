@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FunGrow</title>
+    <title>FinGrow</title>
 </head>
 <body>
     <!-- PANTALLA DE LOGIN -->
@@ -13,8 +13,8 @@
             <p>Organiza tus finanzas fácil y rápido</p>
 
             <form id="login-form">
-                <input type="text" placeholder="Usuario" required>
-                <input type="password" placeholder="Contraseña" required>
+                <input type="text" name="usuario" placeholder="Usuario" required>
+                <input type="password" name="password" placeholder="Contraseña" required>
                 <button type="submit">Iniciar sesión</button>
                 <button type="button">Registrarse</button>
                 <button type="button">Continuar con Google</button>
@@ -82,9 +82,9 @@
     <section id="ingresos-gastos" class="screen" style="display:none;">
         <h2>Gestión de ingresos y gastos</h2>
         <form id="form-ingresos">
-            <label>Fecha: <input type="date" required></label>
-            <label>Categoría: <input type="text" required></label>
-            <label>Monto: <input type="number" required></label>
+            <label>Fecha: <input type="date" name="fecha" required></label>
+            <label>Categoría: <input type="text" name="categoria" required></label>
+            <label>Monto: <input type="number" name="monto" required></label>
             <button type="submit">Agregar</button>
         </form>
         <table>
@@ -165,17 +165,17 @@
         <form id="form-exportar">
             <fieldset>
                 <legend>Datos a exportar</legend>
-                <label><input type="checkbox"> Ingresos y Gastos</label>
-                <label><input type="checkbox"> Metas</label>
-                <label><input type="checkbox"> Inversiones</label>
-                <label><input type="checkbox"> Reportes</label>
-                <label><input type="checkbox"> Auditoría</label>
+                <label><input type="checkbox" name="export_ingresos"> Ingresos y Gastos</label>
+                <label><input type="checkbox" name="export_metas"> Metas</label>
+                <label><input type="checkbox" name="export_inversiones"> Inversiones</label>
+                <label><input type="checkbox" name="export_reportes"> Reportes</label>
+                <label><input type="checkbox" name="export_auditoria"> Auditoría</label>
             </fieldset>
             <fieldset>
                 <legend>Tipo de archivo</legend>
-                <label><input type="radio" name="tipo"> CSV</label>
-                <label><input type="radio" name="tipo"> XLSX</label>
-                <label><input type="radio" name="tipo"> PDF</label>
+                <label><input type="radio" name="tipo" value="csv"> CSV</label>
+                <label><input type="radio" name="tipo" value="xlsx"> XLSX</label>
+                <label><input type="radio" name="tipo" value="pdf"> PDF</label>
             </fieldset>
             <button type="submit">Exportar</button>
         </form>
@@ -185,13 +185,13 @@
     <section id="configuracion" class="screen" style="display:none;">
         <h2>Configuración de usuario</h2>
         <form id="form-config">
-            <label>Nombre: <input type="text" required></label>
-            <label>Email: <input type="email" required></label>
-            <label>Contraseña: <input type="password" required></label>
+            <label>Nombre: <input type="text" name="nombre" required></label>
+            <label>Email: <input type="email" name="email" required></label>
+            <label>Contraseña: <input type="password" name="nueva_password" required></label>
             <button type="submit">Actualizar</button>
         </form>
         <h3>Preferencias</h3>
-        <label><input type="checkbox"> Notificaciones por correo</label>
+        <label><input type="checkbox" name="notificaciones"> Notificaciones por correo</label>
     </section>
 </body>
 </html>
