@@ -16,9 +16,9 @@ jobs:
           echo "Base branch: ${{ github.base_ref }}"
           echo "Source branch: ${{ github.head_ref }}"
 
-          # Validar PR hacia main
-          if [[ "${{ github.base_ref }}" == "main" && "${{ github.head_ref }}" != "develop" ]]; then
-            echo "❌ PR hacia main solo puede venir desde develop."
+          # Validar PR hacia master
+          if [[ "${{ github.base_ref }}" == "master" && "${{ github.head_ref }}" != release/* ]]; then
+            echo "❌ PR hacia master solo puede venir desde release."
             exit 1
           fi
 
