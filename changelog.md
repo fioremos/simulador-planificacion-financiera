@@ -18,7 +18,7 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   PR: [#3](https://github.com/fioremos/simulador-planificacion-financiera/pull/5) - @skalapuj (Documentador / Diseñador UX)
 
 - [feature/index-html] Estructura HTML5 básica.  
-  PR: [#1](https://github.com/fioremos/simulador-planificacion-financiera/pull/35) - @MNEscobar (Desarrollador Frontend)
+  PR: [#2](https://github.com/fioremos/simulador-planificacion-financiera/pull/3#issue-3367393105) - @MNEscobar (Desarrollador Frontend)
 
 ---
 
