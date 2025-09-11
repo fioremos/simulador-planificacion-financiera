@@ -53,7 +53,7 @@ Incluye la integración de todos los aportes realizados por los integrantes del 
 
 Una vez creada esta Pull Request, notificamos en el canal:
 
-[Actividad Obligatoria N°1][GRUPO X](enlace a esta Pull Request)
+[Actividad Obligatoria N°1][GRUPO 2](enlace a esta Pull Request)
 
 
 Luego iniciamos un hilo mencionando a **@Matías Velasquez** indicando el contenido general de la entrega.  
