@@ -4,6 +4,25 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 
 ---
 
+## [Unreleased]
+
+### Added  
+- [feature/dev-frontend-css-add-styles] Implementa los estilos CSS principales.  
+  PR: [#1]() - @usuario1 (Desarrollador Frontend/CSS)  
+
+### Changed  
+- [feature/responsive-design-add-responsive-styles] Implementa adaptabilidad multiplataforma del diseño.  
+  PR: [#2](link) - @usuario2 (Especialista en Responsive Design)  
+
+- [feature/doc-qa-tester-add-test-case-1] Realiza control de calidad mediante test case especificos.  
+  PR: [#3]() - @usuario3 (Documentador / QA Tester)  
+
+### Fixed  
+- [feature/coord-dev-ops-repo-update-readme-md] Coordina la integración de todas las ramas.  
+  PR: [#4]() - @usuario4 (Coordinador / DevOps)  
+
+---
+
 ## [Release Actividad Obligatoria N°1] - 2025-08-10
 
 ### Added
@@ -21,6 +40,7 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   PR: [#2](https://github.com/fioremos/simulador-planificacion-financiera/pull/3#issue-3367393105) - @MNEscobar (Desarrollador Frontend)
 
 ---
+
 
 ## Cómo usar este archivo
 
