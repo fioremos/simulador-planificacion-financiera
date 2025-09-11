@@ -20,10 +20,10 @@ Incluye la integración de todos los aportes realizados por los integrantes del 
 
 | Nombre completo | Rol asignado en esta entrega | Usuario GitHub |
 |-----------------|------------------------------|----------------|
-| Nombre 1        | Coordinador/DevOps           | @usuario1      |
-| Nombre 2        | Desarrollador Frontend       | @usuario2      |
-| Nombre 3        | Documentador/UX              | @usuario3      |
-| Nombre 4        | Especialista en IA           | @usuario4      |
+| Fiorella Mosca        | Coordinador/DevOps           | @usuario1      |
+| Matías Nicolás Escobar        | Desarrollador Frontend       | @usuario2      |
+| Sol Ailen Kalapuj        | Documentador/UX              | @usuario3      |
+| Ulises Capriles        | Especialista en IA           | @usuario4      |
 
 ---
 
