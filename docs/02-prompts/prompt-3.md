@@ -23,8 +23,8 @@ Obtener una guía clara y profesional sobre como organizar los estilos CSS3 y pl
 **Captura de pantalla del resultado obtenido:**  
 ![Captura del resultado](../02-prompts/capturas/prompt-3/resultado.png)  
 
-**Correcciones manuales realizadas:**
-* Se ajustó el contenido para ser adaptado al proyecto.  
+**Correcciones manuales realizadas:**  
+* La IA propuso una estructura de carpeta y archivos que se ajustaran más adelante para ser adaptados al proyecto.   
 
 **Aplicación en el proyecto:**  
-Carpeta `/style/`  
+
