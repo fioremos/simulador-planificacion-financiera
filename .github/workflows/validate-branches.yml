@@ -1,0 +1,31 @@
+name: Validate PR Source Branch
+
+on:
+  pull_request:
+    branches:
+      - master
+      - develop
+
+jobs:
+  validate-branch:
+    name: Validate PR Source Branch
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate source branch
+        run: |
+          echo "Base branch: ${{ github.base_ref }}"
+          echo "Source branch: ${{ github.head_ref }}"
+
+          # Validar PR hacia master
+          if [[ "${{ github.base_ref }}" == "master" && "${{ github.head_ref }}" != release/* ]]; then
+            echo "❌ PR hacia master solo puede venir desde release."
+            exit 1
+          fi
+
+          # Validar PR hacia develop
+          if [[ "${{ github.base_ref }}" == "develop" && "${{ github.head_ref }}" != feature/* ]]; then
+            echo "❌ PR hacia develop solo puede venir desde feature/*."
+            exit 1
+          fi
+
+          echo "✅ Validación pasada. Rama permitida."
