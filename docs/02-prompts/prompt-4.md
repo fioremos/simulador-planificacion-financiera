@@ -13,7 +13,7 @@ Razoná paso a paso y genera una guía para integrar OAuth (Google) para un proy
 ![Captura del prompt](../02-prompts/capturas/prompt-4/prompt.png)  
 
 **Resultado esperado:**  
-Una guía completa, paso a paso, que permita a un desarrollador integrar OAuth de Google en su proyecto web.  
+Una guía completa, paso a paso, que permita a un desarrollador integrar OAuth de Google en su proyecto web. Actualmente la integración no está contemplada, pero incluimos la guía como documentación de planificación para una etapa futura del proyecto.  
 
 **Resultado obtenido:**  
 * Explicación del flujo de autenticación (Authorization Code Flow y ID token).  
@@ -23,9 +23,7 @@ Una guía completa, paso a paso, que permita a un desarrollador integrar OAuth d
 ![Captura del resultado](../02-prompts/capturas/prompt-4/resultado.png)  
 
 **Correcciones manuales realizadas:**
-* Se ajustó el contenido para ser adaptado al proyecto.  
+* Lo planteamos como una guía adaptada al proyecto. Es decir, los ejemplos de código y la estructura de archivos son ilustrativos de cómo se implementaría en próximas iteraciones, pero todavía no forman parte del repositorio actual.  
 
 **Aplicación en el proyecto:**  
-Archivo `frontend/login.html` - boton "iniciar sesión con Google".  
-Archivo `backend/server.js`  - endpoints.  
-Archivo `.env` - variables de entorno.  
+

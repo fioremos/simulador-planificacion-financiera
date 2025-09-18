@@ -24,8 +24,9 @@
 
 
     <!-- DASHBOARD PRINCIPAL -->
-    <!-- Se aplica CSS para estructura, colores y JS para manejar la navegación -->
-    <section id="dashboard" class="screen" style="display:none;">
+    <!-- Se aplica CSS para estructura y colores. Importar desde href="css/styles.css" -->
+    <!-- JS para manejar la navegación. Importar desde src="js/app.js -->
+    <section id="dashboard" class="screen">
         <!-- BARRA DE NAVEGACIÓN -->
         <aside class="sidebar">
             <h2>FinGrow</h2>
@@ -49,7 +50,7 @@
             <!-- Resumen financiero -->
             <section id="resumen-financiero">
                 <h3>Resumen financiero</h3>
-                <div class="chart"><!-- Gráficos con JS --></div>
+                <div class="chart"><!-- Gráficos con JS. Importar desde src="js/app.js" --></div>
                 <p>Disponible: <strong>$50.258,85</strong></p>
             </section>
 
@@ -79,7 +80,7 @@
     </section>
 
     <!-- GESTIÓN DE INGRESOS Y GASTOS -->
-    <section id="ingresos-gastos" class="screen" style="display:none;">
+    <section id="ingresos-gastos" class="screen">
         <h2>Gestión de ingresos y gastos</h2>
         <form id="form-ingresos">
             <label>Fecha: <input type="date" name="fecha" required></label>
@@ -96,12 +97,12 @@
                     <th>Tipo</th>
                 </tr>
             </thead>
-            <tbody><!-- Agregar JS --></tbody>
+            <tbody><!-- Agregar JS. Importar desde src="js/app.js --></tbody>
         </table>
     </section>
 
     <!-- METAS DE AHORRO -->
-    <section id="metas" class="screen" style="display:none;">
+    <section id="metas" class="screen">
         <h2>Metas de ahorro</h2>
         <table>
             <thead>
@@ -122,7 +123,7 @@
     </section>
 
     <!-- INVERSIONES -->
-    <section id="inversiones" class="screen" style="display:none;">
+    <section id="inversiones" class="screen">
         <h2>Inversiones</h2>
         <table>
             <thead>
@@ -132,20 +133,20 @@
                     <th>Cambio</th>
                 </tr>
             </thead>
-            <tbody><!-- Datos de inversión con JS --></tbody>
+            <tbody><!-- Datos de inversión con JS. Importar desde src="js/app.js --></tbody>
         </table>
-        <div class="grafico-inversiones"><!-- Gráfico con JS --></div>
+        <div class="grafico-inversiones"><!-- Gráfico con JS. Importar desde src="js/app.js --></div>
     </section>
 
     <!-- REPORTES Y ESTADÍSTICAS -->
 
-    <section id="reportes" class="screen" style="display:none;">
+    <section id="reportes" class="screen">
         <h2>Reportes y estadísticas</h2>
-        <div class="grafico-reportes"><!-- Gráficos con JS --></div>
+        <div class="grafico-reportes"><!-- Gráficos con JS. Importar desde src="js/app.js --></div>
     </section>
 
     <!-- HISTORIAL Y AUDITORÍA -->
-    <section id="historial" class="screen" style="display:none;">
+    <section id="historial" class="screen">
         <h2>Historial y Auditoría</h2>
         <table>
             <thead>
@@ -155,12 +156,12 @@
                     <th>Resultado</th>
                 </tr>
             </thead>
-            <tbody><!-- Se llenará con JS --></tbody>
+            <tbody><!-- Se llenará con JS. Importar desde src="js/app.js --></tbody>
         </table>
     </section>
 
     <!-- EXPORTACIÓN DE DATOS -->
-    <section id="exportar" class="screen" style="display:none;">
+    <section id="exportar" class="screen">
         <h2>Exportación de datos</h2>
         <form id="form-exportar">
             <fieldset>
@@ -182,7 +183,7 @@
     </section>
 
     <!-- CONFIGURACIÓN DE USUARIO -->
-    <section id="configuracion" class="screen" style="display:none;">
+    <section id="configuracion" class="screen">
         <h2>Configuración de usuario</h2>
         <form id="form-config">
             <label>Nombre: <input type="text" name="nombre" required></label>
@@ -193,5 +194,15 @@
         <h3>Preferencias</h3>
         <label><input type="checkbox" name="notificaciones"> Notificaciones por correo</label>
     </section>
+
+    <footer>
+        <p>&copy; 2025 FinGrow. Todos los derechos reservados.</p>
+        <nav>
+            <ul>
+                <li><a href="#privacidad">Política de Privacidad</a></li>
+                <li><a href="#terminos">Términos y Condiciones</a></li>
+            </ul>
+        </nav>
+    </footer>
 </body>
 </html>
