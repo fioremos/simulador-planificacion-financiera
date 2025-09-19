@@ -42,7 +42,8 @@
 .card {
     background: var(--background-card);
     display: flex;
-    padding: 3.125rem;
+    padding: 3rem;
+    margin: 1rem;
     border-radius: 0.625rem;
     box-shadow: var(--shadow-soft, 0 0.25rem 0.625rem rgba(0,0,0,0.1));
     flex-direction: column;
@@ -81,6 +82,7 @@
 
 .login-logo-container img {
     transition: opacity 0.3s ease-in-out;
+    height: 16rem;
 }
 
 .login-logo-container img:hover {
@@ -201,13 +203,18 @@
 /* Contenido */
 .content {
     background: var(--background-main);
-    padding: 1.5rem;
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    justify-content: space-between;
 } 
 .content .card {
-    padding: 1.5rem;
+    padding: 1rem;
+    height: 100%;
+    justify-content: space-between;
+}
+
+.dashboard-chart{
+    height: 240px;
 }
 
 .content .icon{
@@ -218,6 +225,7 @@
 .content .subtitle {
     margin: 0;
     font-size: xxx-large;
+    font-weight: normal;
 }
 
 .datos{
@@ -238,13 +246,17 @@
 }
 
 .resumen-grid .card {
-    padding: 1rem;
+    padding: 0 0 0 1rem;
     background-color: var(--neutral-100);
 }
+
 .resumen-grid .resumen-right .card {
     margin-top: 1.03rem;
 }
-
+.resumen-grid .resumen-left .card {
+    margin-top: 1.4rem;
+    height: auto;
+}
 .highlight {
     margin: 0rem;
     font-size: 1.7rem;
@@ -258,17 +270,26 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding-bottom: 1rem;
+}
+
+.header-table .subtitle{
+    font-size: x-large;
 }
 
 .content .btn-primary{
     background: var(--neutral-100);
     color: var(--color-primary);
-    padding: 4px;
+    padding: 0;
 }
 
 .content .icon{
     margin: 0;
-    font-size: 2.5rem;
+    font-size: 2rem;
+}
+
+.table {
+    height: 100%;
 }
 
 .table thead {
