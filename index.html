@@ -3,83 +3,159 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/components.css">
     <title>FinGrow</title>
 </head>
 <body>
     <!-- PANTALLA DE LOGIN -->
-    <section id="login" class="screen">
-        <div class="login-container">
-            <h1>FinGrow</h1>
-            <p>Organiza tus finanzas fácil y rápido</p>
+    <section id="login" class="login-section">
+    <div class="card">
+        <div class="login-logo-container">
+            <img src="images/login/logo inicial.png" alt="Logo FinGrow" class="login-logo">
+            <p class="subtitle">Organiza tus finanzas fácil y rápido</p>
+        </div>
+        
+        <div class="login-form-container">
+            <form id="login-form" class="login-form">
+                <div id="inputs-container" class="inputs-container">
+                    <input type="text" name="usuario" placeholder="Usuario" class="input" required>
+                    <input type="password" name="password" placeholder="Contraseña" class="input" required>
+                </div>
 
-            <form id="login-form">
-                <input type="text" name="usuario" placeholder="Usuario" required>
-                <input type="password" name="password" placeholder="Contraseña" required>
-                <button type="submit">Iniciar sesión</button>
-                <button type="button">Registrarse</button>
-                <button type="button">Continuar con Google</button>
+                <div id="buttons-container" class="buttons-container">
+                    <button type="submit" class="btn btn-primary">Iniciar sesión</button>
+                    <button type="button" class="btn btn-secondary">Registrarse</button>
+                    <button type="button" class="btn btn-google">
+                        <span class="google-icon-container">
+                            <img src="images/iconos/google.png" alt="Logo google" class="google-icon">
+                        </span> Continuar con Google
+                    </button>
+                </div>
             </form>
         </div>
+    </div>
     </section>
-
-
-    <!-- DASHBOARD PRINCIPAL -->
-    <!-- Se aplica CSS para estructura y colores. Importar desde href="css/styles.css" -->
-    <!-- JS para manejar la navegación. Importar desde src="js/app.js -->
-    <section id="dashboard" class="screen">
+    
+    <section id="dashboard" class="dashboard-section">
         <!-- BARRA DE NAVEGACIÓN -->
-        <aside class="sidebar">
-            <h2>FinGrow</h2>
+        <div class="sidebar-header">
+            <img src="images/barraDeNavegacion/nombre inicial.png" alt="Logo FinGrow" class="sidebar-header-logo">
+        </div>
+        <div class="dashboard-container">
+            <aside class="sidebar">    
             <nav>
                 <ul>
-                    <li><a href="#dashboard">Dashboard</a></li>
-                    <li><a href="#ingresos-gastos">Ingresos y Gastos</a></li>
-                    <li><a href="#metas">Metas de ahorro</a></li>
-                    <li><a href="#inversiones">Inversiones</a></li>
-                    <li><a href="#reportes">Reportes y Estadísticas</a></li>
-                    <li><a href="#historial">Historial y Auditoría</a></li>
-                    <li><a href="#exportar">Exportación de Datos</a></li>
-                    <li><a href="#configuracion">Configuración</a></li>
+                <li class="active"><a href="#dashboard"><span class="slidebar-icon"><img src="images/iconos/Bar chart-2.png"> </span> Dashboard</a></li>
+                <li><a href="#ingresos-gastos"><span class="slidebar-icon"><img src="images/iconos/Dollar sign.png"> </span> Ingresos y Gastos</a></li>
+                <li><a href="#metas"><span class="slidebar-icon"><img src="images/iconos/Award.png"> </span> Metas de ahorro</a></li>
+                <li><a href="#inversiones"><span class="slidebar-icon"><img src="images/iconos/Trending up.png"> </span> Inversiones</a></li>
+                <li><a href="#reportes"><span class="slidebar-icon"><img src="images/iconos/Check square.png"> </span> Reportes y Estadísticas</a></li>
+                <li><a href="#historial"><span class="slidebar-icon"><img src="images/iconos/Compass.png"> </span> Historial y Auditoría</a></li>
+                <li><a href="#exportar"><span class="slidebar-icon"><img src="images/iconos/upload.png"> </span> Exportación de Datos</a></li>
+                <li><a href="#configuracion"><span class="slidebar-icon"><img src="images/iconos/settings.png"> </span> Configuración</a></li>
                 </ul>
             </nav>
-            <button class="logout">Cerrar Sesión</button>
-        </aside>
 
-        <!-- CONTENIDO PRINCIPAL -->
-        <main class="content">
-            <!-- Resumen financiero -->
-            <section id="resumen-financiero">
-                <h3>Resumen financiero</h3>
-                <div class="chart"><!-- Gráficos con JS. Importar desde src="js/app.js" --></div>
-                <p>Disponible: <strong>$50.258,85</strong></p>
-            </section>
+            <nav>
+                <ul>    
+                <li><a href="#ingresos-gastos"><span class="slidebar-icon"><img src="images/iconos/Log out.png"> </span>  Cerrar Sesión</a></li>
+            </nav>
+            </aside>
 
-            <!-- Últimos movimientos -->
-            <section id="ultimos-movimientos">
-                <h3>Últimos movimientos</h3>
-                <table>
+            <main class="content">
+                <section id="resumen-financiero" class="card">
+                    <div class="section-title">
+                        <p class="subtitle">Resumen financiero</p>
+                    </div>
+
+                    <div class="resumen-grid">
+                        <div class="resumen-left">
+                            <div class="dashboard-container-chart">
+                                <img src="images/dashboard/Grafico.png" class="dashboard-chart" alt="Gráfico financiero">
+                            </div>
+
+                            <div class="card">
+                                <p class="highlight">
+                                Ahorraste $280.000, el 20% de tu ingreso.<br>
+                                <span class="success">Este mes gastaste 12% menos.</span>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="resumen-right">
+                            <div class="disponible">
+                                <p>
+                                <strong>Disponible</strong><br>
+                                <span class="saldo">$550.258,85</span>
+                                </p>
+                            </div>
+
+                            <div class="resumen-datos">
+                                <div class="card">
+                                <p><strong>Ingresos</strong><br>$1.400.000,00</p>
+                                </div>
+                                <div class="card">
+                                <p><strong>Gastos</strong><br>$569.741,15</p>
+                                </div>
+                                <div class="card">
+                                <p><strong>Meta más cercana</strong><br>Viaje: 70% alcanzado</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="ultimos-movimientos" class="card">
+                    <div class="header-table">
+                        <div class="section-title">
+                            <p class="subtitle">Últimos movimientos</p>
+                        </div>
+                    <button class="btn btn-primary small"><p class="icon">+</p></button>
+                    </div>
+
+                    <table class="table">
                     <thead>
                         <tr>
-                            <th>Fecha</th>
-                            <th>Categoría</th>
-                            <th>Monto</th>
-                            <th>Nota</th>
+                        <th>Fecha</th>
+                        <th>Categoría</th>
+                        <th>Monto</th>
+                        <th>Nota</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>Ene 31</td>
-                            <td>PC</td>
-                            <td>$14.500</td>
-                            <td>-</td>
+                        <td>Feb. 04</td>
+                        <td>Viaje</td>
+                        <td>$40.000</td>
+                        <td><span class="dot blue"></span></td>
+                        </tr>
+                        <tr>
+                        <td>Ene. 31</td>
+                        <td>PC</td>
+                        <td>$15.500</td>
+                        <td><span class="dot blue"></span></td>
+                        </tr>
+                        <tr>
+                        <td>Ene. 20</td>
+                        <td>Viaje</td>
+                        <td>$140.000</td>
+                        <td><span class="dot blue"></span></td>
+                        </tr>
+                        <tr>
+                        <td>Ene. 01</td>
+                        <td>Ocio</td>
+                        <td class="negative">-$45.850</td>
+                        <td><span class="dot red"></span></td>
                         </tr>
                     </tbody>
-                </table>
-            </section>
-        </main>
+                    </table>
+                </section>
+            </main>
+        </div>
     </section>
 
-    <!-- GESTIÓN DE INGRESOS Y GASTOS -->
+     <!--  GESTIÓN DE INGRESOS Y GASTOS 
     <section id="ingresos-gastos" class="screen">
         <h2>Gestión de ingresos y gastos</h2>
         <form id="form-ingresos">
@@ -97,11 +173,11 @@
                     <th>Tipo</th>
                 </tr>
             </thead>
-            <tbody><!-- Agregar JS. Importar desde src="js/app.js --></tbody>
+            <tbody> Agregar JS. Importar desde src="js/app.js </tbody>
         </table>
     </section>
 
-    <!-- METAS DE AHORRO -->
+     METAS DE AHORRO 
     <section id="metas" class="screen">
         <h2>Metas de ahorro</h2>
         <table>
@@ -122,7 +198,7 @@
         </table>
     </section>
 
-    <!-- INVERSIONES -->
+     INVERSIONES 
     <section id="inversiones" class="screen">
         <h2>Inversiones</h2>
         <table>
@@ -133,19 +209,19 @@
                     <th>Cambio</th>
                 </tr>
             </thead>
-            <tbody><!-- Datos de inversión con JS. Importar desde src="js/app.js --></tbody>
+            <tbody> Datos de inversión con JS. Importar desde src="js/app.js </tbody>
         </table>
-        <div class="grafico-inversiones"><!-- Gráfico con JS. Importar desde src="js/app.js --></div>
+        <div class="grafico-inversiones"> Gráfico con JS. Importar desde src="js/app.js </div>
     </section>
 
-    <!-- REPORTES Y ESTADÍSTICAS -->
+     REPORTES Y ESTADÍSTICAS 
 
     <section id="reportes" class="screen">
         <h2>Reportes y estadísticas</h2>
-        <div class="grafico-reportes"><!-- Gráficos con JS. Importar desde src="js/app.js --></div>
+        <div class="grafico-reportes"> Gráficos con JS. Importar desde src="js/app.js </div>
     </section>
 
-    <!-- HISTORIAL Y AUDITORÍA -->
+     HISTORIAL Y AUDITORÍA -
     <section id="historial" class="screen">
         <h2>Historial y Auditoría</h2>
         <table>
@@ -156,11 +232,11 @@
                     <th>Resultado</th>
                 </tr>
             </thead>
-            <tbody><!-- Se llenará con JS. Importar desde src="js/app.js --></tbody>
+            <tbody> Se llenará con JS. Importar desde src="js/app.js </tbody>
         </table>
     </section>
 
-    <!-- EXPORTACIÓN DE DATOS -->
+    EXPORTACIÓN DE DATOS 
     <section id="exportar" class="screen">
         <h2>Exportación de datos</h2>
         <form id="form-exportar">
@@ -182,7 +258,7 @@
         </form>
     </section>
 
-    <!-- CONFIGURACIÓN DE USUARIO -->
+    -- CONFIGURACIÓN DE USUARIO 
     <section id="configuracion" class="screen">
         <h2>Configuración de usuario</h2>
         <form id="form-config">
@@ -193,9 +269,10 @@
         </form>
         <h3>Preferencias</h3>
         <label><input type="checkbox" name="notificaciones"> Notificaciones por correo</label>
-    </section>
+    </section> -->
 
-    <footer>
+    <!-- FOOTER -->    
+    <!-- <footer>
         <p>&copy; 2025 FinGrow. Todos los derechos reservados.</p>
         <nav>
             <ul>
@@ -203,6 +280,6 @@
                 <li><a href="#terminos">Términos y Condiciones</a></li>
             </ul>
         </nav>
-    </footer>
+    </footer> -->
 </body>
 </html>
