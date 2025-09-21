@@ -30,7 +30,7 @@
                         <button type="button" class="btn btn-secondary" onclick="mostrarSeccion('dashboard')">Registrarse</button>
                         <button type="button" class="btn btn-google" onclick="mostrarSeccion('dashboard')">
                             <span class="google-icon-container">
-                                <img src="images/iconos/google.png" alt="Logo google" class="google-icon">
+                                <img src="images/iconos/google.png" alt="Logo google" class="icon-small">
                             </span> Continuar con Google
                         </button>
                     </div>
@@ -79,7 +79,7 @@
                     <div class="resumen-grid">
                         
                         <div class="resumen-left">
-                            <div class="dashboard-container-chart">
+                            <div class="container-chart">
                                 <img src="images/dashboard/Grafico.png" class="dashboard-chart" alt="Gráfico financiero">
                             </div>
 
@@ -119,7 +119,11 @@
                         <div class="section-title">
                             <p class="subtitle">Últimos movimientos</p>
                         </div>
-                    <button class="btn btn-primary small"><p class="icon">+</p></button>
+                    <button class="btn btn-primary small">
+                        <span class="icon">
+                            <img src="images/iconos/plus.png" class="icon-small" alt="Icono más">
+                        </span>
+                    </button>
                     </div>
 
                     <table class="table">
@@ -392,7 +396,7 @@
                     </div>
 
                     
-                    <div class="metas-container-chart">
+                    <div class="container-chart">
                         <img src="images/metasAhorro/Graph.png" class="metas-chart" alt="Gráfico metas de ahorro">
                     </div>
 
@@ -406,30 +410,107 @@
                     <div class="metas-card-graph-button">
                         <button class="btn btn-inverse btn-blue small">Seleccionar objetivo</button>
                     </div>
+                </section>
+            </main>
+        </div>
+    </section>  
 
+    <!-- INVERSIONES -->
+    <section id="inversiones" class="princial-section seccion invisible">
+        <div class="header-container">
+            <div class="header-nav">
+                <img src="images/barraDeNavegacion/menu.png" alt="menu navegable" class="header-menu">
+            </div>
+            <div class="header-logo">
+                <img src="images/barraDeNavegacion/nombre inicial.png" alt="Logo FinGrow" class="header-logo-img">
+            </div>
+        </div>
+        <div class="principal-container">
+            <aside class="sidebar">    
+                <nav>
+                    <ul>
+                    <li><a href="#dashboard" onclick="mostrarSeccion('dashboard')"><span class="slidebar-icon"><img src="images/iconos/Bar chart-2.png"> </span> Dashboard</a></li>
+                    <li><a href="#ingresos-gastos" onclick="mostrarSeccion('ingresos-gastos')"><span class="slidebar-icon"><img src="images/iconos/Dollar sign.png"> </span> Ingresos y Gastos</a></li>
+                    <li><a href="#metas"   onclick="mostrarSeccion('metas')"><span class="slidebar-icon"><img src="images/iconos/Award.png"> </span> Metas de ahorro</a></li>
+                    <li class="active"><a href="#inversiones"><span class="slidebar-icon"><img src="images/iconos/Trending up.png"> </span> Inversiones</a></li>
+                    <li><a href="#reportes"  onclick="mostrarSeccion('reportes')"><span class="slidebar-icon"><img src="images/iconos/Check square.png"> </span> Reportes y Estadísticas</a></li>
+                    <li><a href="#historial"  onclick="mostrarSeccion('historial')"><span class="slidebar-icon"><img src="images/iconos/Compass.png"> </span> Historial y Auditoría</a></li>
+                    <li><a href="#exportar"  onclick="mostrarSeccion('exportar')"><span class="slidebar-icon"><img src="images/iconos/upload.png"> </span> Exportación de Datos</a></li>
+                    <li><a href="#configuracion"  onclick="mostrarSeccion('configuracion')"><span class="slidebar-icon"><img src="images/iconos/settings.png"> </span> Configuración</a></li>
+                    </ul>
+                </nav>
+
+                <nav>
+                    <ul>    
+                    <li><a href="#login" onclick="mostrarSeccion('login')"><span class="slidebar-icon"><img src="images/iconos/Log out.png"> </span>  Cerrar Sesión</a></li>
+                </nav>
+            </aside>
+
+            <main class="content">
+                <section id="inversiones-card-table" class="card">
+                    <div class="header-table">
+                        <div class="section-title">
+                            <p class="subtitle">Inversiones</p>               
+                        </div>
+                        <div class="inversiones-card-table-button">
+                            <button class="btn btn-primary small">
+                                <span class="icon">
+                                    <img src="images/iconos/search.png" class="icon-small" alt="Icono busqueda">
+                                </span>
+                            </button>
+                            <button class="btn btn-primary small">
+                                <span class="icon">
+                                    <img src="images/iconos/plus.png" class="icon-small" alt="Icono más">
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                    <table class="table inversiones-table">
+                            <tbody>
+                            <tr>
+                                <td><span class="tag red">Grupo Financiero Galicia</span></td>
+                                <td>$39,82</td>
+                                <td>$-1,73</td>
+                                <td class="loss">-4,16%</td>
+                            </tr>
+                            <tr>
+                                <td><span class="tag blue">YPF</span></td>
+                                <td>$41.225,00</td>
+                                <td>$+9.630</td>
+                                <td class="gain">+5,07%</td>
+                            </tr>
+                            <tr>
+                                <td><span class="tag purple">IBEX 35</span></td>
+                                <td>$11.600,00</td>
+                                <td>$-52,00</td>
+                                <td class="loss">-0,50%</td>
+                            </tr>
+                            <tr>
+                                <td><span class="tag black">TESLA INC</span></td>
+                                <td>$67.492,00</td>
+                                <td>$+1.073</td>
+                                <td class="gain">+1,62%</td>
+                            </tr>
+                            <tr>
+                                <td><span class="tag green">APPLE</span></td>
+                                <td>$12.157,00</td>
+                                <td>$+0,375</td>
+                                <td class="gain">+0,31%</td>
+                            </tr>
+                            </tbody>
+                    </table>
+                </section>
+
+                <section id="metas-card-graph" class="card metas-card-graph">
+                    <div class="container-chart">
+                        <img src="images/inversiones/grafico.png" class="inversiones-chart" alt="Gráfico metas de ahorro">
                     </div>
                 </section>
             </main>
         </div>
     </section>  
 
-    <!-- INVERSIONES 
-    <section id="inversiones" class="screen">
-        <h2>Inversiones</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Activo</th>
-                    <th>Precio</th>
-                    <th>Cambio</th>
-                </tr>
-            </thead>
-            <tbody> Datos de inversión con JS. Importar desde src="js/app.js </tbody>
-        </table>
-        <div class="grafico-inversiones"> Gráfico con JS. Importar desde src="js/app.js </div>
-    </section>
-
-     REPORTES Y ESTADÍSTICAS 
+    <!-- REPORTES Y ESTADÍSTICAS 
 
     <section id="reportes" class="screen">
         <h2>Reportes y estadísticas</h2>
