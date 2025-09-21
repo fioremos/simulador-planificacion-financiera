@@ -38,6 +38,13 @@
     color: var(--white-000);
 }
 
+.btn-small{
+    background: var(--neutral-100);
+    color: var(--color-primary);
+    padding: 0;
+}
+
+
 .btn-blue {
     color: var(--text-on-selected);
     font-size: small;
@@ -45,7 +52,7 @@
     padding: 0.359rem 2rem;
 }
 
-.btn-google {
+.btn-image{
     background: var(--color-primary);
     color: var(--white-000);
     display: flex;
@@ -69,6 +76,15 @@
 /* --- Letter --- */
 .bold {
     font-weight: bold;
+}
+
+.highlight {
+    margin: 0rem;
+    font-size: 1.175rem;
+}
+
+.success {
+    color: var(--success);
 }
 
 /* --- Subtitulos --- */
@@ -97,7 +113,7 @@
     min-height: 0;
 }
 
-/* --- Header --- */
+/* --- Headers --- */
 .header-container {
     background-color: var(--white-000);
     display: flex;
@@ -198,6 +214,12 @@
     font-weight: normal;
 }
 
+.content .icon{
+    margin: 0;
+    font-size: 2rem;
+}
+
+
 /* --- Charts --- */
 .container-chart{
     text-align: center;
@@ -207,6 +229,17 @@
 }
 
 /* --- Tablas --- */
+.header-table {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 1rem;
+}
+
+.header-table .subtitle{
+    font-size: x-large;
+}
+
 .table {
     height: 100%;
     width: 100%;
@@ -237,20 +270,94 @@
 
 /* --- Dots --- */
 .dot {
-  display: inline-block;
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
+    display: inline-block;
+    width: 0.75rem;
+    height: 0.75rem;
+    border-radius: 50%;
 }
 
-.dot.blue { background: var(--color-primary); }
-.dot.red { background: var(--danger); }
-.negative { color: var(--danger); }
+.dot.green { 
+    background: var(--success); 
+}
+.dot.blue { 
+    background: var(--color-primary); 
+}
+.dot.red { 
+    background: var(--danger); 
+}
+.negative { 
+    color: var(--danger); 
+}
 
 /* --- Iconos --- */
 .icon-small {
     width: 1.5rem;
     height: 1.5rem;
+}
+
+/* --- Formularios --- */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem; 
+    padding: 0 6rem 0 6rem;
+    height: 100%;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.2rem;
+    margin-bottom: 1rem;
+}
+
+.without-margin {
+    margin-bottom: 0;
+}
+
+.full-width {
+    grid-column: span 2;
+}
+
+.form-group label {
+    font-size: 1.7rem;
+    color: var(--color-primary);
+
+}
+
+.form-group select {
+    background-color: var(--color-primary);
+    color: var(--white-000);
+}
+
+.form-actions {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    text-align: center;
+}
+
+.form-actions .btn {
+    padding: 0.6rem 1.2rem;
+    font-size: 1rem;
+}
+
+/* --- Radios --- */
+.radio-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 0.5rem;
+    place-items: center;
+}
+.radio-group label {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.radio-group input {
+  margin-right: 0.5rem;
 }
 
 /****************************************************/
@@ -356,96 +463,9 @@
     height: auto;
     padding: 0.8rem;
 }
-.highlight {
-    margin: 0rem;
-    font-size: 1.175rem;
-}
-.success {
-    color: var(--success);
-}
-
-/* --- Últimos movimientos --- */
-.header-table {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-bottom: 1rem;
-}
-
-.header-table .subtitle{
-    font-size: x-large;
-}
-
-.content .btn-primary{
-    background: var(--neutral-100);
-    color: var(--color-primary);
-    padding: 0;
-}
-
-.content .icon{
-    margin: 0;
-    font-size: 2rem;
-}
 
 /****************************************************/
 /**************INGRESOS Y GASTOS*********************/
-/* --- Formulario Ingresos y Gastos --- */
-.form-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.5rem; 
-    padding: 0 6rem 0 6rem;
-    height: 100%;
-}
-
-.form-group {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 0.2rem;
-    margin-bottom: 1rem;
-}
-
-.full-width {
-    grid-column: span 2;
-}
-
-.form-group label {
-    font-size: 1.7rem;
-    color: var(--color-primary);
-
-}
-
-.radio-group {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    gap: 0.5rem;
-    place-items: center;
-}
-.radio-group label {
-    font-size: 1.2rem;
-    font-weight: bold;
-}
-
-.radio-group input {
-  margin-right: 0.5rem;
-}
-
-.form-group select {
-    background-color: var(--color-primary);
-    color: var(--white-000);
-}
-
-.form-actions {
-  grid-column: 1 / -1;
-  text-align: center;
-}
-
-.form-actions .btn {
-  padding: 0.6rem 1.2rem;
-  font-size: 1rem;
-}
-
 .ingresos-gastos-table {
     display: grid;
 }
@@ -483,13 +503,13 @@
 }
 
 .metas-table {
-  border-collapse: collapse;
-  width: 100%;
+    border-collapse: collapse;
+    width: 100%;
 }
 
 .metas-table thead tr {
-  border-top: 2px solid var(--color-muted);
-  border-bottom: 2px solid var(--color-muted);
+    border-top: 2px solid var(--color-muted);
+    border-bottom: 2px solid var(--color-muted);
 }
 .metas-table tbody tr:nth-child(even) {
     background-color: var(--white-000) ;
@@ -535,7 +555,7 @@
 }
 
 /****************************************************/
-/******************INVERSIONES***********************/
+/********************REPORTES************************/
 /* --- Filtros --- */
 .reportes-estadisticas-form-container select { 
     padding: 0.2rem 2rem 0 0.2rem;
@@ -558,69 +578,105 @@
 }
 
 .filters label {
-  font-size: 1rem;
-  font-weight: 600;
-  text-align: center;
+    font-size: 1rem;
+    font-weight: 600;
+    text-align: center;
 }
 
 /* --- Secciones de reportes --- */
 .reportes-section {
-  margin-top: 1.5rem;
+    margin-top: 1.5rem;
 }
 .reportes-section .subtitle {
-  margin-bottom: 0.5rem;
-  color: var(--color-primary);
-  font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: var(--color-primary);
+    font-weight: bold;
 }
 .reportes-chart {
-  width: 70%;
-  height: auto;
-  padding: 2rem;
+    width: 50%;
+    height: auto;
+    padding: 2rem;
 }
 
 /* --- Principales gastos --- */
 .gastos-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 1rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem;
 }
 .gastos-list p {
-  margin: 0.5rem 0;
-  font-size: 1.2rem;
+    margin: 0.5rem 0;
+    font-size: 1.2rem;
 }
 .gastos-bars {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
 .gastos-bars .bar {
-  background: var(--color-primary);
-  height: 1rem;
-  border-radius: 6px;
-  width: 60%; /* dinámico: esto debe ser ajustado con JS en el futuro */
-  margin: 0.5rem 0rem;
+    background: var(--color-primary);
+    height: 1rem;
+    border-radius: 6px;
+    width: 60%; /* dinámico: esto debe ser ajustado con JS en el futuro */
+    margin: 0.5rem 0rem;
 }
 .gastos-indicadores {
-  font-size: 0.9rem;
-  color: var(--neutral-900);
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--neutral-900);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
 }
 .gastos-indicadores strong {
-  color: var(--color-primary);
+    color: var(--color-primary);
 }
 
 .gastos-indicadores .card {
-  background: var(--neutral-100);
-  color: var(--color-primary);
-  padding: 0;
-  margin: 0.2rem;
-  text-align: center;
+    background: var(--neutral-100);
+    color: var(--color-primary);
+    padding: 0;
+    margin: 0.2rem;
+    text-align: center;
 }
 .gastos-indicadores .card strong {
-  font-size: 2rem;
+    font-size: 2rem;
 }
 
+/****************************************************/
+/*******************HISTORIAL************************/
+.historial-list {
+    list-style: none;
+    padding: 0;
+}
+
+.historial-list li {
+    border-bottom: 1px solid var(--color-muted);
+    padding: 1rem 0;
+}
+
+.historial-list .dot {
+    margin-left: 16px;
+    flex-shrink: 0;
+}
+
+.historial-list .contenido {
+    display: flex;
+    align-items: center;
+}
+
+.historial-list .texto {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    flex-grow: 1;
+}
+
+.historial-list .evento {
+    font-size: 1.4rem;
+}
+
+.historial-list .fecha {
+    font-size: 0.9rem;
+}
 /* =========================================================
 ESTILOS TEMPORALES PARA CORRECCIÓN DOCENTE
 ------------------------------------------------------------
@@ -632,10 +688,10 @@ IMPORTANTE:
 Eliminar estos estilos una vez sea funcional la página.
 =========================================================== */
 .invisible {
-  display: none !important;
+    display: none !important;
 }
 
 .visible {
     display: flex;
-  }
+}
 /* Fin de los estilos temporales */

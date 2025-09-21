@@ -28,7 +28,7 @@
                     <div id="buttons-container" class="buttons-container">
                         <button type="submit" class="btn btn-primary" onclick="mostrarSeccion('dashboard')" >Iniciar sesión</button>
                         <button type="button" class="btn btn-secondary" onclick="mostrarSeccion('dashboard')">Registrarse</button>
-                        <button type="button" class="btn btn-google" onclick="mostrarSeccion('dashboard')">
+                        <button type="button" class="btn btn-image" onclick="mostrarSeccion('dashboard')">
                             <span class="google-icon-container">
                                 <img src="images/iconos/google.png" alt="Logo google" class="icon-small">
                             </span> Continuar con Google
@@ -119,7 +119,7 @@
                         <div class="section-title">
                             <p class="subtitle">Últimos movimientos</p>
                         </div>
-                    <button class="btn btn-primary small">
+                    <button class="btn btn-primary btn-small small">
                         <span class="icon">
                             <img src="images/iconos/plus.png" class="icon-small" alt="Icono más">
                         </span>
@@ -261,55 +261,56 @@
                         <div class="header-table">
                             <p class="subtitle">Movimientos</p>
                         </div>
-
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                <th></th>
-                                <th>Fecha</th>
-                                <th>Categoría</th>
-                                <th>Monto</th>
-                                <th>Tipo</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="td-button"><button class="btn small"><img src="images/iconos/Trash 2.png"></button></td>
-                                    <td>Feb. 04</td>
-                                    <td>Objetivos</td>
-                                    <td>$40.000</td>
-                                    <td>Ahorro</td>
-                                </tr>
-                                <tr>
-                                    <td class="td-button"><button class="btn small"><img src="images/iconos/Trash 2.png"></button></td>
-                                    <td>Ene. 31</td>
-                                    <td>Inversión</td>
-                                    <td>$15.500</td>
-                                    <td>Inversión</td>
-                                </tr>
-                                <tr>
-                                    <td class="td-button"><button class="btn small"><img src="images/iconos/Trash 2.png"></button></td>
-                                    <td>Ene. 20</td>
-                                    <td>Sueldo</td>
-                                    <td>$140.000</td>
-                                    <td>Ingreso</td>
-                                </tr>
-                                <tr>
-                                    <td class="td-button"><button class="btn small"><img src="images/iconos/Trash 2.png"></button></td>
-                                    <td>Ene. 01</td>
-                                    <td>Ocio</td>
-                                    <td class="negative">-$45.850</td>
-                                    <td>Gasto</td>
-                                </tr>
-                                <tr>
-                                    <td class="td-button"><button class="btn small"><img src="images/iconos/Trash 2.png"></button></td>
-                                    <td>Ene. 01</td>
-                                    <td>Salud</td>
-                                    <td class="negative">-$15.257</td>
-                                    <td>Gasto</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <div>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                    <th></th>
+                                    <th>Fecha</th>
+                                    <th>Categoría</th>
+                                    <th>Monto</th>
+                                    <th>Tipo</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="td-button"><button class="btn small"><img src="images/iconos/Trash 2.png"></button></td>
+                                        <td>Feb. 04</td>
+                                        <td>Objetivos</td>
+                                        <td>$40.000</td>
+                                        <td>Ahorro</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="td-button"><button class="btn small"><img src="images/iconos/Trash 2.png"></button></td>
+                                        <td>Ene. 31</td>
+                                        <td>Inversión</td>
+                                        <td>$15.500</td>
+                                        <td>Inversión</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="td-button"><button class="btn small"><img src="images/iconos/Trash 2.png"></button></td>
+                                        <td>Ene. 20</td>
+                                        <td>Sueldo</td>
+                                        <td>$140.000</td>
+                                        <td>Ingreso</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="td-button"><button class="btn small"><img src="images/iconos/Trash 2.png"></button></td>
+                                        <td>Ene. 01</td>
+                                        <td>Ocio</td>
+                                        <td class="negative">-$45.850</td>
+                                        <td>Gasto</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="td-button"><button class="btn small"><img src="images/iconos/Trash 2.png"></button></td>
+                                        <td>Ene. 01</td>
+                                        <td>Salud</td>
+                                        <td class="negative">-$15.257</td>
+                                        <td>Gasto</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </section>
             </main>
@@ -453,12 +454,12 @@
                             <p class="subtitle">Inversiones</p>               
                         </div>
                         <div class="inversiones-card-table-button">
-                            <button class="btn btn-primary small">
+                            <button class="btn btn-primary btn-small small">
                                 <span class="icon">
                                     <img src="images/iconos/search.png" class="icon-small" alt="Icono busqueda">
                                 </span>
                             </button>
-                            <button class="btn btn-primary small">
+                            <button class="btn btn-primary btn-small small">
                                 <span class="icon">
                                     <img src="images/iconos/plus.png" class="icon-small" alt="Icono más">
                                 </span>
@@ -633,22 +634,133 @@
         </div>
     </section>  
 
-    <!-- HISTORIAL Y AUDITORÍA -
-    <section id="historial" class="screen">
-        <h2>Historial y Auditoría</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Fecha</th>
-                    <th>Acción</th>
-                    <th>Resultado</th>
-                </tr>
-            </thead>
-            <tbody> Se llenará con JS. Importar desde src="js/app.js </tbody>
-        </table>
-    </section>
+    <!-- HISTORIAL Y AUDITORÍA -->
+    <section id="historial" class="princial-section seccion invisible">
+        <div class="header-container">
+        <div class="header-nav">
+            <img src="images/barraDeNavegacion/menu.png" alt="menu navegable" class="header-menu">
+        </div>
+        <div class="header-logo">
+            <img src="images/barraDeNavegacion/nombre inicial.png" alt="Logo FinGrow" class="header-logo-img">
+        </div>
+        </div>
+        <div class="principal-container">
+            <aside class="sidebar">    
+                <nav>
+                    <ul>
+                    <li ><a href="#dashboard" onclick="mostrarSeccion('dashboard')"><span class="slidebar-icon"><img src="images/iconos/Bar chart-2.png"> </span> Dashboard</a></li>
+                    <li><a href="#ingresos-gastos"  onclick="mostrarSeccion('ingresos-gastos')"><span class="slidebar-icon"><img src="images/iconos/Dollar sign.png"> </span> Ingresos y Gastos</a></li>
+                    <li><a href="#metas" onclick="mostrarSeccion('metas')"><span class="slidebar-icon"><img src="images/iconos/Award.png"> </span> Metas de ahorro</a></li>
+                    <li><a href="#inversiones"  onclick="mostrarSeccion('inversiones')"><span class="slidebar-icon"><img src="images/iconos/Trending up.png"> </span> Inversiones</a></li>
+                    <li><a href="#reportes"   onclick="mostrarSeccion('reportes')"><span class="slidebar-icon"><img src="images/iconos/Check square.png"> </span> Reportes y Estadísticas</a></li>
+                    <li class="active"><a href="#historial"><span class="slidebar-icon"><img src="images/iconos/Compass.png"> </span> Historial y Auditoría</a></li>
+                    <li><a href="#exportar"  onclick="mostrarSeccion('exportar')"><span class="slidebar-icon"><img src="images/iconos/upload.png"> </span> Exportación de Datos</a></li>
+                    <li><a href="#configuracion"  onclick="mostrarSeccion('configuracion')"><span class="slidebar-icon"><img src="images/iconos/settings.png"> </span> Configuración</a></li>
+                    </ul>
+                </nav>
 
-    EXPORTACIÓN DE DATOS 
+                <nav>
+                    <ul>    
+                    <li><a href="#login" onclick="mostrarSeccion('login')"><span class="slidebar-icon"><img src="images/iconos/Log out.png"> </span>  Cerrar Sesión</a></li>
+                </nav>
+            </aside>
+
+            <main class="content">
+                <section id="historial-container" class="card">
+                    <div class="section-title">
+                        <h2 class="subtitle subtitle-center">Historial y Auditoría</h2>
+                        <hr>
+                    </div>
+
+                    <div>
+                        <form id="historial-form" class="form-grid">
+                            <!-- Fecha -->
+                            <div class="form-group without-margin">
+                                <label for="fecha">Fecha:</label>
+                            </div>
+                            <div class="form-group without-margin">
+                                <input type="date" id="fecha" name="fecha" class="input">
+                            </div>
+                        </form>
+                    
+                        <hr>
+                    </div>
+
+
+                    <div>   
+                        <!-- Lista de eventos -->
+                        <ul class="historial-list">
+                            <li>
+                                <div class="contenido">
+                                    <div class="texto">
+                                        <span class="evento">Creación de usuario</span>
+                                        <span class="fecha">01/02/2025 10:52:35</span>
+                                    </div>
+                                    <span class="dot green"></span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="contenido">
+                                    <div class="texto">
+                                        <span class="evento">Creación de movimiento</span>
+                                        <span class="fecha">01/02/2025 11:00:25</span>
+                                    </div>
+                                    <span class="dot green"></span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="contenido">
+                                    <div class="texto">
+                                        <span class="evento">Modificación de perfil</span>
+                                        <span class="fecha">01/02/2025 11:02:06</span>
+                                    </div>
+                                    <span class="dot blue"></span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="contenido">
+                                    <div class="texto">
+                                        <span class="evento">Modificación de perfil</span>
+                                        <span class="fecha">01/02/2025 11:04:05</span>
+                                    </div>
+                                    <span class="dot blue"></span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="contenido">
+                                    <div class="texto">
+                                        <span class="evento">Eliminación de movimiento</span>
+                                        <span class="fecha">01/02/2025 11:06:10</span>
+                                    </div>
+                                    <span class="dot red"></span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="contenido">
+                                    <div class="texto">
+                                        <span class="evento">Creación de movimiento</span>
+                                        <span class="fecha">01/02/2025 11:22:17</span>
+                                    </div>
+                                    <span class="dot green"></span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Botón exportar -->
+                    <div class="form-actions">
+                        <button class="btn btn-primary btn-image">
+                            <span class="icon">
+                                <img src="images/iconos/descargar.png" class="icon-small" alt="Icono descarga">
+                            </span>
+                            Descargar historial</button>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </section>  
+
+    <!-- EXPORTACIÓN DE DATOS 
     <section id="exportar" class="screen">
         <h2>Exportación de datos</h2>
         <form id="form-exportar">
