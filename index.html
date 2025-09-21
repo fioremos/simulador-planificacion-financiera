@@ -9,7 +9,7 @@
 </head>
 <body>
     <!-- PANTALLA DE LOGIN -->
-    <section id="login" class="login-section">
+    <section id="login" class="login-section seccion">
         <div class="card">
             <div class="login-logo-container">
                 <div class="login-logo-img-container">
@@ -26,9 +26,9 @@
                     </div>
 
                     <div id="buttons-container" class="buttons-container">
-                        <button type="submit" class="btn btn-primary">Iniciar sesión</button>
-                        <button type="button" class="btn btn-secondary">Registrarse</button>
-                        <button type="button" class="btn btn-google">
+                        <button type="submit" class="btn btn-primary" onclick="mostrarSeccion('dashboard')" >Iniciar sesión</button>
+                        <button type="button" class="btn btn-secondary" onclick="mostrarSeccion('dashboard')">Registrarse</button>
+                        <button type="button" class="btn btn-google" onclick="mostrarSeccion('dashboard')">
                             <span class="google-icon-container">
                                 <img src="images/iconos/google.png" alt="Logo google" class="google-icon">
                             </span> Continuar con Google
@@ -40,9 +40,14 @@
     </section>
     
     <!-- BARRA DE NAVEGACIÓN -->
-    <section id="dashboard" class="princial-section">
-        <div class="sidebar-header">
-            <img src="images/barraDeNavegacion/nombre inicial.png" alt="Logo FinGrow" class="sidebar-header-logo">
+    <section id="dashboard" class="princial-section seccion invisible">
+        <div class="header-container">
+            <div class="header-nav">
+                <img src="images/barraDeNavegacion/menu.png" alt="menu navegable" class="header-menu">
+            </div>
+            <div class="header-logo">
+                <img src="images/barraDeNavegacion/nombre inicial.png" alt="Logo FinGrow" class="header-logo-img">
+            </div>
         </div>
         <div class="principal-container">
             <aside class="sidebar">    
@@ -61,7 +66,7 @@
 
                 <nav>
                     <ul>    
-                    <li><a href="#login"><span class="slidebar-icon"><img src="images/iconos/Log out.png"> </span>  Cerrar Sesión</a></li>
+                    <li><a href="#login" onclick="mostrarSeccion('login')" ><span class="slidebar-icon"><img src="images/iconos/Log out.png"> </span>  Cerrar Sesión</a></li>
                 </nav>
             </aside>
 
@@ -159,7 +164,7 @@
     </section>
 
     <!--  GESTIÓN DE INGRESOS Y GASTOS -->
-    <section id="ingresos-gastos" class="princial-section">
+    <section id="ingresos-gastos" class="princial-section seccion invisible">
         <div class="sidebar-header">
             <img src="images/barraDeNavegacion/nombre inicial.png" alt="Logo FinGrow" class="sidebar-header-logo">
         </div>
@@ -406,5 +411,32 @@
             </ul>
         </nav>
     </footer> -->
+    <script>
+        /* ===============================================
+         * Script: Control de Secciones Interactivas
+         * Autor: Sol Kalapuj - Equipo 2
+         * Fecha: Septiembre 2025
+         * Descripción: Este script permite mostrar u ocultar
+         * secciones específicas según el botón presionado.
+         *
+         * NOTA IMPORTANTE:
+         * Este script incluye lógica y estructura pensadas
+         * para facilitar la corrección docente.
+         * Debe ser removido una vez sea funcional la página.
+         * ================================================ */
+        function mostrarSeccion(id) {
+            const secciones = document.querySelectorAll('.seccion');
+            secciones.forEach(seccion => {
+                seccion.classList.remove('visible');
+                seccion.classList.add('invisible');
+            });
+
+            const activa = document.getElementById(id);
+            if (activa) {
+                activa.classList.remove('invisible');
+                activa.classList.add('visible');
+            }
+        }
+    </script>
 </body>
 </html>

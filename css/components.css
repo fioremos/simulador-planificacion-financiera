@@ -82,27 +82,37 @@
     min-height: 0;
 }
 
-/* --- Slide --- */
-.sidebar-header {
+/* --- Header --- */
+.header-container {
     background-color: var(--white-000);
     display: flex;
     align-items: center;
-    justify-content: flex-end; 
+    justify-content: space-between;
+    height: 4rem;
+    padding: 0 1rem;
+}
+
+.header-menu {
+    height: 2rem; 
+    cursor: pointer;
+    /*Para la web el navegable siempre esta desplegado*/
+    display: none; 
+}
+
+.header-logo-img{
     height: 4rem;
 }
-.sidebar-header-logo{
-    height: 4rem;
-}
-.sidebar-header img {
+.header-logo-img {
     transition: opacity 0.3s ease-in-out;
 }
 
-.sidebar-header img:hover {
+.header-logo img:hover {
     content: url('../images/barraDeNavegacion/nombre final.png'); 
     opacity: 1;
     transition: opacity 0.3s ease-in-out;
 }
 
+/* --- Slide --- */
 .sidebar {
     background: var(--background-options-bar);
     padding: 0 0.3rem;
@@ -222,6 +232,8 @@
 .login-logo-container img {
     transition: opacity 0.3s ease-in-out;
     height: 16rem;
+    width: 20.5rem;
+    
 }
 
 .login-logo-container img:hover {
@@ -427,3 +439,23 @@
     text-align: center;
 }
 /****************************************************/
+
+
+/* =========================================================
+ESTILOS TEMPORALES PARA CORRECCIÓN DOCENTE
+------------------------------------------------------------
+La siguiente clase se utiliza para ocultar secciones que 
+facilitan la corrección de pantallas individuales por parte 
+del docente durante el desarrollo.
+
+IMPORTANTE:
+Eliminar estos estilos una vez sea funcional la página.
+=========================================================== */
+.invisible {
+  display: none !important;
+}
+
+.visible {
+    display: flex;
+  }
+/* Fin de los estilos temporales */
