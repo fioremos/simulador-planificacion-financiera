@@ -343,6 +343,10 @@
     padding: 0.6rem 1.2rem;
     font-size: 1rem;
 }
+.form-actions .thinner{
+    padding: 0.1rem 2rem;
+    gap: 2rem;
+}
 
 /* --- Radios --- */
 .radio-group {
@@ -526,7 +530,7 @@
 
 .metas-chart{
     width: 50%;    
-    height: 100%;
+    height: 13rem;
 }
 
 .metas-card-label{
@@ -646,6 +650,7 @@
 .historial-list {
     list-style: none;
     padding: 0;
+    margin-top: 0;
 }
 
 .historial-list li {
@@ -654,8 +659,8 @@
 }
 
 .historial-list .dot {
-    margin-left: 16px;
-    flex-shrink: 0;
+    width: 1.75rem;
+    height: 1.75rem;
 }
 
 .historial-list .contenido {
@@ -676,6 +681,50 @@
 
 .historial-list .fecha {
     font-size: 0.9rem;
+}
+
+
+/****************************************************/
+/*****************EXPORTACION************************/
+.checkbox-group {
+    display: flex;
+    gap: 4rem; 
+    align-items: stretch;     
+    padding: 0 4rem;    
+    margin-bottom: 1rem;
+}
+
+.checkbox-group input {
+    margin: 0.5rem; 
+}
+
+.checkbox-group .column {
+    flex: 1; 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; 
+}
+
+.form-block-end{
+    padding-bottom: 3rem;
+}
+
+.form-row {
+    display: flex;
+    align-items: center; 
+    margin-bottom: 2rem;
+}
+
+.form-row label {
+    width: 5rem; 
+    margin-right: 1rem;
+    line-height: 1.5; 
+}
+
+.form-row .input {
+    flex: 1;
+    padding: 0.2rem;
+    font-size: 1rem;
 }
 /* =========================================================
 ESTILOS TEMPORALES PARA CORRECCIÓN DOCENTE
