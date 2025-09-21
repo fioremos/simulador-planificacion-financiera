@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/components.css">
+    <title>FinGrow</title>
+</head>
+<body>
+    <!-- PANTALLA DE LOGIN -->
+    <section id="login" class="login-section seccion">
+        <div class="card">
+            <div class="login-logo-container">
+                <div class="login-logo-img-container">
+                    <img src="images/login/logo.png" alt="Logo FinGrow" class="login-logo">
+                </div>
+                <p class="subtitle">Organiza tus finanzas fácil y rápido</p>
+            </div>
+            
+            <div class="login-form-container">
+                <form id="login-form" class="login-form">
+                    <div id="inputs-container" class="inputs-container">
+                        <input type="text" name="usuario" placeholder="Usuario" class="input" required>
+                        <input type="password" name="password" placeholder="Contraseña" class="input" required>
+                    </div>
+
+                    <div id="buttons-container" class="buttons-container">
+                        <button type="submit" class="btn btn-primary" onclick="mostrarSeccion('dashboard')" >Iniciar sesión</button>
+                        <button type="button" class="btn btn-secondary" onclick="mostrarSeccion('dashboard')">Registrarse</button>
+                        <button type="button" class="btn btn-google" onclick="mostrarSeccion('dashboard')">
+                            <span class="google-icon-container">
+                                <img src="images/iconos/google.png" alt="Logo google" class="google-icon">
+                            </span> Continuar con Google
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+    
+    <!-- BARRA DE NAVEGACIÓN -->
+    <section id="dashboard" class="princial-section seccion invisible">
+        <div class="header-container">
+            <div class="header-nav">
+                <img src="images/barraDeNavegacion/menu.png" alt="menu navegable" class="header-menu">
+            </div>
+            <div class="header-logo">
+                <img src="images/barraDeNavegacion/nombre inicial.png" alt="Logo FinGrow" class="header-logo-img">
+            </div>
+        </div>
+        <div class="principal-container">
+            <aside class="sidebar">    
+                <nav>
+                    <ul>
+                    <li class="active"><a href="#dashboard"><span class="slidebar-icon"><img src="images/iconos/Bar chart-2.png"> </span> Dashboard</a></li>
+                    <li><a href="#ingresos-gastos"><span class="slidebar-icon"><img src="images/iconos/Dollar sign.png"> </span> Ingresos y Gastos</a></li>
+                    <li><a href="#metas"><span class="slidebar-icon"><img src="images/iconos/Award.png"> </span> Metas de ahorro</a></li>
+                    <li><a href="#inversiones"><span class="slidebar-icon"><img src="images/iconos/Trending up.png"> </span> Inversiones</a></li>
+                    <li><a href="#reportes"><span class="slidebar-icon"><img src="images/iconos/Check square.png"> </span> Reportes y Estadísticas</a></li>
+                    <li><a href="#historial"><span class="slidebar-icon"><img src="images/iconos/Compass.png"> </span> Historial y Auditoría</a></li>
+                    <li><a href="#exportar"><span class="slidebar-icon"><img src="images/iconos/upload.png"> </span> Exportación de Datos</a></li>
+                    <li><a href="#configuracion"><span class="slidebar-icon"><img src="images/iconos/settings.png"> </span> Configuración</a></li>
+                    </ul>
+                </nav>
+
+                <nav>
+                    <ul>    
+                    <li><a href="#login" onclick="mostrarSeccion('login')" ><span class="slidebar-icon"><img src="images/iconos/Log out.png"> </span>  Cerrar Sesión</a></li>
+                </nav>
+            </aside>
+
+            <main class="content">
+                <section id="resumen-financiero" class="card">
+                    <div class="section-title">
+                        <h2 class="subtitle">Resumen financiero</h2>
+                    </div>
+
+                    <div class="resumen-grid">
+                        
+                        <div class="resumen-left">
+                            <div class="dashboard-container-chart">
+                                <img src="images/dashboard/Grafico.png" class="dashboard-chart" alt="Gráfico financiero">
+                            </div>
+
+                            <div class="card">
+                                <p class="highlight">
+                                Ahorraste $280.000, el 20% de tu ingreso.<br>
+                                <span class="success">Este mes gastaste 12% menos.</span>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="resumen-right">
+                            <div class="disponible">
+                                <p>
+                                <strong>Disponible</strong><br>
+                                <span class="saldo">$550.258,85</span>
+                                </p>
+                            </div>
+
+                            <div class="resumen-datos">
+                                <div class="card">
+                                <p><strong>Ingresos</strong><br>$1.400.000,00</p>
+                                </div>
+                                <div class="card">
+                                <p><strong>Gastos</strong><br>$569.741,15</p>
+                                </div>
+                                <div class="card">
+                                <p><strong>Meta más cercana</strong><br>Viaje: 70% alcanzado</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="ultimos-movimientos" class="card">
+                    <div class="header-table">
+                        <div class="section-title">
+                            <p class="subtitle">Últimos movimientos</p>
+                        </div>
+                    <button class="btn btn-primary small"><p class="icon">+</p></button>
+                    </div>
+
+                    <table class="table">
+                    <thead>
+                        <tr>
+                        <th>Fecha</th>
+                        <th>Categoría</th>
+                        <th>Monto</th>
+                        <th>Nota</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                        <td>Feb. 04</td>
+                        <td>Viaje</td>
+                        <td>$40.000</td>
+                        <td><span class="dot blue"></span></td>
+                        </tr>
+                        <tr>
+                        <td>Ene. 31</td>
+                        <td>PC</td>
+                        <td>$15.500</td>
+                        <td><span class="dot blue"></span></td>
+                        </tr>
+                        <tr>
+                        <td>Ene. 20</td>
+                        <td>Viaje</td>
+                        <td>$140.000</td>
+                        <td><span class="dot blue"></span></td>
+                        </tr>
+                        <tr>
+                        <td>Ene. 01</td>
+                        <td>Ocio</td>
+                        <td class="negative">-$45.850</td>
+                        <td><span class="dot red"></span></td>
+                        </tr>
+                    </tbody>
+                    </table>
+                </section>
+            </main>
+        </div>
+    </section>
+
+    <!--  GESTIÓN DE INGRESOS Y GASTOS -->
+    <section id="ingresos-gastos" class="princial-section seccion invisible">
+        <div class="sidebar-header">
+            <img src="images/barraDeNavegacion/nombre inicial.png" alt="Logo FinGrow" class="sidebar-header-logo">
+        </div>
+        <div class="principal-container">
+            <aside class="sidebar">    
+                <nav>
+                    <ul>
+                    <li><a href="#ingresos-gastos"><span class="slidebar-icon"><img src="images/iconos/Bar chart-2.png"> </span> Dashboard</a></li>
+                    <li class="active"><a href="#ingresos-gastos"><span class="slidebar-icon"><img src="images/iconos/Dollar sign.png"> </span> Ingresos y Gastos</a></li>    
+                    <li><a href="#metas"><span class="slidebar-icon"><img src="images/iconos/Award.png"> </span> Metas de ahorro</a></li>
+                    <li><a href="#inversiones"><span class="slidebar-icon"><img src="images/iconos/Trending up.png"> </span> Inversiones</a></li>
+                    <li><a href="#reportes"><span class="slidebar-icon"><img src="images/iconos/Check square.png"> </span> Reportes y Estadísticas</a></li>
+                    <li><a href="#historial"><span class="slidebar-icon"><img src="images/iconos/Compass.png"> </span> Historial y Auditoría</a></li>
+                    <li><a href="#exportar"><span class="slidebar-icon"><img src="images/iconos/upload.png"> </span> Exportación de Datos</a></li>
+                    <li><a href="#configuracion"><span class="slidebar-icon"><img src="images/iconos/settings.png"> </span> Configuración</a></li>
+                    </ul>
+                </nav>
+
+                <nav>
+                    <ul>    
+                    <li><a href="#login"><span class="slidebar-icon"><img src="images/iconos/Log out.png"> </span>  Cerrar Sesión</a></li>
+                </nav>
+            </aside>
+
+            <main class="content">
+                <section id="ingresos-gastos-card" class="card">
+                    <div class="section-title">
+                        <h2 class="subtitle subtitle-center">Gestión de ingresos y gastos</h2>
+                        <hr>
+                    </div>
+
+                    <!-- Formulario -->
+                    <div class="gastos-ingresos-form-container">
+                        <form id="movimientos-form" class="form-grid">
+                            <!-- Fecha -->
+                            <div class="form-group">
+                                <label for="fecha">Fecha:</label>
+                            </div>
+                            <div class="form-group">
+                                <input type="date" id="fecha" name="fecha" class="input">
+                            </div>
+
+                            <!-- Tipo -->
+                            <div class="form-group full-width">
+                                <div class="radio-group">
+                                    <label><input type="checkbox" name="tipo" value="ingreso"> Ingreso</label>
+                                    <label><input type="checkbox" name="tipo" value="ahorro"> Ahorro</label>
+                                    <label><input type="checkbox" name="tipo" value="inversion"> Inversión</label>
+                                    <label><input type="checkbox" name="tipo" value="gasto"> Gasto</label>
+                                </div>
+                            </div>
+                            
+
+                            <!-- Categoría -->
+                            <div class="form-group">
+                                <label for="categoria">Categoría:</label></div>
+                            <div class="form-group">
+                                <select id="categoria" name="categoria" class="input">
+                                    <option value="hogar">Hogar</option>
+                                    <option value="ocio">Ocio</option>
+                                    <option value="salud">Salud</option>
+                                    <option value="sueldo">Sueldo</option>
+                                    <option value="objetivos">Objetivos</option>
+                                    <option value="inversion">Inversión</option>
+                                </select>
+                            </div>
+
+                            <!-- Monto -->
+                            <div class="form-group">
+                                <label for="monto">Monto:</label>
+                            </div>
+                            <div class="form-group">
+                                <input type="number" id="monto" name="monto" placeholder="$ 0,00" class="input">
+                            </div>
+
+                            <!-- Botón -->
+                            <div class="form-actions">
+                            <button type="submit" class="btn btn-inverse" disabled>Agregar movimiento</button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <!-- Tabla de movimientos -->
+                    <div class="ingresos-gastos-table">
+                        <div class="header-table">
+                            <p class="subtitle">Movimientos</p>
+                        </div>
+
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                <th></th>
+                                <th>Fecha</th>
+                                <th>Categoría</th>
+                                <th>Monto</th>
+                                <th>Tipo</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="td-button"><button class="btn small"><img src="images/iconos/Trash 2.png"></button></td>
+                                    <td>Feb. 04</td>
+                                    <td>Objetivos</td>
+                                    <td>$40.000</td>
+                                    <td>Ahorro</td>
+                                </tr>
+                                <tr>
+                                    <td class="td-button"><button class="btn small"><img src="images/iconos/Trash 2.png"></button></td>
+                                    <td>Ene. 31</td>
+                                    <td>Inversión</td>
+                                    <td>$15.500</td>
+                                    <td>Inversión</td>
+                                </tr>
+                                <tr>
+                                    <td class="td-button"><button class="btn small"><img src="images/iconos/Trash 2.png"></button></td>
+                                    <td>Ene. 20</td>
+                                    <td>Sueldo</td>
+                                    <td>$140.000</td>
+                                    <td>Ingreso</td>
+                                </tr>
+                                <tr>
+                                    <td class="td-button"><button class="btn small"><img src="images/iconos/Trash 2.png"></button></td>
+                                    <td>Ene. 01</td>
+                                    <td>Ocio</td>
+                                    <td class="negative">-$45.850</td>
+                                    <td>Gasto</td>
+                                </tr>
+                                <tr>
+                                    <td class="td-button"><button class="btn small"><img src="images/iconos/Trash 2.png"></button></td>
+                                    <td>Ene. 01</td>
+                                    <td>Salud</td>
+                                    <td class="negative">-$15.257</td>
+                                    <td>Gasto</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </section>  
+
+    <!-- METAS DE AHORRO 
+    <section id="metas" class="screen">
+        <h2>Metas de ahorro</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Meta</th>
+                    <th>Objetivo</th>
+                    <th>Restante</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Viaje</td>
+                    <td>$700.000</td>
+                    <td>$210.000</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+     INVERSIONES 
+    <section id="inversiones" class="screen">
+        <h2>Inversiones</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Activo</th>
+                    <th>Precio</th>
+                    <th>Cambio</th>
+                </tr>
+            </thead>
+            <tbody> Datos de inversión con JS. Importar desde src="js/app.js </tbody>
+        </table>
+        <div class="grafico-inversiones"> Gráfico con JS. Importar desde src="js/app.js </div>
+    </section>
+
+     REPORTES Y ESTADÍSTICAS 
+
+    <section id="reportes" class="screen">
+        <h2>Reportes y estadísticas</h2>
+        <div class="grafico-reportes"> Gráficos con JS. Importar desde src="js/app.js </div>
+    </section>
+
+     HISTORIAL Y AUDITORÍA -
+    <section id="historial" class="screen">
+        <h2>Historial y Auditoría</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Fecha</th>
+                    <th>Acción</th>
+                    <th>Resultado</th>
+                </tr>
+            </thead>
+            <tbody> Se llenará con JS. Importar desde src="js/app.js </tbody>
+        </table>
+    </section>
+
+    EXPORTACIÓN DE DATOS 
+    <section id="exportar" class="screen">
+        <h2>Exportación de datos</h2>
+        <form id="form-exportar">
+            <fieldset>
+                <legend>Datos a exportar</legend>
+                <label><input type="checkbox" name="export_ingresos"> Ingresos y Gastos</label>
+                <label><input type="checkbox" name="export_metas"> Metas</label>
+                <label><input type="checkbox" name="export_inversiones"> Inversiones</label>
+                <label><input type="checkbox" name="export_reportes"> Reportes</label>
+                <label><input type="checkbox" name="export_auditoria"> Auditoría</label>
+            </fieldset>
+            <fieldset>
+                <legend>Tipo de archivo</legend>
+                <label><input type="radio" name="tipo" value="csv"> CSV</label>
+                <label><input type="radio" name="tipo" value="xlsx"> XLSX</label>
+                <label><input type="radio" name="tipo" value="pdf"> PDF</label>
+            </fieldset>
+            <button type="submit">Exportar</button>
+        </form>
+    </section>
+
+    -- CONFIGURACIÓN DE USUARIO 
+    <section id="configuracion" class="screen">
+        <h2>Configuración de usuario</h2>
+        <form id="form-config">
+            <label>Nombre: <input type="text" name="nombre" required></label>
+            <label>Email: <input type="email" name="email" required></label>
+            <label>Contraseña: <input type="password" name="nueva_password" required></label>
+            <button type="submit">Actualizar</button>
+        </form>
+        <h3>Preferencias</h3>
+        <label><input type="checkbox" name="notificaciones"> Notificaciones por correo</label>
+    </section> -->
+
+    <!-- FOOTER -->    
+    <!-- <footer>
+        <p>&copy; 2025 FinGrow. Todos los derechos reservados.</p>
+        <nav>
+            <ul>
+                <li><a href="#privacidad">Política de Privacidad</a></li>
+                <li><a href="#terminos">Términos y Condiciones</a></li>
+            </ul>
+        </nav>
+    </footer> -->
+    <script>
+        /* ===============================================
+         * Script: Control de Secciones Interactivas
+         * Autor: Sol Kalapuj - Equipo 2
+         * Fecha: Septiembre 2025
+         * Descripción: Este script permite mostrar u ocultar
+         * secciones específicas según el botón presionado.
+         *
+         * NOTA IMPORTANTE:
+         * Este script incluye lógica y estructura pensadas
+         * para facilitar la corrección docente.
+         * Debe ser removido una vez sea funcional la página.
+         * ================================================ */
+        function mostrarSeccion(id) {
+            const secciones = document.querySelectorAll('.seccion');
+            secciones.forEach(seccion => {
+                seccion.classList.remove('visible');
+                seccion.classList.add('invisible');
+            });
+
+            const activa = document.getElementById(id);
+            if (activa) {
+                activa.classList.remove('invisible');
+                activa.classList.add('visible');
+            }
+        }
+    </script>
+</body>
+</html>
