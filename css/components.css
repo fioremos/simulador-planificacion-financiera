@@ -17,6 +17,7 @@
     font-size: 1.25rem;
     transition: background 0.2s ease, transform 0.1s ease;
 }
+
 .btn:hover {
     transform: translateY(-2px);
 }
@@ -35,6 +36,13 @@
 .btn-inverse {
     background: var(--neutral-300);
     color: var(--white-000);
+}
+
+.btn-blue {
+    color: var(--text-on-selected);
+    font-size: small;
+    margin-top: 1rem;
+    padding: 0.359rem 2rem;
 }
 
 .btn-google {
@@ -58,6 +66,11 @@
     justify-content: center;
 }
 
+/* --- Letter --- */
+.bold {
+    font-weight: bold;
+}
+
 /* --- Subtitulos --- */
 .subtitle {
     color: var(--color-primary);
@@ -77,7 +90,7 @@
 
 .principal-container {
     display: grid;
-    grid-template-columns: 350px 1fr;
+    grid-template-columns: 300px 1fr;
     flex: 1;
     min-height: 0;
 }
@@ -123,11 +136,13 @@
 .sidebar ul {
     padding: 0;
     margin: 0.3rem 0;
-    font-size: 1.5rem;
+    font-size: 1.245rem;
 }
+
 .sidebar ul li {
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
 }
+
 .sidebar ul li a {
     text-decoration: none;
     color: var(--text-secondary);
@@ -136,15 +151,21 @@
     gap: 0.5rem;
     padding: 0.5rem;
     border-radius: 0.375rem;
+    transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+.sidebar ul li a:hover {
+    transform: translateY(-2px);
+    color: var(--color-primary);
 }
 .sidebar ul li.active a {
     background: var(--color-primary);
     color: var(--white-000);
     font-weight: 600;
+    padding: 0.8rem 0.5rem;
 }
 .slidebar-icon {
-    width: 3rem;
-    height: 3rem;
+    width: 2rem;
+    height: 2rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -225,8 +246,9 @@
 }
 
 .login-logo-container {
-    display: grid; 
-    place-items: center;
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
 }
 
 .login-logo-container img {
@@ -295,7 +317,7 @@
 
 .content .subtitle {
     margin: 0;
-    font-size: xxx-large;
+    font-size: xx-large;
     font-weight: normal;
 }
 
@@ -327,10 +349,11 @@
 .resumen-grid .resumen-left .card {
     margin-top: 1.4rem;
     height: auto;
+    padding: 0.8rem;
 }
 .highlight {
     margin: 0rem;
-    font-size: 1.7rem;
+    font-size: 1.175rem;
 }
 .success {
     color: var(--success);
@@ -383,7 +406,7 @@
 }
 
 .form-group label {
-    font-size: 1.5rem;
+    font-size: 1.7rem;
     color: var(--color-primary);
 
 }
@@ -391,11 +414,12 @@
 .radio-group {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    gap: 3rem;
+    gap: 0.5rem;
     place-items: center;
 }
 .radio-group label {
-    font-size: 2rem;
+    font-size: 1.2rem;
+    font-weight: bold;
 }
 
 .radio-group input {
@@ -439,6 +463,61 @@
     text-align: center;
 }
 /****************************************************/
+/****************METAS DE AHORRO*********************/
+.metas-table td{
+    color: var(--neutral-900);
+    text-align: center;
+}
+
+.metas-table th{
+    font-size: larger;
+    color: var(--color-primary);
+    font-weight: normal;    
+    text-align: center;
+}
+
+.metas-table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.metas-table thead tr {
+  border-top: 2px solid var(--color-muted);
+  border-bottom: 2px solid var(--color-muted);
+}
+.metas-table tbody tr:nth-child(even) {
+    background-color: var(--white-000) ;
+}
+
+.metas-table tbody tr:hover {
+    background-color: var(--neutral-200);
+}
+
+.metas-card-table-button{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.metas-chart{
+    width: 100%;    
+    height: 100%;
+}
+
+.metas-card-label{
+    padding: 0.5rem;
+    margin: 0;
+    text-align: center;
+}
+
+.metas-card-graph .section-title{
+    display: flex;
+    justify-content: space-between;
+}
+
+.metas-card-graph-button{
+    display: flex;
+    justify-content: center;
+}
 
 
 /* =========================================================
