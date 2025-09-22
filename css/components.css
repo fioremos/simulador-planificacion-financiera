@@ -947,46 +947,46 @@ input[type="radio"]:checked + .radio-cuadrado::after {
 }
 /* --- Formulario principal --- */
 .config-form {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
 /* --- Bloques generales del formulario --- */
 .form-block {
-  margin-bottom: 1.5rem;
+    margin-bottom: 1.5rem;
 }
 .form-title {
-  font-size: 1.2rem;
-  color: var(--color-primary);
-  margin-bottom: 0.8rem;
+    font-size: 1.2rem;
+    color: var(--color-primary);
+    margin-bottom: 0.8rem;
 }
 /* --- Toggle de formato numérico o preferencia de visualización --- */
 .format-toggle {
-  display: flex;
-  border: 1px solid var(--neutral-300);
-  border-radius: 6px;
-  overflow: hidden;
-  width: fit-content;
+    display: flex;
+    border: 1px solid var(--neutral-300);
+    border-radius: 6px;
+    overflow: hidden;
+    width: fit-content;
 }
 /* --- Variación sin borde para toggle --- */
 .without-border {
-  border: 0;
+    border: 0;
 }
 /* --- Opción de formato  --- */
 .format-option {
-  background: var(--white-000);
-  border: none;
-  padding: 0.4rem 0.8rem;
-  font-size: 1.2rem;
-  cursor: pointer;
-  color: var(--neutral-900);
+    background: var(--white-000);
+    border: none;
+    padding: 0.4rem 0.8rem;
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: var(--neutral-900);
 }
 /* --- Variación de opción en letras --- */
 .letter-option {
-  background: var(--white-000);
-  border: none;
-  padding: 0 0.2rem;
-  cursor: pointer;
-  color: var(--neutral-900);
+    background: var(--white-000);
+    border: none;
+    padding: 0 0.2rem;
+    cursor: pointer;
+    color: var(--neutral-900);
 }
 /* --- Opción activa de letras --- */
 .letter-option.active {  
@@ -994,15 +994,15 @@ input[type="radio"]:checked + .radio-cuadrado::after {
 }
 /* --- Opción activa de formato --- */
 .format-option.active {
-  background: var(--color-primary);
-  color: var(--white-000);
+    background: var(--color-primary);
+    color: var(--white-000);
 }
 /* --- Hover para cualquier opción --- */
 .format-option:hover {
-  background: var(--neutral-200);
+    background: var(--neutral-200);
 }
 .letter-option:hover {
-  background: var(--neutral-200);
+    background: var(--neutral-200);
 }
 /* --- Ajuste de márgenes en títulos con clase específica --- */
 .title-row{
