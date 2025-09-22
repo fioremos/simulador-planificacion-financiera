@@ -5,6 +5,14 @@
  -------------------------------------------------------------- */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
+
+/* --------------------------------------------------------------
+ * Definición de variables CSS globales (:root)
+ * Este bloque contiene todas las variables personalizadas utilizadas
+ * a lo largo del sitio para mantener consistencia visual y facilitar
+ * el mantenimiento del código. Incluye paletas de colores neutrales,
+ * principales, de fondo, texto, elementos interactivos, estados y sombras.
+ -------------------------------------------------------------- */
 :root {
     /* ---------------------------------------------
      * Definición de colores neutrales
@@ -76,6 +84,18 @@
         general del diseño.  */
 }
 
+
+/* ===============================
+   RESET GLOBAL
+   - Elimina márgenes y paddings por defecto
+   - Aplica box-sizing para un control más predecible
+   =============================== */
+* {
+    padding: 0;
+    box-sizing: content-box;
+}
+
+
 /****************************************************
  * BODY
  * Definición de estilos globales para todo el contenido de la página.
@@ -117,7 +137,6 @@ body {
     flex-direction: column;
     min-height: 100vh;
 }
-
 /*
  * PRINCIPAL CONTAINER
  * Divide la pantalla horizontalmente entre:
@@ -148,7 +167,6 @@ body {
     height: 4rem;
     padding: 0 1rem;
 }
-
 /*
  * HEADER MENU
  * Ícono de menú para móviles (oculto por defecto en escritorio)
@@ -159,7 +177,6 @@ body {
     /*Para la web el navegable siempre esta desplegado*/
     display: none; 
 }
-
 /*
  * LOGO DE LA APLICACIÓN
  * Imagen del logo, con transición suave de opacidad al hacer hover.
@@ -168,7 +185,6 @@ body {
     transition: opacity 0.3s ease-in-out;
     height: 4rem;
 }
-
 .header-logo img:hover {
     content: url('../images/barraDeNavegacion/nombre final.png'); 
     opacity: 1;
@@ -189,7 +205,6 @@ body {
     flex-direction: column;
     justify-content: space-between;
 }
-
 /*
  * LISTA DE NAVEGACIÓN
  * Contenedor vertical sin estilos de lista por defecto.
@@ -199,11 +214,9 @@ body {
     margin: 0.3rem 0;
     font-size: 1.245rem;
 }
-
 .sidebar ul li {
     margin-bottom: 1rem;
 }
-
 /*
  * ENLACES DEL SIDEBAR
  * Estilo base para enlaces (con ícono + texto), hover y activo.
@@ -227,7 +240,6 @@ body {
     font-weight: 600;
     padding: 0.8rem 0.5rem;
 }
-
 /*
  * ÍCONO DE CADA ÍTEM
  * Define el tamaño y espacio de los íconos en el sidebar.
@@ -254,7 +266,6 @@ body {
     flex-direction: column;
     justify-content: space-between;
 } 
-
 /*
  * CONTENIDO
  * Contenedor del contenido principal del layout.
@@ -264,7 +275,6 @@ body {
     padding: 1rem;
     height: 100%;
 }
-
 /*
  * ÍCONOS Y SUBTÍTULOS
  * Estiliza elementos destacados como íconos o subtítulos
@@ -275,7 +285,6 @@ body {
     font-size: 2rem;
     font-weight: normal;
 }
-
 .content .icon{
     margin: 0;
     font-size: 2rem;
