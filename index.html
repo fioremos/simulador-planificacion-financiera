@@ -391,7 +391,7 @@
                 </section>
 
                 <section id="metas-card-graph" class="card metas-card-graph">
-                    <div class="section-title">
+                    <div class="section-title-horizintal">
                         <h2 class="subtitle">Viaje</h2>
                         <h2 class="subtitle">$700.000</h2>
                     </div>
@@ -859,28 +859,152 @@
                             <span class="icon">
                                 <img src="images/iconos/descargar.png" class="icon-small" alt="Icono descarga">
                             </span>
-                            Exportar</button>
+                            Exportar
+                        </button>
                     </div>
                 </section>
             </main>
         </div>
     </section>  
 
-    <!-- CONFIGURACIÓN DE USUARIO 
-    <section id="configuracion" class="screen">
-        <h2>Configuración de usuario</h2>
-        <form id="form-config">
-            <label>Nombre: <input type="text" name="nombre" required></label>
-            <label>Email: <input type="email" name="email" required></label>
-            <label>Contraseña: <input type="password" name="nueva_password" required></label>
-            <button type="submit">Actualizar</button>
-        </form>
-        <h3>Preferencias</h3>
-        <label><input type="checkbox" name="notificaciones"> Notificaciones por correo</label>
-    </section> -->
+    <!-- CONFIGURACIÓN DE USUARIO -->
+    <section id="configuracion"  class="princial-section seccion invisible">
+        <div class="header-container">
+        <div class="header-nav">
+            <img src="images/barraDeNavegacion/menu.png" alt="menu navegable" class="header-menu">
+        </div>
+        <div class="header-logo">
+            <img src="images/barraDeNavegacion/nombre inicial.png" alt="Logo FinGrow" class="header-logo-img">
+        </div>
+        </div>
+        <div class="principal-container">
+            <aside class="sidebar">    
+                <nav>
+                    <ul>
+                    <li ><a href="#dashboard" onclick="mostrarSeccion('dashboard')"><span class="slidebar-icon"><img src="images/iconos/Bar chart-2.png"> </span> Dashboard</a></li>
+                    <li><a href="#ingresos-gastos"  onclick="mostrarSeccion('ingresos-gastos')"><span class="slidebar-icon"><img src="images/iconos/Dollar sign.png"> </span> Ingresos y Gastos</a></li>
+                    <li><a href="#metas" onclick="mostrarSeccion('metas')"><span class="slidebar-icon"><img src="images/iconos/Award.png"> </span> Metas de ahorro</a></li>
+                    <li><a href="#inversiones"  onclick="mostrarSeccion('inversiones')"><span class="slidebar-icon"><img src="images/iconos/Trending up.png"> </span> Inversiones</a></li>
+                    <li><a href="#reportes"   onclick="mostrarSeccion('reportes')"><span class="slidebar-icon"><img src="images/iconos/Check square.png"> </span> Reportes y Estadísticas</a></li>
+                    <li><a href="#historial"  onclick="mostrarSeccion('historial')"><span class="slidebar-icon"><img src="images/iconos/Compass.png"> </span> Historial y Auditoría</a></li>
+                    <li><a href="#exportar"   onclick="mostrarSeccion('exportar')"><span class="slidebar-icon"><img src="images/iconos/upload.png"> </span> Exportación de Datos</a></li>
+                    <li class="active"><a href="#configuracion"><span class="slidebar-icon"><img src="images/iconos/settings.png"> </span> Configuración</a></li>
+                    </ul>
+                </nav>
 
-    <!-- FOOTER -->    
-    <!-- <footer>
+                <nav>
+                    <ul>    
+                    <li><a href="#login" onclick="mostrarSeccion('login')"><span class="slidebar-icon"><img src="images/iconos/Log out.png"> </span>  Cerrar Sesión</a></li>
+                </nav>
+            </aside>
+
+            <main class="content">
+                <section id="exportar-container" class="card">
+                    <div class="section-title">
+                        <h2 class="subtitle subtitle-center">Configuración de Usuario</h2>
+                        <hr>
+                    </div>
+                    
+
+                    <!-- Datos Personales -->
+                    <div class="form-block block-center">
+                        <div class="section-title-horizintal">
+                            <h2 class="subtitle title-row">
+                                Datos Personales
+                            </h2>
+                            <img src="images/iconos/usuario.png" class="icon-small" alt="Icono usuario">
+                        </div>
+
+                        <form class="config-form">
+                            <div class="form-group">
+                                <input type="text" class="input" placeholder="Juan Perez">
+                            </div>
+                            <div class="form-group">
+                                <input type="email" class="input" placeholder="juan.perez@gmail.com">
+                            </div>
+                            <div class="form-group">
+                                <input type="tel" class="input" placeholder="1122334455">
+                            </div>
+                            
+                            <div class="checkbox-group alingn-left">
+                                <div class="column">
+                                    <div><input type="checkbox" id="verificacion"><label for="verificacion">Verificación en 2 pasos</label></div>                                    
+                                </div>                            
+                            </div>
+
+                            <div class="form-actions">
+                                <button class="btn btn-primary">
+                                    Cambiar Contraseña
+                                </button>
+                            </div> 
+                        </form>
+                    </div>
+
+                    <!-- Preferencias -->
+                    <div class="form-block block-center">
+                        <div class="section-title-horizintal">
+                            <h2 class="subtitle title-row">
+                                Preferencias
+                            </h2>
+                            <img src="images/iconos/folder.png" class="icon-small" alt="Icono usuario">
+                        </div>
+                        
+                        <form class="prefer-form">
+                            <div class="pref-group">   
+                                <label for="moneda">Moneda preferida</label>
+                                <select id="moneda" class="input">
+                                    <option>ARS</option>
+                                    <option>USD</option>
+                                    <option>EUR</option>
+                                </select>
+                            </div>
+
+                            <div class="pref-group" >
+                                <div >
+                                    <label for="modo-oscuro">Modo Oscuro</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" id="modo-oscuro" class="toggle">
+                                </div>                             
+                            </div>
+                            
+                            <div class="pref-group" >
+                                <div >
+                                    <label for="modo-oscuro">Tamaño de Fuente</label>
+                                </div>
+                                <div>
+                                    <div class="format-toggle without-border">
+                                        <button type="button" class="letter-option small">Pequeño</button>
+                                        <button type="button" class="letter-option active medium">Mediano</button>
+                                        <button type="button" class="letter-option large">Grande</button>
+                                        <button type="button" class="letter-option xlarge">Extra Grande</button>
+                                    </div>
+                                </div>                             
+                            </div>
+                            
+                            <div class="pref-group" >
+                                <div >
+                                    <label for="modo-oscuro">Formato Numérico</label>
+                                </div>
+                                <div>
+                                    <div class="format-toggle">
+                                        <button type="button" class="format-option active">,</button>
+                                        <button type="button" class="format-option">.</button>
+                                    </div>
+                                </div>                             
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Botón Guardar -->
+                    <div class="form-actions">
+                        <button class="btn btn-primary">Guardar</button>
+                    </div>
+                    </section>
+
+    <!-- FOOTER 
+         Este fue ocultado dado a que no fue incluido en el mockup-->    
+   <footer class="princial-section seccion invisible">
         <p>&copy; 2025 FinGrow. Todos los derechos reservados.</p>
         <nav>
             <ul>
@@ -888,7 +1012,7 @@
                 <li><a href="#terminos">Términos y Condiciones</a></li>
             </ul>
         </nav>
-    </footer> -->
+    </footer> 
     <script>
         /* ===============================================
          * Script: Control de Secciones Interactivas
