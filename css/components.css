@@ -44,7 +44,6 @@
     padding: 0;
 }
 
-
 .btn-blue {
     color: var(--text-on-selected);
     font-size: small;
@@ -119,7 +118,7 @@
     text-align: justify;
 }
 /* --- Layout general --- */
-.princial-section {
+.principal-section {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
@@ -259,30 +258,30 @@
     font-size: x-large;
 }
 
-.table {
+.table-csm {
     height: 100%;
     width: 100%;
 }
 
-.table thead {
+.table-csm thead {
     background-color: var(--neutral-100);
     color: var(--neutral-900);
     text-align: left;
 }
 
-.table th, .table td {
+.table-csm th, .table-csm td {
     padding: 0.25rem;
 }
 
-.table tbody tr:nth-child(even) {
+.table-csm tbody tr:nth-child(even) {
     background-color: var(--neutral-100);
 }
 
-.table tbody tr:hover {
+.table-csm tbody tr:hover {
     background-color: var(--neutral-200);
 }
 
-.table .negative {
+.table-csm .negative {
     color: var(--danger);
     font-weight: bold;
 }
@@ -387,12 +386,9 @@
 /***********************LOGIN************************/
 /* --- Login container --- */
 .login-section {
-    display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
     background: var(--background-main);
-    min-height: 100vh;
 }
 
 /* --- Logo y títulos --- */
@@ -709,12 +705,13 @@
 }
 
 .checkbox-group input {
-    margin: 0.5rem; 
+    margin: 0 0.5rem; 
 }
 
 .checkbox-group .column {
     flex: 1; 
     display: flex;
+    gap: 0.5rem;
     flex-direction: column;
     justify-content: space-between; 
 }
@@ -769,9 +766,6 @@
     flex: 1;
 }
 
-.toggle {
-    transform: scale(1.2); /* Para que se vea un poco más grande */
-}
 /* --- Formulario principal --- */
 .config-form {
   display: flex;
@@ -792,10 +786,6 @@
 input[type="checkbox"] {
   accent-color: var(--color-primary); /* personaliza color */
   cursor: pointer;
-}
-.toggle {
-  width: 1.3rem;
-  height: 1.3rem;
 }
 
 /* --- Botón Cambiar Contraseña --- */
@@ -873,6 +863,40 @@ input[type="checkbox"] {
 ;
 }
 
+
+/***********************Correcciones temporales**********************/
+    /* Ocultamos el radio original */
+    input[type="radio"] {
+      display: none;
+    }
+
+    .radio-cuadrado {
+        display: inline-block;
+        width: 0.7rem;
+        height: 0.7rem;
+        border-radius: 0.2rem;   
+        border: 0.1rem solid var(--button-muted);
+        cursor: pointer;
+        position: relative;
+    }
+
+    .checkbox-group .radio-cuadrado{
+        margin: 0 0.5rem;
+    } 
+
+    input[type="radio"]:checked + .radio-cuadrado::after {
+        content: "";
+        position: absolute;
+        width: 0.7rem;
+        height: 0.7rem;
+        border-radius: 0.2rem;
+        background-color: var(--color-primary);
+        border: 0.1rem solid var(--color-primary);
+    }
+
+    .radio-cuadrado:hover {
+      border-color: var(--color-primary);
+    }
 /* =========================================================
 ESTILOS TEMPORALES PARA CORRECCIÓN DOCENTE
 ------------------------------------------------------------
