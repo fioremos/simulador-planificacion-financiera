@@ -17,6 +17,7 @@
     font-size: 1.25rem;
     transition: background 0.2s ease, transform 0.1s ease;
 }
+
 .btn:hover {
     transform: translateY(-2px);
 }
@@ -37,7 +38,21 @@
     color: var(--white-000);
 }
 
-.btn-google {
+.btn-small{
+    background: var(--neutral-100);
+    color: var(--color-primary);
+    padding: 0;
+}
+
+
+.btn-blue {
+    color: var(--text-on-selected);
+    font-size: small;
+    margin-top: 1rem;
+    padding: 0.359rem 2rem;
+}
+
+.btn-image{
     background: var(--color-primary);
     color: var(--white-000);
     display: flex;
@@ -58,7 +73,40 @@
     justify-content: center;
 }
 
+/* --- Letter --- */
+.bold {
+    font-weight: bold;
+}
+.small{
+    font-size: 0.5rem;
+}
+.medium{
+    font-size: 0.75rem;
+}
+.large{
+    font-size: 1rem;
+}
+
+.xlarge{
+    font-size: 1.25rem;
+}
+.highlight {
+    margin: 0rem;
+    font-size: 1.175rem;
+}
+
+.success {
+    color: var(--success);
+}
+
 /* --- Subtitulos --- */
+.section-title-horizintal {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem ;
+}
+
 .subtitle {
     color: var(--color-primary);
     margin-top: 0.313rem;
@@ -67,7 +115,9 @@
 .subtitle-center {
     text-align: center;
 }
-
+.subtitle-justify{
+    text-align: justify;
+}
 /* --- Layout general --- */
 .princial-section {
     display: flex;
@@ -77,32 +127,42 @@
 
 .principal-container {
     display: grid;
-    grid-template-columns: 350px 1fr;
+    grid-template-columns: 300px 1fr;
     flex: 1;
     min-height: 0;
 }
 
-/* --- Slide --- */
-.sidebar-header {
+/* --- Headers --- */
+.header-container {
     background-color: var(--white-000);
     display: flex;
     align-items: center;
-    justify-content: flex-end; 
+    justify-content: space-between;
+    height: 4rem;
+    padding: 0 1rem;
+}
+
+.header-menu {
+    height: 2rem; 
+    cursor: pointer;
+    /*Para la web el navegable siempre esta desplegado*/
+    display: none; 
+}
+
+.header-logo-img{
     height: 4rem;
 }
-.sidebar-header-logo{
-    height: 4rem;
-}
-.sidebar-header img {
+.header-logo-img {
     transition: opacity 0.3s ease-in-out;
 }
 
-.sidebar-header img:hover {
+.header-logo img:hover {
     content: url('../images/barraDeNavegacion/nombre final.png'); 
     opacity: 1;
     transition: opacity 0.3s ease-in-out;
 }
 
+/* --- Slide --- */
 .sidebar {
     background: var(--background-options-bar);
     padding: 0 0.3rem;
@@ -113,11 +173,13 @@
 .sidebar ul {
     padding: 0;
     margin: 0.3rem 0;
-    font-size: 1.5rem;
+    font-size: 1.245rem;
 }
+
 .sidebar ul li {
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
 }
+
 .sidebar ul li a {
     text-decoration: none;
     color: var(--text-secondary);
@@ -126,19 +188,25 @@
     gap: 0.5rem;
     padding: 0.5rem;
     border-radius: 0.375rem;
+    transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+.sidebar ul li a:hover {
+    transform: translateY(-2px);
+    color: var(--color-primary);
 }
 .sidebar ul li.active a {
     background: var(--color-primary);
     color: var(--white-000);
     font-weight: 600;
+    padding: 0.8rem 0.5rem;
 }
 .slidebar-icon {
-    width: 3rem;
-    height: 3rem;
+    width: 2rem;
+    height: 2rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-right: 0.625rem;
+    padding: 0 0.625rem;
 }
 
 /* --- Contenido de frame principal --- */
@@ -154,7 +222,43 @@
     justify-content: space-between;
 }
 
+.content .icon{
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.content .subtitle {
+    margin: 0 0 1rem;
+    font-size: xx-large;
+    font-weight: normal;
+}
+
+.content .icon{
+    margin: 0;
+    font-size: 2rem;
+}
+
+
+/* --- Charts --- */
+.container-chart{
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 /* --- Tablas --- */
+.header-table {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 1rem;
+}
+
+.header-table .subtitle{
+    font-size: x-large;
+}
+
 .table {
     height: 100%;
     width: 100%;
@@ -167,7 +271,7 @@
 }
 
 .table th, .table td {
-    padding: 0.3rem;
+    padding: 0.25rem;
 }
 
 .table tbody tr:nth-child(even) {
@@ -185,15 +289,99 @@
 
 /* --- Dots --- */
 .dot {
-  display: inline-block;
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
+    display: inline-block;
+    width: 0.75rem;
+    height: 0.75rem;
+    border-radius: 50%;
 }
 
-.dot.blue { background: var(--color-primary); }
-.dot.red { background: var(--danger); }
-.negative { color: var(--danger); }
+.dot.green { 
+    background: var(--success); 
+}
+.dot.blue { 
+    background: var(--color-primary); 
+}
+.dot.red { 
+    background: var(--danger); 
+}
+.negative { 
+    color: var(--danger); 
+}
+
+/* --- Iconos --- */
+.icon-small {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+/* --- Formularios --- */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem; 
+    padding: 0 6rem 0 6rem;
+    height: 100%;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.2rem;
+    margin-bottom: 1rem;
+}
+
+.without-margin {
+    margin-bottom: 0;
+}
+
+.full-width {
+    grid-column: span 2;
+}
+
+.form-group label {
+    font-size: 1.7rem;
+    color: var(--color-primary);
+
+}
+
+.form-group select {
+    background-color: var(--color-primary);
+    color: var(--white-000);
+}
+
+.form-actions {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    text-align: center;
+}
+
+.form-actions .btn {
+    padding: 0.6rem 1.2rem;
+    font-size: 1rem;
+}
+.form-actions .thinner{
+    padding: 0.1rem 2rem;
+    gap: 2rem;
+}
+
+/* --- Radios --- */
+.radio-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 0.5rem;
+    place-items: center;
+}
+.radio-group label {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.radio-group input {
+  margin-right: 0.5rem;
+}
 
 /****************************************************/
 /***********************LOGIN************************/
@@ -215,13 +403,16 @@
 }
 
 .login-logo-container {
-    display: grid; 
-    place-items: center;
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
 }
 
 .login-logo-container img {
     transition: opacity 0.3s ease-in-out;
     height: 16rem;
+    width: 20.5rem;
+    
 }
 
 .login-logo-container img:hover {
@@ -259,32 +450,10 @@
     justify-content: center;
 }
 
-.google-icon {
-    width: 1.5rem;
-    height: 1.5rem;
-}
-
 /****************************************************/
 /**********************DASHBOARD*********************/
-.dashboard-chart{
-    height: 240px;
-}
-
-.dashboard-container-chart{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.content .icon{
-    font-size: 1.5rem;
-    font-weight: bold;
-}
-
-.content .subtitle {
-    margin: 0;
-    font-size: xxx-large;
-    font-weight: normal;
+.dashboard-chart{ 
+    height: 15rem;
 }
 
 .datos{
@@ -315,96 +484,11 @@
 .resumen-grid .resumen-left .card {
     margin-top: 1.4rem;
     height: auto;
-}
-.highlight {
-    margin: 0rem;
-    font-size: 1.7rem;
-}
-.success {
-    color: var(--success);
-}
-
-/* --- Últimos movimientos --- */
-.header-table {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-bottom: 1rem;
-}
-
-.header-table .subtitle{
-    font-size: x-large;
-}
-
-.content .btn-primary{
-    background: var(--neutral-100);
-    color: var(--color-primary);
-    padding: 0;
-}
-
-.content .icon{
-    margin: 0;
-    font-size: 2rem;
+    padding: 0.8rem;
 }
 
 /****************************************************/
 /**************INGRESOS Y GASTOS*********************/
-/* --- Formulario Ingresos y Gastos --- */
-.form-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.5rem; 
-    padding: 0 6rem 0 6rem;
-    height: 100%;
-}
-
-.form-group {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 0.2rem;
-    margin-bottom: 1rem;
-}
-
-.full-width {
-    grid-column: span 2;
-}
-
-.form-group label {
-    font-size: 1.5rem;
-    color: var(--color-primary);
-
-}
-
-.radio-group {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    gap: 3rem;
-    place-items: center;
-}
-.radio-group label {
-    font-size: 2rem;
-}
-
-.radio-group input {
-  margin-right: 0.5rem;
-}
-
-.form-group select {
-    background-color: var(--color-primary);
-    color: var(--white-000);
-}
-
-.form-actions {
-  grid-column: 1 / -1;
-  text-align: center;
-}
-
-.form-actions .btn {
-  padding: 0.6rem 1.2rem;
-  font-size: 1rem;
-}
-
 .ingresos-gastos-table {
     display: grid;
 }
@@ -426,4 +510,384 @@
 .td-button {
     text-align: center;
 }
+
 /****************************************************/
+/****************METAS DE AHORRO*********************/
+.metas-table td{
+    color: var(--neutral-900);
+    text-align: center;
+}
+
+.metas-table th{
+    font-size: larger;
+    color: var(--color-primary);
+    font-weight: normal;    
+    text-align: center;
+}
+
+.metas-table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.metas-table thead tr {
+    border-top: 2px solid var(--color-muted);
+    border-bottom: 2px solid var(--color-muted);
+}
+.metas-table tbody tr:nth-child(even) {
+    background-color: var(--white-000) ;
+}
+
+.metas-table tbody tr:hover {
+    background-color: var(--neutral-200);
+}
+
+.metas-card-table-button{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.metas-chart{
+    width: 50%;    
+    height: 13rem;
+}
+
+.metas-card-label{
+    padding: 0.5rem;
+    text-align: center;
+}
+
+.metas-card-graph-button{
+    display: flex;
+    justify-content: center;
+}
+
+/****************************************************/
+/******************INVERSIONES***********************/
+.inversiones-chart{
+    width: 41.25rem;   
+    height: 100%;
+}
+.inversiones-card-table-button button{
+    margin-right: 1rem;
+}
+
+/****************************************************/
+/********************REPORTES************************/
+/* --- Filtros --- */
+.reportes-estadisticas-form-container select { 
+    padding: 0.2rem 2rem 0 0.2rem;
+    font-size: 1.25rem;
+    border: 0.063rem outset var(--white-000);
+}
+
+.filters {
+    display: flex;
+    justify-content: space-between; 
+    gap: 3rem; 
+    flex-wrap: wrap; 
+    padding: 0 2rem;
+}
+
+.form-group {
+    flex: 1; /* Todos ocupan el mismo ancho */
+    display: flex;
+    flex-direction: column;
+}
+
+.filters label {
+    font-size: 1rem;
+    font-weight: 600;
+    text-align: center;
+}
+
+/* --- Secciones de reportes --- */
+.reportes-section {
+    margin-top: 1.5rem;
+}
+.reportes-section .subtitle {
+    margin-bottom: 0.5rem;
+    color: var(--color-primary);
+    font-weight: bold;
+}
+.reportes-chart {
+    width: 50%;
+    height: auto;
+    padding: 2rem;
+}
+
+/* --- Principales gastos --- */
+.gastos-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem;
+}
+.gastos-list p {
+    margin: 0.5rem 0;
+    font-size: 1.2rem;
+}
+.gastos-bars {
+    display: flex;
+    flex-direction: column;
+}
+.gastos-bars .bar {
+    background: var(--color-primary);
+    height: 1rem;
+    border-radius: 6px;
+    width: 60%; /* dinámico: esto debe ser ajustado con JS en el futuro */
+    margin: 0.5rem 0rem;
+}
+.gastos-indicadores {
+    font-size: 0.9rem;
+    color: var(--neutral-900);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+.gastos-indicadores strong {
+    color: var(--color-primary);
+}
+
+.gastos-indicadores .card {
+    background: var(--neutral-100);
+    color: var(--color-primary);
+    padding: 0;
+    margin: 0.2rem;
+    text-align: center;
+}
+.gastos-indicadores .card strong {
+    font-size: 2rem;
+}
+
+/****************************************************/
+/*******************HISTORIAL************************/
+.historial-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 0;
+}
+
+.historial-list li {
+    border-bottom: 1px solid var(--color-muted);
+    padding: 1rem 0;
+}
+
+.historial-list .dot {
+    width: 1.75rem;
+    height: 1.75rem;
+}
+
+.historial-list .contenido {
+    display: flex;
+    align-items: center;
+}
+
+.historial-list .texto {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    flex-grow: 1;
+}
+
+.historial-list .evento {
+    font-size: 1.4rem;
+}
+
+.historial-list .fecha {
+    font-size: 0.9rem;
+}
+
+
+/****************************************************/
+/*****************EXPORTACION************************/
+.checkbox-group {
+    display: flex;
+    gap: 4rem; 
+    align-items: stretch;     
+    padding: 0 4rem;    
+    margin-bottom: 1rem;
+}
+
+.checkbox-group input {
+    margin: 0.5rem; 
+}
+
+.checkbox-group .column {
+    flex: 1; 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; 
+}
+
+.form-block-end{
+    padding-bottom: 3rem;
+}
+
+.form-row {
+    display: flex;
+    align-items: center; 
+    margin-bottom: 2rem;
+}
+
+.form-row label {
+    width: 5rem; 
+    margin-right: 1rem;
+    line-height: 1.5; 
+}
+
+.form-row .input {
+    flex: 1;
+    padding: 0.2rem;
+    font-size: 1rem;
+}
+
+/****************************************************/
+/****************CONFIGURACION***********************/
+.pref-group select {
+    background-color: var(--color-primary);
+    color: var(--white-000);
+    font-size: 0.9rem;
+    padding: 0.2rem 1rem 0.2rem 0.2rem;
+}
+
+.block-center{
+    padding: 0 2.5rem;
+}
+
+.alingn-left{
+    padding: 0;
+}
+
+.pref-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.pref-group label {
+    flex: 1;
+}
+
+.toggle {
+    transform: scale(1.2); /* Para que se vea un poco más grande */
+}
+/* --- Formulario principal --- */
+.config-form {
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- Agrupación de campos --- */
+.form-group {
+  margin-bottom: 1rem;
+}
+.form-group.inline {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* --- Checkbox y toggles --- */
+input[type="checkbox"] {
+  accent-color: var(--color-primary); /* personaliza color */
+  cursor: pointer;
+}
+.toggle {
+  width: 1.3rem;
+  height: 1.3rem;
+}
+
+/* --- Botón Cambiar Contraseña --- */
+.btn.small {
+  font-size: 0.9rem;
+  padding: 0.4rem 1rem;
+  margin-top: 0.5rem;
+}
+
+/* --- Bloques --- */
+.form-block {
+  margin-bottom: 1.5rem;
+}
+.form-title {
+  font-size: 1.2rem;
+  color: var(--color-primary);
+  margin-bottom: 0.8rem;
+}
+
+/* --- Botón Guardar --- */
+.form-actions {
+  text-align: right;
+}
+
+.checkbox-group .alingn-left{
+    padding: 0;
+}
+
+/* Formato numérico */
+.format-toggle {
+  display: flex;
+  border: 1px solid var(--neutral-300);
+  border-radius: 6px;
+  overflow: hidden;
+  width: fit-content;
+}
+.without-border {
+  border: 0;
+}
+.format-option {
+  background: var(--white-000);
+  border: none;
+  padding: 0.4rem 0.8rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: var(--neutral-900);
+}
+
+.letter-option {
+  background: var(--white-000);
+  border: none;
+  padding: 0 0.2rem;
+  cursor: pointer;
+  color: var(--neutral-900);
+}
+
+.letter-option.active {  
+    color: var(--color-primary);
+}
+
+.format-option.active {
+  background: var(--color-primary);
+  color: var(--white-000);
+}
+
+.format-option:hover {
+  background: var(--neutral-200);
+}
+
+.letter-option:hover {
+  background: var(--neutral-200);
+}
+.title-row{
+    margin: 0 !important;
+;
+}
+
+/* =========================================================
+ESTILOS TEMPORALES PARA CORRECCIÓN DOCENTE
+------------------------------------------------------------
+La siguiente clase se utiliza para ocultar secciones que 
+facilitan la corrección de pantallas individuales por parte 
+del docente durante el desarrollo.
+
+IMPORTANTE:
+Eliminar estos estilos una vez sea funcional la página.
+=========================================================== */
+.invisible {
+    display: none !important;
+}
+
+.visible {
+    display: flex;
+}
+/* Fin de los estilos temporales */
