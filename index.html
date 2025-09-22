@@ -52,6 +52,10 @@
         <title>FinGrow</title>
     </head>
     <body>
+        <!--NOTA: Para esta entrega se duplicó header y sidebar en cada pantalla.
+            En un proyecto real esto se haría con componentes reutilizables,
+            pero se mantuvo así para respetar el mockup entregado. -->
+
         <!-- ==========================
             SECCIÓN: LOGIN
             Pantalla inicial de la aplicación. 
@@ -117,20 +121,20 @@
                 <aside class="sidebar">    
                     <nav>
                         <ul>
-                            <li class="active"><a href="#dashboard"><span class="slidebar-icon"><img src="images/iconos/Bar chart-2.png"> </span> Dashboard</a></li>
-                            <li><a href="#ingresos-gastos" onclick="mostrarSeccion('ingresos-gastos')"><span class="slidebar-icon"><img src="images/iconos/Dollar sign.png"> </span> Ingresos y Gastos</a></li>
-                            <li><a href="#metas"  onclick="mostrarSeccion('metas')"><span class="slidebar-icon"><img src="images/iconos/Award.png"> </span> Metas de ahorro</a></li>
-                            <li><a href="#inversiones"  onclick="mostrarSeccion('inversiones')"><span class="slidebar-icon"><img src="images/iconos/Trending up.png"> </span> Inversiones</a></li>
-                            <li><a href="#reportes"  onclick="mostrarSeccion('reportes')"><span class="slidebar-icon"><img src="images/iconos/Check square.png"> </span> Reportes y Estadísticas</a></li>
-                            <li><a href="#historial"  onclick="mostrarSeccion('historial')"><span class="slidebar-icon"><img src="images/iconos/Compass.png"> </span> Historial y Auditoría</a></li>
-                            <li><a href="#exportar"  onclick="mostrarSeccion('exportar')"><span class="slidebar-icon"><img src="images/iconos/upload.png"> </span> Exportación de Datos</a></li>
-                            <li><a href="#configuracion"  onclick="mostrarSeccion('configuracion')"><span class="slidebar-icon"><img src="images/iconos/settings.png"> </span> Configuración</a></li>
+                            <li class="active"><a href="#dashboard"><span class="sidebar-icon"><img src="images/iconos/Bar chart-2.png"> </span> Dashboard</a></li>
+                            <li><a href="#ingresos-gastos" onclick="mostrarSeccion('ingresos-gastos')"><span class="sidebar-icon"><img src="images/iconos/Dollar sign.png"> </span> Ingresos y Gastos</a></li>
+                            <li><a href="#metas"  onclick="mostrarSeccion('metas')"><span class="sidebar-icon"><img src="images/iconos/Award.png"> </span> Metas de ahorro</a></li>
+                            <li><a href="#inversiones"  onclick="mostrarSeccion('inversiones')"><span class="sidebar-icon"><img src="images/iconos/Trending up.png"> </span> Inversiones</a></li>
+                            <li><a href="#reportes"  onclick="mostrarSeccion('reportes')"><span class="sidebar-icon"><img src="images/iconos/Check square.png"> </span> Reportes y Estadísticas</a></li>
+                            <li><a href="#historial"  onclick="mostrarSeccion('historial')"><span class="sidebar-icon"><img src="images/iconos/Compass.png"> </span> Historial y Auditoría</a></li>
+                            <li><a href="#exportar"  onclick="mostrarSeccion('exportar')"><span class="sidebar-icon"><img src="images/iconos/upload.png"> </span> Exportación de Datos</a></li>
+                            <li><a href="#configuracion"  onclick="mostrarSeccion('configuracion')"><span class="sidebar-icon"><img src="images/iconos/settings.png"> </span> Configuración</a></li>
                         </ul>
                     </nav>
 
                     <nav>
                         <ul>    
-                            <li><a href="#login" onclick="mostrarSeccion('login')"><span class="slidebar-icon"><img src="images/iconos/Log out.png"> </span>  Cerrar Sesión</a></li>
+                            <li><a href="#login" onclick="mostrarSeccion('login')"><span class="sidebar-icon"><img src="images/iconos/Log out.png"> </span>  Cerrar Sesión</a></li>
                         </ul>    
                     </nav>
                 </aside>
@@ -261,20 +265,20 @@
                 <aside class="sidebar">    
                     <nav>
                         <ul>
-                            <li ><a href="#dashboard" onclick="mostrarSeccion('dashboard')"><span class="slidebar-icon"><img src="images/iconos/Bar chart-2.png"> </span> Dashboard</a></li>
-                            <li class="active"><a href="#ingresos-gastos"><span class="slidebar-icon"><img src="images/iconos/Dollar sign.png"> </span> Ingresos y Gastos</a></li>
-                            <li><a href="#metas" onclick="mostrarSeccion('metas')"><span class="slidebar-icon"><img src="images/iconos/Award.png"> </span> Metas de ahorro</a></li>
-                            <li><a href="#inversiones"  onclick="mostrarSeccion('inversiones')"><span class="slidebar-icon"><img src="images/iconos/Trending up.png"> </span> Inversiones</a></li>
-                            <li><a href="#reportes"  onclick="mostrarSeccion('reportes')"><span class="slidebar-icon"><img src="images/iconos/Check square.png"> </span> Reportes y Estadísticas</a></li>
-                            <li><a href="#historial"  onclick="mostrarSeccion('historial')"><span class="slidebar-icon"><img src="images/iconos/Compass.png"> </span> Historial y Auditoría</a></li>
-                            <li><a href="#exportar"  onclick="mostrarSeccion('exportar')"><span class="slidebar-icon"><img src="images/iconos/upload.png"> </span> Exportación de Datos</a></li>
-                            <li><a href="#configuracion"  onclick="mostrarSeccion('configuracion')"><span class="slidebar-icon"><img src="images/iconos/settings.png"> </span> Configuración</a></li>
+                            <li ><a href="#dashboard" onclick="mostrarSeccion('dashboard')"><span class="sidebar-icon"><img src="images/iconos/Bar chart-2.png"> </span> Dashboard</a></li>
+                            <li class="active"><a href="#ingresos-gastos"><span class="sidebar-icon"><img src="images/iconos/Dollar sign.png"> </span> Ingresos y Gastos</a></li>
+                            <li><a href="#metas" onclick="mostrarSeccion('metas')"><span class="sidebar-icon"><img src="images/iconos/Award.png"> </span> Metas de ahorro</a></li>
+                            <li><a href="#inversiones"  onclick="mostrarSeccion('inversiones')"><span class="sidebar-icon"><img src="images/iconos/Trending up.png"> </span> Inversiones</a></li>
+                            <li><a href="#reportes"  onclick="mostrarSeccion('reportes')"><span class="sidebar-icon"><img src="images/iconos/Check square.png"> </span> Reportes y Estadísticas</a></li>
+                            <li><a href="#historial"  onclick="mostrarSeccion('historial')"><span class="sidebar-icon"><img src="images/iconos/Compass.png"> </span> Historial y Auditoría</a></li>
+                            <li><a href="#exportar"  onclick="mostrarSeccion('exportar')"><span class="sidebar-icon"><img src="images/iconos/upload.png"> </span> Exportación de Datos</a></li>
+                            <li><a href="#configuracion"  onclick="mostrarSeccion('configuracion')"><span class="sidebar-icon"><img src="images/iconos/settings.png"> </span> Configuración</a></li>
                         </ul>
                     </nav>
 
                     <nav>
                         <ul>    
-                            <li><a href="#login" onclick="mostrarSeccion('login')"><span class="slidebar-icon"><img src="images/iconos/Log out.png"> </span>  Cerrar Sesión</a></li>
+                            <li><a href="#login" onclick="mostrarSeccion('login')"><span class="sidebar-icon"><img src="images/iconos/Log out.png"> </span>  Cerrar Sesión</a></li>
                         </ul>    
                     </nav>
                 </aside>
@@ -424,20 +428,20 @@
                 <aside class="sidebar">    
                     <nav>
                         <ul>
-                            <li><a href="#dashboard" onclick="mostrarSeccion('dashboard')"><span class="slidebar-icon"><img src="images/iconos/Bar chart-2.png"> </span> Dashboard</a></li>
-                            <li><a href="#ingresos-gastos" onclick="mostrarSeccion('ingresos-gastos')"><span class="slidebar-icon"><img src="images/iconos/Dollar sign.png"> </span> Ingresos y Gastos</a></li>
-                            <li class="active"><a href="#metas" ><span class="slidebar-icon"><img src="images/iconos/Award.png"> </span> Metas de ahorro</a></li>
-                            <li><a href="#inversiones"  onclick="mostrarSeccion('inversiones')"><span class="slidebar-icon"><img src="images/iconos/Trending up.png"> </span> Inversiones</a></li>
-                            <li><a href="#reportes"  onclick="mostrarSeccion('reportes')"><span class="slidebar-icon"><img src="images/iconos/Check square.png"> </span> Reportes y Estadísticas</a></li>
-                            <li><a href="#historial"  onclick="mostrarSeccion('historial')"><span class="slidebar-icon"><img src="images/iconos/Compass.png"> </span> Historial y Auditoría</a></li>
-                            <li><a href="#exportar"  onclick="mostrarSeccion('exportar')"><span class="slidebar-icon"><img src="images/iconos/upload.png"> </span> Exportación de Datos</a></li>
-                            <li><a href="#configuracion"  onclick="mostrarSeccion('configuracion')"><span class="slidebar-icon"><img src="images/iconos/settings.png"> </span> Configuración</a></li>
+                            <li><a href="#dashboard" onclick="mostrarSeccion('dashboard')"><span class="sidebar-icon"><img src="images/iconos/Bar chart-2.png"> </span> Dashboard</a></li>
+                            <li><a href="#ingresos-gastos" onclick="mostrarSeccion('ingresos-gastos')"><span class="sidebar-icon"><img src="images/iconos/Dollar sign.png"> </span> Ingresos y Gastos</a></li>
+                            <li class="active"><a href="#metas" ><span class="sidebar-icon"><img src="images/iconos/Award.png"> </span> Metas de ahorro</a></li>
+                            <li><a href="#inversiones"  onclick="mostrarSeccion('inversiones')"><span class="sidebar-icon"><img src="images/iconos/Trending up.png"> </span> Inversiones</a></li>
+                            <li><a href="#reportes"  onclick="mostrarSeccion('reportes')"><span class="sidebar-icon"><img src="images/iconos/Check square.png"> </span> Reportes y Estadísticas</a></li>
+                            <li><a href="#historial"  onclick="mostrarSeccion('historial')"><span class="sidebar-icon"><img src="images/iconos/Compass.png"> </span> Historial y Auditoría</a></li>
+                            <li><a href="#exportar"  onclick="mostrarSeccion('exportar')"><span class="sidebar-icon"><img src="images/iconos/upload.png"> </span> Exportación de Datos</a></li>
+                            <li><a href="#configuracion"  onclick="mostrarSeccion('configuracion')"><span class="sidebar-icon"><img src="images/iconos/settings.png"> </span> Configuración</a></li>
                         </ul>
                     </nav>
 
                     <nav>
                         <ul>    
-                            <li><a href="#login" onclick="mostrarSeccion('login')"><span class="slidebar-icon"><img src="images/iconos/Log out.png"> </span>  Cerrar Sesión</a></li>
+                            <li><a href="#login" onclick="mostrarSeccion('login')"><span class="sidebar-icon"><img src="images/iconos/Log out.png"> </span>  Cerrar Sesión</a></li>
                         </ul>    
                     </nav>
                 </aside>
@@ -539,20 +543,20 @@
                 <aside class="sidebar">    
                     <nav>
                         <ul>
-                            <li><a href="#dashboard" onclick="mostrarSeccion('dashboard')"><span class="slidebar-icon"><img src="images/iconos/Bar chart-2.png"> </span> Dashboard</a></li>
-                            <li><a href="#ingresos-gastos" onclick="mostrarSeccion('ingresos-gastos')"><span class="slidebar-icon"><img src="images/iconos/Dollar sign.png"> </span> Ingresos y Gastos</a></li>
-                            <li><a href="#metas"   onclick="mostrarSeccion('metas')"><span class="slidebar-icon"><img src="images/iconos/Award.png"> </span> Metas de ahorro</a></li>
-                            <li class="active"><a href="#inversiones"><span class="slidebar-icon"><img src="images/iconos/Trending up.png"> </span> Inversiones</a></li>
-                            <li><a href="#reportes"  onclick="mostrarSeccion('reportes')"><span class="slidebar-icon"><img src="images/iconos/Check square.png"> </span> Reportes y Estadísticas</a></li>
-                            <li><a href="#historial"  onclick="mostrarSeccion('historial')"><span class="slidebar-icon"><img src="images/iconos/Compass.png"> </span> Historial y Auditoría</a></li>
-                            <li><a href="#exportar"  onclick="mostrarSeccion('exportar')"><span class="slidebar-icon"><img src="images/iconos/upload.png"> </span> Exportación de Datos</a></li>
-                            <li><a href="#configuracion"  onclick="mostrarSeccion('configuracion')"><span class="slidebar-icon"><img src="images/iconos/settings.png"> </span> Configuración</a></li>
+                            <li><a href="#dashboard" onclick="mostrarSeccion('dashboard')"><span class="sidebar-icon"><img src="images/iconos/Bar chart-2.png"> </span> Dashboard</a></li>
+                            <li><a href="#ingresos-gastos" onclick="mostrarSeccion('ingresos-gastos')"><span class="sidebar-icon"><img src="images/iconos/Dollar sign.png"> </span> Ingresos y Gastos</a></li>
+                            <li><a href="#metas"   onclick="mostrarSeccion('metas')"><span class="sidebar-icon"><img src="images/iconos/Award.png"> </span> Metas de ahorro</a></li>
+                            <li class="active"><a href="#inversiones"><span class="sidebar-icon"><img src="images/iconos/Trending up.png"> </span> Inversiones</a></li>
+                            <li><a href="#reportes"  onclick="mostrarSeccion('reportes')"><span class="sidebar-icon"><img src="images/iconos/Check square.png"> </span> Reportes y Estadísticas</a></li>
+                            <li><a href="#historial"  onclick="mostrarSeccion('historial')"><span class="sidebar-icon"><img src="images/iconos/Compass.png"> </span> Historial y Auditoría</a></li>
+                            <li><a href="#exportar"  onclick="mostrarSeccion('exportar')"><span class="sidebar-icon"><img src="images/iconos/upload.png"> </span> Exportación de Datos</a></li>
+                            <li><a href="#configuracion"  onclick="mostrarSeccion('configuracion')"><span class="sidebar-icon"><img src="images/iconos/settings.png"> </span> Configuración</a></li>
                         </ul>
                     </nav>
 
                     <nav>
                         <ul>    
-                            <li><a href="#login" onclick="mostrarSeccion('login')"><span class="slidebar-icon"><img src="images/iconos/Log out.png"> </span>  Cerrar Sesión</a></li>
+                            <li><a href="#login" onclick="mostrarSeccion('login')"><span class="sidebar-icon"><img src="images/iconos/Log out.png"> </span>  Cerrar Sesión</a></li>
                         </ul>                           
                     </nav>
                 </aside>
@@ -651,20 +655,20 @@
                 <aside class="sidebar">    
                     <nav>
                         <ul>
-                            <li ><a href="#dashboard" onclick="mostrarSeccion('dashboard')"><span class="slidebar-icon"><img src="images/iconos/Bar chart-2.png"> </span> Dashboard</a></li>
-                            <li><a href="#ingresos-gastos"  onclick="mostrarSeccion('ingresos-gastos')"><span class="slidebar-icon"><img src="images/iconos/Dollar sign.png"> </span> Ingresos y Gastos</a></li>
-                            <li><a href="#metas" onclick="mostrarSeccion('metas')"><span class="slidebar-icon"><img src="images/iconos/Award.png"> </span> Metas de ahorro</a></li>
-                            <li><a href="#inversiones"  onclick="mostrarSeccion('inversiones')"><span class="slidebar-icon"><img src="images/iconos/Trending up.png"> </span> Inversiones</a></li>
-                            <li class="active"><a href="#reportes"><span class="slidebar-icon"><img src="images/iconos/Check square.png"> </span> Reportes y Estadísticas</a></li>
-                            <li><a href="#historial"  onclick="mostrarSeccion('historial')"><span class="slidebar-icon"><img src="images/iconos/Compass.png"> </span> Historial y Auditoría</a></li>
-                            <li><a href="#exportar"  onclick="mostrarSeccion('exportar')"><span class="slidebar-icon"><img src="images/iconos/upload.png"> </span> Exportación de Datos</a></li>
-                            <li><a href="#configuracion"  onclick="mostrarSeccion('configuracion')"><span class="slidebar-icon"><img src="images/iconos/settings.png"> </span> Configuración</a></li>
+                            <li ><a href="#dashboard" onclick="mostrarSeccion('dashboard')"><span class="sidebar-icon"><img src="images/iconos/Bar chart-2.png"> </span> Dashboard</a></li>
+                            <li><a href="#ingresos-gastos"  onclick="mostrarSeccion('ingresos-gastos')"><span class="sidebar-icon"><img src="images/iconos/Dollar sign.png"> </span> Ingresos y Gastos</a></li>
+                            <li><a href="#metas" onclick="mostrarSeccion('metas')"><span class="sidebar-icon"><img src="images/iconos/Award.png"> </span> Metas de ahorro</a></li>
+                            <li><a href="#inversiones"  onclick="mostrarSeccion('inversiones')"><span class="sidebar-icon"><img src="images/iconos/Trending up.png"> </span> Inversiones</a></li>
+                            <li class="active"><a href="#reportes"><span class="sidebar-icon"><img src="images/iconos/Check square.png"> </span> Reportes y Estadísticas</a></li>
+                            <li><a href="#historial"  onclick="mostrarSeccion('historial')"><span class="sidebar-icon"><img src="images/iconos/Compass.png"> </span> Historial y Auditoría</a></li>
+                            <li><a href="#exportar"  onclick="mostrarSeccion('exportar')"><span class="sidebar-icon"><img src="images/iconos/upload.png"> </span> Exportación de Datos</a></li>
+                            <li><a href="#configuracion"  onclick="mostrarSeccion('configuracion')"><span class="sidebar-icon"><img src="images/iconos/settings.png"> </span> Configuración</a></li>
                         </ul>
                     </nav>
 
                     <nav>
                         <ul>    
-                            <li><a href="#login" onclick="mostrarSeccion('login')"><span class="slidebar-icon"><img src="images/iconos/Log out.png"> </span>  Cerrar Sesión</a></li>
+                            <li><a href="#login" onclick="mostrarSeccion('login')"><span class="sidebar-icon"><img src="images/iconos/Log out.png"> </span>  Cerrar Sesión</a></li>
                         </ul>
                     </nav>
                 </aside>
@@ -791,20 +795,20 @@
                 <aside class="sidebar">    
                     <nav>
                         <ul>
-                            <li ><a href="#dashboard" onclick="mostrarSeccion('dashboard')"><span class="slidebar-icon"><img src="images/iconos/Bar chart-2.png"> </span> Dashboard</a></li>
-                            <li><a href="#ingresos-gastos"  onclick="mostrarSeccion('ingresos-gastos')"><span class="slidebar-icon"><img src="images/iconos/Dollar sign.png"> </span> Ingresos y Gastos</a></li>
-                            <li><a href="#metas" onclick="mostrarSeccion('metas')"><span class="slidebar-icon"><img src="images/iconos/Award.png"> </span> Metas de ahorro</a></li>
-                            <li><a href="#inversiones"  onclick="mostrarSeccion('inversiones')"><span class="slidebar-icon"><img src="images/iconos/Trending up.png"> </span> Inversiones</a></li>
-                            <li><a href="#reportes"   onclick="mostrarSeccion('reportes')"><span class="slidebar-icon"><img src="images/iconos/Check square.png"> </span> Reportes y Estadísticas</a></li>
-                            <li class="active"><a href="#historial"><span class="slidebar-icon"><img src="images/iconos/Compass.png"> </span> Historial y Auditoría</a></li>
-                            <li><a href="#exportar"  onclick="mostrarSeccion('exportar')"><span class="slidebar-icon"><img src="images/iconos/upload.png"> </span> Exportación de Datos</a></li>
-                            <li><a href="#configuracion"  onclick="mostrarSeccion('configuracion')"><span class="slidebar-icon"><img src="images/iconos/settings.png"> </span> Configuración</a></li>
+                            <li ><a href="#dashboard" onclick="mostrarSeccion('dashboard')"><span class="sidebar-icon"><img src="images/iconos/Bar chart-2.png"> </span> Dashboard</a></li>
+                            <li><a href="#ingresos-gastos"  onclick="mostrarSeccion('ingresos-gastos')"><span class="sidebar-icon"><img src="images/iconos/Dollar sign.png"> </span> Ingresos y Gastos</a></li>
+                            <li><a href="#metas" onclick="mostrarSeccion('metas')"><span class="sidebar-icon"><img src="images/iconos/Award.png"> </span> Metas de ahorro</a></li>
+                            <li><a href="#inversiones"  onclick="mostrarSeccion('inversiones')"><span class="sidebar-icon"><img src="images/iconos/Trending up.png"> </span> Inversiones</a></li>
+                            <li><a href="#reportes"   onclick="mostrarSeccion('reportes')"><span class="sidebar-icon"><img src="images/iconos/Check square.png"> </span> Reportes y Estadísticas</a></li>
+                            <li class="active"><a href="#historial"><span class="sidebar-icon"><img src="images/iconos/Compass.png"> </span> Historial y Auditoría</a></li>
+                            <li><a href="#exportar"  onclick="mostrarSeccion('exportar')"><span class="sidebar-icon"><img src="images/iconos/upload.png"> </span> Exportación de Datos</a></li>
+                            <li><a href="#configuracion"  onclick="mostrarSeccion('configuracion')"><span class="sidebar-icon"><img src="images/iconos/settings.png"> </span> Configuración</a></li>
                         </ul>
                     </nav>
 
                     <nav>
                         <ul>    
-                            <li><a href="#login" onclick="mostrarSeccion('login')"><span class="slidebar-icon"><img src="images/iconos/Log out.png"> </span>  Cerrar Sesión</a></li>
+                            <li><a href="#login" onclick="mostrarSeccion('login')"><span class="sidebar-icon"><img src="images/iconos/Log out.png"> </span>  Cerrar Sesión</a></li>
                         </ul>    
                     </nav>
                 </aside>
@@ -930,20 +934,20 @@
                 <aside class="sidebar">    
                     <nav>
                         <ul>
-                            <li ><a href="#dashboard" onclick="mostrarSeccion('dashboard')"><span class="slidebar-icon"><img src="images/iconos/Bar chart-2.png"> </span> Dashboard</a></li>
-                            <li><a href="#ingresos-gastos"  onclick="mostrarSeccion('ingresos-gastos')"><span class="slidebar-icon"><img src="images/iconos/Dollar sign.png"> </span> Ingresos y Gastos</a></li>
-                            <li><a href="#metas" onclick="mostrarSeccion('metas')"><span class="slidebar-icon"><img src="images/iconos/Award.png"> </span> Metas de ahorro</a></li>
-                            <li><a href="#inversiones"  onclick="mostrarSeccion('inversiones')"><span class="slidebar-icon"><img src="images/iconos/Trending up.png"> </span> Inversiones</a></li>
-                            <li><a href="#reportes"   onclick="mostrarSeccion('reportes')"><span class="slidebar-icon"><img src="images/iconos/Check square.png"> </span> Reportes y Estadísticas</a></li>
-                            <li><a href="#historial"  onclick="mostrarSeccion('historial')"><span class="slidebar-icon"><img src="images/iconos/Compass.png"> </span> Historial y Auditoría</a></li>
-                            <li class="active"><a href="#exportar"><span class="slidebar-icon"><img src="images/iconos/upload.png"> </span> Exportación de Datos</a></li>
-                            <li><a href="#configuracion"  onclick="mostrarSeccion('configuracion')"><span class="slidebar-icon"><img src="images/iconos/settings.png"> </span> Configuración</a></li>
+                            <li ><a href="#dashboard" onclick="mostrarSeccion('dashboard')"><span class="sidebar-icon"><img src="images/iconos/Bar chart-2.png"> </span> Dashboard</a></li>
+                            <li><a href="#ingresos-gastos"  onclick="mostrarSeccion('ingresos-gastos')"><span class="sidebar-icon"><img src="images/iconos/Dollar sign.png"> </span> Ingresos y Gastos</a></li>
+                            <li><a href="#metas" onclick="mostrarSeccion('metas')"><span class="sidebar-icon"><img src="images/iconos/Award.png"> </span> Metas de ahorro</a></li>
+                            <li><a href="#inversiones"  onclick="mostrarSeccion('inversiones')"><span class="sidebar-icon"><img src="images/iconos/Trending up.png"> </span> Inversiones</a></li>
+                            <li><a href="#reportes"   onclick="mostrarSeccion('reportes')"><span class="sidebar-icon"><img src="images/iconos/Check square.png"> </span> Reportes y Estadísticas</a></li>
+                            <li><a href="#historial"  onclick="mostrarSeccion('historial')"><span class="sidebar-icon"><img src="images/iconos/Compass.png"> </span> Historial y Auditoría</a></li>
+                            <li class="active"><a href="#exportar"><span class="sidebar-icon"><img src="images/iconos/upload.png"> </span> Exportación de Datos</a></li>
+                            <li><a href="#configuracion"  onclick="mostrarSeccion('configuracion')"><span class="sidebar-icon"><img src="images/iconos/settings.png"> </span> Configuración</a></li>
                         </ul>
                     </nav>
 
                     <nav>
                         <ul>    
-                            <li><a href="#login" onclick="mostrarSeccion('login')"><span class="slidebar-icon"><img src="images/iconos/Log out.png"> </span>  Cerrar Sesión</a></li>
+                            <li><a href="#login" onclick="mostrarSeccion('login')"><span class="sidebar-icon"><img src="images/iconos/Log out.png"> </span>  Cerrar Sesión</a></li>
                         </ul>    
                     </nav>
                 </aside>
@@ -1048,20 +1052,20 @@
                 <aside class="sidebar">    
                     <nav>
                         <ul>
-                            <li ><a href="#dashboard" onclick="mostrarSeccion('dashboard')"><span class="slidebar-icon"><img src="images/iconos/Bar chart-2.png"> </span> Dashboard</a></li>
-                            <li><a href="#ingresos-gastos"  onclick="mostrarSeccion('ingresos-gastos')"><span class="slidebar-icon"><img src="images/iconos/Dollar sign.png"> </span> Ingresos y Gastos</a></li>
-                            <li><a href="#metas" onclick="mostrarSeccion('metas')"><span class="slidebar-icon"><img src="images/iconos/Award.png"> </span> Metas de ahorro</a></li>
-                            <li><a href="#inversiones"  onclick="mostrarSeccion('inversiones')"><span class="slidebar-icon"><img src="images/iconos/Trending up.png"> </span> Inversiones</a></li>
-                            <li><a href="#reportes"   onclick="mostrarSeccion('reportes')"><span class="slidebar-icon"><img src="images/iconos/Check square.png"> </span> Reportes y Estadísticas</a></li>
-                            <li><a href="#historial"  onclick="mostrarSeccion('historial')"><span class="slidebar-icon"><img src="images/iconos/Compass.png"> </span> Historial y Auditoría</a></li>
-                            <li><a href="#exportar"   onclick="mostrarSeccion('exportar')"><span class="slidebar-icon"><img src="images/iconos/upload.png"> </span> Exportación de Datos</a></li>
-                            <li class="active"><a href="#configuracion"><span class="slidebar-icon"><img src="images/iconos/settings.png"> </span> Configuración</a></li>
+                            <li ><a href="#dashboard" onclick="mostrarSeccion('dashboard')"><span class="sidebar-icon"><img src="images/iconos/Bar chart-2.png"> </span> Dashboard</a></li>
+                            <li><a href="#ingresos-gastos"  onclick="mostrarSeccion('ingresos-gastos')"><span class="sidebar-icon"><img src="images/iconos/Dollar sign.png"> </span> Ingresos y Gastos</a></li>
+                            <li><a href="#metas" onclick="mostrarSeccion('metas')"><span class="sidebar-icon"><img src="images/iconos/Award.png"> </span> Metas de ahorro</a></li>
+                            <li><a href="#inversiones"  onclick="mostrarSeccion('inversiones')"><span class="sidebar-icon"><img src="images/iconos/Trending up.png"> </span> Inversiones</a></li>
+                            <li><a href="#reportes"   onclick="mostrarSeccion('reportes')"><span class="sidebar-icon"><img src="images/iconos/Check square.png"> </span> Reportes y Estadísticas</a></li>
+                            <li><a href="#historial"  onclick="mostrarSeccion('historial')"><span class="sidebar-icon"><img src="images/iconos/Compass.png"> </span> Historial y Auditoría</a></li>
+                            <li><a href="#exportar"   onclick="mostrarSeccion('exportar')"><span class="sidebar-icon"><img src="images/iconos/upload.png"> </span> Exportación de Datos</a></li>
+                            <li class="active"><a href="#configuracion"><span class="sidebar-icon"><img src="images/iconos/settings.png"> </span> Configuración</a></li>
                         </ul>
                     </nav>
 
                     <nav>
                         <ul>    
-                            <li><a href="#login" onclick="mostrarSeccion('login')"><span class="slidebar-icon"><img src="images/iconos/Log out.png"> </span>  Cerrar Sesión</a></li>
+                            <li><a href="#login" onclick="mostrarSeccion('login')"><span class="sidebar-icon"><img src="images/iconos/Log out.png"> </span>  Cerrar Sesión</a></li>
                         </ul>    
                     </nav>
                 </aside>
