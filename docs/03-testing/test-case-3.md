@@ -9,45 +9,47 @@ Evaluar el rendimiento de la página en términos de velocidad de carga y métri
 - Chrome DevTools Lighthouse
 
 ## Capturas Requeridas
-Se deben adjuntar **capturas de pantalla reales** de cada herramienta mostrando los resultados obtenidos. No se permite inventar datos.
+Se deben adjuntar **capturas de pantalla reales** de cada herramienta mostrando los resultados obtenidos.
 
 1. **Google PageSpeed Insights**
-   - Captura del puntaje de **Performance**.
-   - Captura de las métricas **FCP, LCP, CLS, FID**.
-   - Se puede incluir la URL auditada visible en la captura.
+![Google PageSpeed Insigths](imagenes/Google-PageSpeed-Insights.png)
 
 2. **GTmetrix**
-   - Captura del **GTmetrix Grade**.
-   - Captura de **Performance** y **Structure**.
-   - Captura de **Fully Loaded Time** y **Page Size**.
+![GTmetrix Grade](imagenes/GTmetrix-Grade.png)
+![GTmetrix Summary](imagenes/GTmetrix-Summary.png)
+![GTmetrix Perfomance](imagenes/GTmetrix-Perfomance.png)
+![GTmetrix Structure](imagenes/GTmetrix-Structure.png)
 
 3. **Chrome DevTools Lighthouse**
-   - Captura del **report completo**.
-   - Mostrar claramente las métricas **Core Web Vitals**.
-   - Indicar la versión de Chrome usada (opcional).
+![Chrome DevTools Lighthouse](imagenes/Chrome-DevTools-Lighthouse.png)
 
 ## Métricas Obtenidas
-Se deben registrar los valores **tal como aparecen en las capturas**, por ejemplo:
+
 
 ### Google PageSpeed Insights
-- **Performance Score:** [puntaje]/100
-- **First Contentful Paint (FCP):** [tiempo]s
-- **Largest Contentful Paint (LCP):** [tiempo]s
-- **Cumulative Layout Shift (CLS):** [valor]
-- **First Input Delay (FID):** [tiempo]ms
+- **Performance Score:** 100/100
+- **First Contentful Paint (FCP):** 0.7 s
+- **Largest Contentful Paint (LCP):** 0.7 s
+- **Cumulative Layout Shift (CLS):** 0
+- **First Input Delay (FID):** N/A (no se refelja en la captura)
 
 ### GTmetrix Results
-- **GTmetrix Grade:** [letra]
-- **Performance:** [porcentaje]%
-- **Structure:** [porcentaje]%
-- **Fully Loaded Time:** [tiempo]s
-- **Page Size:** [tamaño] MB
+- **GTmetrix Grade:** A
+- **Performance:** 100%
+- **Structure:** 95%
+- **Fully Loaded Time:** 0.631 s
+- **Page Size:** 0.507 MB
 
 ### Lighthouse Audit
-![Lighthouse Report](../screenshots/lighthouse-report.png)
+- **Performance Score:** 97/100
+- **First Contentful Paint (FCP):** 2.0 s
+- **Largest Contentful Paint (LCP):** 2.3 s
+- **Cumulative Layout Shift (CLS):** 0.001
+- **Total Blocking Time (TBT):** 0 ms
+- **Speed Index (SI):** 2.0 s
 
 ## Optimizaciones Implementadas
-[Lista de mejoras realmente aplicadas para mejorar performance]
+No se cuenta con información sobre las optimizaciones que se implementaron para llegar a los resultados actuales.
 
 ## Comparativas Antes/Después
-[Tabla comparativa si se realizaron optimizaciones, usando los valores obtenidos en las capturas]
+No se realizaron análisis de datos de optimizaciones previas.
