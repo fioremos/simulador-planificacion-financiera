@@ -20,15 +20,22 @@ Verificar la adaptabilidad responsive en dispositivos móviles reales
 - Desktop: 1024px+
 
 ## Capturas por Dispositivo
+
 **iPhone 14 Pro (Safari):**
+
 ![Login](imagenes/iphone14-login.png)
+
 ![Dashboard](imagenes/iphone14-dashboard.png)
 
 **Galaxy S23 (Chrome):**
+
 ![Login](imagenes/s23-login.png)
+
 ![Dashboard](imagenes/s23-dashboard.png)
 
 **iPad Air (Safari):**
+
+
 ![Login](imagenes/ipad-login.png)
 
 ![Dashboard](imagenes/ipad-dashboard.png)

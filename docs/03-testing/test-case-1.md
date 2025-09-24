@@ -106,29 +106,25 @@ Pequeñas variaciones en grosor o tamaño de tipografías en elementos destacado
 
 **Dashboard – Safari**
 
-Se detecta un desbordamiento en el contenedor inferior “Últimos Movimientos”:
-la última fila (“Ene. 01”) sobresale del borde inferior del card.
-
+Se detecta un desbordamiento en el contenedor inferior “Últimos Movimientos”: la última fila (“Ene. 01”) sobresale del borde inferior del card.
 Esto no ocurre en Chrome, Firefox ni Edge.
 
 **Inversiones – Safari**
 
 Problema similar al anterior: en el contenedor superior “Inversiones”,
 la última fila (“APPLE”) se muestra por fuera del card.
-
 Correcto en Chrome, Firefox y Edge.
 
 Estilos nativos Safari:
-
 Inputs tipo select y datepicker muestran un estilo metálico/intenso distinto a otros navegadores. Se considera comportamiento estándar de Safari y no error del CSS personalizado.
 
 💡 Recomendaciones sugeridas
 
-Revisar los cards con overflow en Safari agregando propiedades como overflow: auto o padding-bottom adicional para evitar desbordes.
+- Revisar los cards con overflow en Safari agregando propiedades como overflow: auto o padding-bottom adicional para evitar desbordes.
 
-Testear con tamaños de viewport distintos en Safari para confirmar si se trata de un bug de responsive o de altura fija.
+- Testear con tamaños de viewport distintos en Safari para confirmar si se trata de un bug de responsive o de altura fija.
 
-Mantener consistencia de fuentes y tamaños revisando font-weight en elementos destacados para minimizar variaciones entre navegadores.
+- Mantener consistencia de fuentes y tamaños revisando font-weight en elementos destacados para minimizar variaciones entre navegadores.
 
 ## Métricas de Compatibilidad (por navegador)
 
@@ -144,7 +140,7 @@ Compatibilidad CSS (por navegador) = (CompatibleProps / TotalProps) * 100
    ![CSS Stats Overview](imagenes/css-stats.png)
 
 2. **Capturas de 4 propiedades consultadas en Can I Use** (una por imagen), indicando si están soportadas en cada navegador.  
-   Propiedades sugeridas:  
+   ropiedades sugeridas:  
    - `grid`  
    - `flexbox`  
    - `backdrop-filter`  
