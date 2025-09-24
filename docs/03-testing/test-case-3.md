@@ -9,7 +9,7 @@ Evaluar el rendimiento de la página en términos de velocidad de carga y métri
 - Chrome DevTools Lighthouse
 
 ## Capturas Requeridas
-Se deben adjuntar **capturas de pantalla reales** de cada herramienta mostrando los resultados obtenidos.
+
 
 1. **Google PageSpeed Insights**
 ![Google PageSpeed Insigths](imagenes/Google-PageSpeed-Insights.png)
@@ -31,7 +31,7 @@ Se deben adjuntar **capturas de pantalla reales** de cada herramienta mostrando 
 - **First Contentful Paint (FCP):** 0.7 s
 - **Largest Contentful Paint (LCP):** 0.7 s
 - **Cumulative Layout Shift (CLS):** 0
-- **First Input Delay (FID):** N/A (no se refelja en la captura)
+- **First Input Delay (FID):** N/A (no se refelja en la imagen)
 
 ### GTmetrix Results
 - **GTmetrix Grade:** A
