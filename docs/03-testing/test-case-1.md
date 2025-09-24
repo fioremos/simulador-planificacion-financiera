@@ -144,7 +144,7 @@ Compatibilidad CSS (por navegador) = (CompatibleProps / TotalProps) * 100
    ![CSS Stats Overview](imagenes/css-stats.png)
 
 2. **Capturas de 4 propiedades consultadas en Can I Use** (una por imagen), indicando si están soportadas en cada navegador.  
-   Ejemplo de propiedades sugeridas:  
+   Propiedades sugeridas:  
    - `grid`  
    - `flexbox`  
    - `backdrop-filter`  
