@@ -13,34 +13,35 @@ Verificar compatibilidad cross-platform y validar código CSS/HTML
 ### Windows 11
 | Navegador | Versión | Resultado | Observaciones |
 |-----------|---------|-----------|---------------|
-| Chrome | [versión] | ✅/❌ | [notas] |
-| Firefox | [versión] | ✅/❌ | [notas] |
-| Edge | [versión] | ✅/❌ | [notas] |
+| Chrome | 140 | ✅ | No se encontraron problemas de compatibilidad en la visualización. |
+| Firefox | 143 | ✅ | No se encontraron problemas de compatibilidad en la visualización. |
+| Edge | 140 | ✅ | No se encontraron problemas de compatibilidad en la visualización. |
 
 ### macOS
 | Navegador | Versión | Resultado | Observaciones |
 |-----------|---------|-----------|---------------|
-| Safari | [versión] | ✅/❌ | [notas] |
-| Chrome | [versión] | ✅/❌ | [notas] |
-| Firefox | [versión] | ✅/❌ | [notas] |
+| Safari | 18 | ❌ | En varias pantallas algunos elementos se sobresalen de los contenedores. Problema evidente en Dashboard e Inversiones. |
+| Chrome |  | ⚠️ No probado | No se pudo realizar la prueba por limitaciones del plan gratuito de LambdaTest. Se asume comportamiento similar al de Windows, pero sin evidencia real. |
+| Firefox |  | ⚠️ No probado | No se pudo realizar la prueba por limitaciones del plan gratuito de LambdaTest. Se asume comportamiento similar al de Windows, pero sin evidencia real. |
 
-### Linux (Ubuntu)
-| Navegador | Versión | Resultado | Observaciones |
-|-----------|---------|-----------|---------------|
-| Firefox | [versión] | ✅/❌ | [notas] |
-| Chrome | [versión] | ✅/❌ | [notas] |
 
 ## Validación W3C
 
 ### CSS Validation Results
-- **CSS Validator:** ✅ Valid CSS / ❌ [número] errores
-- **Warnings:** [número]
-![CSS Validation](../screenshots/css-validation.png)
+- **CSS Validator:** ✅ Valid CSS
+- **Warnings:** ⚠️ 1
+![CSS Validation](imagenes/W3C-CSS-Validator.png)
 
 ### HTML Validation Results
-- **HTML Validator:** ✅ Valid HTML5 / ❌ [número] errores
-- **Warnings:** [número]
-![HTML Validation](../screenshots/html-validation.png)
+- **HTML Validator:** ❌ 153 errores
+- **Warnings:** ⚠️ 19
+![HTML Validation](imagenes/W3C-HTML-Validator.png)
 
 ## Compatibilidad CSS Features
-[Tabla con features CSS utilizadas y su soporte por navegador]
+
+| CSS Feature          | Chrome 140  | Firefox 143 | Safari (última) | Edge 140    |
+| -------------------- | ----------- | ----------- | --------------- | ----------- |
+| **Grid Layout**      | ✅ Soportado | ✅ Soportado | ✅ Soportado     | ✅ Soportado |
+| **Flexbox**          | ✅ Soportado | ✅ Soportado | ✅ Soportado     | ✅ Soportado |
+| **Backdrop-filter**  | ✅ Soportado | ✅ Soportado | ✅ Soportado     | ✅ Soportado |
+| **Position: sticky** | ✅ Soportado | ✅ Soportado | ✅ Soportado     | ✅ Soportado |
