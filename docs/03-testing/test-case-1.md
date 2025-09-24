@@ -18,80 +18,80 @@ Verificar la correcta visualización y funcionalidad en navegadores desktop prin
 
 ## Capturas de Pantalla
 ### Chrome
-![Login](https://drive.google.com/file/d/1PTUS6Xa0MDdMMhmXe8i-E7nuicOmqWpp/view?usp=sharing)
+![Login](imagenes/login-chrome.png)
 
-![Dashboard](https://drive.google.com/file/d/1uAUDgdf44VulG9d_rqEKf7Y9Yru0KxbO/view?usp=sharing)
+![Dashboard](imagenes/dashboard-chrome.png)
 
-![Ingresos y Gastos](https://drive.google.com/file/d/10b-uWMWx8ABY-HST69JhPlf3b71SS-oV/view?usp=sharing)
+![Ingresos y Gastos](imagenes/ingresos-chrome.png)
 
-![Metas de ahorro](https://drive.google.com/file/d/1_L7So288ToNL4f5_myIEQcktavmLROVr/view?usp=sharing)
+![Metas de ahorro](imagenes/metas-chrome.png)
 
-![Inversiones](https://drive.google.com/file/d/1EOXmMkL16Rhd3COkq926sJbWKMs32w2T/view?usp=sharing)
+![Inversiones](imagenes/inversiones-chrome.png)
 
-![Reportes y Estadísticas](https://drive.google.com/file/d/1Dsw1bi99dJ-sgCg8GkPZsjgwXFsD9sSB/view?usp=sharing)
+![Reportes y Estadísticas](imagenes/reportes-chrome.png)
 
-![Historial y Auditoría](https://drive.google.com/file/d/1D3inaU7JqhHWtOZ7Re6mNN7SkzdDjqqb/view?usp=sharing)
+![Historial y Auditoría](imagenes/historial-chrome.png)
 
-![Exportación de Datos](https://drive.google.com/file/d/1UAPKWbQ2uQdvGercisVA9872qFbshHSo/view?usp=sharing)
+![Exportación de Datos](imagenes/exportar-chrome.png)
 
-![Configuración](https://drive.google.com/file/d/1n6KaRRz5DPXJZyo6Az4T_7t2A60BYXzX/view?usp=sharing)
+![Configuración](imagenes/configuracion-chrome.png)
 
 ### Firefox
-![Login](https://drive.google.com/file/d/1bzqf-bE_bksuh-C-4KxmjPYsvZbuW4nR/view?usp=sharing)
+![Login](imagenes/login-firefox.png)
 
-![Dashboard](https://drive.google.com/file/d/1HvX1AOCyDSuK2oNaP5PB6F3f4JLnFe5k/view?usp=sharing)
+![Dashboard](imagenes/dashboard-firefox.png)
 
-![Ingresos y Gastos](https://drive.google.com/file/d/13TfcNEr3rPglQ9GMookx6K1xdvRKpYo0/view?usp=sharing)
+![Ingresos y Gastos](imagenes/ingresos-firefox.png)
 
-![Metas de ahorro](https://drive.google.com/file/d/18ljHoLrYdMjrK8sIk2BwllsqvlFa2aga/view?usp=sharing)
+![Metas de ahorro](imagenes/metas-firefox.png)
 
-![Inversiones](https://drive.google.com/file/d/1tfElY20vlkii0eg_Uk1DMhwPSME-vTaD/view?usp=sharing)
+![Inversiones](imagenes/inversiones-firefox.png)
 
-![Reportes y Estadísticas](https://drive.google.com/file/d/10r2COwjhNhqTtUGlic2u_a_3s996AlFE/view?usp=sharing)
+![Reportes y Estadísticas](imagenes/reportes-firefox.png)
 
-![Historial y Auditoría](https://drive.google.com/file/d/1Q_vv1GqzSxssqCSvLhWGABpp_kIpQXme/view?usp=sharing)
+![Historial y Auditoría](imagenes/historial-firefox.png)
 
-![Exportación de Datos](https://drive.google.com/file/d/1jJ5-JoRJ7BsWcDc0zF4_73iiFpkDopCR/view?usp=sharing)
+![Exportación de Datos](imagenes/exportar-firefox.png)
 
-![Configuración](https://drive.google.com/file/d/1Yu7KxZSXGtyq-JlfnFQ7MW6aNEp3C3pW/view?usp=sharing)
+![Configuración](imagenes/configuracion-firefox.png)
 
 ### Safari
-![Login](https://drive.google.com/file/d/1f70Rltkf24ncp3DRdTp-hJzj_oJSgnSN/view?usp=sharing)
+![Login](imagenes/login-safari.png)
 
-![Dashboard](https://drive.google.com/file/d/1pE4CIRmhZuDMz2ClJ4kuddF71nI1_Xoz/view?usp=sharing)
+![Dashboard](imagenes/dashboard-safari.png)
 
-![Ingresos y Gastos](https://drive.google.com/file/d/11upXlj2p1Dkz9oCdk_wy6F1FvRuMbEwh/view?usp=sharing)
+![Ingresos y Gastos](imagenes/ingresos-safari.png)
 
-![Metas de ahorro](https://drive.google.com/file/d/1ZeoW6fbaofhmqC7JpYz4WXRT1AGAbwid/view?usp=sharing)
+![Metas de ahorro](imagenes/metas-safari.png)
 
-![Inversiones](https://drive.google.com/file/d/1PTUS6Xa0MDdMMhmXe8i-E7nuicOmqWpp/view?usp=sharing)
+![Inversiones](imagenes/inversiones-safari.png)
 
-![Reportes y Estadísticas](https://drive.google.com/file/d/1ra6Mbl7-tURuYH1cyCGdwCT1Usg4d5W9/view?usp=sharing)
+![Reportes y Estadísticas](imagenes/reportes-safari.png)
 
-![Historial y Auditoría](https://drive.google.com/file/d/1Q_vv1GqzSxssqCSvLhWGABpp_kIpQXme/view?usp=sharing)
+![Historial y Auditoría](imagenes/historial-safari.png)
 
-![Exportación de Datos](https://drive.google.com/file/d/1PE1lF0ERpoY2wYYXzW1gQICejCXJgYEp/view?usp=sharing)
+![Exportación de Datos](imagenes/exportar-safari.png)
 
-![Configuración](https://drive.google.com/file/d/1spo8d12-U8xU_YnuF-jsQpvAlZPvfeud/view?usp=sharing)
+![Configuración](imagenes/configuracion-safari.png)
 
 ### Edge
-![Login](https://drive.google.com/file/d/16ZE813GMIqsD5-6C6zfut2iDgSVUuz0G/view?usp=sharing)
+![Login](imagenes/login-edge.png)
 
-![Dashboard](https://drive.google.com/file/d/1dS2VFbjY7LxCJl0hKfYCnYmq3ghGVi77/view?usp=sharing)
+![Dashboard](imagenes/dashboard-edge.png)
 
-![Ingresos y Gastos](https://drive.google.com/file/d/1lf82KrCRYFBX-ilysmKLLNgXh3Z6ntNV/view?usp=sharing)
+![Ingresos y Gastos](imagenes/ingresos-edge.png)
 
-![Metas de ahorro](https://drive.google.com/file/d/1dmpAMdcqLMd1j29Xf9DSgyFQPbCN9A3c/view?usp=sharing)
+![Metas de ahorro](imagenes/metas-edge.png)
 
-![Inversiones](https://drive.google.com/file/d/1uL_Y46qbEysAhowy3DjIsYhxVWp8DEpv/view?usp=sharing)
+![Inversiones](imagenes/inversiones-edge.png)
 
-![Reportes y Estadísticas](https://drive.google.com/file/d/1ntyFruirKzC8qtUEu5obtR-Fc3jt7Dlo/view?usp=sharing)
+![Reportes y Estadísticas](imagenes/reportes-edge.png)
 
-![Historial y Auditoría](https://drive.google.com/file/d/17cSW_AkGs_kv5dPiiOpRyNMAeyqv7NJU/view?usp=sharing)
+![Historial y Auditoría](imagenes/historial-edge.png)
 
-![Exportación de Datos](https://drive.google.com/file/d/1SoHjWUFRqi1B9NuGW7fBsPRC4rldGoRT/view?usp=sharing)
+![Exportación de Datos](imagenes/exportar-edge.png)
 
-![Configuración](https://drive.google.com/file/d/1RN0unGCl8i0Z65uKonsdQPk03Xz3Pfa2/view?usp=sharing)
+![Configuración](imagenes/configuracion-edge.png)
 
 ## Issues Encontrados
 ✅ Pantallas sin problemas
@@ -141,7 +141,7 @@ Compatibilidad CSS (por navegador) = (CompatibleProps / TotalProps) * 100
 
 ### Evidencias Requeridas
 1. **Captura de CSS Stats** mostrando `TotalProps`.  
-   ![CSS Stats Overview](https://drive.google.com/file/d/1nWMZxOaCb9OBeUF1a0nxTBoIPB8QGILL/view?usp=sharing)
+   ![CSS Stats Overview](imagenes/css-stats.png)
 
 2. **Capturas de 4 propiedades consultadas en Can I Use** (una por imagen), indicando si están soportadas en cada navegador.  
    Ejemplo de propiedades sugeridas:  
@@ -151,10 +151,10 @@ Compatibilidad CSS (por navegador) = (CompatibleProps / TotalProps) * 100
    - `position: sticky`  
 
    Ejemplo de evidencia:  
-   ![Can I Use - Grid](https://drive.google.com/file/d/11kRVBMfVSQnYkH051aodft8jWXoMJ5sS/view?usp=sharing)  
-   ![Can I Use - Flexbox](https://drive.google.com/file/d/1MoJ2mAV4WI5fKinZvGSERXEzAk7J28s_/view?usp=sharing)  
-   ![Can I Use - Backdrop Filter](https://drive.google.com/file/d/1QkerRSu4O-8CewLvdX6l6KewOdM2gx6E/view?usp=sharing)  
-   ![Can I Use - Sticky](https://drive.google.com/file/d/1JpoWOVQ74UczxL8mzsybLkB2jygUPbQV/view?usp=sharing)  
+   ![Can I Use - Grid](imagenes/caniuse-grid.png)  
+   ![Can I Use - Flexbox](imagenes/caniuse-flexbox.png)  
+   ![Can I Use - Backdrop Filter](imagenes/caniuse-backdrop-filter.png)  
+   ![Can I Use - Sticky](imagenes/caniuse-sticky.png)  
 
 ### Tabla de Resultados
 | Navegador | TotalProps | CompatibleProps | Compatibilidad CSS |
