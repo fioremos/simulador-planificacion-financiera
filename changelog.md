@@ -15,7 +15,7 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   PR: [#2](https://github.com/fioremos/simulador-planificacion-financiera/pull/10) - @fioremos (Especialista en Responsive Design)  
 
 - [feature/doc-qa-tester-add-test-case-1] Realiza control de calidad mediante test case especificos.  
-  PR: [#3]() - @usuario3 (Documentador / QA Tester)  
+  PR: [#3](https://github.com/fioremos/simulador-planificacion-financiera/pull/12#issue-3451193443) - @MNEscobar (Documentador / QA Tester)  
 
 ### Fixed  
 - [feature/coord-dev-ops-repo-update-readme-md] Actualizar README.md con los nuevos objetivos y tecnologías utilizadas.  
