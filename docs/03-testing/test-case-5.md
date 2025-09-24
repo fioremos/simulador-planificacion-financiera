@@ -21,8 +21,8 @@ Verificar compatibilidad cross-platform y validar código CSS/HTML
 | Navegador | Versión | Resultado | Observaciones |
 |-----------|---------|-----------|---------------|
 | Safari | 18 | ❌ | En varias pantallas algunos elementos se sobresalen de los contenedores. Problema evidente en Dashboard e Inversiones. |
-| Chrome |  | ⚠️ No probado | No se pudo realizar la prueba por limitaciones del plan gratuito de LambdaTest. Se asume comportamiento similar al de Windows, pero sin evidencia real. |
-| Firefox |  | ⚠️ No probado | No se pudo realizar la prueba por limitaciones del plan gratuito de LambdaTest. Se asume comportamiento similar al de Windows, pero sin evidencia real. |
+| Chrome | 140 | ✅  | No se encontraron problemas de compatibilidad en la visualización. |
+| Firefox | 143 | ✅ | No se encontraron problemas de compatibilidad en la visualización. |
 
 
 ## Validación W3C
