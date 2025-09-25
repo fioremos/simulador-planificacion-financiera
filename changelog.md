@@ -18,8 +18,8 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   PR: [#3]() - @usuario3 (Documentador / QA Tester)  
 
 ### Fixed  
-- [feature/coord-dev-ops-repo-update-readme-md] Coordina la integración de todas las ramas.  
-  PR: [#4]() - @usuario4 (Coordinador / DevOps)  
+- [feature/coord-dev-ops-repo-update-readme-md] Actualizar README.md con los nuevos objetivos y tecnologías utilizadas.
+  PR: [#13](https://github.com/fioremos/simulador-planificacion-financiera/pull/13) - @UlisesC11 (Coordinador / DevOps)  
 
 ---
 
