@@ -186,7 +186,7 @@ body {
     height: 4rem;
 }
 .header-logo img:hover {
-    content: url('../images/barraDeNavegacion/nombre final.png'); 
+    content: url('../images/barraDeNavegacion/nombre_final.png'); 
     opacity: 1;
     transition: opacity 0.3s ease-in-out;
 }

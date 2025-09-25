@@ -492,7 +492,7 @@ input[type="radio"]:checked + .radio-cuadrado::after {
 }
 /* Efecto hover en el logo (cambia imagen y opacidad) */
 .login-logo-container img:hover {
-    content: url('../images/login/Logo final.png'); 
+    content: url('../images/login/Logo_final.png'); 
     opacity: 1;
     transition: opacity 0.3s ease-in-out;
 }
