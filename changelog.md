@@ -7,12 +7,12 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 ## [Unreleased]
 
 ### Added  
-- [feature/dev-frontend-css-add-styles] Implementa los estilos CSS principales.  
-  PR: [#1]() - @usuario1 (Desarrollador Frontend/CSS)  
+- [feature/dev-frontend-css-add-styles] Implementa los estilos principales del frontend para implementar el mockup (reset, variables, componentes y layout). 
+  PR: [#9](https://github.com/fioremos/simulador-planificacion-financiera/pull/9) - @skalapuj (Desarrollador Frontend/CSS)  
 
 ### Changed  
 - [feature/responsive-design-add-responsive-styles] Implementa adaptabilidad multiplataforma del diseño.  
-  PR: [#2](link) - @usuario2 (Especialista en Responsive Design)  
+  PR: [#2](https://github.com/fioremos/simulador-planificacion-financiera/pull/10) - @fioremos (Especialista en Responsive Design)  
 
 - [feature/doc-qa-tester-add-test-case-1] Realiza control de calidad mediante test case especificos.  
   PR: [#3]() - @usuario3 (Documentador / QA Tester)  
