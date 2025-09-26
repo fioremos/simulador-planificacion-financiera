@@ -90,7 +90,8 @@ El resultado esperado es un repositorio organizado, con estilos aplicados al dis
 ---
 
 ## 📁 Documentación
-- 🖼️ [Mockup](docs/01-mockup/diseño-inicial.png)
+- 🖼️ [Mockup diseño inicial](docs/01-mockup/diseño-inicial.png)
+- 🖼️ [Mockup diseño con css](docs/01-mockup/disenio-con-css.png)
 - 🗂️ [Índice de Prompts](docs/02-prompts/prompts.md)
 - 🧪 [Índice de Test Cases](docs/03-testing/testing-doc.md)
 - 📜 [Changelog](changelog.md)
