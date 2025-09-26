@@ -39,6 +39,7 @@ Verificar el cumplimiento de estándares de accesibilidad WCAG 2.1 AA
 
 ## Issues de Accesibilidad Encontrados
 - Problema 1: Alto número de errores detectados por WAVE (96) principalmente por falta de texto alternativo en imágenes decorativas.
+
 Solución propuesta: Revisar todas las imágenes e incluir atributos alt descriptivos cuando corresponda.
 
 - Problema 2: Algunos botones secundarios presentan contraste borderline con el fondo azul claro.
