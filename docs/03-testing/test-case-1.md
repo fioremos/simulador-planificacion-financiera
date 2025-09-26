@@ -18,80 +18,80 @@ Verificar la correcta visualización y funcionalidad en navegadores desktop prin
 
 ## Capturas de Pantalla
 ### Chrome
-![Login](imagenes/login-chrome.png)
+![Login](imagenes/test-case-1/login-chrome.png)
 
-![Dashboard](imagenes/dashboard-chrome.png)
+![Dashboard](imagenes/test-case-1/dashboard-chrome.png)
 
-![Ingresos y Gastos](imagenes/ingresos-chrome.png)
+![Ingresos y Gastos](imagenes/test-case-1/ingresos-chrome.png)
 
-![Metas de ahorro](imagenes/metas-chrome.png)
+![Metas de ahorro](imagenes/test-case-1/metas-chrome.png)
 
-![Inversiones](imagenes/inversiones-chrome.png)
+![Inversiones](imagenes/test-case-1/inversiones-chrome.png)
 
-![Reportes y Estadísticas](imagenes/reportes-chrome.png)
+![Reportes y Estadísticas](imagenes/test-case-1/reportes-chrome.png)
 
-![Historial y Auditoría](imagenes/historial-chrome.png)
+![Historial y Auditoría](imagenes/test-case-1/historial-chrome.png)
 
-![Exportación de Datos](imagenes/exportar-chrome.png)
+![Exportación de Datos](imagenes/test-case-1/exportar-chrome.png)
 
-![Configuración](imagenes/configuracion-chrome.png)
+![Configuración](imagenes/test-case-1/configuracion-chrome.png)
 
 ### Firefox
-![Login](imagenes/login-firefox.png)
+![Login](imagenes/test-case-1/login-firefox.png)
 
-![Dashboard](imagenes/dashboard-firefox.png)
+![Dashboard](imagenes/test-case-1/dashboard-firefox.png)
 
-![Ingresos y Gastos](imagenes/ingresos-firefox.png)
+![Ingresos y Gastos](imagenes/test-case-1/ingresos-firefox.png)
 
-![Metas de ahorro](imagenes/metas-firefox.png)
+![Metas de ahorro](imagenes/test-case-1/metas-firefox.png)
 
-![Inversiones](imagenes/inversiones-firefox.png)
+![Inversiones](imagenes/test-case-1/inversiones-firefox.png)
 
-![Reportes y Estadísticas](imagenes/reportes-firefox.png)
+![Reportes y Estadísticas](imagenes/test-case-1/reportes-firefox.png)
 
-![Historial y Auditoría](imagenes/historial-firefox.png)
+![Historial y Auditoría](imagenes/test-case-1/historial-firefox.png)
 
-![Exportación de Datos](imagenes/exportar-firefox.png)
+![Exportación de Datos](imagenes/test-case-1/exportar-firefox.png)
 
-![Configuración](imagenes/configuracion-firefox.png)
+![Configuración](imagenes/test-case-1/configuracion-firefox.png)
 
 ### Safari
-![Login](imagenes/login-safari.png)
+![Login](imagenes/test-case-1/login-safari.png)
 
-![Dashboard](imagenes/dashboard-safari.png)
+![Dashboard](imagenes/test-case-1/dashboard-safari.png)
 
-![Ingresos y Gastos](imagenes/ingresos-safari.png)
+![Ingresos y Gastos](imagenes/test-case-1/ingresos-safari.png)
 
-![Metas de ahorro](imagenes/metas-safari.png)
+![Metas de ahorro](imagenes/test-case-1/metas-safari.png)
 
-![Inversiones](imagenes/inversiones-safari.png)
+![Inversiones](imagenes/test-case-1/inversiones-safari.png)
 
-![Reportes y Estadísticas](imagenes/reportes-safari.png)
+![Reportes y Estadísticas](imagenes/test-case-1/reportes-safari.png)
 
-![Historial y Auditoría](imagenes/historial-safari.png)
+![Historial y Auditoría](imagenes/test-case-1/historial-safari.png)
 
-![Exportación de Datos](imagenes/exportar-safari.png)
+![Exportación de Datos](imagenes/test-case-1/exportar-safari.png)
 
-![Configuración](imagenes/configuracion-safari.png)
+![Configuración](imagenes/test-case-1/configuracion-safari.png)
 
 ### Edge
-![Login](imagenes/login-edge.png)
+![Login](imagenes/test-case-1/login-edge.png)
 
-![Dashboard](imagenes/dashboard-edge.png)
+![Dashboard](imagenes/test-case-1/dashboard-edge.png)
 
-![Ingresos y Gastos](imagenes/ingresos-edge.png)
+![Ingresos y Gastos](imagenes/test-case-1/ingresos-edge.png)
 
-![Metas de ahorro](imagenes/metas-edge.png)
+![Metas de ahorro](imagenes/test-case-1/metas-edge.png)
 
-![Inversiones](imagenes/inversiones-edge.png)
+![Inversiones](imagenes/test-case-1/inversiones-edge.png)
 
-![Reportes y Estadísticas](imagenes/reportes-edge.png)
+![Reportes y Estadísticas](imagenes/test-case-1/reportes-edge.png)
 
-![Historial y Auditoría](imagenes/historial-edge.png)
+![Historial y Auditoría](imagenes/test-case-1/historial-edge.png)
 
-![Exportación de Datos](imagenes/exportar-edge.png)
+![Exportación de Datos](imagenes/test-case-1/exportar-edge.png)
 
-![Configuración](imagenes/configuracion-edge.png)
+![Configuración](imagenes/test-case-1/configuracion-edge.png)
 
 ## Issues Encontrados
 ✅ Pantallas sin problemas
@@ -137,7 +137,7 @@ Compatibilidad CSS (por navegador) = (CompatibleProps / TotalProps) * 100
 
 ### Evidencias Requeridas
 1. **Captura de CSS Stats** mostrando `TotalProps`.  
-   ![CSS Stats Overview](imagenes/css-stats.png)
+   ![CSS Stats Overview](imagenes/test-case-1/css-stats.png)
 
 2. **Capturas de 4 propiedades consultadas en Can I Use** (una por imagen), indicando si están soportadas en cada navegador.  
    ropiedades sugeridas:  
@@ -147,10 +147,10 @@ Compatibilidad CSS (por navegador) = (CompatibleProps / TotalProps) * 100
    - `position: sticky`  
 
    Ejemplo de evidencia:  
-   ![Can I Use - Grid](imagenes/caniuse-grid.png)  
-   ![Can I Use - Flexbox](imagenes/caniuse-flexbox.png)  
-   ![Can I Use - Backdrop Filter](imagenes/caniuse-backdrop-filter.png)  
-   ![Can I Use - Sticky](imagenes/caniuse-sticky.png)  
+   ![Can I Use - Grid](imagenes/test-case-1/caniuse-grid.png)  
+   ![Can I Use - Flexbox](imagenes/test-case-1/caniuse-flexbox.png)  
+   ![Can I Use - Backdrop Filter](imagenes/test-case-1/caniuse-backdrop-filter.png)  
+   ![Can I Use - Sticky](imagenes/test-case-1/caniuse-sticky.png)  
 
 ### Tabla de Resultados
 | Navegador | TotalProps | CompatibleProps | Compatibilidad CSS |

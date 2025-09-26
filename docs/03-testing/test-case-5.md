@@ -30,12 +30,12 @@ Verificar compatibilidad cross-platform y validar código CSS/HTML
 ### CSS Validation Results
 - **CSS Validator:** ✅ Valid CSS
 - **Warnings:** ⚠️ 1
-![CSS Validation](imagenes/W3C-CSS-Validator.png)
+![CSS Validation](imagenes/test-case-5/W3C-CSS-Validator.png)
 
 ### HTML Validation Results
 - **HTML Validator:** ❌ 153 errores
 - **Warnings:** ⚠️ 19
-![HTML Validation](imagenes/W3C-HTML-Validator.png)
+![HTML Validation](imagenes/test-case-5/W3C-HTML-Validator.png)
 
 ## Compatibilidad CSS Features
 
