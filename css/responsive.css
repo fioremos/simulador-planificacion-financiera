@@ -1,0 +1,190 @@
+/* ===========================
+   Non-web (≤1024px)
+   Tablets / Laptops pequeños
+   Ajustes para pantallas medianas
+=========================== */
+@media screen and (max-width: 1024px) {
+
+    /* Oculta la barra lateral para maximizar el espacio en pantalla */
+    .sidebar {
+        display: none;
+    }
+
+    /* Se muestra el menú del encabezado para navegación alternativa */
+    .header-menu {
+        display: unset;
+        height: 1.5rem;
+    }
+
+    /* Se cambia el logo por uno optimizado para mobile */
+    .header-logo-img {
+        content: url('../images/barraDeNavegacion/nombre\ inicial\ mobile.png');
+        height: 5vh;
+    }
+
+    /* Se ajusta el layout principal a una sola columna */
+    .principal-container {
+        grid-template-columns: auto;
+    }
+
+    /* Espaciado alrededor de tarjetas para mejor visualización */
+    .content .card {
+        justify-content: space-around;
+    }
+
+    /* Se cambia la tabla por layout tipo columna para mejor legibilidad en pantallas medianas */
+    .ingresos-gastos-table {
+        font-size: 3vw;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    /* Se ajustan los gráficos a tamaño relativo a la pantalla */
+    .metas-chart {
+        height: auto;
+        width: 60vw;
+    }
+
+    /* Se incrementa tamaño de fuente de la tabla de metas */
+    .metas-table {
+        font-size: 4vw;
+    }
+
+    /* Se incrementa tamaño de fuente de la tabla de inversiones */
+    .inversiones-table {
+        font-size: 3vw;
+    }
+
+    /* Gráfico de inversiones ocupa mayor parte de la pantalla */
+    .inversiones-chart {
+        width: 80vw;
+        height: auto;
+    }
+}
+
+
+/* ===========================
+   Mobile (≤768px)
+   Tablets chicas / Smartphones grandes
+   Optimización para navegación táctil
+=========================== */
+@media screen and (max-width: 768px) {
+
+    /* Elimina scroll horizontal innecesario */
+    html, body {
+        overflow-x: hidden;
+    }
+
+    /* Se agrega separación vertical entre tarjetas */
+    .card {
+        gap: 5vh;
+    }
+
+    /* Ajuste de tamaño del logo de login para pantallas pequeñas */
+    .login-logo-container img {
+        height: auto;
+        width: 50vw;
+    } 
+
+    /* Elimina márgenes y paddings del formulario de login para usar todo el espacio disponible */
+    .login-form-container {
+        margin: unset;
+        padding: unset;
+    }
+
+    /* Ajusta subtítulo del login para legibilidad en pantallas pequeñas */
+    .login-section .subtitle {
+        font-size: 6vw;
+    }
+
+    .login-logo {
+        padding: unset;
+    }
+
+    /* Aumenta tamaño de texto de inputs y botones en login */
+    .inputs-container .input,
+    .buttons-container .btn {
+        font-size: 4vw;
+    }
+
+    /* Layout resumen cambia de grid a columna para mejor stacking */
+    .resumen-grid {
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Se oculta una de las tarjetas del resumen para reducir ruido visual */
+    .resumen-grid .resumen-left .card {
+        display: none;
+    }
+
+    /* Gráfico del dashboard se adapta a ancho de pantalla */
+    .dashboard-chart {
+        height: auto;
+        width: 80vw;
+    }
+
+    /* Indicadores visuales se ocultan por limitación de espacio */
+    .gastos-indicadores {
+        display: none;
+    }
+
+    /* Las barras ocupan todo el ancho disponible */
+    .gastos-bars .bar {
+        width: 100%;
+    }
+
+    /* Contenedor de barras ajustado a ancho relativo */
+    .gastos-bars {
+        width: 40vw;
+    }
+
+    /* Layout de gastos adaptado para que los elementos se centren y aprovechen el alto */
+    .gastos-grid {
+        display: flex;
+        flex-direction: row;
+        align-items: stretch;
+        justify-content: center;
+    }
+
+    /* Se eliminan paddings del formulario para más espacio útil */
+    .form-grid {
+        padding: unset;
+    }
+}
+
+
+/* ===========================
+   Mobile (≤615px)
+   Smartphones medianos
+   Mejora de stacking y padding
+=========================== */
+@media screen and (max-width: 615px) {
+
+    /* Agrupación de checkboxes en columna para evitar desbordes horizontales */
+    .checkbox-group {
+        flex-direction: column;
+        gap: unset;
+        padding: 0 3rem;
+    }
+
+    /* Elimina padding innecesario en secciones centrales */
+    .block-center {
+        padding: unset;
+    }
+}
+
+
+/* ===========================
+   Mobile (≤472px)
+   Smartphones pequeños
+   Ajustes finales de inputs
+=========================== */
+@media screen and (max-width: 472px) {
+
+    /* Inputs del formulario se ajustan a un ancho manejable para pantallas pequeñas */
+    .form-grid .form-group .input {
+        width: 40vw;
+    }
+}
