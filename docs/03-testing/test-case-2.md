@@ -23,36 +23,36 @@ Verificar la adaptabilidad responsive en dispositivos móviles reales
 
 **iPhone 14 Pro (Safari):**
 
-![Login](imagenes/iphone14-login.png)
+![Login](imagenes/test-case-2/iphone14-login.png)
 
-![Dashboard](imagenes/iphone14-dashboard.png)
+![Dashboard](imagenes/test-case-2/iphone14-dashboard.png)
 
 **Galaxy S23 (Chrome):**
 
-![Login](imagenes/s23-login.png)
+![Login](imagenes/test-case-2/s23-login.png)
 
-![Dashboard](imagenes/s23-dashboard.png)
+![Dashboard](imagenes/test-case-2/s23-dashboard.png)
 
 **iPad Air (Safari):**
 
 
-![Login](imagenes/ipad-login.png)
+![Login](imagenes/test-case-2/ipad-login.png)
 
-![Dashboard](imagenes/ipad-dashboard.png)
+![Dashboard](imagenes/test-case-2/ipad-dashboard.png)
 
-![Ingresos y Gastos](imagenes/ipad-ingresos.png)
+![Ingresos y Gastos](imagenes/test-case-2/ipad-ingresos.png)
 
-![Metas de ahorro](imagenes/ipad-metas.png)
+![Metas de ahorro](imagenes/test-case-2/ipad-metas.png)
 
-![Inversiones](imagenes/ipad-inversiones.png)
+![Inversiones](imagenes/test-case-2/ipad-inversiones.png)
 
-![Reportes y Estadísticas](imagenes/ipad-reportes.png)
+![Reportes y Estadísticas](imagenes/test-case-2/ipad-reportes.png)
 
-![Historial y Auditoría](imagenes/ipad-historial.png)
+![Historial y Auditoría](imagenes/test-case-2/ipad-historial.png)
 
-![Exportación de Datos](imagenes/ipad-exportar.png)
+![Exportación de Datos](imagenes/test-case-2/ipad-exportar.png)
 
-![Configuración](imagenes/ipad-configuracion.png)
+![Configuración](imagenes/test-case-2/ipad-configuracion.png)
 
 ## Issues Encontrados
 

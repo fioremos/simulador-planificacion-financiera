@@ -16,7 +16,7 @@ Verificar el cumplimiento de estándares de accesibilidad WCAG 2.1 AA
 - **ARIA:** 0
 
 ### Captura WAVE Report
-![WAVE Report](imagenes/WAVE-Web.png)
+![WAVE Report](imagenes/test-case-4/WAVE-Web.png)
 
 ## Resultados axe DevTools
 - **Violations:** 0
@@ -24,11 +24,11 @@ Verificar el cumplimiento de estándares de accesibilidad WCAG 2.1 AA
 - **Passes:** No se muestra un número en la captura, pero el mensaje indica que no hay problemas automáticos, por lo que el test es exitoso.
 
 ### Captura Resultados axe DevTools
-![axe DevTools](imagenes/axe-DevTools.png)
+![axe DevTools](imagenes/test-case-4/axe-DevTools.png)
 
 ## Lighthouse Accessibility Score
 - **Puntuación:** 92/100
-![Lighthouse Accessibility](imagenes/Chrome-DevTools-Lighthouse.png)
+![Lighthouse Accessibility](imagenes/test-case-3/Chrome-DevTools-Lighthouse.png)
 
 ## Tests Manuales Realizados
 - ✅ Navegación completa por teclado
@@ -42,7 +42,9 @@ Verificar el cumplimiento de estándares de accesibilidad WCAG 2.1 AA
 Solución propuesta: Revisar todas las imágenes e incluir atributos alt descriptivos cuando corresponda.
 
 - Problema 2: Algunos botones secundarios presentan contraste borderline con el fondo azul claro.
+
 Solución propuesta: Ajustar la paleta de colores para cumplir con el contraste mínimo 4.5:1 recomendado por WCAG 2.1.
 
-- Problema 3: Algunos encabezados carecen de jerarquía correcta (salto de <h2> a <h4>).
+- Problema 3: Algunos encabezados carecen de jerarquía correcta (salto de ``<h2>`` a ``<h4>``).
+
 Solución propuesta: Reestructurar encabezados para mantener jerarquía lógica.

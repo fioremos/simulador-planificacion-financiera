@@ -12,16 +12,16 @@ Evaluar el rendimiento de la página en términos de velocidad de carga y métri
 
 
 1. **Google PageSpeed Insights**
-![Google PageSpeed Insigths](imagenes/Google-PageSpeed-Insights.png)
+![Google PageSpeed Insigths](imagenes/test-case-3/Google-PageSpeed-Insights.png)
 
 2. **GTmetrix**
-![GTmetrix Grade](imagenes/GTmetrix-Grade.png)
-![GTmetrix Summary](imagenes/GTmetrix-Summary.png)
-![GTmetrix Perfomance](imagenes/GTmetrix-Perfomance.png)
-![GTmetrix Structure](imagenes/GTmetrix-Structure.png)
+![GTmetrix Grade](imagenes/test-case-3/GTmetrix-Grade.png)
+![GTmetrix Summary](imagenes/test-case-3/GTmetrix-Summary.png)
+![GTmetrix Perfomance](imagenes/test-case-3/GTmetrix-Perfomance.png)
+![GTmetrix Structure](imagenes/test-case-3/GTmetrix-Structure.png)
 
 3. **Chrome DevTools Lighthouse**
-![Chrome DevTools Lighthouse](imagenes/Chrome-DevTools-Lighthouse.png)
+![Chrome DevTools Lighthouse](imagenes/test-case-3/Chrome-DevTools-Lighthouse.png)
 
 ## Métricas Obtenidas
 
