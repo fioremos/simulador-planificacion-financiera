@@ -7,19 +7,19 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 ## [Unreleased]
 
 ### Added  
-- [feature/dev-frontend-css-add-styles] Implementa los estilos principales del frontend para implementar el mockup (reset, variables, componentes y layout). 
-  PR: [#9](https://github.com/fioremos/simulador-planificacion-financiera/pull/9) - @skalapuj (Desarrollador Frontend/CSS)  
+- [nombre de la branch] Tarea realizada.  
+  PR: [#1]() - @Usuario1 (rol asignado)  
 
 ### Changed  
-- [feature/responsive-design-add-responsive-styles] Implementa adaptabilidad multiplataforma del diseño.  
-  PR: [#10](https://github.com/fioremos/simulador-planificacion-financiera/pull/10) - @fioremos (Especialista en Responsive Design)  
+- [nombre de la branch] Tarea realizada.  
+  PR: [#2]() - @Usuario2 (rol asignado)  
 
-- [feature/doc-qa-tester-add-test-case-1] Realiza control de calidad mediante test case especificos.  
-  PR: [#12](https://github.com/fioremos/simulador-planificacion-financiera/pull/12#issue-3451193443) - @MNEscobar (Documentador / QA Tester)  
+- [nombre de la branch] Tarea realizada.  
+  PR: [#3]() - @Usuario3 (rol asignado)  
 
 ### Fixed  
-- [feature/coord-dev-ops-repo-update-readme-md] Actualizar README.md con los nuevos objetivos y tecnologías utilizadas.  
-  PR: [#13](https://github.com/fioremos/simulador-planificacion-financiera/pull/13) - @UlisesC11 (Coordinador / DevOps)  
+- [nombre de la branch] Tarea realizada.  
+  PR: [#4]() - @Usuario4 (rol asignado)  
 
 ---
 
@@ -41,6 +41,24 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 
 ---
 
+## [Release Actividad Obligatoria N°2] - 2025-09-26
+
+### Added  
+- [feature/dev-frontend-css-add-styles] Implementa los estilos principales del frontend para implementar el mockup (reset, variables, componentes y layout). 
+  PR: [#9](https://github.com/fioremos/simulador-planificacion-financiera/pull/9) - @skalapuj (Desarrollador Frontend/CSS)  
+
+### Changed  
+- [feature/responsive-design-add-responsive-styles] Implementa adaptabilidad multiplataforma del diseño.  
+  PR: [#10](https://github.com/fioremos/simulador-planificacion-financiera/pull/10) - @fioremos (Especialista en Responsive Design)  
+
+- [feature/doc-qa-tester-add-test-case-1] Realiza control de calidad mediante test case especificos.  
+  PR: [#12](https://github.com/fioremos/simulador-planificacion-financiera/pull/12#issue-3451193443) - @MNEscobar (Documentador / QA Tester)  
+
+### Fixed  
+- [feature/coord-dev-ops-repo-update-readme-md] Actualizar README.md con los nuevos objetivos y tecnologías utilizadas.  
+  PR: [#13](https://github.com/fioremos/simulador-planificacion-financiera/pull/13) - @UlisesC11 (Coordinador / DevOps)  
+
+---
 
 ## Cómo usar este archivo
 
