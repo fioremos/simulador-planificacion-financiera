@@ -232,8 +232,6 @@
 .table-csm {
     height: 100%;
     width: 100%;
-    table-layout: auto;
-    border-collapse: collapse;
 }
 /* Encabezado de la tabla con fondo neutro claro y texto oscuro */
 .table-csm thead {
@@ -244,12 +242,6 @@
 /* Espaciado interno en celdas */
 .table-csm th, .table-csm td {
     padding: 0.25rem;
-    vertical-align: middle;      
-    font-family: inherit;        /* Safari a veces no hereda */
-}
-/* Safari fix para no romper layout */
-.table tbody tr {
-  display: table-row;          
 }
 /* Filas alternadas con color de fondo para mejor legibilidad */
 .table-csm tbody tr:nth-child(even) {
