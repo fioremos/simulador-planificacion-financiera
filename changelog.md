@@ -58,6 +58,12 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 - [feature/coord-dev-ops-repo-update-readme-md] Actualizar README.md con los nuevos objetivos y tecnologías utilizadas.  
   PR: [#13](https://github.com/fioremos/simulador-planificacion-financiera/pull/13) - @UlisesC11 (Coordinador / DevOps)  
 
+- [feature/coord-dev-repo-update-readme-md] Se agrego enlace a mockup diseño con css en el README.md.  
+  PR: [#16](https://github.com/fioremos/simulador-planificacion-financiera/pull/16) - @UlisesC11 (Coordinador / DevOps)  
+
+- [feature/UlisesC11-patch-1] Se corrigieron los número de PR correspondientes en el README.md.  
+  PR: [#15](https://github.com/fioremos/simulador-planificacion-financiera/pull/15) - @UlisesC11 (Coordinador / DevOps)  
+
 ---
 
 ## Cómo usar este archivo
