@@ -232,6 +232,8 @@
 .table-csm {
     height: 100%;
     width: 100%;
+    table-layout: auto;
+    border-collapse: collapse;
 }
 /* Encabezado de la tabla con fondo neutro claro y texto oscuro */
 .table-csm thead {
