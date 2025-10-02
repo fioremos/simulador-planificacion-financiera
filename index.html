@@ -357,7 +357,7 @@
                                 <table class="table-csm">
                                     <thead>
                                         <tr>
-                                        <th></th>
+                                        <td></td>
                                         <th>Fecha</th>
                                         <th>Categoría</th>
                                         <th>Monto</th>
@@ -1097,13 +1097,16 @@
 
                             <form class="config-form">
                                 <div class="form-group">
-                                    <input type="text" class="input" placeholder="Juan Perez">
+                                    <label for="nombreC" class="sr-only">Nombre completo</label>
+                                    <input id="nombreC"  type="text" class="input" placeholder="Juan Perez">
                                 </div>
                                 <div class="form-group">
-                                    <input type="email" class="input" placeholder="juan.perez@gmail.com">
+                                    <label for="email" class="sr-only">Correo electrónico</label>
+                                    <input id="email" type="email" class="input" placeholder="juan.perez@gmail.com">
                                 </div>
                                 <div class="form-group">
-                                    <input type="tel" class="input" placeholder="1122334455">
+                                    <label for="telefono" class="sr-only">Número de teléfono</label>
+                                    <input id="telefono" type="tel" class="input" placeholder="1122334455">
                                 </div>
                                 
                                 <div class="checkbox-group alingn-left">
