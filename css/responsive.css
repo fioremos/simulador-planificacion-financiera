@@ -3,7 +3,7 @@
    Tablets / Laptops pequeños
    Ajustes para pantallas medianas
 =========================== */
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1023px) {
 
     /* Oculta la barra lateral para maximizar el espacio en pantalla */
     .sidebar {
@@ -18,7 +18,7 @@
 
     /* Se cambia el logo por uno optimizado para mobile */
     .header-logo-img {
-        content: url('../images/barraDeNavegacion/nombre\ inicial\ mobile.png');
+        content: url('../images/barraDeNavegacion/nombre_inicial_mobile.png');
         height: 5vh;
     }
 
