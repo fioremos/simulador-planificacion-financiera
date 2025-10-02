@@ -75,10 +75,10 @@
                     <form id="login-form">
                         <div id="inputs-container" class="inputs-container">
                             <label for="usuario" class="sr-only">Usuario</label>
-                            <input type="text" name="usuario" placeholder="Usuario" class="input" >
+                            <input id="usuario" type="text" name="usuario" placeholder="Usuario" class="input" >
 
                             <label for="password" class="sr-only">Contraseña</label>
-                            <input type="password" name="password" placeholder="Contraseña" class="input" >
+                            <input id="password" type="password" name="password" placeholder="Contraseña" class="input" >
                         </div>
 
                         <div id="buttons-container" class="buttons-container">
@@ -691,16 +691,16 @@
                             <form id="movimientos-form">
                                 <div class="filters">
                                     <div class="form-group">
-                                        <label for="fecha">Fecha</label>
-                                        <select id="fecha" class="input">
+                                        <label for="fechaRyE">Fecha</label>
+                                        <select id="fechaRyE" class="input">
                                             <option>Últimos 7 días</option>
                                             <option>Último mes</option>
                                             <option>Último año</option>
                                         </select>
                                     </div>
                                     <div class="form-group">
-                                        <label for="categoria">Categoría</label>
-                                        <select id="categoria" class="input">
+                                        <label for="categoriaRyE">Categoría</label>
+                                        <select id="categoriaRyE" class="input">
                                             <option>Todas</option>
                                             <option>Hogar</option>
                                             <option>Transporte</option>
@@ -830,10 +830,10 @@
                             <form id="historial-form" class="form-grid">
                                 <!-- Fecha -->
                                 <div class="form-group without-margin">
-                                    <label for="fecha">Fecha:</label>
+                                    <label for="fechaHyA">Fecha:</label>
                                 </div>
                                 <div class="form-group without-margin">
-                                    <input type="date" id="fecha" name="fecha" class="input">
+                                    <input type="date" id="fechaHyA" name="fecha" class="input">
                                 </div>
                             </form>
                             <hr>
@@ -1131,8 +1131,8 @@
                             
                             <form class="prefer-form">
                                 <div class="pref-group">   
-                                    <label for="moneda">Moneda preferida</label>
-                                    <select id="moneda" class="input">
+                                    <label for="monedaP">Moneda preferida</label>
+                                    <select id="monedaP" class="input">
                                         <option>ARS</option>
                                         <option>USD</option>
                                         <option>EUR</option>
@@ -1150,7 +1150,7 @@
                                 
                                 <div class="pref-group" >
                                     <div >
-                                        <label for="modo-oscuro">Tamaño de Fuente</label>
+                                        <label >Tamaño de Fuente</label>
                                     </div>
                                     <div>
                                         <div class="format-toggle without-border">
@@ -1164,7 +1164,7 @@
                                 
                                 <div class="pref-group" >
                                     <div >
-                                        <label for="modo-oscuro">Formato Numérico</label>
+                                        <label>Formato Numérico</label>
                                     </div>
                                     <div>
                                         <div class="format-toggle">
