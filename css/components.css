@@ -244,6 +244,12 @@
 /* Espaciado interno en celdas */
 .table-csm th, .table-csm td {
     padding: 0.25rem;
+    vertical-align: middle;      
+    font-family: inherit;        /* Safari a veces no hereda */
+}
+/* Safari fix para no romper layout */
+.table tbody tr {
+  display: table-row;          
 }
 /* Filas alternadas con color de fondo para mejor legibilidad */
 .table-csm tbody tr:nth-child(even) {
