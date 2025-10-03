@@ -165,7 +165,7 @@
     /* Agrupación de checkboxes en columna para evitar desbordes horizontales */
     .checkbox-group {
         flex-direction: column;
-        gap: unset;
+        gap: 0.5rem;
         padding: 0 3rem;
     }
 
@@ -173,6 +173,31 @@
     .block-center {
         padding: unset;
     }
+}
+
+/* ===========================
+   Mobile (≤480px)
+   Smartphones pequeños
+   Ajustes finales de los checks
+=========================== */
+@media screen and (max-width: 480px) {
+
+    /* Agrupación de radios en columna para evitar desbordes horizontales */
+    .radio-group {
+        display: flex;
+        grid-template-columns: unset;
+        justify-content: space-around;
+    }
+
+    .radio-group label {
+        font-size: 4vw;
+    }
+
+    .radio-cuadrado {
+        width: 2.25vw;
+        height: 2.25vw;
+    }
+
 }
 
 
