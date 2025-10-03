@@ -28,17 +28,17 @@
      * Colores principales (Base)
      * Colores destacados para elementos interactivos y branding.
      --------------------------------------------- */
-    --color-primary: #76AAFD;
-    --color-secondary: #82B2F2;
+    --color-primary: #044FC8;
+    --color-secondary: #76AAFD;
     --color-accent: #1F5BBC;
-    --color-muted: #999999;
+    --color-muted: #BFBFBF;
 
      /* ---------------------------------------------
      * Colores de fondo
      * Define los colores de fondo para diferentes áreas de la página.
      --------------------------------------------- */
-    --background-main: #496289;
-    --background-options-bar: var(--color-secondary); /**/
+    --background-main: #151E28;
+    --background-options-bar: var(--color-secondary); 
 
       /* ---------------------------------------------
      * Colores de texto
@@ -47,13 +47,13 @@
     --text-primary: var(--color-primary); 
     --text-secondary: var(--white-000); 
     --text-muted: var(--color-muted); 
-    --text-on-selected: #1F5BBC; 
+    --text-on-selected: #0D2A59; 
 
     /* ---------------------------------------------
      * Colores específicos para elementos
      * Colores adicionales para elementos interactivos o destacados.
      --------------------------------------------- */
-    --color-option-selected: #C3D7F6; 
+    --color-option-selected: #0D2A59; 
     --color-text-options-bar: var(--white-000); 
     --items: var(--color-primary); 
     --combobox: var(--color-primary); 
@@ -253,6 +253,10 @@ body {
     padding: 0 0.625rem;
 }
 
+.sidebar-icon img {
+    width: 2rem;
+    height: 2rem;
+}
 
 /* ---------- Contenido principal ---------- */
 /*

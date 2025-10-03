@@ -3,7 +3,7 @@
    Tablets / Laptops pequeños
    Ajustes para pantallas medianas
 =========================== */
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1023px) {
 
     /* Oculta la barra lateral para maximizar el espacio en pantalla */
     .sidebar {
@@ -18,7 +18,7 @@
 
     /* Se cambia el logo por uno optimizado para mobile */
     .header-logo-img {
-        content: url('../images/barraDeNavegacion/nombre\ inicial\ mobile.png');
+        content: url('../images/barraDeNavegacion/nombre_inicial_mobile.png');
         height: 5vh;
     }
 
@@ -165,7 +165,7 @@
     /* Agrupación de checkboxes en columna para evitar desbordes horizontales */
     .checkbox-group {
         flex-direction: column;
-        gap: unset;
+        gap: 0.5rem;
         padding: 0 3rem;
     }
 
@@ -173,6 +173,31 @@
     .block-center {
         padding: unset;
     }
+}
+
+/* ===========================
+   Mobile (≤480px)
+   Smartphones pequeños
+   Ajustes finales de los checks
+=========================== */
+@media screen and (max-width: 480px) {
+
+    /* Agrupación de radios en columna para evitar desbordes horizontales */
+    .radio-group {
+        display: flex;
+        grid-template-columns: unset;
+        justify-content: space-around;
+    }
+
+    .radio-group label {
+        font-size: 4vw;
+    }
+
+    .horizontal{
+        width: 2.25vw;
+        height: 2.25vw;
+    }
+
 }
 
 

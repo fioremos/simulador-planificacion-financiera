@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="css/components.css">
+        <link rel="stylesheet" href="css/responsive.css">
         <script>    
                 /* ===============================================
                 * Script: Control de Secciones Interactivas
@@ -67,14 +68,17 @@
                     <div>
                         <img src="images/login/logo.png" alt="Logo FinGrow" class="login-logo">
                     </div>
-                    <p class="subtitle">Organiza tus finanzas fácil y rápido</p>
+                    <h2 class="subtitle">Organiza tus finanzas fácil y rápido</h2>
                 </div>
                 
                 <div class="login-form-container">
                     <form id="login-form">
                         <div id="inputs-container" class="inputs-container">
-                            <input type="text" name="usuario" placeholder="Usuario" class="input" >
-                            <input type="password" name="password" placeholder="Contraseña" class="input" >
+                            <label for="usuario" class="sr-only">Usuario</label>
+                            <input id="usuario" type="text" name="usuario" placeholder="Usuario" class="input" >
+
+                            <label for="password" class="sr-only">Contraseña</label>
+                            <input id="password" type="password" name="password" placeholder="Contraseña" class="input" >
                         </div>
 
                         <div id="buttons-container" class="buttons-container">
@@ -121,20 +125,20 @@
                 <aside class="sidebar">    
                     <nav>
                         <ul>
-                            <li class="active"><a href="#dashboard"><span class="sidebar-icon"><img src="images/iconos/Bar_chart-2.png"> </span> Dashboard</a></li>
-                            <li><a href="#ingresos-gastos" onclick="mostrarSeccion('ingresos-gastos')"><span class="sidebar-icon"><img src="images/iconos/Dollar_sign.png"> </span> Ingresos y Gastos</a></li>
-                            <li><a href="#metas"  onclick="mostrarSeccion('metas')"><span class="sidebar-icon"><img src="images/iconos/Award.png"> </span> Metas de ahorro</a></li>
-                            <li><a href="#inversiones"  onclick="mostrarSeccion('inversiones')"><span class="sidebar-icon"><img src="images/iconos/Trending_up.png"> </span> Inversiones</a></li>
-                            <li><a href="#reportes"  onclick="mostrarSeccion('reportes')"><span class="sidebar-icon"><img src="images/iconos/Check_square.png"> </span> Reportes y Estadísticas</a></li>
-                            <li><a href="#historial"  onclick="mostrarSeccion('historial')"><span class="sidebar-icon"><img src="images/iconos/Compass.png"> </span> Historial y Auditoría</a></li>
-                            <li><a href="#exportar"  onclick="mostrarSeccion('exportar')"><span class="sidebar-icon"><img src="images/iconos/upload.png"> </span> Exportación de Datos</a></li>
-                            <li><a href="#configuracion"  onclick="mostrarSeccion('configuracion')"><span class="sidebar-icon"><img src="images/iconos/settings.png"> </span> Configuración</a></li>
+                            <li class="active"><a href="#dashboard"><span class="sidebar-icon"><img src="images/iconos/Bar_chart-2.png" alt="logo_menu_dashboard"> </span> Dashboard</a></li>
+                            <li><a href="#ingresos-gastos" onclick="mostrarSeccion('ingresos-gastos')"><span class="sidebar-icon"><img src="images/iconos/Dollar_sign.png" alt="logo_menu_gastos"> </span> Ingresos y Gastos</a></li>
+                            <li><a href="#metas"  onclick="mostrarSeccion('metas')"><span class="sidebar-icon"><img src="images/iconos/Award.png" alt="logo_menu_metas" > </span> Metas de ahorro</a></li>
+                            <li><a href="#inversiones"  onclick="mostrarSeccion('inversiones')"><span class="sidebar-icon"><img src="images/iconos/Trending_up.png" alt="logo_menu_inversiones"> </span> Inversiones</a></li>
+                            <li><a href="#reportes"  onclick="mostrarSeccion('reportes')"><span class="sidebar-icon"><img src="images/iconos/Check_square.png" alt="logo_menu_reportes"> </span> Reportes y Estadísticas</a></li>
+                            <li><a href="#historial"  onclick="mostrarSeccion('historial')"><span class="sidebar-icon"><img src="images/iconos/Compass.png" alt="logo_menu_historial"> </span> Historial y Auditoría</a></li>
+                            <li><a href="#exportar"  onclick="mostrarSeccion('exportar')"><span class="sidebar-icon"><img src="images/iconos/upload.png" alt="logo_menu_exportar"> </span> Exportación de Datos</a></li>
+                            <li><a href="#configuracion"  onclick="mostrarSeccion('configuracion')"><span class="sidebar-icon"><img src="images/iconos/settings.png" alt="logo_menu_configuracion"> </span> Configuración</a></li>
                         </ul>
                     </nav>
 
                     <nav>
                         <ul>    
-                            <li><a href="#login" onclick="mostrarSeccion('login')"><span class="sidebar-icon"><img src="images/iconos/Log_out.png"> </span>  Cerrar Sesión</a></li>
+                            <li><a href="#login" onclick="mostrarSeccion('login')"><span class="sidebar-icon"><img src="images/iconos/Log_out.png" alt="logo_cerrar_sesion"> </span>  Cerrar Sesión</a></li>
                         </ul>    
                     </nav>
                 </aside>
@@ -201,42 +205,44 @@
                         <!-- Tabla generada de forma estática por ahora. 
                              En versiones futuras, se construirá dinámicamente con JavaScript 
                              o mediante datos obtenidos desde una API, permitiendo contenido actualizado  -->
-                        <table class="table-csm">
-                        <thead>
-                            <tr>
-                            <th>Fecha</th>
-                            <th>Categoría</th>
-                            <th>Monto</th>
-                            <th>Nota</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                            <td>Feb. 04</td>
-                            <td>Viaje</td>
-                            <td>$40.000</td>
-                            <td><span class="dot blue"></span></td>
-                            </tr>
-                            <tr>
-                            <td>Ene. 31</td>
-                            <td>PC</td>
-                            <td>$15.500</td>
-                            <td><span class="dot blue"></span></td>
-                            </tr>
-                            <tr>
-                            <td>Ene. 20</td>
-                            <td>Viaje</td>
-                            <td>$140.000</td>
-                            <td><span class="dot blue"></span></td>
-                            </tr>
-                            <tr>
-                            <td>Ene. 01</td>
-                            <td>Ocio</td>
-                            <td class="negative">-$45.850</td>
-                            <td><span class="dot red"></span></td>
-                            </tr>
-                        </tbody>
-                        </table>
+                        <div>
+                            <table class="table-csm">
+                            <thead>
+                                <tr>
+                                <th>Fecha</th>
+                                <th>Categoría</th>
+                                <th>Monto</th>
+                                <th>Nota</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                <td>Feb. 04</td>
+                                <td>Viaje</td>
+                                <td>$40.000</td>
+                                <td><span class="dot blue"></span></td>
+                                </tr>
+                                <tr>
+                                <td>Ene. 31</td>
+                                <td>PC</td>
+                                <td>$15.500</td>
+                                <td><span class="dot blue"></span></td>
+                                </tr>
+                                <tr>
+                                <td>Ene. 20</td>
+                                <td>Viaje</td>
+                                <td>$140.000</td>
+                                <td><span class="dot blue"></span></td>
+                                </tr>
+                                <tr>
+                                <td>Ene. 01</td>
+                                <td>Ocio</td>
+                                <td class="negative">-$45.850</td>
+                                <td><span class="dot red"></span></td>
+                                </tr>
+                            </tbody>
+                            </table>
+                        </div>
                     </section>
                 </main>
             </div>
@@ -265,20 +271,20 @@
                 <aside class="sidebar">    
                     <nav>
                         <ul>
-                            <li ><a href="#dashboard" onclick="mostrarSeccion('dashboard')"><span class="sidebar-icon"><img src="images/iconos/Bar_chart-2.png"> </span> Dashboard</a></li>
-                            <li class="active"><a href="#ingresos-gastos"><span class="sidebar-icon"><img src="images/iconos/Dollar_sign.png"> </span> Ingresos y Gastos</a></li>
-                            <li><a href="#metas" onclick="mostrarSeccion('metas')"><span class="sidebar-icon"><img src="images/iconos/Award.png"> </span> Metas de ahorro</a></li>
-                            <li><a href="#inversiones"  onclick="mostrarSeccion('inversiones')"><span class="sidebar-icon"><img src="images/iconos/Trending_up.png"> </span> Inversiones</a></li>
-                            <li><a href="#reportes"  onclick="mostrarSeccion('reportes')"><span class="sidebar-icon"><img src="images/iconos/Check_square.png"> </span> Reportes y Estadísticas</a></li>
-                            <li><a href="#historial"  onclick="mostrarSeccion('historial')"><span class="sidebar-icon"><img src="images/iconos/Compass.png"> </span> Historial y Auditoría</a></li>
-                            <li><a href="#exportar"  onclick="mostrarSeccion('exportar')"><span class="sidebar-icon"><img src="images/iconos/upload.png"> </span> Exportación de Datos</a></li>
-                            <li><a href="#configuracion"  onclick="mostrarSeccion('configuracion')"><span class="sidebar-icon"><img src="images/iconos/settings.png"> </span> Configuración</a></li>
+                            <li ><a href="#dashboard" onclick="mostrarSeccion('dashboard')"><span class="sidebar-icon"><img src="images/iconos/Bar_chart-2.png" alt="logo_menu_dashboard"> </span> Dashboard</a></li>
+                            <li class="active"><a href="#ingresos-gastos"><span class="sidebar-icon"><img src="images/iconos/Dollar_sign.png" alt="logo_menu_gastos"> </span> Ingresos y Gastos</a></li>
+                            <li><a href="#metas" onclick="mostrarSeccion('metas')"><span class="sidebar-icon"><img src="images/iconos/Award.png" alt="logo_menu_metas"> </span> Metas de ahorro</a></li>
+                            <li><a href="#inversiones"  onclick="mostrarSeccion('inversiones')"><span class="sidebar-icon"><img src="images/iconos/Trending_up.png" alt="logo_menu_inversiones"> </span> Inversiones</a></li>
+                            <li><a href="#reportes"  onclick="mostrarSeccion('reportes')"><span class="sidebar-icon"><img src="images/iconos/Check_square.png" alt="logo_menu_reportes"> </span> Reportes y Estadísticas</a></li>
+                            <li><a href="#historial"  onclick="mostrarSeccion('historial')"><span class="sidebar-icon"><img src="images/iconos/Compass.png" alt="logo_menu_historial"> </span> Historial y Auditoría</a></li>
+                            <li><a href="#exportar"  onclick="mostrarSeccion('exportar')"><span class="sidebar-icon"><img src="images/iconos/upload.png" alt="logo_menu_exportar"> </span> Exportación de Datos</a></li>
+                            <li><a href="#configuracion"  onclick="mostrarSeccion('configuracion')"><span class="sidebar-icon"><img src="images/iconos/settings.png" alt="logo_menu_configuracion"> </span> Configuración</a></li>
                         </ul>
                     </nav>
 
                     <nav>
                         <ul>    
-                            <li><a href="#login" onclick="mostrarSeccion('login')"><span class="sidebar-icon"><img src="images/iconos/Log_out.png"> </span>  Cerrar Sesión</a></li>
+                            <li><a href="#login" onclick="mostrarSeccion('login')"><span class="sidebar-icon"><img src="images/iconos/Log_out.png" alt="logo_cerrar_sesion"> </span>  Cerrar Sesión</a></li>
                         </ul>    
                     </nav>
                 </aside>
@@ -304,10 +310,10 @@
                                 <!-- Tipo -->
                                 <div class="form-group full-width">
                                     <div class="radio-group">
-                                        <label><input type="radio" name="tipo" value="ingreso"><span class="radio-cuadrado"></span> Ingreso</label>
-                                        <label><input type="radio" name="tipo" value="ahorro"><span class="radio-cuadrado"></span> Ahorro</label>
-                                        <label><input type="radio" name="tipo" value="inversion"><span class="radio-cuadrado"></span> Inversión</label>
-                                        <label><input type="radio" name="tipo" value="gasto"><span class="radio-cuadrado"></span> Gasto</label>
+                                        <label><input type="radio" name="tipo" value="ingreso"><span class="radio-cuadrado horizontal"></span> Ingreso</label>
+                                        <label><input type="radio" name="tipo" value="ahorro"><span class="radio-cuadrado horizontal"></span> Ahorro</label>
+                                        <label><input type="radio" name="tipo" value="inversion"><span class="radio-cuadrado horizontal"></span> Inversión</label>
+                                        <label><input type="radio" name="tipo" value="gasto"><span class="radio-cuadrado horizontal"></span> Gasto</label>
                                     </div>
                                 </div>
                                 
@@ -336,7 +342,7 @@
 
                                 <!-- Botón -->
                                 <div class="form-actions">
-                                <button type="submit" class="btn btn-inverse">Agregar movimiento</button>
+                                <button type="submit" class="btn btn-inverse btn-blue">Agregar movimiento</button>
                                 </div>
                             </form>
                         </div>
@@ -353,7 +359,7 @@
                                 <table class="table-csm">
                                     <thead>
                                         <tr>
-                                        <th></th>
+                                        <td></td>
                                         <th>Fecha</th>
                                         <th>Categoría</th>
                                         <th>Monto</th>
@@ -362,35 +368,35 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td class="td-button"><button class="btn small"><img src="images/iconos/Trash_2.png"></button></td>
+                                            <td class="td-button"><button class="btn small"><img src="images/iconos/Trash_2.png" alt="logo_tacho_borrar""></button></td>
                                             <td>Feb. 04</td>
                                             <td>Objetivos</td>
                                             <td>$40.000</td>
                                             <td>Ahorro</td>
                                         </tr>
                                         <tr>
-                                            <td class="td-button"><button class="btn small"><img src="images/iconos/Trash_2.png"></button></td>
+                                            <td class="td-button"><button class="btn small"><img src="images/iconos/Trash_2.png" alt="logo_tacho_borrar"></button></td>
                                             <td>Ene. 31</td>
                                             <td>Inversión</td>
                                             <td>$15.500</td>
                                             <td>Inversión</td>
                                         </tr>
                                         <tr>
-                                            <td class="td-button"><button class="btn small"><img src="images/iconos/Trash_2.png"></button></td>
+                                            <td class="td-button"><button class="btn small"><img src="images/iconos/Trash_2.png" alt="logo_tacho_borrar"></button></td>
                                             <td>Ene. 20</td>
                                             <td>Sueldo</td>
                                             <td>$140.000</td>
                                             <td>Ingreso</td>
                                         </tr>
                                         <tr>
-                                            <td class="td-button"><button class="btn small"><img src="images/iconos/Trash_2.png"></button></td>
+                                            <td class="td-button"><button class="btn small"><img src="images/iconos/Trash_2.png" alt="logo_tacho_borrar"></button></td>
                                             <td>Ene. 01</td>
                                             <td>Ocio</td>
                                             <td class="negative">-$45.850</td>
                                             <td>Gasto</td>
                                         </tr>
                                         <tr>
-                                            <td class="td-button"><button class="btn small"><img src="images/iconos/Trash_2.png"></button></td>
+                                            <td class="td-button"><button class="btn small"><img src="images/iconos/Trash_2.png" alt="logo_tacho_borrar"></button></td>
                                             <td>Ene. 01</td>
                                             <td>Salud</td>
                                             <td class="negative">-$15.257</td>
@@ -430,20 +436,20 @@
                 <aside class="sidebar">    
                     <nav>
                         <ul>
-                            <li><a href="#dashboard" onclick="mostrarSeccion('dashboard')"><span class="sidebar-icon"><img src="images/iconos/Bar_chart-2.png"> </span> Dashboard</a></li>
-                            <li><a href="#ingresos-gastos" onclick="mostrarSeccion('ingresos-gastos')"><span class="sidebar-icon"><img src="images/iconos/Dollar_sign.png"> </span> Ingresos y Gastos</a></li>
-                            <li class="active"><a href="#metas" ><span class="sidebar-icon"><img src="images/iconos/Award.png"> </span> Metas de ahorro</a></li>
-                            <li><a href="#inversiones"  onclick="mostrarSeccion('inversiones')"><span class="sidebar-icon"><img src="images/iconos/Trending_up.png"> </span> Inversiones</a></li>
-                            <li><a href="#reportes"  onclick="mostrarSeccion('reportes')"><span class="sidebar-icon"><img src="images/iconos/Check_square.png"> </span> Reportes y Estadísticas</a></li>
-                            <li><a href="#historial"  onclick="mostrarSeccion('historial')"><span class="sidebar-icon"><img src="images/iconos/Compass.png"> </span> Historial y Auditoría</a></li>
-                            <li><a href="#exportar"  onclick="mostrarSeccion('exportar')"><span class="sidebar-icon"><img src="images/iconos/upload.png"> </span> Exportación de Datos</a></li>
-                            <li><a href="#configuracion"  onclick="mostrarSeccion('configuracion')"><span class="sidebar-icon"><img src="images/iconos/settings.png"> </span> Configuración</a></li>
+                            <li><a href="#dashboard" onclick="mostrarSeccion('dashboard')"><span class="sidebar-icon"><img src="images/iconos/Bar_chart-2.png" alt="logo_menu_dashboard"> </span> Dashboard</a></li>
+                            <li><a href="#ingresos-gastos" onclick="mostrarSeccion('ingresos-gastos')"><span class="sidebar-icon"><img src="images/iconos/Dollar_sign.png" alt="logo_menu_gastos"> </span> Ingresos y Gastos</a></li>
+                            <li class="active"><a href="#metas" ><span class="sidebar-icon"><img src="images/iconos/Award.png" alt="logo_menu_metas"> </span> Metas de ahorro</a></li>
+                            <li><a href="#inversiones"  onclick="mostrarSeccion('inversiones')"><span class="sidebar-icon"><img src="images/iconos/Trending_up.png" alt="logo_menu_inversiones"> </span> Inversiones</a></li>
+                            <li><a href="#reportes"  onclick="mostrarSeccion('reportes')"><span class="sidebar-icon"><img src="images/iconos/Check_square.png" alt="logo_menu_reportes"> </span> Reportes y Estadísticas</a></li>
+                            <li><a href="#historial"  onclick="mostrarSeccion('historial')"><span class="sidebar-icon"><img src="images/iconos/Compass.png" alt="logo_menu_historial"> </span> Historial y Auditoría</a></li>
+                            <li><a href="#exportar"  onclick="mostrarSeccion('exportar')"><span class="sidebar-icon"><img src="images/iconos/upload.png" alt="logo_menu_exportar"> </span> Exportación de Datos</a></li>
+                            <li><a href="#configuracion"  onclick="mostrarSeccion('configuracion')"><span class="sidebar-icon"><img src="images/iconos/settings.png" alt="logo_menu_configuracion"> </span> Configuración</a></li>
                         </ul>
                     </nav>
 
                     <nav>
                         <ul>    
-                            <li><a href="#login" onclick="mostrarSeccion('login')"><span class="sidebar-icon"><img src="images/iconos/Log_out.png"> </span>  Cerrar Sesión</a></li>
+                            <li><a href="#login" onclick="mostrarSeccion('login')"><span class="sidebar-icon"><img src="images/iconos/Log_out.png" alt="logo_cerrar_sesion"> </span>  Cerrar Sesión</a></li>
                         </ul>    
                     </nav>
                 </aside>
@@ -458,36 +464,38 @@
                         <!-- Tabla generada de forma estática por ahora. 
                              En versiones futuras, se construirá dinámicamente con JavaScript 
                              o mediante datos obtenidos desde una API, permitiendo contenido actualizado  -->
-                        <table class="table-csm metas-table">
-                            <thead>
-                                <tr>
-                                <th>Objetivo</th>
-                                <th>Ahorrados</th>
-                                <th>Restante</th>
-                                <th>Nota</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                <td>Viaje</td>
-                                <td>$700.000</td>
-                                <td>$300.000</td>
-                                <td><span class="dot blue"></span></td>
-                                </tr>
-                                <tr>
-                                <td>PC</td>
-                                <td>$50.000</td>
-                                <td>$250.000</td>
-                                <td><span class="dot blue"></span></td>
-                                </tr>
-                                <tr>
-                                <td>Moto</td>
-                                <td>$1.600.000</td>
-                                <td>$2.400.000</td>
-                                <td><span class="dot blue"></span></td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <div>
+                             <table class="table-csm metas-table">
+                                <thead>
+                                    <tr>
+                                    <th>Objetivo</th>
+                                    <th>Ahorrados</th>
+                                    <th>Restante</th>
+                                    <th>Nota</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                    <td>Viaje</td>
+                                    <td>$700.000</td>
+                                    <td>$300.000</td>
+                                    <td><span class="dot blue"></span></td>
+                                    </tr>
+                                    <tr>
+                                    <td>PC</td>
+                                    <td>$50.000</td>
+                                    <td>$250.000</td>
+                                    <td><span class="dot blue"></span></td>
+                                    </tr>
+                                    <tr>
+                                    <td>Moto</td>
+                                    <td>$1.600.000</td>
+                                    <td>$2.400.000</td>
+                                    <td><span class="dot blue"></span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                         <div class="metas-card-table-button">
                             <button class="btn btn-inverse btn-blue small">Agregar objetivo</button>
                         </div>
@@ -495,8 +503,8 @@
 
                     <section id="metas-card-graph" class="card">
                         <div class="section-title-horizintal">
-                            <h2 class="subtitle">Viaje</h2>
-                            <h2 class="subtitle">$700.000</h2>
+                            <h3 class="subtitle">Viaje</h3>
+                            <h3 class="subtitle">$700.000</h3>
                         </div>
 
                         <!-- Gráfico temporalmente representado como imagen estática. 
@@ -545,20 +553,20 @@
                 <aside class="sidebar">    
                     <nav>
                         <ul>
-                            <li><a href="#dashboard" onclick="mostrarSeccion('dashboard')"><span class="sidebar-icon"><img src="images/iconos/Bar_chart-2.png"> </span> Dashboard</a></li>
-                            <li><a href="#ingresos-gastos" onclick="mostrarSeccion('ingresos-gastos')"><span class="sidebar-icon"><img src="images/iconos/Dollar_sign.png"> </span> Ingresos y Gastos</a></li>
-                            <li><a href="#metas"   onclick="mostrarSeccion('metas')"><span class="sidebar-icon"><img src="images/iconos/Award.png"> </span> Metas de ahorro</a></li>
-                            <li class="active"><a href="#inversiones"><span class="sidebar-icon"><img src="images/iconos/Trending_up.png"> </span> Inversiones</a></li>
-                            <li><a href="#reportes"  onclick="mostrarSeccion('reportes')"><span class="sidebar-icon"><img src="images/iconos/Check_square.png"> </span> Reportes y Estadísticas</a></li>
-                            <li><a href="#historial"  onclick="mostrarSeccion('historial')"><span class="sidebar-icon"><img src="images/iconos/Compass.png"> </span> Historial y Auditoría</a></li>
-                            <li><a href="#exportar"  onclick="mostrarSeccion('exportar')"><span class="sidebar-icon"><img src="images/iconos/upload.png"> </span> Exportación de Datos</a></li>
-                            <li><a href="#configuracion"  onclick="mostrarSeccion('configuracion')"><span class="sidebar-icon"><img src="images/iconos/settings.png"> </span> Configuración</a></li>
+                            <li><a href="#dashboard" onclick="mostrarSeccion('dashboard')"><span class="sidebar-icon"><img src="images/iconos/Bar_chart-2.png" alt="logo_menu_dashboard"> </span> Dashboard</a></li>
+                            <li><a href="#ingresos-gastos" onclick="mostrarSeccion('ingresos-gastos')"><span class="sidebar-icon"><img src="images/iconos/Dollar_sign.png" alt="logo_menu_gastos"> </span> Ingresos y Gastos</a></li>
+                            <li><a href="#metas"   onclick="mostrarSeccion('metas')"><span class="sidebar-icon"><img src="images/iconos/Award.png" alt="logo_menu_metas"> </span> Metas de ahorro</a></li>
+                            <li class="active"><a href="#inversiones"><span class="sidebar-icon"><img src="images/iconos/Trending_up.png" alt="logo_menu_inversiones"> </span> Inversiones</a></li>
+                            <li><a href="#reportes"  onclick="mostrarSeccion('reportes')"><span class="sidebar-icon"><img src="images/iconos/Check_square.png" alt="logo_menu_reportes"> </span> Reportes y Estadísticas</a></li>
+                            <li><a href="#historial"  onclick="mostrarSeccion('historial')"><span class="sidebar-icon"><img src="images/iconos/Compass.png" alt="logo_menu_historial"> </span> Historial y Auditoría</a></li>
+                            <li><a href="#exportar"  onclick="mostrarSeccion('exportar')"><span class="sidebar-icon"><img src="images/iconos/upload.png" alt="logo_menu_exportar"> </span> Exportación de Datos</a></li>
+                            <li><a href="#configuracion"  onclick="mostrarSeccion('configuracion')"><span class="sidebar-icon"><img src="images/iconos/settings.png" alt="logo_menu_configuracion"> </span> Configuración</a></li>
                         </ul>
                     </nav>
 
                     <nav>
                         <ul>    
-                            <li><a href="#login" onclick="mostrarSeccion('login')"><span class="sidebar-icon"><img src="images/iconos/Log_out.png"> </span>  Cerrar Sesión</a></li>
+                            <li><a href="#login" onclick="mostrarSeccion('login')"><span class="sidebar-icon"><img src="images/iconos/Log_out.png" alt="logo_cerrar_sesion"> </span>  Cerrar Sesión</a></li>
                         </ul>                           
                     </nav>
                 </aside>
@@ -585,7 +593,8 @@
                         <!-- Tabla generada de forma estática por ahora. 
                              En versiones futuras, se construirá dinámicamente con JavaScript 
                              o mediante datos obtenidos desde una API, permitiendo contenido actualizado  -->
-                        <table class="table-csm">
+                        <div>
+                            <table class="table-csm">
                                 <tbody>
                                 <tr>
                                     <td><span class="tag red">Grupo Financiero Galicia</span></td>
@@ -618,7 +627,8 @@
                                     <td class="gain">+0,31%</td>
                                 </tr>
                                 </tbody>
-                        </table>
+                            </table>
+                        </div>
                     </section>
 
                     <section id="inversiones-card-graph" class="card">
@@ -657,20 +667,20 @@
                 <aside class="sidebar">    
                     <nav>
                         <ul>
-                            <li ><a href="#dashboard" onclick="mostrarSeccion('dashboard')"><span class="sidebar-icon"><img src="images/iconos/Bar_chart-2.png"> </span> Dashboard</a></li>
-                            <li><a href="#ingresos-gastos"  onclick="mostrarSeccion('ingresos-gastos')"><span class="sidebar-icon"><img src="images/iconos/Dollar_sign.png"> </span> Ingresos y Gastos</a></li>
-                            <li><a href="#metas" onclick="mostrarSeccion('metas')"><span class="sidebar-icon"><img src="images/iconos/Award.png"> </span> Metas de ahorro</a></li>
-                            <li><a href="#inversiones"  onclick="mostrarSeccion('inversiones')"><span class="sidebar-icon"><img src="images/iconos/Trending_up.png"> </span> Inversiones</a></li>
-                            <li class="active"><a href="#reportes"><span class="sidebar-icon"><img src="images/iconos/Check_square.png"> </span> Reportes y Estadísticas</a></li>
-                            <li><a href="#historial"  onclick="mostrarSeccion('historial')"><span class="sidebar-icon"><img src="images/iconos/Compass.png"> </span> Historial y Auditoría</a></li>
-                            <li><a href="#exportar"  onclick="mostrarSeccion('exportar')"><span class="sidebar-icon"><img src="images/iconos/upload.png"> </span> Exportación de Datos</a></li>
-                            <li><a href="#configuracion"  onclick="mostrarSeccion('configuracion')"><span class="sidebar-icon"><img src="images/iconos/settings.png"> </span> Configuración</a></li>
+                            <li ><a href="#dashboard" onclick="mostrarSeccion('dashboard')"><span class="sidebar-icon"><img src="images/iconos/Bar_chart-2.png" alt="logo_menu_dashboard"> </span> Dashboard</a></li>
+                            <li><a href="#ingresos-gastos"  onclick="mostrarSeccion('ingresos-gastos')"><span class="sidebar-icon"><img src="images/iconos/Dollar_sign.png" alt="logo_menu_gastos"> </span> Ingresos y Gastos</a></li>
+                            <li><a href="#metas" onclick="mostrarSeccion('metas')"><span class="sidebar-icon"><img src="images/iconos/Award.png" alt="logo_menu_metas"> </span> Metas de ahorro</a></li>
+                            <li><a href="#inversiones"  onclick="mostrarSeccion('inversiones')"><span class="sidebar-icon"><img src="images/iconos/Trending_up.png" alt="logo_menu_inversiones"> </span> Inversiones</a></li>
+                            <li class="active"><a href="#reportes"><span class="sidebar-icon"><img src="images/iconos/Check_square.png" alt="logo_menu_reportes"> </span> Reportes y Estadísticas</a></li>
+                            <li><a href="#historial"  onclick="mostrarSeccion('historial')"><span class="sidebar-icon"><img src="images/iconos/Compass.png" alt="logo_menu_historial"> </span> Historial y Auditoría</a></li>
+                            <li><a href="#exportar"  onclick="mostrarSeccion('exportar')"><span class="sidebar-icon"><img src="images/iconos/upload.png" alt="logo_menu_exportar"> </span> Exportación de Datos</a></li>
+                            <li><a href="#configuracion"  onclick="mostrarSeccion('configuracion')"><span class="sidebar-icon"><img src="images/iconos/settings.png" alt="logo_menu_configuracion"> </span> Configuración</a></li>
                         </ul>
                     </nav>
 
                     <nav>
                         <ul>    
-                            <li><a href="#login" onclick="mostrarSeccion('login')"><span class="sidebar-icon"><img src="images/iconos/Log_out.png"> </span>  Cerrar Sesión</a></li>
+                            <li><a href="#login" onclick="mostrarSeccion('login')"><span class="sidebar-icon"><img src="images/iconos/Log_out.png" alt="logo_cerrar_sesion"> </span>  Cerrar Sesión</a></li>
                         </ul>
                     </nav>
                 </aside>
@@ -687,16 +697,16 @@
                             <form id="movimientos-form">
                                 <div class="filters">
                                     <div class="form-group">
-                                        <label for="fecha">Fecha</label>
-                                        <select id="fecha" class="input">
+                                        <label for="fechaRyE">Fecha</label>
+                                        <select id="fechaRyE" class="input">
                                             <option>Últimos 7 días</option>
                                             <option>Último mes</option>
                                             <option>Último año</option>
                                         </select>
                                     </div>
                                     <div class="form-group">
-                                        <label for="categoria">Categoría</label>
-                                        <select id="categoria" class="input">
+                                        <label for="categoriaRyE">Categoría</label>
+                                        <select id="categoriaRyE" class="input">
                                             <option>Todas</option>
                                             <option>Hogar</option>
                                             <option>Transporte</option>
@@ -719,7 +729,7 @@
                         <!-- Grafico -->
                         <div>
                             <div class="section-title ">
-                                <h2 class="subtitle subtitle-center subtitle-justify">Evolución de ingresos y egresos</h2>
+                                <h3 class="subtitle subtitle-center subtitle-justify">Evolución de ingresos y egresos</h3>
                             </div>
 
                             <!-- Gráfico temporalmente representado como imagen estática. 
@@ -736,7 +746,7 @@
                         <!-- Resumen -->
                         <div>
                             <div>
-                                <h2 class="subtitle subtitle-center subtitle-justify">Principales gastos</h2>
+                                <h3 class="subtitle subtitle-center subtitle-justify">Principales gastos</h3>
                             </div>
 
                             <div class="gastos-grid">
@@ -797,20 +807,20 @@
                 <aside class="sidebar">    
                     <nav>
                         <ul>
-                            <li ><a href="#dashboard" onclick="mostrarSeccion('dashboard')"><span class="sidebar-icon"><img src="images/iconos/Bar_chart-2.png"> </span> Dashboard</a></li>
-                            <li><a href="#ingresos-gastos"  onclick="mostrarSeccion('ingresos-gastos')"><span class="sidebar-icon"><img src="images/iconos/Dollar_sign.png"> </span> Ingresos y Gastos</a></li>
-                            <li><a href="#metas" onclick="mostrarSeccion('metas')"><span class="sidebar-icon"><img src="images/iconos/Award.png"> </span> Metas de ahorro</a></li>
-                            <li><a href="#inversiones"  onclick="mostrarSeccion('inversiones')"><span class="sidebar-icon"><img src="images/iconos/Trending_up.png"> </span> Inversiones</a></li>
-                            <li><a href="#reportes"   onclick="mostrarSeccion('reportes')"><span class="sidebar-icon"><img src="images/iconos/Check_square.png"> </span> Reportes y Estadísticas</a></li>
-                            <li class="active"><a href="#historial"><span class="sidebar-icon"><img src="images/iconos/Compass.png"> </span> Historial y Auditoría</a></li>
-                            <li><a href="#exportar"  onclick="mostrarSeccion('exportar')"><span class="sidebar-icon"><img src="images/iconos/upload.png"> </span> Exportación de Datos</a></li>
-                            <li><a href="#configuracion"  onclick="mostrarSeccion('configuracion')"><span class="sidebar-icon"><img src="images/iconos/settings.png"> </span> Configuración</a></li>
+                            <li ><a href="#dashboard" onclick="mostrarSeccion('dashboard')"><span class="sidebar-icon"><img src="images/iconos/Bar_chart-2.png" alt="logo_menu_dashboard"> </span> Dashboard</a></li>
+                            <li><a href="#ingresos-gastos"  onclick="mostrarSeccion('ingresos-gastos')"><span class="sidebar-icon"><img src="images/iconos/Dollar_sign.png" alt="logo_menu_gastos"> </span> Ingresos y Gastos</a></li>
+                            <li><a href="#metas" onclick="mostrarSeccion('metas')"><span class="sidebar-icon"><img src="images/iconos/Award.png" alt="logo_menu_metas"> </span> Metas de ahorro</a></li>
+                            <li><a href="#inversiones"  onclick="mostrarSeccion('inversiones')"><span class="sidebar-icon"><img src="images/iconos/Trending_up.png" alt="logo_menu_inversiones"> </span> Inversiones</a></li>
+                            <li><a href="#reportes"   onclick="mostrarSeccion('reportes')"><span class="sidebar-icon"><img src="images/iconos/Check_square.png" alt="logo_menu_reportes"> </span> Reportes y Estadísticas</a></li>
+                            <li class="active"><a href="#historial"><span class="sidebar-icon"><img src="images/iconos/Compass.png" alt="logo_menu_historial"> </span> Historial y Auditoría</a></li>
+                            <li><a href="#exportar"  onclick="mostrarSeccion('exportar')"><span class="sidebar-icon"><img src="images/iconos/upload.png" alt="logo_menu_exportar"> </span> Exportación de Datos</a></li>
+                            <li><a href="#configuracion"  onclick="mostrarSeccion('configuracion')"><span class="sidebar-icon"><img src="images/iconos/settings.png" alt="logo_menu_configuracion"> </span> Configuración</a></li>
                         </ul>
                     </nav>
 
                     <nav>
                         <ul>    
-                            <li><a href="#login" onclick="mostrarSeccion('login')"><span class="sidebar-icon"><img src="images/iconos/Log_out.png"> </span>  Cerrar Sesión</a></li>
+                            <li><a href="#login" onclick="mostrarSeccion('login')"><span class="sidebar-icon"><img src="images/iconos/Log_out.png" alt="logo_cerrar_sesion"> </span>  Cerrar Sesión</a></li>
                         </ul>    
                     </nav>
                 </aside>
@@ -826,10 +836,10 @@
                             <form id="historial-form" class="form-grid">
                                 <!-- Fecha -->
                                 <div class="form-group without-margin">
-                                    <label for="fecha">Fecha:</label>
+                                    <label for="fechaHyA">Fecha:</label>
                                 </div>
                                 <div class="form-group without-margin">
-                                    <input type="date" id="fecha" name="fecha" class="input">
+                                    <input type="date" id="fechaHyA" name="fecha" class="input">
                                 </div>
                             </form>
                             <hr>
@@ -936,20 +946,20 @@
                 <aside class="sidebar">    
                     <nav>
                         <ul>
-                            <li ><a href="#dashboard" onclick="mostrarSeccion('dashboard')"><span class="sidebar-icon"><img src="images/iconos/Bar_chart-2.png"> </span> Dashboard</a></li>
-                            <li><a href="#ingresos-gastos"  onclick="mostrarSeccion('ingresos-gastos')"><span class="sidebar-icon"><img src="images/iconos/Dollar_sign.png"> </span> Ingresos y Gastos</a></li>
-                            <li><a href="#metas" onclick="mostrarSeccion('metas')"><span class="sidebar-icon"><img src="images/iconos/Award.png"> </span> Metas de ahorro</a></li>
-                            <li><a href="#inversiones"  onclick="mostrarSeccion('inversiones')"><span class="sidebar-icon"><img src="images/iconos/Trending_up.png"> </span> Inversiones</a></li>
-                            <li><a href="#reportes"   onclick="mostrarSeccion('reportes')"><span class="sidebar-icon"><img src="images/iconos/Check_square.png"> </span> Reportes y Estadísticas</a></li>
-                            <li><a href="#historial"  onclick="mostrarSeccion('historial')"><span class="sidebar-icon"><img src="images/iconos/Compass.png"> </span> Historial y Auditoría</a></li>
-                            <li class="active"><a href="#exportar"><span class="sidebar-icon"><img src="images/iconos/upload.png"> </span> Exportación de Datos</a></li>
-                            <li><a href="#configuracion"  onclick="mostrarSeccion('configuracion')"><span class="sidebar-icon"><img src="images/iconos/settings.png"> </span> Configuración</a></li>
+                            <li ><a href="#dashboard" onclick="mostrarSeccion('dashboard')"><span class="sidebar-icon"><img src="images/iconos/Bar_chart-2.png" alt="logo_menu_dashboard"> </span> Dashboard</a></li>
+                            <li><a href="#ingresos-gastos"  onclick="mostrarSeccion('ingresos-gastos')"><span class="sidebar-icon"><img src="images/iconos/Dollar_sign.png" alt="logo_menu_gastos"> </span> Ingresos y Gastos</a></li>
+                            <li><a href="#metas" onclick="mostrarSeccion('metas')"><span class="sidebar-icon"><img src="images/iconos/Award.png" alt="logo_menu_metas"> </span> Metas de ahorro</a></li>
+                            <li><a href="#inversiones"  onclick="mostrarSeccion('inversiones')"><span class="sidebar-icon"><img src="images/iconos/Trending_up.png" alt="logo_menu_inversiones"> </span> Inversiones</a></li>
+                            <li><a href="#reportes"   onclick="mostrarSeccion('reportes')"><span class="sidebar-icon"><img src="images/iconos/Check_square.png" alt="logo_menu_reportes"> </span> Reportes y Estadísticas</a></li>
+                            <li><a href="#historial"  onclick="mostrarSeccion('historial')"><span class="sidebar-icon"><img src="images/iconos/Compass.png" alt="logo_menu_historial"> </span> Historial y Auditoría</a></li>
+                            <li class="active"><a href="#exportar"><span class="sidebar-icon"><img src="images/iconos/upload.png" alt="logo_menu_exportar"> </span> Exportación de Datos</a></li>
+                            <li><a href="#configuracion"  onclick="mostrarSeccion('configuracion')"><span class="sidebar-icon"><img src="images/iconos/settings.png" alt="logo_menu_configuracion"> </span> Configuración</a></li>
                         </ul>
                     </nav>
 
                     <nav>
                         <ul>    
-                            <li><a href="#login" onclick="mostrarSeccion('login')"><span class="sidebar-icon"><img src="images/iconos/Log_out.png"> </span>  Cerrar Sesión</a></li>
+                            <li><a href="#login" onclick="mostrarSeccion('login')"><span class="sidebar-icon"><img src="images/iconos/Log_out.png" alt="logo_cerrar_sesion"> </span>  Cerrar Sesión</a></li>
                         </ul>    
                     </nav>
                 </aside>
@@ -963,7 +973,7 @@
 
                         <div class="form-block">
                             <div class="section-title ">
-                                <h2 class="subtitle subtitle-center subtitle-justify">Datos a exportar</h2>
+                                <h3 class="subtitle subtitle-center subtitle-justify">Datos a exportar</h3>
                             </div>
                             <div class="checkbox-group">
                                 <div class="column">
@@ -986,7 +996,7 @@
                         <!-- Bloque: Tipo de archivo -->
                         <div class="form-block">
                             <div class="section-title ">
-                                <h2 class="subtitle subtitle-center subtitle-justify">Tipo de archivo</h2>
+                                <h3 class="subtitle subtitle-center subtitle-justify">Tipo de archivo</h3>
                             </div>
                             <div class="checkbox-group">
                                 <div class="column">
@@ -1004,7 +1014,7 @@
                         <!-- Bloque: Datos del archivo -->
                         <div class="form-block-end">
                             <div class="section-title ">
-                                <h2 class="subtitle subtitle-center subtitle-justify">Datos del archivo</h2>
+                                <h3 class="subtitle subtitle-center subtitle-justify">Datos del archivo</h3>
                             </div>
                         <div>
                             <div class="form-row">  
@@ -1056,20 +1066,20 @@
                 <aside class="sidebar">    
                     <nav>
                         <ul>
-                            <li ><a href="#dashboard" onclick="mostrarSeccion('dashboard')"><span class="sidebar-icon"><img src="images/iconos/Bar_chart-2.png"> </span> Dashboard</a></li>
-                            <li><a href="#ingresos-gastos"  onclick="mostrarSeccion('ingresos-gastos')"><span class="sidebar-icon"><img src="images/iconos/Dollar_sign.png"> </span> Ingresos y Gastos</a></li>
-                            <li><a href="#metas" onclick="mostrarSeccion('metas')"><span class="sidebar-icon"><img src="images/iconos/Award.png"> </span> Metas de ahorro</a></li>
-                            <li><a href="#inversiones"  onclick="mostrarSeccion('inversiones')"><span class="sidebar-icon"><img src="images/iconos/Trending_up.png"> </span> Inversiones</a></li>
-                            <li><a href="#reportes"   onclick="mostrarSeccion('reportes')"><span class="sidebar-icon"><img src="images/iconos/Check_square.png"> </span> Reportes y Estadísticas</a></li>
-                            <li><a href="#historial"  onclick="mostrarSeccion('historial')"><span class="sidebar-icon"><img src="images/iconos/Compass.png"> </span> Historial y Auditoría</a></li>
-                            <li><a href="#exportar"   onclick="mostrarSeccion('exportar')"><span class="sidebar-icon"><img src="images/iconos/upload.png"> </span> Exportación de Datos</a></li>
-                            <li class="active"><a href="#configuracion"><span class="sidebar-icon"><img src="images/iconos/settings.png"> </span> Configuración</a></li>
+                            <li ><a href="#dashboard" onclick="mostrarSeccion('dashboard')"><span class="sidebar-icon"><img src="images/iconos/Bar_chart-2.png" alt="logo_menu_dashboard"> </span> Dashboard</a></li>
+                            <li><a href="#ingresos-gastos"  onclick="mostrarSeccion('ingresos-gastos')"><span class="sidebar-icon"><img src="images/iconos/Dollar_sign.png" alt="logo_menu_gastos"> </span> Ingresos y Gastos</a></li>
+                            <li><a href="#metas" onclick="mostrarSeccion('metas')"><span class="sidebar-icon"><img src="images/iconos/Award.png" alt="logo_menu_metas"> </span> Metas de ahorro</a></li>
+                            <li><a href="#inversiones"  onclick="mostrarSeccion('inversiones')"><span class="sidebar-icon"><img src="images/iconos/Trending_up.png" alt="logo_menu_inversiones"> </span> Inversiones</a></li>
+                            <li><a href="#reportes"   onclick="mostrarSeccion('reportes')"><span class="sidebar-icon"><img src="images/iconos/Check_square.png" alt="logo_menu_reportes"> </span> Reportes y Estadísticas</a></li>
+                            <li><a href="#historial"  onclick="mostrarSeccion('historial')"><span class="sidebar-icon"><img src="images/iconos/Compass.png" alt="logo_menu_historial"> </span> Historial y Auditoría</a></li>
+                            <li><a href="#exportar"   onclick="mostrarSeccion('exportar')"><span class="sidebar-icon"><img src="images/iconos/upload.png" alt="logo_menu_exportar"> </span> Exportación de Datos</a></li>
+                            <li class="active"><a href="#configuracion"><span class="sidebar-icon"><img src="images/iconos/settings.png" alt="logo_menu_configuracion"> </span> Configuración</a></li>
                         </ul>
                     </nav>
 
                     <nav>
                         <ul>    
-                            <li><a href="#login" onclick="mostrarSeccion('login')"><span class="sidebar-icon"><img src="images/iconos/Log_out.png"> </span>  Cerrar Sesión</a></li>
+                            <li><a href="#login" onclick="mostrarSeccion('login')"><span class="sidebar-icon"><img src="images/iconos/Log_out.png" alt="logo_cerrar_sesion"> </span>  Cerrar Sesión</a></li>
                         </ul>    
                     </nav>
                 </aside>
@@ -1085,21 +1095,24 @@
                         <!-- Datos Personales -->
                         <div class="form-block block-center">
                             <div class="section-title-horizintal">
-                                <h2 class="subtitle title-row">
+                                <h3 class="subtitle title-row">
                                     Datos Personales
-                                </h2>
+                                </h3>
                                 <img src="images/iconos/usuario.png" class="icon-small" alt="Icono usuario">
                             </div>
 
                             <form class="config-form">
                                 <div class="form-group">
-                                    <input type="text" class="input" placeholder="Juan Perez">
+                                    <label for="nombreC" class="sr-only">Nombre completo</label>
+                                    <input id="nombreC"  type="text" class="input" placeholder="Juan Perez">
                                 </div>
                                 <div class="form-group">
-                                    <input type="email" class="input" placeholder="juan.perez@gmail.com">
+                                    <label for="email" class="sr-only">Correo electrónico</label>
+                                    <input id="email" type="email" class="input" placeholder="juan.perez@gmail.com">
                                 </div>
                                 <div class="form-group">
-                                    <input type="tel" class="input" placeholder="1122334455">
+                                    <label for="telefono" class="sr-only">Número de teléfono</label>
+                                    <input id="telefono" type="tel" class="input" placeholder="1122334455">
                                 </div>
                                 
                                 <div class="checkbox-group alingn-left">
@@ -1119,16 +1132,16 @@
                         <!-- Preferencias -->
                         <div class="form-block block-center">
                             <div class="section-title-horizintal">
-                                <h2 class="subtitle title-row">
+                                <h3 class="subtitle title-row">
                                     Preferencias
-                                </h2>
+                                </h3>
                                 <img src="images/iconos/folder.png" class="icon-small" alt="Icono usuario">
                             </div>
                             
                             <form class="prefer-form">
                                 <div class="pref-group">   
-                                    <label for="moneda">Moneda preferida</label>
-                                    <select id="moneda" class="input">
+                                    <label for="monedaP">Moneda preferida</label>
+                                    <select id="monedaP" class="input">
                                         <option>ARS</option>
                                         <option>USD</option>
                                         <option>EUR</option>
@@ -1146,7 +1159,7 @@
                                 
                                 <div class="pref-group" >
                                     <div >
-                                        <label for="modo-oscuro">Tamaño de Fuente</label>
+                                        <label >Tamaño de Fuente</label>
                                     </div>
                                     <div>
                                         <div class="format-toggle without-border">
@@ -1160,7 +1173,7 @@
                                 
                                 <div class="pref-group" >
                                     <div >
-                                        <label for="modo-oscuro">Formato Numérico</label>
+                                        <label>Formato Numérico</label>
                                     </div>
                                     <div>
                                         <div class="format-toggle">
