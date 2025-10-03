@@ -23,8 +23,8 @@ jobs:
           fi
 
           # Validar PR hacia develop
-          if [[ "${{ github.base_ref }}" == "develop" && "${{ github.head_ref }}" != feature/* ]]; then
-            echo "❌ PR hacia develop solo puede venir desde feature/*."
+          if [[ "${{ github.base_ref }}" == "develop" && ! ( "${{ github.head_ref }}" == feature/* || "${{ github.head_ref }}" == backport/* ) ]]; then
+            echo "❌ PR hacia develop solo puede venir desde feature o backport."
             exit 1
           fi
 

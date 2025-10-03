@@ -44,32 +44,56 @@ El diseño preliminar de la aplicación se encuentra disponible en Figma en el s
 - [Ver mockup en Figma](https://www.figma.com/design/hbgGq77CAkDgbxAwc45AII/Simulador-de-planificaci%C3%B3n-financiera?node-id=0-1&t=ZH1SSly6d7Zphetx-1)
 
 
-## ✅ Objetivos de esta entrega
+## ✅ Objetivos de la primer entrega (5/9/2025)
 Esta entrega tiene como propósito presentar la primera versión del proyecto, estableciendo una base sólida sobre la cual se desarrollará el simulador de planificación financiera. 
 Esta versión inicial establece la base técnica, visual y documental para el desarrollo futuro.
 
 En esta etapa se busca:
 - Definir y estructurar el repositorio inicial del proyecto.
 - Desarrollar una primera versión de la página web utilizando HTML5.
-- Documentar el proyecto en un archivo README.md, incluyendo una descripción general, objetivos, tecnologías utilizadas y funcionalidades previstas.
-- Diseñar un mockup preliminar que represente la visión visual del producto final, ubicado en docs/01-mockup/mockup.png y referenciado en el README.
-- Documentar al menos cinco prompts de inteligencia artificial utilizados durante esta fase, almacenados en docs/02-prompts/.
+- Documentar el proyecto en un archivo `README.md`, incluyendo una descripción general, objetivos, tecnologías utilizadas y funcionalidades previstas.
+- Diseñar un mockup preliminar que represente la visión visual del producto final, ubicado en `docs/01-mockup/mockup.png` y referenciado en el README.
+- Documentar al menos cinco prompts de inteligencia artificial utilizados durante esta fase, almacenados en `docs/02-prompts/`.
 
 El resultado esperado es un repositorio bien organizado en GitHub, con una estructura clara de ramas, una página inicial funcional, un diseño visual representativo del producto y documentación completa del proceso y las herramientas utilizadas.
 
+---
+
+## ✅ Objetivos de esta entrega (26/9/2025)  
+Esta segunda entrega tiene como propósito mejorar el diseño visual y estructural de la página web, estableciendo las bases de estilos CSS y diseño responsive que servirán como punto de partida para futuras funcionalidades.
+
+En esta etapa se busca: 
+- Implementar hojas de estilo en cascada (CSS3) para mejorar la legibilidad, la estética y la organización del contenido.  
+- Aplicar selectores, herencia y box model para estructurar el diseño con buenas prácticas.  
+- Diseñar layouts responsive mediante flexbox, grid y media queries, asegurando la correcta visualización en dispositivos móviles, tablets y escritorio.  
+- Actualizar y documentar los mockups que reflejan los cambios aplicados al diseño.  
+- Implementar un plan de testing cross-browser y responsive, utilizando herramientas profesionales y documentando los resultados en la carpeta `/docs/03-testing/`.  
+- Mantener actualizado el `README.md`, el `changelog.md` y la estructura del repositorio en GitHub.  
+
+El resultado esperado es un repositorio organizado, con estilos aplicados al diseño base, documentación técnica clara y pruebas que validen la correcta visualización en múltiples dispositivos y navegadores.
 
 ---
 
 ## 👨‍💻 Tecnologías Utilizadas
 - **HTML5** (estructura inicial).  
-- **CSS3** (maquetación y estilos responsive — a incorporar).  
-- **JavaScript** (lógica e interactividad — a incorporar).  
+- **CSS3** (maquetación principal, estilos de componentes y diseño responsive).  
+- **JavaScript** (lógica e interactividad — pequeña implementación para navegar entre los apartados).  
 - **Git / GitHub** (control de versiones).  
+- **Herramientas de Testing**  
+  - **BrowserStack** (compatibilidad cross-browser y mobile).  
+  - **Lighthouse / PageSpeed Insights** (performance y accesibilidad).  
+  - **WAVE / axe DevTools** (testing de accesibilidad).  
+  - **LambdaTest / CSS Validator / HTML Validator** (validación multiplataforma y de estándares).  
+- **Slack** (comunicación y notificación de entregas).  
 - (Opcional futuras integraciones) OAuth (Google), bibliotecas de gráficos (Chart.js o Recharts).
 
+---
+
 ## 📁 Documentación
-- 🖼️ [Mockup](docs/01-mockup/diseño-inicial.png)
+- 🖼️ [Mockup diseño inicial](docs/01-mockup/diseño-inicial.png)
+- 🖼️ [Mockup diseño con css](docs/01-mockup/disenio-con-css.png)
 - 🗂️ [Índice de Prompts](docs/02-prompts/prompts.md)
+- 🧪 [Índice de Test Cases](docs/03-testing/testing-doc.md)
 - 📜 [Changelog](changelog.md)
 
 ---
@@ -77,10 +101,10 @@ El resultado esperado es un repositorio bien organizado en GitHub, con una estru
 ## 👥 Integrantes del Grupo
 |     Nombre completo    | N° de Matrícula | Usuario GitHub |         Rol en esta entrega             |
 |------------------------|-----------------|----------------|-----------------------------------------|
-|    Sol Ailen Kalpuj    |      154106     |   @skalapuj    |      Documentador / Diseñador UX        |
-|     Fiorella Mosca     |      154108     |   @fioremos    |         Coordinador / DevOps            | 
-| Matías Nicolás Escobar |      151251     |   @MNEscobar   |         Desarrollador Frontend          |  
-|     Ulises Capriles    |      146291     |   @UlisesC11   | Especialista en IA y Prompt Engineering |  
+|    Sol Ailen Kalpuj    |      154106     |   @skalapuj    |      Desarrollador Frontend / CSS        |
+|     Fiorella Mosca     |      154108     |   @fioremos    |         Especialista en Responsive Design            | 
+| Matías Nicolás Escobar |      151251     |   @MNEscobar   |         Documentador / QA Tester          |  
+|     Ulises Capriles    |      146291     |   @UlisesC11   | Coordinador / DevOps |  
 
 <pre>
 🎓 Datos Académicos
