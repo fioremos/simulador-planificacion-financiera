@@ -8,55 +8,14 @@
         <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="css/components.css">
         <link rel="stylesheet" href="css/responsive.css">
-        <script>    
-                /* ===============================================
-                * Script: Control de Secciones Interactivas
-                * Descripción: Este script permite mostrar u ocultar
-                * secciones específicas según el botón presionado y
-                * garantiza que la pagina cargue en la sección de login.
-                *
-                * NOTA IMPORTANTE:
-                * Este script incluye lógica y estructura pensadas
-                * para facilitar la corrección docente.
-                * Debe ser removido una vez sea funcional la página.
-                * ================================================ */
-                function mostrarSeccion(id) {
-                    const secciones = document.querySelectorAll('.principal-section');
-                    secciones.forEach(seccion => {
-                        seccion.classList.remove('visible');
-                        seccion.classList.add('invisible');
-                    });
-
-                    const activa = document.getElementById(id);
-                    if (activa) {
-                        activa.classList.remove('invisible');
-                        activa.classList.add('visible');
-                    }
-                }
-
-                // A modo de evitar errores reviso la URL 
-                // luego de que el DOM este completamente cargado
-                document.addEventListener('DOMContentLoaded', () => {
-                    let hash = window.location.hash.replace('#', '');
-
-                    if (!hash) {
-                        hash = 'login';  
-                        window.location.hash = hash;
-
-                        const url = new URL(window.location);
-                        url.searchParams.set('usuario', '');  
-                        url.searchParams.set('password', '');  
-                        window.history.replaceState({}, '', url);  
-                    }
-
-                    mostrarSeccion(hash);
-                });
-        </script>
+        
         <title>FinGrow</title>
 
     </head>
+
     <body>
 
+        <!-- HEADER ÚNICO -->
         <header id="main-header" class="header-oculto">
             <div class="header-container">
                 <div>
@@ -70,17 +29,61 @@
             </div>
         </header>
 
+        <div class="principal-container">
 
-        <!--NOTA: Para esta entrega se duplicó header y sidebar en cada pantalla.
-            En un proyecto real esto se haría con componentes reutilizables,
-            pero se mantuvo así para respetar el mockup entregado. -->
+
+        <!-- SIDEBAR ÚNICO (solo visible en desktop) -->
+            <aside class="sidebar d-none d-md-flex">    
+                <nav>
+                    <ul>
+                        <li><a href="#dashboard"><span class="sidebar-icon"><img src="images/iconos/Bar_chart-2.png" alt="logo_menu_dashboard"> </span> Dashboard</a></li>
+                        <li><a href="#ingresos-gastos"><span class="sidebar-icon"><img src="images/iconos/Dollar_sign.png" alt="logo_menu_gastos"> </span> Ingresos y Gastos</a></li>
+                        <li><a href="#metas"><span class="sidebar-icon"><img src="images/iconos/Award.png" alt="logo_menu_metas" > </span> Metas de ahorro</a></li>
+                        <li><a href="#inversiones"><span class="sidebar-icon"><img src="images/iconos/Trending_up.png" alt="logo_menu_inversiones"> </span> Inversiones</a></li>
+                        <li><a href="#reportes"><span class="sidebar-icon"><img src="images/iconos/Check_square.png" alt="logo_menu_reportes"> </span> Reportes y Estadísticas</a></li>
+                        <li><a href="#historial"><span class="sidebar-icon"><img src="images/iconos/Compass.png" alt="logo_menu_historial"> </span> Historial y Auditoría</a></li>
+                        <li><a href="#exportar"><span class="sidebar-icon"><img src="images/iconos/upload.png" alt="logo_menu_exportar"> </span> Exportación de Datos</a></li>
+                        <li><a href="#configuracion"><span class="sidebar-icon"><img src="images/iconos/settings.png" alt="logo_menu_configuracion"> </span> Configuración</a></li>
+                    </ul>
+                </nav>
+
+                <nav>
+                    <ul>    
+                        <li><a href="#login"><span class="sidebar-icon"><img src="images/iconos/Log_out.png" alt="logo_cerrar_sesion"> </span>  Cerrar Sesión</a></li>
+                    </ul>    
+                </nav>
+            </aside>
+
+        <!-- OFFCANVAS ÚNICO (solo visible en mobile/tablet) -->
+        <div class="offcanvas offcanvas-start d-md-none" tabindex="-1" id="sidebarOffcanvas" aria-labelledby="sidebarOffcanvasLabel" data-bs-backdrop="static">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="sidebarOffcanvasLabel">Menú</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Cerrar"></button>
+            </div>
+            <div class="offcanvas-body p-0">
+                <nav>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><a href="#dashboard"><span class="sidebar-icon"><img src="images/iconos/Bar_chart-2.png"></span> Dashboard</a></li>
+                        <li class="list-group-item"><a href="#ingresos-gastos"><span class="sidebar-icon"><img src="images/iconos/Dollar_sign.png"></span> Ingresos y Gastos</a></li>
+                        <li class="list-group-item"><a href="#metas"><span class="sidebar-icon"><img src="images/iconos/Award.png"></span> Metas de ahorro</a></li>
+                        <li class="list-group-item"><a href="#inversiones"><span class="sidebar-icon"><img src="images/iconos/Trending_up.png"></span> Inversiones</a></li>
+                        <li class="list-group-item"><a href="#reportes"><span class="sidebar-icon"><img src="images/iconos/Check_square.png"></span> Reportes y Estadísticas</a></li>
+                        <li class="list-group-item"><a href="#historial"><span class="sidebar-icon"><img src="images/iconos/Compass.png"></span> Historial y Auditoría</a></li>
+                        <li class="list-group-item"><a href="#exportar"><span class="sidebar-icon"><img src="images/iconos/upload.png"></span> Exportación de Datos</a></li>
+                        <li class="list-group-item"><a href="#configuracion"><span class="sidebar-icon"><img src="images/iconos/settings.png"></span> Configuración</a></li>
+                        <li class="list-group-item"><a href="#login"><span class="sidebar-icon"><img src="images/iconos/Log_out.png"></span> Cerrar Sesión</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        
 
         <!-- ==========================
             SECCIÓN: LOGIN
             Pantalla inicial de la aplicación. 
             Solo aquí se muestra el formulario para acceder o registrarse.
         ========================== -->
-        <section id="login" class="principal-section login-section invisible">
+        <section id="login" class="principal-section login-section">
             <div class="card">
                 <div class="login-logo-container">
                     <div>
@@ -100,69 +103,28 @@
                         </div>
 
                         <div id="buttons-container" class="buttons-container">
-                            <button type="submit" class="btn btn-primary" onclick="mostrarSeccion('dashboard')" >Iniciar sesión</button>
-                            <button type="button" class="btn btn-secondary" onclick="mostrarSeccion('dashboard')">Registrarse</button>
-                            <button type="button" class="btn btn-image" onclick="mostrarSeccion('dashboard')">
-                                <span class="google-icon-container">
-                                    <img src="images/iconos/google.png" alt="Logo google" class="icon-small">
-                                </span> Continuar con Google
+                            <button type="submit" class="btn btn-primary"><a href="#dashboard">Iniciar sesión</a></button>
+                            <button type="button" class="btn btn-secondary"><a href="#dashboard">Registrarse</a></button>
+                            <button type="button" class="btn btn-image">
+                                <a href="#dashboard">
+                                    <span class="google-icon-container">
+                                        <img src="images/iconos/google.png" alt="Logo google" class="icon-small">
+                                    </span> Continuar con Google
+                                </a>
                             </button>
                         </div>
                     </form>
                 </div>
             </div>
         </section>
-        
+
         <!-- ==========================
             SECCIÓN: DASHBOARD
             Vista principal con resúmenes financieros.
             Muestra tarjetas de resumen: ingresos, gastos, ahorro, inversión.
             Incluye barra de navegación y sidebar lateral.
         ========================== -->
-        <section id="dashboard" class="principal-section invisible">
-            <!-- ==========================
-                HEADER (BARRA SUPERIOR)
-                Este bloque es TEMPORALMENTE duplicado en cada sección.
-                Más adelante debería convertirse en un componente único y reutilizable.
-
-            <div class="header-container">
-                <div>
-                    <button class="btn btn-outline-primary d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarOffcanvas" aria-controls="sidebarOffcanvas">
-                        <img src="images/barraDeNavegacion/menu.png" alt="menu navegable" class="header-menu">
-                    </button>
-                </div>
-                <div class="header-logo">
-                    <img src="images/barraDeNavegacion/nombre_inicial.png" alt="Logo FinGrow" class="header-logo-img">
-                </div>
-            </div>
-            ========================== -->
-            <div class="principal-container">
-                <!-- ==========================
-                    SIDEBAR (MENÚ LATERAL)
-                    Permite navegar entre las secciones principales.
-                    Actualmente está DUPLICADO en todas las secciones para simular
-                    el mockup, aunque en una versión real debería extraerse como componente.
-                ========================== -->
-                <aside class="sidebar">    
-                    <nav>
-                        <ul>
-                            <li class="active"><a href="#dashboard"><span class="sidebar-icon"><img src="images/iconos/Bar_chart-2.png" alt="logo_menu_dashboard"> </span> Dashboard</a></li>
-                            <li><a href="#ingresos-gastos" onclick="mostrarSeccion('ingresos-gastos')"><span class="sidebar-icon"><img src="images/iconos/Dollar_sign.png" alt="logo_menu_gastos"> </span> Ingresos y Gastos</a></li>
-                            <li><a href="#metas"  onclick="mostrarSeccion('metas')"><span class="sidebar-icon"><img src="images/iconos/Award.png" alt="logo_menu_metas" > </span> Metas de ahorro</a></li>
-                            <li><a href="#inversiones"  onclick="mostrarSeccion('inversiones')"><span class="sidebar-icon"><img src="images/iconos/Trending_up.png" alt="logo_menu_inversiones"> </span> Inversiones</a></li>
-                            <li><a href="#reportes"  onclick="mostrarSeccion('reportes')"><span class="sidebar-icon"><img src="images/iconos/Check_square.png" alt="logo_menu_reportes"> </span> Reportes y Estadísticas</a></li>
-                            <li><a href="#historial"  onclick="mostrarSeccion('historial')"><span class="sidebar-icon"><img src="images/iconos/Compass.png" alt="logo_menu_historial"> </span> Historial y Auditoría</a></li>
-                            <li><a href="#exportar"  onclick="mostrarSeccion('exportar')"><span class="sidebar-icon"><img src="images/iconos/upload.png" alt="logo_menu_exportar"> </span> Exportación de Datos</a></li>
-                            <li><a href="#configuracion"  onclick="mostrarSeccion('configuracion')"><span class="sidebar-icon"><img src="images/iconos/settings.png" alt="logo_menu_configuracion"> </span> Configuración</a></li>
-                        </ul>
-                    </nav>
-
-                    <nav>
-                        <ul>    
-                            <li><a href="#login" onclick="mostrarSeccion('login')"><span class="sidebar-icon"><img src="images/iconos/Log_out.png" alt="logo_cerrar_sesion"> </span>  Cerrar Sesión</a></li>
-                        </ul>    
-                    </nav>
-                </aside>
+        <section id="dashboard" class="principal-section">
 
                 <main class="content">
                     <section id="resumen-financiero" class="card">
@@ -266,7 +228,6 @@
                         </div>
                     </section>
                 </main>
-            </div>
         </section>
 
        <!-- ==========================
@@ -275,43 +236,7 @@
             Se listan transacciones con opción a filtrar por fecha o categoría.
             Incluye barra de navegación y sidebar lateral.
         ========================== -->
-        <section id="ingresos-gastos" class="principal-section invisible">
-            <!-- Header duplicado temporalmente. En el futuro, será un componente único reutilizable 
-                en todas las pantallas. Actualmente, se mantiene fiel al diseño del mockup.
-            <div class="header-container">
-                <div>
-                    <button class="btn btn-outline-primary d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarOffcanvas" aria-controls="sidebarOffcanvas">
-                        <img src="images/barraDeNavegacion/menu.png" alt="menu navegable" class="header-menu">
-                    </button>
-                </div>
-                <div class="header-logo">
-                    <img src="images/barraDeNavegacion/nombre_inicial.png" alt="Logo FinGrow" class="header-logo-img">
-                </div>
-            </div>
-            ========================== -->
-            <div class="principal-container">
-                <!-- Barra lateral (sidebar) duplicada temporalmente. En el futuro, se convertirá en un componente único 
-                    reutilizable en todas las pantallas. Por ahora, es importante mantener la consistencia con el mockup. -->
-                <aside class="sidebar">    
-                    <nav>
-                        <ul>
-                            <li ><a href="#dashboard" onclick="mostrarSeccion('dashboard')"><span class="sidebar-icon"><img src="images/iconos/Bar_chart-2.png" alt="logo_menu_dashboard"> </span> Dashboard</a></li>
-                            <li class="active"><a href="#ingresos-gastos"><span class="sidebar-icon"><img src="images/iconos/Dollar_sign.png" alt="logo_menu_gastos"> </span> Ingresos y Gastos</a></li>
-                            <li><a href="#metas" onclick="mostrarSeccion('metas')"><span class="sidebar-icon"><img src="images/iconos/Award.png" alt="logo_menu_metas"> </span> Metas de ahorro</a></li>
-                            <li><a href="#inversiones"  onclick="mostrarSeccion('inversiones')"><span class="sidebar-icon"><img src="images/iconos/Trending_up.png" alt="logo_menu_inversiones"> </span> Inversiones</a></li>
-                            <li><a href="#reportes"  onclick="mostrarSeccion('reportes')"><span class="sidebar-icon"><img src="images/iconos/Check_square.png" alt="logo_menu_reportes"> </span> Reportes y Estadísticas</a></li>
-                            <li><a href="#historial"  onclick="mostrarSeccion('historial')"><span class="sidebar-icon"><img src="images/iconos/Compass.png" alt="logo_menu_historial"> </span> Historial y Auditoría</a></li>
-                            <li><a href="#exportar"  onclick="mostrarSeccion('exportar')"><span class="sidebar-icon"><img src="images/iconos/upload.png" alt="logo_menu_exportar"> </span> Exportación de Datos</a></li>
-                            <li><a href="#configuracion"  onclick="mostrarSeccion('configuracion')"><span class="sidebar-icon"><img src="images/iconos/settings.png" alt="logo_menu_configuracion"> </span> Configuración</a></li>
-                        </ul>
-                    </nav>
-
-                    <nav>
-                        <ul>    
-                            <li><a href="#login" onclick="mostrarSeccion('login')"><span class="sidebar-icon"><img src="images/iconos/Log_out.png" alt="logo_cerrar_sesion"> </span>  Cerrar Sesión</a></li>
-                        </ul>    
-                    </nav>
-                </aside>
+        <section id="ingresos-gastos" class="principal-section">
 
                 <main class="content">
                     <section id="ingresos-gastos-card" class="card">
@@ -432,7 +357,6 @@
                         </div>
                     </section>
                 </main>
-            </div>
         </section>  
 
         <!-- ==========================
@@ -443,43 +367,7 @@
             El gráfico es actualmente una imagen estática; en futuras versiones será dinámico con datos en tiempo real.
             Incluye header superior y sidebar lateral duplicados temporalmente por consistencia con el mockup.
         ========================== -->
-        <section id="metas" class="principal-section invisible">
-            <!-- Header duplicado temporalmente. En el futuro, será un componente único reutilizable 
-                en todas las pantallas. Actualmente, se mantiene fiel al diseño del mockup.
-            <div class="header-container">
-                <div>
-                    <button class="btn btn-outline-primary d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarOffcanvas" aria-controls="sidebarOffcanvas">
-                        <img src="images/barraDeNavegacion/menu.png" alt="menu navegable" class="header-menu">
-                    </button>
-                </div>
-                <div class="header-logo">
-                    <img src="images/barraDeNavegacion/nombre_inicial.png" alt="Logo FinGrow" class="header-logo-img">
-                </div>
-            </div>
-            ========================== -->
-            <div class="principal-container">
-                <!-- Barra lateral (sidebar) duplicada temporalmente. En el futuro, se convertirá en un componente único 
-                    reutilizable en todas las pantallas. Por ahora, es importante mantener la consistencia con el mockup. -->
-                <aside class="sidebar">    
-                    <nav>
-                        <ul>
-                            <li><a href="#dashboard" onclick="mostrarSeccion('dashboard')"><span class="sidebar-icon"><img src="images/iconos/Bar_chart-2.png" alt="logo_menu_dashboard"> </span> Dashboard</a></li>
-                            <li><a href="#ingresos-gastos" onclick="mostrarSeccion('ingresos-gastos')"><span class="sidebar-icon"><img src="images/iconos/Dollar_sign.png" alt="logo_menu_gastos"> </span> Ingresos y Gastos</a></li>
-                            <li class="active"><a href="#metas" ><span class="sidebar-icon"><img src="images/iconos/Award.png" alt="logo_menu_metas"> </span> Metas de ahorro</a></li>
-                            <li><a href="#inversiones"  onclick="mostrarSeccion('inversiones')"><span class="sidebar-icon"><img src="images/iconos/Trending_up.png" alt="logo_menu_inversiones"> </span> Inversiones</a></li>
-                            <li><a href="#reportes"  onclick="mostrarSeccion('reportes')"><span class="sidebar-icon"><img src="images/iconos/Check_square.png" alt="logo_menu_reportes"> </span> Reportes y Estadísticas</a></li>
-                            <li><a href="#historial"  onclick="mostrarSeccion('historial')"><span class="sidebar-icon"><img src="images/iconos/Compass.png" alt="logo_menu_historial"> </span> Historial y Auditoría</a></li>
-                            <li><a href="#exportar"  onclick="mostrarSeccion('exportar')"><span class="sidebar-icon"><img src="images/iconos/upload.png" alt="logo_menu_exportar"> </span> Exportación de Datos</a></li>
-                            <li><a href="#configuracion"  onclick="mostrarSeccion('configuracion')"><span class="sidebar-icon"><img src="images/iconos/settings.png" alt="logo_menu_configuracion"> </span> Configuración</a></li>
-                        </ul>
-                    </nav>
-
-                    <nav>
-                        <ul>    
-                            <li><a href="#login" onclick="mostrarSeccion('login')"><span class="sidebar-icon"><img src="images/iconos/Log_out.png" alt="logo_cerrar_sesion"> </span>  Cerrar Sesión</a></li>
-                        </ul>    
-                    </nav>
-                </aside>
+        <section id="metas" class="principal-section">
 
                 <main class="content">
                     <section id="metas-card-table" class="card">
@@ -554,7 +442,6 @@
                         </div>
                     </section>
                 </main>
-            </div>
         </section>  
 
         <!-- ==========================
@@ -563,43 +450,7 @@
             Visualiza rentabilidad, tipo de inversión y contribuciones.
             Incluye barra de navegación y sidebar lateral.
         ========================== -->
-        <section id="inversiones" class="principal-section invisible">
-            <!-- Header duplicado temporalmente. En el futuro, será un componente único reutilizable 
-                en todas las pantallas. Actualmente, se mantiene fiel al diseño del mockup. 
-            <div class="header-container">
-                <div>
-                    <button class="btn btn-outline-primary d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarOffcanvas" aria-controls="sidebarOffcanvas">
-                        <img src="images/barraDeNavegacion/menu.png" alt="menu navegable" class="header-menu">
-                    </button>
-                </div>
-                <div class="header-logo">
-                    <img src="images/barraDeNavegacion/nombre_inicial.png" alt="Logo FinGrow" class="header-logo-img">
-                </div>
-            </div>
-            ========================== -->
-            <div class="principal-container">
-                <!-- Barra lateral (sidebar) duplicada temporalmente. En el futuro, se convertirá en un componente único 
-                    reutilizable en todas las pantallas. Por ahora, es importante mantener la consistencia con el mockup. -->
-                <aside class="sidebar">    
-                    <nav>
-                        <ul>
-                            <li><a href="#dashboard" onclick="mostrarSeccion('dashboard')"><span class="sidebar-icon"><img src="images/iconos/Bar_chart-2.png" alt="logo_menu_dashboard"> </span> Dashboard</a></li>
-                            <li><a href="#ingresos-gastos" onclick="mostrarSeccion('ingresos-gastos')"><span class="sidebar-icon"><img src="images/iconos/Dollar_sign.png" alt="logo_menu_gastos"> </span> Ingresos y Gastos</a></li>
-                            <li><a href="#metas"   onclick="mostrarSeccion('metas')"><span class="sidebar-icon"><img src="images/iconos/Award.png" alt="logo_menu_metas"> </span> Metas de ahorro</a></li>
-                            <li class="active"><a href="#inversiones"><span class="sidebar-icon"><img src="images/iconos/Trending_up.png" alt="logo_menu_inversiones"> </span> Inversiones</a></li>
-                            <li><a href="#reportes"  onclick="mostrarSeccion('reportes')"><span class="sidebar-icon"><img src="images/iconos/Check_square.png" alt="logo_menu_reportes"> </span> Reportes y Estadísticas</a></li>
-                            <li><a href="#historial"  onclick="mostrarSeccion('historial')"><span class="sidebar-icon"><img src="images/iconos/Compass.png" alt="logo_menu_historial"> </span> Historial y Auditoría</a></li>
-                            <li><a href="#exportar"  onclick="mostrarSeccion('exportar')"><span class="sidebar-icon"><img src="images/iconos/upload.png" alt="logo_menu_exportar"> </span> Exportación de Datos</a></li>
-                            <li><a href="#configuracion"  onclick="mostrarSeccion('configuracion')"><span class="sidebar-icon"><img src="images/iconos/settings.png" alt="logo_menu_configuracion"> </span> Configuración</a></li>
-                        </ul>
-                    </nav>
-
-                    <nav>
-                        <ul>    
-                            <li><a href="#login" onclick="mostrarSeccion('login')"><span class="sidebar-icon"><img src="images/iconos/Log_out.png" alt="logo_cerrar_sesion"> </span>  Cerrar Sesión</a></li>
-                        </ul>                           
-                    </nav>
-                </aside>
+        <section id="inversiones" class="principal-section">
 
                 <main class="content">
                     <section id="inversiones-card-table" class="card">
@@ -671,7 +522,6 @@
                         </div>
                     </section>
                 </main>
-            </div>
         </section>  
 
         <!-- ==========================
@@ -680,44 +530,8 @@
             Permite visualizar datos históricos y actuales.
             Incluye barra de navegación y sidebar lateral.
         ========================== -->
-        <section id="reportes" class="principal-section invisible">
-            <!-- Header duplicado temporalmente. En el futuro, será un componente único reutilizable 
-                en todas las pantallas. Actualmente, se mantiene fiel al diseño del mockup.
-            <div class="header-container">
-                <div>
-                    <button class="btn btn-outline-primary d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarOffcanvas" aria-controls="sidebarOffcanvas">
-                        <img src="images/barraDeNavegacion/menu.png" alt="menu navegable" class="header-menu">
-                    </button>
-                </div>
-                <div class="header-logo">
-                    <img src="images/barraDeNavegacion/nombre_inicial.png" alt="Logo FinGrow" class="header-logo-img">
-                </div>
-            </div>
-            ========================== -->
-            <div class="principal-container">
-                <!-- Barra lateral (sidebar) duplicada temporalmente. En el futuro, se convertirá en un componente único 
-                    reutilizable en todas las pantallas. Por ahora, es importante mantener la consistencia con el mockup. -->
-                <aside class="sidebar">    
-                    <nav>
-                        <ul>
-                            <li ><a href="#dashboard" onclick="mostrarSeccion('dashboard')"><span class="sidebar-icon"><img src="images/iconos/Bar_chart-2.png" alt="logo_menu_dashboard"> </span> Dashboard</a></li>
-                            <li><a href="#ingresos-gastos"  onclick="mostrarSeccion('ingresos-gastos')"><span class="sidebar-icon"><img src="images/iconos/Dollar_sign.png" alt="logo_menu_gastos"> </span> Ingresos y Gastos</a></li>
-                            <li><a href="#metas" onclick="mostrarSeccion('metas')"><span class="sidebar-icon"><img src="images/iconos/Award.png" alt="logo_menu_metas"> </span> Metas de ahorro</a></li>
-                            <li><a href="#inversiones"  onclick="mostrarSeccion('inversiones')"><span class="sidebar-icon"><img src="images/iconos/Trending_up.png" alt="logo_menu_inversiones"> </span> Inversiones</a></li>
-                            <li class="active"><a href="#reportes"><span class="sidebar-icon"><img src="images/iconos/Check_square.png" alt="logo_menu_reportes"> </span> Reportes y Estadísticas</a></li>
-                            <li><a href="#historial"  onclick="mostrarSeccion('historial')"><span class="sidebar-icon"><img src="images/iconos/Compass.png" alt="logo_menu_historial"> </span> Historial y Auditoría</a></li>
-                            <li><a href="#exportar"  onclick="mostrarSeccion('exportar')"><span class="sidebar-icon"><img src="images/iconos/upload.png" alt="logo_menu_exportar"> </span> Exportación de Datos</a></li>
-                            <li><a href="#configuracion"  onclick="mostrarSeccion('configuracion')"><span class="sidebar-icon"><img src="images/iconos/settings.png" alt="logo_menu_configuracion"> </span> Configuración</a></li>
-                        </ul>
-                    </nav>
-
-                    <nav>
-                        <ul>    
-                            <li><a href="#login" onclick="mostrarSeccion('login')"><span class="sidebar-icon"><img src="images/iconos/Log_out.png" alt="logo_cerrar_sesion"> </span>  Cerrar Sesión</a></li>
-                        </ul>
-                    </nav>
-                </aside>
-
+        <section id="reportes" class="principal-section">
+                
                 <main class="content">
                     <section id="reportes-estadisticas-container" class="card">
                         <div>
@@ -814,7 +628,6 @@
                         </div>
                     </section>
                 </main>
-            </div>
         </section>  
 
         <!-- ==========================
@@ -823,44 +636,8 @@
             Registra acciones como creación, edición o eliminación de datos.
             Incluye barra de navegación y sidebar lateral.
         ========================== -->
-        <section id="historial" class="principal-section invisible">
-            <!-- Header duplicado temporalmente. En el futuro, será un componente único reutilizable 
-                en todas las pantallas. Actualmente, se mantiene fiel al diseño del mockup.
-            <div class="header-container">
-                <div>
-                    <button class="btn btn-outline-primary d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarOffcanvas" aria-controls="sidebarOffcanvas">
-                        <img src="images/barraDeNavegacion/menu.png" alt="menu navegable" class="header-menu">
-                    </button>
-                </div>
-                <div class="header-logo">
-                    <img src="images/barraDeNavegacion/nombre_inicial.png" alt="Logo FinGrow" class="header-logo-img">
-                </div>
-            </div>
-            ========================== -->
-            <div class="principal-container">
-                <!-- Barra lateral (sidebar) duplicada temporalmente. En el futuro, se convertirá en un componente único 
-                    reutilizable en todas las pantallas. Por ahora, es importante mantener la consistencia con el mockup. -->
-                <aside class="sidebar">    
-                    <nav>
-                        <ul>
-                            <li ><a href="#dashboard" onclick="mostrarSeccion('dashboard')"><span class="sidebar-icon"><img src="images/iconos/Bar_chart-2.png" alt="logo_menu_dashboard"> </span> Dashboard</a></li>
-                            <li><a href="#ingresos-gastos"  onclick="mostrarSeccion('ingresos-gastos')"><span class="sidebar-icon"><img src="images/iconos/Dollar_sign.png" alt="logo_menu_gastos"> </span> Ingresos y Gastos</a></li>
-                            <li><a href="#metas" onclick="mostrarSeccion('metas')"><span class="sidebar-icon"><img src="images/iconos/Award.png" alt="logo_menu_metas"> </span> Metas de ahorro</a></li>
-                            <li><a href="#inversiones"  onclick="mostrarSeccion('inversiones')"><span class="sidebar-icon"><img src="images/iconos/Trending_up.png" alt="logo_menu_inversiones"> </span> Inversiones</a></li>
-                            <li><a href="#reportes"   onclick="mostrarSeccion('reportes')"><span class="sidebar-icon"><img src="images/iconos/Check_square.png" alt="logo_menu_reportes"> </span> Reportes y Estadísticas</a></li>
-                            <li class="active"><a href="#historial"><span class="sidebar-icon"><img src="images/iconos/Compass.png" alt="logo_menu_historial"> </span> Historial y Auditoría</a></li>
-                            <li><a href="#exportar"  onclick="mostrarSeccion('exportar')"><span class="sidebar-icon"><img src="images/iconos/upload.png" alt="logo_menu_exportar"> </span> Exportación de Datos</a></li>
-                            <li><a href="#configuracion"  onclick="mostrarSeccion('configuracion')"><span class="sidebar-icon"><img src="images/iconos/settings.png" alt="logo_menu_configuracion"> </span> Configuración</a></li>
-                        </ul>
-                    </nav>
-
-                    <nav>
-                        <ul>    
-                            <li><a href="#login" onclick="mostrarSeccion('login')"><span class="sidebar-icon"><img src="images/iconos/Log_out.png" alt="logo_cerrar_sesion"> </span>  Cerrar Sesión</a></li>
-                        </ul>    
-                    </nav>
-                </aside>
-
+        <section id="historial" class="principal-section">
+                
                 <main class="content">
                     <section id="historial-container" class="card">
                         <div>
@@ -956,7 +733,6 @@
                         </div>
                     </section>
                 </main>
-            </div>
         </section>  
 
         <!-- ==========================
@@ -965,44 +741,8 @@
             Permite seleccionar ubicación y nombre del archivo.
             Incluye barra de navegación y sidebar lateral.
         ========================== -->
-        <section id="exportar" class="principal-section invisible">
-            <!-- Header duplicado temporalmente. En el futuro, será un componente único reutilizable 
-                en todas las pantallas. Actualmente, se mantiene fiel al diseño del mockup.
-            <div class="header-container">
-                <div>
-                    <button class="btn btn-outline-primary d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarOffcanvas" aria-controls="sidebarOffcanvas">
-                        <img src="images/barraDeNavegacion/menu.png" alt="menu navegable" class="header-menu">
-                    </button>
-                </div>
-                <div class="header-logo">
-                    <img src="images/barraDeNavegacion/nombre_inicial.png" alt="Logo FinGrow" class="header-logo-img">
-                </div>
-            </div>
-            ========================== -->
-            <div class="principal-container">
-                <!-- Barra lateral (sidebar) duplicada temporalmente. En el futuro, se convertirá en un componente único 
-                    reutilizable en todas las pantallas. Por ahora, es importante mantener la consistencia con el mockup. -->
-                <aside class="sidebar">    
-                    <nav>
-                        <ul>
-                            <li ><a href="#dashboard" onclick="mostrarSeccion('dashboard')"><span class="sidebar-icon"><img src="images/iconos/Bar_chart-2.png" alt="logo_menu_dashboard"> </span> Dashboard</a></li>
-                            <li><a href="#ingresos-gastos"  onclick="mostrarSeccion('ingresos-gastos')"><span class="sidebar-icon"><img src="images/iconos/Dollar_sign.png" alt="logo_menu_gastos"> </span> Ingresos y Gastos</a></li>
-                            <li><a href="#metas" onclick="mostrarSeccion('metas')"><span class="sidebar-icon"><img src="images/iconos/Award.png" alt="logo_menu_metas"> </span> Metas de ahorro</a></li>
-                            <li><a href="#inversiones"  onclick="mostrarSeccion('inversiones')"><span class="sidebar-icon"><img src="images/iconos/Trending_up.png" alt="logo_menu_inversiones"> </span> Inversiones</a></li>
-                            <li><a href="#reportes"   onclick="mostrarSeccion('reportes')"><span class="sidebar-icon"><img src="images/iconos/Check_square.png" alt="logo_menu_reportes"> </span> Reportes y Estadísticas</a></li>
-                            <li><a href="#historial"  onclick="mostrarSeccion('historial')"><span class="sidebar-icon"><img src="images/iconos/Compass.png" alt="logo_menu_historial"> </span> Historial y Auditoría</a></li>
-                            <li class="active"><a href="#exportar"><span class="sidebar-icon"><img src="images/iconos/upload.png" alt="logo_menu_exportar"> </span> Exportación de Datos</a></li>
-                            <li><a href="#configuracion"  onclick="mostrarSeccion('configuracion')"><span class="sidebar-icon"><img src="images/iconos/settings.png" alt="logo_menu_configuracion"> </span> Configuración</a></li>
-                        </ul>
-                    </nav>
-
-                    <nav>
-                        <ul>    
-                            <li><a href="#login" onclick="mostrarSeccion('login')"><span class="sidebar-icon"><img src="images/iconos/Log_out.png" alt="logo_cerrar_sesion"> </span>  Cerrar Sesión</a></li>
-                        </ul>    
-                    </nav>
-                </aside>
-
+        <section id="exportar" class="principal-section">
+                
                 <main class="content">
                     <section id="exportar-container" class="card">
                         <div>
@@ -1077,7 +817,6 @@
                         </div>
                     </section>
                 </main>
-            </div>
         </section>  
 
         <!-- ==========================
@@ -1088,44 +827,8 @@
             Componentes como el header y sidebar están duplicados temporalmente por consistencia 
             con el mockup, pero se planea unificarlos como componentes reutilizables.
         ========================== -->
-        <section id="configuracion"  class="principal-section invisible">
-            <!-- Header duplicado temporalmente. En el futuro, será un componente único reutilizable 
-                en todas las pantallas. Actualmente, se mantiene fiel al diseño del mockup.
-            <div class="header-container">
-                <div>
-                    <button class="btn btn-outline-primary d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarOffcanvas" aria-controls="sidebarOffcanvas">
-                        <img src="images/barraDeNavegacion/menu.png" alt="menu navegable" class="header-menu">
-                    </button>
-                </div>
-                <div class="header-logo">
-                    <img src="images/barraDeNavegacion/nombre_inicial.png" alt="Logo FinGrow" class="header-logo-img">
-                </div>
-            </div>
-            ========================== -->
-            <div class="principal-container">
-                <!-- Barra lateral (sidebar) duplicada temporalmente. En el futuro, se convertirá en un componente único 
-                    reutilizable en todas las pantallas. Por ahora, es importante mantener la consistencia con el mockup. -->
-                <aside class="sidebar">    
-                    <nav>
-                        <ul>
-                            <li ><a href="#dashboard" onclick="mostrarSeccion('dashboard')"><span class="sidebar-icon"><img src="images/iconos/Bar_chart-2.png" alt="logo_menu_dashboard"> </span> Dashboard</a></li>
-                            <li><a href="#ingresos-gastos"  onclick="mostrarSeccion('ingresos-gastos')"><span class="sidebar-icon"><img src="images/iconos/Dollar_sign.png" alt="logo_menu_gastos"> </span> Ingresos y Gastos</a></li>
-                            <li><a href="#metas" onclick="mostrarSeccion('metas')"><span class="sidebar-icon"><img src="images/iconos/Award.png" alt="logo_menu_metas"> </span> Metas de ahorro</a></li>
-                            <li><a href="#inversiones"  onclick="mostrarSeccion('inversiones')"><span class="sidebar-icon"><img src="images/iconos/Trending_up.png" alt="logo_menu_inversiones"> </span> Inversiones</a></li>
-                            <li><a href="#reportes"   onclick="mostrarSeccion('reportes')"><span class="sidebar-icon"><img src="images/iconos/Check_square.png" alt="logo_menu_reportes"> </span> Reportes y Estadísticas</a></li>
-                            <li><a href="#historial"  onclick="mostrarSeccion('historial')"><span class="sidebar-icon"><img src="images/iconos/Compass.png" alt="logo_menu_historial"> </span> Historial y Auditoría</a></li>
-                            <li><a href="#exportar"   onclick="mostrarSeccion('exportar')"><span class="sidebar-icon"><img src="images/iconos/upload.png" alt="logo_menu_exportar"> </span> Exportación de Datos</a></li>
-                            <li class="active"><a href="#configuracion"><span class="sidebar-icon"><img src="images/iconos/settings.png" alt="logo_menu_configuracion"> </span> Configuración</a></li>
-                        </ul>
-                    </nav>
-
-                    <nav>
-                        <ul>    
-                            <li><a href="#login" onclick="mostrarSeccion('login')"><span class="sidebar-icon"><img src="images/iconos/Log_out.png" alt="logo_cerrar_sesion"> </span>  Cerrar Sesión</a></li>
-                        </ul>    
-                    </nav>
-                </aside>
-
+        <section id="configuracion"  class="principal-section">
+                
                 <main class="content">
                     <section id="configuracion-container" class="card">
                         <div>
@@ -1233,7 +936,6 @@
                         </div>
                     </section>
                 </main>
-            </div>
         </section>
 
         <!-- ==========================
@@ -1250,67 +952,10 @@
                 </ul>
             </nav>
         </footer>
-
+        
+        </div> <!-- Cierre de .main-container -->
         <!-- Bootstrap JS Bundle via jsDelivr CDN (incluye Popper) -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
     </body>
-    
-    <div class="offcanvas offcanvas-start" tabindex="-1" id="sidebarOffcanvas" aria-labelledby="sidebarOffcanvasLabel" data-bs-backdrop="static">
-        <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="sidebarOffcanvasLabel">Menú</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Cerrar"></button>
-    </div>
-    <div class="offcanvas-body p-0">
-        <nav>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">
-                    <a href="#dashboard" onclick="mostrarSeccion('dashboard')" data-bs-dismiss="offcanvas">
-                        <span class="sidebar-icon"><img src="images/iconos/Bar_chart-2.png" alt="logo_menu_dashboard"></span> Dashboard
-                    </a>
-                </li>
-                <li class="list-group-item">
-                    <a href="#ingresos-gastos" onclick="mostrarSeccion('ingresos-gastos')" data-bs-dismiss="offcanvas">
-                        <span class="sidebar-icon"><img src="images/iconos/Dollar_sign.png" alt="logo_menu_gastos"></span> Ingresos y Gastos
-                    </a>
-                </li>
-                <li class="list-group-item">
-                    <a href="#metas" onclick="mostrarSeccion('metas')" data-bs-dismiss="offcanvas">
-                        <span class="sidebar-icon"><img src="images/iconos/Award.png" alt="logo_menu_metas"></span> Metas de ahorro
-                    </a>
-                </li>
-                <li class="list-group-item">
-                    <a href="#inversiones" onclick="mostrarSeccion('inversiones')" data-bs-dismiss="offcanvas">
-                        <span class="sidebar-icon"><img src="images/iconos/Trending_up.png" alt="logo_menu_inversiones"></span> Inversiones
-                    </a>
-                </li>
-                <li class="list-group-item">
-                    <a href="#reportes" onclick="mostrarSeccion('reportes')" data-bs-dismiss="offcanvas">
-                        <span class="sidebar-icon"><img src="images/iconos/Check_square.png" alt="logo_menu_reportes"></span> Reportes y Estadísticas
-                    </a>
-                </li>
-                <li class="list-group-item">
-                    <a href="#historial" onclick="mostrarSeccion('historial')" data-bs-dismiss="offcanvas">
-                        <span class="sidebar-icon"><img src="images/iconos/Compass.png" alt="logo_menu_historial"></span> Historial y Auditoría
-                    </a>
-                </li>
-                <li class="list-group-item">
-                    <a href="#exportar" onclick="mostrarSeccion('exportar')" data-bs-dismiss="offcanvas">
-                        <span class="sidebar-icon"><img src="images/iconos/upload.png" alt="logo_menu_exportar"></span> Exportación de Datos
-                    </a>
-                </li>
-                <li class="list-group-item">
-                    <a href="#configuracion" onclick="mostrarSeccion('configuracion')" data-bs-dismiss="offcanvas">
-                        <span class="sidebar-icon"><img src="images/iconos/settings.png" alt="logo_menu_configuracion"></span> Configuración
-                    </a>
-                </li>
-                <li class="list-group-item">
-                    <a href="#login" onclick="mostrarSeccion('login')" data-bs-dismiss="offcanvas">
-                        <span class="sidebar-icon"><img src="images/iconos/Log_out.png" alt="logo_cerrar_sesion"></span> Cerrar Sesión
-                    </a>
-                </li>
-            </ul>
-        </nav>
-    </div>
-
-
 </html>
