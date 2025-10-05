@@ -92,7 +92,6 @@
    =============================== */
 * {
     padding: 0;
-    /* box-sizing: content-box; */
 }
 
 
@@ -145,15 +144,9 @@ body {
  */
 .principal-container {
     display: grid;
-    grid-template-columns: 300px 1fr;
+    grid-template-columns: auto;
     flex: 1;
     min-height: 0;
-}
-
-/* Bootstrap integration - Override container-fluid padding for our layout */
-.principal-container.container-fluid {
-    padding-left: 0;
-    padding-right: 0;
 }
 
 

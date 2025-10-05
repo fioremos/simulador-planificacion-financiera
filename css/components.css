@@ -550,11 +550,11 @@ input[type="radio"]:checked + .radio-cuadrado::after {
     font-weight: bold;
 }
 /* --- Sección de resumen financiero en grid --- */
-.resumen-grid {
+/* .resumen-grid {
     display: grid;
     grid-template-columns: 2fr 1fr;
     gap: 1rem;
-}
+} */
 /* --- Tarjetas del resumen financiero (estilo base) --- */
 .resumen-grid .card {
     padding: 0 0 0 1rem;
@@ -757,10 +757,10 @@ input[type="radio"]:checked + .radio-cuadrado::after {
     font-size: 1.2rem;
 }
 /* Contenedor para barras de gasto */
-.gastos-bars {
+/* .gastos-bars {
     display: flex;
     flex-direction: column;
-}
+} */
 /* Barra individual de gasto */
 .gastos-bars .bar {
     background: var(--color-primary);
@@ -825,10 +825,10 @@ input[type="radio"]:checked + .radio-cuadrado::after {
     height: 1.75rem;
 }
 /* Contenedor principal del contenido en cada elemento */
-.historial-list .contenido {
+/* .historial-list .contenido {
     display: flex;
     align-items: center;
-}
+} */
 /* Contenedor del texto dentro del contenido */
 .historial-list .texto {
     display: flex;

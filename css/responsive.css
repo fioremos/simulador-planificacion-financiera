@@ -22,10 +22,6 @@
         height: 5vh;
     }
 
-    /* Se ajusta el layout principal a una sola columna */
-    .principal-container {
-        grid-template-columns: auto;
-    }
 
     /* Espaciado alrededor de tarjetas para mejor visualización */
     .content .card {
@@ -97,10 +93,10 @@
     }
 
     /* Layout resumen cambia de grid a columna para mejor stacking */
-    .resumen-grid {
+    /* .resumen-grid {
         display: flex;
         flex-direction: column;
-    }
+    } */
 
     /* Se oculta una de las tarjetas del resumen para reducir ruido visual */
     .resumen-grid .resumen-left .card {
@@ -110,13 +106,13 @@
     /* Gráfico del dashboard se adapta a ancho de pantalla */
     .dashboard-chart {
         height: auto;
-        width: 80vw;
+        width: 70vw;
     }
 
     /* Indicadores visuales se ocultan por limitación de espacio */
-    .gastos-indicadores {
+    /* .gastos-indicadores {
         display: none;
-    }
+    } */
 
     /* Las barras ocupan todo el ancho disponible */
     .gastos-bars .bar {
@@ -124,9 +120,9 @@
     }
 
     /* Contenedor de barras ajustado a ancho relativo */
-    .gastos-bars {
+    /* .gastos-bars {
         width: 40vw;
-    }
+    } */
 
     /* Layout de gastos adaptado para que los elementos se centren y aprovechen el alto */
     .gastos-grid {
@@ -200,4 +196,4 @@
     .form-grid .form-group .input {
         width: 40vw;
     }
-} 
+}
