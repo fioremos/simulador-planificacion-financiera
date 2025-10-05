@@ -11,19 +11,19 @@
  * - :focus   → resalta el borde con color primario
  ****************************************************/
 /* Estilo general de campos de entrada */
-/* .input {
+.input {
     padding: 0.6rem;
     border: 0.063rem outset var(--color-muted);
     border-radius: 0.375rem;
     font-size: 1.25rem;
     color: var(--color-muted);
-} */
+}
 /* Estados de foco para accesibilidad */
-/* .input:focus,
+.input:focus,
 .select:focus{
   outline: 2px solid var(--color-primary);
   outline-offset: 2px;
-} */
+}
 
 
 /****************************************************
@@ -40,14 +40,14 @@
  * - .btn.small      → botón diminuto con fuente reducida
  ****************************************************/
 /* Estilo base para todos los botones */
-/* .btn {
+.btn {
     border: none;
     border-radius: 6px;
     padding: 0.6rem;
     cursor: pointer;
     font-size: 1.25rem;
     transition: background 0.2s ease, transform 0.1s ease;
-} */
+}
 /* Efecto de hover para botones */
 .btn:hover {
     transform: translateY(-2px);
@@ -221,7 +221,7 @@
 .header-table {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: baseline;
     padding-bottom: 1rem;
 }
 /* Título dentro del encabezado de tabla */
@@ -547,7 +547,6 @@ input[type="radio"]:checked + .radio-cuadrado::after {
 .saldo {
     font-size: 2rem;
     color: var(--color-primary);
-    font-weight: bold;
 }
 /* --- Sección de resumen financiero en grid --- */
 /* .resumen-grid {
@@ -566,8 +565,8 @@ input[type="radio"]:checked + .radio-cuadrado::after {
 }
 /* --- Ajuste superior y padding de la tarjeta en la columna izquierda --- */
 .resumen-grid .resumen-left .card {
-    margin-top: 1.4rem;
-    height: auto;
+    /* margin-top: 1.4rem;
+    height: auto; */
     padding: 0.8rem;
 }
 
@@ -624,19 +623,19 @@ input[type="radio"]:checked + .radio-cuadrado::after {
  /* --- Celdas de datos en la tabla de metas --- */
 .metas-table td{
     color: var(--neutral-900);
-    text-align: center;
+    /* text-align: center; */
 }
 /* --- Encabezados de la tabla de metas --- */
 .metas-table th{
     font-size: larger;
     color: var(--color-primary);
     font-weight: normal;    
-    text-align: center;
+    /* text-align: center; */
 }
 /* --- Estilo general de la tabla de metas --- */
 .metas-table {
     border-collapse: collapse;
-    width: 100%;
+    /* width: 100%; */
 }
 /* --- Bordes superior e inferior en fila de encabezado --- */
 .metas-table thead tr {
@@ -652,25 +651,24 @@ input[type="radio"]:checked + .radio-cuadrado::after {
     background-color: var(--neutral-200);
 }
 /* --- Contenedor para botones dentro de tarjetas de metas, alineados a la derecha --- */
-.metas-card-table-button{
+/* .metas-card-table-button{
     display: flex;
     justify-content: flex-end;
-}
+} */
 /* --- Estilo para el gráfico dentro de metas (50% ancho y altura fija) --- */
-.metas-chart{
-    width: 50%;    
+.metas-chart{  
     height: 13rem;
 }
 /* --- Etiquetas dentro de las tarjetas de metas, con padding y centrado --- */
-.metas-card-label{
+/* .metas-card-label{
     padding: 0.5rem;
     text-align: center;
-}
+} */
 /* --- Contenedor para botones relacionados con gráficos, centrados --- */
-.metas-card-graph-button{
+/* .metas-card-graph-button{
     display: flex;
     justify-content: center;
-}
+} */
 
 
 
@@ -684,7 +682,6 @@ input[type="radio"]:checked + .radio-cuadrado::after {
 /* --- Estilo para el gráfico de inversiones --- */
 .inversiones-chart{
     width: 41.25rem;   
-    height: 100%;
 }
 /* --- Estilo para botones dentro de la tarjeta de inversiones --- */
 .inversiones-card-table-button button{
@@ -715,52 +712,15 @@ input[type="radio"]:checked + .radio-cuadrado::after {
     font-size: 1.25rem;
     border: 0.063rem outset var(--white-000);
 }
-/* --- Contenedor de filtros con distribución flexible --- */
-.filters {
-    display: flex;
-    justify-content: space-between; 
-    gap: 3rem; 
-    flex-wrap: wrap; 
-    padding: 0 2rem;
-}
-/* --- Estilo para etiquetas dentro de filtros --- */
-.filters label {
-    font-size: 1rem;
-    font-weight: 600;
-    text-align: center;
-}
-/* --- Secciones de reportes --- */
-.reportes-section {
-    margin-top: 1.5rem;
-}
-/* Subtítulos dentro de reportes */
-.reportes-section .subtitle {
-    margin-bottom: 0.5rem;
-    color: var(--color-primary);
-    font-weight: bold;
-}
 /* Contenedor para gráficos en reportes */
 .reportes-chart {
-    width: 50%;
-    height: auto;
     padding: 2rem;
-}
-/* --- Grid para principales gastos --- */
-.gastos-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 1rem;
 }
 /* Párrafos dentro de la lista de gastos */
 .gastos-list p {
     margin: 0.5rem 0;
     font-size: 1.2rem;
 }
-/* Contenedor para barras de gasto */
-/* .gastos-bars {
-    display: flex;
-    flex-direction: column;
-} */
 /* Barra individual de gasto */
 .gastos-bars .bar {
     background: var(--color-primary);
@@ -771,11 +731,7 @@ input[type="radio"]:checked + .radio-cuadrado::after {
 }
 /* Indicadores de gastos */
 .gastos-indicadores {
-    font-size: 0.9rem;
     color: var(--neutral-900);
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
 }
 /* Texto en negrita para indicadores */
 .gastos-indicadores strong {
@@ -811,8 +767,6 @@ input[type="radio"]:checked + .radio-cuadrado::after {
  /* Lista del historial sin estilo de lista predeterminado */
 .historial-list {
     list-style: none;
-    padding: 0;
-    margin-top: 0;
 }
 /* Elementos de la lista con borde inferior para separar */
 .historial-list li {

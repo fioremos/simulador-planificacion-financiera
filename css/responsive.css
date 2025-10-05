@@ -55,7 +55,6 @@
     /* Gráfico de inversiones ocupa mayor parte de la pantalla */
     .inversiones-chart {
         width: 80vw;
-        height: auto;
     }
 }
 
@@ -99,9 +98,9 @@
     } */
 
     /* Se oculta una de las tarjetas del resumen para reducir ruido visual */
-    .resumen-grid .resumen-left .card {
+    /* .resumen-grid .resumen-left .card {
         display: none;
-    }
+    } */
 
     /* Gráfico del dashboard se adapta a ancho de pantalla */
     .dashboard-chart {
@@ -123,14 +122,6 @@
     /* .gastos-bars {
         width: 40vw;
     } */
-
-    /* Layout de gastos adaptado para que los elementos se centren y aprovechen el alto */
-    .gastos-grid {
-        display: flex;
-        flex-direction: row;
-        align-items: stretch;
-        justify-content: center;
-    }
 
     /* Se eliminan paddings del formulario para más espacio útil */
     .form-grid {
