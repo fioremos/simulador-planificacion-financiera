@@ -9,6 +9,10 @@
     .sidebar {
         display: none;
     }
+    
+   .principal-main {
+        grid-template-columns: auto;
+   }
 
     /* Se muestra el menú del encabezado para navegación alternativa */
     .header-menu {

@@ -134,14 +134,9 @@ body {
 .principal-section {
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
+    min-height: 92.5vh;
 }
-/*
- * PRINCIPAL CONTAINER
- * Divide la pantalla horizontalmente entre:
- * - Sidebar a la izquierda (300px)
- * - Contenido principal al resto del espacio disponible
- */
+
 .principal-container {
     display: grid;
     grid-template-columns: auto;
@@ -149,6 +144,18 @@ body {
     min-height: 0;
 }
 
+/*
+ * PRINCIPAL MAIN 
+ * Divide la pantalla horizontalmente entre:
+ * - Sidebar a la izquierda (300px)
+ * - Contenido principal al resto del espacio disponible
+ */
+.principal-main {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    flex: 1;
+    min-height: 100vh;
+}
 
 /* ---------- Header / Encabezado ---------- */
 /*

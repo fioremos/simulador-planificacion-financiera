@@ -975,3 +975,7 @@ Eliminar estos estilos una vez sea funcional la página.
 .invisible {
     display: none !important;
 }
+
+.solo-contenido {
+    grid-template-columns: auto !important; /* Oculta sidebar y header del layout */
+}
