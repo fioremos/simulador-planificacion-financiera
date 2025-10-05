@@ -567,6 +567,11 @@ input[type="radio"]:checked + .radio-cuadrado::after {
     height: auto; */
     padding: 0.8rem;
 }
+.resumen-grid .resumen-right .card p {
+    /* margin-top: 1.4rem;
+    height: auto; */
+    margin: 1rem 0;
+}
 
 
 

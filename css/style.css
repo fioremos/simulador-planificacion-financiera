@@ -277,6 +277,8 @@ body {
 .content .card {
     padding: 1rem;
     height: 100%;
+    border: none;
+    color:var(--color-primary);
 }
 /*
  * ÍCONOS Y SUBTÍTULOS
