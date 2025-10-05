@@ -979,3 +979,118 @@ Eliminar estos estilos una vez sea funcional la página.
 .solo-contenido {
     grid-template-columns: auto !important; /* Oculta sidebar y header del layout */
 }
+
+
+
+
+
+/* ================================
+   Componente: Video Educativo
+   ================================ */
+
+.video-educacion {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    display: block;
+    margin: 1rem auto;
+}
+.video-educacion-container {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; 
+    height: 0;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.video-educacion-container video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+#video-tutorial {
+    text-align: center;
+    padding: 1.5rem;
+}
+
+#video-tutorial .subtitle {
+    margin-bottom: 1rem;
+}
+
+/* ===== PROGRESO DE META DE AHORRO ===== */
+
+.progreso-meta {
+    text-align: center;
+    padding: 1rem;
+    margin-top: 1rem;
+}
+
+.progreso-meta label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+progress {
+    width: 100%;
+    height: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+    appearance: none;
+}
+
+progress::-webkit-progress-bar {
+    background-color: #f1f1f1;
+}
+
+progress::-webkit-progress-value {
+    background-color: #007bff; 
+    transition: width 0.5s ease;
+}
+
+progress::-moz-progress-bar {
+    background-color: #007bff;
+}
+
+.meta-porcentaje {
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+    color: #555;
+}
+
+
+/* ================================
+   Componente: details/summary
+   ================================ */
+
+details {
+  background-color: #f9fafb;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  padding: 0.8rem 1rem;
+  transition: all 0.3s ease;
+}
+
+details[open] {
+  background-color: #eef6ff;
+  border-color: #90caf9;
+}
+
+summary {
+  font-weight: 600;
+  cursor: pointer;
+  color: #333;
+}
+
+summary::-webkit-details-marker {
+  color: #007bff; 
+}

@@ -134,7 +134,7 @@ body {
 .principal-section {
     display: flex;
     flex-direction: column;
-    min-height: 92.5vh;
+    max-height: 92.5vh;
 }
 
 .principal-container {
@@ -154,7 +154,8 @@ body {
     display: grid;
     grid-template-columns: 280px 1fr;
     flex: 1;
-    min-height: 100vh;
+    min-height: 92.5vh;
+    max-height: 92.5vh;
 }
 
 /* ---------- Header / Encabezado ---------- */
@@ -210,6 +211,8 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    overflow: hidden;
+    height: 92.5vh;
 }
 /*
  * LISTA DE NAVEGACIÓN
@@ -275,6 +278,8 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    overflow: auto; 
+    height: 92.5vh;
 } 
 /*
  * CONTENIDO
