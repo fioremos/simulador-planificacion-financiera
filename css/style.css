@@ -152,9 +152,11 @@ body:not(:has(:target)) #login {
   display: block;
 }
 
-/* Oculta header y sidebar cuando login está activo */
+/* Oculta header y sidebar cuando login está activo o cuando no hay hash (pantalla inicial) */
 body:has(#login:target) #main-header,
-body:has(#login:target) .sidebar {
+body:has(#login:target) .sidebar,
+body:not(:has(:target)) #main-header,
+body:not(:has(:target)) .sidebar {
     display: none !important;
 }
 
