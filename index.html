@@ -3,6 +3,8 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="css/components.css">
         <link rel="stylesheet" href="css/responsive.css">
@@ -62,33 +64,41 @@
             Pantalla inicial de la aplicación. 
             Solo aquí se muestra el formulario para acceder o registrarse.
         ========================== -->
-        <section id="login" class="principal-section login-section invisible">
+        <section id="login" class="principal-section login-section visible justify-content-center align-items-center">
             <div class="card">
-                <div class="login-logo-container">
+                <div class="login-logo-container d-flex flex-column align-items-center">
                     <div>
                         <img src="images/login/logo.png" alt="Logo FinGrow" class="login-logo">
                     </div>
-                    <h2 class="subtitle">Organiza tus finanzas fácil y rápido</h2>
+                    <h2 class="subtitle text-center fw-bold fs-lg-2">Organiza tus finanzas fácil y rápido</h2>
                 </div>
                 
-                <div class="login-form-container">
+                <div class="login-form-container mx-md-5 my-md-0 p-md-4 m-0 p-0">
                     <form id="login-form">
-                        <div id="inputs-container" class="inputs-container">
-                            <label for="usuario" class="sr-only">Usuario</label>
-                            <input id="usuario" type="text" name="usuario" placeholder="Usuario" class="input" >
-
-                            <label for="password" class="sr-only">Contraseña</label>
-                            <input id="password" type="password" name="password" placeholder="Contraseña" class="input" >
+                        <div class="inputs-container">
+                            <div class="mb-3">
+                                <label for="usuario" class="form-label" hidden>Usuario</label>
+                                <input id="usuario" type="text" name="usuario" placeholder="Usuario" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label for="password" class="form-label" hidden>Contraseña</label>
+                                <input id="password" type="password" name="password" placeholder="Contraseña" class="form-control">
+                            </div>
                         </div>
-
-                        <div id="buttons-container" class="buttons-container">
-                            <button type="submit" class="btn btn-primary" onclick="mostrarSeccion('dashboard')" >Iniciar sesión</button>
-                            <button type="button" class="btn btn-secondary" onclick="mostrarSeccion('dashboard')">Registrarse</button>
-                            <button type="button" class="btn btn-image" onclick="mostrarSeccion('dashboard')">
-                                <span class="google-icon-container">
+                        <div id="buttons-container" class="buttons-container d-flex flex-column gap-2">
+                            <div class="col-12">
+                                    <button type="submit" class="btn btn-primary w-100" onclick="mostrarSeccion('dashboard')">Iniciar sesión</button>
+                            </div>
+                            <div class="col-12">
+                                <button type="button" class="btn btn-secondary w-100" onclick="mostrarSeccion('dashboard')">Registrarse</button>
+                            </div>
+                            <div class="col-12">
+                                <button type="button" class="btn btn-image w-100" onclick="mostrarSeccion('dashboard')">
+                                <span class="google-icon-container d-flex align-items-center justify-content-center">
                                     <img src="images/iconos/google.png" alt="Logo google" class="icon-small">
                                 </span> Continuar con Google
-                            </button>
+                                </button>
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -109,19 +119,19 @@
             ========================== -->
             <div class="header-container">
                 <div>
-                    <img src="images/barraDeNavegacion/menu.png" alt="menu navegable" class="header-menu">
+                        <img src="images/barraDeNavegacion/menu.png" alt="menu navegable" class="header-menu">
                 </div>
                 <div class="header-logo">
-                    <img src="images/barraDeNavegacion/nombre_inicial.png" alt="Logo FinGrow" class="header-logo-img">
+                        <img src="images/barraDeNavegacion/nombre_inicial.png" alt="Logo FinGrow" class="header-logo-img">
+                    </div>
                 </div>
-            </div>
             <div class="principal-container">
-                <!-- ==========================
-                    SIDEBAR (MENÚ LATERAL)
-                    Permite navegar entre las secciones principales.
-                    Actualmente está DUPLICADO en todas las secciones para simular
-                    el mockup, aunque en una versión real debería extraerse como componente.
-                ========================== -->
+                    <!-- ==========================
+                        SIDEBAR (MENÚ LATERAL)
+                        Permite navegar entre las secciones principales.
+                        Actualmente está DUPLICADO en todas las secciones para simular
+                        el mockup, aunque en una versión real debería extraerse como componente.
+                    ========================== -->
                 <aside class="sidebar">    
                     <nav>
                         <ul>
@@ -133,13 +143,13 @@
                             <li><a href="#historial"  onclick="mostrarSeccion('historial')"><span class="sidebar-icon"><img src="images/iconos/Compass.png" alt="logo_menu_historial"> </span> Historial y Auditoría</a></li>
                             <li><a href="#exportar"  onclick="mostrarSeccion('exportar')"><span class="sidebar-icon"><img src="images/iconos/upload.png" alt="logo_menu_exportar"> </span> Exportación de Datos</a></li>
                             <li><a href="#configuracion"  onclick="mostrarSeccion('configuracion')"><span class="sidebar-icon"><img src="images/iconos/settings.png" alt="logo_menu_configuracion"> </span> Configuración</a></li>
-                        </ul>
+                            </ul>
                     </nav>
 
                     <nav>
                         <ul>    
                             <li><a href="#login" onclick="mostrarSeccion('login')"><span class="sidebar-icon"><img src="images/iconos/Log_out.png" alt="logo_cerrar_sesion"> </span>  Cerrar Sesión</a></li>
-                        </ul>    
+                            </ul>
                     </nav>
                 </aside>
 
@@ -151,21 +161,21 @@
 
                         <div class="resumen-grid">                        
                             <div class="resumen-left">
-                                <!-- Gráfico temporalmente representado como imagen estática. 
-                                En el futuro, será generado dinámicamente con JavaScript, 
-                                o bien integrará una solución externa para 
-                                mostrar datos actualizados y personalizados en tiempo real. -->
+                                                <!-- Gráfico temporalmente representado como imagen estática. 
+                                                En el futuro, será generado dinámicamente con JavaScript, 
+                                                o bien integrará una solución externa para 
+                                                mostrar datos actualizados y personalizados en tiempo real. -->
                                 <div class="container-chart">
                                     <img src="images/dashboard/Grafico.png" class="dashboard-chart" alt="Gráfico financiero">
-                                </div>
+                                                </div>
 
                                 <div class="card">
                                     <p class="highlight">
-                                    Ahorraste $280.000, el 20% de tu ingreso.<br>
+                                                            Ahorraste $280.000, el 20% de tu ingreso.<br>
                                     <span class="success">Este mes gastaste 12% menos.</span>
-                                    </p>
-                                </div>
-                            </div>
+                                                        </p>
+                                                    </div>
+                                                </div>
 
                             <div class="resumen-right">
                                 <div>
@@ -173,28 +183,28 @@
                                     <strong>Disponible</strong><br>
                                     <span class="saldo">$550.258,85</span>
                                     </p>
-                                </div>
+                                            </div>
 
                                 <div>
-                                    <div class="card">
+                                                        <div class="card">
                                     <p><strong>Ingresos</strong><br>$1.400.000,00</p>
-                                    </div>
-                                    <div class="card">
+                                                            </div>
+                                                        <div class="card">
                                     <p><strong>Gastos</strong><br>$569.741,15</p>
-                                    </div>
-                                    <div class="card">
+                                                            </div>
+                                                        <div class="card">
                                     <p><strong>Meta más cercana</strong><br>Viaje: 70% alcanzado</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                     </section>
 
                     <section id="ultimos-movimientos" class="card">
                         <div class="header-table">
                             <div>
                                 <p class="subtitle">Últimos movimientos</p>
-                            </div>
+                                            </div>
                         <button class="btn btn-primary btn-small">
                             <span class="icon">
                                 <img src="images/iconos/plus.png" class="icon-small" alt="Icono más">
@@ -202,49 +212,49 @@
                         </button>
                         </div>
 
-                        <!-- Tabla generada de forma estática por ahora. 
-                             En versiones futuras, se construirá dinámicamente con JavaScript 
-                             o mediante datos obtenidos desde una API, permitiendo contenido actualizado  -->
+                                        <!-- Tabla generada de forma estática por ahora. 
+                                             En versiones futuras, se construirá dinámicamente con JavaScript 
+                                             o mediante datos obtenidos desde una API, permitiendo contenido actualizado  -->
                         <div>
                             <table class="table-csm">
                             <thead>
-                                <tr>
-                                <th>Fecha</th>
-                                <th>Categoría</th>
-                                <th>Monto</th>
-                                <th>Nota</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                <td>Feb. 04</td>
-                                <td>Viaje</td>
-                                <td>$40.000</td>
+                                                    <tr>
+                                                        <th>Fecha</th>
+                                                        <th>Categoría</th>
+                                                        <th>Monto</th>
+                                                        <th>Nota</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Feb. 04</td>
+                                                        <td>Viaje</td>
+                                                        <td>$40.000</td>
                                 <td><span class="dot blue"></span></td>
-                                </tr>
-                                <tr>
-                                <td>Ene. 31</td>
-                                <td>PC</td>
-                                <td>$15.500</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Ene. 31</td>
+                                                        <td>PC</td>
+                                                        <td>$15.500</td>
                                 <td><span class="dot blue"></span></td>
-                                </tr>
-                                <tr>
-                                <td>Ene. 20</td>
-                                <td>Viaje</td>
-                                <td>$140.000</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Ene. 20</td>
+                                                        <td>Viaje</td>
+                                                        <td>$140.000</td>
                                 <td><span class="dot blue"></span></td>
-                                </tr>
-                                <tr>
-                                <td>Ene. 01</td>
-                                <td>Ocio</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Ene. 01</td>
+                                                        <td>Ocio</td>
                                 <td class="negative">-$45.850</td>
                                 <td><span class="dot red"></span></td>
-                                </tr>
-                            </tbody>
-                            </table>
-                        </div>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
                     </section>
-                </main>
+                    </main>
             </div>
         </section>
 
@@ -259,15 +269,15 @@
                 en todas las pantallas. Actualmente, se mantiene fiel al diseño del mockup. -->
             <div class="header-container">
                 <div>
-                    <img src="images/barraDeNavegacion/menu.png" alt="menu navegable" class="header-menu">
+                        <img src="images/barraDeNavegacion/menu.png" alt="menu navegable" class="header-menu">
                 </div>
                 <div class="header-logo">
-                    <img src="images/barraDeNavegacion/nombre_inicial.png" alt="Logo FinGrow" class="header-logo-img">
+                        <img src="images/barraDeNavegacion/nombre_inicial.png" alt="Logo FinGrow" class="header-logo-img">
+                    </div>
                 </div>
-            </div>
             <div class="principal-container">
-                <!-- Barra lateral (sidebar) duplicada temporalmente. En el futuro, se convertirá en un componente único 
-                    reutilizable en todas las pantallas. Por ahora, es importante mantener la consistencia con el mockup. -->
+                    <!-- Barra lateral (sidebar) duplicada temporalmente. En el futuro, se convertirá en un componente único 
+                        reutilizable en todas las pantallas. Por ahora, es importante mantener la consistencia con el mockup. -->
                 <aside class="sidebar">    
                     <nav>
                         <ul>
@@ -279,13 +289,13 @@
                             <li><a href="#historial"  onclick="mostrarSeccion('historial')"><span class="sidebar-icon"><img src="images/iconos/Compass.png" alt="logo_menu_historial"> </span> Historial y Auditoría</a></li>
                             <li><a href="#exportar"  onclick="mostrarSeccion('exportar')"><span class="sidebar-icon"><img src="images/iconos/upload.png" alt="logo_menu_exportar"> </span> Exportación de Datos</a></li>
                             <li><a href="#configuracion"  onclick="mostrarSeccion('configuracion')"><span class="sidebar-icon"><img src="images/iconos/settings.png" alt="logo_menu_configuracion"> </span> Configuración</a></li>
-                        </ul>
+                            </ul>
                     </nav>
 
                     <nav>
                         <ul>    
                             <li><a href="#login" onclick="mostrarSeccion('login')"><span class="sidebar-icon"><img src="images/iconos/Log_out.png" alt="logo_cerrar_sesion"> </span>  Cerrar Sesión</a></li>
-                        </ul>    
+                            </ul>
                     </nav>
                 </aside>
 
@@ -299,13 +309,13 @@
                         <!-- Formulario -->
                         <div>
                             <form id="movimientos-form" class="form-grid">
-                                <!-- Fecha -->
+                                                <!-- Fecha -->
                                 <div class="form-group">
                                     <label for="fecha">Fecha:</label>
                                 </div>
                                 <div class="form-group">
                                     <input type="date" id="fecha" name="fecha" class="input">
-                                </div>
+                                                </div>
 
                                 <!-- Tipo -->
                                 <div class="form-group full-width">
@@ -318,96 +328,96 @@
                                 </div>
                                 
 
-                                <!-- Categoría -->
+                                                <!-- Categoría -->
                                 <div class="form-group">
                                     <label for="categoria">Categoría:</label></div>
                                 <div class="form-group">
                                     <select id="categoria" name="categoria" class="input">
-                                        <option value="hogar">Hogar</option>
-                                        <option value="ocio">Ocio</option>
-                                        <option value="salud">Salud</option>
-                                        <option value="sueldo">Sueldo</option>
-                                        <option value="objetivos">Objetivos</option>
-                                        <option value="inversion">Inversión</option>
-                                    </select>
-                                </div>
+                                                        <option value="hogar">Hogar</option>
+                                                        <option value="ocio">Ocio</option>
+                                                        <option value="salud">Salud</option>
+                                                        <option value="sueldo">Sueldo</option>
+                                                        <option value="objetivos">Objetivos</option>
+                                                        <option value="inversion">Inversión</option>
+                                                    </select>
+                                                </div>
 
                                 <!-- Monto -->
                                 <div class="form-group">
                                     <label for="monto">Monto:</label>
-                                </div>
+                                                            </div>
                                 <div class="form-group">
                                     <input type="number" id="monto" name="monto" placeholder="$ 0,00" class="input">
-                                </div>
+                                                </div>
 
-                                <!-- Botón -->
+                                                <!-- Botón -->
                                 <div class="form-actions">
                                 <button type="submit" class="btn btn-inverse btn-blue">Agregar movimiento</button>
-                                </div>
-                            </form>
+                                            </div>
+                                        </form>
                         </div>
                         
                         <!-- Tabla de movimientos -->
                         <div class="ingresos-gastos-table">
                             <div class="header-table">
                                 <p class="subtitle">Movimientos</p>
-                            </div>
+                                    </div>
                             <div>
-                                <!-- Tabla generada de forma estática por ahora. 
-                                    En versiones futuras, se construirá dinámicamente con JavaScript 
-                                    o mediante datos obtenidos desde una API, permitiendo contenido actualizado  -->
+                                        <!-- Tabla generada de forma estática por ahora. 
+                                            En versiones futuras, se construirá dinámicamente con JavaScript 
+                                            o mediante datos obtenidos desde una API, permitiendo contenido actualizado  -->
                                 <table class="table-csm">
                                     <thead>
-                                        <tr>
+                                                    <tr>
                                         <td></td>
-                                        <th>Fecha</th>
-                                        <th>Categoría</th>
-                                        <th>Monto</th>
-                                        <th>Tipo</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
+                                                        <th>Fecha</th>
+                                                        <th>Categoría</th>
+                                                        <th>Monto</th>
+                                                        <th>Tipo</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
                                             <td class="td-button"><button class="btn small"><img src="images/iconos/Trash_2.png" alt="logo_tacho_borrar""></button></td>
-                                            <td>Feb. 04</td>
-                                            <td>Objetivos</td>
-                                            <td>$40.000</td>
-                                            <td>Ahorro</td>
-                                        </tr>
-                                        <tr>
+                                                        <td>Feb. 04</td>
+                                                        <td>Objetivos</td>
+                                                        <td>$40.000</td>
+                                                        <td>Ahorro</td>
+                                                    </tr>
+                                                    <tr>
                                             <td class="td-button"><button class="btn small"><img src="images/iconos/Trash_2.png" alt="logo_tacho_borrar"></button></td>
-                                            <td>Ene. 31</td>
-                                            <td>Inversión</td>
-                                            <td>$15.500</td>
-                                            <td>Inversión</td>
-                                        </tr>
-                                        <tr>
+                                                        <td>Ene. 31</td>
+                                                        <td>Inversión</td>
+                                                        <td>$15.500</td>
+                                                        <td>Inversión</td>
+                                                    </tr>
+                                                    <tr>
                                             <td class="td-button"><button class="btn small"><img src="images/iconos/Trash_2.png" alt="logo_tacho_borrar"></button></td>
-                                            <td>Ene. 20</td>
-                                            <td>Sueldo</td>
-                                            <td>$140.000</td>
-                                            <td>Ingreso</td>
-                                        </tr>
-                                        <tr>
+                                                        <td>Ene. 20</td>
+                                                        <td>Sueldo</td>
+                                                        <td>$140.000</td>
+                                                        <td>Ingreso</td>
+                                                    </tr>
+                                                    <tr>
                                             <td class="td-button"><button class="btn small"><img src="images/iconos/Trash_2.png" alt="logo_tacho_borrar"></button></td>
-                                            <td>Ene. 01</td>
-                                            <td>Ocio</td>
+                                                        <td>Ene. 01</td>
+                                                        <td>Ocio</td>
                                             <td class="negative">-$45.850</td>
-                                            <td>Gasto</td>
-                                        </tr>
-                                        <tr>
+                                                        <td>Gasto</td>
+                                                    </tr>
+                                                    <tr>
                                             <td class="td-button"><button class="btn small"><img src="images/iconos/Trash_2.png" alt="logo_tacho_borrar"></button></td>
-                                            <td>Ene. 01</td>
-                                            <td>Salud</td>
+                                                        <td>Ene. 01</td>
+                                                        <td>Salud</td>
                                             <td class="negative">-$15.257</td>
-                                            <td>Gasto</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+                                                        <td>Gasto</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
                     </section>
-                </main>
+                    </main>
             </div>
         </section>  
 
@@ -424,15 +434,15 @@
                 en todas las pantallas. Actualmente, se mantiene fiel al diseño del mockup. -->
             <div class="header-container">
                 <div>
-                    <img src="images/barraDeNavegacion/menu.png" alt="menu navegable" class="header-menu">
+                        <img src="images/barraDeNavegacion/menu.png" alt="menu navegable" class="header-menu">
                 </div>
                 <div class="header-logo">
-                    <img src="images/barraDeNavegacion/nombre_inicial.png" alt="Logo FinGrow" class="header-logo-img">
+                        <img src="images/barraDeNavegacion/nombre_inicial.png" alt="Logo FinGrow" class="header-logo-img">
+                    </div>
                 </div>
-            </div>
             <div class="principal-container">
-                <!-- Barra lateral (sidebar) duplicada temporalmente. En el futuro, se convertirá en un componente único 
-                    reutilizable en todas las pantallas. Por ahora, es importante mantener la consistencia con el mockup. -->
+                    <!-- Barra lateral (sidebar) duplicada temporalmente. En el futuro, se convertirá en un componente único 
+                        reutilizable en todas las pantallas. Por ahora, es importante mantener la consistencia con el mockup. -->
                 <aside class="sidebar">    
                     <nav>
                         <ul>
@@ -444,13 +454,13 @@
                             <li><a href="#historial"  onclick="mostrarSeccion('historial')"><span class="sidebar-icon"><img src="images/iconos/Compass.png" alt="logo_menu_historial"> </span> Historial y Auditoría</a></li>
                             <li><a href="#exportar"  onclick="mostrarSeccion('exportar')"><span class="sidebar-icon"><img src="images/iconos/upload.png" alt="logo_menu_exportar"> </span> Exportación de Datos</a></li>
                             <li><a href="#configuracion"  onclick="mostrarSeccion('configuracion')"><span class="sidebar-icon"><img src="images/iconos/settings.png" alt="logo_menu_configuracion"> </span> Configuración</a></li>
-                        </ul>
+                            </ul>
                     </nav>
 
                     <nav>
                         <ul>    
                             <li><a href="#login" onclick="mostrarSeccion('login')"><span class="sidebar-icon"><img src="images/iconos/Log_out.png" alt="logo_cerrar_sesion"> </span>  Cerrar Sesión</a></li>
-                        </ul>    
+                            </ul>
                     </nav>
                 </aside>
 
@@ -459,46 +469,46 @@
                         <div class="header-table">
                             <div>
                                 <p class="subtitle">Metas de ahorro</p>
-                            </div>
                         </div>
-                        <!-- Tabla generada de forma estática por ahora. 
-                             En versiones futuras, se construirá dinámicamente con JavaScript 
-                             o mediante datos obtenidos desde una API, permitiendo contenido actualizado  -->
+                                    </div>
+                                        <!-- Tabla generada de forma estática por ahora. 
+                                             En versiones futuras, se construirá dinámicamente con JavaScript 
+                                             o mediante datos obtenidos desde una API, permitiendo contenido actualizado  -->
                         <div>
                              <table class="table-csm metas-table">
                                 <thead>
-                                    <tr>
-                                    <th>Objetivo</th>
-                                    <th>Ahorrados</th>
-                                    <th>Restante</th>
-                                    <th>Nota</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                    <td>Viaje</td>
-                                    <td>$700.000</td>
-                                    <td>$300.000</td>
+                                                    <tr>
+                                                        <th>Objetivo</th>
+                                                        <th>Ahorrados</th>
+                                                        <th>Restante</th>
+                                                        <th>Nota</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Viaje</td>
+                                                        <td>$700.000</td>
+                                                        <td>$300.000</td>
                                     <td><span class="dot blue"></span></td>
-                                    </tr>
-                                    <tr>
-                                    <td>PC</td>
-                                    <td>$50.000</td>
-                                    <td>$250.000</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>PC</td>
+                                                        <td>$50.000</td>
+                                                        <td>$250.000</td>
                                     <td><span class="dot blue"></span></td>
-                                    </tr>
-                                    <tr>
-                                    <td>Moto</td>
-                                    <td>$1.600.000</td>
-                                    <td>$2.400.000</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Moto</td>
+                                                        <td>$1.600.000</td>
+                                                        <td>$2.400.000</td>
                                     <td><span class="dot blue"></span></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
                         <div class="metas-card-table-button">
                             <button class="btn btn-inverse btn-blue small">Agregar objetivo</button>
-                        </div>
+                                    </div>
                     </section>
 
                     <section id="metas-card-graph" class="card">
@@ -507,26 +517,26 @@
                             <h3 class="subtitle">$700.000</h3>
                         </div>
 
-                        <!-- Gráfico temporalmente representado como imagen estática. 
-                             En el futuro, será generado dinámicamente con JavaScript, 
-                             o bien integrará una solución externa para 
-                             mostrar datos actualizados y personalizados en tiempo real. -->
+                                        <!-- Gráfico temporalmente representado como imagen estática. 
+                                             En el futuro, será generado dinámicamente con JavaScript, 
+                                             o bien integrará una solución externa para 
+                                             mostrar datos actualizados y personalizados en tiempo real. -->
                         <div class="container-chart">
                             <img src="images/metasAhorro/Graph.png" class="metas-chart" alt="Gráfico metas de ahorro">
-                        </div>
-
+                                        </div>
+                                        
                         <div class="card metas-card-label">
                             <p class="highlight">
-                            Este mes ingresaste $40.000, alcanzaste un 70% de tu meta de ahorro.<br>
+                                                    Este mes ingresaste $40.000, alcanzaste un 70% de tu meta de ahorro.<br>
                             <span class="highlight bold">Solo te faltan $300.000. ¡Vas por muy buen camino!</span>
-                            </p>
-                        </div>
-
+                                                </p>
+                                        </div>
+                                        
                         <div class="metas-card-graph-button">
                             <button class="btn btn-inverse btn-blue small">Seleccionar objetivo</button>
-                        </div>
+                                        </div>
                     </section>
-                </main>
+                    </main>
             </div>
         </section>  
 
@@ -541,15 +551,15 @@
                 en todas las pantallas. Actualmente, se mantiene fiel al diseño del mockup. -->
             <div class="header-container">
                 <div>
-                    <img src="images/barraDeNavegacion/menu.png" alt="menu navegable" class="header-menu">
+                        <img src="images/barraDeNavegacion/menu.png" alt="menu navegable" class="header-menu">
                 </div>
                 <div class="header-logo">
-                    <img src="images/barraDeNavegacion/nombre_inicial.png" alt="Logo FinGrow" class="header-logo-img">
+                        <img src="images/barraDeNavegacion/nombre_inicial.png" alt="Logo FinGrow" class="header-logo-img">
+                    </div>
                 </div>
-            </div>
             <div class="principal-container">
-                <!-- Barra lateral (sidebar) duplicada temporalmente. En el futuro, se convertirá en un componente único 
-                    reutilizable en todas las pantallas. Por ahora, es importante mantener la consistencia con el mockup. -->
+                    <!-- Barra lateral (sidebar) duplicada temporalmente. En el futuro, se convertirá en un componente único 
+                        reutilizable en todas las pantallas. Por ahora, es importante mantener la consistencia con el mockup. -->
                 <aside class="sidebar">    
                     <nav>
                         <ul>
@@ -561,13 +571,13 @@
                             <li><a href="#historial"  onclick="mostrarSeccion('historial')"><span class="sidebar-icon"><img src="images/iconos/Compass.png" alt="logo_menu_historial"> </span> Historial y Auditoría</a></li>
                             <li><a href="#exportar"  onclick="mostrarSeccion('exportar')"><span class="sidebar-icon"><img src="images/iconos/upload.png" alt="logo_menu_exportar"> </span> Exportación de Datos</a></li>
                             <li><a href="#configuracion"  onclick="mostrarSeccion('configuracion')"><span class="sidebar-icon"><img src="images/iconos/settings.png" alt="logo_menu_configuracion"> </span> Configuración</a></li>
-                        </ul>
+                            </ul>
                     </nav>
 
                     <nav>
                         <ul>    
                             <li><a href="#login" onclick="mostrarSeccion('login')"><span class="sidebar-icon"><img src="images/iconos/Log_out.png" alt="logo_cerrar_sesion"> </span>  Cerrar Sesión</a></li>
-                        </ul>                           
+                            </ul>
                     </nav>
                 </aside>
 
@@ -576,71 +586,71 @@
                         <div class="header-table">
                             <div>
                                 <p class="subtitle">Inversiones</p>               
-                            </div>
+                        </div>
                             <div class="inversiones-card-table-button">
                                 <button class="btn btn-primary btn-small">
                                     <span class="icon">
                                         <img src="images/iconos/search.png" class="icon-small" alt="Icono busqueda">
                                     </span>
-                                </button>
+                                            </button>
                                 <button class="btn btn-primary btn-small">
                                     <span class="icon">
                                         <img src="images/iconos/plus.png" class="icon-small" alt="Icono más">
                                     </span>
-                                </button>
-                            </div>
-                        </div>
-                        <!-- Tabla generada de forma estática por ahora. 
-                             En versiones futuras, se construirá dinámicamente con JavaScript 
-                             o mediante datos obtenidos desde una API, permitiendo contenido actualizado  -->
+                                            </button>
+                                        </div>
+                                    </div>
+                                        <!-- Tabla generada de forma estática por ahora. 
+                                             En versiones futuras, se construirá dinámicamente con JavaScript 
+                                             o mediante datos obtenidos desde una API, permitiendo contenido actualizado  -->
                         <div>
                             <table class="table-csm">
-                                <tbody>
-                                <tr>
+                                                <tbody>
+                                                    <tr>
                                     <td><span class="tag red">Grupo Financiero Galicia</span></td>
-                                    <td>$39,82</td>
+                                                        <td>$39,82</td>
                                     <td>$-1,73</td>
                                     <td class="loss">-4,16%</td>
-                                </tr>
-                                <tr>
+                                                    </tr>
+                                                    <tr>
                                     <td><span class="tag blue">YPF</span></td>
-                                    <td>$41.225,00</td>
+                                                        <td>$41.225,00</td>
                                     <td>$+9.630</td>
                                     <td class="gain">+5,07%</td>
-                                </tr>
-                                <tr>
+                                                    </tr>
+                                                    <tr>
                                     <td><span class="tag purple">IBEX 35</span></td>
-                                    <td>$11.600,00</td>
+                                                        <td>$11.600,00</td>
                                     <td>$-52,00</td>
                                     <td class="loss">-0,50%</td>
-                                </tr>
-                                <tr>
+                                                    </tr>
+                                                    <tr>
                                     <td><span class="tag black">TESLA INC</span></td>
-                                    <td>$67.492,00</td>
+                                                        <td>$67.492,00</td>
                                     <td>$+1.073</td>
                                     <td class="gain">+1,62%</td>
-                                </tr>
-                                <tr>
+                                                    </tr>
+                                                    <tr>
                                     <td><span class="tag green">APPLE</span></td>
-                                    <td>$12.157,00</td>
+                                                        <td>$12.157,00</td>
                                     <td>$+0,375</td>
                                     <td class="gain">+0,31%</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
                     </section>
 
                     <section id="inversiones-card-graph" class="card">
-                        <!-- Módulo temporalmente representado como contenido estático. 
-                             En futuras versiones, se integrará un iframe (u otro método de embed) 
-                             para mostrar información financiera en tiempo real mediante Google Inversiones 
-                             u otro servicio externo de mercado. -->
+                                        <!-- Módulo temporalmente representado como contenido estático. 
+                                             En futuras versiones, se integrará un iframe (u otro método de embed) 
+                                             para mostrar información financiera en tiempo real mediante Google Inversiones 
+                                             u otro servicio externo de mercado. -->
                         <div class="container-chart">
                             <img src="images/inversiones/grafico.png" class="inversiones-chart" alt="Gráfico metas de ahorro">
-                        </div>
+                                        </div>
                     </section>
-                </main>
+                    </main>
             </div>
         </section>  
 

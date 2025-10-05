@@ -92,7 +92,7 @@
    =============================== */
 * {
     padding: 0;
-    box-sizing: content-box;
+    /* box-sizing: content-box; */
 }
 
 
@@ -148,6 +148,12 @@ body {
     grid-template-columns: 300px 1fr;
     flex: 1;
     min-height: 0;
+}
+
+/* Bootstrap integration - Override container-fluid padding for our layout */
+.principal-container.container-fluid {
+    padding-left: 0;
+    padding-right: 0;
 }
 
 

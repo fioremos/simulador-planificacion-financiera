@@ -87,12 +87,6 @@
         width: 50vw;
     } 
 
-    /* Elimina márgenes y paddings del formulario de login para usar todo el espacio disponible */
-    .login-form-container {
-        margin: unset;
-        padding: unset;
-    }
-
     /* Ajusta subtítulo del login para legibilidad en pantallas pequeñas */
     .login-section .subtitle {
         font-size: 6vw;
@@ -100,12 +94,6 @@
 
     .login-logo {
         padding: unset;
-    }
-
-    /* Aumenta tamaño de texto de inputs y botones en login */
-    .inputs-container .input,
-    .buttons-container .btn {
-        font-size: 4vw;
     }
 
     /* Layout resumen cambia de grid a columna para mejor stacking */
@@ -212,4 +200,4 @@
     .form-grid .form-group .input {
         width: 40vw;
     }
-}
+} 

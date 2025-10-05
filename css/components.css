@@ -11,19 +11,19 @@
  * - :focus   → resalta el borde con color primario
  ****************************************************/
 /* Estilo general de campos de entrada */
-.input {
+/* .input {
     padding: 0.6rem;
     border: 0.063rem outset var(--color-muted);
     border-radius: 0.375rem;
     font-size: 1.25rem;
     color: var(--color-muted);
-}
+} */
 /* Estados de foco para accesibilidad */
-.input:focus,
+/* .input:focus,
 .select:focus{
   outline: 2px solid var(--color-primary);
   outline-offset: 2px;
-}
+} */
 
 
 /****************************************************
@@ -40,14 +40,14 @@
  * - .btn.small      → botón diminuto con fuente reducida
  ****************************************************/
 /* Estilo base para todos los botones */
-.btn {
+/* .btn {
     border: none;
     border-radius: 6px;
     padding: 0.6rem;
     cursor: pointer;
     font-size: 1.25rem;
     transition: background 0.2s ease, transform 0.1s ease;
-}
+} */
 /* Efecto de hover para botones */
 .btn:hover {
     transform: translateY(-2px);
@@ -479,28 +479,13 @@ input[type="radio"]:checked + .radio-cuadrado::after {
     }
 /* Contenedor principal del login */
 .login-section {
-    align-items: center;
-    justify-content: center;
     background: var(--background-main);
 }
-/* Subtítulo del login (estilizado dentro del contenedor de login) */
-.login-section .subtitle{
-    font-size: 2rem;
-    text-align: center;
-    font-weight: bold;
-}
-/* Contenedor del logo y títulos */
-.login-logo-container {
-    display: flex; 
-    flex-direction: column;
-    align-items: center;
-}
+
 /* Imagen del logo */
 .login-logo-container img {
     transition: opacity 0.3s ease-in-out;
     height: 16rem;
-    width: 20.5rem;
-    
 }
 /* Efecto hover en el logo (cambia imagen y opacidad) */
 .login-logo-container img:hover {
@@ -512,32 +497,30 @@ input[type="radio"]:checked + .radio-cuadrado::after {
 .login-logo {
     padding: 0 10rem;
 }
-/* Contenedor del formulario de login */
-.login-form-container {
-    margin: 0 3rem;
-    padding: 1.25rem;
-}
-/* Agrupación de inputs */
-.inputs-container {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    padding: 0 0 2.5rem;
-}
-/* Contenedor de los botones */
-.buttons-container {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-/* Contenedor del ícono de Google */
-.google-icon-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+
+/* Bootstrap form control integration for login */
+.input.form-control {
+    display: block;
+    width: 100%;
+    padding: 0.6rem;
+    font-size: 1.25rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--color-muted);
+    background-color: var(--white-000);
+    background-clip: padding-box;
+    border: 0.063rem outset var(--color-muted);
+    border-radius: 0.375rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
-
+.input.form-control:focus {
+    color: var(--color-muted);
+    background-color: var(--white-000);
+    border-color: var(--color-primary);
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(4, 79, 200, 0.25);
+}
 
 
 /****************************************************
@@ -1037,7 +1020,4 @@ Eliminar estos estilos una vez sea funcional la página.
 =========================================================== */
 .invisible {
     display: none !important;
-}
-.visible {
-    display: flex;
 }
