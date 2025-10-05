@@ -426,10 +426,8 @@ input[type="radio"] {
 /* Margen horizontal cuando se usa dentro de un grupo de checkboxes */
 .checkbox-group .radio-cuadrado{
     margin: 0 0.5rem;
-} 
-.checkbox-group .alingn-left{
-    padding: 0;
 }
+
 input[type="checkbox"] {
   accent-color: var(--color-primary); 
   cursor: pointer;
@@ -630,7 +628,7 @@ input[type="radio"]:checked + .radio-cuadrado::after {
     font-size: larger;
     color: var(--color-primary);
     font-weight: normal;    
-    /* text-align: center; */
+    text-align: center;
 }
 /* --- Estilo general de la tabla de metas --- */
 .metas-table {
@@ -799,6 +797,9 @@ input[type="radio"]:checked + .radio-cuadrado::after {
     font-size: 0.9rem;
 }
 
+.historial hr {
+    margin: 1rem 3rem;
+}
 
 
 /****************************************************
@@ -881,9 +882,6 @@ input[type="radio"]:checked + .radio-cuadrado::after {
 .block-center{
     padding: 0 2.5rem;
 }
-.alingn-left{
-    padding: 0;
-}
 /* --- Contenedor de grupo de preferencia (label + input/select) --- */
 .pref-group {
     display: flex;
@@ -893,11 +891,6 @@ input[type="radio"]:checked + .radio-cuadrado::after {
 }
 .pref-group label {
     flex: 1;
-}
-/* --- Formulario principal --- */
-.config-form {
-    display: flex;
-    flex-direction: column;
 }
 /* --- Bloques generales del formulario --- */
 .form-block {
@@ -915,10 +908,6 @@ input[type="radio"]:checked + .radio-cuadrado::after {
     border-radius: 6px;
     overflow: hidden;
     width: fit-content;
-}
-/* --- Variación sin borde para toggle --- */
-.without-border {
-    border: 0;
 }
 /* --- Opción de formato  --- */
 .format-option {
