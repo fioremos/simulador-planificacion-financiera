@@ -5,5 +5,6 @@
 - [Test Case 3 - Performance y Carga](./test-case-3.md)
 - [Test Case 4 - Accesibilidad Web](./test-case-4.md)
 - [Test Case 5 - Cross-Platform y Compatibilidad CSS](./test-case-5.md)
+- [Test Case 6 - Responsive - Migración a Bootstrap](./test-case-6.md)
 - [Test Case 7 - Implementación de Componente Avanzado Bootstrap (Offcanvas)](./test-case-7.md)
 - [Test Case 8 - Implementación de Componente Avanzado Bootstrap (Modal)](test-case-8.md)

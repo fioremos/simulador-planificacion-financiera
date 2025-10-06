@@ -92,7 +92,6 @@
    =============================== */
 * {
     padding: 0;
-    box-sizing: content-box;
 }
 
 
@@ -168,7 +167,7 @@ body:not(:has(:target)) .sidebar {
  */
 .principal-container {
     display: grid;
-    grid-template-columns: 300px 1fr;
+    grid-template-columns: auto;
     flex: 1;
     min-height: 0;
 }
@@ -301,6 +300,8 @@ body:not(:has(:target)) .sidebar {
 .content .card {
     padding: 1rem;
     height: 100%;
+    border: none;
+    color:var(--color-primary);
 }
 /*
  * ÍCONOS Y SUBTÍTULOS

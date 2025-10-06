@@ -22,10 +22,6 @@
         height: 5vh;
     }
 
-    /* Se ajusta el layout principal a una sola columna */
-    .principal-container {
-        grid-template-columns: auto;
-    }
 
     /* Espaciado alrededor de tarjetas para mejor visualización */
     .content .card {
@@ -59,10 +55,89 @@
     /* Gráfico de inversiones ocupa mayor parte de la pantalla */
     .inversiones-chart {
         width: 80vw;
-        height: auto;
     }
 }
 
+/* ===== VIDEO EDUCACION FINANCIERA ===== */
+
+/* =======================================
+        Desktop(>1440px)
+        Pantallas grandes
+        Optimización de video
+========================================= */
+
+@media (min-width: 1440px) {
+  .video-educacion-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+}
+
+/* ========================================================
+        Tablets (769px a 1024px)
+        Pantallas medianas
+        Ajuste de tamaño del video 
+======================================================== */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .video-educacion {
+        max-width: 90%;
+    }
+}
+/* ========================================================
+        Móviles y Tablets pequeñas (<= 768px)
+        Adaptación a dispositivos pequeños
+======================================================== */
+@media (max-width: 768px) {
+    .video-educacion {
+        width: 100%;
+        height: auto;
+    }
+
+    #video-tutorial {
+        padding: 1rem;
+    }
+
+    #video-tutorial .subtitle {
+        font-size: 1rem;
+    }
+}
+
+/* ===== PROGRESS META RESPONSIVE ===== */
+
+/* ========================================================
+        Tablets (769px a 1024px)
+        Pantallas medianas
+        Ajuste de tipografía y espaciado
+======================================================== */
+@media (min-width: 769px) and (max-width: 1024px){
+    .progreso-meta {
+        padding: 1.2rem;
+    }
+    .progreso-meta label {
+        font-size: 1.2rem; 
+    }
+    .meta-porcentaje {
+        font-size: 1rem;
+    }
+}
+
+/* ========================================================
+        Móviles y Tablets pequeñas (<= 768px)
+        Adaptación para espacio reducido
+======================================================== */
+@media (max-width: 768px) {
+    .progreso-meta {
+        padding: 0.8rem;
+    }
+
+    .progreso-meta label {
+        font-size: 0.95rem;
+    }
+
+    .meta-porcentaje {
+        font-size: 0.85rem;
+    }
+}
 
 /* ===========================
    Mobile (≤768px)
@@ -87,12 +162,6 @@
         width: 50vw;
     } 
 
-    /* Elimina márgenes y paddings del formulario de login para usar todo el espacio disponible */
-    .login-form-container {
-        margin: unset;
-        padding: unset;
-    }
-
     /* Ajusta subtítulo del login para legibilidad en pantallas pequeñas */
     .login-section .subtitle {
         font-size: 6vw;
@@ -102,33 +171,27 @@
         padding: unset;
     }
 
-    /* Aumenta tamaño de texto de inputs y botones en login */
-    .inputs-container .input,
-    .buttons-container .btn {
-        font-size: 4vw;
-    }
-
     /* Layout resumen cambia de grid a columna para mejor stacking */
-    .resumen-grid {
+    /* .resumen-grid {
         display: flex;
         flex-direction: column;
-    }
+    } */
 
     /* Se oculta una de las tarjetas del resumen para reducir ruido visual */
-    .resumen-grid .resumen-left .card {
+    /* .resumen-grid .resumen-left .card {
         display: none;
-    }
+    } */
 
     /* Gráfico del dashboard se adapta a ancho de pantalla */
     .dashboard-chart {
         height: auto;
-        width: 80vw;
+        width: 70vw;
     }
 
     /* Indicadores visuales se ocultan por limitación de espacio */
-    .gastos-indicadores {
+    /* .gastos-indicadores {
         display: none;
-    }
+    } */
 
     /* Las barras ocupan todo el ancho disponible */
     .gastos-bars .bar {
@@ -136,17 +199,9 @@
     }
 
     /* Contenedor de barras ajustado a ancho relativo */
-    .gastos-bars {
+    /* .gastos-bars {
         width: 40vw;
-    }
-
-    /* Layout de gastos adaptado para que los elementos se centren y aprovechen el alto */
-    .gastos-grid {
-        display: flex;
-        flex-direction: row;
-        align-items: stretch;
-        justify-content: center;
-    }
+    } */
 
     /* Se eliminan paddings del formulario para más espacio útil */
     .form-grid {
