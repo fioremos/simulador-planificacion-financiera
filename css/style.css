@@ -154,8 +154,6 @@ body {
     display: grid;
     grid-template-columns: 280px 1fr;
     flex: 1;
-    min-height: 92.5vh;
-    max-height: 92.5vh;
 }
 
 /* ---------- Header / Encabezado ---------- */
@@ -279,7 +277,6 @@ body {
     flex-direction: column;
     justify-content: space-between;
     overflow: auto; 
-    height: 92.5vh;
 } 
 /*
  * CONTENIDO

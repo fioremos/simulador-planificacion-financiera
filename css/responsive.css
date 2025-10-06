@@ -4,9 +4,7 @@
    Ajustes para pantallas medianas
 =========================== */
 @media (min-width: 1660px) {
-    .card#video-tutorial{
-        display: none;
-    }
+
 }
 
 /* ===========================
@@ -59,6 +57,10 @@
         grid-template-columns: auto;
    }
 
+   .principal-section {
+        max-height: none;
+    }
+
     /* Se muestra el menú del encabezado para navegación alternativa */
     .header-menu {
         display: unset;
@@ -107,6 +109,14 @@
 
     .movimientos-table th:first-child, .movimientos-table  td:first-child {
         display: none;
+    }
+
+    .card#ingresos-gastos-card{
+        height: 100vh;
+    }
+
+    .card#inversiones-card-table{
+        height: 60vh;
     }
 
     .card#reportes-estadisticas-container, 
@@ -318,5 +328,19 @@
     }
     .meta-porcentaje {
         font-size: 1rem;
+    }
+}
+
+/* ===========================
+   Non-web (≤650px)
+   Ajustes para pantallas horizontales
+=========================== */
+@media screen and (min-height: 650) {
+    .card#ingresos-gastos-card {
+        height: unset;
+    }
+
+    .card#inversiones-card-table {
+        height: unset;
     }
 }
