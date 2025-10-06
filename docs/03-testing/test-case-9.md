@@ -44,11 +44,13 @@ Validar la integración, compatibilidad y comportamiento responsive del primer c
 
 | Componente | Compatibilidad Global | Navegadores compatibles | Limitaciones |
 |------------|-----------------------|-------------------------|--------------|
-| <video>  | 96.37%  | Chrome, Edge, Safari, Firefox, Opera | Totalmente soportado, no requiere plugins.|
-| <track>  | 95.53%  | Chrome, Safari, Firefox, Edge  | No compatible con modo fullscreen en navegadores antiguos.|
+|  `<video>`  | 96.37%  | Chrome, Edge, Safari, Firefox, Opera | Totalmente soportado, no requiere plugins.|
+|  `<track> `  | 95.53%  | Chrome, Safari, Firefox, Edge  | No compatible con modo fullscreen en navegadores antiguos.|
 
 - **W3C HTML Validator:** Validar que la implementación del componente sea conforme a HTML5 y no genere errores o warnings de semántica.  
+
   **Capturas necesarias:**  
+
  ![W3C HTML Validator](imagenes/test-case-9/W3C-HTML-Validator.png)
 
  **Resultado general:** Se detectaron errores menores estructurales, relacionados con la organización del documento, no con los componentes avanzados implementados.
@@ -65,12 +67,13 @@ Validar la integración, compatibilidad y comportamiento responsive del primer c
 ---
 
 ## Performance en Mobile
+
 - Medir el impacto del componente en la **performance total de la página** con PageSpeed.  
+
   **Capturas necesarias:**  
 
   Resultados del test de Google PageSpeed para **mobile**.
   ![General](imagenes/test-case-9/pagespeed-general.png) 
-  Gráfico de puntuación general.  
 
   ![Accessibility](imagenes/test-case-9/pagespeed-accessibility.png)
   ![Best Practices](imagenes/test-case-9/pagespeed-best-practices.png)

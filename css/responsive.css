@@ -65,6 +65,19 @@
 
 /* ===== VIDEO EDUCACION FINANCIERA ===== */
 
+@media (min-width: 1440px) {
+  .video-educacion-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .video-educacion {
+        max-width: 90%;
+    }
+}
+
 @media (max-width: 768px) {
     .video-educacion {
         width: 100%;
@@ -80,20 +93,20 @@
     }
 }
 
-@media (min-width: 769px) and (max-width: 1024px) {
-    .video-educacion {
-        max-width: 90%;
+/* ===== PROGRESS META RESPONSIVE ===== */
+
+@media (min-width: 769px) and (max-width: 1024px){
+    .progreso-meta {
+        padding: 1.2rem;
+    }
+    .progreso-meta label {
+        font-size: 1.2rem; 
+    }
+    .meta-porcentaje {
+        font-size: 1rem;
     }
 }
 
-@media (min-width: 1440px) {
-  .video-educacion-container {
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-}
-
-/* ===== PROGRESS META RESPONSIVE ===== */
 @media (max-width: 768px) {
     .progreso-meta {
         padding: 0.8rem;
@@ -105,17 +118,6 @@
 
     .meta-porcentaje {
         font-size: 0.85rem;
-    }
-}
-@media (min-width: 769px) and (max-width: 1024px){
-    .progreso-meta {
-        padding: 1.2rem;
-    }
-    .progreso-meta label {
-        font-size: 1.2rem; 
-    }
-    .meta-porcentaje {
-        font-size: 1rem;
     }
 }
 

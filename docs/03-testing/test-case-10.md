@@ -43,10 +43,10 @@ Validar la integración, compatibilidad y comportamiento responsive de component
   ![caniuse-details](imagenes/test-case-10/caniuse-details.png)
   ![canisue-summary](imagenes/test-case-10/caniuse-summary.png)
 
-  | Componente | Compatibilidad Global | Navegadores compatibles | Limitaciones |
+| Componente | Compatibilidad Global | Navegadores compatibles | Limitaciones |
 |------------|-----------------------|-------------------------|--------------|
-| <progress>  | 96.36%| Chrome, Safari, Firefox, Edge, Opera | No soporta estado “indeterminate” en algunos navegadores antiguos.|
-| <details>/ <summary>  | 95.87%/ 95.1%  | Chrome, Safari, Firefox, Edge, Opera  | En algunos navegadores antiguos no se estilizan correctamente o no son interactivos.| 
+| `<progress> ` | 96.36% | Chrome, Safari, Firefox, Edge, Opera | No soporta estado “indeterminate” en algunos navegadores antiguos.|
+| `<details>/ <summary>` | 95.87%/ 95.1%  | Chrome, Safari, Firefox, Edge, Opera | En algunos navegadores antiguos no se estilizan correctamente o no son interactivos.| 
 
 - **W3C HTML Validator:** Validar que la implementación del componente sea conforme a HTML5 y no genere errores o warnings de semántica.  
    **Capturas necesarias:**  
@@ -66,13 +66,14 @@ Validar la integración, compatibilidad y comportamiento responsive de component
 ---
 
 ## Performance en Mobile
-- Medir el impacto del componente en la **performance total de la página** con PageSpeed.  
-  **Capturas necesarias:**  
 
-  Resultados del test de Google PageSpeed para **mobile**.
+- Medir el impacto del componente en la **performance total de la página** con PageSpeed.
+
+  **Capturas necesarias:**  
 
   Gráfico de puntuación general
 
+Resultados del test de Google PageSpeed para **mobile**
   ![General](imagenes/test-case-10/pagespeed-general.png) 
   
 
