@@ -304,3 +304,8 @@ body {
     margin: 0;
     font-size: 2rem;
 }
+
+a {
+  text-decoration: none; /* quita el subrayado */
+  color: inherit; /* hereda el color del texto del elemento padre */
+}
