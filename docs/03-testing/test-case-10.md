@@ -95,7 +95,7 @@ Resultados del test de Google PageSpeed para **mobile**
 
 ![Iphone 14 Pro - Portait](imagenes/test-case-10/iphone-progress.png)
 
-[!Iphone 14 Pro - Landscape](imagenes/test-case-10/iphone-progress-landscape.png)
+![Iphone 14 Pro - Landscape](imagenes/test-case-10/iphone-progress-landscape.png)
 
 **iPhone 14 Pro - Details/Summary**
 
