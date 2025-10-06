@@ -99,3 +99,74 @@
     margin-top: 80px;
     color: #ffffff;
 }
+
+
+/* =========================
+   MODAL DE BOOTSTRAP
+   Personalización visual del componente modal
+========================= */
+
+/* Estilo general del modal
+   Da diseño al contenedor principal del modal (bordes, sombra, fondo) */
+.modal-content {
+    margin-top: 5rem;
+    border-radius: 18px;
+    box-shadow: 0 8px 32px rgba(13, 110, 253, 0.18);
+    border: none;
+    background: #f8fafd;
+}
+
+/* Header del modal
+   Da color y bordes redondeados al encabezado del modal */
+.modal-header {
+    background: linear-gradient(90deg, #0d6efd 60%, #5bc0de 100%);
+    color: #fff;
+    border-top-left-radius: 18px;
+    border-top-right-radius: 18px;
+    border-bottom: none;
+}
+
+/* Título del modal
+   Estiliza el texto del título del modal */
+.modal-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+/* Botón de cierre del modal
+   Cambia el color y opacidad del botón de cerrar */
+.btn-close {
+    filter: invert(1);
+    opacity: 0.8;
+}
+.btn-close:hover {
+    opacity: 1;
+}
+
+/* Cuerpo del modal
+   Ajusta el padding y color del contenido principal del modal */
+.modal-body {
+    padding: 2rem 1.5rem;
+    color: #222;
+}
+
+/* Footer del modal
+   Da color de fondo y bordes redondeados a la parte inferior del modal */
+.modal-footer {
+    background: #eaf1f8;
+    border-bottom-left-radius: 18px;
+    border-bottom-right-radius: 18px;
+    border-top: none;
+}
+
+/* Botones del modal
+   Personaliza los botones de acción del modal */
+.modal-footer .btn-primary {
+    background: #0d6efd;
+    border: none;
+}
+.modal-footer .btn-secondary {
+    background: #6c757d;
+    border: none;
+}
