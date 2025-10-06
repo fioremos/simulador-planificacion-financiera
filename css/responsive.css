@@ -1,4 +1,15 @@
 /* ===========================
+   Non-web > 1440px)
+   Tablets / Laptops pequeños
+   Ajustes para pantallas medianas
+=========================== */
+@media (min-width: 1440px) {
+  .reportes-chart {
+    max-height: 200px;
+  }
+}
+
+/* ===========================
    Non-web (≤1024px)
    Tablets / Laptops pequeños
    Ajustes para pantallas medianas
@@ -34,7 +45,6 @@
 
     /* Se cambia la tabla por layout tipo columna para mejor legibilidad en pantallas medianas */
     .ingresos-gastos-table {
-        font-size: 3vw;
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
@@ -60,6 +70,14 @@
     .inversiones-chart {
         width: 80vw;
     }
+
+    .movimientos-table th:first-child, .movimientos-table  td:first-child {
+        display: none;
+    }
+
+    .card#reportes-estadisticas-container{
+        overflow-y: auto;
+    }
 }
 
 
@@ -68,7 +86,7 @@
    Tablets chicas / Smartphones grandes
    Optimización para navegación táctil
 =========================== */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 767px) {
 
     /* Elimina scroll horizontal innecesario */
     html, body {
@@ -109,7 +127,7 @@
     /* Gráfico del dashboard se adapta a ancho de pantalla */
     .dashboard-chart {
         height: auto;
-        width: 70vw;
+        width: 50vw;
     }
 
     /* Indicadores visuales se ocultan por limitación de espacio */
@@ -176,7 +194,13 @@
         width: 2.25vw;
         height: 2.25vw;
     }
-
+    
+    .table-csm{
+        font-size: 0.8rem;
+    }
+    .pref-group label {
+        font-size: 0.8rem;
+    }
 }
 
 
@@ -195,6 +219,7 @@
     p {
       margin: 0;  
     }
+
 }
 
 
@@ -223,8 +248,13 @@
 
 @media (min-width: 1440px) {
   .video-educacion-container {
-    max-width: 1200px;
-    margin: 0 auto;
+    max-width: 900px;
+    max-height: 500px;
+  }
+
+  .video-educacion{
+    max-width: 900px;
+    max-height: 500px;
   }
 }
 
@@ -241,6 +271,15 @@
     .meta-porcentaje {
         font-size: 0.85rem;
     }
+
+    .metas-chart{
+        display: none;
+    }
+
+    .card#metas-card-graph{
+        gap:0.1rem
+    } 
+
 }
 @media (min-width: 769px) and (max-width: 1024px){
     .progreso-meta {

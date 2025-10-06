@@ -292,13 +292,14 @@ body {
     border: none;
     color:var(--color-primary);
 }
+
 /*
  * ÍCONOS Y SUBTÍTULOS
  * Estiliza elementos destacados como íconos o subtítulos
  * dentro del contenedor de contenido.
  */
 .content .subtitle {
-    margin: 0 0 1rem;
+    margin: 0;
     font-size: 2rem;
     font-weight: normal;
 }
