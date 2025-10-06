@@ -81,7 +81,7 @@
 /* ========================================================
         Tablets (769px a 1024px)
         Pantallas medianas
-        Ajuste de video
+        Ajuste de tamaño del video 
 ======================================================== */
 @media (min-width: 769px) and (max-width: 1024px) {
     .video-educacion {

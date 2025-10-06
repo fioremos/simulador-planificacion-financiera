@@ -675,7 +675,7 @@ input[type="radio"]:checked + .radio-cuadrado::after {
  * - .metas-card-label        → etiquetas dentro de tarjetas
  * - .metas-card-graph-button → botones relacionados con gráficos
  * - .progreso-meta           → barra de progreso
- * - .details/summary         → componente desplegable estilizado 
+ * - .details/summary         → componente desplegable
  ****************************************************/
  /* --- Celdas de datos en la tabla de metas --- */
 .metas-table td{
