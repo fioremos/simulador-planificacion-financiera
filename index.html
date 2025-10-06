@@ -244,6 +244,24 @@
                             </table>
                         </div>
                     </section>
+
+                    <!-- === VIDEO HTML5 COMPONENTE AVANZADO === -->
+                    <section id= "video-tutorial" class="card">
+                        <div>
+                            <div>
+                                <p class="subtitle">Educación Financiera para Principiantes</p>
+                            </div>
+
+                            <div class="video-educacion-container">
+                            <video controls class="video-educacion">
+                                <source src="media/educacion_financiera.mp4" type="video/mp4">
+                                <track kind="subtitles" src="media/subtitulos_financieros.vtt" srclang="es" label="Español" default>
+                                Tu navegador no soporta el video
+                            </video>
+                            </div>
+                        </div>
+                    </section>
+
                 </main>
             </div>
         </section>
@@ -522,9 +540,33 @@
                             </p>
                         </div>
 
+                        <!-- === PROGRESS COMPONENTE HTML5 AVANZADO === -->
+                         <div class="card progreso-meta">
+                            <label for="meta-ahorro">Progreso hacia la meta:</label>
+                            <progress id="meta-ahorro" value="70" max="100">70%</progress>
+                            <p class="meta-porcentaje">70% completado</p>
+                         </div>
+
                         <div class="metas-card-graph-button">
                             <button class="btn btn-inverse btn-blue small">Seleccionar objetivo</button>
                         </div>
+                    </section>
+
+                    <!-- === DETAILS/SUMMARY COMPONENTE HTML5 AVANZADO === -->
+                    <section id="tips-financieros" class="card">
+                        <h2 class="subtitle">Consejos de Ahorro</h2>
+                        <details>
+                            <summary> 
+                                <p class="large">¿Cómo empezar a ahorrar?</p>
+                             </summary>
+                            <p class="medium">Comienza destinando el 10% de tus ingresos mensuales a un fondo separado. Automatiza el ahorro para no olvidarlo.</p>
+                        </details>
+                        <details>
+                            <summary>
+                                <p class="large">¿Cómo controlar tus gastos?</p>
+                            </summary>
+                            <p class="medium">Utiliza categorías y revisa tus gastos semanales para identificar patrones. Animo!!</p>
+                        </details>
                     </section>
                 </main>
             </div>

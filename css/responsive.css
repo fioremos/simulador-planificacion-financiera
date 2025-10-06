@@ -63,6 +63,86 @@
     }
 }
 
+/* ===== VIDEO EDUCACION FINANCIERA ===== */
+
+/* =======================================
+        Desktop(>1440px)
+        Pantallas grandes
+        Optimización de video
+========================================= */
+
+@media (min-width: 1440px) {
+  .video-educacion-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+}
+
+/* ========================================================
+        Tablets (769px a 1024px)
+        Pantallas medianas
+        Ajuste de tamaño del video 
+======================================================== */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .video-educacion {
+        max-width: 90%;
+    }
+}
+/* ========================================================
+        Móviles y Tablets pequeñas (<= 768px)
+        Adaptación a dispositivos pequeños
+======================================================== */
+@media (max-width: 768px) {
+    .video-educacion {
+        width: 100%;
+        height: auto;
+    }
+
+    #video-tutorial {
+        padding: 1rem;
+    }
+
+    #video-tutorial .subtitle {
+        font-size: 1rem;
+    }
+}
+
+/* ===== PROGRESS META RESPONSIVE ===== */
+
+/* ========================================================
+        Tablets (769px a 1024px)
+        Pantallas medianas
+        Ajuste de tipografía y espaciado
+======================================================== */
+@media (min-width: 769px) and (max-width: 1024px){
+    .progreso-meta {
+        padding: 1.2rem;
+    }
+    .progreso-meta label {
+        font-size: 1.2rem; 
+    }
+    .meta-porcentaje {
+        font-size: 1rem;
+    }
+}
+
+/* ========================================================
+        Móviles y Tablets pequeñas (<= 768px)
+        Adaptación para espacio reducido
+======================================================== */
+@media (max-width: 768px) {
+    .progreso-meta {
+        padding: 0.8rem;
+    }
+
+    .progreso-meta label {
+        font-size: 0.95rem;
+    }
+
+    .meta-porcentaje {
+        font-size: 0.85rem;
+    }
+}
 
 /* ===========================
    Mobile (≤768px)
