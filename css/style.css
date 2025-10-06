@@ -132,44 +132,28 @@ body {
  * Se asegura de que ocupe al menos toda la altura de la ventana.
  */
 .principal-section {
-    display: none;
+    display: flex;
     flex-direction: column;
-    min-height: 100vh;
+    max-height: 92.5vh;
 }
 
-
-/* NUEVO: Manejo de secciones mediante hash en la URL */
-/* NUEVO: Manejo de secciones mediante hash en la URL */
-
-/* Muestra solo la sección cuyo id coincide con el hash */
-.principal-section:target {
-  display: block;
-}
-
-/* Si no hay hash, muestra login por defecto */
-body:not(:has(:target)) #login {
-  display: block;
-}
-
-/* Oculta header y sidebar cuando login está activo o cuando no hay hash (pantalla inicial) */
-body:has(#login:target) #main-header,
-body:has(#login:target) .sidebar,
-body:not(:has(:target)) #main-header,
-body:not(:has(:target)) .sidebar {
-    display: none !important;
-}
-
-/*
- * PRINCIPAL CONTAINER
- * Divide la pantalla horizontalmente entre:
- * - Sidebar a la izquierda (300px)
- * - Contenido principal al resto del espacio disponible
- */
 .principal-container {
     display: grid;
     grid-template-columns: auto;
     flex: 1;
     min-height: 0;
+}
+
+/*
+ * PRINCIPAL MAIN 
+ * Divide la pantalla horizontalmente entre:
+ * - Sidebar a la izquierda (300px)
+ * - Contenido principal al resto del espacio disponible
+ */
+.principal-main {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    flex: 1;
 }
 
 
@@ -226,6 +210,8 @@ body:not(:has(:target)) .sidebar {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    overflow: hidden;
+    height: 92.5vh;
 }
 /*
  * LISTA DE NAVEGACIÓN
@@ -274,11 +260,11 @@ body:not(:has(:target)) .sidebar {
     justify-content: center;
     padding: 0 0.625rem;
 }
-
 .sidebar-icon img {
     width: 2rem;
     height: 2rem;
 }
+
 
 /* ---------- Contenido principal ---------- */
 /*
@@ -291,6 +277,7 @@ body:not(:has(:target)) .sidebar {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    overflow: auto; 
 } 
 /*
  * CONTENIDO
@@ -309,11 +296,20 @@ body:not(:has(:target)) .sidebar {
  * dentro del contenedor de contenido.
  */
 .content .subtitle {
-    margin: 0 0 1rem;
+    margin: 0;
     font-size: 2rem;
     font-weight: normal;
 }
 .content .icon{
     margin: 0;
     font-size: 2rem;
+}
+/*
+ * ENLACES SIN ESTILO VISUAL
+ * Remueve el subrayado y hereda el color del texto del elemento padre
+ * para mantener la coherencia visual dentro del diseño.
+ */
+a {
+  text-decoration: none; 
+  color: inherit; 
 }

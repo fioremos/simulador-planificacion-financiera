@@ -1,6 +1,7 @@
 /* =========================
    Header del offcanvas
    Da estilo al encabezado del menú lateral móvil (offcanvas)
+========================= */
 .offcanvas-header {
     display: flex;
     justify-content: space-between;
@@ -11,7 +12,6 @@
     border-bottom: 2px solid #0d6efd;
     box-shadow: 0 2px 8px rgba(13, 110, 253, 0.08);
 }
-
 /* Título del header del offcanvas */
 .offcanvas-title {
     font-size: 1.3rem;
@@ -19,7 +19,6 @@
     letter-spacing: 0.5px;
     color: #ffffff;
 }
-
 /* Botón de cierre del offcanvas */
 .btn-close {
     filter: invert(1);
@@ -30,18 +29,24 @@
     opacity: 1;
 }
 
+
 /* =========================
    Body del offcanvas
    Da estilo al cuerpo del menú lateral móvil (offcanvas)
+========================= */
 .offcanvas-body {
     padding: 1.2rem 0.5rem 1.2rem 1.5rem;
     background: #76AAFD;
-    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
+
 
 /* =========================
    Ítems del menú del offcanvas
    Da estilo a cada opción/lista del menú lateral móvil
+========================= */
 .list-group-item {
     border: none;
     padding: 0.75rem 0.50rem;
@@ -54,7 +59,6 @@
     cursor: pointer;
     transition: background 0.2s, color 0.2s;
 }
-
 /* Ítem activo o al pasar el mouse */
 .list-group-item:hover,
 .list-group-item:focus {
@@ -62,8 +66,10 @@
     color: #ffffff;
 }
 
+
 /* =========================
    Íconos dentro de los ítems del menú
+========================= */
 .list-group-item .sidebar-icon img {
     width: 22px;
     height: 22px;
@@ -71,13 +77,14 @@
     filter: grayscale(0.5);
     transition: filter 0.2s;
 }
-
 .list-group-item:hover .sidebar-icon img {
     filter: grayscale(0) brightness(1.2);
 }
 
+
 /* =========================
    Enlaces dentro de los ítems del menú
+========================= */
 .list-group-item a {
     color: inherit;
     text-decoration: none;
@@ -86,19 +93,11 @@
     align-items: center;
 }
 
-/* =========================
-   Último ítem del menú (ej: cerrar sesión)
-   Separa visualmente el último ítem del resto
-.list-group-item:last-child {
-    margin-top: 80px;
-    color: #ffffff;
-}
-
 
 /* =========================
    MODAL DE BOOTSTRAP
    Personalización visual del componente modal
-
+========================= */
 /* Estilo general del modal
    Da diseño al contenedor principal del modal (bordes, sombra, fondo) */
 .modal-content {
@@ -108,7 +107,6 @@
     border: none;
     background: #f8fafd;
 }
-
 /* Header del modal
    Da color y bordes redondeados al encabezado del modal */
 .modal-header {
@@ -118,7 +116,6 @@
     border-top-right-radius: 18px;
     border-bottom: none;
 }
-
 /* Título del modal
    Estiliza el texto del título del modal */
 .modal-title {
@@ -126,7 +123,6 @@
     font-weight: 600;
     letter-spacing: 0.5px;
 }
-
 /* Botón de cierre del modal
    Cambia el color y opacidad del botón de cerrar */
 .btn-close {
@@ -136,14 +132,14 @@
 .btn-close:hover {
     opacity: 1;
 }
-
 /* Cuerpo del modal
    Ajusta el padding y color del contenido principal del modal */
 .modal-body {
     padding: 2rem 1.5rem;
     color: #222;
+    overflow-y: auto;
+    flex: 1 1 auto;
 }
-
 /* Footer del modal
    Da color de fondo y bordes redondeados a la parte inferior del modal */
 .modal-footer {
@@ -152,7 +148,6 @@
     border-bottom-right-radius: 18px;
     border-top: none;
 }
-
 /* Botones del modal
    Personaliza los botones de acción del modal */
 .modal-footer .btn-primary {
@@ -163,6 +158,18 @@
     background: #6c757d;
     border: none;
 }
+/* Modal general */
+.modal-dialog {
+  margin: 1rem auto;
+}
+.modal-content .form-grid{
+    padding: 0;
+}
+/*
+ * CONTENIDO
+ * Contenedor del contenido principal del layout.
+ * Organiza internamente en columna y ajusta el fondo.
+ */
 .content .card {
     padding: 1rem;
     height: 100%;
@@ -170,6 +177,24 @@
     color:var(--color-primary);
 }
 
+.content .card p {
+    margin: 0;
+}
+
+
+/****************************************************
+ * BOTONES
+ * Estilos reutilizables para botones en toda la app.
+ * 
+ * - .btn            → estilo base (padding, bordes, hover)
+ * - .btn-primary    → botón principal (color primario)
+ * - .btn-secondary  → botón secundario (fondo blanco, borde gris)
+ * - .btn-inverse    → fondo neutro, texto blanco
+ * - .btn-small      → botón pequeño y claro
+ * - .btn-blue       → texto azul, padding reducido
+ * - .btn-image      → botón con ícono, centrado con flex
+ * - .btn.small      → botón diminuto con fuente reducida
+ ****************************************************/
 /* Estilo base para todos los botones */
 .btn {
     border: none;

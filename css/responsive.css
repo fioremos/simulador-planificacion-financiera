@@ -1,13 +1,88 @@
 /* ===========================
-   Non-web (≤1024px)
+   Non-web > 1660px)
    Tablets / Laptops pequeños
    Ajustes para pantallas medianas
 =========================== */
-@media screen and (max-width: 1023px) {
+@media (min-width: 1660px) {
+    .principal-section {
+        margin-top: 63px;
+        height: 92.5vh;
+    }
+    .principal-section#dashboard {
+        max-height: none;
+        height: unset;
+    }
+
+    .sidebar{
+        position: sticky;
+        top: 63px;
+        align-self: start;
+    }
+
+    .header-container{
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1000;
+    }
+
+    .spacer-header {
+        height: 63px;
+    }
+
+}
+
+/* ===========================
+   Non-web > 1440px)
+   Tablets / Laptops pequeños
+   Ajustes para pantallas medianas
+=========================== */
+@media (min-width: 1440px) {
+    .reportes-chart {
+        max-height: 200px;
+    }
+  
+    .video-educacion-container,
+    .video-educacion {
+    max-width: 100% !important;
+    width: 100% !important;
+    height: auto !important;
+    object-fit: contain !important;
+    }
+
+    /* Asegurá que todos los padres también limiten el overflow */
+    #video-tutorial,
+    #video-tutorial .card {
+    max-width: 100%;
+    }
+
+    .padre-flex {
+        display: flex;
+        flex-wrap: wrap;       /* ← clave para que no desborde */
+        max-width: 100%;
+    }
+}
+
+
+/* ===========================
+   Non-web (≤991px)
+   Tablets / Laptops pequeños
+   Ajustes para pantallas medianas
+=========================== */
+@media screen and (max-width: 991px) {
 
     /* Oculta la barra lateral para maximizar el espacio en pantalla */
     .sidebar {
-        display: none !important;
+        display: none;
+    }
+    
+   .principal-main {
+        grid-template-columns: auto;
+   }
+
+   .principal-section {
+        max-height: none;
     }
 
     /* Se muestra el menú del encabezado para navegación alternativa */
@@ -30,7 +105,6 @@
 
     /* Se cambia la tabla por layout tipo columna para mejor legibilidad en pantallas medianas */
     .ingresos-gastos-table {
-        font-size: 3vw;
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
@@ -56,38 +130,26 @@
     .inversiones-chart {
         width: 80vw;
     }
-}
 
-/* ===== VIDEO EDUCACION FINANCIERA ===== */
-
-/* =======================================
-        Desktop(>1440px)
-        Pantallas grandes
-        Optimización de video
-========================================= */
-
-@media (min-width: 1440px) {
-  .video-educacion-container {
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-}
-
-/* ========================================================
-        Tablets (769px a 1024px)
-        Pantallas medianas
-        Ajuste de tamaño del video 
-======================================================== */
-@media (min-width: 769px) and (max-width: 1024px) {
-    .video-educacion {
-        max-width: 90%;
+    .movimientos-table th:first-child, .movimientos-table  td:first-child {
+        display: none;
     }
-}
-/* ========================================================
-        Móviles y Tablets pequeñas (<= 768px)
-        Adaptación a dispositivos pequeños
-======================================================== */
-@media (max-width: 768px) {
+
+    .card#ingresos-gastos-card{
+        height: 100vh;
+    }
+
+    .card#inversiones-card-table{
+        height: 60vh;
+    }
+
+    .card#reportes-estadisticas-container, 
+    .card#historial-container,
+    .card#exportar-container,
+    .card#configuracion-container {
+        overflow-y: auto;
+    }
+
     .video-educacion {
         width: 100%;
         height: auto;
@@ -102,7 +164,6 @@
     }
 }
 
-/* ===== PROGRESS META RESPONSIVE ===== */
 
 /* ========================================================
         Tablets (769px a 1024px)
@@ -121,6 +182,7 @@
     }
 }
 
+
 /* ========================================================
         Móviles y Tablets pequeñas (<= 768px)
         Adaptación para espacio reducido
@@ -137,14 +199,24 @@
     .meta-porcentaje {
         font-size: 0.85rem;
     }
+
+    .metas-chart{
+        display: none;
+    }
+
+    .card#metas-card-graph{
+        gap:0.1rem
+    } 
+
 }
+
 
 /* ===========================
    Mobile (≤768px)
    Tablets chicas / Smartphones grandes
    Optimización para navegación táctil
 =========================== */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 767px) {
 
     /* Elimina scroll horizontal innecesario */
     html, body {
@@ -171,37 +243,20 @@
         padding: unset;
     }
 
-    /* Layout resumen cambia de grid a columna para mejor stacking */
-    /* .resumen-grid {
-        display: flex;
-        flex-direction: column;
-    } */
-
-    /* Se oculta una de las tarjetas del resumen para reducir ruido visual */
-    /* .resumen-grid .resumen-left .card {
-        display: none;
-    } */
 
     /* Gráfico del dashboard se adapta a ancho de pantalla */
     .dashboard-chart {
         height: auto;
-        width: 70vw;
+        width: 50vw;
     }
 
-    /* Indicadores visuales se ocultan por limitación de espacio */
-    /* .gastos-indicadores {
-        display: none;
-    } */
+
 
     /* Las barras ocupan todo el ancho disponible */
     .gastos-bars .bar {
         width: 100%;
     }
 
-    /* Contenedor de barras ajustado a ancho relativo */
-    /* .gastos-bars {
-        width: 40vw;
-    } */
 
     /* Se eliminan paddings del formulario para más espacio útil */
     .form-grid {
@@ -230,6 +285,7 @@
     }
 }
 
+
 /* ===========================
    Mobile (≤480px)
    Smartphones pequeños
@@ -252,7 +308,13 @@
         width: 2.25vw;
         height: 2.25vw;
     }
-
+    
+    .table-csm{
+        font-size: 0.8rem;
+    }
+    .pref-group label {
+        font-size: 0.8rem;
+    }
 }
 
 
@@ -266,5 +328,33 @@
     /* Inputs del formulario se ajustan a un ancho manejable para pantallas pequeñas */
     .form-grid .form-group .input {
         width: 40vw;
+    }
+
+    p {
+      margin: 0;  
+    }
+
+    .checkbox-group{
+        padding: 0 1.5rem;
+    }
+
+    .form-row .input {
+        font-size: 0.7rem;
+    }
+
+}
+
+
+/* ===========================
+   Non-web (≤650px)
+   Ajustes para pantallas horizontales
+=========================== */
+@media screen and (max-height: 650px) {
+    .card#ingresos-gastos-card {
+        height: unset;
+    }
+
+    .card#inversiones-card-table {
+        height: unset;
     }
 }
