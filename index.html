@@ -162,8 +162,8 @@
                 Pantalla inicial de la aplicación. 
                 Solo aquí se muestra el formulario para acceder o registrarse.
             ========================== -->
-        <section id="login" class="principal-section login-section visible justify-content-center align-items-center m-md-5">
-            <div class="card">
+        <section id="login" class="principal-section login-section visible justify-content-center align-items-center m-md-5 m-auto">
+            <div class="card  m-3 m-ms-4 m-md-5 p-3 p-ms-4 p-md-5">
                 <div class="login-logo-container d-flex flex-column align-items-center">
                     <div>
                         <img src="images/login/logo.png" alt="Logo FinGrow" class="login-logo">
@@ -237,7 +237,7 @@
                                             alt="Gráfico financiero">
                                     </div>
 
-                                    <div class="card mt-4 h-auto d-sm-none d-md-block">
+                                    <div class="card mt-4 h-auto d-none d-md-block">
                                         <p class="highlight">
                                             Ahorraste $280.000, el 20% de tu ingreso.<br>
                                             <span class="success">Este mes gastaste 12% menos.</span>
@@ -828,11 +828,11 @@
             <div class="principal-container">
                 <main class="content">
                     <section id="historial-container" class="card">
-                        <div>
+                        <div class="historial">
                             <h2 class="subtitle subtitle-center">Historial y Auditoría</h2>
                             <hr>
                         </div>
-                        <div>
+                        <div class="historial">
                             <form id="historial-form" class="form-grid">
                                 <!-- Fecha -->
                                 <div class="form-group without-margin">
@@ -851,7 +851,7 @@
                             <!--   Listado temporalmente generado de forma estática. 
                                         En el futuro, se generará dinámicamente mediante JavaScript 
                                         o consumiendo datos desde una API para reflejar contenido actualizado y dinámico. -->
-                            <ul class="historial-list p-0 mt-0">
+                            <ul class="historial-list p-md-5 p-2 mt-0">
                                 <li>
                                     <div class="row justify-content-around align-items-center contenido">
                                         <div class="col texto">
@@ -1052,7 +1052,7 @@
                                 <img src="images/iconos/usuario.png" class="icon-small" alt="Icono usuario">
                             </div>
 
-                            <form class="config-form">
+                            <form class="config-form d-flex flex-column">
                                 <div class="form-group">
                                     <label for="nombreC" class="sr-only">Nombre completo</label>
                                     <input id="nombreC" type="text" class="input" placeholder="Juan Perez">
@@ -1066,7 +1066,7 @@
                                     <input id="telefono" type="tel" class="input" placeholder="1122334455">
                                 </div>
 
-                                <div class="checkbox-group alingn-left">
+                                <div class="checkbox-group p-0">
                                     <div class="column">
                                         <div><input type="checkbox" id="verificacion"><label for="verificacion">Verificación
                                                 en 2 pasos</label></div>
@@ -1114,7 +1114,7 @@
                                         <label>Tamaño de Fuente</label>
                                     </div>
                                     <div>
-                                        <div class="format-toggle without-border">
+                                        <div class="format-toggle border-0">
                                             <button type="button" class="letter-option small">Pequeño</button>
                                             <button type="button" class="letter-option active medium">Mediano</button>
                                             <button type="button" class="letter-option large">Grande</button>
