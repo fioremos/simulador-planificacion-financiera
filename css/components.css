@@ -102,6 +102,7 @@
   outline-offset: 2px;
 }
 
+
 /****************************************************
  * TARJETAS / CARDS
  * Contenedores visuales con sombra y borde redondeado.
@@ -292,7 +293,6 @@
 }
 
 
-
 /****************************************************
  * ICONOS
  * Ajustes de tamaño para iconografía.
@@ -315,15 +315,13 @@
  * - .full-width    → campo que ocupa ambas columnas
  * - .form-actions  → contenedor de botones
  * Variantes:
- * - .inline, .without-margin, .thinner
+ * - .inline, .thinner
  ****************************************************/
 /* Contenedor principal del formulario en estructura de grilla */
 .form-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 0.5rem; 
     padding: 0 6rem 0 6rem;
-    height: 100%;
 }
 /* Agrupación de elementos del formulario (label + input/select) */
 .form-group {
@@ -332,10 +330,6 @@
     justify-content: center;
     gap: 0.2rem;
     margin-bottom: 1rem;
-}
-/* Variante del form-group sin margen inferior */
-.without-margin {
-    margin-bottom: 0;
 }
 /* Hace que un campo ocupe las 2 columnas del grid */
 .full-width {
@@ -364,7 +358,6 @@
     background-color: var(--color-primary);
     color: var(--white-000);
 }
-
 /* Contenedor de botones o acciones del formulario */
 .form-actions {
     grid-column: 1 / -1;
@@ -426,8 +419,7 @@ input[type="radio"] {
 /* Margen horizontal cuando se usa dentro de un grupo de checkboxes */
 .checkbox-group .radio-cuadrado{
     margin: 0 0.5rem;
-}
-
+} 
 input[type="checkbox"] {
   accent-color: var(--color-primary); 
   cursor: pointer;
@@ -464,16 +456,16 @@ input[type="radio"]:checked + .radio-cuadrado::after {
  ****************************************************/
  /* Oculta visualmente el elemento, pero lo mantiene accesible para lectores de pantalla */
  .sr-only {
-        position: absolute;
-        width: 1px;
-        height: 1px;
-        padding: 0;
-        margin: -1px;
-        overflow: hidden;
-        clip: rect(0, 0, 0, 0);
-        white-space: nowrap;
-        border: 0;
-    }
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
 /* Contenedor principal del login */
 .login-section {
     background: var(--background-main);
@@ -546,12 +538,7 @@ input[type="radio"]:checked + .radio-cuadrado::after {
     font-size: 2rem;
     color: var(--color-primary);
 }
-/* --- Sección de resumen financiero en grid --- */
-/* .resumen-grid {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 1rem;
-} */
+
 /* --- Tarjetas del resumen financiero (estilo base) --- */
 .resumen-grid .card {
     padding: 0 0 0 1rem;
@@ -563,44 +550,34 @@ input[type="radio"]:checked + .radio-cuadrado::after {
 }
 /* --- Ajuste superior y padding de la tarjeta en la columna izquierda --- */
 .resumen-grid .resumen-left .card {
-    /* margin-top: 1.4rem;
-    height: auto; */
+
     padding: 0.8rem;
 }
 .resumen-grid .resumen-right .card p {
-    /* margin-top: 1.4rem;
-    height: auto; */
-    margin: 1rem 0;
-}
 
+    margin: 0;
+}
 /* --- Video Educativo --- */
 .video-educacion {
-    width: 100%;
-    max-width: 100%;
-    height: auto;
-    border-radius:  0.75rem;
-    box-shadow: 0 0.25rem 0.625rem rgba(0, 0, 0, 0.1);
-    display: block;
-    margin: 1rem auto;
-}
-.video-educacion-container {
-    position: relative;
-    width: 100%;
-    padding-bottom: 56.25%; 
-    height: 0;
-    overflow: hidden;
-    border-radius: 0.75rem;
-    box-shadow: 0 0.25rem 0.625rem rgba(0, 0, 0, 0.1);
-}
-
-.video-educacion-container video {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    display: block;
+    object-fit: cover; /* o 'contain' según lo que prefieras */
 }
-
+.video-educacion-container {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* 16:9 */
+    height: 0;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
 #video-tutorial {
     text-align: center;
     padding: 1.5rem;
@@ -645,7 +622,6 @@ input[type="radio"]:checked + .radio-cuadrado::after {
 }
 
 
-
 /****************************************************
  * SECCIÓN: METAS DE AHORRO
  * Vista para gestionar metas de ahorro con tablas y gráficos.
@@ -672,7 +648,7 @@ input[type="radio"]:checked + .radio-cuadrado::after {
     font-size: larger;
     color: var(--color-primary);
     font-weight: normal;    
-    text-align: center;
+    text-align: center; 
 }
 /* --- Estilo general de la tabla de metas --- */
 .metas-table {
@@ -692,41 +668,22 @@ input[type="radio"]:checked + .radio-cuadrado::after {
 .metas-table tbody tr:hover {
     background-color: var(--neutral-200);
 }
-/* --- Contenedor para botones dentro de tarjetas de metas, alineados a la derecha --- */
-/* .metas-card-table-button{
-    display: flex;
-    justify-content: flex-end;
-} */
 /* --- Estilo para el gráfico dentro de metas (50% ancho y altura fija) --- */
 .metas-chart{  
     height: 13rem;
 }
-/* --- Etiquetas dentro de las tarjetas de metas, con padding y centrado --- */
-/* .metas-card-label{
-    padding: 0.5rem;
-    text-align: center;
-} */
-/* --- Contenedor para botones relacionados con gráficos, centrados --- */
-/* .metas-card-graph-button{
-    display: flex;
-    justify-content: center;
-} */
-  
 /* --- PROGRESO DE META DE AHORRO --- */
-
 .progreso-meta {
     text-align: center;
     padding: 1rem;
     margin-top: 1rem;
 }
-
 .progreso-meta label {
     display: block;
     font-weight: 600;
     margin-bottom: 0.5rem;
     color: #333;
 }
-
 progress {
     width: 100%;
     height: 1.25rem;
@@ -734,26 +691,21 @@ progress {
     overflow: hidden;
     appearance: none;
 }
-
 progress::-webkit-progress-bar {
     background-color: #f1f1f1;
 }
-
 progress::-webkit-progress-value {
     background-color: #007bff; 
     transition: width 0.5s ease;
 }
-
 progress::-moz-progress-bar {
     background-color: #007bff;
 }
-
 .meta-porcentaje {
     font-size: 0.9rem;
     margin-top: 0.5rem;
     color: #555;
 }
-
 /* --- details/summary --- */
 details {
   background-color: #f9fafb;
@@ -763,18 +715,15 @@ details {
   padding: 0.8rem 1rem;
   transition: all 0.6s ease;
 }
-
 details[open] {
   background-color: #eef6ff;
   border-color: #90caf9;
 }
-
 summary {
   font-weight: 600;
   cursor: pointer;
   color: #333;
 }
-
 summary::-webkit-details-marker {
   color: #007bff; 
 }
@@ -795,7 +744,6 @@ summary::-webkit-details-marker {
 .inversiones-card-table-button button{
     margin-right: 1rem;
 }
-
 
 
 /****************************************************
@@ -859,7 +807,6 @@ summary::-webkit-details-marker {
 }
 
 
-
 /****************************************************
  * SECCIÓN: HISTORIAL
  * Lista de eventos pasados del usuario.
@@ -879,7 +826,7 @@ summary::-webkit-details-marker {
 /* Elementos de la lista con borde inferior para separar */
 .historial-list li {
     border-bottom: 1px solid var(--color-muted);
-    padding: 1rem 0;
+    padding: 0.5rem 0;
 }
 /* Punto (dot) que puede usarse como indicador o icono */
 .historial-list .dot {
@@ -905,10 +852,6 @@ summary::-webkit-details-marker {
 /* Estilo para la fecha, más pequeña */
 .historial-list .fecha {
     font-size: 0.9rem;
-}
-
-.historial hr {
-    margin: 1rem 3rem;
 }
 
 
@@ -1073,4 +1016,8 @@ Eliminar estos estilos una vez sea funcional la página.
 =========================================================== */
 .invisible {
     display: none !important;
+}
+
+.solo-contenido {
+    grid-template-columns: auto !important; /* Oculta sidebar y header del layout */
 }
