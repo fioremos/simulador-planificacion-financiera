@@ -102,6 +102,17 @@
                 }
 
             });
+
+             // 🔄 Cerrar offcanvas si la ventana cambia de tamaño (ej. rotación)
+            window.addEventListener('resize', () => {
+                const offcanvasEl = document.getElementById('sidebarOffcanvas');
+                if (offcanvasEl && offcanvasEl.classList.contains('show')) {
+                    const offcanvas = bootstrap.Offcanvas.getInstance(offcanvasEl);
+                    if (offcanvas) {
+                        offcanvas.hide();
+                    }
+                }
+            });
         });
     </script>
     <title>FinGrow</title>
@@ -301,7 +312,7 @@
 
                         <!-- Modal -->
                         <div class="modal fade" id="miModal" tabindex="-1" aria-labelledby="miModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
+                            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h1 class="modal-title fs-5" id="miModalLabel">Nuevo movimiento</h1>

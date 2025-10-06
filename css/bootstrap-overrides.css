@@ -216,6 +216,8 @@
 .modal-body {
     padding: 2rem 1.5rem;
     color: #222;
+    overflow-y: auto;
+    flex: 1 1 auto;
 }
 
 /* Footer del modal
@@ -236,4 +238,13 @@
 .modal-footer .btn-secondary {
     background: #6c757d;
     border: none;
+}
+
+/* Modal general */
+.modal-dialog {
+  margin: 1rem auto;
+}
+
+.modal-content .form-grid{
+    padding: 0;
 }
