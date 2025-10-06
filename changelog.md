@@ -7,8 +7,8 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 ## [Unreleased]
 
 ### Added  
-- [nombre de la branch] Tarea realizada.  
-  PR: [#1]() - @Usuario1 (rol asignado)  
+- [feature/esp-com-bootstrap-add-component] Integración de dos componentes bootstrap (Offcanvas y Modal)  
+  PR: [#62](https://github.com/fioremos/simulador-planificacion-financiera/pull/62) - @UlisesC11 (Especialista en Componentes Bootstrap)  
 
 ### Changed  
 - [nombre de la branch] Tarea realizada.  
