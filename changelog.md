@@ -7,8 +7,12 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 ## [Unreleased]
 
 ### Added  
+- [feature/esp-com-bootstrap-add-component] Integración de dos componentes bootstrap (Offcanvas y Modal)  
+  PR: [#62](https://github.com/fioremos/simulador-planificacion-financiera/pull/62) - @UlisesC11 (Especialista en Componentes Bootstrap)  
 - [feature/dev-frontend-bootstrap-update-migration] Migracion a Bootstrap.  
-  PR: [#1](https://github.com/fioremos/simulador-planificacion-financiera/pull/59) - @fioremos (Desarrollador Frontend/Bootstrap)  
+  PR: [#59](https://github.com/fioremos/simulador-planificacion-financiera/pull/59) - @fioremos (Desarrollador Frontend/Bootstrap)  
+- [feature/dev-comp-html-avanzados-add-componen] Implementación de componentes avanzados HTML.  
+  PR: [#58](https://github.com/fioremos/simulador-planificacion-financiera/pull/58#issue-3485697584) - @MNEscobar (Desarrollador de Componentes HTML Avanzados)  
 
 ### Changed  
 - [nombre de la branch] Tarea realizada.  
@@ -73,8 +77,8 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   PR: [#1]() - @Usuario1 (rol asignado) 
 
 ### Changed  
-- [feature/dev-comp-html-avanzados-add-componen] Implementación de componentes avanzados HTML.  
-  PR: [#58](https://github.com/fioremos/simulador-planificacion-financiera/pull/58#issue-3485697584) - @MNEscobar (Desarrollador de Componentes HTML Avanzados)  
+- [nombre de la branch] Tarea realizada.  
+  PR: [#1]() - @Usuario1 (rol asignado) 
 
 - [nombre de la branch] Tarea realizada.  
   PR: [#3]() - @Usuario3 (rol asignado)  

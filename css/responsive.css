@@ -7,7 +7,7 @@
 
     /* Oculta la barra lateral para maximizar el espacio en pantalla */
     .sidebar {
-        display: none;
+        display: none !important;
     }
 
     /* Se muestra el menú del encabezado para navegación alternativa */
