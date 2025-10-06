@@ -1,4 +1,4 @@
-# Test Case 9: Responsive – Implementación de Componente Avanzado HTML (1)
+# Test Case 10: Responsive – Implementación de Componente Avanzado HTML (2)
 
 ## Objetivo
 Validar la integración, compatibilidad y comportamiento responsive de componentes avanzados HTML implementado: **elemento `<progress>`, `<details/summary>`** en diferentes dispositivos.  
