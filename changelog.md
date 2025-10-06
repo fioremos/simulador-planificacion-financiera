@@ -7,8 +7,8 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 ## [Unreleased]
 
 ### Added  
-- [nombre de la branch] Tarea realizada.  
-  PR: [#1]() - @Usuario1 (rol asignado)  
+- [feature/dev-frontend-bootstrap-update-migration] Migracion a Bootstrap.  
+  PR: [#1](https://github.com/fioremos/simulador-planificacion-financiera/pull/59) - @fioremos (Desarrollador Frontend/Bootstrap)  
 
 ### Changed  
 - [nombre de la branch] Tarea realizada.  
