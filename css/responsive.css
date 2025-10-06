@@ -4,6 +4,32 @@
    Ajustes para pantallas medianas
 =========================== */
 @media (min-width: 1660px) {
+    .principal-section {
+        margin-top: 63px;
+        height: 92.5vh;
+    }
+    .principal-section#dashboard {
+        max-height: none;
+        height: unset;
+    }
+
+    .sidebar{
+        position: sticky;
+        top: 63px;
+        align-self: start;
+    }
+
+    .header-container{
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1000;
+    }
+
+    .spacer-header {
+        height: 63px;
+    }
 
 }
 
@@ -50,8 +76,6 @@
     .sidebar {
         display: none;
     }
-
-    
     
    .principal-main {
         grid-template-columns: auto;
@@ -335,7 +359,7 @@
    Non-web (≤650px)
    Ajustes para pantallas horizontales
 =========================== */
-@media screen and (min-height: 650) {
+@media screen and (max-height: 650px) {
     .card#ingresos-gastos-card {
         height: unset;
     }
