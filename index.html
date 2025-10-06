@@ -329,10 +329,12 @@
 
                     <!-- === VIDEO HTML5 COMPONENTE AVANZADO === -->
                     <section id= "video-tutorial" class="card">
-                        <div>
-                            <h2 class="subtitle">Educación Financiera para Principiantes</h2>
-                            <div class="video-educacion-container">
-                            <video controls class="video-educacion">
+                        <div class="padre-flex">
+                            <div>
+                                <p class="subtitle">Educación Financiera para Principiantes</p>
+                            </div>    
+                            <div class="video-educacion-container ratio ratio-16x">
+                            <video controls class="video-educacion w-100 h-100">
                                 <source src="media/educacion_financiera.mp4" type="video/mp4">
                                 <track kind="subtitles" src="media/subtitulos_financieros.vtt" srclang="es" label="Español" default>
                                 Tu navegador no soporta el video
@@ -838,14 +840,14 @@
                         <div class="historial">
                             <form id="historial-form" class="form-grid">
                                 <!-- Fecha -->
-                                <div class="form-group without-margin">
+                                <div class="form-group m-0">
                                     <label for="fechaHyA">Fecha:</label>
                                 </div>
-                                <div class="form-group without-margin">
+                                <div class="form-group m-0">
                                     <input type="date" id="fechaHyA" name="fecha" class="input">
                                 </div>
-                                <hr>
                             </form>
+                            <hr>
                         </div>
 
 
@@ -854,7 +856,7 @@
                             <!--   Listado temporalmente generado de forma estática. 
                                         En el futuro, se generará dinámicamente mediante JavaScript 
                                         o consumiendo datos desde una API para reflejar contenido actualizado y dinámico. -->
-                            <ul class="historial-list p-md-5 p-2 mt-0">
+                            <ul class="historial-list me-md- p-2 mt-0">
                                 <li>
                                     <div class="row justify-content-around align-items-center contenido">
                                         <div class="col texto">

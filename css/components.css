@@ -322,7 +322,6 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     padding: 0 6rem 0 6rem;
-    height: 100%;
 }
 /* Agrupación de elementos del formulario (label + input/select) */
 .form-group {
@@ -773,7 +772,7 @@ input[type="radio"]:checked + .radio-cuadrado::after {
 /* Elementos de la lista con borde inferior para separar */
 .historial-list li {
     border-bottom: 1px solid var(--color-muted);
-    padding: 1rem 0;
+    padding: 0.5rem 0;
 }
 /* Punto (dot) que puede usarse como indicador o icono */
 .historial-list .dot {
@@ -800,9 +799,7 @@ input[type="radio"]:checked + .radio-cuadrado::after {
 .historial-list .fecha {
     font-size: 0.9rem;
 }
-.historial hr {
-    margin: 1rem 3rem;
-}
+
 
 
 
@@ -984,31 +981,26 @@ Eliminar estos estilos una vez sea funcional la página.
    Componente: Video Educativo
    ================================ */
 
-.video-educacion {
-    width: 100%;
-    max-width: 100%;
-    height: auto;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    display: block;
-    margin: 1rem auto;
-}
 .video-educacion-container {
     position: relative;
     width: 100%;
-    padding-bottom: 56.25%; 
+    padding-bottom: 56.25%; /* 16:9 */
     height: 0;
     overflow: hidden;
     border-radius: 12px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.video-educacion-container video {
+.video-educacion {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    display: block;
+    object-fit: cover; /* o 'contain' según lo que prefieras */
 }
 
 #video-tutorial {

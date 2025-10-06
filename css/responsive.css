@@ -1,12 +1,43 @@
 /* ===========================
+   Non-web > 1660px)
+   Tablets / Laptops pequeños
+   Ajustes para pantallas medianas
+=========================== */
+@media (min-width: 1660px) {
+    .card#video-tutorial{
+        display: none;
+    }
+}
+
+/* ===========================
    Non-web > 1440px)
    Tablets / Laptops pequeños
    Ajustes para pantallas medianas
 =========================== */
 @media (min-width: 1440px) {
-  .reportes-chart {
-    max-height: 200px;
-  }
+    .reportes-chart {
+        max-height: 200px;
+    }
+  
+    .video-educacion-container,
+    .video-educacion {
+    max-width: 100% !important;
+    width: 100% !important;
+    height: auto !important;
+    object-fit: contain !important;
+    }
+
+    /* Asegurá que todos los padres también limiten el overflow */
+    #video-tutorial,
+    #video-tutorial .card {
+    max-width: 100%;
+    }
+
+    .padre-flex {
+        display: flex;
+        flex-wrap: wrap;       /* ← clave para que no desborde */
+        max-width: 100%;
+    }
 }
 
 /* ===========================
@@ -75,9 +106,13 @@
         display: none;
     }
 
-    .card#reportes-estadisticas-container{
+    .card#reportes-estadisticas-container, 
+    .card#historial-container,
+    .card#exportar-container,
+    .card#exportar-container {
         overflow-y: auto;
     }
+
 }
 
 
@@ -220,12 +255,20 @@
       margin: 0;  
     }
 
+    .checkbox-group{
+        padding: 0 1.5rem;
+    }
+
+    .form-row .input {
+        font-size: 0.7rem;
+    }
+
 }
 
 
 /* ===== VIDEO EDUCACION FINANCIERA ===== */
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
     .video-educacion {
         width: 100%;
         height: auto;
@@ -238,24 +281,6 @@
     #video-tutorial .subtitle {
         font-size: 1rem;
     }
-}
-
-@media (min-width: 769px) and (max-width: 1024px) {
-    .video-educacion {
-        max-width: 90%;
-    }
-}
-
-@media (min-width: 1440px) {
-  .video-educacion-container {
-    max-width: 900px;
-    max-height: 500px;
-  }
-
-  .video-educacion{
-    max-width: 900px;
-    max-height: 500px;
-  }
 }
 
 /* ===== PROGRESS META RESPONSIVE ===== */
