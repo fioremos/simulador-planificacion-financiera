@@ -34,28 +34,28 @@ Verificar la correcta integración, personalización y comportamiento responsive
 ## Capturas esperadas
 
 ### iPhone 14 pro - Portrait  
-![alt text](..\03-testing\imagenes\test-case-8\1-iphone14pro-portrait.png)
+![alt text](../03-testing/imagenes/test-case-8/1-iphone14pro-portrait.png)
 
 ### iPhone 14 pro - Landscape  
-![alt text](..\03-testing\imagenes\test-case-8\2-iphone14pro-landscape.png)
+![alt text](../03-testing/imagenes/test-case-8/2-iphone14pro-landscape.png)
 
 ### Samsung Galaxy S23 - Portrait  
-![alt text](..\03-testing\imagenes\test-case-8\3-samsungS23-portrait.png)
+![alt text](../03-testing/imagenes/test-case-8/3-samsungS23-portrait.png)
 
 ### Samsung Galaxy S23 - Landscape  
-![alt text](..\03-testing\imagenes\test-case-8\4-samsungS23-landscape.png)
+![alt text](../03-testing/imagenes/test-case-8/4-samsungS23-landscape.png)
 
 ### iPad Air - Portrait  
-![alt text](..\03-testing\imagenes\test-case-8\5-ipadAir-portrait.png)
+![alt text](../03-testing/imagenes/test-case-8/5-ipadAir-portrait.png)
 
 ### ipad Air - Landscape
-![alt text](..\03-testing\imagenes\test-case-8\6-ipadAir-landscape.png)
+![alt text](../03-testing/imagenes/test-case-8/6-ipadAir-landscape.png)
 
 ### Desktop  
-![alt text](..\03-testing\imagenes\test-case-8\7-desktop.png)
+![alt text](../03-testing/imagenes/test-case-8/7-desktop.png)
 
 ### DevTools - Performance
-![alt text](..\03-testing\imagenes\test-case-8\8-devtools-performance.png)
+![alt text](../03-testing/imagenes/test-case-8/8-devtools-performance.png)
 
 ---
 
@@ -74,44 +74,31 @@ Verificar la correcta integración, personalización y comportamiento responsive
 - SEO: 91 / 100 
 
 ### Captura del resultado global
-![alt text](..\03-testing\imagenes\test-case-8\9-pagespeed-resultado-global.png)
+![alt text](../03-testing/imagenes/test-case-8/9-pagespeed-resultado-global.png)
 
 ### Resultados antes y despues de la incorpotación del componente 
 
 ### Accesibilidad - Antes
-![alt text](..\03-testing\imagenes\test-case-8\10.1-pagespeed-accesibilidad-antes.png)
+![alt text](../03-testing/imagenes/test-case-8/10.1-pagespeed-accesibilidad-antes.png)
 
 ### Accesibilidad - Despues
-![alt text](..\03-testing\imagenes\test-case-8\10.2-pagespeed-accesibilidad-despues.png)
+![alt text](../03-testing/imagenes/test-case-8/10.2-pagespeed-accesibilidad-despues.png)
 
 ### Practicas recomendadas - Antes
-![alt text](..\03-testing\imagenes\test-case-8\11.1-pagespeed-practicas-recomendadas-antes.png)
+![alt text](../03-testing/imagenes/test-case-8/11.1-pagespeed-practicas-recomendadas-antes.png)
 
 ### Practicas recomendadas - Despues
-![alt text](..\03-testing\imagenes\test-case-8\11.2-pagespeed-practicas-recomendadas-despues.png)
+![alt text](../03-testing/imagenes/test-case-8/11.2-pagespeed-practicas-recomendadas-despues.png)
 
 ### SEO - Antes
-![alt text](..\03-testing\imagenes\test-case-8\12.1-pagespeed-seo-antes.png)
+![alt text](../03-testing/imagenes/test-case-8/12.1-pagespeed-seo-antes.png)
 
 ### SEO - Despues
-![alt text](..\03-testing\imagenes\test-case-8\12.2-pagespeed-seo-despues.png)
+![alt text](../03-testing/imagenes/test-case-8/12.2-pagespeed-seo-despues.png)
 
 
 ### Sección de Insights y Diagnósticos de PageSpeed donde se evidencie si hay recursos de bloqueo de renderizado.
-![alt text](..\03-testing\imagenes\test-case-8\13-pagespeed-insigths-diagnostico.png)
-
-
-
-
-
-
-
-
-- Ejecutar **Google PageSpeed Insights** después de integrar el componente.  
-- Comparar score con la versión sin el componente. 
-- Captura del resultado global (Performance, Accessibility, Best Practices, SEO).  
-- Comparar resultados *antes y después* de la incorporación del componente Bootstrap.   
-- Confirmar que los recursos cargados no bloquean la renderización.  
+![alt text](../03-testing/imagenes/test-case-8/13-pagespeed-insigths-diagnostico.png)
 
 ---
 
@@ -125,8 +112,6 @@ Verificar la correcta integración, personalización y comportamiento responsive
 ## Issues encontrados
 Registrar aquí los problemas detectados y su correspondiente issue en el repositorio:  
 
-- HAY QUE REGISTRAR UN ISSUES PARA MOBILE EN LANDSCAPE, MODAL MAS GRNADE QUE RESOLUCION DE LA PANTALLA.
-
 | IssueID | Descripción |
 |---------|-------------|
-| [#101](https://github.com/tu-org/tu-repo/issues/101) | En modo landscape, el modal es mas grande que el alto del dispositivo (Mobile) |
+| [#61](https://github.com/fioremos/simulador-planificacion-financiera/issues/61) | En modo landscape, el modal es mas grande que el alto del dispositivo (Mobile) |
