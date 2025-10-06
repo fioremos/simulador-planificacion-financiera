@@ -221,7 +221,7 @@
 .header-table {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: baseline;
     padding-bottom: 1rem;
 }
 /* Título dentro del encabezado de tabla */
@@ -426,10 +426,8 @@ input[type="radio"] {
 /* Margen horizontal cuando se usa dentro de un grupo de checkboxes */
 .checkbox-group .radio-cuadrado{
     margin: 0 0.5rem;
-} 
-.checkbox-group .alingn-left{
-    padding: 0;
 }
+
 input[type="checkbox"] {
   accent-color: var(--color-primary); 
   cursor: pointer;
@@ -478,28 +476,13 @@ input[type="radio"]:checked + .radio-cuadrado::after {
     }
 /* Contenedor principal del login */
 .login-section {
-    align-items: center;
-    justify-content: center;
     background: var(--background-main);
 }
-/* Subtítulo del login (estilizado dentro del contenedor de login) */
-.login-section .subtitle{
-    font-size: 2rem;
-    text-align: center;
-    font-weight: bold;
-}
-/* Contenedor del logo y títulos */
-.login-logo-container {
-    display: flex; 
-    flex-direction: column;
-    align-items: center;
-}
+
 /* Imagen del logo */
 .login-logo-container img {
     transition: opacity 0.3s ease-in-out;
     height: 16rem;
-    width: 20.5rem;
-    
 }
 /* Efecto hover en el logo (cambia imagen y opacidad) */
 .login-logo-container img:hover {
@@ -511,32 +494,30 @@ input[type="radio"]:checked + .radio-cuadrado::after {
 .login-logo {
     padding: 0 10rem;
 }
-/* Contenedor del formulario de login */
-.login-form-container {
-    margin: 0 3rem;
-    padding: 1.25rem;
-}
-/* Agrupación de inputs */
-.inputs-container {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    padding: 0 0 2.5rem;
-}
-/* Contenedor de los botones */
-.buttons-container {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-/* Contenedor del ícono de Google */
-.google-icon-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+
+/* Bootstrap form control integration for login */
+.input.form-control {
+    display: block;
+    width: 100%;
+    padding: 0.6rem;
+    font-size: 1.25rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--color-muted);
+    background-color: var(--white-000);
+    background-clip: padding-box;
+    border: 0.063rem outset var(--color-muted);
+    border-radius: 0.375rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
-
+.input.form-control:focus {
+    color: var(--color-muted);
+    background-color: var(--white-000);
+    border-color: var(--color-primary);
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(4, 79, 200, 0.25);
+}
 
 
 /****************************************************
@@ -564,14 +545,13 @@ input[type="radio"]:checked + .radio-cuadrado::after {
 .saldo {
     font-size: 2rem;
     color: var(--color-primary);
-    font-weight: bold;
 }
 /* --- Sección de resumen financiero en grid --- */
-.resumen-grid {
+/* .resumen-grid {
     display: grid;
     grid-template-columns: 2fr 1fr;
     gap: 1rem;
-}
+} */
 /* --- Tarjetas del resumen financiero (estilo base) --- */
 .resumen-grid .card {
     padding: 0 0 0 1rem;
@@ -583,12 +563,17 @@ input[type="radio"]:checked + .radio-cuadrado::after {
 }
 /* --- Ajuste superior y padding de la tarjeta en la columna izquierda --- */
 .resumen-grid .resumen-left .card {
-    margin-top: 1.4rem;
-    height: auto;
+    /* margin-top: 1.4rem;
+    height: auto; */
     padding: 0.8rem;
 }
-/* --- Video Educativo --- */
+.resumen-grid .resumen-right .card p {
+    /* margin-top: 1.4rem;
+    height: auto; */
+    margin: 1rem 0;
+}
 
+/* --- Video Educativo --- */
 .video-educacion {
     width: 100%;
     max-width: 100%;
@@ -680,7 +665,7 @@ input[type="radio"]:checked + .radio-cuadrado::after {
  /* --- Celdas de datos en la tabla de metas --- */
 .metas-table td{
     color: var(--neutral-900);
-    text-align: center;
+    /* text-align: center; */
 }
 /* --- Encabezados de la tabla de metas --- */
 .metas-table th{
@@ -692,7 +677,7 @@ input[type="radio"]:checked + .radio-cuadrado::after {
 /* --- Estilo general de la tabla de metas --- */
 .metas-table {
     border-collapse: collapse;
-    width: 100%;
+    /* width: 100%; */
 }
 /* --- Bordes superior e inferior en fila de encabezado --- */
 .metas-table thead tr {
@@ -708,25 +693,25 @@ input[type="radio"]:checked + .radio-cuadrado::after {
     background-color: var(--neutral-200);
 }
 /* --- Contenedor para botones dentro de tarjetas de metas, alineados a la derecha --- */
-.metas-card-table-button{
+/* .metas-card-table-button{
     display: flex;
     justify-content: flex-end;
-}
+} */
 /* --- Estilo para el gráfico dentro de metas (50% ancho y altura fija) --- */
-.metas-chart{
-    width: 50%;    
+.metas-chart{  
     height: 13rem;
 }
 /* --- Etiquetas dentro de las tarjetas de metas, con padding y centrado --- */
-.metas-card-label{
+/* .metas-card-label{
     padding: 0.5rem;
     text-align: center;
-}
+} */
 /* --- Contenedor para botones relacionados con gráficos, centrados --- */
-.metas-card-graph-button{
+/* .metas-card-graph-button{
     display: flex;
     justify-content: center;
-}
+} */
+  
 /* --- PROGRESO DE META DE AHORRO --- */
 
 .progreso-meta {
@@ -805,7 +790,6 @@ summary::-webkit-details-marker {
 /* --- Estilo para el gráfico de inversiones --- */
 .inversiones-chart{
     width: 41.25rem;   
-    height: 100%;
 }
 /* --- Estilo para botones dentro de la tarjeta de inversiones --- */
 .inversiones-card-table-button button{
@@ -836,51 +820,14 @@ summary::-webkit-details-marker {
     font-size: 1.25rem;
     border: 0.063rem outset var(--white-000);
 }
-/* --- Contenedor de filtros con distribución flexible --- */
-.filters {
-    display: flex;
-    justify-content: space-between; 
-    gap: 3rem; 
-    flex-wrap: wrap; 
-    padding: 0 2rem;
-}
-/* --- Estilo para etiquetas dentro de filtros --- */
-.filters label {
-    font-size: 1rem;
-    font-weight: 600;
-    text-align: center;
-}
-/* --- Secciones de reportes --- */
-.reportes-section {
-    margin-top: 1.5rem;
-}
-/* Subtítulos dentro de reportes */
-.reportes-section .subtitle {
-    margin-bottom: 0.5rem;
-    color: var(--color-primary);
-    font-weight: bold;
-}
 /* Contenedor para gráficos en reportes */
 .reportes-chart {
-    width: 50%;
-    height: auto;
     padding: 2rem;
-}
-/* --- Grid para principales gastos --- */
-.gastos-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 1rem;
 }
 /* Párrafos dentro de la lista de gastos */
 .gastos-list p {
     margin: 0.5rem 0;
     font-size: 1.2rem;
-}
-/* Contenedor para barras de gasto */
-.gastos-bars {
-    display: flex;
-    flex-direction: column;
 }
 /* Barra individual de gasto */
 .gastos-bars .bar {
@@ -892,11 +839,7 @@ summary::-webkit-details-marker {
 }
 /* Indicadores de gastos */
 .gastos-indicadores {
-    font-size: 0.9rem;
     color: var(--neutral-900);
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
 }
 /* Texto en negrita para indicadores */
 .gastos-indicadores strong {
@@ -932,8 +875,6 @@ summary::-webkit-details-marker {
  /* Lista del historial sin estilo de lista predeterminado */
 .historial-list {
     list-style: none;
-    padding: 0;
-    margin-top: 0;
 }
 /* Elementos de la lista con borde inferior para separar */
 .historial-list li {
@@ -946,10 +887,10 @@ summary::-webkit-details-marker {
     height: 1.75rem;
 }
 /* Contenedor principal del contenido en cada elemento */
-.historial-list .contenido {
+/* .historial-list .contenido {
     display: flex;
     align-items: center;
-}
+} */
 /* Contenedor del texto dentro del contenido */
 .historial-list .texto {
     display: flex;
@@ -966,6 +907,9 @@ summary::-webkit-details-marker {
     font-size: 0.9rem;
 }
 
+.historial hr {
+    margin: 1rem 3rem;
+}
 
 
 /****************************************************
@@ -1048,9 +992,6 @@ summary::-webkit-details-marker {
 .block-center{
     padding: 0 2.5rem;
 }
-.alingn-left{
-    padding: 0;
-}
 /* --- Contenedor de grupo de preferencia (label + input/select) --- */
 .pref-group {
     display: flex;
@@ -1060,11 +1001,6 @@ summary::-webkit-details-marker {
 }
 .pref-group label {
     flex: 1;
-}
-/* --- Formulario principal --- */
-.config-form {
-    display: flex;
-    flex-direction: column;
 }
 /* --- Bloques generales del formulario --- */
 .form-block {
@@ -1082,10 +1018,6 @@ summary::-webkit-details-marker {
     border-radius: 6px;
     overflow: hidden;
     width: fit-content;
-}
-/* --- Variación sin borde para toggle --- */
-.without-border {
-    border: 0;
 }
 /* --- Opción de formato  --- */
 .format-option {
@@ -1141,7 +1073,4 @@ Eliminar estos estilos una vez sea funcional la página.
 =========================================================== */
 .invisible {
     display: none !important;
-}
-.visible {
-    display: flex;
 }
