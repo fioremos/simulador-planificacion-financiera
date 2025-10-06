@@ -41,6 +41,16 @@
 }
 
 /* ===========================
+   Non-web (>1024px)
+  Laptops 
+=========================== */
+@media screen and (min-width: 1024px) {
+    .btn-outline-primary{
+        display: none;
+    }
+}
+
+/* ===========================
    Non-web (≤1024px)
    Tablets / Laptops pequeños
    Ajustes para pantallas medianas
@@ -51,6 +61,8 @@
     .sidebar {
         display: none;
     }
+
+    
     
    .principal-main {
         grid-template-columns: auto;
@@ -109,7 +121,7 @@
     .card#reportes-estadisticas-container, 
     .card#historial-container,
     .card#exportar-container,
-    .card#exportar-container {
+    .card#configuracion-container {
         overflow-y: auto;
     }
 

@@ -42,7 +42,7 @@
 
             // Mostrar u ocultar sidebar y header según la sección
             const sidebar = document.querySelector('.sidebar');
-            const header = document.getElementById('main-header'); // 🔥 Agregado
+            const header = document.getElementById('main-header'); 
             const principalContainer = document.querySelector('.principal-main');
 
             const estaEnLogin = id === 'login';
@@ -52,7 +52,7 @@
                 sidebar.classList.toggle('d-none', estaEnLogin);
             }
 
-            if (header) { // 🔥 Lógica agregada para el header
+            if (header) { 
                 header.classList.toggle('d-none', estaEnLogin);
             }
 
@@ -92,6 +92,15 @@
                     window.location.hash = id;
                     mostrarSeccion(id);
                 }
+                
+                const offcanvasEl = document.getElementById('sidebarOffcanvas');
+                if (offcanvasEl) {
+                    const offcanvas = bootstrap.Offcanvas.getInstance(offcanvasEl);
+                    if (offcanvas) {
+                        offcanvas.hide();
+                    }
+                }
+
             });
         });
     </script>
@@ -103,7 +112,7 @@
     <header id="main-header" class="header-oculto">
         <div class="header-container">
             <div>
-                <button id="menuToggleBtn" class="btn btn-outline-primary d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarOffcanvas" aria-controls="sidebarOffcanvas">
+                <button id="menuToggleBtn" class="btn btn-outline-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarOffcanvas" aria-controls="sidebarOffcanvas">
                     <img src="images/barraDeNavegacion/menu.png" alt="menu navegable" class="header-menu">
                 </button>
             </div>
@@ -153,6 +162,11 @@
                         <li class="list-group-item"><a href="#historial"><span class="sidebar-icon"><img src="images/iconos/Compass.png"></span> Historial y Auditoría</a></li>
                         <li class="list-group-item"><a href="#exportar"><span class="sidebar-icon"><img src="images/iconos/upload.png"></span> Exportación de Datos</a></li>
                         <li class="list-group-item"><a href="#configuracion"><span class="sidebar-icon"><img src="images/iconos/settings.png"></span> Configuración</a></li>
+                    </ul>
+                </nav>
+
+                <nav>
+                        <ul class="list-group list-group-flush">   
                         <li class="list-group-item"><a href="#login"><span class="sidebar-icon"><img src="images/iconos/Log_out.png"></span> Cerrar Sesión</a></li>
                     </ul>
                 </nav>
