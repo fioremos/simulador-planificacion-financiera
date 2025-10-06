@@ -1,4 +1,4 @@
-# Test Case 7: Responsive – Implementación de Componente Avanzado Bootstrap (Modal)
+# Test Case 8: Responsive – Implementación de Componente Avanzado Bootstrap (Modal)
 
 ## Objetivo
 Verificar la correcta integración, personalización y comportamiento responsive del primer componente avanzado de Bootstrap seleccionado: `Modal` en diferentes y navegadores.
