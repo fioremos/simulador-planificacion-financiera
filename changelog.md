@@ -74,7 +74,7 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 
 ### Changed  
 - [feature/dev-comp-html-avanzados-add-componen] Implementación de componentes avanzados HTML.  
-  PR: [#58](https://github.com/fioremos/simulador-planificacion-financiera/pull/58#issue-3485697584) - MNEscobar (Desarrollador de Componentes HTML Avanzados)  
+  PR: [#58](https://github.com/fioremos/simulador-planificacion-financiera/pull/58#issue-3485697584) - @MNEscobar (Desarrollador de Componentes HTML Avanzados)  
 
 - [nombre de la branch] Tarea realizada.  
   PR: [#3]() - @Usuario3 (rol asignado)  
