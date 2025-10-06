@@ -70,8 +70,11 @@ Validar la integración, compatibilidad y comportamiento responsive de component
   **Capturas necesarias:**  
 
   Resultados del test de Google PageSpeed para **mobile**.
+
+  Gráfico de puntuación general
+
   ![General](imagenes/test-case-10/pagespeed-general.png) 
-  Gráfico de puntuación general.  
+  
 
   ![Accessibility](imagenes/test-case-10/pagespeed-accessibility.png)
   ![Best Practices](imagenes/test-case-10/pagespeed-best-practices.png)
@@ -86,33 +89,45 @@ Validar la integración, compatibilidad y comportamiento responsive de component
 ---
 
 ## Capturas esperadas
+
 **iPhone 14 Pro - Progress**
+
 [Iphone 14 Pro - Portait](imagenes/test-case-10/iphone-progress.png)
+
 
 [Iphone 14 Pro - Landscape](imagenes/test-case-10/iphone-progress-landscape.png)
 
 **iPhone 14 Pro - Details/Summary**
+
 [Iphone 14 Pro - Portait](imagenes/test-case-10/iphone-details-summary.png)
+
 
 [Iphone 14 Pro - Landscape](imagenes/test-case-10/iphone-details-sumarry-landscape.png)
 
 
 **Galaxy S23 - Progress**
+
 [Samsumg Galaxy S23 - Portait](imagenes/test-case-10/samsung-progress.png)
+
 
 [Samsung Galaxy S23 - Landscape](imagenes/test-case-10/samsung-progress-landescape.png)
 
 **Galaxy S23 - Details/sumarry**
+
 [Samsung Galaxy S23 - Portait](imagenes/test-case-10/samsung-details-summary.png)
+
 
 [Samsung Galaxy S23 - Landsacape](imagenes/test-case-10/samsung-details-summary-landescape.png)
 
 **iPad Air - Progress - Details/Sumarry**
+
 [iPad Air - Portait](imagenes/test-case-10/ipad-proggres-details-summary-portrait.png)
+
 
 [iPad Air - Landscape](imagenes/test-case-10/ipad-proggres-details-summary-landscape.png)
 
 **Desktop**
+
 [Desktop](imagenes/test-case-10/desktop-progress-details-summary.png)
 
 ---

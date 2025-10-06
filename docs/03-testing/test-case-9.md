@@ -87,24 +87,31 @@ Validar la integración, compatibilidad y comportamiento responsive del primer c
 
 ## Capturas esperadas
 **Iphone 14 pro - Potrait**  
+
 ![Iphone 14 pro - Potrait](imagenes/test-case-9/iphone-video.png)
 
 **Iphone 14 pro - Landscape**
+
 ![Iphone 14 pro - Landscape](imagenes/test-case-9/iphone-video-landscape.png)
 
 **Samsung Galaxy S23 - Portait**
+
 ![Samsung Galaxy S23 - Portait](imagenes/test-case-9/samsung-video.png)
 
 **Samsung Galaxy S23 - Landscape**
+
 ![Samsung Galaxy S23 - Landscape](imagenes/test-case-9/samsung-video-landescape.png)
 
 **iPad Air - Portait** 
+
 ![iPad Air - Portait](imagenes/test-case-9/ipad-video-portrait.png)
 
 **iPad Air - Landscape**
+
 ![iPad Air - Landsacpe](imagenes/test-case-9/ipad-video-landscape.png)
 
 **Desktop**
+
 ![Desktop](imagenes/test-case-9/desktop-video.png)  
 
 
