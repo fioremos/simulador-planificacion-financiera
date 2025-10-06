@@ -105,7 +105,7 @@ Validar la integración, compatibilidad y comportamiento responsive del primer c
 
   ![Insights](imagenes/test-case-9/pagespeed-insights.png)
 
-El componente <video> no afecta de forma crítica la performance global, aunque la página general requiere optimización en recursos estáticos y scripts bloqueantes. La accesibilidad y las prácticas recomendadas se mantienen en niveles sobresalientes.
+El componente `<video>` no afecta de forma crítica la performance global, aunque la página general requiere optimización en recursos estáticos y scripts bloqueantes. La accesibilidad y las prácticas recomendadas se mantienen en niveles sobresalientes.
 
 ---
 
@@ -125,15 +125,15 @@ El componente <video> no afecta de forma crítica la performance global, aunque 
 
 **Samsung Galaxy S23 - Landscape**
 
-![Samsung Galaxy S23 - Landscape](imagenes/test-case-9/samsung-video-landscape.png.png)
+![Samsung Galaxy S23 - Landscape](imagenes/test-case-9/samsung-video-landscape.png)
 
 **iPad Air - Portait** 
 
-![iPad Air - Portait](imagenes/test-case-9/ipad-video-portrait.png)
+![iPad Air - Portait](imagenes/test-case-9/ipad-video.png)
 
 **iPad Air - Landscape**
 
-![iPad Air - Landscape](imagenes/test-case-9/ipad-video-landscape.png.png)
+![iPad Air - Landscape](imagenes/test-case-9/ipad-video-landscape.png)
 
 **Desktop**
 
@@ -156,4 +156,4 @@ Registrar aquí los problemas detectados y su correspondiente issue en el reposi
 
 | IssueID | Descripción |
 |---------|-------------|
-| [#55](https://github.com/fioremos/simulador-planificacion-financiera/issues/55#issue-3485589600) | Video HTML5 se desborda del contenedor en landscape mobile |
+| [#55](https://github.com/fioremos/simulador-planificacion-financiera/issues/55) | Video HTML5 se desborda del contenedor en landscape mobile |
