@@ -769,9 +769,7 @@ progress::-moz-progress-bar {
     color: #555;
 }
 
-
 /* --- details/summary --- */
-
 details {
   background-color: #f9fafb;
   border: 1px solid #ddd;
