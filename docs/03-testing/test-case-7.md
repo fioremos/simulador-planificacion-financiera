@@ -34,29 +34,29 @@ Verificar la correcta integración, personalización y comportamiento responsive
 ## Capturas esperadas
 
 ### iPhone 14 pro - Portrait  
-![alt text](..\03-testing\imagenes\test-case-7\1-iphone14pro-portrait.png)
+![alt text](../03-testing/imagenes/test-case-7/1-iphone14pro-portrait.png)
 
 ### iPhone 14 pro - Landscape  
-![alt text](..\03-testing\imagenes\test-case-7\2-iphone14pro-landscape.png)
+![alt text](../03-testing/imagenes/test-case-7/2-iphone14pro-landscape.png)
 
 ### Samsung Galaxy S23 - Portrait  
-![alt text](..\03-testing\imagenes\test-case-7\3-samsungS23-portrait.png)
+![alt text](../03-testing/imagenes/test-case-7/3-samsungS23-portrait.png)
 
 ### Samsung Galaxy S23 - Landscape  
-![alt text](..\03-testing\imagenes\test-case-7\4-samsungS23-landscape.png)
+![alt text](../03-testing/imagenes/test-case-7/4-samsungS23-landscape.png)
 
 ### iPad Air - Portrait  
-![alt text](..\03-testing\imagenes\test-case-7\5-ipadair-portrait.png)
+![alt text](../03-testing/imagenes/test-case-7/5-ipadair-portrait.png)
 
 ### ipad Air - Landscape
 En este caso el componente Offcanvas no se muestra debido a que se activa el sidebar fijo.
-![alt text](..\03-testing\imagenes\test-case-7\5.1-ipadair-landscape.png)
+![alt text](../03-testing/imagenes/test-case-7/5.1-ipadair-landscape.png)
 
 ### Desktop  
 En esta ocación el componente Offcanvas es visible en mobile y tablet ya que en desktop se despliega el sidebar.
 
 ### DevTools - Performance
-![alt text](..\03-testing\imagenes\test-case-7\6-devtools-performance.png)
+![alt text](../03-testing/imagenes/test-case-7/6-devtools-performance.png)
 
 ---
 
@@ -75,31 +75,31 @@ En esta ocación el componente Offcanvas es visible en mobile y tablet ya que en
 - SEO: 91 / 100 
 
 ### Captura del resultado global
-![alt text](..\03-testing\imagenes\test-case-7\7-pagespeed-resultado-global.png)
+![alt text](../03-testing/imagenes/test-case-7/7-pagespeed-resultado-global.png)
 
 ### Resultados antes y despues de la incorpotación del componente 
 
 ### Accesibilidad - Antes
-![alt text](..\03-testing\imagenes\test-case-7\8.1-pagespeed-accesibilidad-antes.png)
+![alt text](../03-testing/imagenes/test-case-7/8.1-pagespeed-accesibilidad-antes.png)
 
 ### Accesibilidad - Despues
-![alt text](..\03-testing\imagenes\test-case-7\8.2-pagespeed-accesibilidad-despues.png)
+![alt text](../03-testing/imagenes/test-case-7/8.2-pagespeed-accesibilidad-despues.png)
 
 ### Practicas recomendadas - Antes
-![alt text](..\03-testing\imagenes\test-case-7\9.1-pagespeed-practicas-recomendadas-antes.png)
+![alt text](../03-testing/imagenes/test-case-7/9.1-pagespeed-practicas-recomendadas-antes.png)
 
 ### Practicas recomendadas - Despues
-![alt text](..\03-testing\imagenes\test-case-7\9.2-pagespeed-practicas-recomendadas-despues.png)
+![alt text](../03-testing/imagenes/test-case-7/9.2-pagespeed-practicas-recomendadas-despues.png)
 
 ### SEO - Antes
-![alt text](..\03-testing\imagenes\test-case-7\10.1-pagespeed-seo-antes.png)
+![alt text](../03-testing/imagenes/test-case-7/10.1-pagespeed-seo-antes.png)
 
 ### SEO - Despues
-![alt text](..\03-testing\imagenes\test-case-7\10.2-pagespeed-seo-despues.png)
+![alt text](../03-testing/imagenes/test-case-7/10.2-pagespeed-seo-despues.png)
 
 
 ### Sección de Insights y Diagnósticos de PageSpeed donde se evidencie si hay recursos de bloqueo de renderizado.
-![alt text](..\03-testing\imagenes\test-case-7\11-pagespeed-insigths-diagnstico.png)  
+![alt text](../03-testing/imagenes/test-case-7/11-pagespeed-insigths-diagnstico.png)  
 
 ---
 
@@ -115,4 +115,4 @@ Registrar aquí los problemas detectados y su correspondiente issue en el reposi
 
 | IssueID | Descripción |
 |---------|-------------|
-| [#101](https://github.com/tu-org/tu-repo/issues/101) | Si el offcanvas esta desplegado y pasas de portrait a landscape, el fondo queda oscuro y bloqueado (iPad air) |
+| [#60](https://github.com/fioremos/simulador-planificacion-financiera/issues/60) | Si el offcanvas esta desplegado y pasas de portrait a landscape, el fondo queda oscuro y bloqueado (iPad air) |
