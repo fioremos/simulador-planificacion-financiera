@@ -40,22 +40,13 @@
     }
 }
 
-/* ===========================
-   Non-web (>1024px)
-  Laptops 
-=========================== */
-@media screen and (min-width: 1024px) {
-    .btn-outline-primary{
-        display: none;
-    }
-}
 
 /* ===========================
-   Non-web (≤1024px)
+   Non-web (≤991px)
    Tablets / Laptops pequeños
    Ajustes para pantallas medianas
 =========================== */
-@media screen and (max-width: 1023px) {
+@media screen and (max-width: 991px) {
 
     /* Oculta la barra lateral para maximizar el espacio en pantalla */
     .sidebar {
