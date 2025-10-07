@@ -1,8 +1,12 @@
 # 🌐 Simulador de Planificación Financiera
 
+---
+
 ## 📖 Descripción
 El proyecto consiste en el desarrollo de una aplicación web interactiva que permita a los usuarios **gestionar su economía personal**, registrar ingresos y gastos, establecer metas de ahorro, controlar inversiones y recibir sugerencias personalizadas para mejorar sus hábitos financieros.  
 Este simulador busca ser una herramienta práctica y educativa para mejorar la planificación financiera diaria.
+
+---
 
 ## 🎯 Objetivos del Proyecto
 - Proporcionar un simulador accesible para la **organización financiera personal**.  
@@ -39,10 +43,39 @@ Visualmente, el sistema deberá contar con:
 
 Esta maqueta refleja el **qué** queremos lograr en términos visuales, sin definir aún el **cómo** se implementará técnicamente.
 
+---
+
 ### 🔗 Acceso al mockup
 El diseño preliminar de la aplicación se encuentra disponible en Figma en el siguiente enlace: 
 - [Ver mockup en Figma](https://www.figma.com/design/hbgGq77CAkDgbxAwc45AII/Simulador-de-planificaci%C3%B3n-financiera?node-id=0-1&t=ZH1SSly6d7Zphetx-1)
 
+---
+
+## ✅ Objetivos del primer parcial (6/10/2025)
+Esta entrega tiene como propósito presentar la versión integrada y funcional del proyecto, aplicando conceptos de HTML5, CSS3 y Bootstrap, y consolidando el flujo de trabajo en equipo con GitHub.
+En esta etapa se busca:
+
+- Migrar la aplicación a Bootstrap, utilizando componentes y utilidades para mejorar la responsividad y accesibilidad.
+
+- Implementar componentes avanzados de HTML5 y Bootstrap (ej.: sidebar, modales, formularios enriquecidos, tablas responsivas).
+
+- Mantener y organizar el repositorio bajo buenas prácticas de DevOps, incluyendo ramas (master, develop, release/primer-parcial) y gestión de PRs.
+
+- Documentar el proyecto en un archivo `README.md`, con descripción general, roles asignados, tecnologías utilizadas, estructura de carpetas y enlaces a los mockups actualizados.
+
+- Mantener actualizado el archivo changelog.md con las contribuciones de cada miembro y versiones del proyecto.
+
+- Incorporar mockups actualizados en Bootstrap, almacenados en `docs/01-mockup/disenio-bootstrap.png`.
+
+- Documentar los procesos de testing y validación, en `docs/03-testing/testing-doc.md`.
+
+- Gestionar tareas mediante Issues y GitHub Projects (Kanban), asegurando trazabilidad y asignación de responsabilidades.
+
+- Generar una release formal en GitHub, con tag de versión, changelog y enlaces relevantes.
+
+El resultado esperado es un repositorio unificado y limpio, con una versión navegable del simulador en GitHub Pages, incluyendo diseño adaptativo, componentes de Bootstrap aplicados, documentación completa y gestión de equipo transparente.
+
+---
 
 ## ✅ Objetivos de la primer entrega (5/9/2025)
 Esta entrega tiene como propósito presentar la primera versión del proyecto, estableciendo una base sólida sobre la cual se desarrollará el simulador de planificación financiera. 
@@ -77,6 +110,7 @@ El resultado esperado es un repositorio organizado, con estilos aplicados al dis
 ## 👨‍💻 Tecnologías Utilizadas
 - **HTML5** (estructura inicial).  
 - **CSS3** (maquetación principal, estilos de componentes y diseño responsive).  
+- **Bootstrap** (framework para diseño responsive y componentes reutilizables).
 - **JavaScript** (lógica e interactividad — pequeña implementación para navegar entre los apartados).  
 - **Git / GitHub** (control de versiones).  
 - **Herramientas de Testing**  
@@ -92,6 +126,8 @@ El resultado esperado es un repositorio organizado, con estilos aplicados al dis
 ## 📁 Documentación
 - 🖼️ [Mockup diseño inicial](docs/01-mockup/diseño-inicial.png)
 - 🖼️ [Mockup diseño con css](docs/01-mockup/disenio-con-css.png)
+- 🖼️ [Mockup diseño con bootstrap](docs/01-mockup/disenio-bootstrap.png)
+- 🖼️ [Mockup diseño con bootstrap mobile](docs/01-mockup/disenio-bootstrap-mb.png)
 - 🗂️ [Índice de Prompts](docs/02-prompts/prompts.md)
 - 🧪 [Índice de Test Cases](docs/03-testing/testing-doc.md)
 - 📜 [Changelog](changelog.md)
@@ -101,10 +137,10 @@ El resultado esperado es un repositorio organizado, con estilos aplicados al dis
 ## 👥 Integrantes del Grupo
 |     Nombre completo    | N° de Matrícula | Usuario GitHub |         Rol en esta entrega             |
 |------------------------|-----------------|----------------|-----------------------------------------|
-|    Sol Ailen Kalpuj    |      154106     |   @skalapuj    |      Desarrollador Frontend / CSS        |
-|     Fiorella Mosca     |      154108     |   @fioremos    |         Especialista en Responsive Design            | 
-| Matías Nicolás Escobar |      151251     |   @MNEscobar   |         Documentador / QA Tester          |  
-|     Ulises Capriles    |      146291     |   @UlisesC11   | Coordinador / DevOps |  
+|    Sol Ailen Kalpuj    |      154106     |   @skalapuj    |          Coordinador / DevOps            |
+|     Fiorella Mosca     |      154108     |   @fioremos    |       Desarrollador Frontend / Bootstrap  | 
+| Matías Nicolás Escobar |      151251     |   @MNEscobar   |       Desarrollador en Componentes HTML Avanzados          |  
+|     Ulises Capriles    |      146291     |   @UlisesC11   |        Especialista en Componentes Bootstrap              |  
 
 <pre>
 🎓 Datos Académicos
