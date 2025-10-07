@@ -8,3 +8,5 @@
 - [Test Case 6 - Responsive - Migración a Bootstrap](./test-case-6.md)
 - [Test Case 7 - Implementación de Componente Avanzado Bootstrap (Offcanvas)](./test-case-7.md)
 - [Test Case 8 - Implementación de Componente Avanzado Bootstrap (Modal)](test-case-8.md)
+- [Test Case 9 - Responsive – Implementación de Componente Avanzado HTML (1)](test-case-9.md)
+- [Test Case 10 - Responsive – Implementación de Componente Avanzado HTML (2)](test-case-10.md)
