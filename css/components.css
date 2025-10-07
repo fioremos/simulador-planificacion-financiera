@@ -454,6 +454,11 @@ input[type="radio"]:checked + .radio-cuadrado::after {
  * - .buttons-container     → botones de acción principales
  * - .google-icon-container → ícono de inicio con Google
  ****************************************************/
+/*Adapta la card a todas las pantallas */
+ .principal-section#login{
+    height: 100vh;
+}
+
  /* Oculta visualmente el elemento, pero lo mantiene accesible para lectores de pantalla */
  .sr-only {
     position: absolute;
