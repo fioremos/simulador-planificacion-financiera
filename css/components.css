@@ -646,7 +646,7 @@ input[type="radio"]:checked + .radio-cuadrado::after {
  /* --- Celdas de datos en la tabla de metas --- */
 .metas-table td{
     color: var(--neutral-900);
-    /* text-align: center; */
+
 }
 /* --- Encabezados de la tabla de metas --- */
 .metas-table th{
@@ -658,7 +658,7 @@ input[type="radio"]:checked + .radio-cuadrado::after {
 /* --- Estilo general de la tabla de metas --- */
 .metas-table {
     border-collapse: collapse;
-    /* width: 100%; */
+
 }
 /* --- Bordes superior e inferior en fila de encabezado --- */
 .metas-table thead tr {
@@ -838,12 +838,7 @@ summary::-webkit-details-marker {
     width: 1.75rem;
     height: 1.75rem;
 }
-/* Contenedor principal del contenido en cada elemento */
-/* .historial-list .contenido {
-    display: flex;
-    align-items: center;
-} */
-/* Contenedor del texto dentro del contenido */
+
 .historial-list .texto {
     display: flex;
     flex-direction: column;

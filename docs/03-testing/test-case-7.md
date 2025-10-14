@@ -3,8 +3,7 @@
 ## Objetivo
 Verificar la correcta integración, personalización y comportamiento responsive del primer componente avanzado de Bootstrap seleccionado: __`Offcanvas` con menú lateral seleccionable__ en diferentes dispositivos.  
 
-## Herramientas Utilizadas
-- BrowserStack Mobile Testing  
+## Herramientas Utilizadas 
 - Chrome DevTools Device Mode  
 - Google PageSpeed Insights  
 

@@ -14,7 +14,7 @@ Validar la integración, compatibilidad y comportamiento responsive del primer c
 | Dispositivo       | Resolución | Navegador | Orientación         | Resultado | Detalle |
 |-------------------|------------|-----------|---------------------|-----------|---------|
 | iPhone 14 Pro     | 393x852    | Safari    | Portrait/Landscape  | ✅/⚠️ | En modo landscape, el video se desborda levemente del contenedor. |
-| Galaxy S23        | 360x780    | Chrome    | Portrait/Landscape  | ✅ |/⚠️ | En modo landscape, el video se desborda levemente del contenedor. |
+| Galaxy S23        | 360x780    | Chrome    | Portrait/Landscape  | ✅/⚠️ | En modo landscape, el video se desborda levemente del contenedor. |
 | iPad Air          | 820x1180   | Safari    | Portrait/Landscape  | ✅ | Visualización correcta y centrada en ambas orientaciones. |
 | Desktop (Laptop)  | >1024px    | Chrome    | Landscape           | ✅ | El componente se adapta perfectamente al layout y conserva proporciones. |
 
