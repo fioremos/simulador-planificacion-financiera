@@ -156,3 +156,4 @@ Registrar aquí los problemas detectados y su correspondiente issue en el reposi
 |----|-------------|
 | [#56](https://github.com/fioremos/simulador-planificacion-financiera/issues/56) | El componente progress pierde margen interno al rotar la pantalla, generando un desbordamiento hacia abajo del contenedor. |
 | [#57](https://github.com/fioremos/simulador-planificacion-financiera/issues/57) | Desbordamiento de el componente details en orientación landscape. |
+| [#73](https://github.com/fioremos/simulador-planificacion-financiera/issues/73#) | Recursos que bloquean el renderizado |

@@ -157,3 +157,6 @@ Registrar aquí los problemas detectados y su correspondiente issue en el reposi
 | IssueID | Descripción |
 |---------|-------------|
 | [#55](https://github.com/fioremos/simulador-planificacion-financiera/issues/55) | Video HTML5 se desborda del contenedor en landscape mobile |
+| [#70](https://github.com/fioremos/simulador-planificacion-financiera/issues/70#) | El validador W3C detectó que hay más de una etiqueta `<main>` visible.
+| [#71](https://github.com/fioremos/simulador-planificacion-financiera/issues/71#) | El validador W3C dvirtió que varias etiquetas `<section>` no tienen un encabezado. |
+| [#73](https://github.com/fioremos/simulador-planificacion-financiera/issues/73#) | Recursos que bloquean el renderizado |

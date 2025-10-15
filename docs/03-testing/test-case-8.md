@@ -114,3 +114,4 @@ Registrar aquí los problemas detectados y su correspondiente issue en el reposi
 | IssueID | Descripción |
 |---------|-------------|
 | [#61](https://github.com/fioremos/simulador-planificacion-financiera/issues/61) | En modo landscape, el modal es mas grande que el alto del dispositivo (Mobile) |
+| [#72](https://github.com/fioremos/simulador-planificacion-financiera/issues/72#) | Caida de rendimiento por el componente Modal |
