@@ -290,6 +290,10 @@ body {
     border: none;
     color:var(--color-primary);
 }
+.content .card p {
+    margin: 0;
+}
+
 /*
  * ÍCONOS Y SUBTÍTULOS
  * Estiliza elementos destacados como íconos o subtítulos
