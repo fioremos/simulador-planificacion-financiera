@@ -713,24 +713,19 @@ progress::-moz-progress-bar {
 }
 /* --- details/summary --- */
 
-#tips-financieros {
-    max-width: 37.5rem; 
-    margin-left: auto;
-    margin-right: auto;
-}
-#tips-financieros details {
+details {
   background-color: #f9fafb;
-  border: 0,08rem solid #ddd;
+  border: 0.08rem solid #ddd;
   border-radius: 0.5rem;
   margin-bottom: 1rem;
   padding: 0.8rem 1rem;
   transition: background-color 0.3s ease;
 }
-#tips-financieros details[open] {
+details[open] {
   background-color: #eef6ff;
   border-color: #90caf9;
 }
-#tips-financieros summary {
+summary {
   font-weight: 600;
   cursor: pointer;
   color: #333;
@@ -738,17 +733,17 @@ progress::-moz-progress-bar {
   align-items: center; 
   list-style: none;
 }
-#tips-financieros summary::-webkit-details-marker {
+summary::-webkit-details-marker {
   color: #007bff;
   display: none;
 }
-#tips-financieros summary::before {
+summary::before {
     content: '+';
     font-size: 1.5em;
     margin-right: 0.5rem;
     color: #007bff;
 }
-#tips-financieros details[open] > summary::before {
+details[open] > summary::before {
     content: '−'; 
 }
 
