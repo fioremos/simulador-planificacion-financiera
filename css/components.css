@@ -102,6 +102,7 @@
   outline-offset: 2px;
 }
 
+
 /****************************************************
  * TARJETAS / CARDS
  * Contenedores visuales con sombra y borde redondeado.
@@ -221,7 +222,7 @@
 .header-table {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: baseline;
     padding-bottom: 1rem;
 }
 /* Título dentro del encabezado de tabla */
@@ -292,7 +293,6 @@
 }
 
 
-
 /****************************************************
  * ICONOS
  * Ajustes de tamaño para iconografía.
@@ -315,15 +315,13 @@
  * - .full-width    → campo que ocupa ambas columnas
  * - .form-actions  → contenedor de botones
  * Variantes:
- * - .inline, .without-margin, .thinner
+ * - .inline, .thinner
  ****************************************************/
 /* Contenedor principal del formulario en estructura de grilla */
 .form-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 0.5rem; 
     padding: 0 6rem 0 6rem;
-    height: 100%;
 }
 /* Agrupación de elementos del formulario (label + input/select) */
 .form-group {
@@ -332,10 +330,6 @@
     justify-content: center;
     gap: 0.2rem;
     margin-bottom: 1rem;
-}
-/* Variante del form-group sin margen inferior */
-.without-margin {
-    margin-bottom: 0;
 }
 /* Hace que un campo ocupe las 2 columnas del grid */
 .full-width {
@@ -364,7 +358,6 @@
     background-color: var(--color-primary);
     color: var(--white-000);
 }
-
 /* Contenedor de botones o acciones del formulario */
 .form-actions {
     grid-column: 1 / -1;
@@ -427,9 +420,6 @@ input[type="radio"] {
 .checkbox-group .radio-cuadrado{
     margin: 0 0.5rem;
 } 
-.checkbox-group .alingn-left{
-    padding: 0;
-}
 input[type="checkbox"] {
   accent-color: var(--color-primary); 
   cursor: pointer;
@@ -450,7 +440,6 @@ input[type="radio"]:checked + .radio-cuadrado::after {
 }
 
 
-
 /****************************************************
  * PÁGINA: LOGIN
  * Estilos específicos de la pantalla de inicio de sesión.
@@ -465,42 +454,32 @@ input[type="radio"]:checked + .radio-cuadrado::after {
  * - .buttons-container     → botones de acción principales
  * - .google-icon-container → ícono de inicio con Google
  ****************************************************/
+/*Adapta la card a todas las pantallas */
+ .principal-section#login{
+    height: 100vh;
+}
+
  /* Oculta visualmente el elemento, pero lo mantiene accesible para lectores de pantalla */
  .sr-only {
-        position: absolute;
-        width: 1px;
-        height: 1px;
-        padding: 0;
-        margin: -1px;
-        overflow: hidden;
-        clip: rect(0, 0, 0, 0);
-        white-space: nowrap;
-        border: 0;
-    }
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
 /* Contenedor principal del login */
 .login-section {
-    align-items: center;
-    justify-content: center;
     background: var(--background-main);
 }
-/* Subtítulo del login (estilizado dentro del contenedor de login) */
-.login-section .subtitle{
-    font-size: 2rem;
-    text-align: center;
-    font-weight: bold;
-}
-/* Contenedor del logo y títulos */
-.login-logo-container {
-    display: flex; 
-    flex-direction: column;
-    align-items: center;
-}
+
 /* Imagen del logo */
 .login-logo-container img {
     transition: opacity 0.3s ease-in-out;
     height: 16rem;
-    width: 20.5rem;
-    
 }
 /* Efecto hover en el logo (cambia imagen y opacidad) */
 .login-logo-container img:hover {
@@ -512,32 +491,30 @@ input[type="radio"]:checked + .radio-cuadrado::after {
 .login-logo {
     padding: 0 10rem;
 }
-/* Contenedor del formulario de login */
-.login-form-container {
-    margin: 0 3rem;
-    padding: 1.25rem;
-}
-/* Agrupación de inputs */
-.inputs-container {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    padding: 0 0 2.5rem;
-}
-/* Contenedor de los botones */
-.buttons-container {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-/* Contenedor del ícono de Google */
-.google-icon-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+
+/* Bootstrap form control integration for login */
+.input.form-control {
+    display: block;
+    width: 100%;
+    padding: 0.6rem;
+    font-size: 1.25rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--color-muted);
+    background-color: var(--white-000);
+    background-clip: padding-box;
+    border: 0.063rem outset var(--color-muted);
+    border-radius: 0.375rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
-
+.input.form-control:focus {
+    color: var(--color-muted);
+    background-color: var(--white-000);
+    border-color: var(--color-primary);
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(4, 79, 200, 0.25);
+}
 
 
 /****************************************************
@@ -551,6 +528,7 @@ input[type="radio"]:checked + .radio-cuadrado::after {
  * - .resumen-grid      → grid de tarjetas de resumen
  *   - .resumen-left    → tarjetas de la columna izquierda
  *   - .resumen-right   → tarjetas de la columna derecha
+ *   - .video-educacion → video educativo
  ****************************************************/
 /* --- Gráfico principal del dashboard --- */
 .dashboard-chart{ 
@@ -564,14 +542,8 @@ input[type="radio"]:checked + .radio-cuadrado::after {
 .saldo {
     font-size: 2rem;
     color: var(--color-primary);
-    font-weight: bold;
 }
-/* --- Sección de resumen financiero en grid --- */
-.resumen-grid {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 1rem;
-}
+
 /* --- Tarjetas del resumen financiero (estilo base) --- */
 .resumen-grid .card {
     padding: 0 0 0 1rem;
@@ -583,9 +555,41 @@ input[type="radio"]:checked + .radio-cuadrado::after {
 }
 /* --- Ajuste superior y padding de la tarjeta en la columna izquierda --- */
 .resumen-grid .resumen-left .card {
-    margin-top: 1.4rem;
-    height: auto;
+
     padding: 0.8rem;
+}
+.resumen-grid .resumen-right .card p {
+
+    margin: 0;
+}
+/* --- Video Educativo --- */
+.video-educacion {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    display: block;
+    object-fit: cover; /* o 'contain' según lo que prefieras */
+}
+.video-educacion-container {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* 16:9 */
+    height: 0;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+#video-tutorial {
+    text-align: center;
+    padding: 1.5rem;
+}
+
+#video-tutorial .subtitle {
+    margin-bottom: 1rem;
 }
 
 
@@ -623,7 +627,6 @@ input[type="radio"]:checked + .radio-cuadrado::after {
 }
 
 
-
 /****************************************************
  * SECCIÓN: METAS DE AHORRO
  * Vista para gestionar metas de ahorro con tablas y gráficos.
@@ -637,23 +640,25 @@ input[type="radio"]:checked + .radio-cuadrado::after {
  * - .metas-chart             → gráfico de avance (50% ancho)
  * - .metas-card-label        → etiquetas dentro de tarjetas
  * - .metas-card-graph-button → botones relacionados con gráficos
+ * - .progreso-meta           → barra de progreso
+ * - .details/summary         → componente desplegable
  ****************************************************/
  /* --- Celdas de datos en la tabla de metas --- */
 .metas-table td{
     color: var(--neutral-900);
-    text-align: center;
+
 }
 /* --- Encabezados de la tabla de metas --- */
 .metas-table th{
     font-size: larger;
     color: var(--color-primary);
     font-weight: normal;    
-    text-align: center;
+    text-align: center; 
 }
 /* --- Estilo general de la tabla de metas --- */
 .metas-table {
     border-collapse: collapse;
-    width: 100%;
+
 }
 /* --- Bordes superior e inferior en fila de encabezado --- */
 .metas-table thead tr {
@@ -668,27 +673,79 @@ input[type="radio"]:checked + .radio-cuadrado::after {
 .metas-table tbody tr:hover {
     background-color: var(--neutral-200);
 }
-/* --- Contenedor para botones dentro de tarjetas de metas, alineados a la derecha --- */
-.metas-card-table-button{
-    display: flex;
-    justify-content: flex-end;
-}
 /* --- Estilo para el gráfico dentro de metas (50% ancho y altura fija) --- */
-.metas-chart{
-    width: 50%;    
+.metas-chart{  
     height: 13rem;
 }
-/* --- Etiquetas dentro de las tarjetas de metas, con padding y centrado --- */
-.metas-card-label{
-    padding: 0.5rem;
+/* --- PROGRESO DE META DE AHORRO --- */
+.progreso-meta {
     text-align: center;
+    padding: 1rem;
+    margin-top: 1rem;
 }
-/* --- Contenedor para botones relacionados con gráficos, centrados --- */
-.metas-card-graph-button{
-    display: flex;
-    justify-content: center;
+.progreso-meta label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #333;
 }
+progress {
+    width: 100%;
+    height: 1.25rem;
+    border-radius: 0.625rem;
+    overflow: hidden;
+    appearance: none;
+}
+progress::-webkit-progress-bar {
+    background-color: #f1f1f1;
+}
+progress::-webkit-progress-value {
+    background-color: #007bff; 
+    transition: width 0.5s ease;
+}
+progress::-moz-progress-bar {
+    background-color: #007bff;
+}
+.meta-porcentaje {
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+    color: #555;
+}
+/* --- details/summary --- */
 
+details {
+  background-color: #f9fafb;
+  border: 0.08rem solid #ddd;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+  padding: 0.8rem 1rem;
+  transition: background-color 0.3s ease;
+}
+details[open] {
+  background-color: #eef6ff;
+  border-color: #90caf9;
+}
+summary {
+  font-weight: 600;
+  cursor: pointer;
+  color: #333;
+  display: flex; 
+  align-items: center; 
+  list-style: none;
+}
+summary::-webkit-details-marker {
+  color: #007bff;
+  display: none;
+}
+summary::before {
+    content: '+';
+    font-size: 1.5em;
+    margin-right: 0.5rem;
+    color: #007bff;
+}
+details[open] > summary::before {
+    content: '−'; 
+}
 
 
 /****************************************************
@@ -701,13 +758,11 @@ input[type="radio"]:checked + .radio-cuadrado::after {
 /* --- Estilo para el gráfico de inversiones --- */
 .inversiones-chart{
     width: 41.25rem;   
-    height: 100%;
 }
 /* --- Estilo para botones dentro de la tarjeta de inversiones --- */
 .inversiones-card-table-button button{
     margin-right: 1rem;
 }
-
 
 
 /****************************************************
@@ -732,51 +787,14 @@ input[type="radio"]:checked + .radio-cuadrado::after {
     font-size: 1.25rem;
     border: 0.063rem outset var(--white-000);
 }
-/* --- Contenedor de filtros con distribución flexible --- */
-.filters {
-    display: flex;
-    justify-content: space-between; 
-    gap: 3rem; 
-    flex-wrap: wrap; 
-    padding: 0 2rem;
-}
-/* --- Estilo para etiquetas dentro de filtros --- */
-.filters label {
-    font-size: 1rem;
-    font-weight: 600;
-    text-align: center;
-}
-/* --- Secciones de reportes --- */
-.reportes-section {
-    margin-top: 1.5rem;
-}
-/* Subtítulos dentro de reportes */
-.reportes-section .subtitle {
-    margin-bottom: 0.5rem;
-    color: var(--color-primary);
-    font-weight: bold;
-}
 /* Contenedor para gráficos en reportes */
 .reportes-chart {
-    width: 50%;
-    height: auto;
     padding: 2rem;
-}
-/* --- Grid para principales gastos --- */
-.gastos-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 1rem;
 }
 /* Párrafos dentro de la lista de gastos */
 .gastos-list p {
     margin: 0.5rem 0;
     font-size: 1.2rem;
-}
-/* Contenedor para barras de gasto */
-.gastos-bars {
-    display: flex;
-    flex-direction: column;
 }
 /* Barra individual de gasto */
 .gastos-bars .bar {
@@ -788,11 +806,7 @@ input[type="radio"]:checked + .radio-cuadrado::after {
 }
 /* Indicadores de gastos */
 .gastos-indicadores {
-    font-size: 0.9rem;
     color: var(--neutral-900);
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
 }
 /* Texto en negrita para indicadores */
 .gastos-indicadores strong {
@@ -812,7 +826,6 @@ input[type="radio"]:checked + .radio-cuadrado::after {
 }
 
 
-
 /****************************************************
  * SECCIÓN: HISTORIAL
  * Lista de eventos pasados del usuario.
@@ -828,25 +841,18 @@ input[type="radio"]:checked + .radio-cuadrado::after {
  /* Lista del historial sin estilo de lista predeterminado */
 .historial-list {
     list-style: none;
-    padding: 0;
-    margin-top: 0;
 }
 /* Elementos de la lista con borde inferior para separar */
 .historial-list li {
     border-bottom: 1px solid var(--color-muted);
-    padding: 1rem 0;
+    padding: 0.5rem 0;
 }
 /* Punto (dot) que puede usarse como indicador o icono */
 .historial-list .dot {
     width: 1.75rem;
     height: 1.75rem;
 }
-/* Contenedor principal del contenido en cada elemento */
-.historial-list .contenido {
-    display: flex;
-    align-items: center;
-}
-/* Contenedor del texto dentro del contenido */
+
 .historial-list .texto {
     display: flex;
     flex-direction: column;
@@ -861,7 +867,6 @@ input[type="radio"]:checked + .radio-cuadrado::after {
 .historial-list .fecha {
     font-size: 0.9rem;
 }
-
 
 
 /****************************************************
@@ -944,9 +949,6 @@ input[type="radio"]:checked + .radio-cuadrado::after {
 .block-center{
     padding: 0 2.5rem;
 }
-.alingn-left{
-    padding: 0;
-}
 /* --- Contenedor de grupo de preferencia (label + input/select) --- */
 .pref-group {
     display: flex;
@@ -956,11 +958,6 @@ input[type="radio"]:checked + .radio-cuadrado::after {
 }
 .pref-group label {
     flex: 1;
-}
-/* --- Formulario principal --- */
-.config-form {
-    display: flex;
-    flex-direction: column;
 }
 /* --- Bloques generales del formulario --- */
 .form-block {
@@ -978,10 +975,6 @@ input[type="radio"]:checked + .radio-cuadrado::after {
     border-radius: 6px;
     overflow: hidden;
     width: fit-content;
-}
-/* --- Variación sin borde para toggle --- */
-.without-border {
-    border: 0;
 }
 /* --- Opción de formato  --- */
 .format-option {
@@ -1038,6 +1031,7 @@ Eliminar estos estilos una vez sea funcional la página.
 .invisible {
     display: none !important;
 }
-.visible {
-    display: flex;
+
+.solo-contenido {
+    grid-template-columns: auto !important; /* Oculta sidebar y header del layout */
 }

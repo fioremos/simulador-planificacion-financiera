@@ -92,7 +92,6 @@
    =============================== */
 * {
     padding: 0;
-    box-sizing: content-box;
 }
 
 
@@ -135,19 +134,26 @@ body {
 .principal-section {
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
+    max-height: 92.5vh;
 }
+
+.principal-container {
+    display: grid;
+    grid-template-columns: auto;
+    flex: 1;
+    min-height: 0;
+}
+
 /*
- * PRINCIPAL CONTAINER
+ * PRINCIPAL MAIN 
  * Divide la pantalla horizontalmente entre:
  * - Sidebar a la izquierda (300px)
  * - Contenido principal al resto del espacio disponible
  */
-.principal-container {
+.principal-main {
     display: grid;
-    grid-template-columns: 300px 1fr;
+    grid-template-columns: 280px 1fr;
     flex: 1;
-    min-height: 0;
 }
 
 
@@ -204,6 +210,8 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    overflow: hidden;
+    height: 92.5vh;
 }
 /*
  * LISTA DE NAVEGACIÓN
@@ -252,11 +260,11 @@ body {
     justify-content: center;
     padding: 0 0.625rem;
 }
-
 .sidebar-icon img {
     width: 2rem;
     height: 2rem;
 }
+
 
 /* ---------- Contenido principal ---------- */
 /*
@@ -269,6 +277,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    overflow: auto; 
 } 
 /*
  * CONTENIDO
@@ -277,19 +286,34 @@ body {
  */
 .content .card {
     padding: 1rem;
-    height: 100%;
+    height: unset;
+    border: none;
+    color:var(--color-primary);
 }
+.content .card p {
+    margin: 0;
+}
+
 /*
  * ÍCONOS Y SUBTÍTULOS
  * Estiliza elementos destacados como íconos o subtítulos
  * dentro del contenedor de contenido.
  */
 .content .subtitle {
-    margin: 0 0 1rem;
+    margin: 0;
     font-size: 2rem;
     font-weight: normal;
 }
 .content .icon{
     margin: 0;
     font-size: 2rem;
+}
+/*
+ * ENLACES SIN ESTILO VISUAL
+ * Remueve el subrayado y hereda el color del texto del elemento padre
+ * para mantener la coherencia visual dentro del diseño.
+ */
+a {
+  text-decoration: none; 
+  color: inherit; 
 }

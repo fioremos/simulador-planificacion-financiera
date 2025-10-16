@@ -7,19 +7,22 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 ## [Unreleased]
 
 ### Added  
-- [nombre de la branch] Tarea realizada.  
-  PR: [#1]() - @Usuario1 (rol asignado)  
+- [feature/esp-com-bootstrap-add-component] Integración de dos componentes bootstrap (Offcanvas y Modal)  
+  PR: [#62](https://github.com/fioremos/simulador-planificacion-financiera/pull/62) - @UlisesC11 (Especialista en Componentes Bootstrap)  
+- [feature/dev-comp-html-avanzados-add-componen] Implementación de componentes avanzados HTML.  
+  PR: [#58](https://github.com/fioremos/simulador-planificacion-financiera/pull/58) - @MNEscobar (Desarrollador de Componentes HTML Avanzados)  
 
-### Changed  
-- [nombre de la branch] Tarea realizada.  
-  PR: [#2]() - @Usuario2 (rol asignado)  
-
-- [nombre de la branch] Tarea realizada.  
-  PR: [#3]() - @Usuario3 (rol asignado)  
+### Changed 
+- [feature/dev-frontend-bootstrap-update-migration] Migracion a Bootstrap.  
+  PR: [#59](https://github.com/fioremos/simulador-planificacion-financiera/pull/59) - @fioremos (Desarrollador Frontend/Bootstrap)  
+- [feature/coord-devops-update-doc-project] Actualización de la documentación del proyecto.  
+  PR: [#66](https://github.com/fioremos/simulador-planificacion-financiera/pull/66) -  @skalapuj (Coordinador / DevOps)
 
 ### Fixed  
-- [nombre de la branch] Tarea realizada.  
-  PR: [#4]() - @Usuario4 (rol asignado)  
+- [feature/coord-devops-branches-integration] Integración de ramas features a develop.  
+  PR: [#63](https://github.com/fioremos/simulador-planificacion-financiera/pull/63) - @skalapuj (Coordinador / DevOps) 
+- [feature/coord-devops-hotfix-login-card] Fix login card.  
+  PR: [#65](https://github.com/fioremos/simulador-planificacion-financiera/pull/65) - @skalapuj (Coordinador / DevOps)  
 
 ---
 
@@ -66,6 +69,27 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 
 ---
 
+## [Release Primer Parcial] - 2025-10-06
+
+### Added  
+- [feature/esp-com-bootstrap-add-component] Integración de dos componentes bootstrap (Offcanvas y Modal)  
+  PR: [#62](https://github.com/fioremos/simulador-planificacion-financiera/pull/62) - @UlisesC11 (Especialista en Componentes Bootstrap)  
+- [feature/dev-comp-html-avanzados-add-componen] Implementación de componentes avanzados HTML.  
+  PR: [#58](https://github.com/fioremos/simulador-planificacion-financiera/pull/58) - @MNEscobar (Desarrollador de Componentes HTML Avanzados)  
+
+### Changed 
+- [feature/dev-frontend-bootstrap-update-migration] Migracion a Bootstrap.  
+  PR: [#59](https://github.com/fioremos/simulador-planificacion-financiera/pull/59) - @fioremos (Desarrollador Frontend/Bootstrap)  
+- [feature/coord-devops-update-doc-project] Actualización de la documentación del proyecto.  
+  PR: [#66](https://github.com/fioremos/simulador-planificacion-financiera/pull/66) -  @skalapuj (Coordinador / DevOps)
+
+### Fixed  
+- [feature/coord-devops-branches-integration] Integración de ramas features a develop.  
+  PR: [#63](https://github.com/fioremos/simulador-planificacion-financiera/pull/63) - @skalapuj (Coordinador / DevOps) 
+- [feature/coord-devops-hotfix-login-card] Fix login card.  
+  PR: [#65](https://github.com/fioremos/simulador-planificacion-financiera/pull/65) - @skalapuj (Coordinador / DevOps) 
+
+---
 ## Cómo usar este archivo
 
 - Para cada PR, simplemente agregar una línea breve en la sección correspondiente a su cambio (Added, Changed, Fixed).  
