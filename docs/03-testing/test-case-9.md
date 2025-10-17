@@ -14,7 +14,7 @@ Validar la integración, compatibilidad y comportamiento responsive del primer c
 | Dispositivo       | Resolución | Navegador | Orientación         | Resultado | Detalle |
 |-------------------|------------|-----------|---------------------|-----------|---------|
 | iPhone 14 Pro     | 393x852    | Safari    | Portrait/Landscape  | ✅/⚠️ | En modo landscape, el video se desborda levemente del contenedor. |
-| Galaxy S23        | 360x780    | Chrome    | Portrait/Landscape  | ✅ |/⚠️ | En modo landscape, el video se desborda levemente del contenedor. |
+| Galaxy S23        | 360x780    | Chrome    | Portrait/Landscape  | ✅/⚠️ | En modo landscape, el video se desborda levemente del contenedor. |
 | iPad Air          | 820x1180   | Safari    | Portrait/Landscape  | ✅ | Visualización correcta y centrada en ambas orientaciones. |
 | Desktop (Laptop)  | >1024px    | Chrome    | Landscape           | ✅ | El componente se adapta perfectamente al layout y conserva proporciones. |
 
@@ -157,3 +157,6 @@ Registrar aquí los problemas detectados y su correspondiente issue en el reposi
 | IssueID | Descripción |
 |---------|-------------|
 | [#55](https://github.com/fioremos/simulador-planificacion-financiera/issues/55) | Video HTML5 se desborda del contenedor en landscape mobile |
+| [#70](https://github.com/fioremos/simulador-planificacion-financiera/issues/70#) | El validador W3C detectó que hay más de una etiqueta `<main>` visible.
+| [#71](https://github.com/fioremos/simulador-planificacion-financiera/issues/71#) | El validador W3C dvirtió que varias etiquetas `<section>` no tienen un encabezado. |
+| [#73](https://github.com/fioremos/simulador-planificacion-financiera/issues/73#) | Recursos que bloquean el renderizado |

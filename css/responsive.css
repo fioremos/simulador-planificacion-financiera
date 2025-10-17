@@ -343,18 +343,3 @@
     }
 
 }
-
-
-/* ===========================
-   Non-web (≤650px)
-   Ajustes para pantallas horizontales
-=========================== */
-@media screen and (max-height: 650px) {
-    .card#ingresos-gastos-card {
-        height: unset;
-    }
-
-    .card#inversiones-card-table {
-        height: unset;
-    }
-}

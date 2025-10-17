@@ -3,8 +3,7 @@
 ## Objetivo
 Verificar la correcta integración, personalización y comportamiento responsive del primer componente avanzado de Bootstrap seleccionado: `Modal` en diferentes y navegadores.
 
-## Herramientas Utilizadas
-- BrowserStack Mobile Testing  
+## Herramientas Utilizadas  
 - Chrome DevTools Device Mode  
 - Google PageSpeed Insights  
 
@@ -115,3 +114,4 @@ Registrar aquí los problemas detectados y su correspondiente issue en el reposi
 | IssueID | Descripción |
 |---------|-------------|
 | [#61](https://github.com/fioremos/simulador-planificacion-financiera/issues/61) | En modo landscape, el modal es mas grande que el alto del dispositivo (Mobile) |
+| [#72](https://github.com/fioremos/simulador-planificacion-financiera/issues/72#) | Caida de rendimiento por el componente Modal |

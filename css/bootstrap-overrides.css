@@ -165,22 +165,6 @@
 .modal-content .form-grid{
     padding: 0;
 }
-/*
- * CONTENIDO
- * Contenedor del contenido principal del layout.
- * Organiza internamente en columna y ajusta el fondo.
- */
-.content .card {
-    padding: 1rem;
-    height: 100%;
-    border: none;
-    color:var(--color-primary);
-}
-
-.content .card p {
-    margin: 0;
-}
-
 
 /****************************************************
  * BOTONES

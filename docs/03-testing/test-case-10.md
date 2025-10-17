@@ -39,7 +39,7 @@ Validar la integración, compatibilidad y comportamiento responsive de component
 
   **Capturas necesarias:**  
 
-  ![caniuse-progress](imagenes/test-case-10/caniuse-progress.png.png)
+  ![caniuse-progress](imagenes/test-case-10/caniuse-progress.png.)
   ![caniuse-details](imagenes/test-case-10/caniuse-details.png)
   ![canisue-summary](imagenes/test-case-10/caniuse-summary.png)
 
@@ -156,3 +156,4 @@ Registrar aquí los problemas detectados y su correspondiente issue en el reposi
 |----|-------------|
 | [#56](https://github.com/fioremos/simulador-planificacion-financiera/issues/56) | El componente progress pierde margen interno al rotar la pantalla, generando un desbordamiento hacia abajo del contenedor. |
 | [#57](https://github.com/fioremos/simulador-planificacion-financiera/issues/57) | Desbordamiento de el componente details en orientación landscape. |
+| [#73](https://github.com/fioremos/simulador-planificacion-financiera/issues/73#) | Recursos que bloquean el renderizado |

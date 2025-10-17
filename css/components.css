@@ -646,7 +646,7 @@ input[type="radio"]:checked + .radio-cuadrado::after {
  /* --- Celdas de datos en la tabla de metas --- */
 .metas-table td{
     color: var(--neutral-900);
-    /* text-align: center; */
+
 }
 /* --- Encabezados de la tabla de metas --- */
 .metas-table th{
@@ -658,7 +658,7 @@ input[type="radio"]:checked + .radio-cuadrado::after {
 /* --- Estilo general de la tabla de metas --- */
 .metas-table {
     border-collapse: collapse;
-    /* width: 100%; */
+
 }
 /* --- Bordes superior e inferior en fila de encabezado --- */
 .metas-table thead tr {
@@ -712,13 +712,14 @@ progress::-moz-progress-bar {
     color: #555;
 }
 /* --- details/summary --- */
+
 details {
   background-color: #f9fafb;
-  border: 1px solid #ddd;
+  border: 0.08rem solid #ddd;
   border-radius: 0.5rem;
   margin-bottom: 1rem;
   padding: 0.8rem 1rem;
-  transition: all 0.6s ease;
+  transition: background-color 0.3s ease;
 }
 details[open] {
   background-color: #eef6ff;
@@ -728,9 +729,22 @@ summary {
   font-weight: 600;
   cursor: pointer;
   color: #333;
+  display: flex; 
+  align-items: center; 
+  list-style: none;
 }
 summary::-webkit-details-marker {
-  color: #007bff; 
+  color: #007bff;
+  display: none;
+}
+summary::before {
+    content: '+';
+    font-size: 1.5em;
+    margin-right: 0.5rem;
+    color: #007bff;
+}
+details[open] > summary::before {
+    content: '−'; 
 }
 
 
@@ -838,12 +852,7 @@ summary::-webkit-details-marker {
     width: 1.75rem;
     height: 1.75rem;
 }
-/* Contenedor principal del contenido en cada elemento */
-/* .historial-list .contenido {
-    display: flex;
-    align-items: center;
-} */
-/* Contenedor del texto dentro del contenido */
+
 .historial-list .texto {
     display: flex;
     flex-direction: column;

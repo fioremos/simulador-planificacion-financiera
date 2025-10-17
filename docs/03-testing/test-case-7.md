@@ -3,8 +3,7 @@
 ## Objetivo
 Verificar la correcta integración, personalización y comportamiento responsive del primer componente avanzado de Bootstrap seleccionado: __`Offcanvas` con menú lateral seleccionable__ en diferentes dispositivos.  
 
-## Herramientas Utilizadas
-- BrowserStack Mobile Testing  
+## Herramientas Utilizadas 
 - Chrome DevTools Device Mode  
 - Google PageSpeed Insights  
 
@@ -116,3 +115,5 @@ Registrar aquí los problemas detectados y su correspondiente issue en el reposi
 | IssueID | Descripción |
 |---------|-------------|
 | [#60](https://github.com/fioremos/simulador-planificacion-financiera/issues/60) | Si el offcanvas esta desplegado y pasas de portrait a landscape, el fondo queda oscuro y bloqueado (iPad air) |
+| [#68](https://github.com/fioremos/simulador-planificacion-financiera/issues/68#) | El reporte de PageSpeed indica que el logo de la barra de navegación se muestra con una relación de aspecto incorrecta. |
+| [#69](https://github.com/fioremos/simulador-planificacion-financiera/issues/69#) | El reporte de PageSpeed indica que "El documento no tiene una metadescripción" |
