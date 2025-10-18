@@ -191,11 +191,11 @@ body {
     transition: opacity 0.3s ease-in-out;
     height: 4rem;
 }
-.header-logo img:hover {
+/*.header-logo img:hover {
     content: url('../assets/images/barraDeNavegacion/nombre_final.png'); 
     opacity: 1;
     transition: opacity 0.3s ease-in-out;
-}
+}*/
 
 
 /* ---------- Sidebar / Menú lateral ---------- */
