@@ -39,7 +39,7 @@ Validar la integración, compatibilidad y comportamiento responsive de component
 
   **Capturas necesarias:**  
 
-  ![caniuse-progress](imagenes/test-case-10/caniuse-progress.png.)
+  ![caniuse-progress](imagenes/test-case-10/caniuse-progress.png)
   ![caniuse-details](imagenes/test-case-10/caniuse-details.png)
   ![canisue-summary](imagenes/test-case-10/caniuse-summary.png)
 
