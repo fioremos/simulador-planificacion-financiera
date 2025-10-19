@@ -788,6 +788,10 @@ details[open] > summary::before {
     font-size: 1.25rem;
     border: 0.063rem outset var(--white-000);
 }
+
+.card#reportes-estadisticas-container h3 {
+    padding: 0 0 1rem;
+}
 /* Contenedor para gráficos en reportes */
 .reportes-chart {
     padding: 2rem;
