@@ -93,7 +93,7 @@
 
     /* Se cambia el logo por uno optimizado para mobile */
     .header-logo-img {
-        content: url('../images/barraDeNavegacion/nombre_inicial_mobile.png');
+        content: url('../assets/images/barraDeNavegacion/nombre_inicial_mobile.png');
         height: 5vh;
     }
 
