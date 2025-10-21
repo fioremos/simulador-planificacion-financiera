@@ -7,22 +7,23 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 ## [Unreleased]
 
 ### Added  
-- [feature/esp-com-bootstrap-add-component] Integración de dos componentes bootstrap (Offcanvas y Modal)  
-  PR: [#62](https://github.com/fioremos/simulador-planificacion-financiera/pull/62) - @UlisesC11 (Especialista en Componentes Bootstrap)  
-- [feature/dev-comp-html-avanzados-add-componen] Implementación de componentes avanzados HTML.  
-  PR: [#58](https://github.com/fioremos/simulador-planificacion-financiera/pull/58) - @MNEscobar (Desarrollador de Componentes HTML Avanzados)  
+- [feature/arq-diagramas-actividades] Creación de los diagramas de actividad de los4 flujos principales.  
+  PR: [#92](https://github.com/fioremos/simulador-planificacion-financiera/pull/92) -  @skalapuj (Arquitecto de Diagramas de Actividades) 
 
 ### Changed 
-- [feature/dev-frontend-bootstrap-update-migration] Migracion a Bootstrap.  
-  PR: [#59](https://github.com/fioremos/simulador-planificacion-financiera/pull/59) - @fioremos (Desarrollador Frontend/Bootstrap)  
-- [feature/coord-devops-update-doc-project] Actualización de la documentación del proyecto.  
-  PR: [#66](https://github.com/fioremos/simulador-planificacion-financiera/pull/66) -  @skalapuj (Coordinador / DevOps)
+
 
 ### Fixed  
-- [feature/coord-devops-branches-integration] Integración de ramas features a develop.  
-  PR: [#63](https://github.com/fioremos/simulador-planificacion-financiera/pull/63) - @skalapuj (Coordinador / DevOps) 
-- [feature/coord-devops-hotfix-login-card] Fix login card.  
-  PR: [#65](https://github.com/fioremos/simulador-planificacion-financiera/pull/65) - @skalapuj (Coordinador / DevOps)  
+- [feature/hotfix-#68-logo-header-relacion-incorrecta] Fix del logo del header.  
+  PR: [#91](https://github.com/fioremos/simulador-planificacion-financiera/pull/91) - @skalapuj (Arquitecto de Diagramas de Actividades)  
+- [feature/hotfix-#76-#78-imagenes-caidas] Correción de todas las rutas caídas. 
+  PR: [#89](https://github.com/fioremos/simulador-planificacion-financiera/pull/89) - @skalapuj (Arquitecto de Diagramas de Actividades) 
+- [feature/hotfix-#79-error-visualizacion-login] Fix en el scroll de la card de login.  
+  PR: [#88](https://github.com/fioremos/simulador-planificacion-financiera/pull/88) - @skalapuj (Arquitecto de Diagramas de Actividades)  
+- [feature/bugfix-#81-degradacion-rendimiento] Fix de la performace reportada de PageSpeed.  
+  PR: [#87](https://github.com/fioremos/simulador-planificacion-financiera/pull/87) - @skalapuj (Arquitecto de Diagramas de Actividades)  
+- [feature/docfix-#74-actualizacion-figma] Actualización del mockup en Figma.  
+  PR: [#86](https://github.com/fioremos/simulador-planificacion-financiera/pull/86) - @skalapuj (Arquitecto de Diagramas de Actividades)  
 
 ---
 
