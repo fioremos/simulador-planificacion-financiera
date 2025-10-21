@@ -55,9 +55,12 @@
 
 ---
 
-### Suite 3: [Nombre del Flujo 3]
+### Suite 3: Exportar Datos
 **Funciones Testeadas:**
-- `[función4()]` - [Descripción breve]
+- `hayDatosSeleccionados()` - Evalúa si el usuario selecciona correctamente tipos de datos para exportar.
+- `esFormatoValido()` - Verifica si el formato elegido para exportar (CSV, PDF, JSON) es correcto.
+- `sonNombreYRutaValidos()` - Comprueba la validez del nombre del archivo y la ruta destino.
+- `exportarDatosFlow()` - Simula todo el proceso de exportación, incluyendo entradas de usuario y llamada final al procesamiento.
 
 **Casos de Prueba:**
 | # | Descripción | Tipo |
