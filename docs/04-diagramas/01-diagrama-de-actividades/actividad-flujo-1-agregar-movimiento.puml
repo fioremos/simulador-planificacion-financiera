@@ -1,0 +1,57 @@
+@startuml agregar_movimiento
+title Flujo: Agregar Movimiento
+
+|Usuario|
+start
+
+  |Sistema|
+   repeat
+  :Mostrar formulario de nuevo movimiento;
+  note right
+    - Fecha 
+    - Tipo (Ingreso, Ahorro, Inversión, Gasto)
+    - Categoría 
+    - Monto
+    - Botón "Agregar movimiento"
+  end note
+
+  |Usuario|
+  :Completa la fecha del movimiento;
+  :Completa el tipo del movimiento;
+  :Selecciona la categoria a la que corresponde el movimiento;
+  :Ingresa el monto del movimiento;
+  :Hace clic en "Agregar movimiento";
+
+  |Sistema|
+  :Leer valores del formulario;
+
+  if (¿Campos obligatorios completos?) then (no)
+    :Mostrar error "Hay campos obligatorios incompletos";
+  elseif (¿Monto > 0?) then (no)
+    :Mostrar error "Monto debe ser mayor a 0";
+  elseif (¿Fecha válida?) then (no)
+    :Mostrar error "Fecha debe ser anterior a hoy";
+  else
+    break
+  endif
+
+repeat while (¿Formulario con errores?)
+:Enviar datos al backend;
+
+|Backend|
+:Guardar movimiento en base de datos;
+:Actualizar saldo;
+:Registrar en historial (usuario, fecha, tipo, monto);
+:Notifica al sistema que el movimiento fue agregado;
+
+|Sistema|
+fork
+  :Mostrar mensaje "Movimiento agregado con éxito";
+fork again
+  :Cerrar formulario;
+fork again
+:Actualizar vista desde donde se llamó el formulario;
+end fork
+stop
+
+@enduml
