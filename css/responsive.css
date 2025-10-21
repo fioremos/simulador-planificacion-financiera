@@ -1,5 +1,5 @@
 /* ===========================
-   Non-web > 1660px)
+   Non-web > (1660px)
    Tablets / Laptops pequeños
    Ajustes para pantallas medianas
 =========================== */
@@ -34,7 +34,7 @@
 }
 
 /* ===========================
-   Non-web > 1440px)
+   Non-web > (1440px)
    Tablets / Laptops pequeños
    Ajustes para pantallas medianas
 =========================== */
@@ -342,4 +342,31 @@
         font-size: 0.7rem;
     }
 
+}
+
+
+/* ===========================
+   Pantallas cortas
+   (Altura ≤630px y ancho ≥420px)
+   Ajustes para login card
+=========================== */
+@media screen and (max-height: 750px) and (min-width: 420px) {
+    /* Permite scroll para visualizar correctamente la card de login */
+    .principal-section#login {
+        height: auto;
+        max-height: none;
+    }
+}
+
+
+/* ===========================
+   Pantallas cortas y pequeñas
+   (Altura ≤530px y ancho ≤419px)
+   Ajustes para login card
+=========================== */
+@media screen and (max-height: 530px) and (max-width: 419px) {
+    /* Permite scroll para visualizar correctamente la card de login */
+    .principal-section#login {
+        height: auto;
+    }
 }

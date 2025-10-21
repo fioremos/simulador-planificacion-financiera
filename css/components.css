@@ -454,9 +454,9 @@ input[type="radio"]:checked + .radio-cuadrado::after {
  * - .buttons-container     → botones de acción principales
  * - .google-icon-container → ícono de inicio con Google
  ****************************************************/
-/*Adapta la card a todas las pantallas */
+/*Centra la card a todas las pantallas de alto estandar */
  .principal-section#login{
-    height: 100vh;
+    height: 92.5vh;
 }
 
  /* Oculta visualmente el elemento, pero lo mantiene accesible para lectores de pantalla */
@@ -480,13 +480,14 @@ input[type="radio"]:checked + .radio-cuadrado::after {
 .login-logo-container img {
     transition: opacity 0.3s ease-in-out;
     height: 16rem;
+    width: 40rem;
 }
 /* Efecto hover en el logo (cambia imagen y opacidad) */
 .login-logo-container img:hover {
     content: url('../assets/images/login/Logo_final.png'); 
     opacity: 1;
     transition: opacity 0.3s ease-in-out;
-}
+}*/
 /* Padding lateral del logo (espaciado horizontal) */
 .login-logo {
     padding: 0 10rem;
