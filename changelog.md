@@ -24,11 +24,11 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   PR: [#87](https://github.com/fioremos/simulador-planificacion-financiera/pull/87) - @skalapuj (Arquitecto de Diagramas de Actividades)  
 - [feature/docfix-#74-actualizacion-figma] Actualización del mockup en Figma.  
   PR: [#86](https://github.com/fioremos/simulador-planificacion-financiera/pull/86) - @skalapuj (Arquitecto de Diagramas de Actividades)
-  - [feature/hotfix-#70-remover-multiple-main-element] Fix Issue #70
+- [feature/hotfix-#80-alt-imagenes] Fix Issue #80 
+  PR: [#84](https://github.com/fioremos/simulador-planificacion-financiera/pull/84) - @fioremos (Desarrollador JavaScript)
+- [feature/hotfix-#70-remover-multiple-main-element] Fix Issue #70
   PR: [#83](https://github.com/fioremos/simulador-planificacion-financiera/pull/83) - @fioremos (Desrrolladr JavaScript)
   
-
-
 ---
 
 ## [Release Actividad Obligatoria N°1] - 2025-08-10
