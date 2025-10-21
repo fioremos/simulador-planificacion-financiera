@@ -360,6 +360,154 @@ Ej:
   ```
 - **GitHub Issue:** [#101](https://github.com/fioremos/simulador-planificacion-financiera/issues/101)
 - **Estado:** Abierto
+
+### Issue #102: Validación de tipos de datos disponibles (mayúscula) en Exportar Datos
+- **Severidad:** Alta
+- **Suite Afectada:** `describe("Función hayDatosSeleccionados()")`
+- **Test Afectado:** `it("deberia aceptar tipos de datos disponibles en mayúscula (MOVIMIENTOS)")`
+- **Comportamiento Esperado:** Aceptar mayúscula.
+- **Comportamiento Obtenido:** Alerta de "Seleccionar tipo de dato válido".
+- **Pasos para Reproducir:**
+  1. Seleccionar la opción 3 (Exportar Datos) del menu principal.
+  2. Ingresar los datos que se desea exportar (`MOVIMIENTOS`)
+  3. Mensaje de "Debe seleccionar al menos un tipo de dato válido".
+- **Código del Test que Falla:**
+  ```javascript
+  it("deberia aceptar tipos de datos disponibles en mayúscula (MOVIMIENTOS)", function () {
+    // Simula el prompt donde el usuario escribe "MOVIMIENTOS"
+    spyOn(window, 'prompt').and.returnValue("MOVIMIENTOS");
+
+    // Reproducir la lógica de parsing que hace exportarDatosFlow
+    const tiposDisponibles = ['Movimientos', 'Metas', 'Presupuesto', 'Historial'];
+    const seleccion = prompt(); // devuelve "MOVIMIENTOS" por el spy
+    const tiposSeleccionados = seleccion
+        ? seleccion.split(',').map(e => e.trim()).filter(e => tiposDisponibles.includes(e))
+        : [];
+
+    // Compruebo que el array contiene "MOVIMIENTOS" y que hayDatosSeleccionados lo reconoce
+    expect(hayDatosSeleccionados(tiposSeleccionados)).toBeTruthy();
+    });
+  ```
+- **GitHub Issue:** [#102](https://github.com/fioremos/simulador-planificacion-financiera/issues/102)
+- **Estado:** Abierto
+
+### Issue #103: Validación de tipos de datos disponibles (minúscula) en Exportar Datos
+- **Severidad:** Alta
+- **Suite Afectada:** `describe("Función hayDatosSeleccionados()")`
+- **Test Afectado:** `it("deberia aceptar tipos de datos disponibles en minúscula (movimientos)"`
+- **Comportamiento Esperado:** Aceptar minúsculas.
+- **Comportamiento Obtenido:** Alerta de "Seleccionar tipo de dato válido".
+- **Pasos para Reproducir:**
+  1. Seleccionar la opción 3 (Exportar Datos) del menu principal.
+  2. Ingresar los datos que se desea exportar (`movimientos`)
+  3. Mensaje de "Debe seleccionar al menos un tipo de dato válido".
+- **Código del Test que Falla:**
+  ```javascript
+  it("deberia aceptar tipos de datos disponibles en minúscula (movimientos)", function () {
+    // Simula el prompt donde el usuario escribe "movimientos"
+    spyOn(window, 'prompt').and.returnValue("movimientos");
+
+    // Reproducir la lógica de parsing que hace exportarDatosFlow
+    const tiposDisponibles = ['Movimientos', 'Metas', 'Presupuesto', 'Historial'];
+    const seleccion = prompt(); // devuelve "movimientos" por el spy
+    const tiposSeleccionados = seleccion
+        ? seleccion.split(',').map(e => e.trim()).filter(e => tiposDisponibles.includes(e))
+        : [];
+
+    // Compruebo que el array contiene "movimientos" y que hayDatosSeleccionados lo reconoce
+    expect(hayDatosSeleccionados(tiposSeleccionados)).toBeTruthy();
+    });
+  ```
+- **GitHub Issue:** [#103](https://github.com/fioremos/simulador-planificacion-financiera/issues/103)
+- **Estado:** Abierto
+
+### Issue #104: Validación de un tipo de dato disponible y otro incorrecto (Metas, Hogar) en Exportar Datos
+- **Severidad:** Alta
+- **Suite Afectada:** `describe("Función hayDatosSeleccionados()")`
+- **Test Afectado:** `it("deberia rechazar un tipo de dato disponible y otro incorrecto (Metas, Hogar)")`
+- **Comportamiento Esperado:** Alerta de "seleccionar al menos un tipo de dato válido".
+- **Comportamiento Obtenido:** Acepta el ingreso de un tipo de dato incorrecto.
+- **Pasos para Reproducir:**
+  1. Seleccionar la opción 3 (Exportar Datos) del menu principal.
+  2. Ingresar los datos que se desea exportar (`Metas, Hogar`).
+  3. Ingresar formato de exportación (`PDF`).
+  4. Ingresar nombre del archivo (`reporte`).
+  5. Ingresar ruta del directorio (`C:\\Exports`)
+  6. Mensaje de "Exportación exitosa. El archivo fue generado correctamente".
+- **Código del Test que Falla:**
+  ```javascript
+  it("deberia rechazar un tipo de dato disponible y otro incorrecto (Metas, Hogar)", function () {
+    // Simula el prompt donde el usuario escribe "Metas, Hogar"
+    spyOn(window, 'prompt').and.returnValue("Metas, Hogar");
+
+    // Reproducir la lógica de parsing que hace exportarDatosFlow
+    const tiposDisponibles = ['Movimientos', 'Metas', 'Presupuesto', 'Historial'];
+    const seleccion = prompt(); // devuelve "Metas, Hogar" por el spy
+    const tiposSeleccionados = seleccion
+        ? seleccion.split(',').map(e => e.trim()).filter(e => tiposDisponibles.includes(e))
+        : [];
+            
+    // Compruebo que el array contiene "Metas" y "Hogar" y que hayDatosSeleccionados lo reconoce
+    expect(hayDatosSeleccionados(tiposSeleccionados)).toBeFalsy();
+  });
+  ```
+- **GitHub Issue:** [#104](https://github.com/fioremos/simulador-planificacion-financiera/issues/104)
+- **Estado:** Abierto
+
+### Issue #105: Validación de un tipo de dato incorrecto y otro disponible (Hogar, Metas) en Exportar Datos
+- **Severidad:** Alta
+- **Suite Afectada:** `describe("Función hayDatosSeleccionados()")`
+- **Test Afectado:** `it("deberia rechazar un tipo de dato incorrecto y otro disponible (Hogar, Metas)")`
+- **Comportamiento Esperado:** Alerta de "seleccionar al menos un tipo de dato válido".
+- **Comportamiento Obtenido:** Acepta el ingreso de un tipo de dato incorrecto.
+- **Pasos para Reproducir:**
+  1. Seleccionar la opción 3 (Exportar Datos) del menu principal.
+  2. Ingresar los datos que se desea exportar (`Hogar, Metas`).
+  3. Ingresar formato de exportación (`PDF`).
+  4. Ingresar nombre del archivo (`reporte`).
+  5. Ingresar ruta del directorio (`C:\\Exports`)
+  6. Mensaje de "Exportación exitosa. El archivo fue generado correctamente".
+- **Código del Test que Falla:**
+  ```javascript
+  it("deberia rechazar un tipo de dato incorrecto y otro disponible (Hogar, Metas)", function () {
+    // Simula el prompt donde el usuario escribe "Hogar, Meta"
+    spyOn(window, 'prompt').and.returnValue("Hogar, Metas");
+
+    // Reproducir la lógica de parsing que hace exportarDatosFlow
+    const tiposDisponibles = ['Movimientos', 'Metas', 'Presupuesto', 'Historial'];
+    const seleccion = prompt(); // devuelve "Hogar, Metas" por el spy
+    const tiposSeleccionados = seleccion
+        ? seleccion.split(',').map(e => e.trim()).filter(e => tiposDisponibles.includes(e))
+        : [];
+            
+    // Compruebo que el array contiene "Hogar" y "Meta" y que hayDatosSeleccionados lo reconoce
+    expect(hayDatosSeleccionados(tiposSeleccionados)).toBeFalsy();
+  });
+  ```
+- **GitHub Issue:** [#105](https://github.com/fioremos/simulador-planificacion-financiera/issues/105)
+- **Estado:** Abierto
+
+### Issue #106: Validación del nombre del archivo con extensión (reporte.pdf) en Exportar Datos
+- **Severidad:** Alta
+- **Suite Afectada:** `describe("Función sonNombreYRutaValidos()")`
+- **Test Afectado:** `it("debería recharzar nombre con extensión (reporte.pdf)")`
+- **Comportamiento Esperado:** Alerta de nombre del archivo no válido.
+- **Comportamiento Obtenido:** Acepta el ingreso del nombre con extensión.
+- **Pasos para Reproducir:**
+  1. Seleccionar la opción 3 (Exportar Datos) del menu principal.
+  2. Ingresar los datos que se desea exportar (`Metas`).
+  3. Ingresar formato de exportación (`PDF`).
+  4. Ingresar nombre del archivo (`reporte.pdf`).
+  5. Ingresar ruta del directorio (`C:\\Exports`)
+  6. Mensaje de "Exportación exitosa. El archivo fue generado correctamente".
+- **Código del Test que Falla:**
+  ```javascript
+  it("debería recharzar nombre con extensión (reporte.pdf)", function () {
+    expect(sonNombreYRutaValidos("reporte.pdf", "C:\\Exports")).toBeFalsy();
+  });
+  ```
+- **GitHub Issue:** [#106](https://github.com/fioremos/simulador-planificacion-financiera/issues/106)
+- **Estado:** Abierto
 ---
 
 ## Limitaciones del Testing
