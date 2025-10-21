@@ -9,9 +9,10 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 ### Added  
 - [feature/arq-diagramas-actividades] Creación de los diagramas de actividad de los4 flujos principales.  
   PR: [#92](https://github.com/fioremos/simulador-planificacion-financiera/pull/92) -  @skalapuj (Arquitecto de Diagramas de Actividades) 
+- [feature/dev-javascript-logica-negocio] Insercion de logigica en Javascript
+  PR: [#90](https://github.com/fioremos/simulador-planificacion-financiera/pull/90) - @fioremos (Desarrollador JavaScrip)
 
 ### Changed 
-
 
 ### Fixed  
 - [feature/hotfix-#68-logo-header-relacion-incorrecta] Fix del logo del header.  
