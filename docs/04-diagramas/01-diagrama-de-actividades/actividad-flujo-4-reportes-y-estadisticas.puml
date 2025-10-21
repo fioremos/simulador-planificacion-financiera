@@ -1,0 +1,58 @@
+@startuml ver_reportes_detallado
+title Flujo: Visualizar Reporte Financiero
+
+|Usuario|
+start
+
+|Sistema|
+:Mostrar filtros disponibles cargados en los filtros por defecto;
+note right
+    - Fecha 
+    - Moneda 
+    - Categoría 
+end note
+
+repeat
+
+  |Sistema|
+  fork
+    :Bloquear interfaz mientras se cargan los datos;
+  fork again
+    :Solicitar datos al backend con los filtros actuales;
+  end fork
+
+  |Backend|
+  :Consultar base de datos de ingresos y egresos con los filtros recibidos;
+  if (¿Hay datos con los filtros indicados?) then (no)
+    :Devolver mensaje "No hay datos para los filtros seleccionados";
+    :Generar reporte vacío;   
+    
+  else (sí)
+    :Devolver mensaje "Filtros aplicados correctamente";
+    fork
+      :Agrupar datos por categoría y fecha;
+    fork again
+      :Calcular totales e indicadores clave (saldo promedio, % ahorro);
+    fork again
+      :Generar gráfico de ingresos vs egresos;
+    fork again
+      :Generar ranking de categorías con más gastos;
+    end fork
+    :Devolver datos al sistema;
+  endif
+
+  |Sistema|
+  :Mostrar mensaje recibido del backend;
+  :Mostrar la vista preliminar del reporte con los datos recibidos;
+
+  |Usuario|
+  if (¿Deseo cambiar algún filtro?) then (sí)
+    :Configura el filtro que prefiero;
+  else (no)
+    stop
+  endif
+
+repeat while (Se cambió algún filtro respecto a la última vista) 
+
+
+@enduml
