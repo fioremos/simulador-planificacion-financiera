@@ -8,7 +8,7 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
 
@@ -17,8 +17,8 @@
     <link rel="stylesheet" href="css/responsive.css">
    
     <link rel="stylesheet" href="css/bootstrap-overrides.css">
-    <script src="js/main.js" defer></script>
-    <script src="js/eventos.js" defer></script>
+    <script defer src="js/main.js"></script>
+    <script defer src="js/eventos.js"></script>
     <script defer src="js/script.js"></script>
     <title>FinGrow</title>
 </head>
@@ -26,6 +26,7 @@
 <body>
      <!-- HEADER ÚNICO -->
     <header id="main-header" class="header-oculto">
+        <h1 class="visually-hidden">FinGrow - Panel Principal</h1>
         <div class="header-container">
             <div>
                 <button id="menuToggleBtn" class="btn btn-outline-primary d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarOffcanvas" aria-controls="sidebarOffcanvas">
@@ -52,9 +53,7 @@
                     <li><a href="#exportar" data-section="exportar"><span class="sidebar-icon"><img src="assets/images/iconos/upload.png" alt="logo_menu_exportar"> </span> Exportación de Datos</a></li>
                     <li><a href="#configuracion" data-section="configuracion"><span class="sidebar-icon"><img src="assets/images/iconos/settings.png" alt="logo_menu_configuracion"> </span> Configuración</a></li>
                 </ul>
-            </nav>
 
-            <nav>
                 <ul>    
                     <li><a href="#login" data-section="login"><span class="sidebar-icon"><img src="assets/images/iconos/Log_out.png" alt="logo_cerrar_sesion"> </span>  Cerrar Sesión</a></li>
                 </ul>    
@@ -83,7 +82,7 @@
 
                 <nav>
                         <ul class="list-group list-group-flush">   
-                        <li class="list-group-item"><a href="#login"><span class="sidebar-icon"><img src="assets/images/iconos/Log_out.png"></span> Cerrar Sesión</a></li>
+                        <li class="list-group-item"><a href="#login"><span class="sidebar-icon"><img src="assets/images/iconos/Log_out.png" alt="Icono de cerrar sesión"></span> Cerrar Sesión</a></li>
                     </ul>
                 </nav>
             </div>
@@ -108,11 +107,11 @@
                     <form id="login-form">
                         <div class="inputs-container">
                             <div class="mb-3">
-                                <label for="usuario" class="form-label" hidden>Usuario</label>
+                                <label for="usuario" class="form-label visually-hidden">Usuario</label>
                                 <input id="usuario" type="text" name="usuario" placeholder="Usuario" class="form-control">
                             </div>
                             <div class="mb-3">
-                                <label for="password" class="form-label" hidden>Contraseña</label>
+                                <label for="password" class="form-label visually-hidden">Contraseña</label>
                                 <input id="password" type="password" name="password" placeholder="Contraseña"
                                     class="form-control">
                             </div>
@@ -205,7 +204,7 @@
                     <section id="ultimos-movimientos" class="card">
                         <div class="header-table">
                             <div>
-                                <p class="subtitle">Últimos movimientos</p>
+                                <h2 class="subtitle">Últimos movimientos</h2>
                             </div>
                             <!-- Boton que activa el modal -->
                             <button class="btn btn-primary btn-small" data-bs-toggle="modal" data-bs-target="#miModal">
@@ -332,7 +331,7 @@
                     <section id= "video-tutorial" class="card">
                         <div class="padre-flex">
                             <div>
-                                <p class="subtitle">Educación Financiera para Principiantes</p>
+                                <h2 class="subtitle">Educación Financiera para Principiantes</h2>
                             </div>    
                             <div class="video-educacion-container ratio ratio-16x">
                             <video controls class="video-educacion w-100 h-100">
@@ -354,7 +353,7 @@
             ========================== -->
             <section id="ingresos-gastos" class="principal-section invisible">
                 <div class="principal-container">
-                    <section id="ingresos-gastos-card" class="card">
+                    <div id="ingresos-gastos-card" class="card">
                         <div>
                             <h2 class="subtitle subtitle-center">Gestión de ingresos y gastos</h2>
                             <hr>
@@ -420,9 +419,9 @@
                             <!-- Tabla de movimientos -->
                             <div class="ingresos-gastos-table">
                                 <div class="header-table">
-                                    <p class="subtitle">Movimientos</p>
+                                    <h3 class="subtitle">Movimientos</h3>
                                 </div>
-                                <div clas="">
+                                <div class="">
                                     <!-- Tabla generada de forma estática por ahora. 
                                                     En versiones futuras, se construirá dinámicamente con JavaScript 
                                                     o mediante datos obtenidos desde una API, permitiendo contenido actualizado  -->
@@ -486,7 +485,7 @@
                                 </div>
                             </div>
                         </div>
-                    </section>
+                    </div>
                 </div>
             </section>
 
@@ -500,10 +499,10 @@
             ========================== -->
             <section id="metas" class="principal-section invisible">
                 <div class="principal-container">
-                    <section id="metas-card-table" class="card">
+                    <div id="metas-card-table" class="card">
                         <div class="header-table">
                             <div>
-                                <p class="subtitle">Metas de ahorro</p>
+                                <h2 class="subtitle">Metas de ahorro</h2>
                             </div>
                         </div>
                         <!-- Tabla generada de forma estática por ahora. 
@@ -544,9 +543,9 @@
                         <div class="metas-card-table-button d-flex justify-content-end">
                             <button class="btn btn-inverse btn-blue small">Agregar objetivo</button>
                         </div>
-                    </section>
+                    </div>
 
-                    <section id="metas-card-graph" class="card">
+                    <div id="metas-card-graph" class="card">
                         <div class="section-title-horizintal">
                             <h3 class="subtitle">Viaje</h3>
                             <h3 class="subtitle">$700.000</h3>
@@ -577,10 +576,10 @@
                         <div class="metas-card-graph-button d-flex justify-content-center">
                             <button class="btn btn-inverse btn-blue small">Seleccionar objetivo</button>
                         </div>
-                    </section>
+                    </div>
 
                     <!-- === DETAILS/SUMMARY COMPONENTE HTML5 AVANZADO === -->
-                    <section id="tips-financieros" class="card">
+                    <div id="tips-financieros" class="card">
                         <h2 class="subtitle">Consejos de Ahorro</h2>
                         <details>
                             <summary class="large"> 
@@ -594,7 +593,7 @@
                             </summary>
                             <p class="medium">Utiliza categorías y revisa tus gastos semanales para identificar patrones. Animo!!</p>
                         </details>
-                    </section>
+                    </div>
                 </div>
             </section>
 
@@ -606,10 +605,10 @@
             ========================== -->
             <section id="inversiones" class="principal-section invisible">
                 <div class="principal-container">
-                    <section id="inversiones-card-table" class="card">
+                    <div id="inversiones-card-table" class="card">
                         <div class="header-table">
                             <div>
-                                <p class="subtitle">Inversiones</p>
+                                <h2 class="subtitle">Inversiones</h2>
                             </div>
                             <div class="inversiones-card-table-button">
                                 <button class="btn btn-primary btn-small">
@@ -663,9 +662,9 @@
                                 </tbody>
                             </table>
                         </div>
-                    </section>
+                    </div>
 
-                    <section id="inversiones-card-graph" class="card">
+                    <div id="inversiones-card-graph" class="card">
                         <!-- Módulo temporalmente representado como contenido estático. 
                                                 En futuras versiones, se integrará un iframe (u otro método de embed) 
                                                 para mostrar información financiera en tiempo real mediante Google Inversiones 
@@ -674,7 +673,7 @@
                             <img src="assets/images/inversiones/grafico.png" class="inversiones-chart h-lg-100 h-auto"
                                 alt="Gráfico metas de ahorro">
                         </div>
-                    </section>
+                    </div>
                 </div>
             </section>
 
@@ -686,7 +685,7 @@
             ========================== -->
             <section id="reportes" class="principal-section invisible">
                 <div class="principal-container">
-                    <section id="reportes-estadisticas-container" class="card">
+                    <div id="reportes-estadisticas-container" class="card">
                         <div>
                             <h2 class="subtitle subtitle-center">Reportes y estadística</h2>
                             <hr>
@@ -754,7 +753,7 @@
                                     <div class="col container">
                                         <div class="row justify-content-center">
                                             <div class="col gastos-list">
-                                                <p>Hogar</p>
+                                                <h4>Hogar</h4>
                                             </div>
                                             <div class="col gastos-bars">
                                                 <div class="bar"></div>
@@ -762,7 +761,7 @@
                                         </div>
                                         <div class="row justify-content-center">
                                             <div class="col gastos-list">
-                                                <p>Alimentación</p>
+                                                <h4>Alimentación</h4>
                                             </div>
                                             <div class="col gastos-bars">
                                                 <div class="bar"></div>
@@ -770,7 +769,7 @@
                                         </div>
                                         <div class="row justify-content-center">
                                             <div class="col gastos-list">
-                                                <p>Transporte</p>
+                                                <h4>Transporte</h4>
                                             </div>
                                             <div class="col gastos-bars">
                                                 <div class="bar"></div>
@@ -778,7 +777,7 @@
                                         </div>
                                         <div class="row justify-content-center">
                                             <div class="col gastos-list">
-                                                <p>Salud</p>
+                                                <h4>Salud</h4>
                                             </div>
                                             <div class="col gastos-bars">
                                                 <div class="bar"></div>
@@ -786,7 +785,7 @@
                                         </div>
                                         <div class="row justify-content-center">
                                             <div class="col gastos-list">
-                                                <p>Ocio</p>
+                                                <h4>Ocio</h4>
                                             </div>
                                             <div class="col gastos-bars">
                                                 <div class="bar"></div>
@@ -794,7 +793,7 @@
                                         </div>
                                         <div class="row justify-content-center">
                                             <div class="col gastos-list">
-                                                <p>Otros</p>
+                                                <h4>Otros</h4>
                                             </div>
                                             <div class="col gastos-bars">
                                                 <div class="bar"></div>
@@ -812,7 +811,7 @@
                                 </div>
                             </div>
                         </div>
-                    </section>
+                    </div>
                 </div>
             </section>
 
@@ -824,7 +823,7 @@
             ========================== -->
             <section id="historial" class="principal-section invisible">
                 <div class="principal-container">
-                    <section id="historial-container" class="card">
+                    <div id="historial-container" class="card">
                         <div class="historial">
                             <h2 class="subtitle subtitle-center">Historial y Auditoría</h2>
                             <hr>
@@ -915,7 +914,7 @@
                                 Descargar historial
                             </button>
                         </div>
-                    </section>
+                    </div>
                 </div>
             </section>
 
@@ -927,7 +926,7 @@
             ========================== -->
             <section id="exportar" class="principal-section invisible">
                 <div class="principal-container">
-                    <section id="exportar-container" class="card">
+                    <div id="exportar-container" class="card">
                         <div>
                             <h2 class="subtitle subtitle-center">Exportación de Datos</h2>
                             <hr>
@@ -1015,7 +1014,7 @@
                                     Exportar
                                 </button>
                             </div>
-                    </section>
+                    </div>
                 </div>
             </section>
 
@@ -1029,7 +1028,7 @@
             ========================== -->
             <section id="configuracion" class="principal-section invisible">
                 <div class="principal-container">
-                    <section id="configuracion-container" class="card">
+                    <div id="configuracion-container" class="card">
                         <div>
                             <h2 class="subtitle subtitle-center">Configuración de Usuario</h2>
                             <hr>
@@ -1047,15 +1046,15 @@
 
                             <form class="config-form d-flex flex-column">
                                 <div class="form-group">
-                                    <label for="nombreC" class="sr-only">Nombre completo</label>
+                                    <label for="nombreC" class="visually-hidden">Nombre completo</label>
                                     <input id="nombreC" type="text" class="input" placeholder="Juan Perez">
                                 </div>
                                 <div class="form-group">
-                                    <label for="email" class="sr-only">Correo electrónico</label>
+                                    <label for="email" class="visually-hidden">Correo electrónico</label>
                                     <input id="email" type="email" class="input" placeholder="juan.perez@gmail.com">
                                 </div>
                                 <div class="form-group">
-                                    <label for="telefono" class="sr-only">Número de teléfono</label>
+                                    <label for="telefono" class="visually-hidden">Número de teléfono</label>
                                     <input id="telefono" type="tel" class="input" placeholder="1122334455">
                                 </div>
 
@@ -1134,7 +1133,7 @@
                         <div class="form-actions">
                             <button class="btn btn-primary">Guardar</button>
                         </div>
-                    </section>
+                    </div>
                 </div>
             </section>
         </main>
