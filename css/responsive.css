@@ -94,7 +94,11 @@
     /* Se cambia el logo por uno optimizado para mobile */
     .header-logo-img {
         content: url('../images/barraDeNavegacion/nombre_inicial_mobile.png');
-        height: 5vh;
+        width: 100%;
+        height: auto;      
+        display: block;    
+        max-width: 280px;  
+        aspect-ratio: 5.2;
     }
 
 
@@ -342,6 +346,14 @@
         font-size: 0.7rem;
     }
 
+    .header-logo-img {  
+        max-width: 180px;  
+        aspect-ratio: 5.2;
+    }
+
+    .header-container {
+    padding: 0 0.2rem;
+    }
 }
 
 
