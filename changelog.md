@@ -23,7 +23,11 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 - [feature/bugfix-#81-degradacion-rendimiento] Fix de la performace reportada de PageSpeed.  
   PR: [#87](https://github.com/fioremos/simulador-planificacion-financiera/pull/87) - @skalapuj (Arquitecto de Diagramas de Actividades)  
 - [feature/docfix-#74-actualizacion-figma] Actualización del mockup en Figma.  
-  PR: [#86](https://github.com/fioremos/simulador-planificacion-financiera/pull/86) - @skalapuj (Arquitecto de Diagramas de Actividades)  
+  PR: [#86](https://github.com/fioremos/simulador-planificacion-financiera/pull/86) - @skalapuj (Arquitecto de Diagramas de Actividades)
+  - [feature/hotfix-#70-remover-multiple-main-element] Fix Issue #70
+  PR: [#83](https://github.com/fioremos/simulador-planificacion-financiera/pull/83) - @fioremos (Desrrolladr JavaScript)
+  
+
 
 ---
 
