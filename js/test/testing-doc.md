@@ -139,9 +139,10 @@ Ej:
 - **Comportamiento Esperado:** [Descripción]
 - **Comportamiento Obtenido:** [Descripción]
 - **Pasos para Reproducir:**
-  1. [Paso 1]
-  2. [Paso 2]
-  3. [Paso 3]
+  1. paso 1
+  2. paso 2
+  3. paso 3
+
 - **Código del Test que Falla:**
   ```javascript
   it("descripción", function() {
@@ -151,6 +152,211 @@ Ej:
 - **GitHub Issue:** #[número]
 - **Estado:** Abierto/Resuelto
 
+### Issue #93: Validación del monto (vacío) en Metas de Ahorro
+- **Severidad:** Alta
+- **Suite Afectada:** `describe("Validaciones de monto en pedirMeta()")`
+- **Test Afectado:** `it("debería recharzar monto vacío")`
+- **Comportamiento Esperado:** Mostrar alerta de monto inválido.
+- **Comportamiento Obtenido:** Meta guardada con éxito.
+- **Pasos para Reproducir:**
+  1. Seleccionar la opción 2 (Metas de Ahorro) del menu principal.
+  2. Seleccionar la opción 1 (Agregar una nueva meta) del menu Gestión de Metas de Ahorro.
+  3. Ingresar el nombre de la meta.
+  4. Ingresar monto en vacio (`""`).
+  5. Ingresar fecha del objetivo (opcional).
+  6. Mensaje de "Meta guardada con éxito".
+- **Código del Test que Falla:**
+  ```javascript
+  it("debería recharzar monto vacío", function () {
+    spyOn(window, 'prompt').and.returnValues("Meta1", "", "2026-12-31");
+    const montoVacio = pedirMeta();
+    expect(montoVacio).toBeFalsy();
+  });
+  ```
+- **GitHub Issue:** [#93](https://github.com/fioremos/simulador-planificacion-financiera/issues/93)
+- **Estado:** Abierto
+
+### Issue #94: Validación del monto (no numérico) en Metas de Ahorro
+- **Severidad:** Alta
+- **Suite Afectada:** `describe("Validaciones de monto en pedirMeta()")`
+- **Test Afectado:** `it("debería recharzar monto no numérico")`
+- **Comportamiento Esperado:** Mostrar alerta de monto inválido.
+- **Comportamiento Obtenido:** Meta guardada con éxito.
+- **Pasos para Reproducir:**
+  1. Seleccionar la opción 2 (Metas de Ahorro) del menu principal.
+  2. Seleccionar la opción 1 (Agregar una nueva meta) del menu Gestión de Metas de Ahorro.
+  3. Ingresar el nombre de la meta.
+  4. Ingresar monto no numérico (`abc`).
+  5. Ingresar fecha del objetivo (opcional).
+  6. Mensaje de "Meta guardada con éxito".
+- **Código del Test que Falla:**
+  ```javascript
+  it("debería recharzar monto no numérico", function () {
+    spyOn(window, 'prompt').and.returnValues("Meta1", "abc", "2026-12-31");
+    const montoNoNumerico = pedirMeta();
+    expect(montoNoNumerico).toBeFalsy();
+  });
+  ```
+- **GitHub Issue:** [#94](https://github.com/fioremos/simulador-planificacion-financiera/issues/94)
+- **Estado:** Abierto
+
+### Issue #95: Validación del monto (con espacios) en Metas de Ahorro
+- **Severidad:** Alta
+- **Suite Afectada:** `describe("Validaciones de monto en pedirMeta()")`
+- **Test Afectado:** `it("debería recharzar monto con espacios")`
+- **Comportamiento Esperado:** Mostrar alerta de monto inválido.
+- **Comportamiento Obtenido:** Meta guardada con éxito.
+- **Pasos para Reproducir:**
+  1. Seleccionar la opción 2 (Metas de Ahorro) del menu principal.
+  2. Seleccionar la opción 1 (Agregar una nueva meta) del menu Gestión de Metas de Ahorro.
+  3. Ingresar el nombre de la meta.
+  4. Ingresar monto con espacios (`  5000  `).
+  5. Ingresar fecha del objetivo (opcional).
+  6. Mensaje de "Meta guardada con éxito".
+- **Código del Test que Falla:**
+  ```javascript
+  it("debería recharzar monto con espacios", function () {
+    spyOn(window, 'prompt').and.returnValues("Meta1", " 5000 ", "2026-12-31");
+    const montoConEspacios = pedirMeta();
+    expect(montoConEspacios).toBeFalsy();
+  });
+  ```
+- **GitHub Issue:** [#95](https://github.com/fioremos/simulador-planificacion-financiera/issues/95)
+- **Estado:** Abierto
+
+### Issue #96: Validación de fecha futura (formato incorrecto) en Metas de Ahorro
+- **Severidad:** Alta
+- **Suite Afectada:** `describe("Función esFechaFuturaValida()")`
+- **Test Afectado:** `it ("debería rechazar fechas con formato incorrecto")`
+- **Comportamiento Esperado:** Mostrar alerta de formato incorrecto.
+- **Comportamiento Obtenido:** Meta guardada con éxito.
+- **Pasos para Reproducir:**
+  1. Seleccionar la opción 2 (Metas de Ahorro) del menu principal.
+  2. Seleccionar la opción 1 (Agregar una nueva meta) del menu Gestión de Metas de Ahorro.
+  3. Ingresar el nombre de la meta.
+  4. Ingresar monto de la meta.
+  5. Ingresar fecha del objetivo (`01-01-2026`).
+  6. Mensaje de "Meta guardada con éxito".
+- **Código del Test que Falla:**
+  ```javascript
+  it("debería rechazar fechas con formato incorrecto", function () {
+    const formatoIncorrecto = "01-01-2026";
+    expect(esFechaFuturaValida(formatoIncorrecto)).toBeFalsy();
+  });
+  ```
+- **GitHub Issue:** [#96](https://github.com/fioremos/simulador-planificacion-financiera/issues/96)
+- **Estado:** Abierto
+
+### Issue #97: Validación de fecha (formato incorrecto) en Agregar Movimiento
+- **Severidad:** Alta
+- **Suite Afectada:** `describe("Función esFechaValida()")`
+- **Test Afectado:** `it("debería rechazar una fecha con formato incorrecto")`
+- **Comportamiento Esperado:** Mostrar alerta de formato incorrecto.
+- **Comportamiento Obtenido:** Movimiento agregado con éxito.
+- **Pasos para Reproducir:**
+  1. Seleccionar la opción 1 (Agregar Movimiento) del menu principal.
+  2. Ingresar fecha del movimiento (`01-10-2025`)
+  3. Ingresar el tipo de movimiento (`Ingreso`)
+  5. Ingresar la categoria del movimiento (`Sueldo`)
+  4. Ingresar monto del movimiento (`500000`).
+  6. Mensaje de "Movimiento agregado con éxito".
+- **Código del Test que Falla:**
+  ```javascript
+  it("debería rechazar una fecha con formato incorrecto", function () {
+    const formatoIncorrecto = "01-10-2025";
+    expect(esFechaValida(formatoIncorrecto)).toBeFalsy();
+  });
+  ```
+- **GitHub Issue:** [#97](https://github.com/fioremos/simulador-planificacion-financiera/issues/97)
+- **Estado:** Abierto
+
+### Issue #98: Validación de Tipos (mayúscula) en Agregar Movimiento
+- **Severidad:** Alta
+- **Suite Afectada:** `describe("Función esTipoValido()")`
+- **Test Afectado:** `it("debería aceptar 'tipos' en mayúscula")`
+- **Comportamiento Esperado:** Aceptar mayúsculas.
+- **Comportamiento Obtenido:** Alerta de Tipo inválido.
+- **Pasos para Reproducir:**
+  1. Seleccionar la opción 1 (Agregar Movimiento) del menu principal.
+  2. Ingresar fecha del movimiento (`2025-10-01`)
+  3. Ingresar el tipo de movimiento (`INGRESO`)
+  5. Ingresar la categoria del movimiento (`Sueldo`)
+  4. Ingresar monto del movimiento (`500000`).
+  6. Mensaje de "Tipo inválido. Debe ser uno de: Ingreso, Ahorro, Inversión o Gasto".
+- **Código del Test que Falla:**
+  ```javascript
+  it("debería aceptar 'tipos' en mayúscula", function () {
+    expect(esTipoValido("INGRESO")).toBeTruthy();
+  });
+  ```
+- **GitHub Issue:** [#98](https://github.com/fioremos/simulador-planificacion-financiera/issues/98)
+- **Estado:** Abierto
+
+### Issue #99: Validación de Tipos (minúscula) en Agregar Movimiento
+- **Severidad:** Alta
+- **Suite Afectada:** `describe("Función esTipoValido()")`
+- **Test Afectado:** `it("debería aceptar 'tipos' en minúscula")`
+- **Comportamiento Esperado:** Aceptar minúscula.
+- **Comportamiento Obtenido:** Alerta de Tipo inválido.
+- **Pasos para Reproducir:**
+  1. Seleccionar la opción 1 (Agregar Movimiento) del menu principal.
+  2. Ingresar fecha del movimiento (`2025-10-01`)
+  3. Ingresar el tipo de movimiento (`ingreso`)
+  5. Ingresar la categoria del movimiento (`Sueldo`)
+  4. Ingresar monto del movimiento (`500000`).
+  6. Mensaje de "Tipo inválido. Debe ser uno de: Ingreso, Ahorro, Inversión o Gasto".
+- **Código del Test que Falla:**
+  ```javascript
+  it("debería aceptar 'tipos' en minúscula", function () {
+    expect(esTipoValido("ingreso")).toBeTruthy();
+  });
+  ```
+- **GitHub Issue:** [#99](https://github.com/fioremos/simulador-planificacion-financiera/issues/90)
+- **Estado:** Abierto
+
+### Issue #100: Validación de Categorías (mayúscula) en Agregar Movimiento
+- **Severidad:** Alta
+- **Suite Afectada:** `describe("Función esCategoriaValida()")`
+- **Test Afectado:** `it ("debería aceptar categorías en mayúscula")`
+- **Comportamiento Esperado:** Aceptar mayúscula.
+- **Comportamiento Obtenido:** Alerta de Categoría inválida.
+- **Pasos para Reproducir:**
+  1. Seleccionar la opción 1 (Agregar Movimiento) del menu principal.
+  2. Ingresar fecha del movimiento (`2025-10-01`)
+  3. Ingresar el tipo de movimiento (`Gasto`)
+  5. Ingresar la categoria del movimiento (`HOGAR`)
+  4. Ingresar monto del movimiento (`150000`).
+  6. Mensaje de "Categoría inválida. Debe ser una de: Hogar, Ocio, Salud, Sueldo, Objetivos u Otros".
+- **Código del Test que Falla:**
+  ```javascript
+  it ("debería aceptar categorías en mayúscula", function () {
+    expect(esCategoriaValida("HOGAR")).toBeTruthy();
+  });
+  ```
+- **GitHub Issue:** [#100](https://github.com/fioremos/simulador-planificacion-financiera/issues/100)
+- **Estado:** Abierto
+
+### Issue #101: Validación de Categorías (minúscula) en Agregar Movimiento
+- **Severidad:** Alta
+- **Suite Afectada:** `describe("Función esCategoriaValida()")`
+- **Test Afectado:** `it ("debería aceptar categorías en minúscula")`
+- **Comportamiento Esperado:** Aceptar minúsculas.
+- **Comportamiento Obtenido:** Alerta de Categoría inválida.
+- **Pasos para Reproducir:**
+  1. Seleccionar la opción 1 (Agregar Movimiento) del menu principal.
+  2. Ingresar fecha del movimiento (`2025-10-01`)
+  3. Ingresar el tipo de movimiento (`Gasto`)
+  5. Ingresar la categoria del movimiento (`hogar`)
+  4. Ingresar monto del movimiento (`150000`).
+  6. Mensaje de "Categoría inválida. Debe ser una de: Hogar, Ocio, Salud, Sueldo, Objetivos u Otros".
+- **Código del Test que Falla:**
+  ```javascript
+  it ("debería aceptar categorías en minúscula", function () {
+    expect(esCategoriaValida("hogar")).toBeTruthy();
+  });
+  ```
+- **GitHub Issue:** [#101](https://github.com/fioremos/simulador-planificacion-financiera/issues/101)
+- **Estado:** Abierto
 ---
 
 ## Limitaciones del Testing
