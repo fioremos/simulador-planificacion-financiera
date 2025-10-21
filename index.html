@@ -4,6 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Organiza tus finanzas.">
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
@@ -165,14 +167,14 @@
             <div class="offcanvas-body p-0">
                 <nav>
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item"><a href="#dashboard"><span class="sidebar-icon"><img src="assets/images/iconos/Bar_chart-2.png"></span> Dashboard</a></li>
-                        <li class="list-group-item"><a href="#ingresos-gastos"><span class="sidebar-icon"><img src="assets/images/iconos/Dollar_sign.png"></span> Ingresos y Gastos</a></li>
-                        <li class="list-group-item"><a href="#metas"><span class="sidebar-icon"><img src="assets/images/iconos/Award.png"></span> Metas de ahorro</a></li>
-                        <li class="list-group-item"><a href="#inversiones"><span class="sidebar-icon"><img src="assets/images/iconos/Trending_up.png"></span> Inversiones</a></li>
-                        <li class="list-group-item"><a href="#reportes"><span class="sidebar-icon"><img src="assets/images/iconos/Check_square.png"></span> Reportes y Estadísticas</a></li>
-                        <li class="list-group-item"><a href="#historial"><span class="sidebar-icon"><img src="assets/images/iconos/Compass.png"></span> Historial y Auditoría</a></li>
-                        <li class="list-group-item"><a href="#exportar"><span class="sidebar-icon"><img src="assets/images/iconos/upload.png"></span> Exportación de Datos</a></li>
-                        <li class="list-group-item"><a href="#configuracion"><span class="sidebar-icon"><img src="assets/images/iconos/settings.png"></span> Configuración</a></li>
+                        <li class="list-group-item"><a href="#dashboard"><span class="sidebar-icon"><img src="assets/images/iconos/Bar_chart-2.png" alt="logo_menu_dashboard_mb"></span> Dashboard</a></li>
+                        <li class="list-group-item"><a href="#ingresos-gastos"><span class="sidebar-icon"><img src="assets/images/iconos/Dollar_sign.png" alt="logo_menu_gastos_mb"></span> Ingresos y Gastos</a></li>
+                        <li class="list-group-item"><a href="#metas"><span class="sidebar-icon"><img src="assets/images/iconos/Award.png" alt="logo_menu_metas_mb"></span> Metas de ahorro</a></li>
+                        <li class="list-group-item"><a href="#inversiones"><span class="sidebar-icon"><img src="assets/images/iconos/Trending_up.png" alt="logo_menu_inversiones_mb"></span> Inversiones</a></li>
+                        <li class="list-group-item"><a href="#reportes"><span class="sidebar-icon"><img src="assets/images/iconos/Check_square.png" alt="logo_menu_reportes_mb"></span> Reportes y Estadísticas</a></li>
+                        <li class="list-group-item"><a href="#historial"><span class="sidebar-icon"><img src="assets/images/iconos/Compass.png" alt="logo_menu_historial_mb"></span> Historial y Auditoría</a></li>
+                        <li class="list-group-item"><a href="#exportar"><span class="sidebar-icon"><img src="assets/images/iconos/upload.png" alt="logo_menu_exportar_mb"></span> Exportación de Datos</a></li>
+                        <li class="list-group-item"><a href="#configuracion"><span class="sidebar-icon"><img src="assets/images/iconos/settings.png" alt="logo_menu_configuracion_mb"></span> Configuración</a></li>
                     </ul>
                 </nav>
 
@@ -190,7 +192,7 @@
                 Pantalla inicial de la aplicación. 
                 Solo aquí se muestra el formulario para acceder o registrarse.
             ========================== -->
-        <section id="login" class="principal-section login-section visible justify-content-center align-items-center m-md-5 m-auto">
+        <section id="login" class="principal-section login-section visible justify-content-center align-items-center mt-md-5 m-auto">
             <div class="card  m-3 m-ms-4 p-3 p-ms-4">
                 <div class="login-logo-container d-flex flex-column align-items-center">
                     <div>
@@ -244,9 +246,9 @@
                 Muestra tarjetas de resumen: ingresos, gastos, ahorro, inversión.
                 Incluye barra de navegación y sidebar lateral.
             ========================== -->
-        <section id="dashboard" class="principal-section invisible">
-            <div class="principal-container">
-                <main class="content">
+        <main class="content">
+            <section id="dashboard" class="principal-section invisible">
+                <div class="principal-container">
                     <section id="resumen-financiero" class="card">
                         <div>
                             <h2 class="subtitle">Resumen financiero</h2>
@@ -438,10 +440,8 @@
                             </div>
                         </div>
                     </section>
-
-                </main>
-            </div>
-        </section>
+                </div>
+            </section>
 
         <!-- ==========================
                 SECCIÓN: INGRESOS Y GASTOS
@@ -449,9 +449,8 @@
                 Se listan transacciones con opción a filtrar por fecha o categoría.
                 Incluye barra de navegación y sidebar lateral.
             ========================== -->
-        <section id="ingresos-gastos" class="principal-section invisible">
-            <div class="principal-container">
-                <main class="content">
+            <section id="ingresos-gastos" class="principal-section invisible">
+                <div class="principal-container">
                     <section id="ingresos-gastos-card" class="card">
                         <div>
                             <h2 class="subtitle subtitle-center">Gestión de ingresos y gastos</h2>
@@ -585,9 +584,8 @@
                             </div>
                         </div>
                     </section>
-                </main>
-            </div>
-        </section>
+                </div>
+            </section>
 
         <!-- ==========================
                 SECCIÓN: METAS DE AHORRO
@@ -597,9 +595,8 @@
                 El gráfico es actualmente una imagen estática; en futuras versiones será dinámico con datos en tiempo real.
                 Incluye header superior y sidebar lateral duplicados temporalmente por consistencia con el mockup.
             ========================== -->
-        <section id="metas" class="principal-section invisible">
-            <div class="principal-container">
-                <main class="content">
+            <section id="metas" class="principal-section invisible">
+                <div class="principal-container">
                     <section id="metas-card-table" class="card">
                         <div class="header-table">
                             <div>
@@ -668,11 +665,11 @@
                         </div>
 
                         <!-- === PROGRESS COMPONENTE HTML5 AVANZADO === -->
-                         <div class="card progreso-meta">
+                            <div class="card progreso-meta">
                             <label for="meta-ahorro">Progreso hacia la meta:</label>
                             <progress id="meta-ahorro" value="70" max="100">70%</progress>
                             <p class="meta-porcentaje">70% completado</p>
-                         </div>
+                            </div>
 
                         <div class="metas-card-graph-button d-flex justify-content-center">
                             <button class="btn btn-inverse btn-blue small">Seleccionar objetivo</button>
@@ -685,7 +682,7 @@
                         <details>
                             <summary class="large"> 
                                 ¿Cómo empezar a ahorrar?
-                             </summary>
+                                </summary>
                             <p class="medium">Comienza destinando el 10% de tus ingresos mensuales a un fondo separado. Automatiza el ahorro para no olvidarlo.</p>
                         </details>
                         <details>
@@ -695,9 +692,8 @@
                             <p class="medium">Utiliza categorías y revisa tus gastos semanales para identificar patrones. Animo!!</p>
                         </details>
                     </section>
-                </main>
-            </div>
-        </section>
+                </div>
+            </section>
 
         <!-- ==========================
                 SECCIÓN: INVERSIONES
@@ -705,9 +701,8 @@
                 Visualiza rentabilidad, tipo de inversión y contribuciones.
                 Incluye barra de navegación y sidebar lateral.
             ========================== -->
-        <section id="inversiones" class="principal-section invisible">
-            <div class="principal-container">
-                <main class="content">
+            <section id="inversiones" class="principal-section invisible">
+                <div class="principal-container">
                     <section id="inversiones-card-table" class="card">
                         <div class="header-table">
                             <div>
@@ -777,9 +772,8 @@
                                 alt="Gráfico metas de ahorro">
                         </div>
                     </section>
-                </main>
-            </div>
-        </section>
+                </div>
+            </section>
 
         <!-- ==========================
                 SECCIÓN: REPORTES Y ESTADÍSTICAS
@@ -787,9 +781,8 @@
                 Permite visualizar datos históricos y actuales.
                 Incluye barra de navegación y sidebar lateral.
             ========================== -->
-        <section id="reportes" class="principal-section invisible">
-            <div class="principal-container">
-                <main class="content">
+            <section id="reportes" class="principal-section invisible">
+                <div class="principal-container">
                     <section id="reportes-estadisticas-container" class="card">
                         <div>
                             <h2 class="subtitle subtitle-center">Reportes y estadística</h2>
@@ -917,9 +910,8 @@
                             </div>
                         </div>
                     </section>
-                </main>
-            </div>
-        </section>
+                </div>
+            </section>
 
         <!-- ==========================
                 SECCIÓN: HISTORIAL Y AUDITORÍA
@@ -927,9 +919,8 @@
                 Registra acciones como creación, edición o eliminación de datos.
                 Incluye barra de navegación y sidebar lateral.
             ========================== -->
-        <section id="historial" class="principal-section invisible">
-            <div class="principal-container">
-                <main class="content">
+            <section id="historial" class="principal-section invisible">
+                <div class="principal-container">
                     <section id="historial-container" class="card">
                         <div class="historial">
                             <h2 class="subtitle subtitle-center">Historial y Auditoría</h2>
@@ -1022,9 +1013,8 @@
                             </button>
                         </div>
                     </section>
-                </main>
-            </div>
-        </section>
+                </div>
+            </section>
 
         <!-- ==========================
                 SECCIÓN: EXPORTACIÓN DE DATOS
@@ -1032,9 +1022,8 @@
                 Permite seleccionar ubicación y nombre del archivo.
                 Incluye barra de navegación y sidebar lateral.
             ========================== -->
-        <section id="exportar" class="principal-section invisible">
-            <div class="principal-container">
-                <main class="content">
+            <section id="exportar" class="principal-section invisible">
+                <div class="principal-container">
                     <section id="exportar-container" class="card">
                         <div>
                             <h2 class="subtitle subtitle-center">Exportación de Datos</h2>
@@ -1124,9 +1113,8 @@
                                 </button>
                             </div>
                     </section>
-                </main>
-            </div>
-        </section>
+                </div>
+            </section>
 
         <!-- ==========================
                 SECCIÓN: CONFIGURACIÓN
@@ -1136,9 +1124,8 @@
                 Componentes como el header y sidebar están duplicados temporalmente por consistencia 
                 con el mockup, pero se planea unificarlos como componentes reutilizables.
             ========================== -->
-        <section id="configuracion" class="principal-section invisible">
-            <div class="principal-container">
-                <main class="content">
+            <section id="configuracion" class="principal-section invisible">
+                <div class="principal-container">
                     <section id="configuracion-container" class="card">
                         <div>
                             <h2 class="subtitle subtitle-center">Configuración de Usuario</h2>
@@ -1245,9 +1232,9 @@
                             <button class="btn btn-primary">Guardar</button>
                         </div>
                     </section>
-                </main>
-            </div>
-        </section>
+                </div>
+            </section>
+        </main>
     </div>  
         
     <!-- ==========================
