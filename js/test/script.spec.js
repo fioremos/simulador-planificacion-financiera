@@ -1,4 +1,3 @@
-/*
 describe("Flujo 1: Agregar Movimiento", function () {
     beforeEach(function () {
         spyOn(window, 'alert').and.stub();
@@ -402,7 +401,6 @@ describe("Flujo 3: Exportar Datos", function () {
         });
     });
 });
-*/
 
 describe("Flujo 4: Reporte Financiero", function () {
     beforeEach(function () {
