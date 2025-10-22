@@ -70,9 +70,15 @@
 
 ---
 
-### Suite 4: [Nombre del Flujo 4]
+### Suite 4: Reporte Financiero 
 **Funciones Testeadas:**
-- `[función5()]` - [Descripción breve]
+- `esFechaValida()` - Evalúa que las fechas ingresadas sean correctas y coherentes.
+- `esCategoriaValida()` - Valida las categorías financieras disponibles.
+- `calcularIndicadores()` - Verifica el cálculo de los indicadores financieros del reporte: Ingresos, Gastos, Saldo, Ahorro y Porcentaje de ahorro.
+- `filtrarDatos()` - Comprueba la aplicación de filtros por rango de fechas y categoría.
+- `mostrarReporte()` - Verifica la presentación final del reporte.
+- `configurarFiltros()` - Comprueba la configuración inicial de filtros del reporte.
+- `reporteFinancieroFlow()` - Evalúa el flujo completo de ejecución del reporte financiero.
 
 **Casos de Prueba:**
 | # | Descripción | Tipo |
@@ -498,7 +504,7 @@ Ej:
   2. Ingresar los datos que se desea exportar (`Metas`).
   3. Ingresar formato de exportación (`PDF`).
   4. Ingresar nombre del archivo (`reporte.pdf`).
-  5. Ingresar ruta del directorio (`C:\\Exports`)
+  5. Ingresar ruta del directorio (`C:\\Exports`).
   6. Mensaje de "Exportación exitosa. El archivo fue generado correctamente".
 - **Código del Test que Falla:**
   ```javascript
@@ -507,6 +513,108 @@ Ej:
   });
   ```
 - **GitHub Issue:** [#106](https://github.com/fioremos/simulador-planificacion-financiera/issues/106)
+- **Estado:** Abierto
+
+### Issue #109: Validación de fecha 'desde' (formato incorrecto) en Reporte Financiero.
+- **Severidad:** Alta
+- **Suite Afectada:** `describe("Función esFechaValida()")`
+- **Test Afectado:** `it("debería rechazar fechas 'desde' en formato incorrecto (DD-MM-YYYY)")`
+- **Comportamiento Esperado:** Alerta de formato incorrecto.
+- **Comportamiento Obtenido:** Acepta el ingreso de fechas con formato incorrecto (DD-MM-AAAA).
+- **Pasos para Reproducir:**
+  1. Seleccionar la opción 4 (Reporte Financiero) del menu principal.
+  2. Dar en 'Aceptar' en el Alert del reporte financiero.
+  3. Dar en 'Aceptar' en el Alert del reporte financiero detallado.
+  4. Ingresar 'si' para cambiar los filtro.
+  5. Ingresar 'Fecha Desde' para el filtro (`01-01-2025`).
+  6. Ingresar 'Fecha Hasta' para el filtro (`2025-09-30`).
+  7. Ingresar 'Moneda' para el filtro (`ARS`).
+  8. Ingresar 'Categoría' para el filtro (`Todas`).
+  9. Muestra el reporte financiero con la 'fecha desde' con el formato incorrecto.
+- **Código del Test que Falla:**
+  ```javascript
+  it("debería rechazar fechas 'desde' en formato incorrecto (DD-MM-YYYY)", function () {
+    expect(esFechaValida("01-01-2025")).toBeFalsy();
+  });
+  ```
+- **GitHub Issue:** [#109](https://github.com/fioremos/simulador-planificacion-financiera/issues/109)
+- **Estado:** Abierto
+
+### Issue #110: Validación de Categorías válidas (mayúscula) en Reporte Financiero.
+- **Severidad:** Alta
+- **Suite Afectada:** `describe("Función esCategoriaValida()")`
+- **Test Afectado:** `it("debería aceptar categorías válidas en mayúscula (SALUD)")`
+- **Comportamiento Esperado:** Aceptar mayúsculas.
+- **Comportamiento Obtenido:** Alerta de Categoría no válida.
+- **Pasos para Reproducir:**
+  1. Seleccionar la opción 4 (Reporte Financiero) del menu principal.
+  2. Dar en 'Aceptar' en el Alert del reporte financiero.
+  3. Dar en 'Aceptar' en el Alert del reporte financiero detallado.
+  4. Ingresar 'si' para cambiar los filtro.
+  5. Ingresar 'Fecha Desde' para el filtro (`2025-09-01`).
+  6. Ingresar 'Fecha Hasta' para el filtro (`2025-09-30`).
+  7. Ingresar 'Moneda' para el filtro (`ARS`).
+  8. Ingresar 'Categoría' para el filtro (`SALUD`).
+  9. Muestra alerta de categoria no valida.
+- **Código del Test que Falla:**
+  ```javascript
+  it("debería aceptar categorías válidas en mayúscula (SALUD)", function () {
+    expect(esCategoriaValida("SALUD")).toBeTruthy();
+  });
+  ```
+- **GitHub Issue:** [#110](https://github.com/fioremos/simulador-planificacion-financiera/issues/110)
+- **Estado:** Abierto
+
+### Issue #111: Validación de Categorías válidas (minúscula) en Reporte Financiero.
+- **Severidad:** Alta
+- **Suite Afectada:** `describe("Función esCategoriaValida()")`
+- **Test Afectado:** `it("debería aceptar categorías válidas en minúscula (salud)")`
+- **Comportamiento Esperado:** Aceptar minúsculas.
+- **Comportamiento Obtenido:** Alerta de Categoría no válida.
+- **Pasos para Reproducir:**
+  1. Seleccionar la opción 4 (Reporte Financiero) del menu principal.
+  2. Dar en 'Aceptar' en el Alert del reporte financiero.
+  3. Dar en 'Aceptar' en el Alert del reporte financiero detallado.
+  4. Ingresar 'si' para cambiar los filtro.
+  5. Ingresar 'Fecha Desde' para el filtro (`2025-09-01`).
+  6. Ingresar 'Fecha Hasta' para el filtro (`2025-09-30`).
+  7. Ingresar 'Moneda' para el filtro (`ARS`).
+  8. Ingresar 'Categoría' para el filtro (`salud`).
+  9. Muestra alerta de categoria no valida.
+- **Código del Test que Falla:**
+  ```javascript
+  it("debería aceptar categorías válidas en minúscula (salud)", function () {
+    expect(esCategoriaValida("salud")).toBeTruthy();
+  });
+  ```
+- **GitHub Issue:** [#111](https://github.com/fioremos/simulador-planificacion-financiera/issues/111)
+- **Estado:** Abierto
+
+### Issue #112: Manejo de decimales en montos (porcentajeAhorro) en Reporte Financiero.
+- **Severidad:** Alta
+- **Suite Afectada:** `describe("Función calcularIndicadores()")`
+- **Test Afectado:** `it ("debería manejar casos con decimales en montos")`
+- **Comportamiento Esperado:** Manejar porcentajeAhorro con decimal.
+- **Comportamiento Obtenido:** Error ya que porcentajeAhorro es un string y no un numero.
+- **Pasos para Reproducir:**
+  1. En este caso se simulo directamente en el test, dado a que no existe una función como tal para ingresar los datos y los montos con decimales.
+- **Código del Test que Falla:**
+  ```javascript
+  it ("debería manejar casos con decimales en montos", function () {
+    const datos = [
+        { tipo: 'Ingreso', monto: 1000.75 },
+        { tipo: 'Gasto', monto: 500.25 },
+        { tipo: 'Ahorro', monto: 200.50 }
+      ];
+      const ind = calcularIndicadores(datos);
+      expect(ind.ingresos).toBeCloseTo(1000.75, 2);
+      expect(ind.gastos).toBeCloseTo(500.25, 2);
+      expect(ind.ahorro).toBeCloseTo(200.50, 2);
+      expect(ind.saldo).toBeCloseTo(500.50, 2);
+      expect(ind.porcentajeAhorro).toBeCloseTo('20.00', 2); // (200.50 / 1000.75) * 100
+  });
+  ```
+- **GitHub Issue:** [#112](https://github.com/fioremos/simulador-planificacion-financiera/issues/112)
 - **Estado:** Abierto
 ---
 
