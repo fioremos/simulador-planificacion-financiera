@@ -281,8 +281,8 @@ function metasAhorroFlow() {
  * @param {string[]} datosSeleccionados
  * @returns {boolean}
  */
-function hayDatosSeleccionados(datosSeleccionados) {
-    return Array.isArray(datosSeleccionados) && datosSeleccionados.length > 0;
+function hayDatosSeleccionados(datosSeleccionados, seleccion) {
+    return Array.isArray(datosSeleccionados) && datosSeleccionados.length > 0 && seleccion.length === datosSeleccionados.length;
 }
 
 /**
@@ -302,7 +302,7 @@ function esFormatoValido(formato) {
  * @returns {boolean}
  */
 function sonNombreYRutaValidos(nombre, ruta) {
-    return nombre.trim() !== '' && ruta.trim() !== '';
+    return nombre.trim() !== '' && ruta.trim() !== '' && !nombre.includes(".");
 }
 
 /**
@@ -331,14 +331,14 @@ function exportarDatosFlow() {
 
     do {
         //Selección de tipos de datos
-        const tiposDisponibles = ['Movimientos', 'Metas', 'Presupuesto', 'Historial'];
+        const tiposDisponibles = ['movimientos', 'metas', 'presupuesto', 'historial'];
         const seleccion = prompt(`¿Qué datos desea exportar? (separe con coma)\nOpciones:\n${tiposDisponibles.join(', ')}`);
         const tiposSeleccionados = seleccion
-            ? seleccion.split(',').map(e => e.trim()).filter(e => tiposDisponibles.includes(e))
+            ? seleccion.split(',').map(e => e.trim()).filter(e => tiposDisponibles.includes(e.toLowerCase()))
             : [];
 
-        if (!hayDatosSeleccionados(tiposSeleccionados)) {
-            alert('Debe seleccionar al menos un tipo de dato válido.');
+        if (!hayDatosSeleccionados(tiposSeleccionados, seleccion.split(','))) {
+            alert('Debe seleccionar tipos de dato válidos.');
             continue;
         }
 
