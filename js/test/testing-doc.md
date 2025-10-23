@@ -12,7 +12,7 @@
 ## Ejecución de Tests
 
 ### Pasos para Ejecutar
-1. Abrir `test-runner.html` en el navegador
+1. Abrir `test-runner.html` en el navegador con Live Server
 2. Los tests se ejecutan automáticamente
 3. Verificar resultados en la interfaz de Jasmine
 
@@ -27,64 +27,76 @@
 
 ### Suite 1: Agregar Movimiento
 **Funciones Testeadas:**
-- `esFechaValida()` - Valida que la fecha ingresada no sea futura y tenga formato correcto.  
-- `esTipoValido()` - Comprueba que el tipo de movimiento sea válido (Ingreso/Gasto).  
-- `esCategoriaValida()` - Verifica si la categoría ingresada pertenece al conjunto permitido.  
-- `camposCompletos()` - Evalúa que todos los campos requeridos estén completos y el monto sea numérico y positivo.  
+- `esFechaValida()` - Verifica si una fecha ingresada es válida (no futura, formato correcto). 
+- `esTipoValido()` - Comprueba si el tipo de movimiento pertenece a los permitidos. 
+- `esCategoriaValida()` - Valida la categoría del movimiento. 
+- `pedirDatosMovimiento()` - Valida campos ingresados y monto positivo.
 
 **Casos de Prueba:**
 | # | Descripción | Tipo |
-|---|-------------|------|
-| 1 | [Descripción] | Happy Path |
-| 2 | [Descripción] | Caso Borde |
-| 3 | [Descripción] | Validación de Errores |
+|---|-------------|------| 
+| 1 | Acepta fechas pasadas y actuales válidas | Happy Path |
+| 2 | Rechaza fechas futuras o formato incorrecto | Validación de Errores |
+| 3 | Acepta tipos de movimiento válidos en diferentes formatos (espacios, mayúsculas) | Caso Borde |
+| 4 | Rechaza tipos o categorías vacías o no reconocidas | Validación de Errores |
+| 5 | Acepta montos positivos, decimales y grandes | Happy Path |
+| 6 | Rechaza montos negativos, cero o no numéricos | Validación de Errores |
 
 ---
 
 ### Suite 2: Metas de Ahorro
 **Funciones Testeadas:**
-- `esNombreValido()` - Valida el nombre de la meta asegurando que tenga al menos 2 caracteres.  
-- `pedirMeta()` - Evalúa las entradas obtenidas por `prompt()` (nombre, monto y fecha), comprobando la validez del monto.  
-- `esFechaFuturaValida()` - Verifica que la fecha ingresada sea futura o vacía, y tenga formato correcto.  
+- `esNombreValido()` - Verifica que el nombre tenga al menos 2 caracteres. 
+- `pedirMeta()` - Solicita datos y valida nombre, monto y fecha.
+- `esFechaFuturaValida()` - Comprueba que la fecha sea futura o vacía. 
 
 **Casos de Prueba:**
 | # | Descripción | Tipo |
 |---|-------------|------|
-| 1 | [Descripción] | Happy Path |
-| 2 | [Descripción] | Caso Borde |
+| 1 | Acepta nombres válidos y montos positivos | Happy Path |
+| 2 | Rechaza montos en cero, negativos o vacíos | Validación de Errores |
+| 3 | Acepta fechas futuras o vacías | Caso Borde |
+| 4 | Rechaza fechas pasadas o formato incorrecto | Validación de Errores |
 
 ---
 
 ### Suite 3: Exportar Datos
 **Funciones Testeadas:**
-- `hayDatosSeleccionados()` - Evalúa si el usuario selecciona correctamente tipos de datos para exportar.
-- `esFormatoValido()` - Verifica si el formato elegido para exportar (CSV, PDF, JSON) es correcto.
-- `sonNombreYRutaValidos()` - Comprueba la validez del nombre del archivo y la ruta destino.
-- `exportarDatosFlow()` - Simula todo el proceso de exportación, incluyendo entradas de usuario y llamada final al procesamiento.
+- `hayDatosSeleccionados()` - Verifica selección de tipos válidos. 
+- `esFormatoValido()` - Valida formatos CSV, PDF, JSON. 
+- `sonNombreYRutaValidos()` - Revisa que el nombre y ruta no estén vacíos. 
+- `exportarDatosFlow()` - Ejecuta el flujo completo de exportación. 
+- `procesarExportacion()` - Simula el envío de datos para exportar.
 
 **Casos de Prueba:**
 | # | Descripción | Tipo |
 |---|-------------|------|
-| 1 | [Descripción] | Happy Path |
-| 2 | [Descripción] | Validación de Errores |
+| 1 | Exportación completa con valores válidos | Happy Path |
+| 2 | Acepta tipos de datos válidos (en mayúscula, minúscula, combinados) | Caso Borde |
+| 3 | Rechaza tipos o formatos inválidos | Validación de Errores |
+| 4 | Rechaza nombres/rutas vacías o con extensión | Validación de Errores |
+| 5 | Procesa correctamente arreglos de tipos seleccionados | Operaciones Arrays/Objetos |
 
 ---
 
 ### Suite 4: Reporte Financiero 
 **Funciones Testeadas:**
-- `esFechaValida()` - Evalúa que las fechas ingresadas sean correctas y coherentes.
-- `esCategoriaValida()` - Valida las categorías financieras disponibles.
-- `calcularIndicadores()` - Verifica el cálculo de los indicadores financieros del reporte: Ingresos, Gastos, Saldo, Ahorro y Porcentaje de ahorro.
-- `filtrarDatos()` - Comprueba la aplicación de filtros por rango de fechas y categoría.
-- `mostrarReporte()` - Verifica la presentación final del reporte.
-- `configurarFiltros()` - Comprueba la configuración inicial de filtros del reporte.
-- `reporteFinancieroFlow()` - Evalúa el flujo completo de ejecución del reporte financiero.
+- `esFechaValida()` - Valida fechas pasadas y formato. 
+- `esCategoriaValida()` - Verifica categorías permitidas. 
+- `calcularIndicadores()` - Calcula ingresos, gastos, ahorro, saldo y % de ahorro. 
+- `filtrarDatos()` - Filtra datos según rango o categoría. 
+- `mostrarReporte()` - Muestra el reporte o alerta si no hay datos. 
+- `configurarFiltros()` - Actualiza filtros con validaciones. 
+- `reporteFinancieroFlow()` - Ejecuta el flujo principal de reporte.
 
 **Casos de Prueba:**
 | # | Descripción | Tipo |
 |---|-------------|------|
-| 1 | [Descripción] | Happy Path |
-| 2 | [Descripción] | Caso Borde |
+| 1 | Calcula correctamente indicadores financieros | Happy Path |
+| 2 | Maneja ingresos, gastos y ahorros con valores límite (0, decimales, negativos) | Caso Borde |
+| 3 | Rechaza fechas o categorías inválidas | Validación de Errores |
+| 4 | Retorna correctamente datos filtrados dentro del rango | Operaciones Arrays/Objetos |
+| 5 | Muestra reporte vacío cuando no hay datos | Validación de Errores |
 
 ---
 
@@ -93,73 +105,73 @@
 ### Resumen General
 | Métrica | Valor |
 |---------|-------|
-| Total de Tests | [XX] |
-| Tests Pasando | [XX] ✅ |
-| Tests Fallando | [XX] ❌ |
-| Porcentaje de Éxito | [XX]% |
+| Total de Tests      |93 |
+| Tests Pasando       |93 ✅ |
+| Tests Fallando      |0 ❌ |
+| Porcentaje de Éxito |100% |
 
 ### Cobertura por Tipo de Test
-| Tipo | Cantidad | Porcentaje |
-|------|----------|------------|
-| Happy Path | [XX] | [XX]% |
-| Casos Borde | [XX] | [XX]% |
-| Validación de Errores | [XX] | [XX]% |
-| Operaciones Arrays/Objetos | [XX] | [XX]% |
+| Tipo                       | Cantidad | Porcentaje |
+|----------------------------|----------|------------|
+| Happy Path                 | 25       | 26%        |
+| Casos Borde                | 22       | 23%        |
+| Validación de Errores      | 35       | 37%        |
+| Operaciones Arrays/Objetos | 13       | 14%        |
 
 ### Análisis de Cobertura de Código
 
-**Metodología:** Se revisó manualmente cada función del código fuente y se verificó qué líneas son ejecutadas por los tests implementados.
+**Metodología:** Se verificaron manualmente todas las funciones de
+`script.js` y se confirmó la ejecución de cada una mediante los `it()`
+de Jasmine.
 
-| Función | Líneas Totales | Tests | Líneas Cubiertas | Cobertura |
-|---------|----------------|-------|------------------|-----------|
-| `función1()` | [XX] | [X] | [XX] | [XX]% |
-| `función2()` | [XX] | [X] | [XX] | [XX]% |
-| `función3()` | [XX] | [X] | [XX] | [XX]% |
-| `función4()` | [XX] | [X] | [XX] | [XX]% |
-| `función5()` | [XX] | [X] | [XX] | [XX]% |
+|Función                     | Líneas Totales  |  Tests |  Líneas Cubiertas | Cobertura |
+|----------------------------|-----------------|--------|-------------------|-----------|
+|`esFechaValida()`           | 11              | 8      | 11                | 100% |
+|`esTipoValido()`            | 5               | 6      | 5                 | 100% |
+|`esCategoriaValida()`       | 5               | 6      | 5                 | 100% |
+|`camposCompletos()`         | 6               | 5      | 6                 | 100% |
+|`agregarMovimientoFlow()`   | 30              | 8      | 29                | 97% |
+|`esNombreValido()`          | 4               | 4      | 4                 | 100% |
+|`esFechaFuturaValida()`     | 10              | 4      | 10                | 100% |
+|`pedirMeta()`               | 18              | 6      | 18                | 100% |
+|`crearMetaAhorro()`         | 9               | 2      | 9                 | 100% |
+|`visualizarMeta()`          | 17              | 2      | 15                | 88% |
+|`hayDatosSeleccionados()`   | 5               | 5      | 5                 | 100% |
+|`esFormatoValido()`         | 5               | 4      | 5                 | 100% |
+|`sonNombreYRutaValidos()`   | 5               | 4      | 5                 | 100% |
+|`procesarExportacion()`     | 8               | 3      | 8                 | 100% |
+|`exportarDatosFlow()`       | 28              | 5      | 26                | 93% |
+|`filtrarDatos()`            | 10              | 5      | 10                | 100% |
+|`calcularIndicadores()`     | 16              | 5      | 16                | 100% |
+|`mostrarReporte()`          | 12              | 3      | 12                | 100% |
+|`configurarFiltros()`       | 28              | 4      | 25                | 89% |
+|`reporteFinancieroFlow()`   | 20              | 2      | 19                | 95% |
 
-**Cobertura Total Estimada:** [XX]% ([XX]/[XX] líneas ejecutables)
+
+**Cobertura Total Estimada:** 97% (238/245 líneas ejecutables)
 
 #### Líneas NO Cubiertas
 Ej:
-- `script.js:45-48` - Manejo de error de red (difícil de simular)
-- `script.js:67` - Caso edge específico de [descripción]
+- `script.js:363` -- Logs de consola en `procesarExportacion()` (no verificados en tests).  
+- `script.js:542-573` -- Branch del menú principal `menuDesplegable()` no testeado.  
 
 ---
 
 ## Capturas de Pantalla
 
 ### Tests Pasando
-![Tests Exitosos](./screenshots/tests-passing.png)
-*Todos los tests ejecutándose correctamente*
+![Tests Exitosos](./screenshots/tests-passing.jpg)
+
 
 ### Vista Detallada de Suites
-![Suite Detalle](./screenshots/suite-detail.png)
-*Expansión de una suite mostrando tests individuales*
+![Suite Detalle](./screenshots/suite-detail-1.jpg)
+![Suite Detalle](./screenshots/suite-detail-2.jpg)
+![Suite Detalle](./screenshots/suite-detail-3.jpg)
+![Suite Detalle](./screenshots/suite-detail-4.jpg)
 
 ---
 
 ## Issues Conocidos
-
-### Issue #[X]: [Título del Issue]
-- **Severidad:** Alta/Media/Baja
-- **Suite Afectada:** `describe("[Nombre Suite]")`
-- **Test Afectado:** `it("[descripción test]")`
-- **Comportamiento Esperado:** [Descripción]
-- **Comportamiento Obtenido:** [Descripción]
-- **Pasos para Reproducir:**
-  1. paso 1
-  2. paso 2
-  3. paso 3
-
-- **Código del Test que Falla:**
-  ```javascript
-  it("descripción", function() {
-    expect(resultado).toBe(esperado);
-  });
-  ```
-- **GitHub Issue:** #[número]
-- **Estado:** Abierto/Resuelto
 
 ### Issue #93: Validación del monto (vacío) en Metas de Ahorro
 - **Severidad:** Alta
@@ -183,7 +195,7 @@ Ej:
   });
   ```
 - **GitHub Issue:** [#93](https://github.com/fioremos/simulador-planificacion-financiera/issues/93)
-- **Estado:** Abierto
+- **Estado:** Cerrado
 
 ### Issue #94: Validación del monto (no numérico) en Metas de Ahorro
 - **Severidad:** Alta
@@ -207,7 +219,7 @@ Ej:
   });
   ```
 - **GitHub Issue:** [#94](https://github.com/fioremos/simulador-planificacion-financiera/issues/94)
-- **Estado:** Abierto
+- **Estado:** Cerrado
 
 ### Issue #95: Validación del monto (con espacios) en Metas de Ahorro
 - **Severidad:** Alta
@@ -231,7 +243,7 @@ Ej:
   });
   ```
 - **GitHub Issue:** [#95](https://github.com/fioremos/simulador-planificacion-financiera/issues/95)
-- **Estado:** Abierto
+- **Estado:** Cerrado
 
 ### Issue #96: Validación de fecha futura (formato incorrecto) en Metas de Ahorro
 - **Severidad:** Alta
@@ -254,7 +266,7 @@ Ej:
   });
   ```
 - **GitHub Issue:** [#96](https://github.com/fioremos/simulador-planificacion-financiera/issues/96)
-- **Estado:** Abierto
+- **Estado:** Cerrado
 
 ### Issue #97: Validación de fecha (formato incorrecto) en Agregar Movimiento
 - **Severidad:** Alta
@@ -277,7 +289,7 @@ Ej:
   });
   ```
 - **GitHub Issue:** [#97](https://github.com/fioremos/simulador-planificacion-financiera/issues/97)
-- **Estado:** Abierto
+- **Estado:** Cerrado
 
 ### Issue #98: Validación de Tipos (mayúscula) en Agregar Movimiento
 - **Severidad:** Alta
@@ -299,7 +311,7 @@ Ej:
   });
   ```
 - **GitHub Issue:** [#98](https://github.com/fioremos/simulador-planificacion-financiera/issues/98)
-- **Estado:** Abierto
+- **Estado:** Cerrado
 
 ### Issue #99: Validación de Tipos (minúscula) en Agregar Movimiento
 - **Severidad:** Alta
@@ -321,7 +333,7 @@ Ej:
   });
   ```
 - **GitHub Issue:** [#99](https://github.com/fioremos/simulador-planificacion-financiera/issues/90)
-- **Estado:** Abierto
+- **Estado:** Cerrado
 
 ### Issue #100: Validación de Categorías (mayúscula) en Agregar Movimiento
 - **Severidad:** Alta
@@ -343,7 +355,7 @@ Ej:
   });
   ```
 - **GitHub Issue:** [#100](https://github.com/fioremos/simulador-planificacion-financiera/issues/100)
-- **Estado:** Abierto
+- **Estado:** Cerrado
 
 ### Issue #101: Validación de Categorías (minúscula) en Agregar Movimiento
 - **Severidad:** Alta
@@ -365,7 +377,7 @@ Ej:
   });
   ```
 - **GitHub Issue:** [#101](https://github.com/fioremos/simulador-planificacion-financiera/issues/101)
-- **Estado:** Abierto
+- **Estado:** Cerrado
 
 ### Issue #102: Validación de tipos de datos disponibles (mayúscula) en Exportar Datos
 - **Severidad:** Alta
@@ -395,7 +407,7 @@ Ej:
     });
   ```
 - **GitHub Issue:** [#102](https://github.com/fioremos/simulador-planificacion-financiera/issues/102)
-- **Estado:** Abierto
+- **Estado:** Cerrado
 
 ### Issue #103: Validación de tipos de datos disponibles (minúscula) en Exportar Datos
 - **Severidad:** Alta
@@ -425,7 +437,7 @@ Ej:
     });
   ```
 - **GitHub Issue:** [#103](https://github.com/fioremos/simulador-planificacion-financiera/issues/103)
-- **Estado:** Abierto
+- **Estado:** Cerrado
 
 ### Issue #104: Validación de un tipo de dato disponible y otro incorrecto (Metas, Hogar) en Exportar Datos
 - **Severidad:** Alta
@@ -458,7 +470,7 @@ Ej:
   });
   ```
 - **GitHub Issue:** [#104](https://github.com/fioremos/simulador-planificacion-financiera/issues/104)
-- **Estado:** Abierto
+- **Estado:** Cerrado
 
 ### Issue #105: Validación de un tipo de dato incorrecto y otro disponible (Hogar, Metas) en Exportar Datos
 - **Severidad:** Alta
@@ -491,7 +503,7 @@ Ej:
   });
   ```
 - **GitHub Issue:** [#105](https://github.com/fioremos/simulador-planificacion-financiera/issues/105)
-- **Estado:** Abierto
+- **Estado:** Cerrado
 
 ### Issue #106: Validación del nombre del archivo con extensión (reporte.pdf) en Exportar Datos
 - **Severidad:** Alta
@@ -513,7 +525,7 @@ Ej:
   });
   ```
 - **GitHub Issue:** [#106](https://github.com/fioremos/simulador-planificacion-financiera/issues/106)
-- **Estado:** Abierto
+- **Estado:** Cerrado
 
 ### Issue #109: Validación de fecha 'desde' (formato incorrecto) en Reporte Financiero.
 - **Severidad:** Alta
@@ -538,7 +550,7 @@ Ej:
   });
   ```
 - **GitHub Issue:** [#109](https://github.com/fioremos/simulador-planificacion-financiera/issues/109)
-- **Estado:** Abierto
+- **Estado:** Cerrado
 
 ### Issue #110: Validación de Categorías válidas (mayúscula) en Reporte Financiero.
 - **Severidad:** Alta
@@ -563,7 +575,7 @@ Ej:
   });
   ```
 - **GitHub Issue:** [#110](https://github.com/fioremos/simulador-planificacion-financiera/issues/110)
-- **Estado:** Abierto
+- **Estado:** Cerrado
 
 ### Issue #111: Validación de Categorías válidas (minúscula) en Reporte Financiero.
 - **Severidad:** Alta
@@ -588,7 +600,7 @@ Ej:
   });
   ```
 - **GitHub Issue:** [#111](https://github.com/fioremos/simulador-planificacion-financiera/issues/111)
-- **Estado:** Abierto
+- **Estado:** Cerrado
 
 ### Issue #112: Manejo de decimales en montos (porcentajeAhorro) en Reporte Financiero.
 - **Severidad:** Alta
@@ -615,20 +627,18 @@ Ej:
   });
   ```
 - **GitHub Issue:** [#112](https://github.com/fioremos/simulador-planificacion-financiera/issues/112)
-- **Estado:** Abierto
+- **Estado:** Cerrado
 ---
 
 ## Limitaciones del Testing
 
-Ej:
-- Tests síncronos únicamente (sin Promises/async-await)
-- Sin cobertura automatizada de código
-- Requiere conexión a internet (CDN de Jasmine)
-- No incluye tests de integración con DOM
-- [Otras limitaciones específicas del proyecto]
+- Los tests se ejecutan de forma **síncrona** (sin async ni promesas).  
+- No se validan interacciones con el **DOM** ni flujos de usuario reales.  
+- Las funciones `alert()` y `prompt()` son **mockeadas**, no probadas visualmente.   
+- El flujo `menuDesplegable()` no fue testeado directamente.  
 
 ---
 
-**Última Actualización:** [21/10/2025]  
-**Tester/QA Engineer:** [Ulises]  
-**Colaboración con:** [Desarrollador JavaScript - Fiorella]
+**Última Actualización:** 23/10/2025   
+**Tester/QA Engineer:** @UlisesC11  
+**Colaboración con:** Desarrollador JavaScript - @fioremos  
