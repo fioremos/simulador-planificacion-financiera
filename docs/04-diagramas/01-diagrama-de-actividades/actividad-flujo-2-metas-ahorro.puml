@@ -1,0 +1,91 @@
+@startuml crear_visualizar_meta_ahorro
+title Flujo: Crear / Visualizar  Meta de Ahorro
+
+|Usuario|
+start
+
+|Sistema|
+  :Mostrar pantalla de metas;
+  note right
+    - Botón "Agregar objetivo"
+    - Botón "Seleccionar objetivo"
+  end note
+
+|Usuario|
+  if (¿Click en "Agregar objetivo"?) then (sí)
+    |Sistema|
+    repeat
+    :Mostrar formulario para nueva meta;
+
+    |Usuario|
+    :Ingresa nombre de la meta;
+    :Ingresa monto objetivo;
+    :Ingresa fecha objetivo (opcional);
+    :Hace clic en 'Guardar';
+
+    |Sistema|
+    :Leer datos ingresados;
+
+    if (¿Monto > 0?) then (no)
+      :Mostrar error "Monto inválido";
+    elseif (¿Nombre válido?) then (no)
+      :Mostrar error "Nombre inválido";
+    elseif (¿Fecha futura o vacía?) then (no)
+      :Mostrar error "La fecha objetivo debe ser futura";
+    else
+      break
+    endif
+  repeat while (¿Errores en formulario?)
+:Enviar datos al backend;
+
+|Backend|
+:Guardar meta en base de datos;
+:Registrar historial (tipo, usuario, fecha);
+  |Sistema|
+  fork
+    :Mostrar mensaje "Meta guardada con éxito";
+  fork again
+    :Cerrar formulario;
+  fork again
+    :Actualizar vista desde donde se llamó el formulario;
+  end fork
+
+else (Click en "Seleccionar objetivo")
+  |Sistema|
+  :Solicitar listado de metas al backend;
+
+  |Backend|
+  :Obtener metas desde BD;
+  :Enviar lista al sistema;
+
+  |Sistema|
+  :Mostrar lista al usuario;
+
+  |Usuario|
+  :Selecciona una meta;
+
+  |Sistema|
+  :Solicitar detalles de la meta seleccionada al backend;
+
+  |Backend|
+  if (¿Meta existe?) then (sí)
+    :Obtener detalles;
+    fork 
+      :Enviar datos al sistema;
+    fork again
+      :Registrar en historial (tipo, usuario, fecha);
+    end fork
+  else (no)
+    |Sistema|
+    :Mostrar error "Meta no encontrada";
+    end
+  endif
+
+  |Sistema|
+  :Cerrar selector;
+  :Actualizar vista de donde se llamó con los detalles de la meta al usuario;
+
+endif
+stop
+
+@enduml
