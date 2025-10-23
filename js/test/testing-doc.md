@@ -160,13 +160,13 @@ Ej:
 ## Capturas de Pantalla
 
 ### Tests Pasando
-![Tests Exitosos](./screenshots/tests-passing.png)  
+![Tests Exitosos](./screenshots/tests-passing.jpg)  
 
 ### Vista Detallada de Suites
-![Suite Detalle](./screenshots/suite-detail-1.png)  
-![Suite Detalle](./screenshots/suite-detail-2.png)  
-![Suite Detalle](./screenshots/suite-detail-3.png)  
-![Suite Detalle](./screenshots/suite-detail-4.png)  
+![Suite Detalle 1](./screenshots/suite-detail-1.jpg)  
+![Suite Detalle 2](./screenshots/suite-detail-2.jpg)  
+![Suite Detalle 3](./screenshots/suite-detail-3.jpg)  
+![Suite Detalle 4](./screenshots/suite-detail-4.jpg)  
 
 ---
 
