@@ -14,7 +14,9 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 
 ### Changed 
 
-### Fixed  
+### Fixed
+- [feature/coord-devops-hotfix-#71-secciones-sin-encabezados]
+  PR: [#108](https://github.com/fioremos/simulador-planificacion-financiera/pull/108)
 - [feature/hotfix-#68-logo-header-relacion-incorrecta] Fix del logo del header.  
   PR: [#91](https://github.com/fioremos/simulador-planificacion-financiera/pull/91) - @skalapuj (Arquitecto de Diagramas de Actividades)  
 - [feature/hotfix-#76-#78-imagenes-caidas] Correción de todas las rutas caídas. 

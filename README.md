@@ -51,6 +51,11 @@ El diseño preliminar de la aplicación se encuentra disponible en Figma en el s
 
 ---
 
+## ✅ Objetivos de la tercera entrega (24/10/2025)
+Esta tercera entrega tiene como propósito
+
+---
+
 ## ✅ Objetivos del primer parcial (6/10/2025)
 Esta entrega tiene como propósito presentar la versión integrada y funcional del proyecto, aplicando conceptos de HTML5, CSS3 y Bootstrap, y consolidando el flujo de trabajo en equipo con GitHub.
 En esta etapa se busca:
@@ -77,22 +82,7 @@ El resultado esperado es un repositorio unificado y limpio, con una versión nav
 
 ---
 
-## ✅ Objetivos de la primer entrega (5/9/2025)
-Esta entrega tiene como propósito presentar la primera versión del proyecto, estableciendo una base sólida sobre la cual se desarrollará el simulador de planificación financiera. 
-Esta versión inicial establece la base técnica, visual y documental para el desarrollo futuro.
-
-En esta etapa se busca:
-- Definir y estructurar el repositorio inicial del proyecto.
-- Desarrollar una primera versión de la página web utilizando HTML5.
-- Documentar el proyecto en un archivo `README.md`, incluyendo una descripción general, objetivos, tecnologías utilizadas y funcionalidades previstas.
-- Diseñar un mockup preliminar que represente la visión visual del producto final, ubicado en `docs/01-mockup/mockup.png` y referenciado en el README.
-- Documentar al menos cinco prompts de inteligencia artificial utilizados durante esta fase, almacenados en `docs/02-prompts/`.
-
-El resultado esperado es un repositorio bien organizado en GitHub, con una estructura clara de ramas, una página inicial funcional, un diseño visual representativo del producto y documentación completa del proceso y las herramientas utilizadas.
-
----
-
-## ✅ Objetivos de esta entrega (26/9/2025)  
+## ✅ Objetivos de la segunda entrega (26/9/2025)  
 Esta segunda entrega tiene como propósito mejorar el diseño visual y estructural de la página web, estableciendo las bases de estilos CSS y diseño responsive que servirán como punto de partida para futuras funcionalidades.
 
 En esta etapa se busca: 
@@ -105,6 +95,20 @@ En esta etapa se busca:
 
 El resultado esperado es un repositorio organizado, con estilos aplicados al diseño base, documentación técnica clara y pruebas que validen la correcta visualización en múltiples dispositivos y navegadores.
 
+---
+
+## ✅ Objetivos de la primer entrega (5/9/2025)
+Esta entrega tiene como propósito presentar la primera versión del proyecto, estableciendo una base sólida sobre la cual se desarrollará el simulador de planificación financiera. 
+Esta versión inicial establece la base técnica, visual y documental para el desarrollo futuro.
+
+En esta etapa se busca:
+- Definir y estructurar el repositorio inicial del proyecto.
+- Desarrollar una primera versión de la página web utilizando HTML5.
+- Documentar el proyecto en un archivo `README.md`, incluyendo una descripción general, objetivos, tecnologías utilizadas y funcionalidades previstas.
+- Diseñar un mockup preliminar que represente la visión visual del producto final, ubicado en `docs/01-mockup/mockup.png` y referenciado en el README.
+- Documentar al menos cinco prompts de inteligencia artificial utilizados durante esta fase, almacenados en `docs/02-prompts/`.
+
+El resultado esperado es un repositorio bien organizado en GitHub, con una estructura clara de ramas, una página inicial funcional, un diseño visual representativo del producto y documentación completa del proceso y las herramientas utilizadas.
 ---
 
 ## 👨‍💻 Tecnologías Utilizadas
