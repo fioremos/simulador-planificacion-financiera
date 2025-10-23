@@ -57,13 +57,13 @@ describe("Flujo 1: Agregar Movimiento", function () {
         it("debería aceptar categorías con espacios alrededor", function () {
             expect(esCategoriaValida(" Hogar ")).toBeTruthy();
         });
-        it ("debería aceptar categorías en mayúscula", function () {
+        it("debería aceptar categorías en mayúscula", function () {
             expect(esCategoriaValida("HOGAR")).toBeTruthy();
         });
-        it ("debería aceptar categorías en minúscula", function () {
+        it("debería aceptar categorías en minúscula", function () {
             expect(esCategoriaValida("hogar")).toBeTruthy();
         });
-        it ("deberia rechazar string vacío", function () {
+        it("deberia rechazar string vacío", function () {
             expect(esCategoriaValida("")).toBeFalsy();
         });
         it("debería rechazar categorías no esperadas", function () {
@@ -115,16 +115,16 @@ describe("Flujo 2: Metas de Ahorro", function () {
             expect(esNombreValido("Vacaciones")).toBeTruthy();
             expect(esNombreValido("A1")).toBeTruthy();
         });
-        it ("debería aceptar nombres con espacios", function () {
+        it("debería aceptar nombres con espacios", function () {
             expect(esNombreValido("Mi Meta")).toBeTruthy();
         });
-        it ("debería aceptar nombres con caracteres especiales", function () {
+        it("debería aceptar nombres con caracteres especiales", function () {
             expect(esNombreValido("#!%")).toBeTruthy();
         });
-        it ("debería rechazar nombres con menos de 2 caracteres", function () {
+        it("debería rechazar nombres con menos de 2 caracteres", function () {
             expect(esNombreValido("A")).toBeFalsy();
         });
-        it ("debería rechazar nombres vacíos", function () {
+        it("debería rechazar nombres vacíos", function () {
             expect(esNombreValido("")).toBeFalsy();
         });
     });
@@ -184,7 +184,7 @@ describe("Flujo 2: Metas de Ahorro", function () {
             const pasada = "2025-01-01";
             expect(esFechaFuturaValida(pasada)).toBeFalsy();
         });
-        it ("debería rechazar fechas con formato incorrecto", function () {
+        it("debería rechazar fechas con formato incorrecto", function () {
             const formatoIncorrecto = "01-01-2026";
             expect(esFechaFuturaValida(formatoIncorrecto)).toBeFalsy();
         });
@@ -204,126 +204,126 @@ describe("Flujo 3: Exportar Datos", function () {
             spyOn(window, 'prompt').and.returnValue("Movimientos");
 
             // Reproducir la lógica de parsing que hace exportarDatosFlow
-            const tiposDisponibles = ['Movimientos', 'Metas', 'Presupuesto', 'Historial'];
+            const tiposDisponibles = ['movimientos', 'metas', 'presupuesto', 'historial'];
             const seleccion = prompt(); // devuelve "Movimientos" por el spy
             const tiposSeleccionados = seleccion
-                ? seleccion.split(',').map(e => e.trim()).filter(e => tiposDisponibles.includes(e))
+                ? seleccion.split(',').map(e => e.trim()).filter(e => tiposDisponibles.includes(e.toLowerCase()))
                 : [];
 
             // Compruebo que el array contiene "Movimientos" y que hayDatosSeleccionados lo reconoce
-            expect(hayDatosSeleccionados(tiposSeleccionados)).toBeTruthy();
+            expect(hayDatosSeleccionados(tiposSeleccionados, seleccion.split(','))).toBeTruthy();
         });
         it("deberia aceptar varios tipos de datos disponibles (Movimientos, Metas)", function () {
             // Simula el prompt donde el usuario escribe "Movimientos, Metas"
             spyOn(window, 'prompt').and.returnValue("Movimientos, Metas");
 
             // Reproducir la lógica de parsing que hace exportarDatosFlow
-            const tiposDisponibles = ['Movimientos', 'Metas', 'Presupuesto', 'Historial'];
+            const tiposDisponibles = ['movimientos', 'metas', 'presupuesto', 'historial'];
             const seleccion = prompt(); // devuelve "Movimientos, Metas" por el spy
             const tiposSeleccionados = seleccion
-                ? seleccion.split(',').map(e => e.trim()).filter(e => tiposDisponibles.includes(e))
+                ? seleccion.split(',').map(e => e.trim()).filter(e => tiposDisponibles.includes(e.toLowerCase()))
                 : [];
             
             // Compruebo que el array contiene "Movimientos" y "Metas" y que hayDatosSeleccionados lo reconoce
-            expect(hayDatosSeleccionados(tiposSeleccionados)).toBeTruthy();
+            expect(hayDatosSeleccionados(tiposSeleccionados, seleccion.split(','))).toBeTruthy();
         });
         it("deberia aceptar varios tipos de datos disponibles en distintos lugares (Metas, Movimientos)", function () {
             // Simula el prompt donde el usuario escribe "Metas, Movimientos"
             spyOn(window, 'prompt').and.returnValue("Metas, Movimientos");
 
             // Reproducir la lógica de parsing que hace exportarDatosFlow
-            const tiposDisponibles = ['Movimientos', 'Metas', 'Presupuesto', 'Historial'];
+            const tiposDisponibles = ['movimientos', 'metas', 'presupuesto', 'historial'];
             const seleccion = prompt(); // devuelve "Metas, Movimientos" por el spy
             const tiposSeleccionados = seleccion
-                ? seleccion.split(',').map(e => e.trim()).filter(e => tiposDisponibles.includes(e))
+                ? seleccion.split(',').map(e => e.trim()).filter(e => tiposDisponibles.includes(e.toLowerCase()))
                 : [];
             
             // Compruebo que el array contiene "Movimientos" y "Metas" y que hayDatosSeleccionados lo reconoce
-            expect(hayDatosSeleccionados(tiposSeleccionados)).toBeTruthy();
+            expect(hayDatosSeleccionados(tiposSeleccionados, seleccion.split(','))).toBeTruthy();
         });        
         it("deberia aceptar tipos de datos disponibles en mayúscula (MOVIMIENTOS)", function () {
             // Simula el prompt donde el usuario escribe "MOVIMIENTOS"
             spyOn(window, 'prompt').and.returnValue("MOVIMIENTOS");
 
             // Reproducir la lógica de parsing que hace exportarDatosFlow
-            const tiposDisponibles = ['Movimientos', 'Metas', 'Presupuesto', 'Historial'];
+            const tiposDisponibles = ['movimientos', 'metas', 'presupuesto', 'historial'];
             const seleccion = prompt(); // devuelve "MOVIMIENTOS" por el spy
             const tiposSeleccionados = seleccion
-                ? seleccion.split(',').map(e => e.trim()).filter(e => tiposDisponibles.includes(e))
+                ? seleccion.split(',').map(e => e.trim()).filter(e => tiposDisponibles.includes(e.toLowerCase()))
                 : [];
 
             // Compruebo que el array contiene "MOVIMIENTOS" y que hayDatosSeleccionados lo reconoce
-            expect(hayDatosSeleccionados(tiposSeleccionados)).toBeTruthy();
+            expect(hayDatosSeleccionados(tiposSeleccionados, seleccion.split(','))).toBeTruthy();
         });
         it("deberia aceptar tipos de datos disponibles en minúscula (movimientos)", function () {
             // Simula el prompt donde el usuario escribe "movimientos"
             spyOn(window, 'prompt').and.returnValue("movimientos");
 
             // Reproducir la lógica de parsing que hace exportarDatosFlow
-            const tiposDisponibles = ['Movimientos', 'Metas', 'Presupuesto', 'Historial'];
+            const tiposDisponibles = ['movimientos', 'metas', 'presupuesto', 'historial'];
             const seleccion = prompt(); // devuelve "movimientos" por el spy
             const tiposSeleccionados = seleccion
-                ? seleccion.split(',').map(e => e.trim()).filter(e => tiposDisponibles.includes(e))
+                ? seleccion.split(',').map(e => e.trim()).filter(e => tiposDisponibles.includes(e.toLowerCase()))
                 : [];
 
             // Compruebo que el array contiene "movimientos" y que hayDatosSeleccionados lo reconoce
-            expect(hayDatosSeleccionados(tiposSeleccionados)).toBeTruthy();
+            expect(hayDatosSeleccionados(tiposSeleccionados, seleccion.split(','))).toBeTruthy();
         });
         it("deberia rechazar tipos de datos incorrectos (abc)", function () {
             // Simula el prompt donde el usuario escribe "abc"
             spyOn(window, 'prompt').and.returnValue("abc");
 
             // Reproducir la lógica de parsing que hace exportarDatosFlow
-            const tiposDisponibles = ['Movimientos', 'Metas', 'Presupuesto', 'Historial'];
+            const tiposDisponibles = ['movimientos', 'metas', 'presupuesto', 'historial'];
             const seleccion = prompt(); // devuelve "abc" por el spy
             const tiposSeleccionados = seleccion
-                ? seleccion.split(',').map(e => e.trim()).filter(e => tiposDisponibles.includes(e))
+                ? seleccion.split(',').map(e => e.trim()).filter(e => tiposDisponibles.includes(e.toLowerCase()))
                 : [];
 
             // Compruebo que el array contiene "abc" y que hayDatosSeleccionados lo reconoce
-            expect(hayDatosSeleccionados(tiposSeleccionados)).toBeFalsy();
+            expect(hayDatosSeleccionados(tiposSeleccionados, seleccion.split(','))).toBeFalsy();
         });        
         it("deberia rechazar tipos de datos vacíos", function () {
             // Simula el prompt donde el usuario escribe ""
             spyOn(window, 'prompt').and.returnValue("");
 
             // Reproducir la lógica de parsing que hace exportarDatosFlow
-            const tiposDisponibles = ['Movimientos', 'Metas', 'Presupuesto', 'Historial'];
+            const tiposDisponibles = ['movimientos', 'metas', 'presupuesto', 'historial'];
             const seleccion = prompt(); // devuelve "" por el spy
             const tiposSeleccionados = seleccion
-                ? seleccion.split(',').map(e => e.trim()).filter(e => tiposDisponibles.includes(e))
+                ? seleccion.split(',').map(e => e.trim()).filter(e => tiposDisponibles.includes(e.toLowerCase()))
                 : [];
 
             // Compruebo que el array contiene "" y que hayDatosSeleccionados lo reconoce
-            expect(hayDatosSeleccionados(tiposSeleccionados)).toBeFalsy();
+            expect(hayDatosSeleccionados(tiposSeleccionados, seleccion.split(','))).toBeFalsy();
         });
         it("deberia rechazar un tipo de dato disponible y otro incorrecto (Metas, Hogar)", function () {
             // Simula el prompt donde el usuario escribe "Metas, Hogar"
             spyOn(window, 'prompt').and.returnValue("Metas, Hogar");
 
             // Reproducir la lógica de parsing que hace exportarDatosFlow
-            const tiposDisponibles = ['Movimientos', 'Metas', 'Presupuesto', 'Historial'];
+            const tiposDisponibles = ['movimientos', 'metas', 'presupuesto', 'historial'];
             const seleccion = prompt(); // devuelve "Metas, Hogar" por el spy
             const tiposSeleccionados = seleccion
-                ? seleccion.split(',').map(e => e.trim()).filter(e => tiposDisponibles.includes(e))
+                ? seleccion.split(',').map(e => e.trim()).filter(e => tiposDisponibles.includes(e.toLowerCase()))
                 : [];
             
             // Compruebo que el array contiene "Metas" y "Hogar" y que hayDatosSeleccionados lo reconoce
-            expect(hayDatosSeleccionados(tiposSeleccionados)).toBeFalsy();
+            expect(hayDatosSeleccionados(tiposSeleccionados, seleccion.split(','))).toBeFalsy();
         });
         it("deberia rechazar un tipo de dato incorrecto y otro disponible (Hogar, Metas)", function () {
             // Simula el prompt donde el usuario escribe "Hogar, Meta"
             spyOn(window, 'prompt').and.returnValue("Hogar, Metas");
 
             // Reproducir la lógica de parsing que hace exportarDatosFlow
-            const tiposDisponibles = ['Movimientos', 'Metas', 'Presupuesto', 'Historial'];
+            const tiposDisponibles = ['movimientos', 'metas', 'presupuesto', 'historial'];
             const seleccion = prompt(); // devuelve "Hogar, Metas" por el spy
             const tiposSeleccionados = seleccion
-                ? seleccion.split(',').map(e => e.trim()).filter(e => tiposDisponibles.includes(e))
+                ? seleccion.split(',').map(e => e.trim()).filter(e => tiposDisponibles.includes(e.toLowerCase()))
                 : [];
             
             // Compruebo que el array contiene "Hogar" y "Meta" y que hayDatosSeleccionados lo reconoce
-            expect(hayDatosSeleccionados(tiposSeleccionados)).toBeFalsy();
+            expect(hayDatosSeleccionados(tiposSeleccionados, seleccion.split(','))).toBeFalsy();
         });
     });
 
@@ -386,7 +386,7 @@ describe("Flujo 3: Exportar Datos", function () {
             expect(procesarExportacion).toHaveBeenCalledWith(jasmine.arrayContaining(["Movimientos","Metas"]), "CSV", "mi-reporte", "C:\\Exports");
             expect(alert).toHaveBeenCalled();
         });
-        it ("maneja entradas inválidas hasta recibir válidas (tipo inválido)", function () {
+        it("maneja entradas inválidas hasta recibir válidas (tipo inválido)", function () {
             // primer intento: tipo inválido -> 'abc', luego tipos válidos
             spyOn(window, 'prompt').and.returnValues(
                 "abc", // tipos (inválido)
@@ -500,7 +500,7 @@ describe("Flujo 4: Reporte Financiero", function () {
             expect(ind.saldo).toBe(0);
             expect(ind.porcentajeAhorro).toBe('0.00');
         });
-        it ("debería manejar casos con solo 'ingresos'", function () {
+        it("debería manejar casos con solo 'ingresos'", function () {
             const datos = [
                 { tipo: 'Ingreso', monto: 1000 }
             ];
@@ -511,7 +511,7 @@ describe("Flujo 4: Reporte Financiero", function () {
             expect(ind.saldo).toBe(1000);
             expect(ind.porcentajeAhorro).toBe('0.00');
         });
-        it ("debería manejar casos con solo 'gastos'", function () {
+        it("debería manejar casos con solo 'gastos'", function () {
             const datos = [
                 { tipo: 'Gasto', monto: 500 }
             ];
@@ -522,7 +522,7 @@ describe("Flujo 4: Reporte Financiero", function () {
             expect(ind.saldo).toBe(-500);
             expect(ind.porcentajeAhorro).toBe('0.00');
         });
-        it ("debería manejar casos con solo 'ahorro'", function () {
+        it("debería manejar casos con solo 'ahorro'", function () {
             const datos = [
                 { tipo: 'Ahorro', monto: 300 }
             ];
@@ -533,7 +533,7 @@ describe("Flujo 4: Reporte Financiero", function () {
             expect(ind.saldo).toBe(0);
             expect(ind.porcentajeAhorro).toBe('0.00');
         });
-        it ("debería manejar casos con ingresos y gastos iguales", function () {
+        it("debería manejar casos con ingresos y gastos iguales", function () {
             const datos = [
                 { tipo: 'Ingreso', monto: 500 },
                 { tipo: 'Gasto', monto: 500 }
@@ -545,7 +545,7 @@ describe("Flujo 4: Reporte Financiero", function () {
             expect(ind.saldo).toBe(0);
             expect(ind.porcentajeAhorro).toBe('0.00');
         });
-        it ("debería manejar casos con 'ahorro' mayor que 'ingresos'", function () {
+        it("debería manejar casos con 'ahorro' mayor que 'ingresos'", function () {
             const datos = [
                 { tipo: 'Ingreso', monto: 400 },
                 { tipo: 'Ahorro', monto: 500 }
@@ -557,7 +557,7 @@ describe("Flujo 4: Reporte Financiero", function () {
             expect(ind.saldo).toBe(400);
             expect(ind.porcentajeAhorro).toBe('125.00'); // (500 / 400) * 100
         });
-        it ("debería manejar casos con 'gastos' mayores que 'ingresos'", function () {
+        it("debería manejar casos con 'gastos' mayores que 'ingresos'", function () {
             const datos = [
                 { tipo: 'Ingreso', monto: 300 },
                 { tipo: 'Gasto', monto: 500 }
@@ -569,7 +569,7 @@ describe("Flujo 4: Reporte Financiero", function () {
             expect(ind.saldo).toBe(-200);
             expect(ind.porcentajeAhorro).toBe('0.00');
         });
-        it ("debería manejar casos con decimales en montos", function () {
+        it("debería manejar casos con decimales en montos", function () {
             const datos = [
                 { tipo: 'Ingreso', monto: 1000.75 },
                 { tipo: 'Gasto', monto: 500.25 },
@@ -580,7 +580,7 @@ describe("Flujo 4: Reporte Financiero", function () {
             expect(ind.gastos).toBeCloseTo(500.25, 2);
             expect(ind.ahorro).toBeCloseTo(200.50, 2);
             expect(ind.saldo).toBeCloseTo(500.50, 2);
-            expect(ind.porcentajeAhorro).toBeCloseTo('20.00', 2); // (200.50 / 1000.75) * 100
+            expect(ind.porcentajeAhorro).toBeCloseTo('20.03', 2); // (200.50 / 1000.75) * 100
         });
     });
 
