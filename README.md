@@ -52,14 +52,29 @@ El diseño preliminar de la aplicación se encuentra disponible en Figma en el s
 ---
 
 ## ✅ Objetivos de la tercera entrega (24/10/2025)
-Esta tercera entrega tiene como propósito
+Esta tercera entrega tiene como propósito integrar la lógica de negocio fundamental del proyecto mediante el uso de JavaScript, aplicando estructuras de control, funciones, arrays y objetos para simular el comportamiento del sistema. Además, se incorpora el testing automatizado con Jasmine y la documentación de diagramas de actividades en PlantUML, consolidando así la fase de programación funcional antes de la manipulación del DOM.
+
+En esta etapa se busca:
+- Implementar la lógica central del simulador o aplicación, utilizando algoritmos condicionales (`if`, `else if`, `switch`) y estructuras de repetición (for, while) para procesar datos y tomar decisiones.
+- Desarrollar funciones modulares, reutilizables y testeables, aplicando principios de responsabilidad única, parámetros y valores de retorno.
+- Integrar arrays y objetos para representar datos y comportamientos relevantes al contexto del proyecto.
+- Implementar cuatro flujos de trabajo principales, cada uno con estructura: **entrada → proceso → salida**, ejecutables desde un menú principal mediante `prompt()`.
+- Garantizar la validez y coherencia de las entradas del usuario, mostrando los resultados con `alert()` y/o `console.log()`.
+- Documentar y representar los flujos desarrollados mediante diagramas de actividades en **PlantUML**, incluyendo decisiones, ciclos y particiones de responsabilidad (usuario/sistema).
+- Incorporar una suite de testing automatizado con **Jasmine**, validando la funcionalidad de los flujos principales mediante casos de prueba de éxito, casos borde, validaciones de error y operaciones con arrays y objetos.
+- Documentar el proceso de testing en `js/test/testing-doc.md`, detallando la ejecución de pruebas, cobertura y resultados.
+- Mantener actualizado el repositorio con ramas organizadas por feature, commits individuales por rol, y gestión de tareas mediante Issues.
+- Asegurar la integración controlada de ramas hacia develop y la publicación de una release formal `(v1.1-tercera-entrega)` en GitHub con `changelog` y enlaces relevantes.
+- Actualizar el `README.md` con la descripción de la entrega, las tecnologías utilizadas y los enlaces a la documentación generada (diagramas, testing y mockups).
+
+El resultado esperado es un proyecto funcional y estructurado, con la lógica de negocio completamente implementada en `JavaScript`, respaldada por diagramas, pruebas automatizadas y documentación técnica coherente con las buenas prácticas de desarrollo colaborativo.
 
 ---
 
 ## ✅ Objetivos del primer parcial (6/10/2025)
 Esta entrega tiene como propósito presentar la versión integrada y funcional del proyecto, aplicando conceptos de HTML5, CSS3 y Bootstrap, y consolidando el flujo de trabajo en equipo con GitHub.
-En esta etapa se busca:
 
+En esta etapa se busca:
 - Migrar la aplicación a Bootstrap, utilizando componentes y utilidades para mejorar la responsividad y accesibilidad.
 
 - Implementar componentes avanzados de HTML5 y Bootstrap (ej.: sidebar, modales, formularios enriquecidos, tablas responsivas).
@@ -109,6 +124,7 @@ En esta etapa se busca:
 - Documentar al menos cinco prompts de inteligencia artificial utilizados durante esta fase, almacenados en `docs/02-prompts/`.
 
 El resultado esperado es un repositorio bien organizado en GitHub, con una estructura clara de ramas, una página inicial funcional, un diseño visual representativo del producto y documentación completa del proceso y las herramientas utilizadas.
+
 ---
 
 ## 👨‍💻 Tecnologías Utilizadas
@@ -141,10 +157,10 @@ El resultado esperado es un repositorio bien organizado en GitHub, con una estru
 ## 👥 Integrantes del Grupo
 |     Nombre completo    | N° de Matrícula | Usuario GitHub |         Rol en esta entrega             |
 |------------------------|-----------------|----------------|-----------------------------------------|
-|    Sol Ailen Kalpuj    |      154106     |   @skalapuj    |          Coordinador / DevOps            |
-|     Fiorella Mosca     |      154108     |   @fioremos    |       Desarrollador Frontend / Bootstrap  | 
-| Matías Nicolás Escobar |      151251     |   @MNEscobar   |       Desarrollador en Componentes HTML Avanzados          |  
-|     Ulises Capriles    |      146291     |   @UlisesC11   |        Especialista en Componentes Bootstrap              |  
+|    Sol Ailen Kalpuj    |      154106     |   @skalapuj    |      Arquitecto de Diagramas de Actividades         |
+|     Fiorella Mosca     |      154108     |   @fioremos    |      Desarrollador JavaScript     | 
+| Matías Nicolás Escobar |      151251     |   @MNEscobar   |      Coordinador / DevOps         |  
+|     Ulises Capriles    |      146291     |   @UlisesC11   |      Tester JavaScript / QA Engineer         |  
 
 <pre>
 🎓 Datos Académicos
