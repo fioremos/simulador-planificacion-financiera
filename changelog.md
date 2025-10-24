@@ -7,6 +7,8 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 ## [Unreleased]
 
 ### Added  
+- [feature/tester-javascipt-jasmine] Implementación de suites de testing en los 4 flujos principales.  
+  PR[#114](https://github.com/fioremos/simulador-planificacion-financiera/pull/114) - @UlisesC11 (Tester JavaScript / QA Engineer)
 - [feature/arq-diagramas-actividades] Creación de los diagramas de actividad de los4 flujos principales.  
   PR: [#92](https://github.com/fioremos/simulador-planificacion-financiera/pull/92) -  @skalapuj (Arquitecto de Diagramas de Actividades) 
 - [feature/dev-javascript-logica-negocio] Insercion de logigica en Javascript
@@ -33,7 +35,9 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   PR: [#83](https://github.com/fioremos/simulador-planificacion-financiera/pull/83) - @fioremos (Desrrolladr JavaScript)
 - [feature/hotfix-#69-meta-description-added] Fix Issue #69 
   PR: [#85](https://github.com/fioremos/simulador-planificacion-financiera/pull/85) - @fioremos (Desarrollador JavaScript)
-  
+- [feature/tester-javascipt-jasmine] Fix de bugs encontrados en el testeo de los flujos.  
+  PR[#113](https://github.com/fioremos/simulador-planificacion-financiera/pull/113) - @fioremos (Desarrollador JavaScript)
+
 ---
 
 ## [Release Actividad Obligatoria N°1] - 2025-08-10

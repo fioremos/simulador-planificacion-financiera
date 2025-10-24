@@ -8,7 +8,7 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
 
@@ -17,8 +17,8 @@
     <link rel="stylesheet" href="css/responsive.css">
    
     <link rel="stylesheet" href="css/bootstrap-overrides.css">
-    <script src="js/main.js" defer></script>
-    <script src="js/eventos.js" defer></script>
+    <script defer src="js/main.js"></script>
+    <script defer src="js/eventos.js"></script>
     <script defer src="js/script.js"></script>
     <title>FinGrow</title>
 </head>
@@ -26,6 +26,7 @@
 <body>
      <!-- HEADER ÚNICO -->
     <header id="main-header" class="header-oculto">
+        <h1 class="visually-hidden">FinGrow - Panel Principal</h1>
         <div class="header-container">
             <div>
                 <button id="menuToggleBtn" class="btn btn-outline-primary d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarOffcanvas" aria-controls="sidebarOffcanvas">
@@ -53,7 +54,7 @@
                     <li><a href="#configuracion" data-section="configuracion"><span class="sidebar-icon"><img src="assets/images/iconos/settings.png" alt="logo_menu_configuracion"> </span> Configuración</a></li>
                 </ul>
             </nav>
-
+            
             <nav>
                 <ul>    
                     <li><a href="#login" data-section="login"><span class="sidebar-icon"><img src="assets/images/iconos/Log_out.png" alt="logo_cerrar_sesion"> </span>  Cerrar Sesión</a></li>
@@ -205,7 +206,7 @@
                     <section id="ultimos-movimientos" class="card">
                         <div class="header-table">
                             <div>
-                                <p class="subtitle">Últimos movimientos</p>
+                                <h2 class="subtitle">Últimos movimientos</h2>
                             </div>
                             <!-- Boton que activa el modal -->
                             <button class="btn btn-primary btn-small" data-bs-toggle="modal" data-bs-target="#miModal">
@@ -332,7 +333,7 @@
                     <section id= "video-tutorial" class="card">
                         <div class="padre-flex">
                             <div>
-                                <p class="subtitle">Educación Financiera para Principiantes</p>
+                                <h2 class="subtitle">Educación Financiera para Principiantes</h2>
                             </div>    
                             <div class="video-educacion-container ratio ratio-16x">
                             <video controls class="video-educacion w-100 h-100">
@@ -420,7 +421,7 @@
                             <!-- Tabla de movimientos -->
                             <div class="ingresos-gastos-table">
                                 <div class="header-table">
-                                    <p class="subtitle">Movimientos</p>
+                                    <h3 class="subtitle">Movimientos</h3>
                                 </div>
                                 <div clas="">
                                     <!-- Tabla generada de forma estática por ahora. 
@@ -503,7 +504,7 @@
                     <section id="metas-card-table" class="card">
                         <div class="header-table">
                             <div>
-                                <p class="subtitle">Metas de ahorro</p>
+                                <h2 class="subtitle">Metas de ahorro</h2>
                             </div>
                         </div>
                         <!-- Tabla generada de forma estática por ahora. 
@@ -609,7 +610,7 @@
                     <section id="inversiones-card-table" class="card">
                         <div class="header-table">
                             <div>
-                                <p class="subtitle">Inversiones</p>
+                                <h2 class="subtitle">Inversiones</h2>
                             </div>
                             <div class="inversiones-card-table-button">
                                 <button class="btn btn-primary btn-small">
@@ -754,7 +755,7 @@
                                     <div class="col container">
                                         <div class="row justify-content-center">
                                             <div class="col gastos-list">
-                                                <p>Hogar</p>
+                                                <h4>Hogar</h4>
                                             </div>
                                             <div class="col gastos-bars">
                                                 <div class="bar"></div>
@@ -762,7 +763,7 @@
                                         </div>
                                         <div class="row justify-content-center">
                                             <div class="col gastos-list">
-                                                <p>Alimentación</p>
+                                                <h4>Alimentación</h4>
                                             </div>
                                             <div class="col gastos-bars">
                                                 <div class="bar"></div>
@@ -770,7 +771,7 @@
                                         </div>
                                         <div class="row justify-content-center">
                                             <div class="col gastos-list">
-                                                <p>Transporte</p>
+                                                <h4>Transporte</h4>
                                             </div>
                                             <div class="col gastos-bars">
                                                 <div class="bar"></div>
@@ -778,7 +779,7 @@
                                         </div>
                                         <div class="row justify-content-center">
                                             <div class="col gastos-list">
-                                                <p>Salud</p>
+                                                <h4>Salud</h4>
                                             </div>
                                             <div class="col gastos-bars">
                                                 <div class="bar"></div>
@@ -786,7 +787,7 @@
                                         </div>
                                         <div class="row justify-content-center">
                                             <div class="col gastos-list">
-                                                <p>Ocio</p>
+                                                <h4>Ocio</h4>
                                             </div>
                                             <div class="col gastos-bars">
                                                 <div class="bar"></div>
@@ -794,7 +795,7 @@
                                         </div>
                                         <div class="row justify-content-center">
                                             <div class="col gastos-list">
-                                                <p>Otros</p>
+                                                <h4>Otros</h4>
                                             </div>
                                             <div class="col gastos-bars">
                                                 <div class="bar"></div>
