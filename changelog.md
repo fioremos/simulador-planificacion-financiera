@@ -83,7 +83,7 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 
 ### Changed 
 - [feature/coord-devops-tercera-entrega] Actualización de la documentación del proyecto.
-  PR: []()
+  PR: [#116](https://github.com/fioremos/simulador-planificacion-financiera/pull/116#) - @MNEscobar (Coordinador / DevOps/)  
 
 ### Fixed
 - [feature/hotfix-#70-remover-multiple-main-element] Fix Issue #70   
