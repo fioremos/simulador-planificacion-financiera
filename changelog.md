@@ -33,7 +33,9 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   PR: [#83](https://github.com/fioremos/simulador-planificacion-financiera/pull/83) - @fioremos (Desrrolladr JavaScript)
 - [feature/hotfix-#69-meta-description-added] Fix Issue #69 
   PR: [#85](https://github.com/fioremos/simulador-planificacion-financiera/pull/85) - @fioremos (Desarrollador JavaScript)
-  
+- [feature/tester-javascipt-jasmine] Fix de bugs encontrados en el testeo de los flujos.  
+  PR[#113](https://github.com/fioremos/simulador-planificacion-financiera/pull/113) - @fioremos (Desarrollador JavaScript)
+
 ---
 
 ## [Release Actividad Obligatoria N°1] - 2025-08-10
