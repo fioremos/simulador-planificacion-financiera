@@ -4,42 +4,6 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 
 ---
 
-## [Unreleased]
-
-### Added  
-- [feature/tester-javascipt-jasmine] Implementación de suites de testing en los 4 flujos principales.  
-  PR[#114](https://github.com/fioremos/simulador-planificacion-financiera/pull/114) - @UlisesC11 (Tester JavaScript / QA Engineer)
-- [feature/arq-diagramas-actividades] Creación de los diagramas de actividad de los4 flujos principales.  
-  PR: [#92](https://github.com/fioremos/simulador-planificacion-financiera/pull/92) -  @skalapuj (Arquitecto de Diagramas de Actividades) 
-- [feature/dev-javascript-logica-negocio] Insercion de logigica en Javascript
-  PR: [#90](https://github.com/fioremos/simulador-planificacion-financiera/pull/90) - @fioremos (Desarrollador JavaScrip)
-
-### Changed 
-
-### Fixed
-- [feature/coord-devops-hotfix-#71-secciones-sin-encabezados]
-  PR: [#108](https://github.com/fioremos/simulador-planificacion-financiera/pull/108)
-- [feature/hotfix-#68-logo-header-relacion-incorrecta] Fix del logo del header.  
-  PR: [#91](https://github.com/fioremos/simulador-planificacion-financiera/pull/91) - @skalapuj (Arquitecto de Diagramas de Actividades)  
-- [feature/hotfix-#76-#78-imagenes-caidas] Correción de todas las rutas caídas. 
-  PR: [#89](https://github.com/fioremos/simulador-planificacion-financiera/pull/89) - @skalapuj (Arquitecto de Diagramas de Actividades) 
-- [feature/hotfix-#79-error-visualizacion-login] Fix en el scroll de la card de login.  
-  PR: [#88](https://github.com/fioremos/simulador-planificacion-financiera/pull/88) - @skalapuj (Arquitecto de Diagramas de Actividades)  
-- [feature/bugfix-#81-degradacion-rendimiento] Fix de la performace reportada de PageSpeed.  
-  PR: [#87](https://github.com/fioremos/simulador-planificacion-financiera/pull/87) - @skalapuj (Arquitecto de Diagramas de Actividades)  
-- [feature/docfix-#74-actualizacion-figma] Actualización del mockup en Figma.  
-  PR: [#86](https://github.com/fioremos/simulador-planificacion-financiera/pull/86) - @skalapuj (Arquitecto de Diagramas de Actividades)
-- [feature/hotfix-#80-alt-imagenes] Fix Issue #80 
-  PR: [#84](https://github.com/fioremos/simulador-planificacion-financiera/pull/84) - @fioremos (Desarrollador JavaScript)
-- [feature/hotfix-#70-remover-multiple-main-element] Fix Issue #70
-  PR: [#83](https://github.com/fioremos/simulador-planificacion-financiera/pull/83) - @fioremos (Desrrolladr JavaScript)
-- [feature/hotfix-#69-meta-description-added] Fix Issue #69 
-  PR: [#85](https://github.com/fioremos/simulador-planificacion-financiera/pull/85) - @fioremos (Desarrollador JavaScript)
-- [feature/tester-javascipt-jasmine] Fix de bugs encontrados en el testeo de los flujos.  
-  PR[#113](https://github.com/fioremos/simulador-planificacion-financiera/pull/113) - @fioremos (Desarrollador JavaScript)
-
----
-
 ## [Release Actividad Obligatoria N°1] - 2025-08-10
 
 ### Added
@@ -104,6 +68,54 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   PR: [#65](https://github.com/fioremos/simulador-planificacion-financiera/pull/65) - @skalapuj (Coordinador / DevOps) 
 
 ---
+
+## [Release Tercera Entrega] - 2025-10-24
+
+### Added  
+- [feature/tester-javascipt-jasmine] Implementación de suites de testing en los 4 flujos principales.  
+  PR[#114](https://github.com/fioremos/simulador-planificacion-financiera/pull/114) - @UlisesC11 (Tester JavaScript / QA Engineer)
+
+- [feature/arq-diagramas-actividades] Creación de los diagramas de actividad de los4 flujos principales.  
+  PR: [#92](https://github.com/fioremos/simulador-planificacion-financiera/pull/92) -  @skalapuj (Arquitecto de Diagramas de Actividades)   
+
+- [feature/dev-javascript-logica-negocio] Insercion de logigica en Javascript   
+  PR: [#90](https://github.com/fioremos/simulador-planificacion-financiera/pull/90) - @fioremos (Desarrollador JavaScrip)   
+
+### Changed 
+- [feature/coord-devops-tercera-entrega] Actualización de la documentación del proyecto.
+  PR: []()
+
+### Fixed
+- [feature/hotfix-#70-remover-multiple-main-element] Fix Issue #70   
+  PR: [#83](https://github.com/fioremos/simulador-planificacion-financiera/pull/83) - @fioremos (Desrrolladr JavaScript)
+
+- [feature/hotfix-#80-alt-imagenes] Fix Issue #80    
+  PR: [#84](https://github.com/fioremos/simulador-planificacion-financiera/pull/84) - @fioremos (Desarrollador JavaScript)
+
+- [feature/hotfix-#69-meta-description-added] Fix Issue #69   
+  PR: [#85](https://github.com/fioremos/simulador-planificacion-financiera/pull/85) - @fioremos (Desarrollador JavaScript)
+
+- [feature/docfix-#74-actualizacion-figma] Actualización del mockup en Figma.  
+  PR: [#86](https://github.com/fioremos/simulador-planificacion-financiera/pull/86) - @skalapuj (Arquitecto de Diagramas de Actividades)
+
+- [feature/bugfix-#81-degradacion-rendimiento] Fix de la performace reportada de PageSpeed.  
+  PR: [#87](https://github.com/fioremos/simulador-planificacion-financiera/pull/87) - @skalapuj (Arquitecto de Diagramas de Actividades)  
+
+- [feature/hotfix-#79-error-visualizacion-login] Fix en el scroll de la card de login.  
+  PR: [#88](https://github.com/fioremos/simulador-planificacion-financiera/pull/88) - @skalapuj (Arquitecto de Diagramas de Actividades)  
+
+- [feature/hotfix-#76-#78-imagenes-caidas] Correción de todas las rutas caídas.   
+  PR: [#89](https://github.com/fioremos/simulador-planificacion-financiera/pull/89) - @skalapuj (Arquitecto de Diagramas de Actividades)   
+
+- [feature/hotfix-#68-logo-header-relacion-incorrecta] Fix del logo del header.  
+  PR: [#91](https://github.com/fioremos/simulador-planificacion-financiera/pull/91) - @skalapuj (Arquitecto de Diagramas de Actividades)
+
+- [feature/tester-javascipt-jasmine] Fix de bugs encontrados en el testeo de los flujos.    
+  PR: [#113](https://github.com/fioremos/simulador-planificacion-financiera/pull/113) - @fioremos (Desarrollador JavaScript)
+
+- [feature/coord-devops-hotfix-#71-secciones-sin-encabezados]   
+  PR: [#115](https://github.com/fioremos/simulador-planificacion-financiera/pull/115) - @MNEscobar (Coordinador / DevOps/)  
+
 ## Cómo usar este archivo
 
 - Para cada PR, simplemente agregar una línea breve en la sección correspondiente a su cambio (Added, Changed, Fixed).  

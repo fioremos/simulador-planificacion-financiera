@@ -51,23 +51,33 @@ El diseño preliminar de la aplicación se encuentra disponible en Figma en el s
 
 ---
 
-## ✅ Objetivos de la tercera entrega (24/10/2025)
-Esta tercera entrega tiene como propósito integrar la lógica de negocio fundamental del proyecto mediante el uso de JavaScript, aplicando estructuras de control, funciones, arrays y objetos para simular el comportamiento del sistema. Además, se incorpora el testing automatizado con Jasmine y la documentación de diagramas de actividades en PlantUML, consolidando así la fase de programación funcional antes de la manipulación del DOM.
+## ✅ Objetivos de la primer entrega (5/9/2025)
+Esta entrega tiene como propósito presentar la primera versión del proyecto, estableciendo una base sólida sobre la cual se desarrollará el simulador de planificación financiera. 
+Esta versión inicial establece la base técnica, visual y documental para el desarrollo futuro.
 
 En esta etapa se busca:
-- Implementar la lógica central del simulador o aplicación, utilizando algoritmos condicionales (`if`, `else if`, `switch`) y estructuras de repetición (for, while) para procesar datos y tomar decisiones.
-- Desarrollar funciones modulares, reutilizables y testeables, aplicando principios de responsabilidad única, parámetros y valores de retorno.
-- Integrar arrays y objetos para representar datos y comportamientos relevantes al contexto del proyecto.
-- Implementar cuatro flujos de trabajo principales, cada uno con estructura: **entrada → proceso → salida**, ejecutables desde un menú principal mediante `prompt()`.
-- Garantizar la validez y coherencia de las entradas del usuario, mostrando los resultados con `alert()` y/o `console.log()`.
-- Documentar y representar los flujos desarrollados mediante diagramas de actividades en **PlantUML**, incluyendo decisiones, ciclos y particiones de responsabilidad (usuario/sistema).
-- Incorporar una suite de testing automatizado con **Jasmine**, validando la funcionalidad de los flujos principales mediante casos de prueba de éxito, casos borde, validaciones de error y operaciones con arrays y objetos.
-- Documentar el proceso de testing en `js/test/testing-doc.md`, detallando la ejecución de pruebas, cobertura y resultados.
-- Mantener actualizado el repositorio con ramas organizadas por feature, commits individuales por rol, y gestión de tareas mediante Issues.
-- Asegurar la integración controlada de ramas hacia develop y la publicación de una release formal `(v1.1-tercera-entrega)` en GitHub con `changelog` y enlaces relevantes.
-- Actualizar el `README.md` con la descripción de la entrega, las tecnologías utilizadas y los enlaces a la documentación generada (diagramas, testing y mockups).
+- Definir y estructurar el repositorio inicial del proyecto.
+- Desarrollar una primera versión de la página web utilizando HTML5.
+- Documentar el proyecto en un archivo `README.md`, incluyendo una descripción general, objetivos, tecnologías utilizadas y funcionalidades previstas.
+- Diseñar un mockup preliminar que represente la visión visual del producto final, ubicado en `docs/01-mockup/mockup.png` y referenciado en el README.
+- Documentar al menos cinco prompts de inteligencia artificial utilizados durante esta fase, almacenados en `docs/02-prompts/`.
 
-El resultado esperado es un proyecto funcional y estructurado, con la lógica de negocio completamente implementada en `JavaScript`, respaldada por diagramas, pruebas automatizadas y documentación técnica coherente con las buenas prácticas de desarrollo colaborativo.
+El resultado esperado es un repositorio bien organizado en GitHub, con una estructura clara de ramas, una página inicial funcional, un diseño visual representativo del producto y documentación completa del proceso y las herramientas utilizadas.
+
+---
+
+## ✅ Objetivos de la segunda entrega (26/9/2025)  
+Esta segunda entrega tiene como propósito mejorar el diseño visual y estructural de la página web, estableciendo las bases de estilos CSS y diseño responsive que servirán como punto de partida para futuras funcionalidades.
+
+En esta etapa se busca: 
+- Implementar hojas de estilo en cascada (CSS3) para mejorar la legibilidad, la estética y la organización del contenido.  
+- Aplicar selectores, herencia y box model para estructurar el diseño con buenas prácticas.  
+- Diseñar layouts responsive mediante flexbox, grid y media queries, asegurando la correcta visualización en dispositivos móviles, tablets y escritorio.  
+- Actualizar y documentar los mockups que reflejan los cambios aplicados al diseño.  
+- Implementar un plan de testing cross-browser y responsive, utilizando herramientas profesionales y documentando los resultados en la carpeta `/docs/03-testing/`.  
+- Mantener actualizado el `README.md`, el `changelog.md` y la estructura del repositorio en GitHub.  
+
+El resultado esperado es un repositorio organizado, con estilos aplicados al diseño base, documentación técnica clara y pruebas que validen la correcta visualización en múltiples dispositivos y navegadores.
 
 ---
 
@@ -97,33 +107,23 @@ El resultado esperado es un repositorio unificado y limpio, con una versión nav
 
 ---
 
-## ✅ Objetivos de la segunda entrega (26/9/2025)  
-Esta segunda entrega tiene como propósito mejorar el diseño visual y estructural de la página web, estableciendo las bases de estilos CSS y diseño responsive que servirán como punto de partida para futuras funcionalidades.
-
-En esta etapa se busca: 
-- Implementar hojas de estilo en cascada (CSS3) para mejorar la legibilidad, la estética y la organización del contenido.  
-- Aplicar selectores, herencia y box model para estructurar el diseño con buenas prácticas.  
-- Diseñar layouts responsive mediante flexbox, grid y media queries, asegurando la correcta visualización en dispositivos móviles, tablets y escritorio.  
-- Actualizar y documentar los mockups que reflejan los cambios aplicados al diseño.  
-- Implementar un plan de testing cross-browser y responsive, utilizando herramientas profesionales y documentando los resultados en la carpeta `/docs/03-testing/`.  
-- Mantener actualizado el `README.md`, el `changelog.md` y la estructura del repositorio en GitHub.  
-
-El resultado esperado es un repositorio organizado, con estilos aplicados al diseño base, documentación técnica clara y pruebas que validen la correcta visualización en múltiples dispositivos y navegadores.
-
----
-
-## ✅ Objetivos de la primer entrega (5/9/2025)
-Esta entrega tiene como propósito presentar la primera versión del proyecto, estableciendo una base sólida sobre la cual se desarrollará el simulador de planificación financiera. 
-Esta versión inicial establece la base técnica, visual y documental para el desarrollo futuro.
+## ✅ Objetivos de la tercera entrega (24/10/2025)
+Esta tercera entrega tiene como propósito integrar la lógica de negocio fundamental del proyecto mediante el uso de JavaScript, aplicando estructuras de control, funciones, arrays y objetos para simular el comportamiento del sistema. Además, se incorpora el testing automatizado con Jasmine y la documentación de diagramas de actividades en PlantUML, consolidando así la fase de programación funcional antes de la manipulación del DOM.
 
 En esta etapa se busca:
-- Definir y estructurar el repositorio inicial del proyecto.
-- Desarrollar una primera versión de la página web utilizando HTML5.
-- Documentar el proyecto en un archivo `README.md`, incluyendo una descripción general, objetivos, tecnologías utilizadas y funcionalidades previstas.
-- Diseñar un mockup preliminar que represente la visión visual del producto final, ubicado en `docs/01-mockup/mockup.png` y referenciado en el README.
-- Documentar al menos cinco prompts de inteligencia artificial utilizados durante esta fase, almacenados en `docs/02-prompts/`.
+- Implementar la lógica central del simulador o aplicación, utilizando algoritmos condicionales (`if`, `else if`, `switch`) y estructuras de repetición (for, while) para procesar datos y tomar decisiones.
+- Desarrollar funciones modulares, reutilizables y testeables, aplicando principios de responsabilidad única, parámetros y valores de retorno.
+- Integrar arrays y objetos para representar datos y comportamientos relevantes al contexto del proyecto.
+- Implementar cuatro flujos de trabajo principales, cada uno con estructura: **entrada → proceso → salida**, ejecutables desde un menú principal mediante `prompt()`.
+- Garantizar la validez y coherencia de las entradas del usuario, mostrando los resultados con `alert()` y/o `console.log()`.
+- Documentar y representar los flujos desarrollados mediante diagramas de actividades en **PlantUML**, incluyendo decisiones, ciclos y particiones de responsabilidad (usuario/sistema).
+- Incorporar una suite de testing automatizado con **Jasmine**, validando la funcionalidad de los flujos principales mediante casos de prueba de éxito, casos borde, validaciones de error y operaciones con arrays y objetos.
+- Documentar el proceso de testing en `js/test/testing-doc.md`, detallando la ejecución de pruebas, cobertura y resultados.
+- Mantener actualizado el repositorio con ramas organizadas por feature, commits individuales por rol, y gestión de tareas mediante Issues.
+- Asegurar la integración controlada de ramas hacia develop y la publicación de una release formal `(v1.1-tercera-entrega)` en GitHub con `changelog` y enlaces relevantes.
+- Actualizar el `README.md` con la descripción de la entrega, las tecnologías utilizadas y los enlaces a la documentación generada (diagramas, testing y mockups).
 
-El resultado esperado es un repositorio bien organizado en GitHub, con una estructura clara de ramas, una página inicial funcional, un diseño visual representativo del producto y documentación completa del proceso y las herramientas utilizadas.
+El resultado esperado es un proyecto funcional y estructurado, con la lógica de negocio completamente implementada en `JavaScript`, respaldada por diagramas, pruebas automatizadas y documentación técnica coherente con las buenas prácticas de desarrollo colaborativo.
 
 ---
 
@@ -131,13 +131,18 @@ El resultado esperado es un repositorio bien organizado en GitHub, con una estru
 - **HTML5** (estructura inicial).  
 - **CSS3** (maquetación principal, estilos de componentes y diseño responsive).  
 - **Bootstrap** (framework para diseño responsive y componentes reutilizables).
-- **JavaScript** (lógica e interactividad — pequeña implementación para navegar entre los apartados).  
+- **JavaScript** implementación de la lógica de negocio mediante:    
+  - Algoritmos condicionales y estructuras de control (`if`, `else if`, `switch`, `for`, `while`).
+  - Funciones modulares con parámetros y valores de retorno.
+  - Simulación de flujos de trabajo interactivos mediante prompt(), alert() y console.log().
+- **PlantUML** (creación de diagramas de actividades que documentan los flujos principales del sistema).  
 - **Git / GitHub** (control de versiones).  
 - **Herramientas de Testing**  
   - **BrowserStack** (compatibilidad cross-browser y mobile).  
   - **Lighthouse / PageSpeed Insights** (performance y accesibilidad).  
   - **WAVE / axe DevTools** (testing de accesibilidad).  
-  - **LambdaTest / CSS Validator / HTML Validator** (validación multiplataforma y de estándares).  
+  - **LambdaTest / CSS Validator / HTML Validator** (validación multiplataforma y de estándares). 
+  - **Jasmine** (framework de testing automatizado en navegador, utilizado para validar funciones, cálculos y operaciones con datos). 
 - **Slack** (comunicación y notificación de entregas).  
 - (Opcional futuras integraciones) OAuth (Google), bibliotecas de gráficos (Chart.js o Recharts).
 
@@ -150,6 +155,8 @@ El resultado esperado es un repositorio bien organizado en GitHub, con una estru
 - 🖼️ [Mockup diseño con bootstrap mobile](docs/01-mockup/disenio-bootstrap-mb.png)
 - 🗂️ [Índice de Prompts](docs/02-prompts/prompts.md)
 - 🧪 [Índice de Test Cases](docs/03-testing/testing-doc.md)
+- 📊 [Índice de Diagramas de Actividades](docs/04-diagramas/diagramas-doc.md)
+- 🧪 [Índice de Test Cases(Jasmine)](js/test/testing-doc.md)
 - 📜 [Changelog](changelog.md)
 
 ---
