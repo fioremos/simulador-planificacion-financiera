@@ -4,6 +4,25 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 
 ---
 
+## [Unreleased]
+
+### Added
+- [nombre-de-la-branch] Descripción breve de la tarea realizada.
+  PR: #1 — @usuario1 (rol asignado)
+
+### Changed
+- [nombre-de-la-branch] Descripción breve de la tarea realizada.
+  PR: #2 — @usuario2 (rol asignado)
+
+- [nombre-de-la-branch] Descripción breve de la tarea realizada.
+  PR: #3 — @usuario3 (rol asignado)
+
+### Fixed
+- [nombre-de-la-branch] Descripción breve de la tarea realizada.
+  PR: #4 — @usuario4 (rol asignado)
+
+---
+
 ## [Release Actividad Obligatoria N°1] - 2025-08-10
 
 ### Added
