@@ -106,9 +106,9 @@
 | Métrica | Valor |
 |---------|-------|
 | Total de Tests      |93 |
-| Tests Pasando       |93 ✅ |
-| Tests Fallando      |0 ❌ |
-| Porcentaje de Éxito |100% |
+| Tests Pasando       |78 ✅ |
+| Tests Fallando      |15 ❌ |
+| Porcentaje de Éxito |84% |
 
 ### Cobertura por Tipo de Test
 | Tipo                       | Cantidad | Porcentaje |
@@ -160,13 +160,13 @@ Ej:
 ## Capturas de Pantalla
 
 ### Tests Pasando
-![Tests Exitosos](./screenshots/tests-passing.jpg)  
+![Tests Exitosos](screenshots/tests-passing.png)  
 
 ### Vista Detallada de Suites
-![Suite Detalle 1](./screenshots/suite-detail-1.jpg)  
-![Suite Detalle 2](./screenshots/suite-detail-2.jpg)  
-![Suite Detalle 3](./screenshots/suite-detail-3.jpg)  
-![Suite Detalle 4](./screenshots/suite-detail-4.jpg)  
+![Suite Detalle 1](screenshots/suite-detail-1.png)  
+![Suite Detalle 2](screenshots/suite-detail-2.png) 
+![Suite Detalle 3](screenshots/suite-detail-3.png) 
+![Suite Detalle 4](screenshots/suite-detail-4.png)  
 
 ---
 
@@ -194,7 +194,7 @@ Ej:
   });
   ```
 - **GitHub Issue:** [#93](https://github.com/fioremos/simulador-planificacion-financiera/issues/93)
-- **Estado:** Cerrado
+- **Estado:** Abierto
 
 ### Issue #94: Validación del monto (no numérico) en Metas de Ahorro
 - **Severidad:** Alta
@@ -218,7 +218,7 @@ Ej:
   });
   ```
 - **GitHub Issue:** [#94](https://github.com/fioremos/simulador-planificacion-financiera/issues/94)
-- **Estado:** Cerrado
+- **Estado:** Abierto
 
 ### Issue #95: Validación del monto (con espacios) en Metas de Ahorro
 - **Severidad:** Alta
@@ -242,7 +242,7 @@ Ej:
   });
   ```
 - **GitHub Issue:** [#95](https://github.com/fioremos/simulador-planificacion-financiera/issues/95)
-- **Estado:** Cerrado
+- **Estado:** Abierto
 
 ### Issue #96: Validación de fecha futura (formato incorrecto) en Metas de Ahorro
 - **Severidad:** Alta
@@ -265,7 +265,7 @@ Ej:
   });
   ```
 - **GitHub Issue:** [#96](https://github.com/fioremos/simulador-planificacion-financiera/issues/96)
-- **Estado:** Cerrado
+- **Estado:** Abierto
 
 ### Issue #97: Validación de fecha (formato incorrecto) en Agregar Movimiento
 - **Severidad:** Alta
@@ -288,7 +288,7 @@ Ej:
   });
   ```
 - **GitHub Issue:** [#97](https://github.com/fioremos/simulador-planificacion-financiera/issues/97)
-- **Estado:** Cerrado
+- **Estado:** Abierto
 
 ### Issue #98: Validación de Tipos (mayúscula) en Agregar Movimiento
 - **Severidad:** Alta
@@ -310,7 +310,7 @@ Ej:
   });
   ```
 - **GitHub Issue:** [#98](https://github.com/fioremos/simulador-planificacion-financiera/issues/98)
-- **Estado:** Cerrado
+- **Estado:** Abierto
 
 ### Issue #99: Validación de Tipos (minúscula) en Agregar Movimiento
 - **Severidad:** Alta
@@ -332,7 +332,7 @@ Ej:
   });
   ```
 - **GitHub Issue:** [#99](https://github.com/fioremos/simulador-planificacion-financiera/issues/90)
-- **Estado:** Cerrado
+- **Estado:** Abierto
 
 ### Issue #100: Validación de Categorías (mayúscula) en Agregar Movimiento
 - **Severidad:** Alta
@@ -354,7 +354,7 @@ Ej:
   });
   ```
 - **GitHub Issue:** [#100](https://github.com/fioremos/simulador-planificacion-financiera/issues/100)
-- **Estado:** Cerrado
+- **Estado:** Abierto
 
 ### Issue #101: Validación de Categorías (minúscula) en Agregar Movimiento
 - **Severidad:** Alta
@@ -376,7 +376,7 @@ Ej:
   });
   ```
 - **GitHub Issue:** [#101](https://github.com/fioremos/simulador-planificacion-financiera/issues/101)
-- **Estado:** Cerrado
+- **Estado:** Abierto
 
 ### Issue #102: Validación de tipos de datos disponibles (mayúscula) en Exportar Datos
 - **Severidad:** Alta
@@ -406,7 +406,7 @@ Ej:
     });
   ```
 - **GitHub Issue:** [#102](https://github.com/fioremos/simulador-planificacion-financiera/issues/102)
-- **Estado:** Cerrado
+- **Estado:** Abierto
 
 ### Issue #103: Validación de tipos de datos disponibles (minúscula) en Exportar Datos
 - **Severidad:** Alta
@@ -436,7 +436,7 @@ Ej:
     });
   ```
 - **GitHub Issue:** [#103](https://github.com/fioremos/simulador-planificacion-financiera/issues/103)
-- **Estado:** Cerrado
+- **Estado:** Abierto
 
 ### Issue #104: Validación de un tipo de dato disponible y otro incorrecto (Metas, Hogar) en Exportar Datos
 - **Severidad:** Alta
@@ -469,7 +469,7 @@ Ej:
   });
   ```
 - **GitHub Issue:** [#104](https://github.com/fioremos/simulador-planificacion-financiera/issues/104)
-- **Estado:** Cerrado
+- **Estado:** Abierto
 
 ### Issue #105: Validación de un tipo de dato incorrecto y otro disponible (Hogar, Metas) en Exportar Datos
 - **Severidad:** Alta
@@ -502,7 +502,7 @@ Ej:
   });
   ```
 - **GitHub Issue:** [#105](https://github.com/fioremos/simulador-planificacion-financiera/issues/105)
-- **Estado:** Cerrado
+- **Estado:** Abierto
 
 ### Issue #106: Validación del nombre del archivo con extensión (reporte.pdf) en Exportar Datos
 - **Severidad:** Alta
@@ -524,7 +524,7 @@ Ej:
   });
   ```
 - **GitHub Issue:** [#106](https://github.com/fioremos/simulador-planificacion-financiera/issues/106)
-- **Estado:** Cerrado
+- **Estado:** Abierto
 
 ### Issue #109: Validación de fecha 'desde' (formato incorrecto) en Reporte Financiero.
 - **Severidad:** Alta
@@ -549,7 +549,7 @@ Ej:
   });
   ```
 - **GitHub Issue:** [#109](https://github.com/fioremos/simulador-planificacion-financiera/issues/109)
-- **Estado:** Cerrado
+- **Estado:** Abierto
 
 ### Issue #110: Validación de Categorías válidas (mayúscula) en Reporte Financiero.
 - **Severidad:** Alta
@@ -574,7 +574,7 @@ Ej:
   });
   ```
 - **GitHub Issue:** [#110](https://github.com/fioremos/simulador-planificacion-financiera/issues/110)
-- **Estado:** Cerrado
+- **Estado:** Abierto
 
 ### Issue #111: Validación de Categorías válidas (minúscula) en Reporte Financiero.
 - **Severidad:** Alta
@@ -599,7 +599,7 @@ Ej:
   });
   ```
 - **GitHub Issue:** [#111](https://github.com/fioremos/simulador-planificacion-financiera/issues/111)
-- **Estado:** Cerrado
+- **Estado:** Abierto
 
 ### Issue #112: Manejo de decimales en montos (porcentajeAhorro) en Reporte Financiero.
 - **Severidad:** Alta
@@ -626,7 +626,7 @@ Ej:
   });
   ```
 - **GitHub Issue:** [#112](https://github.com/fioremos/simulador-planificacion-financiera/issues/112)
-- **Estado:** Cerrado
+- **Estado:** Abierto
 ---
 
 ## Limitaciones del Testing

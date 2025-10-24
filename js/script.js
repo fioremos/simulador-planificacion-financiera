@@ -13,12 +13,9 @@
  * @returns {boolean}
  */
 function esFechaValida(fechaStr) {
-    const regexFecha = /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/;
-    if (!regexFecha.test(fechaStr)) { return false; }
-
     const fecha = new Date(fechaStr);
     const hoy = new Date();
-    
+
     // Limpiar la hora
     fecha.setHours(0, 0, 0, 0);
     hoy.setHours(0, 0, 0, 0);
@@ -33,8 +30,8 @@ function esFechaValida(fechaStr) {
  * @returns {boolean} Retorna `true` si el tipo es uno de los valores permitidos, de lo contrario `false`.
  */
 function esTipoValido(tipo) {
-    const tiposValidos = ['ingreso', 'ahorro', 'inversión', 'gasto'];
-    return tiposValidos.includes(tipo.trim().toLowerCase());
+    const tiposValidos = ['Ingreso', 'Ahorro', 'Inversión', 'Gasto'];
+    return tiposValidos.includes(tipo.trim());
 }
 
 /**
@@ -44,8 +41,8 @@ function esTipoValido(tipo) {
  * @returns {boolean} Retorna `true` si la categoría es una de las permitidas, de lo contrario `false`.
  */
 function esCategoriaValida(categoria) {
-    const categoriasValidas = ['hogar', 'ocio', 'salud', 'sueldo', 'objetivos', 'otros'];
-    return categoriasValidas.includes(categoria.trim().toLowerCase());
+    const categoriasValidas = ['Hogar', 'Ocio', 'Salud', 'Sueldo', 'Objetivos', 'Otros'];
+    return categoriasValidas.includes(categoria.trim());
 }
 
 /**
@@ -165,16 +162,10 @@ function esNombreValido(nombre) {
  */
 function esFechaFuturaValida(fechaStr) {
     if (!fechaStr || fechaStr.trim() === '') return true;
-    
-    const regexFecha = /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/;
-    if (!regexFecha.test(fechaStr)) { return false; }
-
     const fecha = new Date(fechaStr);
     const hoy = new Date();
-    
     fecha.setHours(0, 0, 0, 0);
     hoy.setHours(0, 0, 0, 0);
-
     return fecha > hoy;
 }
 
@@ -189,7 +180,7 @@ function pedirMeta() {
     const monto = parseFloat(montoStr);
 
     // Validaciones
-    if (isNaN(monto) || monto <= 0 || montoStr.includes(' ')) {
+    if (monto <= 0) {
         alert("Monto inválido. Debe ser un número mayor a 0.");
         return null;
     }
@@ -281,8 +272,8 @@ function metasAhorroFlow() {
  * @param {string[]} datosSeleccionados
  * @returns {boolean}
  */
-function hayDatosSeleccionados(datosSeleccionados, seleccion) {
-    return Array.isArray(datosSeleccionados) && datosSeleccionados.length > 0 && seleccion.length === datosSeleccionados.length;
+function hayDatosSeleccionados(datosSeleccionados) {
+    return Array.isArray(datosSeleccionados) && datosSeleccionados.length > 0;
 }
 
 /**
@@ -302,7 +293,7 @@ function esFormatoValido(formato) {
  * @returns {boolean}
  */
 function sonNombreYRutaValidos(nombre, ruta) {
-    return nombre.trim() !== '' && ruta.trim() !== '' && !nombre.includes(".");
+    return nombre.trim() !== '' && ruta.trim() !== '';
 }
 
 /**
@@ -331,14 +322,14 @@ function exportarDatosFlow() {
 
     do {
         //Selección de tipos de datos
-        const tiposDisponibles = ['movimientos', 'metas', 'presupuesto', 'historial'];
+        const tiposDisponibles = ['Movimientos', 'Metas', 'Presupuesto', 'Historial'];
         const seleccion = prompt(`¿Qué datos desea exportar? (separe con coma)\nOpciones:\n${tiposDisponibles.join(', ')}`);
         const tiposSeleccionados = seleccion
-            ? seleccion.split(',').map(e => e.trim()).filter(e => tiposDisponibles.includes(e.toLowerCase()))
+            ? seleccion.split(',').map(e => e.trim()).filter(e => tiposDisponibles.includes(e))
             : [];
 
-        if (!hayDatosSeleccionados(tiposSeleccionados, seleccion.split(','))) {
-            alert('Debe seleccionar tipos de dato válidos.');
+        if (!hayDatosSeleccionados(tiposSeleccionados)) {
+            alert('Debe seleccionar al menos un tipo de dato válido.');
             continue;
         }
 
