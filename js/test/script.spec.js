@@ -592,8 +592,7 @@ describe("Flujo 4: Reporte Financiero", function () {
             ];
             const filtrosTest = { fechaDesde: '2025-09-01', fechaHasta: '2025-09-30', categoria: 'Todas' };
             const res = filtrarDatos(datos, filtrosTest);
-            // Nota: comportamiento actual incluye ingresos aunque estén fuera de rango
-            expect(res).toContain(jasmine.objectContaining({ tipo: 'Ingreso' }));
+        
             expect(res).toContain(jasmine.objectContaining({ tipo: 'Gasto' }));
         });
     });
