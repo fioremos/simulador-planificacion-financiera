@@ -32,7 +32,11 @@ repeat
     fork
       :Agrupar datos por categoría y fecha;
     fork again
-      :Calcular totales e indicadores clave (saldo promedio, % ahorro);
+      :Calcular totales e indicadores clave;
+      note right
+        - Saldo promedio
+        - Porcentaje de ahorro
+      end note
     fork again
       :Generar gráfico de ingresos vs egresos;
     fork again

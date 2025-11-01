@@ -23,71 +23,6 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 
 ---
 
-## [Release Actividad Obligatoria N°1] - 2025-08-10
-
-### Added
-- [feature/coordinador-setup-repo-and-pages] Estructura inicial del proyecto.  
-  PR: [#1](https://github.com/fioremos/simulador-planificacion-financiera/pull/2) - @fioremos (Coordinador / DevOps)
-
-- [feature/ia-add-prompts-1-to-5] Documentación de 5 prompts de IA.  
-  PR: [#4](https://github.com/fioremos/simulador-planificacion-financiera/pull/4) - @ulisesc11 (Especialista en IA)
-
-### Changed
-- [feature/readme-y-mockup] Creación de README.md y diseño de mockup inicial en Figma (docs/01-mockup/).  
-  PR: [#3](https://github.com/fioremos/simulador-planificacion-financiera/pull/5) - @skalapuj (Documentador / Diseñador UX)
-
-- [feature/index-html] Estructura HTML5 básica.  
-  PR: [#2](https://github.com/fioremos/simulador-planificacion-financiera/pull/3#issue-3367393105) - @MNEscobar (Desarrollador Frontend)
-
----
-
-## [Release Actividad Obligatoria N°2] - 2025-09-26
-
-### Added  
-- [feature/dev-frontend-css-add-styles] Implementa los estilos principales del frontend para implementar el mockup (reset, variables, componentes y layout). 
-  PR: [#9](https://github.com/fioremos/simulador-planificacion-financiera/pull/9) - @skalapuj (Desarrollador Frontend/CSS)  
-
-### Changed  
-- [feature/responsive-design-add-responsive-styles] Implementa adaptabilidad multiplataforma del diseño.  
-  PR: [#10](https://github.com/fioremos/simulador-planificacion-financiera/pull/10) - @fioremos (Especialista en Responsive Design)  
-
-- [feature/doc-qa-tester-add-test-case-1] Realiza control de calidad mediante test case especificos.  
-  PR: [#12](https://github.com/fioremos/simulador-planificacion-financiera/pull/12#issue-3451193443) - @MNEscobar (Documentador / QA Tester)  
-
-### Fixed  
-- [feature/coord-dev-ops-repo-update-readme-md] Actualizar README.md con los nuevos objetivos y tecnologías utilizadas.  
-  PR: [#13](https://github.com/fioremos/simulador-planificacion-financiera/pull/13) - @UlisesC11 (Coordinador / DevOps)  
-
-- [feature/coord-dev-repo-update-readme-md] Se agrego enlace a mockup diseño con css en el README.md.  
-  PR: [#16](https://github.com/fioremos/simulador-planificacion-financiera/pull/16) - @UlisesC11 (Coordinador / DevOps)  
-
-- [feature/UlisesC11-patch-1] Se corrigieron los número de PR correspondientes en el README.md.  
-  PR: [#15](https://github.com/fioremos/simulador-planificacion-financiera/pull/15) - @UlisesC11 (Coordinador / DevOps)  
-
----
-
-## [Release Primer Parcial] - 2025-10-06
-
-### Added  
-- [feature/esp-com-bootstrap-add-component] Integración de dos componentes bootstrap (Offcanvas y Modal)  
-  PR: [#62](https://github.com/fioremos/simulador-planificacion-financiera/pull/62) - @UlisesC11 (Especialista en Componentes Bootstrap)  
-- [feature/dev-comp-html-avanzados-add-componen] Implementación de componentes avanzados HTML.  
-  PR: [#58](https://github.com/fioremos/simulador-planificacion-financiera/pull/58) - @MNEscobar (Desarrollador de Componentes HTML Avanzados)  
-
-### Changed 
-- [feature/dev-frontend-bootstrap-update-migration] Migracion a Bootstrap.  
-  PR: [#59](https://github.com/fioremos/simulador-planificacion-financiera/pull/59) - @fioremos (Desarrollador Frontend/Bootstrap)  
-- [feature/coord-devops-update-doc-project] Actualización de la documentación del proyecto.  
-  PR: [#66](https://github.com/fioremos/simulador-planificacion-financiera/pull/66) -  @skalapuj (Coordinador / DevOps)
-
-### Fixed  
-- [feature/coord-devops-branches-integration] Integración de ramas features a develop.  
-  PR: [#63](https://github.com/fioremos/simulador-planificacion-financiera/pull/63) - @skalapuj (Coordinador / DevOps) 
-- [feature/coord-devops-hotfix-login-card] Fix login card.  
-  PR: [#65](https://github.com/fioremos/simulador-planificacion-financiera/pull/65) - @skalapuj (Coordinador / DevOps) 
-
----
-
 ## [Release Tercera Entrega] - 2025-10-24
 
 ### Added  
@@ -134,6 +69,71 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 
 - [feature/coord-devops-hotfix-#71-secciones-sin-encabezados]   
   PR: [#115](https://github.com/fioremos/simulador-planificacion-financiera/pull/115) - @MNEscobar (Coordinador / DevOps/)  
+  
+---
+
+## [Release Primer Parcial] - 2025-10-06
+
+### Added  
+- [feature/esp-com-bootstrap-add-component] Integración de dos componentes bootstrap (Offcanvas y Modal)  
+  PR: [#62](https://github.com/fioremos/simulador-planificacion-financiera/pull/62) - @UlisesC11 (Especialista en Componentes Bootstrap)  
+- [feature/dev-comp-html-avanzados-add-componen] Implementación de componentes avanzados HTML.  
+  PR: [#58](https://github.com/fioremos/simulador-planificacion-financiera/pull/58) - @MNEscobar (Desarrollador de Componentes HTML Avanzados)  
+
+### Changed 
+- [feature/dev-frontend-bootstrap-update-migration] Migracion a Bootstrap.  
+  PR: [#59](https://github.com/fioremos/simulador-planificacion-financiera/pull/59) - @fioremos (Desarrollador Frontend/Bootstrap)  
+- [feature/coord-devops-update-doc-project] Actualización de la documentación del proyecto.  
+  PR: [#66](https://github.com/fioremos/simulador-planificacion-financiera/pull/66) -  @skalapuj (Coordinador / DevOps)
+
+### Fixed  
+- [feature/coord-devops-branches-integration] Integración de ramas features a develop.  
+  PR: [#63](https://github.com/fioremos/simulador-planificacion-financiera/pull/63) - @skalapuj (Coordinador / DevOps) 
+- [feature/coord-devops-hotfix-login-card] Fix login card.  
+  PR: [#65](https://github.com/fioremos/simulador-planificacion-financiera/pull/65) - @skalapuj (Coordinador / DevOps) 
+
+---
+
+## [Release Actividad Obligatoria N°2] - 2025-09-26
+
+### Added  
+- [feature/dev-frontend-css-add-styles] Implementa los estilos principales del frontend para implementar el mockup (reset, variables, componentes y layout). 
+  PR: [#9](https://github.com/fioremos/simulador-planificacion-financiera/pull/9) - @skalapuj (Desarrollador Frontend/CSS)  
+
+### Changed  
+- [feature/responsive-design-add-responsive-styles] Implementa adaptabilidad multiplataforma del diseño.  
+  PR: [#10](https://github.com/fioremos/simulador-planificacion-financiera/pull/10) - @fioremos (Especialista en Responsive Design)  
+
+- [feature/doc-qa-tester-add-test-case-1] Realiza control de calidad mediante test case especificos.  
+  PR: [#12](https://github.com/fioremos/simulador-planificacion-financiera/pull/12#issue-3451193443) - @MNEscobar (Documentador / QA Tester)  
+
+### Fixed  
+- [feature/coord-dev-ops-repo-update-readme-md] Actualizar README.md con los nuevos objetivos y tecnologías utilizadas.  
+  PR: [#13](https://github.com/fioremos/simulador-planificacion-financiera/pull/13) - @UlisesC11 (Coordinador / DevOps)  
+
+- [feature/coord-dev-repo-update-readme-md] Se agrego enlace a mockup diseño con css en el README.md.  
+  PR: [#16](https://github.com/fioremos/simulador-planificacion-financiera/pull/16) - @UlisesC11 (Coordinador / DevOps)  
+
+- [feature/UlisesC11-patch-1] Se corrigieron los número de PR correspondientes en el README.md.  
+  PR: [#15](https://github.com/fioremos/simulador-planificacion-financiera/pull/15) - @UlisesC11 (Coordinador / DevOps)  
+
+---
+
+## [Release Actividad Obligatoria N°1] - 2025-08-10
+
+### Added
+- [feature/coordinador-setup-repo-and-pages] Estructura inicial del proyecto.  
+  PR: [#1](https://github.com/fioremos/simulador-planificacion-financiera/pull/2) - @fioremos (Coordinador / DevOps)
+
+- [feature/ia-add-prompts-1-to-5] Documentación de 5 prompts de IA.  
+  PR: [#4](https://github.com/fioremos/simulador-planificacion-financiera/pull/4) - @ulisesc11 (Especialista en IA)
+
+### Changed
+- [feature/readme-y-mockup] Creación de README.md y diseño de mockup inicial en Figma (docs/01-mockup/).  
+  PR: [#3](https://github.com/fioremos/simulador-planificacion-financiera/pull/5) - @skalapuj (Documentador / Diseñador UX)
+
+- [feature/index-html] Estructura HTML5 básica.  
+  PR: [#2](https://github.com/fioremos/simulador-planificacion-financiera/pull/3#issue-3367393105) - @MNEscobar (Desarrollador Frontend)
 
 ## Cómo usar este archivo
 

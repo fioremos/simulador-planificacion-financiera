@@ -41,7 +41,13 @@ repeat while (¿Formulario con errores?)
 |Backend|
 :Guardar movimiento en base de datos;
 :Actualizar saldo;
-:Registrar en historial (usuario, fecha, tipo, monto);
+:Registrar en historial;
+note right
+  - Tipo de evento: Creación de movimiento
+  - Usuario que realizó la creación
+  - Fecha y hora de la creación
+  - Monto del movimiento
+end note
 :Notifica al sistema que el movimiento fue agregado;
 
 |Sistema|
