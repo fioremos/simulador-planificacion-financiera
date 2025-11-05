@@ -4,9 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Organiza tus finanzas.">
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
 
@@ -15,112 +17,16 @@
     <link rel="stylesheet" href="css/responsive.css">
    
     <link rel="stylesheet" href="css/bootstrap-overrides.css">
-    <script>    
-        /* ===============================================
-        * Script: Control de Secciones Interactivas
-        * Descripción: Este script permite mostrar u ocultar
-        * secciones específicas según el botón presionado y
-        * garantiza que la pagina cargue en la sección de login.
-        *
-        * NOTA IMPORTANTE:
-        * Este script incluye lógica y estructura pensadas
-        * para facilitar la corrección docente.
-        * Debe ser removido una vez sea funcional la página.
-        * ================================================ */
-        function mostrarSeccion(id) {
-            const secciones = document.querySelectorAll('.principal-section');
-            secciones.forEach(seccion => {
-                seccion.classList.remove('visible');
-                seccion.classList.add('invisible');
-            });
-
-            const activa = document.getElementById(id);
-            if (activa) {
-                activa.classList.remove('invisible');
-                activa.classList.add('visible');
-            }
-
-            // Mostrar u ocultar sidebar y header según la sección
-            const sidebar = document.querySelector('.sidebar');
-            const header = document.getElementById('main-header'); 
-            const principalContainer = document.querySelector('.principal-main');
-
-            const estaEnLogin = id === 'login';
-
-
-            if (sidebar) {
-                sidebar.classList.toggle('d-none', estaEnLogin);
-            }
-
-            if (header) { 
-                header.classList.toggle('d-none', estaEnLogin);
-            }
-
-            if (principalContainer) {
-                principalContainer.classList.toggle('solo-contenido', estaEnLogin);
-            }
-        }
-
-        // A modo de evitar errores reviso la URL 
-        // Cuando el DOM esté completamente cargado
-        document.addEventListener('DOMContentLoaded', () => {
-            // Revisa la URL al cargar
-            let hash = window.location.hash.replace('#', '');
-
-            if (!hash) {
-                hash = 'login';  
-                window.location.hash = hash;
-
-                const url = new URL(window.location);
-                url.searchParams.set('usuario', '');  
-                url.searchParams.set('password', '');  
-                window.history.replaceState({}, '', url);  
-            }
-
-            mostrarSeccion(hash);
-
-            // Delegación de eventos para enlaces de la sidebar
-            document.body.addEventListener('click', function (e) {
-                const enlace = e.target.closest('a[href^="#"]');
-                if (!enlace) return;
-
-                const id = enlace.getAttribute('href').substring(1); // elimina el #
-                const destino = document.getElementById(id);
-
-                if (destino && destino.classList.contains('principal-section')) {
-                    e.preventDefault();
-                    window.location.hash = id;
-                    mostrarSeccion(id);
-                }
-                
-                const offcanvasEl = document.getElementById('sidebarOffcanvas');
-                if (offcanvasEl) {
-                    const offcanvas = bootstrap.Offcanvas.getInstance(offcanvasEl);
-                    if (offcanvas) {
-                        offcanvas.hide();
-                    }
-                }
-
-            });
-
-             // 🔄 Cerrar offcanvas si la ventana cambia de tamaño (ej. rotación)
-            window.addEventListener('resize', () => {
-                const offcanvasEl = document.getElementById('sidebarOffcanvas');
-                if (offcanvasEl && offcanvasEl.classList.contains('show')) {
-                    const offcanvas = bootstrap.Offcanvas.getInstance(offcanvasEl);
-                    if (offcanvas) {
-                        offcanvas.hide();
-                    }
-                }
-            });
-        });
-    </script>
+    <script defer src="js/main.js"></script>
+    <script defer src="js/eventos.js"></script>
+    <script defer src="js/script.js"></script>
     <title>FinGrow</title>
 </head>
 
 <body>
      <!-- HEADER ÚNICO -->
     <header id="main-header" class="header-oculto">
+        <h1 class="visually-hidden">FinGrow - Panel Principal</h1>
         <div class="header-container">
             <div>
                 <button id="menuToggleBtn" class="btn btn-outline-primary d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarOffcanvas" aria-controls="sidebarOffcanvas">
@@ -148,7 +54,7 @@
                     <li><a href="#configuracion" data-section="configuracion"><span class="sidebar-icon"><img src="assets/images/iconos/settings.png" alt="logo_menu_configuracion"> </span> Configuración</a></li>
                 </ul>
             </nav>
-
+            
             <nav>
                 <ul>    
                     <li><a href="#login" data-section="login"><span class="sidebar-icon"><img src="assets/images/iconos/Log_out.png" alt="logo_cerrar_sesion"> </span>  Cerrar Sesión</a></li>
@@ -165,14 +71,14 @@
             <div class="offcanvas-body p-0">
                 <nav>
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item"><a href="#dashboard"><span class="sidebar-icon"><img src="assets/images/iconos/Bar_chart-2.png"></span> Dashboard</a></li>
-                        <li class="list-group-item"><a href="#ingresos-gastos"><span class="sidebar-icon"><img src="assets/images/iconos/Dollar_sign.png"></span> Ingresos y Gastos</a></li>
-                        <li class="list-group-item"><a href="#metas"><span class="sidebar-icon"><img src="assets/images/iconos/Award.png"></span> Metas de ahorro</a></li>
-                        <li class="list-group-item"><a href="#inversiones"><span class="sidebar-icon"><img src="assets/images/iconos/Trending_up.png"></span> Inversiones</a></li>
-                        <li class="list-group-item"><a href="#reportes"><span class="sidebar-icon"><img src="assets/images/iconos/Check_square.png"></span> Reportes y Estadísticas</a></li>
-                        <li class="list-group-item"><a href="#historial"><span class="sidebar-icon"><img src="assets/images/iconos/Compass.png"></span> Historial y Auditoría</a></li>
-                        <li class="list-group-item"><a href="#exportar"><span class="sidebar-icon"><img src="assets/images/iconos/upload.png"></span> Exportación de Datos</a></li>
-                        <li class="list-group-item"><a href="#configuracion"><span class="sidebar-icon"><img src="assets/images/iconos/settings.png"></span> Configuración</a></li>
+                        <li class="list-group-item"><a href="#dashboard"><span class="sidebar-icon"><img src="assets/images/iconos/Bar_chart-2.png" alt="logo_menu_dashboard_mb"></span> Dashboard</a></li>
+                        <li class="list-group-item"><a href="#ingresos-gastos"><span class="sidebar-icon"><img src="assets/images/iconos/Dollar_sign.png" alt="logo_menu_gastos_mb"></span> Ingresos y Gastos</a></li>
+                        <li class="list-group-item"><a href="#metas"><span class="sidebar-icon"><img src="assets/images/iconos/Award.png" alt="logo_menu_metas_mb"></span> Metas de ahorro</a></li>
+                        <li class="list-group-item"><a href="#inversiones"><span class="sidebar-icon"><img src="assets/images/iconos/Trending_up.png" alt="logo_menu_inversiones_mb"></span> Inversiones</a></li>
+                        <li class="list-group-item"><a href="#reportes"><span class="sidebar-icon"><img src="assets/images/iconos/Check_square.png" alt="logo_menu_reportes_mb"></span> Reportes y Estadísticas</a></li>
+                        <li class="list-group-item"><a href="#historial"><span class="sidebar-icon"><img src="assets/images/iconos/Compass.png" alt="logo_menu_historial_mb"></span> Historial y Auditoría</a></li>
+                        <li class="list-group-item"><a href="#exportar"><span class="sidebar-icon"><img src="assets/images/iconos/upload.png" alt="logo_menu_exportar_mb"></span> Exportación de Datos</a></li>
+                        <li class="list-group-item"><a href="#configuracion"><span class="sidebar-icon"><img src="assets/images/iconos/settings.png" alt="logo_menu_configuracion_mb"></span> Configuración</a></li>
                     </ul>
                 </nav>
 
@@ -190,7 +96,7 @@
                 Pantalla inicial de la aplicación. 
                 Solo aquí se muestra el formulario para acceder o registrarse.
             ========================== -->
-        <section id="login" class="principal-section login-section visible justify-content-center align-items-center m-md-5 m-auto">
+        <section id="login" class="principal-section login-section invisible justify-content-center align-items-center mt-md-5 m-auto">
             <div class="card  m-3 m-ms-4 p-3 p-ms-4">
                 <div class="login-logo-container d-flex flex-column align-items-center">
                     <div>
@@ -244,9 +150,9 @@
                 Muestra tarjetas de resumen: ingresos, gastos, ahorro, inversión.
                 Incluye barra de navegación y sidebar lateral.
             ========================== -->
-        <section id="dashboard" class="principal-section invisible">
-            <div class="principal-container">
-                <main class="content">
+        <main class="content">
+            <section id="dashboard" class="principal-section invisible">
+                <div class="principal-container">
                     <section id="resumen-financiero" class="card">
                         <div>
                             <h2 class="subtitle">Resumen financiero</h2>
@@ -262,7 +168,7 @@
                                                     mostrar datos actualizados y personalizados en tiempo real. -->
                                     <div class="container-chart">
                                         <img src="assets/images/dashboard/Grafico.png" class="dashboard-chart"
-                                            alt="Gráfico financiero">
+                                            alt="Gráfico financiero" loading="lazy" >
                                     </div>
 
                                     <div class="card m-3 mt-5 mb-1 p-4 h-auto d-none d-md-block">
@@ -300,7 +206,7 @@
                     <section id="ultimos-movimientos" class="card">
                         <div class="header-table">
                             <div>
-                                <p class="subtitle">Últimos movimientos</p>
+                                <h2 class="subtitle">Últimos movimientos</h2>
                             </div>
                             <!-- Boton que activa el modal -->
                             <button class="btn btn-primary btn-small" data-bs-toggle="modal" data-bs-target="#miModal">
@@ -427,7 +333,7 @@
                     <section id= "video-tutorial" class="card">
                         <div class="padre-flex">
                             <div>
-                                <p class="subtitle">Educación Financiera para Principiantes</p>
+                                <h2 class="subtitle">Educación Financiera para Principiantes</h2>
                             </div>    
                             <div class="video-educacion-container ratio ratio-16x">
                             <video controls class="video-educacion w-100 h-100">
@@ -438,10 +344,8 @@
                             </div>
                         </div>
                     </section>
-
-                </main>
-            </div>
-        </section>
+                </div>
+            </section>
 
         <!-- ==========================
                 SECCIÓN: INGRESOS Y GASTOS
@@ -449,9 +353,8 @@
                 Se listan transacciones con opción a filtrar por fecha o categoría.
                 Incluye barra de navegación y sidebar lateral.
             ========================== -->
-        <section id="ingresos-gastos" class="principal-section invisible">
-            <div class="principal-container">
-                <main class="content">
+            <section id="ingresos-gastos" class="principal-section invisible">
+                <div class="principal-container">
                     <section id="ingresos-gastos-card" class="card">
                         <div>
                             <h2 class="subtitle subtitle-center">Gestión de ingresos y gastos</h2>
@@ -518,7 +421,7 @@
                             <!-- Tabla de movimientos -->
                             <div class="ingresos-gastos-table">
                                 <div class="header-table">
-                                    <p class="subtitle">Movimientos</p>
+                                    <h3 class="subtitle">Movimientos</h3>
                                 </div>
                                 <div clas="">
                                     <!-- Tabla generada de forma estática por ahora. 
@@ -585,9 +488,8 @@
                             </div>
                         </div>
                     </section>
-                </main>
-            </div>
-        </section>
+                </div>
+            </section>
 
         <!-- ==========================
                 SECCIÓN: METAS DE AHORRO
@@ -597,13 +499,12 @@
                 El gráfico es actualmente una imagen estática; en futuras versiones será dinámico con datos en tiempo real.
                 Incluye header superior y sidebar lateral duplicados temporalmente por consistencia con el mockup.
             ========================== -->
-        <section id="metas" class="principal-section invisible">
-            <div class="principal-container">
-                <main class="content">
+            <section id="metas" class="principal-section invisible">
+                <div class="principal-container">
                     <section id="metas-card-table" class="card">
                         <div class="header-table">
                             <div>
-                                <p class="subtitle">Metas de ahorro</p>
+                                <h2 class="subtitle">Metas de ahorro</h2>
                             </div>
                         </div>
                         <!-- Tabla generada de forma estática por ahora. 
@@ -657,7 +558,7 @@
                                                 o bien integrará una solución externa para 
                                                 mostrar datos actualizados y personalizados en tiempo real. -->
                         <div class="container-chart">
-                            <img src="assets/images/metasAhorro/Graph.png" class="metas-chart w-50" alt="Gráfico metas de ahorro">
+                            <img src="assets/images/metasAhorro/Graph.png" class="metas-chart w-50" alt="Gráfico metas de ahorro" loading="lazy">
                         </div>
 
                         <div class="card metas-card-label p-2 text-center">
@@ -668,11 +569,11 @@
                         </div>
 
                         <!-- === PROGRESS COMPONENTE HTML5 AVANZADO === -->
-                         <div class="card progreso-meta">
+                            <div class="card progreso-meta">
                             <label for="meta-ahorro">Progreso hacia la meta:</label>
                             <progress id="meta-ahorro" value="70" max="100">70%</progress>
                             <p class="meta-porcentaje">70% completado</p>
-                         </div>
+                            </div>
 
                         <div class="metas-card-graph-button d-flex justify-content-center">
                             <button class="btn btn-inverse btn-blue small">Seleccionar objetivo</button>
@@ -685,7 +586,7 @@
                         <details>
                             <summary class="large"> 
                                 ¿Cómo empezar a ahorrar?
-                             </summary>
+                                </summary>
                             <p class="medium">Comienza destinando el 10% de tus ingresos mensuales a un fondo separado. Automatiza el ahorro para no olvidarlo.</p>
                         </details>
                         <details>
@@ -695,9 +596,8 @@
                             <p class="medium">Utiliza categorías y revisa tus gastos semanales para identificar patrones. Animo!!</p>
                         </details>
                     </section>
-                </main>
-            </div>
-        </section>
+                </div>
+            </section>
 
         <!-- ==========================
                 SECCIÓN: INVERSIONES
@@ -705,13 +605,12 @@
                 Visualiza rentabilidad, tipo de inversión y contribuciones.
                 Incluye barra de navegación y sidebar lateral.
             ========================== -->
-        <section id="inversiones" class="principal-section invisible">
-            <div class="principal-container">
-                <main class="content">
+            <section id="inversiones" class="principal-section invisible">
+                <div class="principal-container">
                     <section id="inversiones-card-table" class="card">
                         <div class="header-table">
                             <div>
-                                <p class="subtitle">Inversiones</p>
+                                <h2 class="subtitle">Inversiones</h2>
                             </div>
                             <div class="inversiones-card-table-button">
                                 <button class="btn btn-primary btn-small">
@@ -777,9 +676,8 @@
                                 alt="Gráfico metas de ahorro">
                         </div>
                     </section>
-                </main>
-            </div>
-        </section>
+                </div>
+            </section>
 
         <!-- ==========================
                 SECCIÓN: REPORTES Y ESTADÍSTICAS
@@ -787,9 +685,8 @@
                 Permite visualizar datos históricos y actuales.
                 Incluye barra de navegación y sidebar lateral.
             ========================== -->
-        <section id="reportes" class="principal-section invisible">
-            <div class="principal-container">
-                <main class="content">
+            <section id="reportes" class="principal-section invisible">
+                <div class="principal-container">
                     <section id="reportes-estadisticas-container" class="card">
                         <div>
                             <h2 class="subtitle subtitle-center">Reportes y estadística</h2>
@@ -842,7 +739,7 @@
                                     mostrar datos actualizados y personalizados en tiempo real. -->
                             <div class="container-chart">
                                 <img src="assets/images/reportes/graficoReportes.png" class="reportes-chart w-50 h-auto"
-                                    alt="Gráfico metas de ahorro">
+                                    alt="Gráfico metas de ahorro" loading="lazy">
                             </div>
                             <hr>
                         </div>
@@ -858,7 +755,7 @@
                                     <div class="col container">
                                         <div class="row justify-content-center">
                                             <div class="col gastos-list">
-                                                <p>Hogar</p>
+                                                <h4>Hogar</h4>
                                             </div>
                                             <div class="col gastos-bars">
                                                 <div class="bar"></div>
@@ -866,7 +763,7 @@
                                         </div>
                                         <div class="row justify-content-center">
                                             <div class="col gastos-list">
-                                                <p>Alimentación</p>
+                                                <h4>Alimentación</h4>
                                             </div>
                                             <div class="col gastos-bars">
                                                 <div class="bar"></div>
@@ -874,7 +771,7 @@
                                         </div>
                                         <div class="row justify-content-center">
                                             <div class="col gastos-list">
-                                                <p>Transporte</p>
+                                                <h4>Transporte</h4>
                                             </div>
                                             <div class="col gastos-bars">
                                                 <div class="bar"></div>
@@ -882,7 +779,7 @@
                                         </div>
                                         <div class="row justify-content-center">
                                             <div class="col gastos-list">
-                                                <p>Salud</p>
+                                                <h4>Salud</h4>
                                             </div>
                                             <div class="col gastos-bars">
                                                 <div class="bar"></div>
@@ -890,7 +787,7 @@
                                         </div>
                                         <div class="row justify-content-center">
                                             <div class="col gastos-list">
-                                                <p>Ocio</p>
+                                                <h4>Ocio</h4>
                                             </div>
                                             <div class="col gastos-bars">
                                                 <div class="bar"></div>
@@ -898,7 +795,7 @@
                                         </div>
                                         <div class="row justify-content-center">
                                             <div class="col gastos-list">
-                                                <p>Otros</p>
+                                                <h4>Otros</h4>
                                             </div>
                                             <div class="col gastos-bars">
                                                 <div class="bar"></div>
@@ -917,9 +814,8 @@
                             </div>
                         </div>
                     </section>
-                </main>
-            </div>
-        </section>
+                </div>
+            </section>
 
         <!-- ==========================
                 SECCIÓN: HISTORIAL Y AUDITORÍA
@@ -927,9 +823,8 @@
                 Registra acciones como creación, edición o eliminación de datos.
                 Incluye barra de navegación y sidebar lateral.
             ========================== -->
-        <section id="historial" class="principal-section invisible">
-            <div class="principal-container">
-                <main class="content">
+            <section id="historial" class="principal-section invisible">
+                <div class="principal-container">
                     <section id="historial-container" class="card">
                         <div class="historial">
                             <h2 class="subtitle subtitle-center">Historial y Auditoría</h2>
@@ -1022,9 +917,8 @@
                             </button>
                         </div>
                     </section>
-                </main>
-            </div>
-        </section>
+                </div>
+            </section>
 
         <!-- ==========================
                 SECCIÓN: EXPORTACIÓN DE DATOS
@@ -1032,9 +926,8 @@
                 Permite seleccionar ubicación y nombre del archivo.
                 Incluye barra de navegación y sidebar lateral.
             ========================== -->
-        <section id="exportar" class="principal-section invisible">
-            <div class="principal-container">
-                <main class="content">
+            <section id="exportar" class="principal-section invisible">
+                <div class="principal-container">
                     <section id="exportar-container" class="card">
                         <div>
                             <h2 class="subtitle subtitle-center">Exportación de Datos</h2>
@@ -1124,9 +1017,8 @@
                                 </button>
                             </div>
                     </section>
-                </main>
-            </div>
-        </section>
+                </div>
+            </section>
 
         <!-- ==========================
                 SECCIÓN: CONFIGURACIÓN
@@ -1136,9 +1028,8 @@
                 Componentes como el header y sidebar están duplicados temporalmente por consistencia 
                 con el mockup, pero se planea unificarlos como componentes reutilizables.
             ========================== -->
-        <section id="configuracion" class="principal-section invisible">
-            <div class="principal-container">
-                <main class="content">
+            <section id="configuracion" class="principal-section invisible">
+                <div class="principal-container">
                     <section id="configuracion-container" class="card">
                         <div>
                             <h2 class="subtitle subtitle-center">Configuración de Usuario</h2>
@@ -1245,9 +1136,9 @@
                             <button class="btn btn-primary">Guardar</button>
                         </div>
                     </section>
-                </main>
-            </div>
-        </section>
+                </div>
+            </section>
+        </main>
     </div>  
         
     <!-- ==========================

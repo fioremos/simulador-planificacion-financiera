@@ -1,0 +1,67 @@
+@startuml exportar_datos_detallado
+title Flujo: Exportar Datos (CSV / PDF / JSON)
+
+|Usuario|
+start
+
+|Sistema|
+  repeat
+  :Mostrar pantalla "Exportar datos";
+    note right
+      - Checkboxes con tipos de datos a exportar
+      - Selector de formato (CSV / PDF / JSON)
+      - Input "Nombre del archivo a exportar"
+      - Input "Ruta del directorio a exportar"
+      - Botón "Exportar"
+    end note
+
+  |Usuario|
+  :Selecciona elementos a exportar;
+  :Elige el formato deseado;
+  :Rellena el nombre y la ruta del archivo;
+  :Hace clic en "Exportar";
+
+  |Sistema|
+    if (¿Se seleccionó al menos un tipo de dato a exportar?) then (no)
+      :Mostrar error "Se debe seleccionar al menos un tipo de dato a exportar";
+    elseif (¿Se seleccionó un formato para la exportación?) then (no)
+      :Mostrar error "Se debe seleccionar un formato para la exportación";
+    elseif (¿Nombre y ruta del archivo completos?) then (no)
+      :Mostrar error "El nombre y la ruta del archivo son obligatorios";
+    else
+      break
+    endif
+
+  repeat while (¿Formulario con errores?)
+  :Enviar solicitud de exportación al backend con tipo de formato;
+
+|Backend|
+:Buscar los datos de la solicitud de exportación;
+
+if (Formato = CSV) then (sí)
+  :Generar archivo CSV;
+elseif (Formato = PDF) then (sí)
+  :Generar archivo PDF;
+else
+  :Generar archivo JSON;
+endif
+
+:Registrar evento en historial;
+note right
+  - Tipo de evento: Exportación de datos
+  - Usuario que realizó la exportación
+  - Fecha y hora de la exportación
+end note
+:Enviar archivo al sistema;
+
+|Sistema|
+:Iniciar descarga automática con nombre y en la ruta indicada;
+
+if (¿Completó la descarga?) then (No)
+  :Mostrar mensaje de error específico;
+else (Sí)
+  :Mostrar mensaje "Exportación exitosa";
+endif
+
+stop
+@enduml
