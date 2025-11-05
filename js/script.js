@@ -1,11 +1,16 @@
 /**
  * Representa un movimiento financiero
  * @typedef {Object} Movimiento
- * @property {string} fecha
  * @property {string} tipo
  * @property {string} categoria
+ * @property {string} fecha
  * @property {number} monto
  */
+
+/** 
+ * Variable global que simula una base de datos local de movimientos
+ */
+const movimientos = [];
 
 /**
  * Valida si una cadena es una fecha válida en el pasado
@@ -81,14 +86,35 @@ function pedirDatosMovimiento() {
  * @param {Movimiento} movimiento
  */
 function guardarMovimiento(movimiento) {
+    // Guardamos el movimiento en nuestro array
+    movimientos.push(movimiento);
+
+    // Simulamos acciones del backend
     console.log('Enviando al backend:', movimiento);
 
-    // Simular acciones del backend
-    console.log('Movimiento guardado en base de datos');
-    console.log('Saldo actualizado');
-    console.log('Historial actualizado');
+   // Actualizamos el saldo (sumando o restando según el tipo de movimiento)
+    const saldo = calcularSaldo();
+    console.log('Saldo actualizado:', saldo);
+
+    // Mostramos el historial de movimientos
+    console.log('Historial de movimientos:', movimientos);
 
     alert('Movimiento agregado con éxito');
+}
+
+/**
+ * Calcula el saldo sumando todos los movimientos
+ */
+function calcularSaldo() {
+    let saldo = 0;
+    for (const mov of movimientos) {
+        if (mov.tipo.toLowerCase() === 'ingreso') {
+            saldo += mov.monto;
+        } else if (mov.tipo.toLowerCase() === 'gasto' || mov.tipo.toLowerCase() === 'ahorro' || mov.tipo.toLowerCase() === 'inversión') {
+            saldo -= mov.monto;
+        }
+    }
+    return saldo;
 }
 
 /**
@@ -407,9 +433,8 @@ function filtrarDatos(datos, filtros) {
     return datos.filter(d => {
         const fecha = new Date(d.fecha);
         const enRango = fecha >= desde && fecha <= hasta;
-        const categoriaCoincide = filtros.categoria === 'Todas' || d.categoria === filtros.categoria;
-        const esIngreso = d.tipo === 'Ingreso';
-        return enRango && categoriaCoincide || esIngreso;
+        const categoriaCoincide = filtros.categoria.toLowerCase() === 'todas' || d.categoria === filtros.categoria;
+        return enRango && categoriaCoincide;
     });
 }
 
@@ -419,9 +444,9 @@ function filtrarDatos(datos, filtros) {
  * @returns {filtros}
  */
 function calcularIndicadores(datos) {
-    const ingresos = datos.filter(d => d.tipo === 'Ingreso').reduce((acc, cur) => acc + cur.monto, 0);
-    const gastos = datos.filter(d => d.tipo === 'Gasto').reduce((acc, cur) => acc + cur.monto, 0);
-    const ahorro = datos.filter(d => d.tipo === 'Ahorro').reduce((acc, cur) => acc + cur.monto, 0);
+    const ingresos = datos.filter(d => d.tipo.toLowerCase() === 'ingreso').reduce((acc, cur) => acc + cur.monto, 0);
+    const gastos = datos.filter(d => d.tipo.toLowerCase() === 'gasto').reduce((acc, cur) => acc + cur.monto, 0);
+    const ahorro = datos.filter(d => d.tipo.toLowerCase() === 'ahorro').reduce((acc, cur) => acc + cur.monto, 0);
     const saldo = ingresos - gastos;
     const porcentajeAhorro = ingresos > 0 ? (ahorro / ingresos) * 100 : 0;
 
@@ -469,8 +494,8 @@ Saldo promedio: $${indicadores.saldo}
  * @returns {boolean} Devuelve `true` si la categoría es válida, de lo contrario `false`.
  */
 function categoriaValida(categoria) {
-    const categorias = ["Todas", "Ocio", "Hogar", "Salud", "Objetivos"]
-    return categorias.includes(categoria);
+    const categorias = ["todas", "ocio", "hogar", "salud", "objetivos"]
+    return categorias.includes(categoria.toLowerCase());
 }
 
 /**
@@ -520,7 +545,7 @@ Filtros por defecto aplicados:
     let seguir = true;
 
     while (seguir) {
-        const datosFiltrados = filtrarDatos(datosFinancieros, filtros);
+        const datosFiltrados = filtrarDatos(datosFinancieros.concat(movimientos), filtros);
         mostrarReporte(datosFiltrados);
 
         const cambiar = prompt('¿Desea cambiar los filtros? (sí / no)').toLowerCase();
@@ -572,4 +597,4 @@ function menuDesplegable() {
     }
 }
 
-menuDesplegable()
+menuDesplegable();

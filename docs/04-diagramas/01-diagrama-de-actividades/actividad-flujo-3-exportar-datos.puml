@@ -46,7 +46,12 @@ else
   :Generar archivo JSON;
 endif
 
-:Registrar evento en historial (tipo, usuario, fecha);
+:Registrar evento en historial;
+note right
+  - Tipo de evento: Exportación de datos
+  - Usuario que realizó la exportación
+  - Fecha y hora de la exportación
+end note
 :Enviar archivo al sistema;
 
 |Sistema|

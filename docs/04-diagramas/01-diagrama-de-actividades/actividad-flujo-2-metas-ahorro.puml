@@ -1,11 +1,11 @@
 @startuml crear_visualizar_meta_ahorro
-title Flujo: Crear / Visualizar  Meta de Ahorro
+title Flujo: Crear / Visualizar Meta de Ahorro
 
 |Usuario|
 start
 
 |Sistema|
-  :Mostrar pantalla de metas;
+  :Mostrar pantalla de "Gestión de Metas de Ahorro";
   note right
     - Botón "Agregar objetivo"
     - Botón "Seleccionar objetivo"
@@ -20,7 +20,10 @@ start
     |Usuario|
     :Ingresa nombre de la meta;
     :Ingresa monto objetivo;
-    :Ingresa fecha objetivo (opcional);
+    :Ingresa fecha objetivo;
+    note right
+      Opcional
+    end note
     :Hace clic en 'Guardar';
 
     |Sistema|
@@ -40,7 +43,12 @@ start
 
 |Backend|
 :Guardar meta en base de datos;
-:Registrar historial (tipo, usuario, fecha);
+:Registrar historial;
+note right
+  - Tipo de evento: Creación de meta de ahorro
+  - Usuario que realizó la creación
+  - Fecha y hora de la creación
+end note
   |Sistema|
   fork
     :Mostrar mensaje "Meta guardada con éxito";
@@ -73,7 +81,12 @@ else (Click en "Seleccionar objetivo")
     fork 
       :Enviar datos al sistema;
     fork again
-      :Registrar en historial (tipo, usuario, fecha);
+      :Registrar en historial;
+      note right
+        - Tipo de evento: Visualización de meta de ahorro
+        - Usuario que realizó la visualización
+        - Fecha y hora de la visualización
+      end note
     end fork
   else (no)
     |Sistema|
