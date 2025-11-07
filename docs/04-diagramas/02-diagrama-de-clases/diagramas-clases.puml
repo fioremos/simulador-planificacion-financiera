@@ -23,17 +23,22 @@ class MetaAhorro {
     - fechaObjetivo: Date | null
     - montoActual: number
     + constructor(nombre, montoObjetivo, fechaObjetivo)
+    + actualizarMontoActual(monto: number): void
     + toJSON(): Object
     + {static} validar(datos: Object): boolean
     + {static} fromJSON(json: Object): MetaAhorro
 }
 class Exportador {
     - formato: string[]
+    - tipoDatos: string[]
     + constructor(formato: string)
-    + exportarDatos(datos: Object[], formato: string, nombreArchivo: string, rutaDestino: string): boolean
-    + validarFormato(formato: string): boolean
-    + validarRuta(nombre: string, ruta: string): boolean
-    + procesarExportacion(datos: Object[], formato: string): string
+    + exportarDatos(datos: Object[], config : Object) : boolean
+    + validarConfiguracion(config : Object) : boolean
+    + toCSV(datos : Object[]) : string
+    + toJSON(datos : Object[]) : string
+    + toPDF(datos : Object[]) : string
+    + {static} esFormatoValido(formato : string) : boolean
+    + {static} sonNombreYRutaValidos(nombre : string, ruta : string) : boolean
 }
 
 ' --- Clase de Lógica de Negocio (Controlador) ---
@@ -48,7 +53,6 @@ class Planificador{
     + exportarDatos(config: Object): Object
     + toJSON(): Object
     + {static} fromJSON(json: Object): Planificador
-' Métodos privados para lógica interna 
     - filtrarDatos(filtros: Object): Movimiento[]
     - calcularIndicadores(datos: Movimiento[]): Object
 }

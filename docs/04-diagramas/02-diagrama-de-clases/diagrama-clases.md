@@ -2,6 +2,8 @@
 
 Este diagrama define la arquitectura de lógica de negocio (POO) para el simulador de planificación financiera. Separa las responsabilidades en dos tipos de clases: modelos de dominio y un gestor central.
 
+![Diagrama de Clases](DiagramaClasesPlanificadorFinanciero.png)
+
 ## Clases Identificadas
 
 ### 1. Movimiento
@@ -16,18 +18,21 @@ Este diagrama define la arquitectura de lógica de negocio (POO) para el simulad
 * **Propiedades:** Almacena los datos del objetivo (`nombre`, `montoObjetivo`, `montoActual`).
 * **Métodos Clave:**
     * `validar(datos)`: Método estático para validar datos *antes* de crear la instancia. Mueve la lógica de `esNombreValido`, `esFechaFuturaValida`, etc.
+    * `actualizarProgreso(monto)`: Permite incrementar el monto ahorrado hasta alcanzar el objetivo. Si el progreso supera el monto objetivo, se ajusta automáticamente al valor máximo permitido.
     * `toJSON() / fromJSON()`: Métodos para la serialización.
 
 ### 3. Exportador
-- **Responsabilidad:** Gestiona el proceso de exportación de datos financieros desde el planificador hacia distintos formatos.  
-  Se encarga de validar los formatos, rutas y nombres de archivos, y de simular la generación del archivo correspondiente.  
+- **Responsabilidad:** Gestiona el proceso de exportación de datos financieros del sistema hacia distintos formatos (CSV, JSON y PDF). Se encarga de validar las configuraciones de exportación, generar el contenido adecuado según el formato solicitado y simular la creación del archivo final en la ruta destino.
 - **Propiedades:**
-  - `formato: string[]`: Lista de formatos permitidos para exportación, por ejmeplo `docx`, `PDF`, `JSON`.  
+  - `formato: string[]`: Lista de formatos permitidos para exportación (`CSV`, `PDF`, `JSON`).  
 - **Métodos Clave:**
-  - `exportar(datos, formato, nombreArchivo, rutaDestino)`: Método principal que valida los parámetros y ejecuta la exportación.  
-  - `validarFormato(formato)`: Comprueba que el formato esté dentro de los permitidos.  
-  - `validarRuta(nombre, ruta)`: Verifica que el nombre de archivo y la ruta sean válidos.  
-  - `procesarExportacion(datos, formato)`: Simula la generación del archivo y la comunicación con el backend. 
+  - `exportar(datos, config)`: Método principal que valida los parámetros y ejecuta la exportación.  
+  - `validarConfiguracion(config)`: Comprueba que la configuración de exportación sea válida, incluyendo formato, nombre y ruta.
+Internamente usa los métodos estáticos `esFormatoValido()`, `sonNombreYRutaValidos()`.   
+  - `toCSV(datos)`: Convierte los datos en una representación de texto plano con formato CSV.  
+  - `toJSON(datos)`: Simula la generación de un documento PDF (por ahora devuelve un string con formato de reporte).   
+  - `esFormatoValido(formato)`:Método estático que comprueba si el formato indicado está dentro de los formatos permitidos.   
+  - `sonNombreYRutaValidos(nombre, ruta)`: Método estático que verifica que el nombre de archivo y la ruta sean correctos y seguros.
 
 ### 4. Planificador
 * **Responsabilidad:** Es la clase principal y el "cerebro" de la aplicación. Orquesta la lógica de negocio y gestiona las listas de movimientos y metas.
