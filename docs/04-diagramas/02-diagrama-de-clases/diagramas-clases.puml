@@ -1,0 +1,70 @@
+@startuml DiagramaClasesPlanificadorFinanciero
+skinparam classAttributeIconSize 0
+hide empty members
+title Diagrama de Clases - Planificador Financiero
+
+' --- Clases de Dominio (Modelos) ---
+
+class Movimiento {
+  - id: number
+  - fecha: Date
+  - tipo: string
+  - categoria: string
+  - monto: number
+  + constructor(fecha, tipo, categoria, monto)
+  + toJSON(): Object
+  + {static} validar(datos: Object): boolean
+  + {static} fromJSON(json: Object): Movimiento
+}
+class MetaAhorro {
+    - id : number
+    - nombre : string
+    - montoObjetivo: number
+    - fechaObjetivo: Date | null
+    - montoActual: number
+    + constructor(nombre, montoObjetivo, fechaObjetivo)
+    + toJSON(): Object
+    + {static} validar(datos: Object): boolean
+    + {static} fromJSON(json: Object): MetaAhorro
+}
+class Exportador {
+    - formato: string[]
+    + constructor(formato: string)
+    + exportarDatos(datos: Object[], formato: string, nombreArchivo: string, rutaDestino: string): boolean
+    + validarFormato(formato: string): boolean
+    + validarRuta(nombre: string, ruta: string): boolean
+    + procesarExportacion(datos: Object[], formato: string): string
+}
+
+' --- Clase de Lógica de Negocio (Controlador) ---
+class Planificador{
+    - movimientos: Movimiento[]
+    - metasAhorro: MetaAhorro[]
+    - exportador: Exportador
+    + constructor()
+    + agregarMovimiento(datos: Object): Movimiento
+    + agregarMetaAhorro(datos: Object): MetaAhorro
+    + generarReporte(filtros: Object): Object
+    + exportarDatos(config: Object): Object
+    + toJSON(): Object
+    + {static} fromJSON(json: Object): Planificador
+' Métodos privados para lógica interna 
+    - filtrarDatos(filtros: Object): Movimiento[]
+    - calcularIndicadores(datos: Movimiento[]): Object
+}
+' --- Relaciones ---
+
+' Relación de Composición:
+' Un Planificador "posee" una colección de 0 o más Movimientos.
+' Si se destruye el Planificador, la colección de movimientos también.
+Planificador "1" *-- "0..*" Movimiento 
+
+' Relación de Composición:
+' Un Planificador "posee" una colección de 0 o más Metas.
+Planificador "1" *-- "0..*" MetaAhorro 
+
+' Relación de Composicion:
+' El planificador utiliza un exportador para manejar la exportación de datos.
+Planificador "1" *-- "1" Exportador 
+
+@enduml
