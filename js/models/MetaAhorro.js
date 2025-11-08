@@ -8,7 +8,7 @@ export default class MetaAhorro {
     constructor(nombre, montoObjetivo, fechaObjetivo = null ){
         const datos = { nombre, montoObjetivo, fechaObjetivo };
         if(!MetaAhorro.validar(datos)){
-            throw new Error ("Datos de meta de ahorro invalidos");
+            throw new Error ("Datos de meta de ahorro inválidos");
         }
         this.#id = MetaAhorro.generarId();
         this.#nombre = String(nombre).trim();

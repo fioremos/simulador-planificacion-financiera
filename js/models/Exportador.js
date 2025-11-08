@@ -1,11 +1,5 @@
-export default class Movimiento {
-    #formato;
-    #tipoDatos;
+export default class Exportador {
 
-    constructor(formato, tipoDatos){
-        this.#formato = ['CSV', 'JSON', 'PDF'];
-        this.#tipoDatos = ['movimientos', 'metas', 'presupuesto', 'historial', 'reporte'];
-    }
     /**
     * Exporta los datos según la configuración recibida.
     * @param {Array<Object>} datos - Datos a exportar.
@@ -18,8 +12,10 @@ export default class Movimiento {
             throw new Error('Configuración de exportación inválida');
         }
         const { tipo, formato, nombreArchivo, rutaDestino } = config;
+
+        const tiposPermitidos = ['movimientos', 'metas', 'presupuesto', 'historial'];
         const formatoMayus = formato.toUpperCase();
-        if (!this.#tipoDatos.includes(tipo)) {
+        if (!this.tiposPermitidos.includes(tipo)) {
             throw new Error(`Tipo de datos no permitido: ${tipo}`);
         }
         

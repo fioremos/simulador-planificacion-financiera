@@ -18,19 +18,17 @@ Este diagrama define la arquitectura de lógica de negocio (POO) para el simulad
 * **Propiedades:** Almacena los datos del objetivo (`nombre`, `montoObjetivo`, `montoActual`).
 * **Métodos Clave:**
     * `validar(datos)`: Método estático para validar datos *antes* de crear la instancia. Mueve la lógica de `esNombreValido`, `esFechaFuturaValida`, etc.
-    * `actualizarProgreso(monto)`: Permite incrementar el monto ahorrado hasta alcanzar el objetivo. Si el progreso supera el monto objetivo, se ajusta automáticamente al valor máximo permitido.
+    * `actualizarMontoActual(monto)`: Permite incrementar el monto ahorrado hasta alcanzar el objetivo. Si el progreso supera el monto objetivo, se ajusta automáticamente al valor máximo permitido.
     * `toJSON() / fromJSON()`: Métodos para la serialización.
 
 ### 3. Exportador
-- **Responsabilidad:** Gestiona el proceso de exportación de datos financieros del sistema hacia distintos formatos (CSV, JSON y PDF). Se encarga de validar las configuraciones de exportación, generar el contenido adecuado según el formato solicitado y simular la creación del archivo final en la ruta destino.
-- **Propiedades:**
-  - `formato: string[]`: Lista de formatos permitidos para exportación (`CSV`, `PDF`, `JSON`).  
+- **Responsabilidad:** Gestiona el proceso de exportación de datos financieros del sistema hacia distintos formatos (CSV, JSON y PDF). Se encarga de validar las configuraciones de exportación, generar el contenido adecuado según el formato solicitado y simular la creación del archivo final en la ruta destino. 
 - **Métodos Clave:**
   - `exportar(datos, config)`: Método principal que valida los parámetros y ejecuta la exportación.  
   - `validarConfiguracion(config)`: Comprueba que la configuración de exportación sea válida, incluyendo formato, nombre y ruta.
 Internamente usa los métodos estáticos `esFormatoValido()`, `sonNombreYRutaValidos()`.   
   - `toCSV(datos)`: Convierte los datos en una representación de texto plano con formato CSV.  
-  - `toJSON(datos)`: Simula la generación de un documento PDF (por ahora devuelve un string con formato de reporte).   
+  - `toJSON(datos)`: convierte los datos a un string JSON.   
   - `esFormatoValido(formato)`:Método estático que comprueba si el formato indicado está dentro de los formatos permitidos.   
   - `sonNombreYRutaValidos(nombre, ruta)`: Método estático que verifica que el nombre de archivo y la ruta sean correctos y seguros.
 
@@ -44,7 +42,7 @@ Internamente usa los métodos estáticos `esFormatoValido()`, `sonNombreYRutaVal
     * `agregarMovimiento(datos)`: Valida datos, crea un `Movimiento` y lo añade a la lista.
     * `agregarMetaAhorro(datos)`: Valida datos, crea una `MetaAhorro` y la añade a la lista.
     * `generarReporte(filtros)`: Procesa la lista de movimientos y devuelve un objeto con los resultados.
-    * `exportarDatos(config)`: Procesa los datos de la app para exportación.
+    * `exportarDatos(tipo, formato, nombreArchivo, rutaDestino)`: Procesa los datos de la app para exportación.
 * **Métodos Privados (Lógica Interna):**
     * `filtrarDatos(...)`: Lógica migrada de la función global `filtrarDatos`.
     * `calcularIndicadores(...)`: Lógica migrada de la función global `calcularIndicadores`.

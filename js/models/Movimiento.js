@@ -7,8 +7,8 @@ export default class Movimiento {
 
     constructor(fecha, tipo, categoria, monto){
         const datos = { fecha, tipo, categoria, monto };
-        if(Movimiento.validar(datos)){
-            throw new Error ("Datos de movimiento invalidos");
+        if(!Movimiento.validar(datos)){
+            throw new Error ("Datos de movimiento inválidos");
         }
         this.#id = Movimiento.generarId();
         this.#fecha = (fecha instanceof Date) ? fecha : new Date(fecha);

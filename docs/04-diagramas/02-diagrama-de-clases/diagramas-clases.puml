@@ -29,10 +29,7 @@ class MetaAhorro {
     + {static} fromJSON(json: Object): MetaAhorro
 }
 class Exportador {
-    - formato: string[]
-    - tipoDatos: string[]
-    + constructor(formato: string)
-    + exportarDatos(datos: Object[], config : Object) : boolean
+    + exportar(datos: Object[], config : Object) : boolean
     + validarConfiguracion(config : Object) : boolean
     + toCSV(datos : Object[]) : string
     + toJSON(datos : Object[]) : string
@@ -50,7 +47,7 @@ class Planificador{
     + agregarMovimiento(datos: Object): Movimiento
     + agregarMetaAhorro(datos: Object): MetaAhorro
     + generarReporte(filtros: Object): Object
-    + exportarDatos(config: Object): Object
+    + exportarDatos(tipo, formato, nombreArchivo, rutaDestino): Object
     + toJSON(): Object
     + {static} fromJSON(json: Object): Planificador
     - filtrarDatos(filtros: Object): Movimiento[]
@@ -61,14 +58,14 @@ class Planificador{
 ' Relación de Composición:
 ' Un Planificador "posee" una colección de 0 o más Movimientos.
 ' Si se destruye el Planificador, la colección de movimientos también.
-Planificador "1" *-- "0..*" Movimiento 
+Planificador "1" *-- "0..*" Movimiento : Posee
 
 ' Relación de Composición:
 ' Un Planificador "posee" una colección de 0 o más Metas.
-Planificador "1" *-- "0..*" MetaAhorro 
+Planificador "1" *-- "0..*" MetaAhorro : Posee
 
 ' Relación de Composicion:
 ' El planificador utiliza un exportador para manejar la exportación de datos.
-Planificador "1" *-- "1" Exportador 
+Planificador "1" *-- "1" Exportador : Posee un
 
 @enduml
