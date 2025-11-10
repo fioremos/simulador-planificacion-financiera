@@ -24,6 +24,31 @@ function mostrarSeccion(id) {
     if (sidebar) sidebar.classList.toggle('d-none', estaEnLogin);
     if (header) header.classList.toggle('d-none', estaEnLogin);
     if (principalContainer) principalContainer.classList.toggle('solo-contenido', estaEnLogin);
+
+    let movimientosIniciado = false;
+
+    if (id === 'ingresos-gastos' && !movimientosIniciado) {
+        initMovimientoEvents();
+        movimientosIniciado = true;
+    }
+
+    movimientosIniciado = false;
+    if (id === 'exportar' && !movimientosIniciado) {
+        initExportarDatos();
+        movimientosIniciado = true;
+    }
+
+    movimientosIniciado = false;
+    if (id === 'reportes' && !movimientosIniciado) {
+        initReportes();
+        movimientosIniciado = true;
+    }
+    
+    movimientosIniciado = false;
+    if (id === 'metas' && !movimientosIniciado) {
+        initMetaAhorro();
+        movimientosIniciado = true;
+    }
 }
 
 // Ejecutar solo cuando el DOM esté listo
