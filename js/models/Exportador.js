@@ -5,19 +5,20 @@ export default class Exportador {
     * @param {Array<Object>} datos - Datos a exportar.
     * @param {Object} config - Configuración: { tipo, formato, nombreArchivo, rutaDestino }.
     * @returns {boolean} - true si la exportación fue exitosa.
+    * @throws {Error} - Si la configuración o el formato es invalido.
     */
    
+    // Método para exportar
     exportar(datos, config) {
+        if (!Array.isArray(datos) || datos.length === 0){
+            console.warn("No hay datos para exportar.");
+            return false;
+        }
         if (!this.validarConfiguracion(config)) {
             throw new Error('Configuración de exportación inválida');
         }
         const { tipo, formato, nombreArchivo, rutaDestino } = config;
-
-        const tiposPermitidos = ['movimientos', 'metas', 'presupuesto', 'historial'];
         const formatoMayus = formato.toUpperCase();
-        if (!this.tiposPermitidos.includes(tipo)) {
-            throw new Error(`Tipo de datos no permitido: ${tipo}`);
-        }
         
         let contenido;
         switch (formatoMayus) {
@@ -59,7 +60,7 @@ export default class Exportador {
     toCSV(datos) {
         if (!Array.isArray(datos) || datos.length === 0) return '';
         const encabezados = Object.keys(datos[0]);
-        const filas = datos.map(obj => encabezados.map(k => obj[k]).join(','));
+        const filas = datos.map(obj => encabezados.map(k => JSON.stringify(obj[k])).join(','));
         return [encabezados.join(','), ...filas].join('\n');
     }
 
