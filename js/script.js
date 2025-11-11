@@ -4,6 +4,8 @@
 let feedback = null;
 let filtros = null;
 
+const planificador = new Planificador();
+
 // =============================================================
 // 1. Módulo de Movimientos (Ingresos / Gastos)
 // =============================================================
@@ -33,12 +35,7 @@ function manejarMovimientoSubmit(event) {
     };
 
     try {
-        const nuevoMovimiento = new Movimiento(
-            datos.fecha,
-            datos.tipo,
-            datos.categoria,
-            datos.monto
-        );
+        const movimiento = planificador.agregarMovimiento(datos);
 
         setFeedback(feedback, 'Movimiento agregado con éxito.', false);
         crearFilaMovimiento(datos);
@@ -94,20 +91,14 @@ function manejarExportar(event) {
     event.preventDefault();
 
     const checkboxes = document.querySelectorAll('#exportar-container input[name="datos"]:checked');
-    const datosSeleccionados = Array.from(checkboxes).map(cb => cb.value);
-    const tipoArchivo = document.querySelector('#exportar-container input[name="tipo"]:checked')?.value;
+    const tipoDatos = Array.from(checkboxes).map(cb => cb.value);
+    const formato = document.querySelector('#exportar-container input[name="tipo"]:checked')?.value;
     const nombre = document.querySelector('#nombre').value.trim();
     const ubicacion = document.querySelector('#ubicacion').value.trim();
 
     try {
-        const exportador = new Exportador();
-        exportador.exportar({
-            tipo: datosSeleccionados,
-            formato: tipoArchivo,
-            nombreArchivo: nombre,
-            rutaDestino: ubicacion
-        });
-
+        planificador.exportarDatos(tipoDatos, formato, nombre, ubicacion);
+        
         setFeedback(feedback, 'Archivo exportado con éxito.', false);
     } catch (error) {
         setFeedback(feedback, error, true);
@@ -130,7 +121,6 @@ function initReportes() {
 
     actualizarFechas(document.getElementById('fechaRyE').value, filtros);
 
-    const planificador = new Planificador();
     const datos = planificador.generarReporte(filtros);
     actualizarReporteGastos(datos);
 
@@ -150,7 +140,6 @@ function manejarReportes(event) {
     }
 
     try {
-        const planificador = new Planificador();
         const datos = planificador.generarReporte(filtros);
         actualizarReporteGastos(datos);
         setFeedback(feedback, 'Reporte generado con éxito.', false);
@@ -234,7 +223,7 @@ function manejarGuardarMeta(event) {
     const fecha = document.getElementById('fecha-objetivo').value;
 
     try {
-        const meta = new MetaAhorro(nombre, monto, fecha);
+        const meta = planificador.agregarMetaAhorro({nombre: nombre, montoObjetivo: monto, fechaObjetivo: fecha});
         crearFilaMeta(meta);
         actualizarRadiosConMetas();
         cerrarModal('MetasAhorroModal');
