@@ -2,7 +2,7 @@
 
 Este diagrama define la arquitectura de lógica de negocio (POO) para el simulador de planificación financiera. Separa las responsabilidades en dos tipos de clases: modelos de dominio y un gestor central.
 
-![Diagrama de Clases](DiagramaClasesPlanificadorFinanciero.png)
+![Diagrama de Clases](diagrama-clases.png)
 
 ## Clases Identificadas
 
