@@ -11,8 +11,8 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   PR: [#150](https://github.com/fioremos/simulador-planificacion-financiera/pull/150#) — @MNEscobar (Desarrollador JS POO)
 
 ### Changed
-- [nombre-de-la-branch] Descripción breve de la tarea realizada.
-  PR: #2 — @usuario2 (rol asignado)
+- [feature/dev-eventos-dom] Manipulación de los eventos del DOM.
+  PR:[#131](https://github.com/fioremos/simulador-planificacion-financiera/pull/131) — @fioremos (Desarrollador JS Eventos + DOM)
 
 - [nombre-de-la-branch] Descripción breve de la tarea realizada.
   PR: #3 — @usuario3 (rol asignado)

@@ -11,7 +11,7 @@ class Exportador {
     // Método para exportar
     exportar(datos, config) {
         if (!Array.isArray(datos) || datos.length === 0){
-            console.warn("No hay datos para exportar.");
+            console.log("No hay datos para exportar.");
             return false;
         }
         if (!this.validarConfiguracion(config)) {
