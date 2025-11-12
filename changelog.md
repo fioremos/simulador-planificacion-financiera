@@ -7,8 +7,8 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 ## [Unreleased]
 
 ### Added
-- [nombre-de-la-branch] Descripción breve de la tarea realizada.
-  PR: #1 — @usuario1 (rol asignado)
+- [feature/dev-poo-logica-negocio] Se refactorizó toda la lógica de negocio a una arquitectura de Programación Orientada a Objetos.   
+  PR: [#150](https://github.com/fioremos/simulador-planificacion-financiera/pull/150#) — @MNEscobar (Desarrollador JS POO)
 
 ### Changed
 - [nombre-de-la-branch] Descripción breve de la tarea realizada.
