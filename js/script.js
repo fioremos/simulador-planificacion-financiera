@@ -11,6 +11,164 @@ let filtros = null;
 /** @type {Planificador} Instancia principal del planificador */
 const planificador = new Planificador();
 
+/** @type {NodeListOf<HTMLElement>} Lista de secciones principales del contenido */
+let secciones;
+
+/** @type {HTMLElement|null} Barra lateral de navegación */
+let sidebar;
+
+/** @type {HTMLElement|null} Cabecera principal del sitio */
+let header;
+
+/** @type {HTMLElement|null} Contenedor principal que engloba las secciones */
+let principalContainer;
+
+/** @type {HTMLElement|null} Elemento Offcanvas del sidebar (modo móvil) */
+let offcanvasEl;
+
+// =============================================================
+// Event Listeners
+// =============================================================
+
+/**
+ * Evento principal que se ejecuta cuando el DOM está completamente cargado.
+ * Realiza la inicialización de los elementos globales y determina qué sección mostrar inicialmente.
+ *
+ * @event DOMContentLoaded
+ */
+document.addEventListener('DOMContentLoaded', () => {
+    // Cachear selectores para evitar consultas repetidas
+    secciones = document.querySelectorAll('.principal-section');
+    sidebar = document.querySelector('.sidebar');
+    header = document.getElementById('main-header');
+    principalContainer = document.querySelector('.principal-main');
+    offcanvasEl = document.getElementById('sidebarOffcanvas');
+
+    // Determinar la sección inicial a mostrar desde el hash de la URL
+    let hash = window.location.hash.replace('#', '') || 'login';
+
+    // Si no hay hash, establecer "login" como predeterminado y limpiar parámetros extra
+    if (!window.location.hash) {
+        window.location.hash = hash;
+
+        // Limpiar parámetros de autenticación de la URL sin recargar la página
+        const url = new URL(window.location);
+        url.searchParams.delete('usuario');
+        url.searchParams.delete('password');
+        window.history.replaceState({}, '', url);
+    }
+
+    // Mostrar la sección inicial
+    mostrarSeccion(hash);
+});
+
+/**
+ * Delegación de eventos sobre el `body` para manejar clics en enlaces internos.
+ *
+ * Permite la navegación fluida entre secciones del SPA sin recargar la página.
+ * También actualiza el hash de la URL y oculta el menú lateral si está abierto.
+ *
+ * @event click
+ * @param {MouseEvent} e - Evento de clic.
+ */
+document.body.addEventListener('click', e => {
+    /** @type {HTMLAnchorElement|null} Enlace interno (si aplica) */
+    const enlace = e.target.closest('a[href^="#"]');
+    if (!enlace) return;
+
+    const id = enlace.getAttribute('href').substring(1);
+    if (!id) return;
+
+    const destino = document.getElementById(id);
+
+    // Verifica si el destino pertenece a una sección principal
+    if (destino && destino.classList.contains('principal-section')) {
+        e.preventDefault();
+
+        // Actualiza el hash de la URL solo si cambió
+        if (window.location.hash !== `#${id}`) {
+            window.location.hash = id;
+        }
+
+        // Muestra la nueva sección solicitada
+        mostrarSeccion(id);
+
+        // Oculta el menú lateral (offcanvas) si está abierto
+        if (offcanvasEl) {
+            const offcanvas = bootstrap.Offcanvas.getInstance(offcanvasEl);
+            if (offcanvas) offcanvas.hide();
+        }
+    }
+});
+
+/**
+ * Listener global para ocultar el sidebar (offcanvas)
+ * automáticamente cuando se redimensiona la ventana.
+ *
+ * Evita que el panel lateral quede abierto al cambiar entre
+ * modos de escritorio y móvil.
+ *
+ * @event resize
+ */
+window.addEventListener('resize', () => {
+    if (offcanvasEl && offcanvasEl.classList.contains('show')) {
+        const offcanvas = bootstrap.Offcanvas.getInstance(offcanvasEl);
+        if (offcanvas) offcanvas.hide();
+    }
+});
+
+
+// =============================================================
+// Manipulacion del DOM
+// =============================================================
+
+/**
+ * Muestra una sección específica de la interfaz y oculta las demás.
+ * Además, inicializa los módulos correspondientes según el ID de la sección.
+ *
+ * @param {string} id - ID de la sección a mostrar (por ejemplo: "reportes", "metas", etc.)
+ */
+function mostrarSeccion(id) {
+    const activa = document.getElementById(id);
+    if (!activa || activa.classList.contains('visible')) return;
+
+    // Cambiar visibilidad usando clases sin manipular el DOM repetidamente
+    secciones.forEach(seccion => {
+        seccion.classList.toggle('visible', seccion.id === id);
+        seccion.classList.toggle('invisible', seccion.id !== id);
+    });
+
+    // Ocultar elementos globales si la vista actual es login
+    const estaEnLogin = id === 'login';
+    if (sidebar) sidebar.classList.toggle('d-none', estaEnLogin);
+    if (header) header.classList.toggle('d-none', estaEnLogin);
+    if (principalContainer) principalContainer.classList.toggle('solo-contenido', estaEnLogin);
+
+    // Control para evitar inicializaciones múltiples
+    let movimientosIniciado = false;
+
+    // Inicializar el módulo correspondiente según la sección activa
+    if (id === 'ingresos-gastos' && !movimientosIniciado) {
+        initMovimientoEvents();
+        movimientosIniciado = true;
+    }
+
+    if (id === 'exportar' && !movimientosIniciado) {
+        initExportarDatos();
+        movimientosIniciado = true;
+    }
+
+    if (id === 'reportes' && !movimientosIniciado) {
+        initReportes();
+        movimientosIniciado = true;
+    }
+
+    if (id === 'metas' && !movimientosIniciado) {
+        initMetaAhorro();
+        movimientosIniciado = true;
+    }
+}
+
 // =============================================================
 // 1. Módulo de Movimientos (Ingresos / Gastos)
 // =============================================================
