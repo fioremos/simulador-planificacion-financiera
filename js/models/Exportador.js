@@ -1,4 +1,4 @@
-export default class Exportador {
+class Exportador {
 
     /**
     * Exporta los datos según la configuración recibida.
@@ -31,16 +31,33 @@ export default class Exportador {
             case 'PDF':
                 contenido = this.toPDF(datos);
                 break;
+            case 'XLSX':
+                contenido = this.toXLSX(datos);
+                break;
             default:
                 throw new Error(`Formato no soportado: ${formato}`);
             }
         
-    // Simulación de exportación (por ahora solo loguea)
-    console.log(`Exportando ${tipo} en formato ${formatoMayus}`);
-    console.log(`Archivo: ${rutaDestino}/${nombreArchivo}.${formatoMayus.toLowerCase()}`);
-    console.log('Contenido generado:', contenido);
-    return true;
-}  
+        // Simulación de exportación (por ahora solo loguea)
+        console.log(`Exportando ${tipo} en formato ${formatoMayus}`);
+        console.log(`Archivo: ${rutaDestino}/${nombreArchivo}.${formatoMayus.toLowerCase()}`);
+        console.log('Contenido generado:', contenido);
+
+        //// Crear un Blob con el contenido generado
+        const blob = new Blob([contenido], { type: 'text/plain;charset=utf-8' });
+
+        // Crear un enlace temporal para descarga
+        const enlace = document.createElement('a');
+        enlace.href = URL.createObjectURL(blob);
+        enlace.download = `${nombreArchivo}.${formatoMayus.toLowerCase()}`;
+        enlace.click();
+
+        // Liberar la URL temporal
+        URL.revokeObjectURL(enlace.href);
+
+        console.log(`Archivo ${nombreArchivo}.${formatoMayus.toLowerCase()} descargado correctamente.`);
+        return true;
+    }  
 
     /**
     * Valida la configuración de exportación.
@@ -52,6 +69,28 @@ export default class Exportador {
         if (!Exportador.esFormatoValido(formato)) return false;
         if (!Exportador.sonNombreYRutaValidos(nombreArchivo, rutaDestino)) return false;
         return true;
+    }
+
+    /**
+     * Genera el contenido XLSX simulado (texto plano tabulado).
+     * Devuelve una cadena representando el contenido del archivo Excel.
+     */
+    toXLSX(datos) {
+        if (!Array.isArray(datos) || datos.length === 0) return '';
+
+        // Obtener encabezados desde la primera fila
+        const encabezados = Object.keys(datos[0]);
+
+        // Construir filas con tabuladores para simular celdas
+        const filas = datos.map(obj =>
+            encabezados.map(k => obj[k] ?? '').join('\t')
+        );
+
+        // Unir encabezados y filas
+        const contenido = [encabezados.join('\t'), ...filas].join('\n');
+
+        // Simular estructura típica de archivo Excel
+        return `--- XLSX SIMULADO ---\n${contenido}\n--- FIN XLSX ---`;
     }
 
     /**
@@ -81,7 +120,7 @@ export default class Exportador {
     /* ===== Métodos estáticos de validación ===== */
 
     static esFormatoValido(formato) {
-        const formatos = ['CSV', 'JSON', 'PDF'];
+        const formatos = ['CSV', 'JSON', 'PDF', 'XLSX'];
         return formatos.includes(String(formato).trim().toUpperCase());
     }
 

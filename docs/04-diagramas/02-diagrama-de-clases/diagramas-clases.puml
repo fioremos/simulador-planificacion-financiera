@@ -34,11 +34,12 @@ class Exportador {
     + toCSV(datos : Object[]) : string
     + toJSON(datos : Object[]) : string
     + toPDF(datos : Object[]) : string
+    + toXLSX(datos : Object[]) : string
     + {static} esFormatoValido(formato : string) : boolean
     + {static} sonNombreYRutaValidos(nombre : string, ruta : string) : boolean
 }
 
-' --- Clase de Lógica de Negocio (Controlador) ---
+' --- Clase de Lógica de Negocio (Gestor) ---
 class Planificador{
     - movimientos: Movimiento[]
     - metasAhorro: MetaAhorro[]
@@ -66,6 +67,6 @@ Planificador "1" *-- "0..*" MetaAhorro : Posee
 
 ' Relación de Composicion:
 ' El planificador utiliza un exportador para manejar la exportación de datos.
-Planificador "1" *-- "1" Exportador : Posee un
+Planificador "1" o-- "1" Exportador : Utiliza
 
 @enduml

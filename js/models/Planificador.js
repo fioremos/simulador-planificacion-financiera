@@ -1,19 +1,28 @@
-import Movimiento from './Movimiento.js';
-import MetaAhorro from './MetaAhorro.js';
-import Exportador from './Exportador.js';
-
-export default class Planificador {
+/**
+ * Clase para planificar y gestionar movimientos financieros y metas de ahorro.
+ * Permite agregar movimientos, metas de ahorro, generar reportes y exportar datos.
+ */
+class Planificador {
     #movimientos;
     #metasAhorro;
     #exportador;
-    
+
+    /**
+     * Inicializa un nuevo planificador.
+     */
     constructor() {
         this.#movimientos = [];
         this.#metasAhorro = [];
         this.#exportador = new Exportador();
-  }
+    }
 
     /* ======== Gestión de Movimientos ======== */
+     /**
+     * Agrega un nuevo movimiento financiero.
+     * @param {Object} datos - Datos del movimiento: { fecha, tipo, categoria, monto }.
+     * @returns {Movimiento} - Instancia del movimiento agregado.
+     * @throws {Error} - Si los datos son inválidos o falla la creación del movimiento.
+     */
     agregarMovimiento(datos) {
         try {
             const movimiento = new Movimiento(
@@ -31,6 +40,12 @@ export default class Planificador {
     }
 
     /* ======== Gestión de Metas ======== */
+     /**
+     * Agrega una nueva meta de ahorro.
+     * @param {Object} datos - Datos de la meta: { nombre, montoObjetivo, fechaObjetivo }.
+     * @returns {MetaAhorro} - Instancia de la meta agregada.
+     * @throws {Error} - Si los datos son inválidos o falla la creación de la meta.
+     */
     agregarMetaAhorro(datos) {
         try {
             const meta = new MetaAhorro(
@@ -47,29 +62,55 @@ export default class Planificador {
     }
 
     /* ======== Reportes ======== */
+    /**
+     * Genera un reporte de movimientos según los filtros recibidos.
+     * @param {Object} filtros - Filtros: { fechaDesde, fechaHasta, categoria }.
+     * @returns {Object} - Reporte con los datos filtrados e indicadores calculados.
+     *                     {
+     *                         filtros,
+     *                         totalMovimientos,
+     *                         ingresos,
+     *                         gastos,
+     *                         ahorro,
+     *                         saldo,
+     *                         porcentajeAhorro
+     *                     }
+     */
     generarReporte(filtros) {
         const datosFiltrados = this.#filtrarDatos(filtros);
         const indicadores = this.#calcularIndicadores(datosFiltrados);
 
-    return {
+        return {
         filtros,
         totalMovimientos: datosFiltrados.length,
         ...indicadores
         };
     }
 
+    /**
+     * Filtra los movimientos según un rango de fechas y categoría.
+     * @private
+     * @param {Object} filtros - Filtros: { fechaDesde, fechaHasta, categoria }.
+     * @returns {Array<Movimiento>} - Movimientos que cumplen los filtros.
+     */
     #filtrarDatos(filtros) {
         const desde = new Date(filtros.fechaDesde);
         const hasta = new Date(filtros.fechaHasta);
 
-    return this.#movimientos.filter(mov => {
-        const fecha = new Date(mov.fecha);
-        const enRango = fecha >= desde && fecha <= hasta;
-        const categoriaCoincide = filtros.categoria === 'Todas' || mov.categoria === filtros.categoria;
-        return enRango && categoriaCoincide;
+        return this.#movimientos.filter(mov => {
+            const fecha = new Date(mov.fecha);
+            const enRango = fecha >= desde && fecha <= hasta;
+            const categoriaCoincide = filtros.categoria === 'Todas' || mov.categoria === filtros.categoria;
+            return enRango && categoriaCoincide;
         });
     }
     
+    /**
+     * Calcula indicadores financieros a partir de un conjunto de movimientos.
+     * @private
+     * @param {Array<Movimiento>} datos - Movimientos a procesar.
+     * @returns {Object} - Indicadores calculados: { ingresos, gastos, ahorro, saldo, porcentajeAhorro }.
+     */
     #calcularIndicadores(datos) {
         const ingresos = datos.filter(d => d.tipo === 'ingreso').reduce((acc, cur) => acc + cur.monto, 0);
         const gastos = datos.filter(d => d.tipo === 'gasto').reduce((acc, cur) => acc + cur.monto, 0);
@@ -77,19 +118,26 @@ export default class Planificador {
         const saldo = ingresos - gastos;
         const porcentajeAhorro = ingresos > 0 ? (ahorro / ingresos) * 100 : 0;
 
-    return {
-        ingresos,
-        gastos,
-        ahorro,
-        saldo,
-        porcentajeAhorro: porcentajeAhorro.toFixed(2)
+        return {
+            ingresos,
+            gastos,
+            ahorro,
+            saldo,
+            porcentajeAhorro: porcentajeAhorro.toFixed(2)
        };
     }
 
     /* ======== Exportación ======== */
+    /**
+     * Exporta los movimientos o metas de ahorro a un formato y archivo específico.
+     * @param {Array<string>} tipo - Tipo de datos a exportar: ['resumen-cuenta'] o ['metas'].
+     * @param {string} formato - Formato de exportación: 'CSV', 'JSON', 'PDF', 'XLSX'.
+     * @param {string} nombreArchivo - Nombre del archivo a generar.
+     * @param {string} rutaDestino - Ruta o ubicación para guardar el archivo.
+     */
     exportarDatos(tipo, formato, nombreArchivo, rutaDestino) {
         const datos =
-        tipo === 'movimientos'
+        tipo.length === 1 && tipo[0] === 'resumen-cuenta'
         ? this.#movimientos.map(m => m.toJSON())
         : this.#metasAhorro.map(m => m.toJSON());
         
@@ -104,6 +152,10 @@ export default class Planificador {
     }
 
     /* ======== Serialización ======== */
+    /**
+     * Serializa el planificador a un objeto JSON.
+     * @returns {Object} - Objeto JSON con movimientos y metas de ahorro.
+     */
     toJSON() {
         return {
             movimientos: this.#movimientos.map(m => m.toJSON()),
@@ -111,6 +163,11 @@ export default class Planificador {
         };
     }
 
+    /**
+     * Crea una instancia de Planificador desde un objeto JSON.
+     * @param {Object} json - Objeto JSON con estructuras de movimientos y metas.
+     * @returns {Planificador} - Instancia reconstruida del planificador.
+     */
     static fromJSON(json) {
         const planificador = new Planificador();
         planificador.#movimientos = json.movimientos.map(m => Movimiento.fromJSON(m));
@@ -119,10 +176,12 @@ export default class Planificador {
     }
 
     /* ======== Accesores ======== */
+    /** @returns {Array<Movimiento>} - Lista de todos los movimientos del planificador. */
     get movimientos() {
         return this.#movimientos;
     }
 
+    /** @returns {Array<MetaAhorro>} - Lista de todas las metas de ahorro del planificador. */
     get metasAhorro() {
         return this.#metasAhorro;
     }

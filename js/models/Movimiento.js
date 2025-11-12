@@ -1,10 +1,23 @@
-export default class Movimiento {
+/**
+ * Clase que representa un movimiento financiero.
+ * Permite crear movimientos de tipo ingreso, gasto, ahorro o inversión,
+ * validar los datos, serializar y generar un resumen.
+ */
+class Movimiento {
     #id;
     #fecha;
     #tipo;
     #categoria;
     #monto;
 
+    /**
+     * Crea un nuevo movimiento financiero.
+     * @param {string|Date} fecha - Fecha del movimiento (YYYY-MM-DD o Date).
+     * @param {string} tipo - Tipo de movimiento: 'ingreso', 'gasto', 'ahorro', 'inversión'.
+     * @param {string} categoria - Categoría del movimiento: 'hogar', 'ocio', 'salud', 'sueldo', 'objetivos', 'otros', 'freelance'.
+     * @param {number} monto - Monto del movimiento (positivo).
+     * @throws {Error} - Si los datos no son válidos.
+     */
     constructor(fecha, tipo, categoria, monto){
         const datos = { fecha, tipo, categoria, monto };
         if(!Movimiento.validar(datos)){
@@ -27,15 +40,37 @@ export default class Movimiento {
 
     /* --- validaciones --- */
 
+    /**
+     * Genera un ID único para el movimiento.
+     * @returns {number} - ID único basado en timestamp + número aleatorio.
+     */
     static generarId(){
-        return Date.now() + Math.floor(Math.random() * 1000);
+        return crypto.randomUUID();
     }
+    
+    /**
+     * Normaliza el tipo a minúsculas y elimina espacios.
+     * @param {string} tipo
+     * @returns {string}
+     */
     static normalizarTipo(tipo){
         return String(tipo).trim().toLowerCase();
     }
+
+    /**
+     * Normaliza la categoría a minúsculas y elimina espacios.
+     * @param {string} categoria
+     * @returns {string}
+     */
     static normalizarCategoria(categoria){
         return String(categoria).trim().toLowerCase();
     }
+
+    /**
+     * Valida todos los datos de un movimiento.
+     * @param {Object} datos - { fecha, tipo, categoria, monto }
+     * @returns {boolean} - true si todos los datos son válidos.
+     */
     static validar({ fecha, tipo, categoria, monto}){
         if(!Movimiento.esFechaValida(fecha)) return false;
         if(!Movimiento.esTipoValido(tipo)) return false;
@@ -44,6 +79,11 @@ export default class Movimiento {
         return true;
     }
 
+    /**
+     * Valida que la fecha sea válida y no futura.
+     * @param {string|Date} fechaInput
+     * @returns {boolean}
+     */
     static esFechaValida(fechaInput) {
         if (!fechaInput) return false;
         const fechaStr = (fechaInput instanceof Date) ? fechaInput.toISOString().split('T')[0] : String(fechaInput).trim();
@@ -55,11 +95,23 @@ export default class Movimiento {
         hoy.setHours(0,0,0,0);
         return fecha <= hoy;
     }    
+
+    /**
+     * Valida que el tipo esté dentro de los permitidos.
+     * @param {string} tipo
+     * @returns {boolean}
+     */
     static esTipoValido(tipo) {
         if (!tipo) return false;
         const tiposValidos = ['ingreso', 'ahorro', 'inversión', 'inversion', 'gasto'];
         return tiposValidos.includes(String(tipo).trim().toLowerCase());
     }
+
+    /**
+     * Valida que la categoría esté dentro de las permitidas.
+     * @param {string} categoria
+     * @returns {boolean}
+     */
     static esCategoriaValida(categoria) {
         if (!categoria) return false;
         const categoriasValidas = ['hogar', 'ocio', 'salud', 'sueldo', 'objetivos', 'otros', 'freelance'];
@@ -68,6 +120,10 @@ export default class Movimiento {
 
     /* --- serialización --- */
 
+    /**
+     * Serializa el movimiento a un objeto JSON.
+     * @returns {Object} - { id, fecha, tipo, categoria, monto }
+     */
     toJSON(){
         return {
             id: this.#id,
@@ -77,11 +133,22 @@ export default class Movimiento {
             monto: this.#monto
         };
     }
+
+    /**
+     * Crea una instancia de Movimiento desde un objeto JSON.
+     * @param {Object} json - Objeto con los datos del movimiento.
+     * @returns {Movimiento} - Instancia reconstruida.
+     */
     static fromJSON(json) {
         const instancia = new Movimiento(json.fecha, json.tipo, json.categoria, json.monto);
         if (json.id) instancia.#id = json.id;
         return instancia;
     }
+
+    /**
+     * Genera un resumen legible del movimiento.
+     * @returns {string} - Formato: 'YYYY-MM-DD - tipo - categoria - $monto'
+     */
     getResumen() {
         return `${this.fecha.toISOString().split('T')[0]} - ${this.tipo} - ${this.categoria} - $${this.monto}`;
     }

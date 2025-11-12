@@ -28,7 +28,9 @@ Este diagrama define la arquitectura de lógica de negocio (POO) para el simulad
   - `validarConfiguracion(config)`: Comprueba que la configuración de exportación sea válida, incluyendo formato, nombre y ruta.
 Internamente usa los métodos estáticos `esFormatoValido()`, `sonNombreYRutaValidos()`.   
   - `toCSV(datos)`: Convierte los datos en una representación de texto plano con formato CSV.  
-  - `toJSON(datos)`: convierte los datos a un string JSON.   
+  - `toJSON(datos)`: convierte los datos a un string JSON.  
+  - `toPDF(datos)`: Genera un contenido en formato PDF.
+  - `toXLSX(datos)`: Convierte los datos en una hoja de cálculo Excel.
   - `esFormatoValido(formato)`:Método estático que comprueba si el formato indicado está dentro de los formatos permitidos.   
   - `sonNombreYRutaValidos(nombre, ruta)`: Método estático que verifica que el nombre de archivo y la ruta sean correctos y seguros.
 
@@ -52,3 +54,38 @@ Internamente usa los métodos estáticos `esFormatoValido()`, `sonNombreYRutaVal
 * **Planificador `*--` Movimiento (Composición):** El `Planificador` "posee" una colección de 0 o más (`0..*`) `Movimientos`. Esta relación es de composición porque los movimientos son parte integral del estado del planificador.
 * **Planificador `*--` MetaAhorro (Composición):** El `Planificador` también "posee" una colección de 0 o más (`0..*`) `MetasAhorro`.
 * **Planificador `*--` Exportador (Composición):** El `Planificador` incorpora internamente un objeto `Exportador`, al cual delega la responsabilidad de gestionar la exportación de datos. Esta relación refuerza el principio de responsabilidad única y desacopla la lógica de negocio del manejo de archivos.
+
+
+## Persistencia y Serialización de Datos
+
+Cada clase del modelo de dominio implementa métodos de **serialización** (`toJSON()`) y **deserialización** (`fromJSON()`) que permiten transformar las instancias en estructuras planas o cadenas JSON.  
+Esto facilita el almacenamiento y recuperación del estado de la aplicación mediante `localStorage`, archivos locales o exportaciones JSON.
+
+### Objetivos
+
+- **Estandarizar el formato** de guardado y carga de datos entre todas las clases.
+- **Desacoplar la lógica de negocio del almacenamiento**, evitando dependencias directas con el navegador o APIs externas.
+- **Garantizar la integridad** y reconstrucción correcta de las instancias del modelo.
+
+### Implementación por Clase
+
+| Clase | Método | Descripción |
+|--------|---------|-------------|
+| **Movimiento** | `toJSON()` | Convierte la instancia en un objeto plano con sus propiedades (`fecha`, `tipo`, `categoria`, `monto`). |
+|  | `fromJSON(json)` | Método estático que reconstruye una instancia de `Movimiento` desde un objeto previamente serializado. |
+| **MetaAhorro** | `toJSON()` | Serializa la meta con sus propiedades (`nombre`, `montoObjetivo`, `montoActual`, `fechaObjetivo`). |
+|  | `fromJSON(json)` | Crea una nueva instancia de `MetaAhorro` a partir de un objeto JSON cargado. |
+| **Planificador** | `toJSON()` | Serializa el estado completo del planificador, incluyendo listas de movimientos y metas. |
+|  | `fromJSON(json)` | Reconstruye un `Planificador` con sus colecciones internas, utilizando los métodos `fromJSON()` de `Movimiento` y `MetaAhorro`. |
+
+
+**Ejemplo de uso con Local Storage:**
+ ```js
+ // Guardar estado actual
+ localStorage.setItem('planificador', JSON.stringify(planificador.toJSON()));
+
+ // Restaurar estado al iniciar la app
+ const data = JSON.parse(localStorage.getItem('planificador'));
+ const planificador = Planificador.fromJSON(data);
+ ```
+
