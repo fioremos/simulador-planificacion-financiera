@@ -12,7 +12,7 @@ const planificador = new Planificador();
 function initMovimientoEvents() {
     const formMovimiento = document.querySelector('#form-ingresos-gastos');
     if (!formMovimiento) {
-        console.warn('Formulario de movimientos no encontrado en el DOM.');
+        console.log('Formulario de movimientos no encontrado en el DOM.');
         return;
     }
 
@@ -35,7 +35,7 @@ function manejarMovimientoSubmit(event) {
     try {
         const movimiento = planificador.agregarMovimiento(datos);
         setFeedback(feedback, 'Movimiento agregado con éxito.', false);
-        crearFilaMovimiento(datos);
+        crearFilaMovimiento(datos, movimiento);
         form.reset();
 
     } catch (error) {
@@ -44,7 +44,7 @@ function manejarMovimientoSubmit(event) {
 }
 
 // ---------- Manipulación del DOM ----------
-function crearFilaMovimiento(datos) {
+function crearFilaMovimiento(datos, movimiento) {
     const tablaCuerpo = document.querySelector('.movimientos-table tbody');
     const fila = document.createElement('tr');
 
@@ -58,7 +58,7 @@ function crearFilaMovimiento(datos) {
     img.alt = 'logo_tacho_borrar';
     boton.appendChild(img);
     tdBoton.appendChild(boton);
-    boton.addEventListener('click', () => fila.remove());
+    boton.addEventListener('click', () => {fila.remove(); planificador.eliminarMovimiento(movimiento)});
 
     // Celdas
     const tdFecha = crearCelda(datos.fecha);
@@ -77,7 +77,7 @@ function crearFilaMovimiento(datos) {
 function initExportarDatos() {
     const botonExportar = document.querySelector('#exportar-container .btn');
 
-    if (!botonExportar) {console.error("'#exportar-container .btn' no encontrado"); return};
+    if (!botonExportar) {console.log("'#exportar-container .btn' no encontrado"); return};
     botonExportar.addEventListener('click', manejarExportar);
     console.log('Listeners de Exportar inicializados.');
 }
@@ -131,7 +131,7 @@ function manejarReportes(event) {
         case 'fechaRyE': actualizarFechas(value, filtros); break;
         case 'categoriaRyE': filtros.categoria = value; break;
         case 'moneda': filtros.moneda = value; break;
-        default: console.warn(`Evento no manejado: ${id}`);
+        default: console.log(`Evento no manejado: ${id}`);
     }
 
     try {
@@ -238,7 +238,7 @@ function manejarGuardarObjetivo(event) {
     if (!radioSeleccionado) return setFeedback(feedback, 'Selecciona un objetivo.', true);
 
     const datosMeta = getDatosMeta(radioSeleccionado.value);
-    if (!datosMeta) {console.error("No hay datos de Meta de Ahorro"); cerrarModal('ObjetivosModal'); return};
+    if (!datosMeta) {console.log("No hay datos de Meta de Ahorro"); cerrarModal('ObjetivosModal'); return};
 
     actualizarMetaCard(datosMeta);
     mostrarMetaCard(true);
@@ -285,7 +285,7 @@ function actualizarMetaCard(datosMeta) {
 
 function mostrarMetaCard(mostrar = true) {
     const contenido = document.querySelector('.meta-card-content');
-    if (!contenido) {consoloe.error("'.meta-card-content' no encontrado"); return};
+    if (!contenido) {consoloe.log("'.meta-card-content' no encontrado"); return};
     contenido.style.display = mostrar ? 'block' : 'none';
 }
 
@@ -314,16 +314,16 @@ function crearFilaMeta(meta) {
 
 function actualizarRadiosConMetas() {
     const tbody = document.querySelector('.metas-table tbody');
-    if (!tbody) {console.error(".metas-table tbody no encontrado"); return};
+    if (!tbody) {console.log(".metas-table tbody no encontrado"); return};
 
     const radioGroup = document.querySelector('#form-objetivo-modal .radio-group');
-    if (!radioGroup) {console.error("'#form-objetivo-modal .radio-group' no encontrado"); return};
+    if (!radioGroup) {console.log("'#form-objetivo-modal .radio-group' no encontrado"); return};
 
     radioGroup.innerHTML = '';
 
     tbody.querySelectorAll('tr').forEach((fila) => {
         const objetivo = fila.querySelector('td')?.textContent.trim();
-        if (!objetivo) { console.error("No se encontro ningun objetivo"); return};
+        if (!objetivo) { console.log("No se encontro ningun objetivo"); return};
 
         const label = document.createElement('label');
         const input = document.createElement('input');
@@ -361,12 +361,12 @@ function cerrarModal(id) {
 function setFeedback(feedback, message, error) {
     const overlay = document.getElementById('overlay');
     if (error) {
-        console.error(message);
+        console.log(message);
         feedback.textContent =
             `${message.message}`;
         feedback.classList.remove('success');
         feedback.classList.add('error');
-        console.error(message);
+        console.log(message);
         overlay.style.display = "flex";
 
         // Limpiar el mensaje de error también después de 3 segundos
@@ -374,7 +374,7 @@ function setFeedback(feedback, message, error) {
             feedback.textContent = '';
             feedback.classList.remove('error');
             overlay.style.display = "none";
-        }, 3000);
+        }, 1000);
     } else {
         const overlay = document.getElementById('overlay');
         feedback.textContent = message;
@@ -386,6 +386,6 @@ function setFeedback(feedback, message, error) {
             feedback.textContent = '';
             feedback.classList.remove('success', 'error');
             overlay.style.display = "none";
-        }, 3000);
+        }, 1000);
     }
 }

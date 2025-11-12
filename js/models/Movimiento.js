@@ -14,7 +14,7 @@ class Movimiento {
      * Crea un nuevo movimiento financiero.
      * @param {string|Date} fecha - Fecha del movimiento (YYYY-MM-DD o Date).
      * @param {string} tipo - Tipo de movimiento: 'ingreso', 'gasto', 'ahorro', 'inversión'.
-     * @param {string} categoria - Categoría del movimiento: 'hogar', 'ocio', 'salud', 'sueldo', 'objetivos', 'otros', 'freelance'.
+     * @param {string} categoria - Categoría del movimiento: 'hogar', 'ocio', 'salud', 'sueldo', 'objetivos', 'otros'.
      * @param {number} monto - Monto del movimiento (positivo).
      * @throws {Error} - Si los datos no son válidos.
      */
@@ -114,7 +114,7 @@ class Movimiento {
      */
     static esCategoriaValida(categoria) {
         if (!categoria) return false;
-        const categoriasValidas = ['hogar', 'ocio', 'salud', 'sueldo', 'objetivos', 'otros', 'freelance'];
+        const categoriasValidas = ['hogar', 'ocio', 'salud', 'sueldo', 'objetivos', 'otros'];
         return categoriasValidas.includes(String(categoria).trim().toLowerCase());
     }
 

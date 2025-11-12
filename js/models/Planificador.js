@@ -17,12 +17,12 @@ class Planificador {
     }
 
     /* ======== Gestión de Movimientos ======== */
-     /**
-     * Agrega un nuevo movimiento financiero.
-     * @param {Object} datos - Datos del movimiento: { fecha, tipo, categoria, monto }.
-     * @returns {Movimiento} - Instancia del movimiento agregado.
-     * @throws {Error} - Si los datos son inválidos o falla la creación del movimiento.
-     */
+    /**
+    * Agrega un nuevo movimiento financiero.
+    * @param {Object} datos - Datos del movimiento: { fecha, tipo, categoria, monto }.
+    * @returns {Movimiento} - Instancia del movimiento agregado.
+    * @throws {Error} - Si los datos son inválidos o falla la creación del movimiento.
+    */
     agregarMovimiento(datos) {
         try {
             const movimiento = new Movimiento(
@@ -30,7 +30,7 @@ class Planificador {
                 datos.tipo,
                 datos.categoria,
                 datos.monto
-            );  
+            );
             this.#movimientos.push(movimiento);
             console.log('Movimiento agregado:', movimiento.toJSON());
             return movimiento;
@@ -39,13 +39,29 @@ class Planificador {
         }
     }
 
+    eliminarMovimiento(movimiento) {
+        try {
+            const idAEliminar = movimiento.id;
+            const indice = this.#movimientos.findIndex(m => m.id === idAEliminar);
+
+            if (indice !== -1) {
+                this.#movimientos.splice(indice, 1);
+                return true; // Eliminado con éxito
+            }
+
+            return false; // No se encontró
+        } catch(error) {
+            throw new Error('Error al eliminar movimiento: ' + error.message);
+        }
+    }
+
     /* ======== Gestión de Metas ======== */
-     /**
-     * Agrega una nueva meta de ahorro.
-     * @param {Object} datos - Datos de la meta: { nombre, montoObjetivo, fechaObjetivo }.
-     * @returns {MetaAhorro} - Instancia de la meta agregada.
-     * @throws {Error} - Si los datos son inválidos o falla la creación de la meta.
-     */
+    /**
+    * Agrega una nueva meta de ahorro.
+    * @param {Object} datos - Datos de la meta: { nombre, montoObjetivo, fechaObjetivo }.
+    * @returns {MetaAhorro} - Instancia de la meta agregada.
+    * @throws {Error} - Si los datos son inválidos o falla la creación de la meta.
+    */
     agregarMetaAhorro(datos) {
         try {
             const meta = new MetaAhorro(
@@ -81,9 +97,9 @@ class Planificador {
         const indicadores = this.#calcularIndicadores(datosFiltrados);
 
         return {
-        filtros,
-        totalMovimientos: datosFiltrados.length,
-        ...indicadores
+            filtros,
+            totalMovimientos: datosFiltrados.length,
+            ...indicadores
         };
     }
 
@@ -100,31 +116,47 @@ class Planificador {
         return this.#movimientos.filter(mov => {
             const fecha = new Date(mov.fecha);
             const enRango = fecha >= desde && fecha <= hasta;
-            const categoriaCoincide = filtros.categoria === 'Todas' || mov.categoria === filtros.categoria;
+            const categoriaCoincide = filtros.categoria === 'Todas' || mov.categoria.toLowerCase() === filtros.categoria.toLowerCase() || (mov.categoria.toLowerCase() === "sueldo" && mov.tipo.toLowerCase() === "ingreso");
             return enRango && categoriaCoincide;
         });
     }
-    
+
     /**
      * Calcula indicadores financieros a partir de un conjunto de movimientos.
      * @private
      * @param {Array<Movimiento>} datos - Movimientos a procesar.
-     * @returns {Object} - Indicadores calculados: { ingresos, gastos, ahorro, saldo, porcentajeAhorro }.
+     * @returns {Object} - Indicadores calculados:   total: { ingresos, gastos, ahorro, saldo, porcentajeAhorro }, categorias.
      */
     #calcularIndicadores(datos) {
-        const ingresos = datos.filter(d => d.tipo === 'ingreso').reduce((acc, cur) => acc + cur.monto, 0);
-        const gastos = datos.filter(d => d.tipo === 'gasto').reduce((acc, cur) => acc + cur.monto, 0);
-        const ahorro = datos.filter(d => d.tipo === 'ahorro').reduce((acc, cur) => acc + cur.monto, 0);
-        const saldo = ingresos - gastos;
-        const porcentajeAhorro = ingresos > 0 ? (ahorro / ingresos) * 100 : 0;
+    const categorias = {};
 
-        return {
-            ingresos,
-            gastos,
-            ahorro,
-            saldo,
-            porcentajeAhorro: porcentajeAhorro.toFixed(2)
-       };
+    datos.forEach(d => {
+        if (!categorias[d.categoria]) {
+            // Inicializamos los totales de cada categoría
+            categorias[d.categoria] = { ingreso: 0, gasto: 0, ahorro: 0 };
+        }
+
+        // Sumamos el monto según el tipo
+        if (d.tipo === 'ingreso') {
+            categorias[d.categoria].ingreso += d.monto;
+        } else if (d.tipo === 'gasto') {
+            categorias[d.categoria].gasto += d.monto;
+        } else if (d.tipo === 'ahorro') {
+            categorias[d.categoria].ahorro += d.monto;
+        }
+    });
+
+    // Totales generales
+    const ingresos = datos.filter(d => d.tipo === 'ingreso').reduce((acc, cur) => acc + cur.monto, 0);
+    const gastos = datos.filter(d => d.tipo === 'gasto').reduce((acc, cur) => acc + cur.monto, 0);
+    const ahorro = datos.filter(d => d.tipo === 'ahorro').reduce((acc, cur) => acc + cur.monto, 0);
+    const saldo = ingresos - gastos;
+    const porcentajeAhorro = ingresos > 0 ? (ahorro / ingresos) * 100 : 0;
+
+    return {
+        total: { ingresos, gastos, ahorro, saldo, porcentajeAhorro: porcentajeAhorro.toFixed(2) },
+        categorias
+        };
     }
 
     /* ======== Exportación ======== */
@@ -140,14 +172,14 @@ class Planificador {
         tipo.length === 1 && tipo[0] === 'resumen-cuenta'
         ? this.#movimientos.map(m => m.toJSON())
         : this.#metasAhorro.map(m => m.toJSON());
-        
+
     const config = { tipo, formato, nombreArchivo, rutaDestino };
 
     try {
         this.#exportador.exportar(datos, config);
         console.log('Exportación exitosa.');
     } catch (error) {
-        console.error('Error al exportar:', error.message);
+        console.log('Error al exportar:', error.message);
         }
     }
 
