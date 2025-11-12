@@ -1,14 +1,24 @@
 // =============================================================
 // Variables globales de estado
 // =============================================================
+
+/** @type {HTMLElement} Elemento para mostrar mensajes de feedback */
 let feedback = document.querySelector('#feedback');
+
+/** @type {Object|null} Filtros actuales para reportes */
 let filtros = null;
 
+/** @type {Planificador} Instancia principal del planificador */
 const planificador = new Planificador();
 
 // =============================================================
 // 1. Módulo de Movimientos (Ingresos / Gastos)
 // =============================================================
+
+/**
+ * Inicializa los listeners del formulario de ingresos y gastos.
+ * Busca el formulario en el DOM y agrega el manejador de envío.
+ */
 function initMovimientoEvents() {
     const formMovimiento = document.querySelector('#form-ingresos-gastos');
     if (!formMovimiento) {
@@ -20,7 +30,12 @@ function initMovimientoEvents() {
     console.log('Listeners de Movimiento inicializados.');
 }
 
-// ---------- Manejador de evento ----------
+/**
+ * Maneja el evento de envío del formulario de movimientos.
+ * Valida los datos y los envía al planificador.
+ * 
+ * @param {SubmitEvent} event - Evento de envío del formulario.
+ */
 function manejarMovimientoSubmit(event) {
     event.preventDefault();
     const form = event.target;
@@ -37,13 +52,17 @@ function manejarMovimientoSubmit(event) {
         setFeedback(feedback, 'Movimiento agregado con éxito.', false);
         crearFilaMovimiento(datos, movimiento);
         form.reset();
-
     } catch (error) {
         setFeedback(feedback, error, true);
     }
 }
 
-// ---------- Manipulación del DOM ----------
+/**
+ * Crea y agrega una fila en la tabla de movimientos.
+ * 
+ * @param {Object} datos - Datos del movimiento.
+ * @param {Object} movimiento - Objeto de movimiento generado por el planificador.
+ */
 function crearFilaMovimiento(datos, movimiento) {
     const tablaCuerpo = document.querySelector('.movimientos-table tbody');
     const fila = document.createElement('tr');
@@ -58,7 +77,10 @@ function crearFilaMovimiento(datos, movimiento) {
     img.alt = 'logo_tacho_borrar';
     boton.appendChild(img);
     tdBoton.appendChild(boton);
-    boton.addEventListener('click', () => {fila.remove(); planificador.eliminarMovimiento(movimiento)});
+    boton.addEventListener('click', () => {
+        fila.remove();
+        planificador.eliminarMovimiento(movimiento);
+    });
 
     // Celdas
     const tdFecha = crearCelda(datos.fecha);
@@ -74,15 +96,25 @@ function crearFilaMovimiento(datos, movimiento) {
 // =============================================================
 // 2. Módulo de Exportar Datos
 // =============================================================
+
+/**
+ * Inicializa el botón de exportación de datos.
+ */
 function initExportarDatos() {
     const botonExportar = document.querySelector('#exportar-container .btn');
-
-    if (!botonExportar) {console.log("'#exportar-container .btn' no encontrado"); return};
+    if (!botonExportar) {
+        console.log("'#exportar-container .btn' no encontrado");
+        return;
+    }
     botonExportar.addEventListener('click', manejarExportar);
     console.log('Listeners de Exportar inicializados.');
 }
 
-// ---------- Manejador de evento ----------
+/**
+ * Maneja la exportación de datos seleccionados.
+ * 
+ * @param {MouseEvent} event - Evento del clic en el botón de exportar.
+ */
 function manejarExportar(event) {
     event.preventDefault();
 
@@ -94,7 +126,6 @@ function manejarExportar(event) {
 
     try {
         planificador.exportarDatos(tipoDatos, formato, nombre, ubicacion);
-        
         setFeedback(feedback, 'Archivo exportado con éxito.', false);
     } catch (error) {
         setFeedback(feedback, error, true);
@@ -104,6 +135,10 @@ function manejarExportar(event) {
 // =============================================================
 // 3. Módulo de Reportes
 // =============================================================
+
+/**
+ * Inicializa los reportes y configura los filtros por defecto.
+ */
 function initReportes() {
     const form = document.getElementById('movimientos-form');
 
@@ -123,7 +158,11 @@ function initReportes() {
     console.log('Listeners de Reportes inicializados.');
 }
 
-// ---------- Manejador de evento ----------
+/**
+ * Maneja los cambios de filtros en el formulario de reportes.
+ * 
+ * @param {Event} event - Evento de cambio en el formulario.
+ */
 function manejarReportes(event) {
     const { id, value } = event.target;
 
@@ -143,10 +182,13 @@ function manejarReportes(event) {
     }
 }
 
-// ---------- Manipulación del DOM ----------
+/**
+ * Actualiza la sección visual del reporte de gastos.
+ * 
+ * @param {{total: Object, categorias: Object}} resultados - Resultados del reporte.
+ */
 function actualizarReporteGastos(resultados) {
     const { total, categorias } = resultados;
-
     const listaContenedor = document.getElementById('gastos-lista');
     const saldoElem = document.querySelector('#reportes .saldo-promedio strong');
     const ahorroElem = document.querySelector('#reportes .porcentaje-ahorro strong');
@@ -181,7 +223,12 @@ function actualizarReporteGastos(resultados) {
     ahorroElem.textContent = `${total.porcentajeAhorro}%`;
 }
 
-// ---------- Funciones auxiliares ----------
+/**
+ * Actualiza los rangos de fechas según la opción seleccionada.
+ * 
+ * @param {string} valor - Valor seleccionado (por ejemplo, "Últimos 7 días").
+ * @param {Object} filtros - Objeto de filtros que se actualizará.
+ */
 function actualizarFechas(valor, filtros) {
     const hoy = new Date();
     const desde = new Date(hoy);
@@ -197,6 +244,10 @@ function actualizarFechas(valor, filtros) {
 // =============================================================
 // 4. Módulo de Metas y Objetivos de Ahorro
 // =============================================================
+
+/**
+ * Inicializa los formularios de metas y objetivos de ahorro.
+ */
 function initMetaAhorro() {
     const formMetas = document.querySelector('#form-metas-modal');
     const formObjetivo = document.querySelector('#form-objetivo-modal');
@@ -208,7 +259,11 @@ function initMetaAhorro() {
     console.log('Listeners de Metas y Objetivos inicializados.');
 }
 
-// ---------- Manejador de evento ----------
+/**
+ * Maneja el guardado de una nueva meta de ahorro.
+ * 
+ * @param {SubmitEvent} event - Evento de envío del formulario de metas.
+ */
 function manejarGuardarMeta(event) {
     event.preventDefault();
 
@@ -229,7 +284,11 @@ function manejarGuardarMeta(event) {
     }
 }
 
-
+/**
+ * Maneja la selección y visualización de un objetivo guardado.
+ * 
+ * @param {SubmitEvent} event - Evento de envío del formulario de objetivos.
+ */
 function manejarGuardarObjetivo(event) {
     event.preventDefault();
 
@@ -238,7 +297,11 @@ function manejarGuardarObjetivo(event) {
     if (!radioSeleccionado) return setFeedback(feedback, 'Selecciona un objetivo.', true);
 
     const datosMeta = getDatosMeta(radioSeleccionado.value);
-    if (!datosMeta) {console.log("No hay datos de Meta de Ahorro"); cerrarModal('ObjetivosModal'); return};
+    if (!datosMeta) {
+        console.log("No hay datos de Meta de Ahorro");
+        cerrarModal('ObjetivosModal');
+        return;
+    }
 
     actualizarMetaCard(datosMeta);
     mostrarMetaCard(true);
@@ -246,7 +309,12 @@ function manejarGuardarObjetivo(event) {
     form.reset();
 }
 
-// ---------- Funciones de manipulación del DOM ----------
+/**
+ * Obtiene los datos de una meta específica desde la tabla.
+ * 
+ * @param {string} objetivo - Nombre de la meta a buscar.
+ * @returns {Object|null} Datos de la meta o null si no se encuentra.
+ */
 function getDatosMeta(objetivo) {
     const filas = document.querySelectorAll('.metas-table tbody tr');
 
@@ -264,6 +332,11 @@ function getDatosMeta(objetivo) {
     return null;
 }
 
+/**
+ * Actualiza la tarjeta (card) de la meta seleccionada.
+ * 
+ * @param {Object} datosMeta - Datos de la meta de ahorro.
+ */
 function actualizarMetaCard(datosMeta) {
     document.querySelector('#meta-nombre').textContent = datosMeta.nombre;
     document.querySelector('#meta-ahorrado').textContent = `$${datosMeta.ahorrado.toLocaleString()}`;
@@ -283,12 +356,25 @@ function actualizarMetaCard(datosMeta) {
     porcentajeElem.textContent = `${porcentaje}% completado`;
 }
 
+/**
+ * Muestra u oculta la tarjeta de meta seleccionada.
+ * 
+ * @param {boolean} [mostrar=true] - Define si se muestra o se oculta la tarjeta.
+ */
 function mostrarMetaCard(mostrar = true) {
     const contenido = document.querySelector('.meta-card-content');
-    if (!contenido) {consoloe.log("'.meta-card-content' no encontrado"); return};
+    if (!contenido) {
+        console.log("'.meta-card-content' no encontrado");
+        return;
+    }
     contenido.style.display = mostrar ? 'block' : 'none';
 }
 
+/**
+ * Crea una nueva fila en la tabla de metas de ahorro.
+ * 
+ * @param {Object} meta - Objeto con datos de la meta.
+ */
 function crearFilaMeta(meta) {
     const tablaCuerpo = document.querySelector('.metas-table tbody');
     const fila = document.createElement('tr');
@@ -312,18 +398,30 @@ function crearFilaMeta(meta) {
     tablaCuerpo.appendChild(fila);
 }
 
+/**
+ * Actualiza los radios en el formulario de objetivos según las metas disponibles.
+ */
 function actualizarRadiosConMetas() {
     const tbody = document.querySelector('.metas-table tbody');
-    if (!tbody) {console.log(".metas-table tbody no encontrado"); return};
+    if (!tbody) {
+        console.log(".metas-table tbody no encontrado");
+        return;
+    }
 
     const radioGroup = document.querySelector('#form-objetivo-modal .radio-group');
-    if (!radioGroup) {console.log("'#form-objetivo-modal .radio-group' no encontrado"); return};
+    if (!radioGroup) {
+        console.log("'#form-objetivo-modal .radio-group' no encontrado");
+        return;
+    }
 
     radioGroup.innerHTML = '';
 
     tbody.querySelectorAll('tr').forEach((fila) => {
         const objetivo = fila.querySelector('td')?.textContent.trim();
-        if (!objetivo) { console.log("No se encontro ningun objetivo"); return};
+        if (!objetivo) {
+            console.log("No se encontró ningún objetivo");
+            return;
+        }
 
         const label = document.createElement('label');
         const input = document.createElement('input');
@@ -342,41 +440,62 @@ function actualizarRadiosConMetas() {
 // =============================================================
 // Funciones auxiliares comunes
 // =============================================================
+
+/**
+ * Crea una celda <td> con texto.
+ * 
+ * @param {string} texto - Texto del contenido de la celda.
+ * @returns {HTMLTableCellElement} Celda creada.
+ */
 function crearCelda(texto) {
     const td = document.createElement('td');
     td.textContent = texto;
     return td;
 }
 
+/**
+ * Capitaliza un string (primera letra mayúscula, resto minúscula).
+ * 
+ * @param {string} str - Cadena de texto.
+ * @returns {string} Texto capitalizado.
+ */
 function capitalizar(str) {
     return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
 }
 
+/**
+ * Cierra un modal de Bootstrap por su ID.
+ * 
+ * @param {string} id - ID del modal a cerrar.
+ */
 function cerrarModal(id) {
     const modal = document.getElementById(id);
     const modalBootstrap = bootstrap.Modal.getInstance(modal);
     modalBootstrap?.hide();
 }
 
+/**
+ * Muestra un mensaje de feedback (éxito o error) en pantalla.
+ * 
+ * @param {HTMLElement} feedback - Elemento del DOM para el mensaje.
+ * @param {string|Error} message - Mensaje a mostrar.
+ * @param {boolean} error - Si es true, se trata de un mensaje de error.
+ */
 function setFeedback(feedback, message, error) {
     const overlay = document.getElementById('overlay');
     if (error) {
         console.log(message);
-        feedback.textContent =
-            `${message.message}`;
+        feedback.textContent = `${message.message}`;
         feedback.classList.remove('success');
         feedback.classList.add('error');
-        console.log(message);
         overlay.style.display = "flex";
 
-        // Limpiar el mensaje de error también después de 3 segundos
         setTimeout(() => {
             feedback.textContent = '';
             feedback.classList.remove('error');
             overlay.style.display = "none";
         }, 1000);
     } else {
-        const overlay = document.getElementById('overlay');
         feedback.textContent = message;
         feedback.classList.remove('error');
         feedback.classList.add('success');
