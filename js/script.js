@@ -1,7 +1,7 @@
 // =============================================================
 // Variables globales de estado
 // =============================================================
-let feedback = null;
+let feedback = document.querySelector('#feedback');
 let filtros = null;
 
 const planificador = new Planificador();
@@ -11,8 +11,6 @@ const planificador = new Planificador();
 // =============================================================
 function initMovimientoEvents() {
     const formMovimiento = document.querySelector('#form-ingresos-gastos');
-    feedback = document.querySelector('#fb-ingresos');
-
     if (!formMovimiento) {
         console.warn('Formulario de movimientos no encontrado en el DOM.');
         return;
@@ -36,7 +34,6 @@ function manejarMovimientoSubmit(event) {
 
     try {
         const movimiento = planificador.agregarMovimiento(datos);
-
         setFeedback(feedback, 'Movimiento agregado con éxito.', false);
         crearFilaMovimiento(datos);
         form.reset();
@@ -79,9 +76,8 @@ function crearFilaMovimiento(datos) {
 // =============================================================
 function initExportarDatos() {
     const botonExportar = document.querySelector('#exportar-container .btn');
-    feedback = document.querySelector('#fb-exportar');
 
-    if (!botonExportar) return;
+    if (!botonExportar) {console.error("'#exportar-container .btn' no encontrado"); return};
     botonExportar.addEventListener('click', manejarExportar);
     console.log('Listeners de Exportar inicializados.');
 }
@@ -110,7 +106,6 @@ function manejarExportar(event) {
 // =============================================================
 function initReportes() {
     const form = document.getElementById('movimientos-form');
-    feedback = document.querySelector('#fb-reportes');
 
     filtros = {
         fechaDesde: "",
@@ -205,7 +200,6 @@ function actualizarFechas(valor, filtros) {
 function initMetaAhorro() {
     const formMetas = document.querySelector('#form-metas-modal');
     const formObjetivo = document.querySelector('#form-objetivo-modal');
-    feedback = document.querySelector('#fb-metaAhorro');
 
     if (!formMetas || !formObjetivo) return;
 
@@ -230,13 +224,13 @@ function manejarGuardarMeta(event) {
         setFeedback(feedback, 'Objetivo guardado con éxito', false);
         event.target.reset();
     } catch (error) {
+        cerrarModal('MetasAhorroModal');
         setFeedback(feedback, error, true);
     }
 }
 
 
 function manejarGuardarObjetivo(event) {
-    feedback = document.querySelector('#fb-objetivos');
     event.preventDefault();
 
     const form = event.target;
@@ -244,7 +238,7 @@ function manejarGuardarObjetivo(event) {
     if (!radioSeleccionado) return setFeedback(feedback, 'Selecciona un objetivo.', true);
 
     const datosMeta = getDatosMeta(radioSeleccionado.value);
-    if (!datosMeta) return;
+    if (!datosMeta) {console.error("No hay datos de Meta de Ahorro"); cerrarModal('ObjetivosModal'); return};
 
     actualizarMetaCard(datosMeta);
     mostrarMetaCard(true);
@@ -291,7 +285,7 @@ function actualizarMetaCard(datosMeta) {
 
 function mostrarMetaCard(mostrar = true) {
     const contenido = document.querySelector('.meta-card-content');
-    if (!contenido) return;
+    if (!contenido) {consoloe.error("'.meta-card-content' no encontrado"); return};
     contenido.style.display = mostrar ? 'block' : 'none';
 }
 
@@ -320,16 +314,16 @@ function crearFilaMeta(meta) {
 
 function actualizarRadiosConMetas() {
     const tbody = document.querySelector('.metas-table tbody');
-    if (!tbody) return;
+    if (!tbody) {console.error(".metas-table tbody no encontrado"); return};
 
     const radioGroup = document.querySelector('#form-objetivo-modal .radio-group');
-    if (!radioGroup) return;
+    if (!radioGroup) {console.error("'#form-objetivo-modal .radio-group' no encontrado"); return};
 
     radioGroup.innerHTML = '';
 
     tbody.querySelectorAll('tr').forEach((fila) => {
         const objetivo = fila.querySelector('td')?.textContent.trim();
-        if (!objetivo) return;
+        if (!objetivo) { console.error("No se encontro ningun objetivo"); return};
 
         const label = document.createElement('label');
         const input = document.createElement('input');
@@ -365,6 +359,7 @@ function cerrarModal(id) {
 }
 
 function setFeedback(feedback, message, error) {
+    const overlay = document.getElementById('overlay');
     if (error) {
         console.error(message);
         feedback.textContent =
@@ -372,20 +367,25 @@ function setFeedback(feedback, message, error) {
         feedback.classList.remove('success');
         feedback.classList.add('error');
         console.error(message);
+        overlay.style.display = "flex";
 
         // Limpiar el mensaje de error también después de 3 segundos
         setTimeout(() => {
             feedback.textContent = '';
             feedback.classList.remove('error');
+            overlay.style.display = "none";
         }, 3000);
     } else {
+        const overlay = document.getElementById('overlay');
         feedback.textContent = message;
         feedback.classList.remove('error');
         feedback.classList.add('success');
+        overlay.style.display = "flex";
 
         setTimeout(() => {
             feedback.textContent = '';
             feedback.classList.remove('success', 'error');
+            overlay.style.display = "none";
         }, 3000);
     }
 }

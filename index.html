@@ -28,6 +28,10 @@
 </head>
 
 <body>
+    <div id="overlay" class="modal-overlay">
+        <div id="feedback" class="feedback">
+        </div>
+    </div>
      <!-- HEADER ÚNICO -->
     <header id="main-header" class="header-oculto">
         <h1 class="visually-hidden">FinGrow - Panel Principal</h1>
@@ -420,8 +424,6 @@
                                         <button type="submit" class="btn btn-inverse btn-blue">Agregar movimiento</button>
                                     </div>
                                 </form>
-
-                                <div class="feedback" id="fb-ingresos"></div>
                             </div>
 
                             <!-- Tabla de movimientos -->
@@ -430,9 +432,6 @@
                                     <h3 class="subtitle">Movimientos</h3>
                                 </div>
                                 <div clas="">
-                                    <!-- Tabla generada de forma estática por ahora. 
-                                                    En versiones futuras, se construirá dinámicamente con JavaScript 
-                                                    o mediante datos obtenidos desde una API, permitiendo contenido actualizado  -->
                                     <table class="table-csm movimientos-table">
                                         <thead>
                                             <tr>
@@ -469,9 +468,6 @@
                                 <h2 class="subtitle">Metas de ahorro</h2>
                             </div>
                         </div>
-                        <!-- Tabla generada de forma estática por ahora. 
-                                                En versiones futuras, se construirá dinámicamente con JavaScript 
-                                                o mediante datos obtenidos desde una API, permitiendo contenido actualizado  -->
                         <div>
                             <table class="table-csm metas-table text-center w-100 borde">
                                 <thead>
@@ -489,8 +485,6 @@
                         <div class="metas-card-table-button d-flex justify-content-end">
                             <button class="btn btn-inverse btn-blue small" data-bs-toggle="modal" data-bs-target="#MetasAhorroModal">Agregar objetivo</button>
                         </div>
-                        <div class="feedback" id="fb-metaAhorro"></div>
-
                         <!-- Modal -->
                         <div class="modal fade" id="MetasAhorroModal" tabindex="-1" aria-labelledby="MetasAhorroModalLabel" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
@@ -548,7 +542,10 @@
                                 <h3 class="subtitle" id="meta-nombre">Objetivo</h3>
                                 <h3 class="subtitle" id="meta-ahorrado">$0</h3>
                             </div>
-
+                            <!-- Gráfico temporalmente representado como imagen estática. 
+                                                    En el futuro, será generado dinámicamente con JavaScript, 
+                                                    o bien integrará una solución externa para 
+                                                    mostrar datos actualizados y personalizados en tiempo real. -->
                             <div class="container-chart">
                                 <img src="assets/images/metasAhorro/Graph.png" class="metas-chart w-50" alt="Gráfico metas de ahorro" loading="lazy" id="meta-grafico">
                             </div>
@@ -594,7 +591,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="feedback" id="fb-objetivos"></div>
                         </div>
                     </section>
 
@@ -743,7 +739,6 @@
                                 </div>
                             </form>
                             <hr>
-                            <div class="feedback" id="fb-reportes"></div>
                         </div>
 
                         <!-- Grafico -->
@@ -976,7 +971,6 @@
                                     <input type="text" id="ubicacion" name="ubicacion" class="input"
                                         placeholder="C:/Users/user/Inversiones/">
                                 </div>
-                                <div class="feedback" id="fb-exportar"></div>
                             </div>
 
                             <!-- Botón exportar -->

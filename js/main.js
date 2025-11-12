@@ -32,19 +32,16 @@ function mostrarSeccion(id) {
         movimientosIniciado = true;
     }
 
-    movimientosIniciado = false;
     if (id === 'exportar' && !movimientosIniciado) {
         initExportarDatos();
         movimientosIniciado = true;
     }
 
-    movimientosIniciado = false;
     if (id === 'reportes' && !movimientosIniciado) {
         initReportes();
         movimientosIniciado = true;
     }
     
-    movimientosIniciado = false;
     if (id === 'metas' && !movimientosIniciado) {
         initMetaAhorro();
         movimientosIniciado = true;
