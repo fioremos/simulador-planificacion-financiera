@@ -11,7 +11,7 @@ class Movimiento {
   - tipo: string
   - categoria: string
   - monto: number
-  + constructor(fecha, tipo, categoria, monto)
+  + constructor(fecha: Date, tipo: string, categoria: string, monto: number)
   + toJSON(): Object
   + {static} validar(datos: Object): boolean
   + {static} fromJSON(json: Object): Movimiento
@@ -22,7 +22,7 @@ class MetaAhorro {
     - montoObjetivo: number
     - fechaObjetivo: Date | null
     - montoActual: number
-    + constructor(nombre, montoObjetivo, fechaObjetivo)
+    + constructor(nombre: string, montoObjetivo: number, fechaObjetivo: Date | null)
     + actualizarMontoActual(monto: number): void
     + toJSON(): Object
     + {static} validar(datos: Object): boolean
@@ -48,7 +48,7 @@ class Planificador{
     + agregarMovimiento(datos: Object): Movimiento
     + agregarMetaAhorro(datos: Object): MetaAhorro
     + generarReporte(filtros: Object): Object
-    + exportarDatos(tipo, formato, nombreArchivo, rutaDestino): Object
+    + exportarDatos(tipo: Array, formato: string, nombreArchivo: string, rutaDestino: string): Object
     + toJSON(): Object
     + {static} fromJSON(json: Object): Planificador
     - filtrarDatos(filtros: Object): Movimiento[]
