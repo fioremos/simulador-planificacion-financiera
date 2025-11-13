@@ -1,600 +1,668 @@
+// =============================================================
+// Variables globales de estado
+// =============================================================
+
+/** @type {HTMLElement} Elemento para mostrar mensajes de feedback */
+let feedback = document.querySelector('#feedback');
+
+/** @type {Object|null} Filtros actuales para reportes */
+let filtros = null;
+
+/** @type {Planificador} Instancia principal del planificador */
+const planificador = new Planificador();
+
+/** @type {NodeListOf<HTMLElement>} Lista de secciones principales del contenido */
+let secciones;
+
+/** @type {HTMLElement|null} Barra lateral de navegación */
+let sidebar;
+
+/** @type {HTMLElement|null} Cabecera principal del sitio */
+let header;
+
+/** @type {HTMLElement|null} Contenedor principal que engloba las secciones */
+let principalContainer;
+
+/** @type {HTMLElement|null} Elemento Offcanvas del sidebar (modo móvil) */
+let offcanvasEl;
+
+// =============================================================
+// Event Listeners
+// =============================================================
+
 /**
- * Representa un movimiento financiero
- * @typedef {Object} Movimiento
- * @property {string} tipo
- * @property {string} categoria
- * @property {string} fecha
- * @property {number} monto
- */
-
-/** 
- * Variable global que simula una base de datos local de movimientos
- */
-const movimientos = [];
-
-/**
- * Valida si una cadena es una fecha válida en el pasado
- * @param {string} fechaStr - Fecha en formato YYYY-MM-DD
- * @returns {boolean}
- */
-function esFechaValida(fechaStr) {
-    const regexFecha = /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/;
-    if (!regexFecha.test(fechaStr)) { return false; }
-
-    const fecha = new Date(fechaStr);
-    const hoy = new Date();
-    
-    // Limpiar la hora
-    fecha.setHours(0, 0, 0, 0);
-    hoy.setHours(0, 0, 0, 0);
-
-    return fecha <= hoy;
-}
-
-/**
- * Verifica si el tipo ingresado es válido.
+ * Evento principal que se ejecuta cuando el DOM está completamente cargado.
+ * Realiza la inicialización de los elementos globales y determina qué sección mostrar inicialmente.
  *
- * @param {string} tipo - El tipo de movimiento ingresado por el usuario.
- * @returns {boolean} Retorna `true` si el tipo es uno de los valores permitidos, de lo contrario `false`.
+ * @event DOMContentLoaded
  */
-function esTipoValido(tipo) {
-    const tiposValidos = ['ingreso', 'ahorro', 'inversión', 'gasto'];
-    return tiposValidos.includes(tipo.trim().toLowerCase());
-}
+document.addEventListener('DOMContentLoaded', () => {
+    // Cachear selectores para evitar consultas repetidas
+    secciones = document.querySelectorAll('.principal-section');
+    sidebar = document.querySelector('.sidebar');
+    header = document.getElementById('main-header');
+    principalContainer = document.querySelector('.principal-main');
+    offcanvasEl = document.getElementById('sidebarOffcanvas');
+
+    // Determinar la sección inicial a mostrar desde el hash de la URL
+    let hash = window.location.hash.replace('#', '') || 'login';
+
+    // Si no hay hash, establecer "login" como predeterminado y limpiar parámetros extra
+    if (!window.location.hash) {
+        window.location.hash = hash;
+
+        // Limpiar parámetros de autenticación de la URL sin recargar la página
+        const url = new URL(window.location);
+        url.searchParams.delete('usuario');
+        url.searchParams.delete('password');
+        window.history.replaceState({}, '', url);
+    }
+
+    // Mostrar la sección inicial
+    mostrarSeccion(hash);
+});
 
 /**
- * Verifica si la categoría ingresada es válida.
+ * Delegación de eventos sobre el `body` para manejar clics en enlaces internos.
  *
- * @param {string} categoria - La categoría del movimiento ingresada por el usuario.
- * @returns {boolean} Retorna `true` si la categoría es una de las permitidas, de lo contrario `false`.
+ * Permite la navegación fluida entre secciones del SPA sin recargar la página.
+ * También actualiza el hash de la URL y oculta el menú lateral si está abierto.
+ *
+ * @event click
+ * @param {MouseEvent} e - Evento de clic.
  */
-function esCategoriaValida(categoria) {
-    const categoriasValidas = ['hogar', 'ocio', 'salud', 'sueldo', 'objetivos', 'otros'];
-    return categoriasValidas.includes(categoria.trim().toLowerCase());
-}
+document.body.addEventListener('click', e => {
+    /** @type {HTMLAnchorElement|null} Enlace interno (si aplica) */
+    const enlace = e.target.closest('a[href^="#"]');
+    if (!enlace) return;
 
-/**
- * Verifica si los campos del movimiento están completos
- * @param {Movimiento} movimiento
- * @returns {boolean}
- */
-function camposCompletos(movimiento) {
-    return (
-        movimiento.fecha.trim() !== '' &&
-        movimiento.tipo.trim() !== '' &&
-        movimiento.categoria.trim() !== '' &&
-        !isNaN(movimiento.monto)
-    );
-}
+    const id = enlace.getAttribute('href').substring(1);
+    if (!id) return;
 
-/**
- * Pide al usuario que ingrese un nuevo movimiento
- * @returns {Movimiento}
- */
-function pedirDatosMovimiento() {
-    const fecha = prompt('Ingrese la fecha del movimiento (YYYY-MM-DD):');
-    const tipo = prompt('Ingrese el tipo de movimiento:\n- Ingreso\n- Ahorro\n- Inversión\n- Gasto');
-    const categoria = prompt('Ingrese la categoría del movimiento:\n- Hogar\n- Ocio\n- Salud\n- Sueldo\n- Objetivos\n- Otros');
-    const montoStr = prompt('Ingrese el monto del movimiento:');
-    const monto = parseFloat(montoStr);
+    const destino = document.getElementById(id);
 
-    return { fecha, tipo, categoria, monto };
-}
+    // Verifica si el destino pertenece a una sección principal
+    if (destino && destino.classList.contains('principal-section')) {
+        e.preventDefault();
 
-/**
- * Simula enviar los datos al backend y guardar el movimiento
- * @param {Movimiento} movimiento
- */
-function guardarMovimiento(movimiento) {
-    // Guardamos el movimiento en nuestro array
-    movimientos.push(movimiento);
-
-    // Simulamos acciones del backend
-    console.log('Enviando al backend:', movimiento);
-
-   // Actualizamos el saldo (sumando o restando según el tipo de movimiento)
-    const saldo = calcularSaldo();
-    console.log('Saldo actualizado:', saldo);
-
-    // Mostramos el historial de movimientos
-    console.log('Historial de movimientos:', movimientos);
-
-    alert('Movimiento agregado con éxito');
-}
-
-/**
- * Calcula el saldo sumando todos los movimientos
- */
-function calcularSaldo() {
-    let saldo = 0;
-    for (const mov of movimientos) {
-        if (mov.tipo.toLowerCase() === 'ingreso') {
-            saldo += mov.monto;
-        } else if (mov.tipo.toLowerCase() === 'gasto' || mov.tipo.toLowerCase() === 'ahorro' || mov.tipo.toLowerCase() === 'inversión') {
-            saldo -= mov.monto;
-        }
-    }
-    return saldo;
-}
-
-/**
- * Flujo principal: agregar movimiento (con bucle hasta que esté válido)
- */
-function agregarMovimientoFlow() {
-    let movimiento;
-    let errores = true;
-
-    do {
-        movimiento = pedirDatosMovimiento();
-
-        if (!camposCompletos(movimiento)) {
-            alert('Hay campos obligatorios incompletos');
-            continue;
+        // Actualiza el hash de la URL solo si cambió
+        if (window.location.hash !== `#${id}`) {
+            window.location.hash = id;
         }
 
-        if (!esFechaValida(movimiento.fecha)) {
-            alert('La fecha debe ser anterior a hoy y en formato válido (YYYY-MM-DD)');
-            continue;
+        // Muestra la nueva sección solicitada
+        mostrarSeccion(id);
+
+        // Oculta el menú lateral (offcanvas) si está abierto
+        if (offcanvasEl) {
+            const offcanvas = bootstrap.Offcanvas.getInstance(offcanvasEl);
+            if (offcanvas) offcanvas.hide();
         }
-
-        if (!esTipoValido(movimiento.tipo)) {
-            alert('Tipo inválido. Debe ser uno de: Ingreso, Ahorro, Inversión o Gasto.');
-            continue;
-        }
-
-        if (!esCategoriaValida(movimiento.categoria)) {
-            alert('Categoría inválida. Debe ser una de: Hogar, Ocio, Salud, Sueldo, Objetivos u Otros.');
-            continue;
-        }
-
-        if (movimiento.monto <= 0) {
-            alert('El monto debe ser un número mayor a 0');
-            continue;
-        }
-
-        errores = false; // todos los datos están OK
-
-    } while (errores);
-
-    guardarMovimiento(movimiento);
-}
-
-/**
- * @typedef {Object} MetaAhorro
- * @param {Array} metas
- * @property {string} nombre
- * @property {number} monto
- * @property {string|null} fechaObjetivo - Formato YYYY-MM-DD o null
- */
-// ==== Datos simulados ====
-const metas = [
-    {
-        nombre: 'Vacaciones 2026',
-        monto: 300000,
-        fechaObjetivo: '2026-01-01'
     }
-];
+});
 
 /**
- * Verifica si un nombre es válido (no vacío, mínimo 2 caracteres)
- * @param {string} nombre
- * @returns {boolean}
+ * Listener global para ocultar el sidebar (offcanvas)
+ * automáticamente cuando se redimensiona la ventana.
+ *
+ * Evita que el panel lateral quede abierto al cambiar entre
+ * modos de escritorio y móvil.
+ *
+ * @event resize
  */
-function esNombreValido(nombre) {
-    return nombre.trim().length >= 2;
-}
-
-/**
- * Verifica si la fecha ingresada es futura o está vacía
- * @param {string|null} fechaStr
- * @returns {boolean}
- */
-function esFechaFuturaValida(fechaStr) {
-    if (!fechaStr || fechaStr.trim() === '') return true;
-    
-    const regexFecha = /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/;
-    if (!regexFecha.test(fechaStr)) { return false; }
-
-    const fecha = new Date(fechaStr);
-    const hoy = new Date();
-    
-    fecha.setHours(0, 0, 0, 0);
-    hoy.setHours(0, 0, 0, 0);
-
-    return fecha > hoy;
-}
-
-/**
- * Pide al usuario los datos de la nueva meta de ahorro
- * @returns {MetaAhorro|null}
- */
-function pedirMeta() {
-    const nombre = prompt("Ingrese el nombre de la meta:");
-    const montoStr = prompt("Ingrese el monto objetivo:");
-    const fecha = prompt("Ingrese la fecha objetivo (YYYY-MM-DD) (opcional):");
-    const monto = parseFloat(montoStr);
-
-    // Validaciones
-    if (isNaN(monto) || monto <= 0 || montoStr.includes(' ')) {
-        alert("Monto inválido. Debe ser un número mayor a 0.");
-        return null;
+window.addEventListener('resize', () => {
+    if (offcanvasEl && offcanvasEl.classList.contains('show')) {
+        const offcanvas = bootstrap.Offcanvas.getInstance(offcanvasEl);
+        if (offcanvas) offcanvas.hide();
     }
+});
 
-    if (!esNombreValido(nombre)) {
-        alert("Nombre inválido. Debe tener al menos 2 caracteres.");
-        return null;
-    }
 
-    if (!esFechaFuturaValida(fecha)) {
-        alert("La fecha objetivo debe ser futura o dejarse vacía.");
-        return null;
-    }
-
-    return {
-        nombre: nombre.trim(),
-        monto,
-        fechaObjetivo: fecha && fecha.trim() !== '' ? fecha.trim() : null,
-    };
-}
+// =============================================================
+// Manipulacion del DOM
+// =============================================================
 
 /**
- * Flujo para crear una nueva meta de ahorro
+ * Muestra una sección específica de la interfaz y oculta las demás.
+ * Además, inicializa los módulos correspondientes según el ID de la sección.
+ *
+ * @param {string} id - ID de la sección a mostrar (por ejemplo: "reportes", "metas", etc.)
  */
-function crearMetaAhorro() {
-    let meta = null;
+function mostrarSeccion(id) {
+    const activa = document.getElementById(id);
+    if (!activa || activa.classList.contains('visible')) return;
 
-    do {
-        meta = pedirMeta();
-    } while (!meta);
-
-    // Simulamos "guardar en base de datos"
-    metas.push(meta);
-    console.log("Meta guardada:", meta);
-
-    alert("Meta guardada con éxito.");
-}
-
-/**
- * Muestra las metas disponibles y permite seleccionar una para ver detalles
- */
-function visualizarMeta() {
-    if (metas.length === 0) {
-        alert("No hay metas creadas todavía.");
-        return;
-    }
-
-    // Mostrar lista
-    let lista = "Metas disponibles:\n";
-    metas.forEach((meta, i) => {
-        lista += `${i + 1}. ${meta.nombre}\n`;
+    // Cambiar visibilidad usando clases sin manipular el DOM repetidamente
+    secciones.forEach(seccion => {
+        seccion.classList.toggle('visible', seccion.id === id);
+        seccion.classList.toggle('invisible', seccion.id !== id);
     });
 
-    const seleccionStr = prompt(`${lista}\nIngrese el número de la meta a visualizar:`);
-    const seleccion = parseInt(seleccionStr);
+    // Ocultar elementos globales si la vista actual es login
+    const estaEnLogin = id === 'login';
+    if (sidebar) sidebar.classList.toggle('d-none', estaEnLogin);
+    if (header) header.classList.toggle('d-none', estaEnLogin);
+    if (principalContainer) principalContainer.classList.toggle('solo-contenido', estaEnLogin);
 
-    if (isNaN(seleccion) || seleccion < 1 || seleccion > metas.length) {
-        alert("Meta no encontrada.");
+    // Control para evitar inicializaciones múltiples
+    let movimientosIniciado = false;
+
+    // Inicializar el módulo correspondiente según la sección activa
+    if (id === 'ingresos-gastos' && !movimientosIniciado) {
+        initMovimientoEvents();
+        movimientosIniciado = true;
+    }
+
+    if (id === 'exportar' && !movimientosIniciado) {
+        initExportarDatos();
+        movimientosIniciado = true;
+    }
+
+    if (id === 'reportes' && !movimientosIniciado) {
+        initReportes();
+        movimientosIniciado = true;
+    }
+
+    if (id === 'metas' && !movimientosIniciado) {
+        initMetaAhorro();
+        movimientosIniciado = true;
+    }
+}
+
+// =============================================================
+// 1. Módulo de Movimientos (Ingresos / Gastos)
+// =============================================================
+
+/**
+ * Inicializa los listeners del formulario de ingresos y gastos.
+ * Busca el formulario en el DOM y agrega el manejador de envío.
+ */
+function initMovimientoEvents() {
+    const formMovimiento = document.querySelector('#form-ingresos-gastos');
+    if (!formMovimiento) {
+        console.log('Formulario de movimientos no encontrado en el DOM.');
         return;
     }
 
-    const metaElegida = metas[seleccion - 1];
-
-    console.log("Meta consultada:", metaElegida);
-    alert(`Detalles de la Meta:\n- Nombre: ${metaElegida.nombre}\n- Monto objetivo: $${metaElegida.monto}\n- Fecha objetivo: ${metaElegida.fechaObjetivo || 'No definida'}`);
+    formMovimiento.addEventListener('submit', manejarMovimientoSubmit);
+    console.log('Listeners de Movimiento inicializados.');
 }
 
 /**
- * Menú principal de flujo de metas de ahorro
+ * Maneja el evento de envío del formulario de movimientos.
+ * Valida los datos y los envía al planificador.
+ * 
+ * @param {SubmitEvent} event - Evento de envío del formulario.
  */
-function metasAhorroFlow() {
-    const opcion = prompt(`Gestión de Metas de Ahorro\n Seleccione una opción:\n1. Agregar una nueva meta\n2. Visualizar una meta existente`);
+function manejarMovimientoSubmit(event) {
+    event.preventDefault();
+    const form = event.target;
 
-    if (opcion === '1') {
-        crearMetaAhorro();
-    } else if (opcion === '2') {
-        visualizarMeta();
-    } else {
-        alert("Opción inválida.");
-    }
-}
-
-/**
- * @typedef {"CSV" | "PDF" | "JSON"} FormatoExportacion
- */
-
-/**
- * Verifica si hay al menos un tipo de dato seleccionado
- * @param {string[]} datosSeleccionados
- * @returns {boolean}
- */
-function hayDatosSeleccionados(datosSeleccionados, seleccion) {
-    return Array.isArray(datosSeleccionados) && datosSeleccionados.length > 0 && seleccion.length === datosSeleccionados.length;
-}
-
-/**
- * Verifica si el formato es válido
- * @param {string} formato
- * @returns {boolean}
- */
-function esFormatoValido(formato) {
-    const formatosPermitidos = ['CSV', 'PDF', 'JSON'];
-    return formatosPermitidos.includes(formato.toUpperCase());
-}
-
-/**
- * Verifica que el nombre de archivo y la ruta estén completos
- * @param {string} nombre
- * @param {string} ruta
- * @returns {boolean}
- */
-function sonNombreYRutaValidos(nombre, ruta) {
-    return nombre.trim() !== '' && ruta.trim() !== '' && !nombre.includes(".");
-}
-
-/**
- * Simula el proceso de generación de archivo y retorno desde el backend
- * @param {string[]} tiposDatos
- * @param {FormatoExportacion} formato
- * @param {string} nombreArchivo
- * @param {string} rutaDestino
- * @returns {boolean} - true si la exportación fue exitosa
- */
-function procesarExportacion(tiposDatos, formato, nombreArchivo, rutaDestino) {
-    console.log('Enviando datos al backend...');
-    console.log(`Datos: ${tiposDatos.join(', ')}`);
-    console.log(`Formato: ${formato}`);
-    console.log(`Nombre del archivo: ${nombreArchivo}`);
-    console.log(`Ruta destino: ${rutaDestino}`);
-
-    return true;
-}
-
-/**
- * Flujo principal: Exportar datos
- */
-function exportarDatosFlow() {
-    let exportacionExitosa = false;
-
-    do {
-        //Selección de tipos de datos
-        const tiposDisponibles = ['movimientos', 'metas', 'presupuesto', 'historial'];
-        const seleccion = prompt(`¿Qué datos desea exportar? (separe con coma)\nOpciones:\n${tiposDisponibles.join(', ')}`);
-        const tiposSeleccionados = seleccion
-            ? seleccion.split(',').map(e => e.trim()).filter(e => tiposDisponibles.includes(e.toLowerCase()))
-            : [];
-
-        if (!hayDatosSeleccionados(tiposSeleccionados, seleccion.split(','))) {
-            alert('Debe seleccionar tipos de dato válido.');
-            continue;
-        }
-
-        //Selección de formato
-        const formato = prompt('Formato de exportación:\n- CSV\n- PDF\n- JSON').toUpperCase();
-
-        if (!esFormatoValido(formato)) {
-            alert('Formato inválido. Debe ser CSV, PDF o JSON.');
-            continue;
-        }
-
-        // 3. Nombre del archivo
-        const nombreArchivo = prompt('Ingrese el nombre del archivo (sin extensión):');
-        const rutaArchivo = prompt('Ingrese la ruta del directorio de exportación:');
-
-        if (!sonNombreYRutaValidos(nombreArchivo, rutaArchivo)) {
-            alert('El nombre del archivo y la ruta son obligatorios.');
-            continue;
-        }
-
-        // 4. Procesar exportación
-        exportacionExitosa = procesarExportacion(tiposSeleccionados, formato, nombreArchivo, rutaArchivo);
-
-    } while (!exportacionExitosa);
-
-    alert('Exportación exitosa. El archivo fue generado correctamente.');
-
-}
-
-/**
- * Filtra los datos en base a los filtros activos
- * @param {Array} datos
- * @param {Object} filtros
- * @returns {Array}
- */
-
-// ==== Datos simulados ====
-const datosFinancieros = [
-    { tipo: 'Ingreso', categoria: 'Sueldo', fecha: '2025-09-01', monto: 150000 },
-    { tipo: 'Gasto', categoria: 'Hogar', fecha: '2025-09-10', monto: 25000 },
-    { tipo: 'Gasto', categoria: 'Ocio', fecha: '2025-09-15', monto: 18000 },
-    { tipo: 'Ingreso', categoria: 'Freelance', fecha: '2025-09-20', monto: 60000 },
-    { tipo: 'Gasto', categoria: 'Salud', fecha: '2025-09-21', monto: 30000 },
-    { tipo: 'Ahorro', categoria: 'Objetivos', fecha: '2025-09-30', monto: 40000 }
-];
-
-// ==== Filtros por defecto ====
-let filtros = {
-    fechaDesde: '2025-09-01',
-    fechaHasta: '2025-09-30',
-    moneda: 'ARS',
-    categoria: 'Todas'
-};
-
-/**
- * Filtra los datos financieros según los filtros de fecha y categoría.
- *
- * @param {Array<Object>} datos - Lista de objetos con información financiera. Cada objeto debe tener una propiedad `fecha` y `categoria`.
- * @param {Object} filtros - Filtros a aplicar. Debe contener `fechaDesde`, `fechaHasta` y `categoria`.
- * @returns {Array<Object>} Un nuevo array con los datos filtrados que coinciden con los filtros.
- */
-function filtrarDatos(datos, filtros) {
-    const desde = new Date(filtros.fechaDesde);
-    const hasta = new Date(filtros.fechaHasta);
-
-    return datos.filter(d => {
-        const fecha = new Date(d.fecha);
-        const enRango = fecha >= desde && fecha <= hasta;
-        const categoriaCoincide = filtros.categoria.toLowerCase() === 'todas' || d.categoria === filtros.categoria;
-        return enRango && categoriaCoincide;
-    });
-}
-
-/**
- * Calcula indicadores financieros básicos
- * @param {Array} datos
- * @returns {filtros}
- */
-function calcularIndicadores(datos) {
-    const ingresos = datos.filter(d => d.tipo.toLowerCase() === 'ingreso').reduce((acc, cur) => acc + cur.monto, 0);
-    const gastos = datos.filter(d => d.tipo.toLowerCase() === 'gasto').reduce((acc, cur) => acc + cur.monto, 0);
-    const ahorro = datos.filter(d => d.tipo.toLowerCase() === 'ahorro').reduce((acc, cur) => acc + cur.monto, 0);
-    const saldo = ingresos - gastos;
-    const porcentajeAhorro = ingresos > 0 ? (ahorro / ingresos) * 100 : 0;
-
-    return {
-        ingresos,
-        gastos,
-        ahorro,
-        saldo,
-        porcentajeAhorro: porcentajeAhorro.toFixed(2)
+    const datos = {
+        fecha: form.querySelector('#fecha-Ingresos-Gastos').value,
+        tipo: form.querySelector('input[name="tipo"]:checked')?.value || '',
+        categoria: form.querySelector('#categoria-Ingresos-Gastos').value,
+        monto: parseFloat(form.querySelector('#monto-Ingresos-Gastos').value),
     };
+
+    try {
+        const movimiento = planificador.agregarMovimiento(datos);
+        setFeedback(feedback, 'Movimiento agregado con éxito.', false);
+        crearFilaMovimiento(datos, movimiento);
+        form.reset();
+    } catch (error) {
+        setFeedback(feedback, error, true);
+    }
 }
 
 /**
- * Muestra el reporte basado en los datos filtrados
- * @param {Array} datos
+ * Crea y agrega una fila en la tabla de movimientos.
+ * 
+ * @param {Object} datos - Datos del movimiento.
+ * @param {Object} movimiento - Objeto de movimiento generado por el planificador.
  */
-function mostrarReporte(datos) {
-    if (datos.length === 0) {
-        alert('No hay datos para los filtros seleccionados.\nSe generó un reporte vacío.');
+function crearFilaMovimiento(datos, movimiento) {
+    const tablaCuerpo = document.querySelector('.movimientos-table tbody');
+    const fila = document.createElement('tr');
+
+    // Botón eliminar
+    const tdBoton = document.createElement('td');
+    tdBoton.classList.add('td-button');
+    const boton = document.createElement('button');
+    boton.classList.add('btn', 'small');
+    const img = document.createElement('img');
+    img.src = 'assets/images/iconos/Trash_2.png';
+    img.alt = 'logo_tacho_borrar';
+    boton.appendChild(img);
+    tdBoton.appendChild(boton);
+    boton.addEventListener('click', () => {
+        fila.remove();
+        planificador.eliminarMovimiento(movimiento);
+    });
+
+    // Celdas
+    const tdFecha = crearCelda(datos.fecha);
+    const tdCategoria = crearCelda(capitalizar(datos.categoria));
+    const tdMonto = crearCelda(`$${datos.monto.toLocaleString()}`);
+    if (datos.tipo.toLowerCase() === 'gasto') tdMonto.classList.add('negative');
+    const tdTipo = crearCelda(capitalizar(datos.tipo));
+
+    fila.append(tdBoton, tdFecha, tdCategoria, tdMonto, tdTipo);
+    tablaCuerpo.appendChild(fila);
+}
+
+// =============================================================
+// 2. Módulo de Exportar Datos
+// =============================================================
+
+/**
+ * Inicializa el botón de exportación de datos.
+ */
+function initExportarDatos() {
+    const botonExportar = document.querySelector('#exportar-container .btn');
+    if (!botonExportar) {
+        console.log("'#exportar-container .btn' no encontrado");
         return;
     }
-
-    const indicadores = calcularIndicadores(datos);
-
-    let resumen = `Reporte Financiero:
-Intervalo: ${filtros.fechaDesde} a ${filtros.fechaHasta}
-Categoria: ${filtros.categoria}
-Moneda: ${filtros.moneda} 
-
-Ingresos: $${indicadores.ingresos}
-Gastos: $${indicadores.gastos}
-Ahorro: $${indicadores.ahorro}
-Saldo promedio: $${indicadores.saldo}
-% Ahorro: ${indicadores.porcentajeAhorro}%
-`;
-
-    console.log('Filtros aplicados correctamente.');
-    alert(resumen);
+    botonExportar.addEventListener('click', manejarExportar);
+    console.log('Listeners de Exportar inicializados.');
 }
 
 /**
- * Verifica si una categoría es válida dentro de las permitidas.
- *
- * @param {string} categoria - Categoría ingresada por el usuario.
- * @returns {boolean} Devuelve `true` si la categoría es válida, de lo contrario `false`.
+ * Maneja la exportación de datos seleccionados.
+ * 
+ * @param {MouseEvent} event - Evento del clic en el botón de exportar.
  */
-function categoriaValida(categoria) {
-    const categorias = ["todas", "ocio", "hogar", "salud", "objetivos"]
-    return categorias.includes(categoria.toLowerCase());
+function manejarExportar(event) {
+    event.preventDefault();
+
+    const checkboxes = document.querySelectorAll('#exportar-container input[name="datos"]:checked');
+    const tipoDatos = Array.from(checkboxes).map(cb => cb.value);
+    const formato = document.querySelector('#exportar-container input[name="tipo"]:checked')?.value;
+    const nombre = document.querySelector('#nombre').value.trim();
+    const ubicacion = document.querySelector('#ubicacion').value.trim();
+
+    try {
+        planificador.exportarDatos(tipoDatos, formato, nombre, ubicacion);
+        setFeedback(feedback, 'Archivo exportado con éxito.', false);
+    } catch (error) {
+        setFeedback(feedback, error, true);
+    }
 }
 
+// =============================================================
+// 3. Módulo de Reportes
+// =============================================================
+
 /**
- * Permite al usuario cambiar los filtros actuales.
- * @returns {boolean} Devuelve `true` si algún filtro fue modificado, `false` si no hubo cambios.
+ * Inicializa los reportes y configura los filtros por defecto.
  */
-function configurarFiltros() {
-    let nuevaFechaDesde = prompt(`Fecha Desde (actual: ${filtros.fechaDesde}):`) || filtros.fechaDesde;
-    let nuevaFechaHasta = prompt(`Fecha Hasta (actual: ${filtros.fechaHasta}):`) || filtros.fechaHasta;
-    let nuevaMoneda = prompt(`Moneda (actual: ${filtros.moneda}):`) || filtros.moneda;
-    let nuevaCategoria = prompt(`Categoría (actual: ${filtros.categoria})\n(Todas, Ocio, Hogar, Salud, Objetivos):`) || filtros.categoria;
-
-    while (!esFechaValida(nuevaFechaDesde)){
-        alert('La fecha desde no puede posterior al dia de hoy')
-        nuevaFechaDesde = prompt(`Fecha Desde (actual: ${filtros.fechaDesde}):`) || filtros.fechaDesde;
-    }
-
-    while (!categoriaValida(nuevaCategoria)) {
-        alert('Categoria no valida. Ingrese nuevamente.');
-        nuevaCategoria = prompt(`Categoría (actual: ${filtros.categoria})\n(Todas, Ocio, Hogar, Salud, Objetivos):`) || filtros.categoria;
-    }
-
-    const filtrosAnteriores = { ...filtros };
+function initReportes() {
+    const form = document.getElementById('movimientos-form');
 
     filtros = {
-        fechaDesde: nuevaFechaDesde,
-        fechaHasta: nuevaFechaHasta,
-        moneda: nuevaMoneda,
-        categoria: nuevaCategoria
+        fechaDesde: "",
+        fechaHasta: "",
+        categoria: document.getElementById('categoriaRyE').value,
+        moneda: document.getElementById('moneda').value
     };
 
-    // Ver si cambió algo
-    return JSON.stringify(filtros) !== JSON.stringify(filtrosAnteriores);
+    actualizarFechas(document.getElementById('fechaRyE').value, filtros);
+
+    const datos = planificador.generarReporte(filtros);
+    actualizarReporteGastos(datos);
+
+    form.addEventListener('change', manejarReportes);
+    console.log('Listeners de Reportes inicializados.');
 }
 
 /**
- * Flujo principal: Visualizar Reporte Financiero
+ * Maneja los cambios de filtros en el formulario de reportes.
+ * 
+ * @param {Event} event - Evento de cambio en el formulario.
  */
-function reporteFinancieroFlow() {
-    alert(`Visualizar Reporte Financiero\n
-Filtros por defecto aplicados:
-- Fecha: ${filtros.fechaDesde} a ${filtros.fechaHasta}
-- Moneda: ${filtros.moneda}
-- Categoría: ${filtros.categoria}
-`);
+function manejarReportes(event) {
+    const { id, value } = event.target;
 
-    let seguir = true;
-
-    while (seguir) {
-        const datosFiltrados = filtrarDatos(datosFinancieros.concat(movimientos), filtros);
-        mostrarReporte(datosFiltrados);
-
-        const cambiar = prompt('¿Desea cambiar los filtros? (sí / no)').toLowerCase();
-
-        if (cambiar === 'si') {
-            const cambiaron = configurarFiltros();
-            if (!cambiaron) {
-                console.log('No se cambió ningún filtro.');
-                seguir = false;
-            }
-        } else {
-            seguir = false;
-        }
+    switch (id) {
+        case 'fechaRyE': actualizarFechas(value, filtros); break;
+        case 'categoriaRyE': filtros.categoria = value; break;
+        case 'moneda': filtros.moneda = value; break;
+        default: console.log(`Evento no manejado: ${id}`);
     }
 
-    alert('Fin del reporte.');
-}
-
-function menuDesplegable() {
-    const option = prompt(
-        'Seleccione una opción:\n' +
-        '1 - Agregar Movimiento\n' +
-        '2 - Metas de Ahorro\n' +
-        '3 - Exportar Datos\n' +
-        '4 - Reporte Financiero'
-    );
-
-    switch (option) {
-        case '1': {
-            agregarMovimientoFlow();
-            return;
-        }
-        case '2': {
-            metasAhorroFlow();
-            return;
-        }
-        case '3': {
-            exportarDatosFlow();
-            return;
-        }
-        case '4': {
-            reporteFinancieroFlow();
-            return;
-        }
-        default: {
-            alert('Opción no válida.');
-            return;
-        }
+    try {
+        const datos = planificador.generarReporte(filtros);
+        actualizarReporteGastos(datos);
+        setFeedback(feedback, 'Reporte generado con éxito.', false);
+    } catch (error) {
+        setFeedback(feedback, error, true);
     }
 }
 
-menuDesplegable();
+/**
+ * Actualiza la sección visual del reporte de gastos.
+ * 
+ * @param {{total: Object, categorias: Object}} resultados - Resultados del reporte.
+ */
+function actualizarReporteGastos(resultados) {
+    const { total, categorias } = resultados;
+    const listaContenedor = document.getElementById('gastos-lista');
+    const saldoElem = document.querySelector('#reportes .saldo-promedio strong');
+    const ahorroElem = document.querySelector('#reportes .porcentaje-ahorro strong');
+
+    listaContenedor.innerHTML = '';
+
+    Object.entries(categorias).forEach(([categoria, valores]) => {
+        if (valores.gasto <= 0) return;
+
+        const row = document.createElement('div');
+        row.classList.add('row', 'justify-content-center', 'gasto-item');
+
+        const colNombre = document.createElement('div');
+        colNombre.classList.add('col', 'gastos-list');
+        const h4 = document.createElement('h4');
+        h4.textContent = capitalizar(categoria);
+        colNombre.appendChild(h4);
+
+        const colBar = document.createElement('div');
+        colBar.classList.add('col', 'gastos-bars');
+        const bar = document.createElement('div');
+        const porcentaje = total.ingresos > 0 ? (valores.gasto / total.ingresos) * 100 : 0;
+        bar.style.width = `${porcentaje}%`;
+        bar.classList.add('bar');
+        colBar.appendChild(bar);
+
+        row.append(colNombre, colBar);
+        listaContenedor.appendChild(row);
+    });
+
+    saldoElem.textContent = `$${total.saldo.toLocaleString('es-AR', { minimumFractionDigits: 2 })}`;
+    ahorroElem.textContent = `${total.porcentajeAhorro}%`;
+}
+
+/**
+ * Actualiza los rangos de fechas según la opción seleccionada.
+ * 
+ * @param {string} valor - Valor seleccionado (por ejemplo, "Últimos 7 días").
+ * @param {Object} filtros - Objeto de filtros que se actualizará.
+ */
+function actualizarFechas(valor, filtros) {
+    const hoy = new Date();
+    const desde = new Date(hoy);
+
+    if (valor === 'Últimos 7 días') desde.setDate(hoy.getDate() - 7);
+    else if (valor === 'Último mes') desde.setMonth(hoy.getMonth() - 1);
+    else if (valor === 'Último año') desde.setFullYear(hoy.getFullYear() - 1);
+
+    filtros.fechaDesde = desde.toISOString().split('T')[0];
+    filtros.fechaHasta = hoy.toISOString().split('T')[0];
+}
+
+// =============================================================
+// 4. Módulo de Metas y Objetivos de Ahorro
+// =============================================================
+
+/**
+ * Inicializa los formularios de metas y objetivos de ahorro.
+ */
+function initMetaAhorro() {
+    const formMetas = document.querySelector('#form-metas-modal');
+    const formObjetivo = document.querySelector('#form-objetivo-modal');
+
+    if (!formMetas || !formObjetivo) return;
+
+    formMetas.addEventListener('submit', manejarGuardarMeta);
+    formObjetivo.addEventListener('submit', manejarGuardarObjetivo);
+    console.log('Listeners de Metas y Objetivos inicializados.');
+}
+
+/**
+ * Maneja el guardado de una nueva meta de ahorro.
+ * 
+ * @param {SubmitEvent} event - Evento de envío del formulario de metas.
+ */
+function manejarGuardarMeta(event) {
+    event.preventDefault();
+
+    const nombre = document.getElementById('nombre-objetivo').value;
+    const monto = document.getElementById('monto-objetivo').value;
+    const fecha = document.getElementById('fecha-objetivo').value;
+
+    try {
+        const meta = planificador.agregarMetaAhorro({nombre: nombre, montoObjetivo: monto, fechaObjetivo: fecha});
+        crearFilaMeta(meta);
+        actualizarRadiosConMetas();
+        cerrarModal('MetasAhorroModal');
+        setFeedback(feedback, 'Objetivo guardado con éxito', false);
+        event.target.reset();
+    } catch (error) {
+        cerrarModal('MetasAhorroModal');
+        setFeedback(feedback, error, true);
+    }
+}
+
+/**
+ * Maneja la selección y visualización de un objetivo guardado.
+ * 
+ * @param {SubmitEvent} event - Evento de envío del formulario de objetivos.
+ */
+function manejarGuardarObjetivo(event) {
+    event.preventDefault();
+
+    const form = event.target;
+    const radioSeleccionado = form.querySelector('input[name="tipo"]:checked');
+    if (!radioSeleccionado) return setFeedback(feedback, 'Selecciona un objetivo.', true);
+
+    const datosMeta = getDatosMeta(radioSeleccionado.value);
+    if (!datosMeta) {
+        console.log("No hay datos de Meta de Ahorro");
+        cerrarModal('ObjetivosModal');
+        return;
+    }
+
+    actualizarMetaCard(datosMeta);
+    mostrarMetaCard(true);
+    cerrarModal('ObjetivosModal');
+    form.reset();
+}
+
+/**
+ * Obtiene los datos de una meta específica desde la tabla.
+ * 
+ * @param {string} objetivo - Nombre de la meta a buscar.
+ * @returns {Object|null} Datos de la meta o null si no se encuentra.
+ */
+function getDatosMeta(objetivo) {
+    const filas = document.querySelectorAll('.metas-table tbody tr');
+
+    for (const fila of filas) {
+        const celdas = fila.querySelectorAll('td');
+        const nombreMeta = celdas[0]?.textContent.trim();
+        if (nombreMeta === objetivo) {
+            return {
+                nombre: nombreMeta,
+                ahorrado: parseInt(celdas[1].textContent.replace(/\D/g, '')),
+                restante: parseInt(celdas[2].textContent.replace(/\D/g, ''))
+            };
+        }
+    }
+    return null;
+}
+
+/**
+ * Actualiza la tarjeta (card) de la meta seleccionada.
+ * 
+ * @param {Object} datosMeta - Datos de la meta de ahorro.
+ */
+function actualizarMetaCard(datosMeta) {
+    document.querySelector('#meta-nombre').textContent = datosMeta.nombre;
+    document.querySelector('#meta-ahorrado').textContent = `$${datosMeta.ahorrado.toLocaleString()}`;
+    document.querySelector('#meta-mensaje').innerHTML = `
+        Este mes ingresaste $${datosMeta.ahorrado.toLocaleString()}, alcanzaste un 
+        ${Math.round((datosMeta.ahorrado / (datosMeta.ahorrado + datosMeta.restante)) * 100)}% 
+        de tu meta de ahorro.<br>
+        <span class="highlight bold">
+            Solo te faltan $${datosMeta.restante.toLocaleString()}. ¡Vas por muy buen camino!
+        </span>
+    `;
+
+    const porcentaje = Math.round((datosMeta.ahorrado / (datosMeta.ahorrado + datosMeta.restante)) * 100);
+    const progress = document.querySelector('#meta-ahorro');
+    const porcentajeElem = document.querySelector('#meta-porcentaje');
+    progress.value = porcentaje;
+    porcentajeElem.textContent = `${porcentaje}% completado`;
+}
+
+/**
+ * Muestra u oculta la tarjeta de meta seleccionada.
+ * 
+ * @param {boolean} [mostrar=true] - Define si se muestra o se oculta la tarjeta.
+ */
+function mostrarMetaCard(mostrar = true) {
+    const contenido = document.querySelector('.meta-card-content');
+    if (!contenido) {
+        console.log("'.meta-card-content' no encontrado");
+        return;
+    }
+    contenido.style.display = mostrar ? 'block' : 'none';
+}
+
+/**
+ * Crea una nueva fila en la tabla de metas de ahorro.
+ * 
+ * @param {Object} meta - Objeto con datos de la meta.
+ */
+function crearFilaMeta(meta) {
+    const tablaCuerpo = document.querySelector('.metas-table tbody');
+    const fila = document.createElement('tr');
+
+    const tdNombre = document.createElement('td');
+    tdNombre.textContent = meta.nombre;
+
+    const tdAhorrado = document.createElement('td');
+    tdAhorrado.textContent = `$${meta.montoActual.toLocaleString()}`;
+
+    const tdRestante = document.createElement('td');
+    const restante = meta.montoObjetivo - meta.montoActual;
+    tdRestante.textContent = `$${restante.toLocaleString()}`;
+
+    const tdNota = document.createElement('td');
+    const span = document.createElement('span');
+    span.classList.add('dot', 'blue');
+    tdNota.appendChild(span);
+
+    fila.append(tdNombre, tdAhorrado, tdRestante, tdNota);
+    tablaCuerpo.appendChild(fila);
+}
+
+/**
+ * Actualiza los radios en el formulario de objetivos según las metas disponibles.
+ */
+function actualizarRadiosConMetas() {
+    const tbody = document.querySelector('.metas-table tbody');
+    if (!tbody) {
+        console.log(".metas-table tbody no encontrado");
+        return;
+    }
+
+    const radioGroup = document.querySelector('#form-objetivo-modal .radio-group');
+    if (!radioGroup) {
+        console.log("'#form-objetivo-modal .radio-group' no encontrado");
+        return;
+    }
+
+    radioGroup.innerHTML = '';
+
+    tbody.querySelectorAll('tr').forEach((fila) => {
+        const objetivo = fila.querySelector('td')?.textContent.trim();
+        if (!objetivo) {
+            console.log("No se encontró ningún objetivo");
+            return;
+        }
+
+        const label = document.createElement('label');
+        const input = document.createElement('input');
+        input.type = 'radio';
+        input.name = 'tipo';
+        input.value = objetivo;
+
+        const span = document.createElement('span');
+        span.classList.add('radio-cuadrado', 'horizontal');
+
+        label.append(input, span, document.createTextNode(' ' + objetivo));
+        radioGroup.appendChild(label);
+    });
+}
+
+// =============================================================
+// Funciones auxiliares comunes
+// =============================================================
+
+/**
+ * Crea una celda <td> con texto.
+ * 
+ * @param {string} texto - Texto del contenido de la celda.
+ * @returns {HTMLTableCellElement} Celda creada.
+ */
+function crearCelda(texto) {
+    const td = document.createElement('td');
+    td.textContent = texto;
+    return td;
+}
+
+/**
+ * Capitaliza un string (primera letra mayúscula, resto minúscula).
+ * 
+ * @param {string} str - Cadena de texto.
+ * @returns {string} Texto capitalizado.
+ */
+function capitalizar(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+}
+
+/**
+ * Cierra un modal de Bootstrap por su ID.
+ * 
+ * @param {string} id - ID del modal a cerrar.
+ */
+function cerrarModal(id) {
+    const modal = document.getElementById(id);
+    const modalBootstrap = bootstrap.Modal.getInstance(modal);
+    modalBootstrap?.hide();
+}
+
+/**
+ * Muestra un mensaje de feedback (éxito o error) en pantalla.
+ * 
+ * @param {HTMLElement} feedback - Elemento del DOM para el mensaje.
+ * @param {string|Error} message - Mensaje a mostrar.
+ * @param {boolean} error - Si es true, se trata de un mensaje de error.
+ */
+function setFeedback(feedback, message, error) {
+    const overlay = document.getElementById('overlay');
+    if (error) {
+        console.log(message);
+        feedback.textContent = `${message.message}`;
+        feedback.classList.remove('success');
+        feedback.classList.add('error');
+        overlay.style.display = "flex";
+
+        setTimeout(() => {
+            feedback.textContent = '';
+            feedback.classList.remove('error');
+            overlay.style.display = "none";
+        }, 1000);
+    } else {
+        feedback.textContent = message;
+        feedback.classList.remove('error');
+        feedback.classList.add('success');
+        overlay.style.display = "flex";
+
+        setTimeout(() => {
+            feedback.textContent = '';
+            feedback.classList.remove('success', 'error');
+            overlay.style.display = "none";
+        }, 1000);
+    }
+}

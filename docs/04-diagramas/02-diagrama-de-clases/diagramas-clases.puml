@@ -1,0 +1,72 @@
+@startuml DiagramaClasesPlanificadorFinanciero
+skinparam classAttributeIconSize 0
+hide empty members
+title Diagrama de Clases - Planificador Financiero
+
+' --- Clases de Dominio (Modelos) ---
+
+class Movimiento {
+  - id: number
+  - fecha: Date
+  - tipo: string
+  - categoria: string
+  - monto: number
+  + constructor(fecha: Date, tipo: string, categoria: string, monto: number)
+  + toJSON(): Object
+  + {static} validar(datos: Object): boolean
+  + {static} fromJSON(json: Object): Movimiento
+}
+class MetaAhorro {
+    - id : number
+    - nombre : string
+    - montoObjetivo: number
+    - fechaObjetivo: Date | null
+    - montoActual: number
+    + constructor(nombre: string, montoObjetivo: number, fechaObjetivo: Date | null)
+    + actualizarMontoActual(monto: number): void
+    + toJSON(): Object
+    + {static} validar(datos: Object): boolean
+    + {static} fromJSON(json: Object): MetaAhorro
+}
+class Exportador {
+    + exportar(datos: Object[], config : Object) : boolean
+    + validarConfiguracion(config : Object) : boolean
+    + toCSV(datos : Object[]) : string
+    + toJSON(datos : Object[]) : string
+    + toPDF(datos : Object[]) : string
+    + toXLSX(datos : Object[]) : string
+    + {static} esFormatoValido(formato : string) : boolean
+    + {static} sonNombreYRutaValidos(nombre : string, ruta : string) : boolean
+}
+
+' --- Clase de Lógica de Negocio (Gestor) ---
+class Planificador{
+    - movimientos: Movimiento[]
+    - metasAhorro: MetaAhorro[]
+    - exportador: Exportador
+    + constructor()
+    + agregarMovimiento(datos: Object): Movimiento
+    + agregarMetaAhorro(datos: Object): MetaAhorro
+    + generarReporte(filtros: Object): Object
+    + exportarDatos(tipo: Array, formato: string, nombreArchivo: string, rutaDestino: string): Object
+    + toJSON(): Object
+    + {static} fromJSON(json: Object): Planificador
+    - filtrarDatos(filtros: Object): Movimiento[]
+    - calcularIndicadores(datos: Movimiento[]): Object
+}
+' --- Relaciones ---
+
+' Relación de Composición:
+' Un Planificador "posee" una colección de 0 o más Movimientos.
+' Si se destruye el Planificador, la colección de movimientos también.
+Planificador "1" *-- "0..*" Movimiento : Posee
+
+' Relación de Composición:
+' Un Planificador "posee" una colección de 0 o más Metas.
+Planificador "1" *-- "0..*" MetaAhorro : Posee
+
+' Relación de Composicion:
+' El planificador utiliza un exportador para manejar la exportación de datos.
+Planificador "1" o-- "1" Exportador : Utiliza
+
+@enduml

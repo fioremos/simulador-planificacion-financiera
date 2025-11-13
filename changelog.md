@@ -7,12 +7,12 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 ## [Unreleased]
 
 ### Added
-- [feature/dev-storage] Diseño y documentación de estrategia de almacenamiento.  
-  PR: [#155](https://github.com/fioremos/simulador-planificacion-financiera/pull/155) — @UlisesC11 (Desarrollador JS Local y Session Storage)
+- [feature/dev-poo-logica-negocio] Se refactorizó toda la lógica de negocio a una arquitectura de Programación Orientada a Objetos.   
+  PR: [#150](https://github.com/fioremos/simulador-planificacion-financiera/pull/150#) — @MNEscobar (Desarrollador JS POO)
 
 ### Changed
-- [nombre-de-la-branch] Descripción breve de la tarea realizada.
-  PR: #2 — @usuario2 (rol asignado)
+- [feature/dev-eventos-dom] Manipulación de los eventos del DOM.
+  PR:[#131](https://github.com/fioremos/simulador-planificacion-financiera/pull/131) — @fioremos (Desarrollador JS Eventos + DOM)
 
 - [nombre-de-la-branch] Descripción breve de la tarea realizada.
   PR: #3 — @usuario3 (rol asignado)
