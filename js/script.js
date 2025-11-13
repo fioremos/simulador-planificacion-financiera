@@ -392,7 +392,7 @@ function manejarReportes(event) {
     }
 }
 
-function generarGraficoReporte(datosFiltrados) {
+function generarGrafico(datosFiltrados) {
     // --- Extraemos los datos para el gráfico ---
     const styles = getComputedStyle(document.documentElement);
     const colorIngreso = styles.getPropertyValue("--success").trim();
