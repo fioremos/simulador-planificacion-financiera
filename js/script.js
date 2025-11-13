@@ -29,6 +29,7 @@ let offcanvasEl;
 /** @type {HTMLElement|null} Exporatador usado por planificador */
 let exportador = new Exportador;
 
+let grafico;
 // =============================================================
 // Event Listeners
 // =============================================================
@@ -362,6 +363,7 @@ function initReportes(filtrosGuardado = null) {
     actualizarFechas(fechaAscii, filtros);
 
     const datos = planificador.generarReporte(filtros, fechaAscii);
+    generarGrafico(datos.datosFiltrados);
     actualizarReporteGastos(datos);
 }
 
@@ -382,13 +384,80 @@ function manejarReportes(event) {
     }
 
     try {
-        const datos = planificador.generarReporte(filtros, document.getElementById('fechaRyE').value);
-        StorageUtil.actualizar('app:planificador:filtros', planificador.sessionToJSON().filtros, 'session');
+        const datos = planificador.generarReporte(filtros);
         actualizarReporteGastos(datos);
         setFeedback(feedback, 'Reporte generado con éxito.', false);
     } catch (error) {
         setFeedback(feedback, error, true);
     }
+}
+
+function generarGraficoReporte(datosFiltrados) {
+    // --- Extraemos los datos para el gráfico ---
+    const styles = getComputedStyle(document.documentElement);
+    const colorIngreso = styles.getPropertyValue("--success").trim();
+    const colorEgreso = styles.getPropertyValue("--danger").trim();
+    const etiquetas = [...new Set(datosFiltrados.map(mov => new Date(mov.fecha).toLocaleDateString()))].sort((a, b) => new Date(a) - new Date(b));
+    
+    //Agrupar montos por categoría
+    const porCategoria = {};
+
+    datosFiltrados.forEach(mov => {
+        const categoria = mov.categoria;
+        if (!porCategoria[categoria]) {
+            porCategoria[categoria] = {
+            tipo: mov.tipo,
+            data: Array(etiquetas.length).fill(0) // inicializa con ceros
+            };
+        }
+
+        // Suma el monto en la posición correcta según la fecha
+        const idx = etiquetas.indexOf(mov.fecha.toLocaleDateString());
+        porCategoria[categoria].data[idx] += mov.monto;
+    });
+
+    //Convertir a formato de dataset de Chart.js
+    const datasets = Object.keys(porCategoria).map(cat => ({
+    label: cat,
+    data: porCategoria[cat].data,
+    backgroundColor:
+        porCategoria[cat].tipo === "ingreso" ? colorIngreso : colorEgreso
+    }));
+
+    console.log(datasets)
+
+    if (grafico) {
+        grafico.destroy();
+    }
+
+    const ctx = document.getElementById("reportes-chart").getContext("2d");
+
+    // --- Creamos el gráfico ---
+    grafico = new Chart(ctx, {
+        type: "bar",
+        data: {
+            labels: etiquetas,
+            datasets: datasets
+        },
+        options: {
+            responsive: true,
+            plugins: {
+            legend: { display: false },
+            title: {
+                display: true,
+                text: "Montos por Categoría y Fecha"
+            },
+            tooltip: {
+                mode: "index",
+                intersect: false
+            }
+            },
+            scales: {
+            x: { stacked: true, title: { display: true, text: "Fecha" } },
+            y: { stacked: true, beginAtZero: true, title: { display: true, text: "Monto ($)" } }
+            }
+        }
+    });
 }
 
 /**

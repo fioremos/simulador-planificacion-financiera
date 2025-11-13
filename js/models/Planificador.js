@@ -109,6 +109,7 @@ class Planificador {
 
         return {
             filtrosNuevos,
+            datosFiltrados,
             totalMovimientos: datosFiltrados.length,
             ...indicadores
         };

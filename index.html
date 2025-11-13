@@ -11,6 +11,7 @@
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/components.css">
@@ -745,14 +746,8 @@
                                 <h3 class="subtitle subtitle-center subtitle-justify">Evolución de ingresos y egresos</h3>
                             </div>
 
-                            <!-- Gráfico temporalmente representado como imagen estática. 
-                                    En el futuro, será generado dinámicamente con JavaScript, 
-                                    o bien integrará una solución externa para 
-                                    mostrar datos actualizados y personalizados en tiempo real. -->
-                            <div class="container-chart">
-                                <img src="assets/images/reportes/graficoReportes.png" class="reportes-chart w-50 h-auto"
-                                    alt="Gráfico metas de ahorro" loading="lazy">
-                            </div>
+                            <canvas id="reportes-chart">
+                            </canvas>
                             <hr>
                         </div>
 
