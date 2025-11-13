@@ -1,11 +1,11 @@
 /**
  * Clase para planificar y gestionar movimientos financieros y metas de ahorro.
- * Permite agregar movimientos, metas de ahorro, generar reportes y exportar datos.
+ * Permite agregar movimientos, metas de ahorro, generar reportes.
  */
 class Planificador {
     #movimientos;
     #metasAhorro;
-    #exportador;
+    #filtros;
 
     /**
      * Inicializa un nuevo planificador.
@@ -13,9 +13,13 @@ class Planificador {
     constructor() {
         this.#movimientos = [];
         this.#metasAhorro = [];
-        this.#exportador = new Exportador();
+        this.#filtros = {   fechaAscii: "",
+                            fechaDesde: "",
+                            fechaHasta: "",
+                            categoria: "Todas",
+                            moneda: "ARS"};
     }
-
+    
     /* ======== Gestión de Movimientos ======== */
     /**
     * Agrega un nuevo movimiento financiero.
@@ -39,9 +43,8 @@ class Planificador {
         }
     }
 
-    eliminarMovimiento(movimiento) {
+    eliminarMovimiento(idAEliminar) {
         try {
-            const idAEliminar = movimiento.id;
             const indice = this.#movimientos.findIndex(m => m.id === idAEliminar);
 
             if (indice !== -1) {
@@ -80,7 +83,8 @@ class Planificador {
     /* ======== Reportes ======== */
     /**
      * Genera un reporte de movimientos según los filtros recibidos.
-     * @param {Object} filtros - Filtros: { fechaDesde, fechaHasta, categoria }.
+     * @param {Object} filtrosNuevos - Filtros: { fechaDesde, fechaHasta, categoria }.
+     * @param {String} - Fecha en formato ASCII.
      * @returns {Object} - Reporte con los datos filtrados e indicadores calculados.
      *                     {
      *                         filtros,
@@ -92,12 +96,19 @@ class Planificador {
      *                         porcentajeAhorro
      *                     }
      */
-    generarReporte(filtros) {
-        const datosFiltrados = this.#filtrarDatos(filtros);
+    generarReporte(filtrosNuevos, fechaAscii) {
+        const datosFiltrados = this.#filtrarDatos(filtrosNuevos);
         const indicadores = this.#calcularIndicadores(datosFiltrados);
+        const { fechaDesde, fechaHasta, categoria, moneda } = filtrosNuevos;
+
+        this.filtros.fechaAscii = fechaAscii;
+        this.filtros.categoria = categoria;
+        this.filtros.moneda = moneda;
+        this.filtros.fechaHasta = fechaHasta;
+        this.filtros.fechaDesde = fechaDesde;
 
         return {
-            filtros,
+            filtrosNuevos,
             totalMovimientos: datosFiltrados.length,
             ...indicadores
         };
@@ -159,39 +170,26 @@ class Planificador {
         };
     }
 
-    /* ======== Exportación ======== */
-    /**
-     * Exporta los movimientos o metas de ahorro a un formato y archivo específico.
-     * @param {Array<string>} tipo - Tipo de datos a exportar: ['resumen-cuenta'] o ['metas'].
-     * @param {string} formato - Formato de exportación: 'CSV', 'JSON', 'PDF', 'XLSX'.
-     * @param {string} nombreArchivo - Nombre del archivo a generar.
-     * @param {string} rutaDestino - Ruta o ubicación para guardar el archivo.
-     */
-    exportarDatos(tipo, formato, nombreArchivo, rutaDestino) {
-        const datos =
-        tipo.length === 1 && tipo[0] === 'resumen-cuenta'
-        ? this.#movimientos.map(m => m.toJSON())
-        : this.#metasAhorro.map(m => m.toJSON());
-
-    const config = { tipo, formato, nombreArchivo, rutaDestino };
-
-    try {
-        this.#exportador.exportar(datos, config);
-        console.log('Exportación exitosa.');
-    } catch (error) {
-        console.log('Error al exportar:', error.message);
-        }
-    }
 
     /* ======== Serialización ======== */
     /**
      * Serializa el planificador a un objeto JSON.
      * @returns {Object} - Objeto JSON con movimientos y metas de ahorro.
      */
-    toJSON() {
+    localToJSON() {
         return {
-            movimientos: this.#movimientos.map(m => m.toJSON()),
-            metasAhorro: this.#metasAhorro.map(m => m.toJSON())
+            movimientos: this.movimientos.map(m => m.toJSON()),
+            metasAhorro: this.metasAhorro.map(m => m.toJSON())
+        };
+    }   
+
+    /**
+     * Serializa el planificador a un objeto JSON.
+     * @returns {Object} - Objeto JSON con movimientos y metas de ahorro.
+     */
+    sessionToJSON() {
+        return {
+            filtros: JSON.stringify(this.filtros)
         };
     }
 
@@ -200,21 +198,52 @@ class Planificador {
      * @param {Object} json - Objeto JSON con estructuras de movimientos y metas.
      * @returns {Planificador} - Instancia reconstruida del planificador.
      */
-    static fromJSON(json) {
+    static localFromJSON(json) {
         const planificador = new Planificador();
-        planificador.#movimientos = json.movimientos.map(m => Movimiento.fromJSON(m));
-        planificador.#metasAhorro = json.metasAhorro.map(m => MetaAhorro.fromJSON(m));
+
+        if (json){
+            planificador.movimientos = json.movimientos.map(m => Movimiento.fromJSON(m));
+            planificador.metasAhorro = json.metasAhorro.map(m => MetaAhorro.fromJSON(m));
+        }    
+
         return planificador;
     }
 
-    /* ======== Accesores ======== */
-    /** @returns {Array<Movimiento>} - Lista de todos los movimientos del planificador. */
-    get movimientos() {
-        return this.#movimientos;
+    /**
+     * Crarga la instancia de Planificador desde un objeto JSON.
+     * @param {Object} jsonFiltros - Objeto JSON con estructuras de filtros.
+     */
+    static sessionRepFromJSON(jsonFiltros) {
+        if (jsonFiltros)
+            this.filtros = jsonFiltros;
     }
 
-    /** @returns {Array<MetaAhorro>} - Lista de todas las metas de ahorro del planificador. */
+
+    /* ======== Accesores ======== */
+    /* ======== Setters ======== */
+    set filtros(nuevosFiltros) {
+        if (nuevosFiltros && typeof nuevosFiltros === 'object')
+        this.#filtros = nuevosFiltros;
+    }
+
+    set metasAhorro(nuevasMetas) {
+        if ( nuevasMetas && Array.isArray(nuevasMetas))
+            this.#metasAhorro = nuevasMetas;
+    }
+    
+    set movimientos(nuevosMovimientos) {
+        if ( nuevosMovimientos && Array.isArray(nuevosMovimientos))
+            this.#movimientos = nuevosMovimientos;
+    }
+
+    /* ======== Getters ======== */
+    get filtros() {
+        return this.#filtros;
+    }
     get metasAhorro() {
         return this.#metasAhorro;
+    }
+    get movimientos() {
+        return this.#movimientos;
     }
 }
