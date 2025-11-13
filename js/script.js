@@ -6,10 +6,10 @@
 let feedback = document.querySelector('#feedback');
 
 /** @type {Object|null} Filtros actuales para reportes */
-let filtros = null;
+let filtros = {fechaDesde: "", fechaHasta: "", categoria: "", moneda: ""};
 
 /** @type {Planificador} Instancia principal del planificador */
-const planificador = new Planificador();
+let planificador;
 
 /** @type {NodeListOf<HTMLElement>} Lista de secciones principales del contenido */
 let secciones;
@@ -25,6 +25,9 @@ let principalContainer;
 
 /** @type {HTMLElement|null} Elemento Offcanvas del sidebar (modo móvil) */
 let offcanvasEl;
+
+/** @type {HTMLElement|null} Exporatador usado por planificador */
+let exportador = new Exportador;
 
 // =============================================================
 // Event Listeners
@@ -58,6 +61,18 @@ document.addEventListener('DOMContentLoaded', () => {
         window.history.replaceState({}, '', url);
     }
 
+    //Cargo las variables locales si existen
+    const planificadorGuardado = StorageUtil.obtener('app:planificador', 'local');
+    if (planificadorGuardado){
+        planificador = Planificador.localFromJSON(planificadorGuardado);
+
+        // Listar movimientos y metas en la interfaz
+        ListarMoviminetos(planificador.localToJSON().movimientos);
+        ListarMetas(planificador.localToJSON().metasAhorro);
+        actualizarRadiosConMetas();
+    }else
+        planificador = new Planificador();
+    
     // Mostrar la sección inicial
     mostrarSeccion(hash);
 });
@@ -143,30 +158,37 @@ function mostrarSeccion(id) {
     if (sidebar) sidebar.classList.toggle('d-none', estaEnLogin);
     if (header) header.classList.toggle('d-none', estaEnLogin);
     if (principalContainer) principalContainer.classList.toggle('solo-contenido', estaEnLogin);
-
-    // Control para evitar inicializaciones múltiples
-    let movimientosIniciado = false;
-
-    // Inicializar el módulo correspondiente según la sección activa
-    if (id === 'ingresos-gastos' && !movimientosIniciado) {
-        initMovimientoEvents();
-        movimientosIniciado = true;
+    if (id === 'reportes') {
+        if(!planificador.sessionToJSON().filtros.fechaAscii && StorageUtil.obtener('app:planificador:filtros', 'session'))
+            recargarVariablesSession('reportes');
+        else
+            initReportes();
     }
 
-    if (id === 'exportar' && !movimientosIniciado) {
-        initExportarDatos();
-        movimientosIniciado = true;
+    if (id === 'exportar') {
+        if(StorageUtil.obtener('app:exportador:config', 'session'))
+            recargarVariablesSession('exportador');
     }
 
-    if (id === 'reportes' && !movimientosIniciado) {
-        initReportes();
-        movimientosIniciado = true;
+    if (id === 'login') {
+        if(planificador){
+            StorageUtil.eliminar('app:planificador:filtros', 'session');
+            filtros = {fechaDesde: "", fechaHasta: "", categoria: "", moneda: ""};
+
+            document.getElementById('fechaRyE').value = "Últimos 7 días";
+            document.getElementById('categoriaRyE').value = "Todas";
+            document.getElementById('moneda').value = "ARS";
+
+            
+            StorageUtil.eliminar('app:exportador:config', 'session');
+            if(document.querySelector('#exportar-container input[name="tipo"]:checked'))
+                document.querySelector('#exportar-container input[name="tipo"]:checked').checked = false;
+            document.querySelectorAll(`#exportar-container input[name="datos"]`).forEach(cb => {cb.checked = false;});  
+            document.querySelector('#nombre').value ='';
+            document.querySelector('#ubicacion').value = '';
+        }
     }
 
-    if (id === 'metas' && !movimientosIniciado) {
-        initMetaAhorro();
-        movimientosIniciado = true;
-    }
 }
 
 // =============================================================
@@ -177,15 +199,18 @@ function mostrarSeccion(id) {
  * Inicializa los listeners del formulario de ingresos y gastos.
  * Busca el formulario en el DOM y agrega el manejador de envío.
  */
-function initMovimientoEvents() {
-    const formMovimiento = document.querySelector('#form-ingresos-gastos');
-    if (!formMovimiento) {
-        console.log('Formulario de movimientos no encontrado en el DOM.');
-        return;
-    }
+document.querySelector('#form-ingresos-gastos').addEventListener('submit', manejarMovimientoSubmit);
 
-    formMovimiento.addEventListener('submit', manejarMovimientoSubmit);
-    console.log('Listeners de Movimiento inicializados.');
+
+/**
+ * Lista los movimientos existentes en la tabla al iniciar la sección.
+ * 
+ * @param {Array} movimientos - Array de movimientos a listar.
+ */
+function ListarMoviminetos(movimientos) {
+    movimientos.forEach(movimiento => {
+        crearFilaMovimiento(movimiento);
+    });
 }
 
 /**
@@ -207,6 +232,7 @@ function manejarMovimientoSubmit(event) {
 
     try {
         const movimiento = planificador.agregarMovimiento(datos);
+        StorageUtil.actualizar('app:planificador', planificador.localToJSON(), 'local');
         setFeedback(feedback, 'Movimiento agregado con éxito.', false);
         crearFilaMovimiento(datos, movimiento);
         form.reset();
@@ -224,6 +250,9 @@ function manejarMovimientoSubmit(event) {
 function crearFilaMovimiento(datos, movimiento) {
     const tablaCuerpo = document.querySelector('.movimientos-table tbody');
     const fila = document.createElement('tr');
+    // Guardamos el id del movimiento en el dataset de la fila
+    fila.dataset.movimientoId = datos.id;
+    
 
     // Botón eliminar
     const tdBoton = document.createElement('td');
@@ -237,7 +266,8 @@ function crearFilaMovimiento(datos, movimiento) {
     tdBoton.appendChild(boton);
     boton.addEventListener('click', () => {
         fila.remove();
-        planificador.eliminarMovimiento(movimiento);
+        planificador.eliminarMovimiento(fila.dataset.movimientoId);
+        StorageUtil.actualizar('app:planificador', planificador.localToJSON(), 'local');
     });
 
     // Celdas
@@ -258,16 +288,26 @@ function crearFilaMovimiento(datos, movimiento) {
 /**
  * Inicializa el botón de exportación de datos.
  */
-function initExportarDatos() {
-    const botonExportar = document.querySelector('#exportar-container .btn');
-    if (!botonExportar) {
-        console.log("'#exportar-container .btn' no encontrado");
-        return;
-    }
-    botonExportar.addEventListener('click', manejarExportar);
-    console.log('Listeners de Exportar inicializados.');
-}
+document.querySelector('#exportar-container .btn').addEventListener('click', manejarExportar);
 
+
+function initExportador(filtrosExportacion) {
+    if (filtrosExportacion){
+
+        document.querySelector(`#exportar-container input[name="tipo"][value="${filtrosExportacion.formato}"]`).checked = true;
+        const checkboxes = document.querySelectorAll('#exportar-container input[name="datos"]');
+
+        checkboxes.forEach(cb => {
+            cb.checked = filtrosExportacion.tipo.includes(cb.value);
+        });
+        /*checkboxes.forEach(cb => {
+            cb.checked = tipoDatos.includes(cb.value);
+        });*/
+
+        document.querySelector('#nombre').value = filtrosExportacion.nombreArchivo;
+        document.querySelector('#ubicacion').value = filtrosExportacion.rutaDestino;
+    }
+}
 /**
  * Maneja la exportación de datos seleccionados.
  * 
@@ -283,7 +323,8 @@ function manejarExportar(event) {
     const ubicacion = document.querySelector('#ubicacion').value.trim();
 
     try {
-        planificador.exportarDatos(tipoDatos, formato, nombre, ubicacion);
+        exportador.exportarDatos(tipoDatos, formato, nombre, ubicacion , planificador);
+        StorageUtil.actualizar('app:exportador:config', exportador.sessionToJSON(), 'session');
         setFeedback(feedback, 'Archivo exportado con éxito.', false);
     } catch (error) {
         setFeedback(feedback, error, true);
@@ -297,24 +338,29 @@ function manejarExportar(event) {
 /**
  * Inicializa los reportes y configura los filtros por defecto.
  */
-function initReportes() {
-    const form = document.getElementById('movimientos-form');
+document.getElementById('movimientos-form').addEventListener('change', manejarReportes);
+function initReportes(filtrosGuardado = null) {
+    let fechaAscii;
+    if(!filtrosGuardado){
+        fechaAscii = document.getElementById('fechaRyE').value;
+        filtros.categoria = document.getElementById('categoriaRyE').value;
+        filtros.moneda = document.getElementById('moneda').value;
+    } else{
+        document.getElementById('fechaRyE').value = filtrosGuardado.fechaAscii;
+        document.getElementById('categoriaRyE').value = filtrosGuardado.categoria;
+        document.getElementById('moneda').value = filtrosGuardado.moneda;
 
-    filtros = {
-        fechaDesde: "",
-        fechaHasta: "",
-        categoria: document.getElementById('categoriaRyE').value,
-        moneda: document.getElementById('moneda').value
-    };
+        fechaAscii = filtrosGuardado.fechaAscii;
+        filtros.categoria = filtrosGuardado.categoria;
+        filtros.moneda = filtrosGuardado.moneda;
+    }
 
-    actualizarFechas(document.getElementById('fechaRyE').value, filtros);
+    actualizarFechas(fechaAscii, filtros);
 
-    const datos = planificador.generarReporte(filtros);
+    const datos = planificador.generarReporte(filtros, fechaAscii);
     actualizarReporteGastos(datos);
-
-    form.addEventListener('change', manejarReportes);
-    console.log('Listeners de Reportes inicializados.');
 }
+
 
 /**
  * Maneja los cambios de filtros en el formulario de reportes.
@@ -332,7 +378,8 @@ function manejarReportes(event) {
     }
 
     try {
-        const datos = planificador.generarReporte(filtros);
+        const datos = planificador.generarReporte(filtros, document.getElementById('fechaRyE').value);
+        StorageUtil.actualizar('app:planificador:filtros', planificador.sessionToJSON().filtros, 'session');
         actualizarReporteGastos(datos);
         setFeedback(feedback, 'Reporte generado con éxito.', false);
     } catch (error) {
@@ -406,15 +453,18 @@ function actualizarFechas(valor, filtros) {
 /**
  * Inicializa los formularios de metas y objetivos de ahorro.
  */
-function initMetaAhorro() {
-    const formMetas = document.querySelector('#form-metas-modal');
-    const formObjetivo = document.querySelector('#form-objetivo-modal');
-
-    if (!formMetas || !formObjetivo) return;
-
-    formMetas.addEventListener('submit', manejarGuardarMeta);
-    formObjetivo.addEventListener('submit', manejarGuardarObjetivo);
-    console.log('Listeners de Metas y Objetivos inicializados.');
+document.querySelector('#form-metas-modal').addEventListener('submit', manejarGuardarMeta);
+document.querySelector('#form-objetivo-modal').addEventListener('submit', manejarGuardarObjetivo);
+  
+/**
+ * Lista las metas de ahorro existentes en la tabla al iniciar la sección.
+ * 
+ * @param {Array} metasAhorro - Array de metas de ahorro a listar.
+ */
+function ListarMetas(metasAhorro) {
+    metasAhorro.forEach(metaAhorro => {
+        crearFilaMeta(metaAhorro);
+    });
 }
 
 /**
@@ -431,6 +481,7 @@ function manejarGuardarMeta(event) {
 
     try {
         const meta = planificador.agregarMetaAhorro({nombre: nombre, montoObjetivo: monto, fechaObjetivo: fecha});
+        StorageUtil.actualizar('app:planificador', planificador.localToJSON(), 'local');
         crearFilaMeta(meta);
         actualizarRadiosConMetas();
         cerrarModal('MetasAhorroModal');
@@ -664,5 +715,37 @@ function setFeedback(feedback, message, error) {
             feedback.classList.remove('success', 'error');
             overlay.style.display = "none";
         }, 1000);
+    }
+}
+
+/**
+ * Recarga las variables de sesión desde el almacenamiento para un módulo dado.
+ *
+ * @function recargarVariablesSession
+ * @param {string} tipo - Identificador del módulo cuyas variables de sesión se deben recargar.
+ *   Valores esperados:
+ *   - `"Reportes"`: Recarga los filtros de reporte del planificador.
+ *   - `"exportador"`: Recarga la configuración de exportación.
+ */
+function recargarVariablesSession(tipo) {
+    switch (tipo){
+        case 'reportes': {
+            const datosGuardados = StorageUtil.obtener('app:planificador:filtros', 'session');
+            Planificador.sessionRepFromJSON(datosGuardados);
+
+            if (datosGuardados) {
+                initReportes(datosGuardados);
+            }
+            break;
+        }
+        case 'exportador': {
+            const datosGuardados = JSON.parse(StorageUtil.obtener('app:exportador:config', 'session').filtrosExportador);
+            exportador.sessionExpFromJSON(datosGuardados);
+
+            if (datosGuardados) {
+                initExportador(datosGuardados);
+            }
+            break;
+        }
     }
 }

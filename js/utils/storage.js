@@ -162,51 +162,6 @@ const StorageUtil = (() => {
     }
   };
 
-  // -----------------------------
-  // Funciones auxiliares para Clases (POO)
-  // -----------------------------
-
-  /**
-   * Guarda una lista de instancias de clase que implementan toJSON().
-   * @param {string} clave - Clave del registro
-   * @param {object[]} instancias - Lista de objetos con método toJSON()
-   * @param {'local'|'session'} tipo - Tipo de almacenamiento
-   * @returns {boolean} true si se guardó correctamente
-   */
-  const guardarColeccion = (clave, instancias, tipo = 'local') => {
-    try {
-      if (!Array.isArray(instancias)) throw new Error('El valor no es un array.');
-      const data = instancias.map(obj =>
-        typeof obj.toJSON === 'function' ? obj.toJSON() : obj
-      );
-      return guardar(clave, data, tipo);
-    } catch (error) {
-      console.error(`[StorageUtil] Error al guardar colección ${clave}: ${error.message}`);
-      return false;
-    }
-  };
-
-  /**
-   * Carga una lista de instancias usando un método estático fromJSON().
-   * @param {string} clave - Clave de la colección
-   * @param {function} clase - Clase con método estático fromJSON()
-   * @param {'local'|'session'} tipo - Tipo de almacenamiento
-   * @returns {object[]} Lista de instancias restauradas
-   */
-  const cargarColeccion = (clave, clase, tipo = 'local') => {
-    try {
-      const data = obtener(clave, tipo);
-      if (!data) return [];
-      if (typeof clase.fromJSON !== 'function') {
-        console.warn(`[StorageUtil] La clase ${clase.name} no implementa fromJSON().`);
-        return data;
-      }
-      return data.map(item => clase.fromJSON(item));
-    } catch (error) {
-      console.error(`[StorageUtil] Error al cargar colección ${clave}: ${error.message}`);
-      return [];
-    }
-  };
 
   // -----------------------------
   // Exportación pública
@@ -219,8 +174,6 @@ const StorageUtil = (() => {
     listar,
     limpiar,
     existe,
-    guardarColeccion,
-    cargarColeccion,
   };
 })();
 

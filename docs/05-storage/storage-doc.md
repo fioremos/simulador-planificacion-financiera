@@ -1,6 +1,6 @@
-# 📦 Documentación del Módulo de Storage  
+#  Documentación del Módulo de Storage  
 
-## 🧠 Propósito del módulo
+##  Propósito del módulo
 
 El módulo `StorageUtil` proporciona una interfaz unificada y segura para gestionar el **almacenamiento persistente** del navegador (localStorage y sessionStorage).  
 Se encarga de guardar, recuperar, actualizar y eliminar datos de manera estructurada, incluyendo:
@@ -13,7 +13,7 @@ Gracias a la serialización JSON y a los métodos `toJSON()` / `fromJSON()` impl
 
 ---
 
-## 📘 Qué datos se almacenan
+##  Qué datos se almacenan
 
 El sistema persiste diferentes tipos de información según el contexto:
 
@@ -21,11 +21,11 @@ El sistema persiste diferentes tipos de información según el contexto:
 |---------------|---------|-------------|-------------------|------------------------|
 | **Movimientos** | Registro de operaciones financieras | Guarda ingresos, gastos, ahorros e inversiones. | `Movimiento` | `localStorage` |
 | **Metas de ahorro** | Objetivos financieros | Contiene nombre, monto objetivo, progreso y fecha límite. | `MetaAhorro` | `localStorage` |
-| **Estado del planificador** | Configuración del simulador financiero | Filtros, moneda, rango de fechas, etc. | `Planificador` | `sessionStorage` |
+| **Configuración del generador de reportes** | Configuración del generador de reportes | Filtros, moneda, rango de fechas, etc. | `Planificador` | `sessionStorage` |
 | **Configuración del exportador** | Preferencias de exportación del usuario | Formato, ruta o nombre de archivo exportado. | `Exportador` | `sessionStorage` |
 ---
 
-## 🗂️ Estructura de claves
+##  Estructura de claves
 
 Todas las claves del almacenamiento siguen la convención:  
 app:< modulo >:< tipo-dato >
@@ -33,14 +33,13 @@ app:< modulo >:< tipo-dato >
 
 | Clave | Contenido | Ejemplo | Tipo |
 |--------|------------|----------|------|
-| `app:movimientos` | Lista de objetos de tipo `Movimiento`. | `[ {fecha, tipo, categoria, monto}, ... ]` | local |
-| `app:metas` | Lista de metas de ahorro (`MetaAhorro`). | `[ {nombre, montoObjetivo, montoAcumulado}, ... ]` | local |
-| `app:planificador:filtros` | Estado temporal del simulador financiero. | `{fechaDesde, fechaHasta, categoria, moneda}` | session |
-| `app:exportador:config` | Estado temporal de la configuración de exportación. | `[ {tipo, formato, nombreArchivo, rutaDestino}, ... ]` | session |
+| `app:planificador` | Lista de objetos de tipo `Movimiento`. | `{fecha, tipo, categoria, monto}` | local |
+| `app:planificador:filtros` | Estado temporal del simulador financiero. | `{ fechaAscii, fechaDesde, fechaHasta, categoria , moneda}` | session |
+| `app:exportador:config` | Estado temporal de la configuración de exportación. | `{tipo, formato, nombreArchivo, rutaDestino}` | session |
 
 ---
 
-## 🧾 Formato de datos (Schemas JSON)
+##  Formato de datos (Schemas JSON)
 
 A continuación se presentan los **schemas JSON** utilizados por cada tipo de entidad almacenada.
 
@@ -66,7 +65,7 @@ A continuación se presentan los **schemas JSON** utilizados por cada tipo de en
 }
 ```
 
-### 🔹 Planificador (filtros)
+###  Planificador (filtros)
 ```json
 {
   "fechaDesde": "2025-10-01",
@@ -87,19 +86,19 @@ A continuación se presentan los **schemas JSON** utilizados por cada tipo de en
 ```
 
 
-## 🧮 Diferencia entre localStorage y sessionStorage
+## Diferencia entre localStorage y sessionStorage
 
 | Aspecto              | **localStorage**                                                 | **sessionStorage**                                     |
 | -------------------- | ---------------------------------------------------------------- | ------------------------------------------------------ |
 | **Persistencia**     | Permanece incluso después de cerrar el navegador.                | Se borra al cerrar la pestaña.                         |
 | **Uso principal**    | Datos duraderos del usuario (movimientos, metas). | Datos temporales del flujo activo (filtros, reportes, exportaciones). |
-| **Ejemplo de clave** | `app:movimientos`, `app:metas`                       | `app:planificador:filtros`, `app:exportador:config`                             |
+| **Ejemplo de clave** | `app:planificador`                      | `app:planificador:filtros`, `app:exportador:config`                             |
 | **Volumen de datos** | Mayor, se usa para colecciones.                                  | Ligero, solo configuraciones temporales.               |
 | **Recomendado para** | Información de largo plazo.                                      | Sesiones o estados transitorios.                       |
 
-## 💾 Ejemplos de uso
+## Ejemplos de uso
 
-### 🧩 Guardar una colección de movimientos
+###  Guardar una colección de movimientos
 
 ```js
 // Supongamos que tenemos una lista de instancias de Movimiento
@@ -112,7 +111,7 @@ const movimientos = [
 StorageUtil.guardarColeccion('app:movimientos', movimientos);
 ```
 
-### 🧩 Recuperar los movimientos desde el almacenamiento
+###  Recuperar los movimientos desde el almacenamiento
 ```js
 // Cargar la lista y reconstruir las instancias originales
 const movimientosGuardados = StorageUtil.cargarColeccion('app:movimientos', Movimiento);
@@ -121,7 +120,7 @@ console.log(movimientosGuardados[0] instanceof Movimiento); // true
 console.log(movimientosGuardados[0].tipo); // "ingreso"
 ```
 
-### 🧩 Guardar metas de ahorro
+###  Guardar metas de ahorro
 ```js
 const metas = [
   new MetaAhorro('Auto nuevo', 3000000, '2026-06-01'),
@@ -131,13 +130,13 @@ const metas = [
 StorageUtil.guardarColeccion('app:metas', metas);
 ```
 
-### 🧩 Recuperar metas guardadas
+###  Recuperar metas guardadas
 ```js
 const metasGuardadas = StorageUtil.cargarColeccion('app:metas', MetaAhorro);
 console.log(metasGuardadas[0].nombre()); // "Auto nuevo"
 ```
 
-### 🧩 Guardar el estado temporal del planificador
+###  Guardar el estado temporal del planificador
 ```js
 const filtrosActivos = {
   fechaDesde: '2025-10-01',
@@ -149,13 +148,13 @@ const filtrosActivos = {
 StorageUtil.guardar('app:planificador:filtros', filtrosActivos, 'session');
 ```
 
-### 🧩 Cargar estado del planificador
+### Cargar estado del planificador
 ```js
 const filtros = StorageUtil.obtener('app:planificador:filtros', 'session');
 console.log(filtros.categoria); // "Todas"
 ```
 
-### 🧩 Guardar configuración de exportación
+### Guardar configuración de exportación
 ```js
 const configActivo = {
   tipo: ["movimientos"],
@@ -166,13 +165,13 @@ const configActivo = {
 StorageUtil.guardar('app:exportador:config', configActivo, 'session');
 ```
 
-### 🧩 Cargar configuración de exportación
+### Cargar configuración de exportación
 ```js
 const config = StorageUtil.obtener('app:exportador:config', 'session');
 console.log(config.formato); // "CSV"
 ```
 
-### 🧩 Limpieza general del almacenamiento
+### Limpieza general del almacenamiento
 ```js
 // Limpia datos persistentes
 StorageUtil.limpiar('local');

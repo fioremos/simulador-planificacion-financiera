@@ -29,7 +29,8 @@ class MetaAhorro {
     + {static} fromJSON(json: Object): MetaAhorro
 }
 class Exportador {
-    + exportar(datos: Object[], config : Object) : boolean
+    - filtrosExportacion: {tipo, formato, nombreArchivo, rutaDestino}
+    + exportarDatos(tipo: Array, formato: string, nombreArchivo: string, rutaDestino: string, datos: Object): Object
     + validarConfiguracion(config : Object) : boolean
     + toCSV(datos : Object[]) : string
     + toJSON(datos : Object[]) : string
@@ -37,18 +38,18 @@ class Exportador {
     + toXLSX(datos : Object[]) : string
     + {static} esFormatoValido(formato : string) : boolean
     + {static} sonNombreYRutaValidos(nombre : string, ruta : string) : boolean
+    - exportar(datos: Object[], config : Object) : boolean
 }
 
 ' --- Clase de Lógica de Negocio (Gestor) ---
 class Planificador{
     - movimientos: Movimiento[]
     - metasAhorro: MetaAhorro[]
-    - exportador: Exportador
+    - filtros:  { fechaAscii, fechaDesde, fechaHasta, categoria , moneda}
     + constructor()
     + agregarMovimiento(datos: Object): Movimiento
     + agregarMetaAhorro(datos: Object): MetaAhorro
     + generarReporte(filtros: Object): Object
-    + exportarDatos(tipo: Array, formato: string, nombreArchivo: string, rutaDestino: string): Object
     + toJSON(): Object
     + {static} fromJSON(json: Object): Planificador
     - filtrarDatos(filtros: Object): Movimiento[]

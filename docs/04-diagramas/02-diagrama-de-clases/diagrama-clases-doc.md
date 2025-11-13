@@ -23,7 +23,10 @@ Este diagrama define la arquitectura de lógica de negocio (POO) para el simulad
 
 ### 3. Exportador
 - **Responsabilidad:** Gestiona el proceso de exportación de datos financieros del sistema hacia distintos formatos (CSV, JSON y PDF). Se encarga de validar las configuraciones de exportación, generar el contenido adecuado según el formato solicitado y simular la creación del archivo final en la ruta destino. 
+* **Propiedades:**
+    * `filtrosExportacion:{tipo, formato, nombreArchivo, rutaDestino}`: Diccionario con los filtros de la última exporación realizada.
 - **Métodos Clave:**
+  * `exportarDatos(tipo, formato, nombreArchivo, rutaDestino)`: Procesa los datos de la app para exportación.
   - `exportar(datos, config)`: Método principal que valida los parámetros y ejecuta la exportación.  
   - `validarConfiguracion(config)`: Comprueba que la configuración de exportación sea válida, incluyendo formato, nombre y ruta.
 Internamente usa los métodos estáticos `esFormatoValido()`, `sonNombreYRutaValidos()`.   
@@ -39,12 +42,11 @@ Internamente usa los métodos estáticos `esFormatoValido()`, `sonNombreYRutaVal
 * **Propiedades:**
     * `movimientos: Movimiento[]`: Lista que contiene todas las instancias de `Movimiento`.
     * `metas: MetaAhorro[]`: Lista que contiene todas las instancias de `MetaAhorro`.
-    * `exportador: Exportador`: Componente interno encargado de gestionar la exportación de datos.
+    * `filtros: { fechaAscii, fechaDesde, fechaHasta, categoria , moneda}`: Diccionario del último filtro útilizado para generar un reporte.
 * **Métodos Públicos (Interfaz):**
     * `agregarMovimiento(datos)`: Valida datos, crea un `Movimiento` y lo añade a la lista.
     * `agregarMetaAhorro(datos)`: Valida datos, crea una `MetaAhorro` y la añade a la lista.
     * `generarReporte(filtros)`: Procesa la lista de movimientos y devuelve un objeto con los resultados.
-    * `exportarDatos(tipo, formato, nombreArchivo, rutaDestino)`: Procesa los datos de la app para exportación.
 * **Métodos Privados (Lógica Interna):**
     * `filtrarDatos(...)`: Lógica migrada de la función global `filtrarDatos`.
     * `calcularIndicadores(...)`: Lógica migrada de la función global `calcularIndicadores`.
@@ -75,9 +77,12 @@ Esto facilita el almacenamiento y recuperación del estado de la aplicación med
 |  | `fromJSON(json)` | Método estático que reconstruye una instancia de `Movimiento` desde un objeto previamente serializado. |
 | **MetaAhorro** | `toJSON()` | Serializa la meta con sus propiedades (`nombre`, `montoObjetivo`, `montoActual`, `fechaObjetivo`). |
 |  | `fromJSON(json)` | Crea una nueva instancia de `MetaAhorro` a partir de un objeto JSON cargado. |
-| **Planificador** | `toJSON()` | Serializa el estado completo del planificador, incluyendo listas de movimientos y metas. |
-|  | `fromJSON(json)` | Reconstruye un `Planificador` con sus colecciones internas, utilizando los métodos `fromJSON()` de `Movimiento` y `MetaAhorro`. |
-
+| **Planificador** | `localtoJSON()` | Serializa el estado completo del planificador, incluyendo listas de movimientos y metas. |
+|  | `localFromJSON(json)` | Reconstruye un `Planificador` con sus colecciones internas, utilizando los métodos `fromJSON()` de `Movimiento` y `MetaAhorro`. |
+| **Planificador** | `sessiontoJSON()` | Serializa los filtros de generación de reporte. |
+|  | `sessionFromJSON(json)` | Reconstruye el estado del reporte generado restaurando los filtros de generación de reporte. |
+| **Exportador** | `sessionToJSON()` | Serializa los filtros de exportación del exportador. |
+|  | `sessionExpFromJSON(json)` | Reconstruye el estado del exportador restaurando los filtros de exportación. |
 
 **Ejemplo de uso con Local Storage:**
  ```js
