@@ -199,7 +199,8 @@ function mostrarSeccion(id) {
  * Inicializa los listeners del formulario de ingresos y gastos.
  * Busca el formulario en el DOM y agrega el manejador de envío.
  */
-document.querySelector('#form-ingresos-gastos').addEventListener('submit', manejarMovimientoSubmit);
+if(document.querySelector('#form-ingresos-gastos'))
+    document.querySelector('#form-ingresos-gastos').addEventListener('submit', manejarMovimientoSubmit);
 
 
 /**
@@ -288,7 +289,8 @@ function crearFilaMovimiento(datos, movimiento) {
 /**
  * Inicializa el botón de exportación de datos.
  */
-document.querySelector('#exportar-container .btn').addEventListener('click', manejarExportar);
+if(document.querySelector('#exportar-container .btn'))
+    document.querySelector('#exportar-container .btn').addEventListener('click', manejarExportar);
 
 
 function initExportador(filtrosExportacion) {
@@ -338,7 +340,9 @@ function manejarExportar(event) {
 /**
  * Inicializa los reportes y configura los filtros por defecto.
  */
-document.getElementById('movimientos-form').addEventListener('change', manejarReportes);
+if(document.getElementById('movimientos-form'))
+    document.getElementById('movimientos-form').addEventListener('change', manejarReportes);
+
 function initReportes(filtrosGuardado = null) {
     let fechaAscii;
     if(!filtrosGuardado){
@@ -453,8 +457,11 @@ function actualizarFechas(valor, filtros) {
 /**
  * Inicializa los formularios de metas y objetivos de ahorro.
  */
-document.querySelector('#form-metas-modal').addEventListener('submit', manejarGuardarMeta);
-document.querySelector('#form-objetivo-modal').addEventListener('submit', manejarGuardarObjetivo);
+if(document.querySelector('#form-metas-modal'))
+    document.querySelector('#form-metas-modal').addEventListener('submit', manejarGuardarMeta);
+
+if(document.querySelector('#form-objetivo-modal'))
+    document.querySelector('#form-objetivo-modal').addEventListener('submit', manejarGuardarObjetivo);
   
 /**
  * Lista las metas de ahorro existentes en la tabla al iniciar la sección.

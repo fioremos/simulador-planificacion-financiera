@@ -25,79 +25,382 @@
 
 ## Suites de Tests
 
-### Suite 1: Agregar Movimiento
-**Funciones Testeadas:**
-- `esFechaValida()` - Verifica si una fecha ingresada es válida (no futura, formato correcto). 
-- `esTipoValido()` - Comprueba si el tipo de movimiento pertenece a los permitidos. 
-- `esCategoriaValida()` - Valida la categoría del movimiento. 
-- `pedirDatosMovimiento()` - Valida campos ingresados y monto positivo.
+### Suite 1: Model Movimiento
+
+#### Funciones Testeadas:
+- **`Movimiento.esFechaValida()`**: Valida si una fecha es correcta (no futura, formato válido).
+- **`Movimiento.esTipoValido()`**: Verifica si el tipo de movimiento es uno de los esperados.
+- **`Movimiento.esCategoriaValida()`**: Valida si la categoría de movimiento es una de las permitidas.
+- **`Movimiento.validar()`**: Valida los datos de un movimiento, incluyendo fecha, tipo, categoría y monto.
+
+
+#### Test 1: `Movimiento.esFechaValida()`
 
 **Casos de Prueba:**
-| # | Descripción | Tipo |
-|---|-------------|------| 
-| 1 | Acepta fechas pasadas y actuales válidas | Happy Path |
-| 2 | Rechaza fechas futuras o formato incorrecto | Validación de Errores |
-| 3 | Acepta tipos de movimiento válidos en diferentes formatos (espacios, mayúsculas) | Caso Borde |
-| 4 | Rechaza tipos o categorías vacías o no reconocidas | Validación de Errores |
-| 5 | Acepta montos positivos, decimales y grandes | Happy Path |
-| 6 | Rechaza montos negativos, cero o no numéricos | Validación de Errores |
+
+| #  | Descripción                             | Tipo                  |
+|----|----------------------------------------|-----------------------|
+| 1  | Debería aceptar una fecha pasada       | Happy Path            |
+| 2  | Debería aceptar la fecha de hoy        | Happy Path            |
+| 3  | Debería rechazar una fecha futura      | Validación de Errores |
+| 4  | Debería rechazar una cadena inválida   | Validación de Errores |
+| 5  | Debería rechazar una fecha con formato incorrecto | Validación de Errores |
+| 6  | Debería rechazar una fecha vacía       | Validación de Errores |
+
+
+#### Test 2: `Movimiento.esTipoValido()`
+
+**Casos de Prueba:**
+
+| #  | Descripción                             | Tipo                  |
+|----|----------------------------------------|-----------------------|
+| 1  | Debería aceptar tipos esperados        | Happy Path            |
+| 2  | Debería aceptar tipos con espacios alrededor | Happy Path            |
+| 3  | Debería aceptar tipos en mayúsculas    | Happy Path            |
+| 4  | Debería aceptar tipos en minúsculas    | Happy Path            |
+| 5  | Debería rechazar string vacío          | Validación de Errores |
+| 6  | Debería rechazar tipos no esperados    | Validación de Errores |
+
+
+#### Test 3: `Movimiento.esCategoriaValida()`
+
+**Casos de Prueba:**
+
+| #  | Descripción                             | Tipo                  |
+|----|----------------------------------------|-----------------------|
+| 1  | Debería aceptar categorías esperadas    | Happy Path            |
+| 2  | Debería aceptar categorías con espacios alrededor | Happy Path            |
+| 3  | Debería aceptar categorías en mayúsculas | Happy Path            |
+| 4  | Debería aceptar categorías en minúsculas | Happy Path            |
+| 5  | Debería rechazar string vacío          | Validación de Errores |
+| 6  | Debería rechazar categorías no esperadas | Validación de Errores |
+
+
+#### Test 4: `Movimiento.validar()`
+
+**Casos de Prueba:**
+
+| #  | Descripción                             | Tipo                  |
+|----|----------------------------------------|-----------------------|
+| 1  | Debería aceptar monto positivo         | Happy Path            |
+| 2  | Debería aceptar monto decimal positivo | Happy Path            |
+| 3  | Debería aceptar monto muy grande       | Happy Path            |
+| 4  | Debería rechazar monto cero            | Validación de Errores |
+| 5  | Debería rechazar monto negativo        | Validación de Errores |
+| 6  | Debería rechazar monto no numérico     | Validación de Errores |
+
+---
+---
+
+### Suite 2: Model Metas de Ahorro
+
+#### Funciones Testeadas:
+- **`MetaAhorro.esNombreValido()`**: Verifica que el nombre de la meta sea válido (con al menos 2 caracteres, sin estar vacío, etc.).
+- **`MetaAhorro.esMontoValido()`**: Valida que el monto objetivo sea un número positivo, sin ser cero ni negativo.
+- **`MetaAhorro.esFechaFuturaValida()`**: Verifica si la fecha objetivo es una fecha futura válida.
+
+#### Test 1: `MetaAhorro.esNombreValido()`
+
+**Casos de Prueba:**
+
+| #  | Descripción                             | Tipo                  |
+|----|----------------------------------------|-----------------------|
+| 1  | Debería aceptar nombres con 2 o más caracteres | Happy Path        |
+| 2  | Debería aceptar nombres con espacios   | Happy Path            |
+| 3  | Debería aceptar nombres con caracteres especiales | Happy Path        |
+| 4  | Debería rechazar nombres con menos de 2 caracteres | Validación de Errores |
+| 5  | Debería rechazar nombres vacíos        | Validación de Errores |
+
+
+#### Test 2: `MetaAhorro.esMontoValido()`
+
+**Casos de Prueba:**
+
+| #  | Descripción                             | Tipo                  |
+|----|----------------------------------------|-----------------------|
+| 1  | Debería aceptar monto positivo         | Happy Path            |
+| 2  | Debería aceptar monto decimal positivo | Happy Path            |
+| 3  | Debería aceptar monto muy grande       | Happy Path            |
+| 4  | Debería rechazar monto cero            | Validación de Errores |
+| 5  | Debería rechazar monto negativo        | Validación de Errores |
+| 6  | Debería rechazar monto vacío           | Validación de Errores |
+| 7  | Debería rechazar monto no numérico     | Validación de Errores |
+| 8  | Debería aceptar montos con espacios adelante y/o al final | Happy Path  |
+
+
+#### Test 3: `MetaAhorro.esFechaFuturaValida()`
+
+**Casos de Prueba:**
+
+| #  | Descripción                             | Tipo                  |
+|----|----------------------------------------|-----------------------|
+| 1  | Debería aceptar fechas futuras         | Happy Path            |
+| 2  | Debería aceptar fecha vacía            | Happy Path            |
+| 3  | Debería rechazar fechas pasadas        | Validación de Errores |
+| 4  | Debería rechazar fechas con formato incorrecto | Validación de Errores |
+
+---
+---
+
+### Suite 3: Model Exportador
+
+#### Funciones Testeadas:
+- **`Exportador.hayDatosSeleccionados()`**: Verifica que los datos seleccionados sean válidos según los tipos predefinidos.
+- **`Exportador.esFormatoValido()`**: Valida que el formato de exportación sea uno de los permitidos (CSV, PDF, JSON, XLSX).
+- **`Exportador.sonNombreYRutaValidos()`**: Verifica que el nombre del archivo y la ruta de destino sean válidos.
+
+
+#### Test 1: `Exportador.hayDatosSeleccionados()`
+
+**Casos de Prueba:**
+
+| #  | Descripción                                             | Tipo                  |
+|----|---------------------------------------------------------|-----------------------|
+| 1  | Debería aceptar tipos de datos disponibles (resumen-cuenta) | Happy Path            |
+| 2  | Debería aceptar varios tipos de datos disponibles (Movimientos, Metas) | Happy Path            |
+| 3  | Debería rechazar tipos de datos incorrectos (movimientos) | Validación de Errores |
+| 4  | Debería rechazar tipos de datos vacíos                  | Validación de Errores |
+
+
+
+#### Test 2: `Exportador.esFormatoValido()`
+
+**Casos de Prueba:**
+
+| #  | Descripción                                             | Tipo                  |
+|----|---------------------------------------------------------|-----------------------|
+| 1  | Debería aceptar formatos válidos (CSV, PDF, JSON, XLSX) | Happy Path            |
+| 2  | Debería aceptar formatos válidos en minúscula (csv, pdf, json, xlsx) | Happy Path            |
+| 3  | Debería rechazar formatos inválidos (XML, TXT)          | Validación de Errores |
+| 4  | Debería rechazar formatos vacíos                        | Validación de Errores |
+
+
+
+#### Test 3: `Exportador.sonNombreYRutaValidos()`
+
+**Casos de Prueba:**
+
+| #  | Descripción                                             | Tipo                  |
+|----|---------------------------------------------------------|-----------------------|
+| 1  | Debería aceptar nombre y ruta válidos                   | Happy Path            |
+| 2  | Debería rechazar nombre vacío                           | Validación de Errores |
+| 3  | Debería rechazar ruta vacía                             | Validación de Errores |
+| 4  | Debería rechazar nombre con extensión (reporte.pdf)     | Validación de Errores |
+
 
 ---
 
-### Suite 2: Metas de Ahorro
-**Funciones Testeadas:**
-- `esNombreValido()` - Verifica que el nombre tenga al menos 2 caracteres. 
-- `pedirMeta()` - Solicita datos y valida nombre, monto y fecha.
-- `esFechaFuturaValida()` - Comprueba que la fecha sea futura o vacía. 
+### Suite 4: Model Planificador
+
+#### Funciones Testeadas:
+- **`Planificador.agregarMovimiento()`**: Valida que los movimientos sean agregados correctamente con las categorías y fechas adecuadas.
+- **`Planificador.eliminarMovimiento()`**: Verifica que los movimientos sean eliminados correctamente.
+- **`Planificador.agregarMetaAhorro()`**: Asegura que las metas de ahorro sean agregadas correctamente con validaciones de formato y valores.
+
+
+#### Test 1: `Planificador.agregarMovimiento()`
 
 **Casos de Prueba:**
-| # | Descripción | Tipo |
-|---|-------------|------|
-| 1 | Acepta nombres válidos y montos positivos | Happy Path |
-| 2 | Rechaza montos en cero, negativos o vacíos | Validación de Errores |
-| 3 | Acepta fechas futuras o vacías | Caso Borde |
-| 4 | Rechaza fechas pasadas o formato incorrecto | Validación de Errores |
+
+| #  | Descripción                                              | Tipo                  |
+|----|----------------------------------------------------------|-----------------------|
+| 1  | Debería aceptar movimientos con categoría válida (salud) | Happy Path            |
+| 2  | Debería aceptar categorías válidas en mayúscula (SALUD)  | Happy Path            |
+| 3  | Debería aceptar categorías válidas en minúscula (salud)  | Happy Path            |
+| 4  | Debería rechazar categorías con espacios (' ')           | Validación de Errores |
+| 5  | Debería rechazar categorías inválidas (abc)              | Validación de Errores |
+| 6  | Debería rechazar fechas 'desde' futuras en formato correcto (YYYY-MM-DD) | Validación de Errores |
+| 7  | Debería rechazar fechas en formato incorrecto (DD-MM-YYYY) | Validación de Errores |
+| 8  | Debería rechazar fechas 'desde' no válidas               | Validación de Errores |
+
+
+#### Test 2: `Planificador.eliminarMovimiento()`
+
+**Casos de Prueba:**
+
+| #  | Descripción                                              | Tipo                  |
+|----|----------------------------------------------------------|-----------------------|
+| 1  | Debería eliminar un movimiento correctamente             | Happy Path            |
+| 2  | Debería no eliminar un movimiento que no existe         | Validación de Errores |
+| 3  | Debería eliminar un movimiento correctamente usando un identificador único | Happy Path            |
+
+
+#### Test 3: `Planificador.agregarMetaAhorro()`
+
+**Casos de Prueba:**
+
+| #  | Descripción                                              | Tipo                  |
+|----|----------------------------------------------------------|-----------------------|
+| 1  | Debería agregar una meta válida correctamente            | Happy Path            |
+| 2  | Debería agregar la meta al arreglo interno `metasAhorro` | Happy Path            |
+| 3  | Debería lanzar error si el nombre está vacío             | Validación de Errores |
+| 4  | Debería lanzar error si el monto objetivo no es un número | Validación de Errores |
+| 5  | Debería lanzar error si el monto objetivo es negativo    | Validación de Errores |
+| 6  | Debería lanzar error si la fecha está en formato incorrecto | Validación de Errores |
+| 7  | Debería lanzar error si la fecha objetivo es pasada      | Validación de Errores |
+| 8  | Debería devolver un objeto `MetaAhorro` válido al agregarse | Happy Path            |
 
 ---
-
-### Suite 3: Exportar Datos
-**Funciones Testeadas:**
-- `hayDatosSeleccionados()` - Verifica selección de tipos válidos. 
-- `esFormatoValido()` - Valida formatos CSV, PDF, JSON. 
-- `sonNombreYRutaValidos()` - Revisa que el nombre y ruta no estén vacíos. 
-- `exportarDatosFlow()` - Ejecuta el flujo completo de exportación. 
-- `procesarExportacion()` - Simula el envío de datos para exportar.
-
-**Casos de Prueba:**
-| # | Descripción | Tipo |
-|---|-------------|------|
-| 1 | Exportación completa con valores válidos | Happy Path |
-| 2 | Acepta tipos de datos válidos (en mayúscula, minúscula, combinados) | Caso Borde |
-| 3 | Rechaza tipos o formatos inválidos | Validación de Errores |
-| 4 | Rechaza nombres/rutas vacías o con extensión | Validación de Errores |
-| 5 | Procesa correctamente arreglos de tipos seleccionados | Operaciones Arrays/Objetos |
-
 ---
 
-### Suite 4: Reporte Financiero 
-**Funciones Testeadas:**
-- `esFechaValida()` - Valida fechas pasadas y formato. 
-- `esCategoriaValida()` - Verifica categorías permitidas. 
-- `calcularIndicadores()` - Calcula ingresos, gastos, ahorro, saldo y % de ahorro. 
-- `filtrarDatos()` - Filtra datos según rango o categoría. 
-- `mostrarReporte()` - Muestra el reporte o alerta si no hay datos. 
-- `configurarFiltros()` - Actualiza filtros con validaciones. 
-- `reporteFinancieroFlow()` - Ejecuta el flujo principal de reporte.
+### Suite 5: Flujo de Ejecución - Planificador
+
+#### Funciones Testeadas:
+- **`Planificador.agregarMovimiento()`**: Asegura que los movimientos sean correctamente agregados a la lista de movimientos, validando datos y manejando errores.
+- **`Planificador.agregarMetaAhorro()`**: Verifica que las metas de ahorro sean correctamente creadas, incluyendo validaciones para los valores de las metas.
+- **`Exportador.exportar()`**: Valida la correcta exportación de datos según la configuración y formato especificado.
+- **`Planificador.generarReporte()`**: Genera reportes financieros correctos basados en los movimientos registrados.
+
+#### Test 1: `Planificador.agregarMovimiento()`
 
 **Casos de Prueba:**
-| # | Descripción | Tipo |
-|---|-------------|------|
-| 1 | Calcula correctamente indicadores financieros | Happy Path |
-| 2 | Maneja ingresos, gastos y ahorros con valores límite (0, decimales, negativos) | Caso Borde |
-| 3 | Rechaza fechas o categorías inválidas | Validación de Errores |
-| 4 | Retorna correctamente datos filtrados dentro del rango | Operaciones Arrays/Objetos |
-| 5 | Muestra reporte vacío cuando no hay datos | Validación de Errores |
 
+| #  | Descripción                                                | Tipo                  |
+|----|------------------------------------------------------------|-----------------------|
+| 1  | Debería agregar correctamente un movimiento válido        | Happy Path            |
+| 2  | Debería lanzar error al intentar agregar un movimiento con datos inválidos | Validación de Errores |
+
+
+#### Test 2: `Planificador.agregarMetaAhorro()`
+
+**Casos de Prueba:**
+
+| #  | Descripción                                                | Tipo                  |
+|----|------------------------------------------------------------|-----------------------|
+| 1  | Debería agregar correctamente una meta de ahorro válida   | Happy Path            |
+| 2  | Debería lanzar error si el monto objetivo es negativo     | Validación de Errores |
+| 3  | Debería lanzar error si la fecha objetivo es incorrecta   | Validación de Errores |
+
+
+#### Test 3: `Exportador.exportar()`
+
+**Casos de Prueba:**
+
+| #  | Descripción                                                | Tipo                  |
+|----|------------------------------------------------------------|-----------------------|
+| 1  | Debería exportar correctamente con datos válidos y configuración correcta | Happy Path            |
+| 2  | Debería rechazar exportación con formato no soportado (XML) | Validación de Errores |
+| 3  | Debería rechazar exportación con ruta vacía               | Validación de Errores |
+
+
+#### Test 4: `Planificador.generarReporte()`
+
+**Casos de Prueba:**
+
+| #  | Descripción                                                | Tipo                  |
+|----|------------------------------------------------------------|-----------------------|
+| 1  | Debería calcular correctamente los ingresos totales       | Happy Path            |
+| 2  | Debería calcular correctamente los gastos totales         | Happy Path            |
+| 3  | Debería calcular correctamente el ahorro total            | Happy Path            |
+| 4  | Debería calcular correctamente el saldo total             | Happy Path            |
+| 5  | Debería calcular correctamente el porcentaje de ahorro    | Happy Path            |
+| 6  | Debería manejar caso sin datos (todo cero)                | Validación de Errores |
+| 7  | Debería manejar casos con solo 'gastos'                   | Validación de Errores |
+| 8  | Debería manejar casos con solo 'ahorro'                   | Validación de Errores |
+| 9  | Debería manejar casos con ingresos y gastos iguales       | Validación de Errores |
+| 10 | Debería manejar casos con 'ahorro' mayor que 'ingresos'   | Validación de Errores |
+| 11 | Debería manejar casos con 'gastos' mayores que 'ingresos' | Validación de Errores |
+| 12 | Debería manejar casos con decimales en los montos         | Happy Path            |
+| 13 | Debería filtrar correctamente los datos según el rango de fechas y categoría | Happy Path            |
+
+---
+---
+
+### Suite 6: Util StorageUtil
+
+#### Funciones Testeadas:
+- **`StorageUtil.guardar()`**: Guarda valores en localStorage o sessionStorage con validaciones, serialización y manejo de errores.
+- **`StorageUtil.obtener()`**: Recupera valores almacenados, decodificando JSON cuando corresponde y manejando datos corruptos.
+- **`StorageUtil.actualizar()`**: Actualiza claves existentes en el storage sin perder integridad.
+- **`StorageUtil.eliminar()`**: Elimina claves de forma segura tanto en local como en session.
+- **`StorageUtil.listar()`**: Lista todas las claves del storage o las que coincidan con un prefijo.
+- **`StorageUtil.limpiar()`**: Limpia completamente el storage seleccionado.
+- **`StorageUtil.existe()`**: Verifica si una clave está presente en el storage.
+
+#### Test 1: `StorageUtil.guardar()`
+
+**Casos de Prueba:**
+
+| #  | Descripción                                                | Tipo                  |
+|----|------------------------------------------------------------|-----------------------|
+|1	|Guardar un valor primitivo en localStorage					|Happy Path             |
+|2	|Guardar objetos serializados correctamente						|Happy Path             |
+|3	|Guardar en sessionStorage cuando se indica tipo = 'session'			|Happy Path             |
+|4	|Maneja error QuotaExceededError					|Validación de Errores  |
+|5	|Rechaza guardar datos excesivamente grandes		|Validación de Errores  |
+|6	|No debería romperse si el valor es undefined		|Validación de Errores  |
+
+
+#### Test 2: `StorageUtil.obtener()`
+
+**Casos de Prueba:**
+
+| #  | Descripción                                                | Tipo                  |
+|----|------------------------------------------------------------|-----------------------|
+|1	|Obtiene correctamente strings											|Happy Path				|
+|3	|Obtiene correctamente objetos JSON										|Happy Path             |   
+|3	|Retorna null cuando la clave no existe									|Happy Path             |   
+|4	|Maneja JSON corrupto devolviendo null									|Validación de Errores  |   
+
+
+#### Test 3: `StorageUtil.actualizar()`
+
+**Casos de Prueba:**
+
+| #  | Descripción                                                | Tipo                  |
+|----|------------------------------------------------------------|-----------------------|
+|1	|Actualiza correctamente una clave ya existente							|Happy Path             |   
+
+
+#### Test 4: `StorageUtil.eliminar()`
+
+**Casos de Prueba:**
+
+| #  | Descripción                                                | Tipo                  |
+|----|------------------------------------------------------------|-----------------------|
+|1	|Elimina correctamente una clave existente								|Happy Path             |   
+|2	|Retorna true aunque la clave no exista									|Happy Path             |   
+
+#### Test 5: `StorageUtil.listar()`
+
+**Casos de Prueba:**
+
+| #  | Descripción                                                | Tipo                  |
+|----|------------------------------------------------------------|-----------------------|
+|1	|Lista solo claves con un prefijo específico							|Happy Path             |   
+|2	|Retorna arreglo vacío cuando no hay coincidencias						|Happy Path             | 
+
+#### Test 6: `StorageUtil.limpiar()`
+
+**Casos de Prueba:**
+
+| #  | Descripción                                                | Tipo                  |
+|----|------------------------------------------------------------|-----------------------|
+|1	|Limpia completamente localStorage										|Happy Path             |   
+|2	|Limpia completamente sessionStorage									|Happy Path             |   
+
+#### Test 7: `StorageUtil.existe()`
+
+**Casos de Prueba:**
+
+| #  | Descripción                                                | Tipo                  |
+|----|------------------------------------------------------------|-----------------------|
+|1	|Retorna true si la clave existe										|Happy Path             |   
+|2	|Retorna false si la clave no existe									|Happy Path             |   
+
+#### Test 8: `Casos extremos`
+
+**Casos de Prueba:**
+
+| #  | Descripción                                                | Tipo                  |
+|----|------------------------------------------------------------|-----------------------|
+|1	|Guardar objetos muy anidados											|Stress Test            |   
+|2	|Guardar arrays masivos (>200 ítems)									|Stress Test            |     
+|3	|guardar null explícitamente			|Happy Path             |   
+|4	|manejar claves vacías		|Happy Path             |   
+|5	|no romperse si se pasan números como clave	|Happy Path             |   
+
+---
 ---
 
 ## Métricas de Cobertura
@@ -105,55 +408,18 @@
 ### Resumen General
 | Métrica | Valor |
 |---------|-------|
-| Total de Tests      |93 |
-| Tests Pasando       |78 ✅ |
-| Tests Fallando      |15 ❌ |
-| Porcentaje de Éxito |84% |
+| Total de Tests      |116 |
+| Tests Pasando       |112 ✅ |
+| Tests Fallando      |4 ❌ |
+| Porcentaje de Éxito |96,5% |
 
 ### Cobertura por Tipo de Test
 | Tipo                       | Cantidad | Porcentaje |
 |----------------------------|----------|------------|
-| Happy Path                 | 25       | 26%        |
-| Casos Borde                | 22       | 23%        |
-| Validación de Errores      | 35       | 37%        |
-| Operaciones Arrays/Objetos | 13       | 14%        |
+| Happy Path                 | 62       | 53.5%        |
+|Stress Test                 |  2       |       2%|
+| Validación de Errores      | 52       | 44.5%        |
 
-### Análisis de Cobertura de Código
-
-**Metodología:** Se verificaron manualmente todas las funciones de
-`script.js` y se confirmó la ejecución de cada una mediante los `it()`
-de Jasmine.
-
-|Función                     | Líneas Totales  |  Tests |  Líneas Cubiertas | Cobertura |
-|----------------------------|-----------------|--------|-------------------|-----------|
-|`esFechaValida()`           | 11              | 8      | 11                | 100% |
-|`esTipoValido()`            | 5               | 6      | 5                 | 100% |
-|`esCategoriaValida()`       | 5               | 6      | 5                 | 100% |
-|`camposCompletos()`         | 6               | 5      | 6                 | 100% |
-|`agregarMovimientoFlow()`   | 30              | 8      | 29                | 97% |
-|`esNombreValido()`          | 4               | 4      | 4                 | 100% |
-|`esFechaFuturaValida()`     | 10              | 4      | 10                | 100% |
-|`pedirMeta()`               | 18              | 6      | 18                | 100% |
-|`crearMetaAhorro()`         | 9               | 2      | 9                 | 100% |
-|`visualizarMeta()`          | 17              | 2      | 15                | 88% |
-|`hayDatosSeleccionados()`   | 5               | 5      | 5                 | 100% |
-|`esFormatoValido()`         | 5               | 4      | 5                 | 100% |
-|`sonNombreYRutaValidos()`   | 5               | 4      | 5                 | 100% |
-|`procesarExportacion()`     | 8               | 3      | 8                 | 100% |
-|`exportarDatosFlow()`       | 28              | 5      | 26                | 93% |
-|`filtrarDatos()`            | 10              | 5      | 10                | 100% |
-|`calcularIndicadores()`     | 16              | 5      | 16                | 100% |
-|`mostrarReporte()`          | 12              | 3      | 12                | 100% |
-|`configurarFiltros()`       | 28              | 4      | 25                | 89% |
-|`reporteFinancieroFlow()`   | 20              | 2      | 19                | 95% |
-
-
-**Cobertura Total Estimada:** 97% (238/245 líneas ejecutables)
-
-#### Líneas NO Cubiertas
-Ej:
-- `script.js:363` -- Logs de consola en `procesarExportacion()` (no verificados en tests).  
-- `script.js:542-573` -- Branch del menú principal `menuDesplegable()` no testeado.  
 
 ---
 
@@ -167,477 +433,104 @@ Ej:
 ![Suite Detalle 2](screenshots/suite-detail-2.png) 
 ![Suite Detalle 3](screenshots/suite-detail-3.png) 
 ![Suite Detalle 4](screenshots/suite-detail-4.png)  
+![Suite Detalle 5](screenshots/suite-detail-5.png)  
+![Suite Detalle 6](screenshots/suite-detail-6.png)  
 
 ---
 
 ## Issues Conocidos
 
-### Issue #93: Validación del monto (vacío) en Metas de Ahorro
-- **Severidad:** Alta
-- **Suite Afectada:** `describe("Validaciones de monto en pedirMeta()")`
-- **Test Afectado:** `it("debería recharzar monto vacío")`
-- **Comportamiento Esperado:** Mostrar alerta de monto inválido.
-- **Comportamiento Obtenido:** Meta guardada con éxito.
+### Issue #153: Manejo de decimales en montos (porcentajeAhorro) en Reporte Financiero.
+- **Severidad:** Baja
+- **Suite Afectada:** `describe("Exportador.hayDatosSeleccionados()")`
+- **Tests Afectados:** `it ("debería aceptar tipos de datos disponibles (resumen-cuenta)")`, `it("debería aceptar varios tipos de datos disponibles (Movimientos, Metas)"`, ` it("debería rechazar tipos de datos incorrectos (movimientos)"`, `it("debería rechazar tipos de datos vacíos"` 
+- **Comportamiento Esperado:** Que el exportador envié un mensaje de error al usuario que no ha seleccionado los campos campos necesarios, ni enviado los datos.
+- **Comportamiento Obtenido:** No hay ningún mensjae, dado que no existe ninguna validación.
 - **Pasos para Reproducir:**
-  1. Seleccionar la opción 2 (Metas de Ahorro) del menu principal.
-  2. Seleccionar la opción 1 (Agregar una nueva meta) del menu Gestión de Metas de Ahorro.
-  3. Ingresar el nombre de la meta.
-  4. Ingresar monto en vacio (`""`).
-  5. Ingresar fecha del objetivo (opcional).
-  6. Mensaje de "Meta guardada con éxito".
+  1. Ir al apartado de exportación de Dato no seleccionar nada ni llenar ningún campo y apretar el botón exportar.
 - **Código del Test que Falla:**
   ```javascript
-  it("debería recharzar monto vacío", function () {
-    spyOn(window, 'prompt').and.returnValues("Meta1", "", "2026-12-31");
-    const montoVacio = pedirMeta();
-    expect(montoVacio).toBeFalsy();
-  });
-  ```
-- **GitHub Issue:** [#93](https://github.com/fioremos/simulador-planificacion-financiera/issues/93)
-- **Estado:** Resuelto
+  it("debería aceptar tipos de datos disponibles (resumen-cuenta)", function () {
+            const seleccion = "resumen-cuenta";
+            const tiposDisponibles = ['transacciones', 'inversiones', 'performance', 'contribuciones', 'asignaciones', 'balances', 'flujo-fondos', 'descripcion-general', 'resumen-cuenta'];
+            const tiposSeleccionados = seleccion
+                ? seleccion.split(',').map(e => e.trim()).filter(e => tiposDisponibles.includes(e.toLowerCase()))
+                : [];
 
-### Issue #94: Validación del monto (no numérico) en Metas de Ahorro
+            expect(exportador.hayDatosSeleccionados(tiposSeleccionados, seleccion.split(','))).toBeTrue();
+        });
+
+        it("debería aceptar varios tipos de datos disponibles (Movimientos, Metas)", function () {
+            const seleccion = "resumen-cuenta, inversiones";
+            const tiposDisponibles = ['transacciones', 'inversiones', 'performance', 'contribuciones', 'asignaciones', 'balances', 'flujo-fondos', 'descripcion-general', 'resumen-cuenta'];
+            const tiposSeleccionados = seleccion
+                ? seleccion.split(',').map(e => e.trim()).filter(e => tiposDisponibles.includes(e.toLowerCase()))
+                : [];
+
+            expect(exportador.hayDatosSeleccionados(tiposSeleccionados, seleccion.split(','))).toBeTrue();
+        });
+
+        it("debería rechazar tipos de datos incorrectos (movimientos)", function () {
+            const seleccion = "movimientos";
+            const tiposDisponibles = ['transacciones', 'inversiones', 'performance', 'contribuciones', 'asignaciones', 'balances', 'flujo-fondos', 'descripcion-general', 'resumen-cuenta'];
+            const tiposSeleccionados = seleccion
+                ? seleccion.split(',').map(e => e.trim()).filter(e => tiposDisponibles.includes(e.toLowerCase()))
+                : [];
+
+            expect(exportador.hayDatosSeleccionados(tiposSeleccionados, seleccion.split(','))).toBeFalse();
+        });
+
+        it("debería rechazar tipos de datos vacíos", function () {
+            const seleccion = "";
+            const tiposDisponibles = ['transacciones', 'inversiones', 'performance', 'contribuciones', 'asignaciones', 'balances', 'flujo-fondos', 'descripcion-general', 'resumen-cuenta'];
+            const tiposSeleccionados = seleccion
+                ? seleccion.split(',').map(e => e.trim()).filter(e => tiposDisponibles.includes(e.toLowerCase()))
+                : [];
+
+            expect(exportador.hayDatosSeleccionados(tiposSeleccionados, seleccion.split(','))).toBeFalse();
+        });
+  ```
+- **GitHub Issue:** [#153](https://github.com/fioremos/simulador-planificacion-financiera/issues/153)
+- **Estado:** Abierto
+
+### Issue #154: Manejo de decimales en montos (porcentajeAhorro) en Reporte Financiero.
 - **Severidad:** Alta
-- **Suite Afectada:** `describe("Validaciones de monto en pedirMeta()")`
-- **Test Afectado:** `it("debería recharzar monto no numérico")`
-- **Comportamiento Esperado:** Mostrar alerta de monto inválido.
-- **Comportamiento Obtenido:** Meta guardada con éxito.
+- **Suite Afectada:** `describe("Flujo 4: Generar Reporte Financiero")`
+- **Test Afectado:** `it ("debería filtrar correctamente los datos según el rango de fechas y categoría")`
+- **Comportamiento Esperado:** Generar el reporte filtrando por los rangos correctors.
+- **Comportamiento Obtenido:** Error ya que la comparación que se realiza en el codigo no es del tipo Date.
 - **Pasos para Reproducir:**
-  1. Seleccionar la opción 2 (Metas de Ahorro) del menu principal.
-  2. Seleccionar la opción 1 (Agregar una nueva meta) del menu Gestión de Metas de Ahorro.
-  3. Ingresar el nombre de la meta.
-  4. Ingresar monto no numérico (`abc`).
-  5. Ingresar fecha del objetivo (opcional).
-  6. Mensaje de "Meta guardada con éxito".
+  1. En este caso se simulo directamente en el test, dado a que no existe una funcionalidad como tal para ingresar los dias explicitos de los rangos.
 - **Código del Test que Falla:**
   ```javascript
-  it("debería recharzar monto no numérico", function () {
-    spyOn(window, 'prompt').and.returnValues("Meta1", "abc", "2026-12-31");
-    const montoNoNumerico = pedirMeta();
-    expect(montoNoNumerico).toBeFalsy();
-  });
+  it("debería filtrar correctamente los datos según el rango de fechas y categoría", function () {
+            planificador.agregarMovimiento({ tipo: 'Ingreso', monto: 1000, fecha: '2025-01-10', categoria: 'Sueldo' });
+            planificador.agregarMovimiento({ tipo: 'Ingreso', monto: 500, fecha: '2025-02-10', categoria: 'Sueldo' });
+            planificador.agregarMovimiento({ tipo: 'Gasto', monto: 200, fecha: '2025-01-20', categoria: 'Hogar' });
+            planificador.agregarMovimiento({ tipo: 'Ahorro', monto: 100, fecha: '2025-03-15', categoria: 'Objetivos' });
+
+
+            const filtros = { fechaDesde: '2025-01-01', fechaHasta: '2025-02-28', categoria: 'Sueldo' };
+
+            const reporte = planificador.generarReporte(filtros);
+
+            expect(reporte.total.ingresos).toBe(1000);  // Solo el ingreso de 'Sueldo'
+            expect(reporte.total.gastos).toBe(0);
+            expect(reporte.total.ahorro).toBe(0);
+            expect(reporte.total.saldo).toBe(1000);  // Ingresos - 0 = 1000
+        });
   ```
-- **GitHub Issue:** [#94](https://github.com/fioremos/simulador-planificacion-financiera/issues/94)
-- **Estado:** Resuelto
-
-### Issue #95: Validación del monto (con espacios) en Metas de Ahorro
-- **Severidad:** Alta
-- **Suite Afectada:** `describe("Validaciones de monto en pedirMeta()")`
-- **Test Afectado:** `it("debería recharzar monto con espacios")`
-- **Comportamiento Esperado:** Mostrar alerta de monto inválido.
-- **Comportamiento Obtenido:** Meta guardada con éxito.
-- **Pasos para Reproducir:**
-  1. Seleccionar la opción 2 (Metas de Ahorro) del menu principal.
-  2. Seleccionar la opción 1 (Agregar una nueva meta) del menu Gestión de Metas de Ahorro.
-  3. Ingresar el nombre de la meta.
-  4. Ingresar monto con espacios (`  5000  `).
-  5. Ingresar fecha del objetivo (opcional).
-  6. Mensaje de "Meta guardada con éxito".
-- **Código del Test que Falla:**
-  ```javascript
-  it("debería recharzar monto con espacios", function () {
-    spyOn(window, 'prompt').and.returnValues("Meta1", " 5000 ", "2026-12-31");
-    const montoConEspacios = pedirMeta();
-    expect(montoConEspacios).toBeFalsy();
-  });
-  ```
-- **GitHub Issue:** [#95](https://github.com/fioremos/simulador-planificacion-financiera/issues/95)
-- **Estado:** Resuelto
-
-### Issue #96: Validación de fecha futura (formato incorrecto) en Metas de Ahorro
-- **Severidad:** Alta
-- **Suite Afectada:** `describe("Función esFechaFuturaValida()")`
-- **Test Afectado:** `it ("debería rechazar fechas con formato incorrecto")`
-- **Comportamiento Esperado:** Mostrar alerta de formato incorrecto.
-- **Comportamiento Obtenido:** Meta guardada con éxito.
-- **Pasos para Reproducir:**
-  1. Seleccionar la opción 2 (Metas de Ahorro) del menu principal.
-  2. Seleccionar la opción 1 (Agregar una nueva meta) del menu Gestión de Metas de Ahorro.
-  3. Ingresar el nombre de la meta.
-  4. Ingresar monto de la meta.
-  5. Ingresar fecha del objetivo (`01-01-2026`).
-  6. Mensaje de "Meta guardada con éxito".
-- **Código del Test que Falla:**
-  ```javascript
-  it("debería rechazar fechas con formato incorrecto", function () {
-    const formatoIncorrecto = "01-01-2026";
-    expect(esFechaFuturaValida(formatoIncorrecto)).toBeFalsy();
-  });
-  ```
-- **GitHub Issue:** [#96](https://github.com/fioremos/simulador-planificacion-financiera/issues/96)
-- **Estado:** Resuelto
-
-### Issue #97: Validación de fecha (formato incorrecto) en Agregar Movimiento
-- **Severidad:** Alta
-- **Suite Afectada:** `describe("Función esFechaValida()")`
-- **Test Afectado:** `it("debería rechazar una fecha con formato incorrecto")`
-- **Comportamiento Esperado:** Mostrar alerta de formato incorrecto.
-- **Comportamiento Obtenido:** Movimiento agregado con éxito.
-- **Pasos para Reproducir:**
-  1. Seleccionar la opción 1 (Agregar Movimiento) del menu principal.
-  2. Ingresar fecha del movimiento (`01-10-2025`)
-  3. Ingresar el tipo de movimiento (`Ingreso`)
-  5. Ingresar la categoria del movimiento (`Sueldo`)
-  4. Ingresar monto del movimiento (`500000`).
-  6. Mensaje de "Movimiento agregado con éxito".
-- **Código del Test que Falla:**
-  ```javascript
-  it("debería rechazar una fecha con formato incorrecto", function () {
-    const formatoIncorrecto = "01-10-2025";
-    expect(esFechaValida(formatoIncorrecto)).toBeFalsy();
-  });
-  ```
-- **GitHub Issue:** [#97](https://github.com/fioremos/simulador-planificacion-financiera/issues/97)
-- **Estado:** Resuelto
-
-### Issue #98: Validación de Tipos (mayúscula) en Agregar Movimiento
-- **Severidad:** Alta
-- **Suite Afectada:** `describe("Función esTipoValido()")`
-- **Test Afectado:** `it("debería aceptar 'tipos' en mayúscula")`
-- **Comportamiento Esperado:** Aceptar mayúsculas.
-- **Comportamiento Obtenido:** Alerta de Tipo inválido.
-- **Pasos para Reproducir:**
-  1. Seleccionar la opción 1 (Agregar Movimiento) del menu principal.
-  2. Ingresar fecha del movimiento (`2025-10-01`)
-  3. Ingresar el tipo de movimiento (`INGRESO`)
-  5. Ingresar la categoria del movimiento (`Sueldo`)
-  4. Ingresar monto del movimiento (`500000`).
-  6. Mensaje de "Tipo inválido. Debe ser uno de: Ingreso, Ahorro, Inversión o Gasto".
-- **Código del Test que Falla:**
-  ```javascript
-  it("debería aceptar 'tipos' en mayúscula", function () {
-    expect(esTipoValido("INGRESO")).toBeTruthy();
-  });
-  ```
-- **GitHub Issue:** [#98](https://github.com/fioremos/simulador-planificacion-financiera/issues/98)
-- **Estado:** Resuelto
-
-### Issue #99: Validación de Tipos (minúscula) en Agregar Movimiento
-- **Severidad:** Alta
-- **Suite Afectada:** `describe("Función esTipoValido()")`
-- **Test Afectado:** `it("debería aceptar 'tipos' en minúscula")`
-- **Comportamiento Esperado:** Aceptar minúscula.
-- **Comportamiento Obtenido:** Alerta de Tipo inválido.
-- **Pasos para Reproducir:**
-  1. Seleccionar la opción 1 (Agregar Movimiento) del menu principal.
-  2. Ingresar fecha del movimiento (`2025-10-01`)
-  3. Ingresar el tipo de movimiento (`ingreso`)
-  5. Ingresar la categoria del movimiento (`Sueldo`)
-  4. Ingresar monto del movimiento (`500000`).
-  6. Mensaje de "Tipo inválido. Debe ser uno de: Ingreso, Ahorro, Inversión o Gasto".
-- **Código del Test que Falla:**
-  ```javascript
-  it("debería aceptar 'tipos' en minúscula", function () {
-    expect(esTipoValido("ingreso")).toBeTruthy();
-  });
-  ```
-- **GitHub Issue:** [#99](https://github.com/fioremos/simulador-planificacion-financiera/issues/90)
-- **Estado:** Resuelto
-
-### Issue #100: Validación de Categorías (mayúscula) en Agregar Movimiento
-- **Severidad:** Alta
-- **Suite Afectada:** `describe("Función esCategoriaValida()")`
-- **Test Afectado:** `it ("debería aceptar categorías en mayúscula")`
-- **Comportamiento Esperado:** Aceptar mayúscula.
-- **Comportamiento Obtenido:** Alerta de Categoría inválida.
-- **Pasos para Reproducir:**
-  1. Seleccionar la opción 1 (Agregar Movimiento) del menu principal.
-  2. Ingresar fecha del movimiento (`2025-10-01`)
-  3. Ingresar el tipo de movimiento (`Gasto`)
-  5. Ingresar la categoria del movimiento (`HOGAR`)
-  4. Ingresar monto del movimiento (`150000`).
-  6. Mensaje de "Categoría inválida. Debe ser una de: Hogar, Ocio, Salud, Sueldo, Objetivos u Otros".
-- **Código del Test que Falla:**
-  ```javascript
-  it ("debería aceptar categorías en mayúscula", function () {
-    expect(esCategoriaValida("HOGAR")).toBeTruthy();
-  });
-  ```
-- **GitHub Issue:** [#100](https://github.com/fioremos/simulador-planificacion-financiera/issues/100)
-- **Estado:** Resuelto
-
-### Issue #101: Validación de Categorías (minúscula) en Agregar Movimiento
-- **Severidad:** Alta
-- **Suite Afectada:** `describe("Función esCategoriaValida()")`
-- **Test Afectado:** `it ("debería aceptar categorías en minúscula")`
-- **Comportamiento Esperado:** Aceptar minúsculas.
-- **Comportamiento Obtenido:** Alerta de Categoría inválida.
-- **Pasos para Reproducir:**
-  1. Seleccionar la opción 1 (Agregar Movimiento) del menu principal.
-  2. Ingresar fecha del movimiento (`2025-10-01`)
-  3. Ingresar el tipo de movimiento (`Gasto`)
-  5. Ingresar la categoria del movimiento (`hogar`)
-  4. Ingresar monto del movimiento (`150000`).
-  6. Mensaje de "Categoría inválida. Debe ser una de: Hogar, Ocio, Salud, Sueldo, Objetivos u Otros".
-- **Código del Test que Falla:**
-  ```javascript
-  it ("debería aceptar categorías en minúscula", function () {
-    expect(esCategoriaValida("hogar")).toBeTruthy();
-  });
-  ```
-- **GitHub Issue:** [#101](https://github.com/fioremos/simulador-planificacion-financiera/issues/101)
-- **Estado:** Resuelto
-
-### Issue #102: Validación de tipos de datos disponibles (mayúscula) en Exportar Datos
-- **Severidad:** Alta
-- **Suite Afectada:** `describe("Función hayDatosSeleccionados()")`
-- **Test Afectado:** `it("deberia aceptar tipos de datos disponibles en mayúscula (MOVIMIENTOS)")`
-- **Comportamiento Esperado:** Aceptar mayúscula.
-- **Comportamiento Obtenido:** Alerta de "Seleccionar tipo de dato válido".
-- **Pasos para Reproducir:**
-  1. Seleccionar la opción 3 (Exportar Datos) del menu principal.
-  2. Ingresar los datos que se desea exportar (`MOVIMIENTOS`)
-  3. Mensaje de "Debe seleccionar al menos un tipo de dato válido".
-- **Código del Test que Falla:**
-  ```javascript
-  it("deberia aceptar tipos de datos disponibles en mayúscula (MOVIMIENTOS)", function () {
-    // Simula el prompt donde el usuario escribe "MOVIMIENTOS"
-    spyOn(window, 'prompt').and.returnValue("MOVIMIENTOS");
-
-    // Reproducir la lógica de parsing que hace exportarDatosFlow
-    const tiposDisponibles = ['Movimientos', 'Metas', 'Presupuesto', 'Historial'];
-    const seleccion = prompt(); // devuelve "MOVIMIENTOS" por el spy
-    const tiposSeleccionados = seleccion
-        ? seleccion.split(',').map(e => e.trim()).filter(e => tiposDisponibles.includes(e))
-        : [];
-
-    // Compruebo que el array contiene "MOVIMIENTOS" y que hayDatosSeleccionados lo reconoce
-    expect(hayDatosSeleccionados(tiposSeleccionados)).toBeTruthy();
-    });
-  ```
-- **GitHub Issue:** [#102](https://github.com/fioremos/simulador-planificacion-financiera/issues/102)
-- **Estado:** Resuelto
-
-### Issue #103: Validación de tipos de datos disponibles (minúscula) en Exportar Datos
-- **Severidad:** Alta
-- **Suite Afectada:** `describe("Función hayDatosSeleccionados()")`
-- **Test Afectado:** `it("deberia aceptar tipos de datos disponibles en minúscula (movimientos)"`
-- **Comportamiento Esperado:** Aceptar minúsculas.
-- **Comportamiento Obtenido:** Alerta de "Seleccionar tipo de dato válido".
-- **Pasos para Reproducir:**
-  1. Seleccionar la opción 3 (Exportar Datos) del menu principal.
-  2. Ingresar los datos que se desea exportar (`movimientos`)
-  3. Mensaje de "Debe seleccionar al menos un tipo de dato válido".
-- **Código del Test que Falla:**
-  ```javascript
-  it("deberia aceptar tipos de datos disponibles en minúscula (movimientos)", function () {
-    // Simula el prompt donde el usuario escribe "movimientos"
-    spyOn(window, 'prompt').and.returnValue("movimientos");
-
-    // Reproducir la lógica de parsing que hace exportarDatosFlow
-    const tiposDisponibles = ['Movimientos', 'Metas', 'Presupuesto', 'Historial'];
-    const seleccion = prompt(); // devuelve "movimientos" por el spy
-    const tiposSeleccionados = seleccion
-        ? seleccion.split(',').map(e => e.trim()).filter(e => tiposDisponibles.includes(e))
-        : [];
-
-    // Compruebo que el array contiene "movimientos" y que hayDatosSeleccionados lo reconoce
-    expect(hayDatosSeleccionados(tiposSeleccionados)).toBeTruthy();
-    });
-  ```
-- **GitHub Issue:** [#103](https://github.com/fioremos/simulador-planificacion-financiera/issues/103)
-- **Estado:** Resuelto
-
-### Issue #104: Validación de un tipo de dato disponible y otro incorrecto (Metas, Hogar) en Exportar Datos
-- **Severidad:** Alta
-- **Suite Afectada:** `describe("Función hayDatosSeleccionados()")`
-- **Test Afectado:** `it("deberia rechazar un tipo de dato disponible y otro incorrecto (Metas, Hogar)")`
-- **Comportamiento Esperado:** Alerta de "seleccionar al menos un tipo de dato válido".
-- **Comportamiento Obtenido:** Acepta el ingreso de un tipo de dato incorrecto.
-- **Pasos para Reproducir:**
-  1. Seleccionar la opción 3 (Exportar Datos) del menu principal.
-  2. Ingresar los datos que se desea exportar (`Metas, Hogar`).
-  3. Ingresar formato de exportación (`PDF`).
-  4. Ingresar nombre del archivo (`reporte`).
-  5. Ingresar ruta del directorio (`C:\\Exports`)
-  6. Mensaje de "Exportación exitosa. El archivo fue generado correctamente".
-- **Código del Test que Falla:**
-  ```javascript
-  it("deberia rechazar un tipo de dato disponible y otro incorrecto (Metas, Hogar)", function () {
-    // Simula el prompt donde el usuario escribe "Metas, Hogar"
-    spyOn(window, 'prompt').and.returnValue("Metas, Hogar");
-
-    // Reproducir la lógica de parsing que hace exportarDatosFlow
-    const tiposDisponibles = ['Movimientos', 'Metas', 'Presupuesto', 'Historial'];
-    const seleccion = prompt(); // devuelve "Metas, Hogar" por el spy
-    const tiposSeleccionados = seleccion
-        ? seleccion.split(',').map(e => e.trim()).filter(e => tiposDisponibles.includes(e))
-        : [];
-            
-    // Compruebo que el array contiene "Metas" y "Hogar" y que hayDatosSeleccionados lo reconoce
-    expect(hayDatosSeleccionados(tiposSeleccionados)).toBeFalsy();
-  });
-  ```
-- **GitHub Issue:** [#104](https://github.com/fioremos/simulador-planificacion-financiera/issues/104)
-- **Estado:** Resuelto
-
-### Issue #105: Validación de un tipo de dato incorrecto y otro disponible (Hogar, Metas) en Exportar Datos
-- **Severidad:** Alta
-- **Suite Afectada:** `describe("Función hayDatosSeleccionados()")`
-- **Test Afectado:** `it("deberia rechazar un tipo de dato incorrecto y otro disponible (Hogar, Metas)")`
-- **Comportamiento Esperado:** Alerta de "seleccionar al menos un tipo de dato válido".
-- **Comportamiento Obtenido:** Acepta el ingreso de un tipo de dato incorrecto.
-- **Pasos para Reproducir:**
-  1. Seleccionar la opción 3 (Exportar Datos) del menu principal.
-  2. Ingresar los datos que se desea exportar (`Hogar, Metas`).
-  3. Ingresar formato de exportación (`PDF`).
-  4. Ingresar nombre del archivo (`reporte`).
-  5. Ingresar ruta del directorio (`C:\\Exports`)
-  6. Mensaje de "Exportación exitosa. El archivo fue generado correctamente".
-- **Código del Test que Falla:**
-  ```javascript
-  it("deberia rechazar un tipo de dato incorrecto y otro disponible (Hogar, Metas)", function () {
-    // Simula el prompt donde el usuario escribe "Hogar, Meta"
-    spyOn(window, 'prompt').and.returnValue("Hogar, Metas");
-
-    // Reproducir la lógica de parsing que hace exportarDatosFlow
-    const tiposDisponibles = ['Movimientos', 'Metas', 'Presupuesto', 'Historial'];
-    const seleccion = prompt(); // devuelve "Hogar, Metas" por el spy
-    const tiposSeleccionados = seleccion
-        ? seleccion.split(',').map(e => e.trim()).filter(e => tiposDisponibles.includes(e))
-        : [];
-            
-    // Compruebo que el array contiene "Hogar" y "Meta" y que hayDatosSeleccionados lo reconoce
-    expect(hayDatosSeleccionados(tiposSeleccionados)).toBeFalsy();
-  });
-  ```
-- **GitHub Issue:** [#105](https://github.com/fioremos/simulador-planificacion-financiera/issues/105)
-- **Estado:** Resuelto
-
-### Issue #106: Validación del nombre del archivo con extensión (reporte.pdf) en Exportar Datos
-- **Severidad:** Alta
-- **Suite Afectada:** `describe("Función sonNombreYRutaValidos()")`
-- **Test Afectado:** `it("debería recharzar nombre con extensión (reporte.pdf)")`
-- **Comportamiento Esperado:** Alerta de nombre del archivo no válido.
-- **Comportamiento Obtenido:** Acepta el ingreso del nombre con extensión.
-- **Pasos para Reproducir:**
-  1. Seleccionar la opción 3 (Exportar Datos) del menu principal.
-  2. Ingresar los datos que se desea exportar (`Metas`).
-  3. Ingresar formato de exportación (`PDF`).
-  4. Ingresar nombre del archivo (`reporte.pdf`).
-  5. Ingresar ruta del directorio (`C:\\Exports`).
-  6. Mensaje de "Exportación exitosa. El archivo fue generado correctamente".
-- **Código del Test que Falla:**
-  ```javascript
-  it("debería recharzar nombre con extensión (reporte.pdf)", function () {
-    expect(sonNombreYRutaValidos("reporte.pdf", "C:\\Exports")).toBeFalsy();
-  });
-  ```
-- **GitHub Issue:** [#106](https://github.com/fioremos/simulador-planificacion-financiera/issues/106)
-- **Estado:** Resuelto
-
-### Issue #109: Validación de fecha 'desde' (formato incorrecto) en Reporte Financiero.
-- **Severidad:** Alta
-- **Suite Afectada:** `describe("Función esFechaValida()")`
-- **Test Afectado:** `it("debería rechazar fechas 'desde' en formato incorrecto (DD-MM-YYYY)")`
-- **Comportamiento Esperado:** Alerta de formato incorrecto.
-- **Comportamiento Obtenido:** Acepta el ingreso de fechas con formato incorrecto (DD-MM-AAAA).
-- **Pasos para Reproducir:**
-  1. Seleccionar la opción 4 (Reporte Financiero) del menu principal.
-  2. Dar en 'Aceptar' en el Alert del reporte financiero.
-  3. Dar en 'Aceptar' en el Alert del reporte financiero detallado.
-  4. Ingresar 'si' para cambiar los filtro.
-  5. Ingresar 'Fecha Desde' para el filtro (`01-01-2025`).
-  6. Ingresar 'Fecha Hasta' para el filtro (`2025-09-30`).
-  7. Ingresar 'Moneda' para el filtro (`ARS`).
-  8. Ingresar 'Categoría' para el filtro (`Todas`).
-  9. Muestra el reporte financiero con la 'fecha desde' con el formato incorrecto.
-- **Código del Test que Falla:**
-  ```javascript
-  it("debería rechazar fechas 'desde' en formato incorrecto (DD-MM-YYYY)", function () {
-    expect(esFechaValida("01-01-2025")).toBeFalsy();
-  });
-  ```
-- **GitHub Issue:** [#109](https://github.com/fioremos/simulador-planificacion-financiera/issues/109)
-- **Estado:** Resuelto
-
-### Issue #110: Validación de Categorías válidas (mayúscula) en Reporte Financiero.
-- **Severidad:** Alta
-- **Suite Afectada:** `describe("Función esCategoriaValida()")`
-- **Test Afectado:** `it("debería aceptar categorías válidas en mayúscula (SALUD)")`
-- **Comportamiento Esperado:** Aceptar mayúsculas.
-- **Comportamiento Obtenido:** Alerta de Categoría no válida.
-- **Pasos para Reproducir:**
-  1. Seleccionar la opción 4 (Reporte Financiero) del menu principal.
-  2. Dar en 'Aceptar' en el Alert del reporte financiero.
-  3. Dar en 'Aceptar' en el Alert del reporte financiero detallado.
-  4. Ingresar 'si' para cambiar los filtro.
-  5. Ingresar 'Fecha Desde' para el filtro (`2025-09-01`).
-  6. Ingresar 'Fecha Hasta' para el filtro (`2025-09-30`).
-  7. Ingresar 'Moneda' para el filtro (`ARS`).
-  8. Ingresar 'Categoría' para el filtro (`SALUD`).
-  9. Muestra alerta de categoria no valida.
-- **Código del Test que Falla:**
-  ```javascript
-  it("debería aceptar categorías válidas en mayúscula (SALUD)", function () {
-    expect(esCategoriaValida("SALUD")).toBeTruthy();
-  });
-  ```
-- **GitHub Issue:** [#110](https://github.com/fioremos/simulador-planificacion-financiera/issues/110)
-- **Estado:** Resuelto
-
-### Issue #111: Validación de Categorías válidas (minúscula) en Reporte Financiero.
-- **Severidad:** Alta
-- **Suite Afectada:** `describe("Función esCategoriaValida()")`
-- **Test Afectado:** `it("debería aceptar categorías válidas en minúscula (salud)")`
-- **Comportamiento Esperado:** Aceptar minúsculas.
-- **Comportamiento Obtenido:** Alerta de Categoría no válida.
-- **Pasos para Reproducir:**
-  1. Seleccionar la opción 4 (Reporte Financiero) del menu principal.
-  2. Dar en 'Aceptar' en el Alert del reporte financiero.
-  3. Dar en 'Aceptar' en el Alert del reporte financiero detallado.
-  4. Ingresar 'si' para cambiar los filtro.
-  5. Ingresar 'Fecha Desde' para el filtro (`2025-09-01`).
-  6. Ingresar 'Fecha Hasta' para el filtro (`2025-09-30`).
-  7. Ingresar 'Moneda' para el filtro (`ARS`).
-  8. Ingresar 'Categoría' para el filtro (`salud`).
-  9. Muestra alerta de categoria no valida.
-- **Código del Test que Falla:**
-  ```javascript
-  it("debería aceptar categorías válidas en minúscula (salud)", function () {
-    expect(esCategoriaValida("salud")).toBeTruthy();
-  });
-  ```
-- **GitHub Issue:** [#111](https://github.com/fioremos/simulador-planificacion-financiera/issues/111)
-- **Estado:** Resuelto
-
-### Issue #112: Manejo de decimales en montos (porcentajeAhorro) en Reporte Financiero.
-- **Severidad:** Alta
-- **Suite Afectada:** `describe("Función calcularIndicadores()")`
-- **Test Afectado:** `it ("debería manejar casos con decimales en montos")`
-- **Comportamiento Esperado:** Manejar porcentajeAhorro con decimal.
-- **Comportamiento Obtenido:** Error ya que porcentajeAhorro es un string y no un numero.
-- **Pasos para Reproducir:**
-  1. En este caso se simulo directamente en el test, dado a que no existe una función como tal para ingresar los datos y los montos con decimales.
-- **Código del Test que Falla:**
-  ```javascript
-  it ("debería manejar casos con decimales en montos", function () {
-    const datos = [
-        { tipo: 'Ingreso', monto: 1000.75 },
-        { tipo: 'Gasto', monto: 500.25 },
-        { tipo: 'Ahorro', monto: 200.50 }
-      ];
-      const ind = calcularIndicadores(datos);
-      expect(ind.ingresos).toBeCloseTo(1000.75, 2);
-      expect(ind.gastos).toBeCloseTo(500.25, 2);
-      expect(ind.ahorro).toBeCloseTo(200.50, 2);
-      expect(ind.saldo).toBeCloseTo(500.50, 2);
-      expect(ind.porcentajeAhorro).toBeCloseTo('20.00', 2); // (200.50 / 1000.75) * 100
-  });
-  ```
-- **GitHub Issue:** [#112](https://github.com/fioremos/simulador-planificacion-financiera/issues/112)
+- **GitHub Issue:** [#154](https://github.com/fioremos/simulador-planificacion-financiera/issues/154)
 - **Estado:** Resuelto
 ---
 
 ## Limitaciones del Testing
 
-- Los tests se ejecutan de forma **síncrona** (sin async ni promesas).  
-- No se validan interacciones con el **DOM** ni flujos de usuario reales.  
-- Las funciones `alert()` y `prompt()` son **mockeadas**, no probadas visualmente.   
-- El flujo `menuDesplegable()` no fue testeado directamente.  
+Una de las principales limitaciones en el proceso de testing es la falta de análisis exhaustivo de las líneas de código involucradas en las pruebas, lo que ha llevado a una cobertura de código limitada. Además, las pruebas se realizaron de manera superficial para las clases por separado, sin un enfoque integral que contemple su interacción dentro del sistema.
+
+Estas limitaciones se deben principalmente a las restricciones de tiempo con las que se contó durante el desarrollo de las pruebas, lo que impidió realizar un análisis más profundo y exhaustivo de cada componente.
 
 ---
 
-**Última Actualización:** 24/10/2025   
-**Tester/QA Engineer:** @UlisesC11  
-**Colaboración con:** Desarrollador JavaScript - @fioremos  
+**Última Actualización:** 14/11/2025   
+**Coordinador / DevOps + Tester QA:** @Skalapuj 

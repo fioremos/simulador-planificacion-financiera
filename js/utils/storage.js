@@ -40,13 +40,13 @@ const StorageUtil = (() => {
       // Tamaño estimado del nuevo dato
         const dataString =
             typeof valor === 'object' ? JSON.stringify(valor) : String(valor);
-        const nuevoTamaño = dataString.length * 2;
+        const nuevoTamano = dataString.length * 2;
 
       // Límite estimado (5 MB = 5 * 1024 * 1024 bytes)
       const LIMITE = 5 * 1024 * 1024;
 
-      if (usoActual + nuevoTamaño > LIMITE) {
-        console.warn(`[StorageUtil] Espacio insuficiente en ${tipo}Storage. No se guardó "${clave}".`);
+      if (usoActual + nuevoTamano > LIMITE) {
+        console.log(`[StorageUtil] Espacio insuficiente en ${tipo}Storage. No se guardó "${clave}".`);
         return false;
       }
 
@@ -57,9 +57,9 @@ const StorageUtil = (() => {
 
     } catch (error) {
       if (error.name === 'QuotaExceededError') {
-        console.error(`[StorageUtil] ${tipo}Storage lleno. No se pudo guardar "${clave}".`);
+        console.log(`[StorageUtil] ${tipo}Storage lleno. No se pudo guardar "${clave}".`);
       } else {
-        console.error(`[StorageUtil] Error al guardar "${clave}": ${error.message}`);
+        console.log(`[StorageUtil] Error al guardar "${clave}": ${error.message}`);
       }
       return false;
     }
@@ -78,7 +78,7 @@ const StorageUtil = (() => {
       if (data === null) return null;
       return JSON.parse(data);
     } catch (error) {
-      console.warn(`[StorageUtil] Error al obtener ${clave}: ${error.message}`);
+      console.log(`[StorageUtil] Error al obtener ${clave}: ${error.message}`);
       return null;
     }
   };
@@ -104,7 +104,7 @@ const StorageUtil = (() => {
       storage.removeItem(clave);
       return true;
     } catch (error) {
-      console.error(`[StorageUtil] Error al eliminar ${clave}: ${error.message}`);
+      console.log(`[StorageUtil] Error al eliminar ${clave}: ${error.message}`);
       return false;
     }
   };
@@ -125,7 +125,7 @@ const StorageUtil = (() => {
       }
       return claves;
     } catch (error) {
-      console.error(`[StorageUtil] Error al listar claves: ${error.message}`);
+      console.log(`[StorageUtil] Error al listar claves: ${error.message}`);
       return [];
     }
   };
@@ -142,7 +142,7 @@ const StorageUtil = (() => {
       storage.clear();
       return true;
     } catch (error) {
-      console.error(`[StorageUtil] Error al limpiar ${tipo}Storage: ${error.message}`);
+      console.log(`[StorageUtil] Error al limpiar ${tipo}Storage: ${error.message}`);
       return false;
     }
   };
