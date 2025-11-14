@@ -32,6 +32,8 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   PR: [#159](https://github.com/fioremos/simulador-planificacion-financiera/pull/159) — @fioremos (Desarrollador JS Eventos + DOM)
 - [feature/hotfix-#151-datos-asociados] Fix Issue #151
   PR: [#160](https://github.com/fioremos/simulador-planificacion-financiera/pull/160) - @fioremos (Desarrollador JS Eventos + DOM)
+- [feature/hotfix-coord-objetivos-movimientos] Fix relación entre objetivos y movimientos.   
+  PR: [#163](https://github.com/fioremos/simulador-planificacion-financiera/pull/163) — @skalapuj (Coordinador / DevOps + Tester QA)
 
 ---
 
