@@ -9,6 +9,7 @@ class Movimiento {
     #tipo;
     #categoria;
     #monto;
+    #idObjetivo;
 
     /**
      * Crea un nuevo movimiento financiero.
@@ -18,7 +19,7 @@ class Movimiento {
      * @param {number} monto - Monto del movimiento (positivo).
      * @throws {Error} - Si los datos no son válidos.
      */
-    constructor(fecha, tipo, categoria, monto){
+    constructor(fecha, tipo, categoria, monto, idObjetivo=null){
         const datos = { fecha, tipo, categoria, monto };
         if(!Movimiento.validar(datos)){
             throw new Error ("Datos de movimiento inválidos");
@@ -28,6 +29,7 @@ class Movimiento {
         this.#tipo = Movimiento.normalizarTipo(tipo);
         this.#categoria = Movimiento.normalizarCategoria(categoria);
         this.#monto = Number(monto);
+        this.#idObjetivo = idObjetivo;
     }
 
     /* --- getters --- */
@@ -37,6 +39,7 @@ class Movimiento {
     get tipo() { return this.#tipo; }
     get categoria() { return this.#categoria; }
     get monto() { return this.#monto; }
+    get idObjetivo() { return this.#idObjetivo; }
 
     /* --- validaciones --- */
 
@@ -130,7 +133,8 @@ class Movimiento {
             fecha: this.#fecha.toISOString().split('T')[0],
             tipo: this.#tipo,
             categoria: this.#categoria,
-            monto: this.#monto
+            monto: this.#monto,
+            idObjetivo: this.#idObjetivo
         };
     }
 
@@ -140,7 +144,7 @@ class Movimiento {
      * @returns {Movimiento} - Instancia reconstruida.
      */
     static fromJSON(json) {
-        const instancia = new Movimiento(json.fecha, json.tipo, json.categoria, json.monto);
+        const instancia = new Movimiento(json.fecha, json.tipo, json.categoria, json.monto, json.idObjetivo);
         if (json.id) instancia.#id = json.id;
         return instancia;
     }

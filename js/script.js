@@ -71,9 +71,54 @@ document.addEventListener('DOMContentLoaded', () => {
         ListarMoviminetos(planificador.localToJSON().movimientos);
         ListarMetas(planificador.localToJSON().metasAhorro);
         actualizarRadiosConMetas();
-    }else
+    } else
         planificador = new Planificador();
     
+    // logica para seleccion de movimientos    
+    const tipoRadios = document.querySelectorAll('input[name="tipo"]');
+    const categoriaSelects = document.querySelectorAll('select[name="categoria"]');
+
+    // Guardamos un mapa con las opciones originales de cada select
+    const opcionesOriginales = new Map();
+    
+    categoriaSelects.forEach((select, index) => {
+        opcionesOriginales.set(index, Array.from(select.options));
+    });
+
+    // Opciones permitidas según tipo
+    const opcionesPorTipo = {
+        ingreso: ["sueldo"],
+        ahorro: ["objetivos"],
+        inversion: ["inversiones"],
+        gasto: ["hogar", "ocio", "salud"]
+    };
+
+    tipoRadios.forEach(radio => {
+        radio.addEventListener("change", function () {
+            const tipoSeleccionado = this.value;
+            const permitidas = opcionesPorTipo[tipoSeleccionado];
+
+            categoriaSelects.forEach((select, index) => {
+                const opciones = opcionesOriginales.get(index);
+
+                // Limpiar opciones
+                select.innerHTML = "";
+
+                // Agregar solo las permitidas
+                opciones.forEach(opt => {
+                    if (permitidas.includes(opt.value)) {
+                        select.appendChild(opt.cloneNode(true));
+                    }
+                });
+
+                // Seleccionar automáticamente la primera opción válida
+                if (select.options.length > 0) {
+                    select.selectedIndex = 0;
+                }
+            });
+        });
+    });
+
     // Mostrar la sección inicial
     mostrarSeccion(hash);
 });
@@ -165,6 +210,11 @@ function mostrarSeccion(id) {
         else
             initReportes();
     }
+    
+    if (id === 'metas') {
+        document.querySelector('.metas-table tbody').innerHTML = '';
+        ListarMetas(planificador.localToJSON().metasAhorro);
+    }
 
     if (id === 'exportar') {
         if(StorageUtil.obtener('app:exportador:config', 'session'))
@@ -203,6 +253,28 @@ function mostrarSeccion(id) {
 if(document.querySelector('#form-ingresos-gastos'))
     document.querySelector('#form-ingresos-gastos').addEventListener('submit', manejarMovimientoSubmit);
 
+if(document.querySelector('#form-dashboard-modal'))
+    document.querySelector('#form-dashboard-modal').addEventListener('submit', manejarMovimientoSubmit);
+
+const grupos = document.querySelectorAll(".form-tipo.radio-group");
+
+grupos.forEach(grupo => {
+    const radios = grupo.querySelectorAll("input[type='radio']");
+    radios.forEach(radio => {
+        radio.addEventListener("change", function() {
+            if (this.checked) {
+                if (this.value === "ahorro") {
+                    abrirCombo(grupo.id);
+                } else {
+                    Array.from(document.getElementsByClassName("form-ahorro")).forEach(el => {
+                    el.classList.remove("visible");
+                    el.classList.add("invisible");
+                    });
+                }
+            }
+        });
+    });
+});
 
 /**
  * Lista los movimientos existentes en la tabla al iniciar la sección.
@@ -226,10 +298,11 @@ function manejarMovimientoSubmit(event) {
     const form = event.target;
 
     const datos = {
-        fecha: form.querySelector('#fecha-Ingresos-Gastos').value,
+        fecha: form.querySelector('input[name="fecha"]').value,
         tipo: form.querySelector('input[name="tipo"]:checked')?.value || '',
-        categoria: form.querySelector('#categoria-Ingresos-Gastos').value,
-        monto: parseFloat(form.querySelector('#monto-Ingresos-Gastos').value),
+        categoria: form.querySelector('select[name="categoria"]').value,
+        monto: parseFloat(form.querySelector('input[name="monto"]').value),
+        objetivo: (form.querySelector('select[name="categoria"]').value==='objetivos')? form.querySelector('select[name="objtivos"]').value:null,
     };
 
     try {
@@ -237,12 +310,41 @@ function manejarMovimientoSubmit(event) {
         StorageUtil.actualizar('app:planificador', planificador.localToJSON(), 'local');
         setFeedback(feedback, 'Movimiento agregado con éxito.', false);
         crearFilaMovimiento(datos, movimiento);
+        
+        Array.from(document.getElementsByClassName("form-ahorro")).forEach(el => {
+            el.classList.remove("visible");
+            el.classList.add("invisible");
+            });
+    
+
+        if (window.location.hash === "#dashboard") {
+            cerrarModal('miModal');
+        }
         form.reset();
     } catch (error) {
         setFeedback(feedback, error, true);
     }
 }
 
+function abrirCombo() {
+    const categoriaSelect = document.getElementsByName("objtivos");
+    
+    categoriaSelect.forEach(cat => {
+        planificador.metasAhorro.forEach(ma => {
+        const opcion = document.createElement("option");
+        opcion.value = ma.id;
+        opcion.textContent = ma.nombre;
+        cat.appendChild(opcion);
+        });
+
+    });
+     
+    Array.from(document.getElementsByClassName("form-ahorro")).forEach(el => {
+    el.classList.add("visible");
+    el.classList.remove("invisible");
+    });
+    
+}
 /**
  * Crea y agrega una fila en la tabla de movimientos.
  * 
@@ -253,8 +355,10 @@ function crearFilaMovimiento(datos, movimiento) {
     const tablaCuerpo = document.querySelector('.movimientos-table tbody');
     const fila = document.createElement('tr');
     // Guardamos el id del movimiento en el dataset de la fila
-    fila.dataset.movimientoId = datos.id;
-    
+    if(movimiento)
+        fila.dataset.movimientoId = movimiento.id;
+    else    
+        fila.dataset.movimientoId = datos.id;
 
     // Botón eliminar
     const tdBoton = document.createElement('td');
@@ -267,8 +371,8 @@ function crearFilaMovimiento(datos, movimiento) {
     boton.appendChild(img);
     tdBoton.appendChild(boton);
     boton.addEventListener('click', () => {
-        fila.remove();
         planificador.eliminarMovimiento(fila.dataset.movimientoId);
+        fila.remove();
         StorageUtil.actualizar('app:planificador', planificador.localToJSON(), 'local');
     });
 
@@ -277,6 +381,7 @@ function crearFilaMovimiento(datos, movimiento) {
     const tdCategoria = crearCelda(capitalizar(datos.categoria));
     const tdMonto = crearCelda(`$${datos.monto.toLocaleString()}`);
     if (datos.tipo.toLowerCase() === 'gasto') tdMonto.classList.add('negative');
+    if (datos.tipo.toLowerCase() === 'ahorro') tdMonto.classList.add('saving');
     const tdTipo = crearCelda(capitalizar(datos.tipo));
 
     fila.append(tdBoton, tdFecha, tdCategoria, tdMonto, tdTipo);
@@ -695,13 +800,14 @@ function actualizarRadiosConMetas() {
         return;
     }
 
-    const radioGroup = document.querySelector('#form-objetivo-modal .radio-group');
-    if (!radioGroup) {
-        console.log("'#form-objetivo-modal .radio-group' no encontrado");
+    const radioGroup1 = document.querySelector('#form-objetivo-modal .radio-group');
+
+    if (!radioGroup1) {
+        console.log("'.radio-group' no encontrado");
         return;
     }
 
-    radioGroup.innerHTML = '';
+    radioGroup1.innerHTML = '';
 
     tbody.querySelectorAll('tr').forEach((fila) => {
         const objetivo = fila.querySelector('td')?.textContent.trim();
@@ -720,7 +826,7 @@ function actualizarRadiosConMetas() {
         span.classList.add('radio-cuadrado', 'horizontal');
 
         label.append(input, span, document.createTextNode(' ' + objetivo));
-        radioGroup.appendChild(label);
+        radioGroup1.appendChild(label);
     });
 }
 

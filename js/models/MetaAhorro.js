@@ -70,7 +70,7 @@ class MetaAhorro {
      */
     static validar({ nombre, montoObjetivo, fechaObjetivo }){
         if (!MetaAhorro.esNombreValido(nombre)) return false;
-        if (!MetaAhorro.esMontoValido(montoObjetivo)) return false;
+        if (!MetaAhorro.esMontoValido(montoObjetivo) || montoObjetivo < 0) return false;
         if (!MetaAhorro.esFechaFuturaValida(fechaObjetivo)) return false;
         return true;
     }
@@ -91,7 +91,7 @@ class MetaAhorro {
      */
     static esMontoValido(monto){
         const num = Number(monto);
-        return !isNaN(num) && num > 0;
+        return !isNaN(num) ;
     }
 
     /**
