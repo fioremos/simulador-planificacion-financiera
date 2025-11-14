@@ -384,7 +384,9 @@ function manejarReportes(event) {
     }
 
     try {
-        const datos = planificador.generarReporte(filtros);
+        const datos = planificador.generarReporte(filtros, document.getElementById('fechaRyE').value);
+        StorageUtil.actualizar('app:planificador:filtros', planificador.sessionToJSON().filtros, 'session');
+        generarGrafico(datos.datosFiltrados);
         actualizarReporteGastos(datos);
         setFeedback(feedback, 'Reporte generado con éxito.', false);
     } catch (error) {
