@@ -26,6 +26,8 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   PR: [#157](https://github.com/fioremos/simulador-planificacion-financiera/pull/157) — @UlisesC11 (Desarrollador JS Local y Session Storage) 
 - [feature/bugfix-#152-graficos-dinamicos] Fix Issue #152.  
   PR: [#159](https://github.com/fioremos/simulador-planificacion-financiera/pull/159) — @fioremos (Desarrollador JS Eventos + DOM)
+- [feature/hotfix-#151-datos-asociados] Fix Issue #151
+  PR: [#160](https://github.com/fioremos/simulador-planificacion-financiera/pull/160) - @fioremos (Desarrollador JS Eventos + DOM)
 
 ---
 

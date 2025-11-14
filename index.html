@@ -98,7 +98,6 @@
             </div>
         </div>
  
-    
         <!-- ==========================
                 SECCIÓN: LOGIN
                 Pantalla inicial de la aplicación. 
@@ -247,7 +246,7 @@
 
                                                 <!-- Tipo -->
                                                 <div class="form-group full-width">
-                                                    <div class="radio-group">
+                                                    <div class="form-tipo radio-group">
                                                         <label><input type="radio" name="tipo" value="ingreso"><span class="radio-cuadrado horizontal"></span> Ingreso</label>
                                                         <label><input type="radio" name="tipo" value="ahorro"><span class="radio-cuadrado horizontal"></span> Ahorro</label>
                                                         <label><input type="radio" name="tipo" value="inversion"><span class="radio-cuadrado horizontal"></span> Inversión</label>
@@ -265,6 +264,7 @@
                                                         <option value="salud">Salud</option>
                                                         <option value="sueldo">Sueldo</option>
                                                         <option value="objetivos">Objetivos</option>
+                                                        <option value="inversiones">Inversiones</option>
                                                     </select>
                                                 </div>
 
@@ -274,6 +274,14 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <input type="number" id="monto-Dashboard" name="monto" placeholder="$ 0,00" class="input">
+                                                </div>
+
+                                                <div class="form-group form-ahorro invisible" id="form-ahorro-dash">
+                                                    <label for="objetivos-dash">Objetivo:</label>
+                                                </div>
+                                                <div class="form-group form-ahorro invisible" id="form-ahorro-dash">
+                                                    <select id="objetivos-dash" name="objtivos" class="input">
+                                                    </select>
                                                 </div>
 
                                                 <!-- Botón 
@@ -287,7 +295,7 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                        <button type="button" class="btn btn-primary">Guardar cambio</button>
+                                        <button type="submit" form="form-dashboard-modal" class="btn btn-primary">Guardar cambio</button>
                                     </div>
                                 </div>
                             </div>
@@ -382,7 +390,7 @@
 
                                     <!-- Tipo -->
                                     <div class="form-group full-width">
-                                        <div class="radio-group">
+                                        <div class="form-tipo radio-group">
                                             <label><input type="radio" name="tipo" value="ingreso"><span
                                                     class="radio-cuadrado horizontal"></span> Ingreso</label>
                                             <label><input type="radio" name="tipo" value="ahorro"><span
@@ -406,7 +414,7 @@
                                             <option value="salud">Salud</option>
                                             <option value="sueldo">Sueldo</option>
                                             <option value="objetivos">Objetivos</option>
-                                            <option value="inversion">Inversión</option>
+                                            <option value="inversiones">Inversiones</option>
                                         </select>
                                     </div>
 
@@ -416,6 +424,15 @@
                                     </div>
                                     <div class="form-group">
                                         <input type="number" id="monto-Ingresos-Gastos" name="monto" placeholder="$ 0,00" class="input">
+                                    </div>
+
+                                    <!-- Objetivos -->
+                                    <div class="form-group form-ahorro invisible">
+                                        <label for="objetivos-Ingresos-Gastos">Objetivo:</label>
+                                    </div>
+                                    <div class="form-group form-ahorro invisible" id="form-ahorro">
+                                        <select id="objetivos-Ingresos-Gastos" name="objtivos" class="input">
+                                        </select>
                                     </div>
 
                                     <!-- Botón -->

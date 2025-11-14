@@ -29,11 +29,22 @@ class Planificador {
     */
     agregarMovimiento(datos) {
         try {
+            let meta=null;
+            if(datos.objetivo){
+                meta = this.#metasAhorro.filter(obj => obj.id === datos.objetivo);
+                if(!meta){
+                    console.log('Meta de ahorro invalida');
+                    return null;
+                }
+                meta[0].actualizarMontoActual(datos.monto);
+            }
+            
             const movimiento = new Movimiento(
                 datos.fecha,
                 datos.tipo,
                 datos.categoria,
-                datos.monto
+                datos.monto,
+                datos.objetivo
             );
             this.#movimientos.push(movimiento);
             console.log('Movimiento agregado:', movimiento.toJSON());
@@ -46,8 +57,17 @@ class Planificador {
     eliminarMovimiento(idAEliminar) {
         try {
             const indice = this.#movimientos.findIndex(m => m.id === idAEliminar);
+            let meta=null;
+            let movimiento;
 
-            if (indice !== -1) {
+            if (indice !== -1){
+                movimiento = this.#movimientos[indice];
+            
+                if(movimiento.idObjetivo){
+                    meta = this.#metasAhorro.filter(obj => obj.id === movimiento.idObjetivo)[0];
+                    meta.actualizarMontoActual(-movimiento.monto);    
+                }
+                
                 this.#movimientos.splice(indice, 1);
                 return true; // Eliminado con éxito
             }
@@ -170,6 +190,7 @@ class Planificador {
             categorias[d.categoria].ahorro += d.monto;
         }
     });
+
 
     // Totales generales
     const ingresos = datos.filter(d => d.tipo === 'ingreso').reduce((acc, cur) => acc + cur.monto, 0);
