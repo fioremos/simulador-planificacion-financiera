@@ -22,8 +22,8 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   PR: [#158](https://github.com/fioremos/simulador-planificacion-financiera/pull/158) — @skalapuj (Coordinador / DevOps + Tester QA)
 
 ### Fixed
-- [nombre-de-la-branch] Descripción breve de la tarea realizada.
-  PR: #4 — @usuario4 (rol asignado)
+- [feature/hotfix-#154-filtrado-fechas-categorias] Fix Issue #154.  
+  PR: [#156]() — @UlisesC11 (Desarrollador JS Local y Session Storage) 
 
 ---
 
