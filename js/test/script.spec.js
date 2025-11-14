@@ -274,11 +274,7 @@ describe("Flujo de ejecución", function () {
             const filtros = { fechaDesde: '2025-01-01', fechaHasta: '2025-02-28', categoria: 'Sueldo' };
 
             const reporte = planificador.generarReporte(filtros);
-<<<<<<< HEAD
 
-=======
-            
->>>>>>> bad003d (corrección en el valor del test)
             expect(reporte.total.ingresos).toBe(1500);  // Solo el ingreso de 'Sueldo'
             expect(reporte.total.gastos).toBe(0);
             expect(reporte.total.ahorro).toBe(0);
