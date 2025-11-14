@@ -303,6 +303,102 @@
 | 12 | Debería manejar casos con decimales en los montos         | Happy Path            |
 | 13 | Debería filtrar correctamente los datos según el rango de fechas y categoría | Happy Path            |
 
+---
+---
+
+### Suite 6: Util StorageUtil
+
+#### Funciones Testeadas:
+- **`StorageUtil.guardar()`**: Guarda valores en localStorage o sessionStorage con validaciones, serialización y manejo de errores.
+- **`StorageUtil.obtener()`**: Recupera valores almacenados, decodificando JSON cuando corresponde y manejando datos corruptos.
+- **`StorageUtil.actualizar()`**: Actualiza claves existentes en el storage sin perder integridad.
+- **`StorageUtil.eliminar()`**: Elimina claves de forma segura tanto en local como en session.
+- **`StorageUtil.listar()`**: Lista todas las claves del storage o las que coincidan con un prefijo.
+- **`StorageUtil.limpiar()`**: Limpia completamente el storage seleccionado.
+- **`StorageUtil.existe()`**: Verifica si una clave está presente en el storage.
+
+#### Test 1: `StorageUtil.guardar()`
+
+**Casos de Prueba:**
+
+| #  | Descripción                                                | Tipo                  |
+|----|------------------------------------------------------------|-----------------------|
+|1	|Guardar un valor primitivo en localStorage					|Happy Path             |
+|2	|Guardar objetos serializados correctamente						|Happy Path             |
+|3	|Guardar en sessionStorage cuando se indica tipo = 'session'			|Happy Path             |
+|4	|Maneja error QuotaExceededError					|Validación de Errores  |
+|5	|Rechaza guardar datos excesivamente grandes		|Validación de Errores  |
+|6	|No debería romperse si el valor es undefined		|Validación de Errores  |
+
+
+#### Test 2: `StorageUtil.obtener()`
+
+**Casos de Prueba:**
+
+| #  | Descripción                                                | Tipo                  |
+|----|------------------------------------------------------------|-----------------------|
+|1	|Obtiene correctamente strings											|Happy Path				|
+|3	|Obtiene correctamente objetos JSON										|Happy Path             |   
+|3	|Retorna null cuando la clave no existe									|Happy Path             |   
+|4	|Maneja JSON corrupto devolviendo null									|Validación de Errores  |   
+
+
+#### Test 3: `StorageUtil.actualizar()`
+
+**Casos de Prueba:**
+
+| #  | Descripción                                                | Tipo                  |
+|----|------------------------------------------------------------|-----------------------|
+|1	|Actualiza correctamente una clave ya existente							|Happy Path             |   
+
+
+#### Test 4: `StorageUtil.eliminar()`
+
+**Casos de Prueba:**
+
+| #  | Descripción                                                | Tipo                  |
+|----|------------------------------------------------------------|-----------------------|
+|1	|Elimina correctamente una clave existente								|Happy Path             |   
+|2	|Retorna true aunque la clave no exista									|Happy Path             |   
+
+#### Test 5: `StorageUtil.listar()`
+
+**Casos de Prueba:**
+
+| #  | Descripción                                                | Tipo                  |
+|----|------------------------------------------------------------|-----------------------|
+|1	|Lista solo claves con un prefijo específico							|Happy Path             |   
+|2	|Retorna arreglo vacío cuando no hay coincidencias						|Happy Path             | 
+
+#### Test 6: `StorageUtil.limpiar()`
+
+**Casos de Prueba:**
+
+| #  | Descripción                                                | Tipo                  |
+|----|------------------------------------------------------------|-----------------------|
+|1	|Limpia completamente localStorage										|Happy Path             |   
+|2	|Limpia completamente sessionStorage									|Happy Path             |   
+
+#### Test 7: `StorageUtil.existe()`
+
+**Casos de Prueba:**
+
+| #  | Descripción                                                | Tipo                  |
+|----|------------------------------------------------------------|-----------------------|
+|1	|Retorna true si la clave existe										|Happy Path             |   
+|2	|Retorna false si la clave no existe									|Happy Path             |   
+
+#### Test 8: `Casos extremos`
+
+**Casos de Prueba:**
+
+| #  | Descripción                                                | Tipo                  |
+|----|------------------------------------------------------------|-----------------------|
+|1	|Guardar objetos muy anidados											|Stress Test            |   
+|2	|Guardar arrays masivos (>200 ítems)									|Stress Test            |     
+|3	|guardar null explícitamente			|Happy Path             |   
+|4	|manejar claves vacías		|Happy Path             |   
+|5	|no romperse si se pasan números como clave	|Happy Path             |   
 
 ---
 ---
@@ -312,16 +408,17 @@
 ### Resumen General
 | Métrica | Valor |
 |---------|-------|
-| Total de Tests      |92 |
-| Tests Pasando       |87 ✅ |
-| Tests Fallando      |5 ❌ |
-| Porcentaje de Éxito |94,5% |
+| Total de Tests      |116 |
+| Tests Pasando       |112 ✅ |
+| Tests Fallando      |4 ❌ |
+| Porcentaje de Éxito |96,5% |
 
 ### Cobertura por Tipo de Test
 | Tipo                       | Cantidad | Porcentaje |
 |----------------------------|----------|------------|
-| Happy Path                 | 45       | 49%        |
-| Validación de Errores      | 48       | 51%        |
+| Happy Path                 | 62       | 53.5%        |
+|Stress Test                 |  2       |       2%|
+| Validación de Errores      | 52       | 44.5%        |
 
 
 ---
@@ -337,6 +434,7 @@
 ![Suite Detalle 3](screenshots/suite-detail-3.png) 
 ![Suite Detalle 4](screenshots/suite-detail-4.png)  
 ![Suite Detalle 5](screenshots/suite-detail-5.png)  
+![Suite Detalle 6](screenshots/suite-detail-6.png)  
 
 ---
 
@@ -423,7 +521,7 @@
         });
   ```
 - **GitHub Issue:** [#154](https://github.com/fioremos/simulador-planificacion-financiera/issues/154)
-- **Estado:** Abierto
+- **Estado:** Resuelto
 ---
 
 ## Limitaciones del Testing
@@ -434,5 +532,5 @@ Estas limitaciones se deben principalmente a las restricciones de tiempo con las
 
 ---
 
-**Última Actualización:** 13/11/2025   
+**Última Actualización:** 14/11/2025   
 **Coordinador / DevOps + Tester QA:** @Skalapuj 

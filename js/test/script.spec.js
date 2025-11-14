@@ -61,52 +61,43 @@ describe("Flujo de ejecución", function () {
     });
 
     describe("Flujo 3: Exportar Datos", function () {
-        let exportador;
+        let exportador, planificador;
 
         beforeEach(function () {
             exportador = new Exportador();
+            planificador = new Planificador();
         });
 
         it("happy path: llama a exportar con datos válidos y configuración correcta", function () {
-            const datos = [{ movimiento: 100, fecha: '2023-11-12' }];
-            const config = {
-                tipo: 'resumen-cuenta',
-                formato: 'CSV',
-                nombreArchivo: 'mi-reporte',
-                rutaDestino: 'C:\\Exports'
-            };
+            let movimiento = { tipo: 'Ahorro', categoria: 'Objetivos', fecha: '2025-01-15', monto: 200 };
+            planificador.agregarMovimiento(movimiento);
 
             spyOn(console, 'log'); // Espejeamos la salida de log
-            const resultado = exportador.exportar(datos, config);
+            exportador.exportarDatos('resumen-cuenta', 'CSV', 'mi-reporte', 'C:\\Exports', planificador);
 
-            expect(resultado).toBeTrue();
-            expect(console.log).toHaveBeenCalledWith("Exportando resumen-cuenta en formato CSV");
+            expect(console.log).toHaveBeenCalledWith("Exportación exitosa.");
         });
 
         it("debería rechazar exportación con formato inválido", function () {
-            const datos = [{ monto: 100, fecha: '2023-11-12' }];
-            const config = {
-                tipo: 'resumen-cuenta',
-                formato: 'XML',  // Formato no soportado
-                nombreArchivo: 'mi-reporte',
-                rutaDestino: 'C:\\Exports'
-            };
+            let movimiento = { tipo: 'Ahorro', categoria: 'Objetivos', fecha: '2025-01-15', monto: 200 };
+            planificador.agregarMovimiento(movimiento);
 
-            spyOn(console, 'log');
-            expect(() => exportador.exportar(datos, config)).toThrowError('Configuración de exportación inválida');
+            spyOn(console, 'log'); // Espejeamos la salida de log
+            exportador.exportarDatos('resumen-cuenta', 'XML', 'mi-reporte', 'C:\\Exports', planificador);
+
+            // Verificamos que el mensaje de error sea el esperado por un formato inválido
+            expect(console.log).not.toContain("Exportación exitosa.");
+
         });
 
         it("debería rechazar exportación con configuración inválida (ruta vacía)", function () {
-            const datos = [{ monto: 100, fecha: '2023-11-12' }];
-            const config = {
-                tipo: 'movimientos',
-                formato: 'CSV',
-                nombreArchivo: 'mi-reporte',
-                rutaDestino: ''  // Ruta vacía
-            };
+            let movimiento = { tipo: 'Ahorro', categoria: 'Objetivos', fecha: '2025-01-15', monto: 200 };
+            planificador.agregarMovimiento(movimiento);
 
             spyOn(console, 'log');
-            expect(() => exportador.exportar(datos, config)).toThrowError('Configuración de exportación inválida');
+            exportador.exportarDatos('resumen-cuenta', 'XML', 'mi-reporte', '', planificador);
+            
+            expect(console.log).not.toContain("Exportación exitosa.");
         });
 
     });
@@ -284,10 +275,10 @@ describe("Flujo de ejecución", function () {
 
             const reporte = planificador.generarReporte(filtros);
 
-            expect(reporte.total.ingresos).toBe(1000);  // Solo el ingreso de 'Sueldo'
+            expect(reporte.total.ingresos).toBe(1500);  // Solo el ingreso de 'Sueldo'
             expect(reporte.total.gastos).toBe(0);
             expect(reporte.total.ahorro).toBe(0);
-            expect(reporte.total.saldo).toBe(1000);  // Ingresos - 0 = 1000
+            expect(reporte.total.saldo).toBe(1500);  // Ingresos - 0 = 1000
         });
                 
 

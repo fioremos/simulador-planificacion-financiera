@@ -354,7 +354,7 @@ describe("Model Planificador", function () {
             movimiento = planificador.agregarMovimiento(movimiento);  // Primero agregamos el movimiento
             const movimientosPrevios = planificador.movimientos.length;
 
-            planificador.eliminarMovimiento(movimiento);  // Ahora lo eliminamos
+            planificador.eliminarMovimiento(movimiento.id);  // Ahora lo eliminamos
             expect(planificador.movimientos.length).toBe(movimientosPrevios - 1);  // Verificamos que la longitud disminuyó
         });
 
@@ -373,7 +373,7 @@ describe("Model Planificador", function () {
             movimiento = planificador.agregarMovimiento(movimiento);  // Primero lo agregamos
             const movimientosPrevios = planificador.movimientos.length;
 
-            planificador.eliminarMovimiento(movimiento);  // Asumimos que eliminamos con la fecha como identificador único
+            planificador.eliminarMovimiento(movimiento.id);  // Asumimos que eliminamos con la fecha como identificador único
             expect(planificador.movimientos.length).toBe(movimientosPrevios - 1);
         });
     });
