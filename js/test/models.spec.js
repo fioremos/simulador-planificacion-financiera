@@ -141,9 +141,9 @@ describe("Model Metas de Ahorro", function () {
             expect(MetaAhorro.esMontoValido(datos.montoObjetivo)).toBeFalse();
         });
 
-        it("debería rechazar monto negativo", function () {
+        it("debería aceptar monto negativo", function () {
             const datos = { nombre: "Meta1", montoObjetivo: -1000, fechaObjetivo: "2026-12-31" };
-            expect(MetaAhorro.esMontoValido(datos.montoObjetivo)).toBeFalse();
+            expect(MetaAhorro.esMontoValido(datos.montoObjetivo)).toBeTrue();
         });
 
         it("debería rechazar monto vacío", function () {

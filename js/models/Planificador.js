@@ -57,14 +57,17 @@ class Planificador {
     eliminarMovimiento(idAEliminar) {
         try {
             const indice = this.#movimientos.findIndex(m => m.id === idAEliminar);
-            const movimiento = this.#movimientos[indice];
             let meta=null;
-            if(movimiento.idObjetivo){
-                meta = this.#metasAhorro.filter(obj => obj.id === movimiento.idObjetivo)[0];
-                meta.actualizarMontoActual(-movimiento.monto);    
-            }
+            let movimiento;
 
-            if (indice !== -1) {
+            if (indice !== -1){
+                movimiento = this.#movimientos[indice];
+            
+                if(movimiento.idObjetivo){
+                    meta = this.#metasAhorro.filter(obj => obj.id === movimiento.idObjetivo)[0];
+                    meta.actualizarMontoActual(-movimiento.monto);    
+                }
+                
                 this.#movimientos.splice(indice, 1);
                 return true; // Eliminado con éxito
             }

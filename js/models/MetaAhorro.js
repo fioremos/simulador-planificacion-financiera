@@ -95,7 +95,7 @@ class MetaAhorro {
      */
     static esMontoValido(monto){
         const num = Number(monto);
-        return !isNaN(num) ;
+        return !isNaN(num) && monto != 0;
     }
 
     /**
