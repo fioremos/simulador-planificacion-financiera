@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     tipoRadios.forEach(radio => {
         radio.addEventListener("change", function () {
-            if(this.value.name != "tipo")
+            if(this.name != "tipo")
                 return;
             const tipoSeleccionado = this.value;
             const permitidas = opcionesPorTipo[tipoSeleccionado];
