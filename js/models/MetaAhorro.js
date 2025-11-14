@@ -51,6 +51,10 @@ class MetaAhorro {
         if(this.#montoActual > this.#montoObjetivo){
             this.#montoActual = this.#montoObjetivo;
         }
+        
+        if(this.#montoActual < 0){
+            this.#montoActual = 0;
+        }
     }
 
     /* --- Validaciones estáticas --- */

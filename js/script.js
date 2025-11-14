@@ -214,6 +214,7 @@ function mostrarSeccion(id) {
     if (id === 'metas') {
         document.querySelector('.metas-table tbody').innerHTML = '';
         ListarMetas(planificador.localToJSON().metasAhorro);
+        mostrarMetaCard(false);
     }
 
     if (id === 'exportar') {
