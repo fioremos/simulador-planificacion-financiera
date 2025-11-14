@@ -12,14 +12,14 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   PR: [#155](https://github.com/fioremos/simulador-planificacion-financiera/pull/155) — @UlisesC11 (Desarrollador JS Local y Session Storage)  
 
 - [feature/dev-poo-logica-negocio] Se refactorizó toda la lógica de negocio a una arquitectura de Programación Orientada a Objetos.   
-  PR: [#150](https://github.com/fioremos/simulador-planificacion-financiera/pull/150#) — @MNEscobar (Desarrollador JS POO)
+  PR: [#150](https://github.com/fioremos/simulador-planificacion-financiera/pull/150) — @MNEscobar (Desarrollador JS POO)
 
 ### Changed
 - [feature/dev-eventos-dom] Manipulación de los eventos del DOM.
   PR:[#131](https://github.com/fioremos/simulador-planificacion-financiera/pull/131) — @fioremos (Desarrollador JS Eventos + DOM)
 
-- [nombre-de-la-branch] Descripción breve de la tarea realizada.
-  PR: #3 — @usuario3 (rol asignado)
+- [feature/tester-qa-specs] Se refactorizó toda la lógica de testing a la nueva arquitectura de Programación Orientada a Objetos.   
+  PR: [#158](https://github.com/fioremos/simulador-planificacion-financiera/pull/158) — @skalapuj (Coordinador / DevOps + Tester QA)
 
 ### Fixed
 - [nombre-de-la-branch] Descripción breve de la tarea realizada.
