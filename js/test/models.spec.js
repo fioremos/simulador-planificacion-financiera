@@ -1,3 +1,8 @@
+import { MetaAhorro } from '../models/MetaAhorro.js';
+import { Movimiento } from '../models/Movimiento.js';
+import { Planificador } from '../models/Planificador.js';
+import { Exportador }   from '../models/Exportador.js';
+
 describe("Model Movimiento", function () {
 
      describe("Movimiento.esFechaValida()", function () {

@@ -1,3 +1,6 @@
+import { Planificador } from '../models/Planificador.js';
+import { Exportador }   from '../models/Exportador.js';
+
 describe("Flujo de ejecución", function () {
     describe("Fuljo 1: Creación de Movimiento con Planificador", function () {
         let planificador;

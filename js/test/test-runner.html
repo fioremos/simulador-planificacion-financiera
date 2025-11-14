@@ -19,18 +19,15 @@
 </head>
 
 <body> 
-    <!-- Tu código fuente --> 
-    <script src = "../models/MetaAhorro.js"></script>
-    <script src = "../models/Movimiento.js"></script>
-    <script src = "../models/Exportador.js"></script> 
-    <script src = "../models/Planificador.js"></script> 
-    <script src = "../utils/storage.js"></script>
-    <script src = "../script.js"></script> 
+    <!-- Carga de tests como módulos ES6 -->
+    <script type="module">
+        import "./storage.spec.js";
+        import "./models.spec.js";
+        import "./script.spec.js";
 
-    <!-- Tus tests --> 
-    <script src = "script.spec.js"></script> 
-    <script src = "models.spec.js"></script>
-    <script src = "storage.spec.js"></script>
+        // Jasmine boot1 debe correr al final
+        import("https://cdnjs.cloudflare.com/ajax/libs/jasmine/5.10.0/boot1.min.js");
+    </script>
     
 
 </body> 

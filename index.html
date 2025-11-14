@@ -18,16 +18,15 @@
     <link rel="stylesheet" href="css/responsive.css">
    
     <link rel="stylesheet" href="css/bootstrap-overrides.css">
-    <script defer src="js/utils/storage.js"></script>
-    <script defer src="js/models/Exportador.js"></script>
-    <script defer src="js/models/MetaAhorro.js"></script>
-    <script defer src="js/models/Movimiento.js"></script>
-    <script defer src="js/models/Planificador.js"></script>
-    <script defer src="js/script.js"></script>
     <title>FinGrow</title>
 </head>
 
 <body>
+    
+    <script type="module" src="js/utils/storage.js"></script>
+    <script type="module" src="js/models/Exportador.js"></script>
+    <script type="module" src="js/models/Planificador.js"></script>
+    <script type="module" src="js/script.js"></script>
     <div id="overlay" class="modal-overlay">
         <div id="feedback" class="feedback">
         </div>
@@ -951,15 +950,15 @@
                             </div>
                             <div class="checkbox-group">
                                 <div class="column">
-                                    <div><label for="csv"><input type="radio" id="csv" name="tipo" value="csv"><span
+                                    <div><label for="csv"><input type="radio" id="csv" name="tipoExp" value="csv"><span
                                                 class="radio-cuadrado"></span>CSV</label></div>
-                                    <div><label for="xlsx"><input type="radio" id="xlsx" name="tipo" value="xlsx" disabled><span
+                                    <div><label for="xlsx"><input type="radio" id="xlsx" name="tipoExp" value="xlsx" disabled><span
                                                 class="radio-cuadrado"></span>XLSX</label></div>
                                 </div>
                                 <div class="column">
-                                    <div><label for="pdf"><input type="radio" id="pdf" name="tipo" value="pdf" disabled><span
+                                    <div><label for="pdf"><input type="radio" id="pdf" name="tipoExp" value="pdf" disabled><span
                                                 class="radio-cuadrado"></span>PDF</label></div>
-                                    <div><label for="json"><input type="radio" id="json" name="tipo" value="json"><span
+                                    <div><label for="json"><input type="radio" id="json" name="tipoExp" value="json"><span
                                                 class="radio-cuadrado"></span>JSON</label></div>
                                 </div>
                             </div>

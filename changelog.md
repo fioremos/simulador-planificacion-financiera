@@ -21,6 +21,10 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 - [feature/tester-qa-specs] Se refactorizó toda la lógica de testing a la nueva arquitectura de Programación Orientada a Objetos.   
   PR: [#158](https://github.com/fioremos/simulador-planificacion-financiera/pull/158) — @skalapuj (Coordinador / DevOps + Tester QA)
 
+- [feature/coord-devops-cuarta-entrega] Actualización de la documentación del proyecto.   
+  PR: [#162](https://github.com/fioremos/simulador-planificacion-financiera/pull/162) — @skalapuj (Coordinador / DevOps + Tester QA)
+
+
 ### Fixed
 - [feature/hotfix-#154-filtrado-fechas-categorias] Fix Issue #154.  
   PR: [#157](https://github.com/fioremos/simulador-planificacion-financiera/pull/157) — @UlisesC11 (Desarrollador JS Local y Session Storage) 

@@ -1,7 +1,7 @@
 /**
  * Representa una meta de ahorro con seguimiento de monto y fecha objetivo.
  */
-class MetaAhorro {
+export class MetaAhorro {
     #id;
     #nombre;
     #montoObjetivo;
@@ -11,7 +11,7 @@ class MetaAhorro {
     /**
      * Crea una nueva meta de ahorro.
      * @param {string} nombre - Nombre de la meta (mínimo 2 caracteres).
-     * @param {number} montoObjetivo - Monto objetivo de la meta (mayor que 0).
+     * @param {number} montoObjetivo - Monto objetivo de la meta (no puede ser 0).
      * @param {string|null} [fechaObjetivo=null] - Fecha objetivo en formato 'YYYY-MM-DD'. Opcional.
      * @throws {Error} Si los datos son inválidos.
      */
@@ -27,20 +27,30 @@ class MetaAhorro {
         this.#montoActual = 0;
     }
 
-    /* --- getters --- */
+    /* --- Getters --- */
 
+    /** @returns {string} ID único de la meta. */
     get id() { return this.#id; }
+
+    /** @returns {string} Nombre de la meta. */
     get nombre() { return this.#nombre; }
+
+    /** @returns {number} Monto objetivo establecido. */
     get montoObjetivo() { return this.#montoObjetivo; }
+
+    /** @returns {Date|null} Fecha objetivo o null si no tiene. */
     get fechaObjetivo() { return this.#fechaObjetivo; }
+
+    /** @returns {number} Monto actual acumulado. */
     get montoActual() { return this.#montoActual; }
 
     /* --- Métodos funcionales --- */
 
     /**
-     * Actualiza el monto actual de la meta, sumando el valor recibido.
-     * Si el monto supera el objetivo, se ajusta al monto objetivo.
-     * @param {number} monto - Monto a sumar.
+     * Actualiza el monto actual de la meta sumando el valor recibido.
+     * Si excede el objetivo, se ajusta al máximo permitido.
+     * También se evita que el monto baje de 0.
+     * @param {number} monto - Monto a sumar (puede ser negativo).
      * @throws {Error} Si el monto es inválido.
      */
     actualizarMontoActual(monto){
@@ -59,17 +69,20 @@ class MetaAhorro {
 
     /* --- Validaciones estáticas --- */
 
-    /** @returns {number} Genera un ID único basado en la fecha y un número aleatorio. */
+    /**
+     * Genera un ID único.
+     * @returns {string} UUID generado.
+     */
     static generarId(){
         return crypto.randomUUID();
     }
 
     /**
      * Valida un conjunto de datos para crear una meta de ahorro.
-     * @param {Object} datos
-     * @param {string} datos.nombre
-     * @param {number} datos.montoObjetivo
-     * @param {string|null} datos.fechaObjetivo
+     * @param {Object} datos - Datos a validar.
+     * @param {string} datos.nombre - Nombre de la meta.
+     * @param {number} datos.montoObjetivo - Monto objetivo.
+     * @param {string|null} datos.fechaObjetivo - Fecha objetivo.
      * @returns {boolean} true si los datos son válidos.
      */
     static validar({ nombre, montoObjetivo, fechaObjetivo }){
@@ -81,17 +94,17 @@ class MetaAhorro {
 
     /**
      * Verifica que un nombre sea válido.
-     * @param {string} nombre
-     * @returns {boolean}
+     * @param {string} nombre - Nombre a validar.
+     * @returns {boolean} true si es válido.
      */
     static esNombreValido(nombre) {
         return typeof nombre === 'string' && nombre.trim().length >= 2;
     }
 
     /**
-     * Verifica que un monto sea válido (>0).
-     * @param {number} monto
-     * @returns {boolean}
+     * Verifica que un monto sea válido (no puede ser 0 y debe ser numérico).
+     * @param {number} monto - Monto a validar.
+     * @returns {boolean} true si es válido.
      */
     static esMontoValido(monto){
         const num = Number(monto);
@@ -99,9 +112,9 @@ class MetaAhorro {
     }
 
     /**
-     * Verifica que una fecha, si existe, sea futura y tenga formato YYYY-MM-DD.
-     * @param {string|null} fechaStr
-     * @returns {boolean}
+     * Verifica que una fecha, si existe, tenga formato válido (YYYY-MM-DD) y sea futura.
+     * @param {string|null} fechaStr - Fecha a validar.
+     * @returns {boolean} true si es válida.
      */
     static esFechaFuturaValida(fechaStr) {
         if (!fechaStr) return true;
@@ -112,28 +125,31 @@ class MetaAhorro {
         fecha.setHours(0, 0, 0, 0);
         hoy.setHours(0, 0, 0, 0);
         return fecha > hoy;
-  }
+    }
+
     /* ===== Serialización ===== */
+
     /**
      * Devuelve un objeto JSON representando la meta.
      * @returns {Object} Representación serializable de la meta.
      */
     toJSON() {
-    return {id: this.#id,
-        nombre: this.#nombre,
-        montoObjetivo: this.#montoObjetivo,
-        fechaObjetivo: this.#fechaObjetivo ? this.#fechaObjetivo.toISOString().split('T')[0] : null,
-        montoActual: this.#montoActual
+        return {
+            id: this.#id,
+            nombre: this.#nombre,
+            montoObjetivo: this.#montoObjetivo,
+            fechaObjetivo: this.#fechaObjetivo ? this.#fechaObjetivo.toISOString().split('T')[0] : null,
+            montoActual: this.#montoActual
         };
     }
 
     /**
      * Crea una instancia de MetaAhorro a partir de un objeto JSON.
-     * @param {Object} json - Objeto JSON con los campos de la meta.
-     * @param {string} json.nombre
-     * @param {number} json.montoObjetivo
-     * @param {string|null} json.fechaObjetivo
-     * @param {number} [json.id] - ID opcional.
+     * @param {Object} json - Objeto con los datos de la meta.
+     * @param {string} json.nombre - Nombre de la meta.
+     * @param {number} json.montoObjetivo - Monto objetivo.
+     * @param {string|null} json.fechaObjetivo - Fecha objetivo.
+     * @param {string} [json.id] - ID opcional.
      * @param {number} [json.montoActual] - Monto actual opcional.
      * @returns {MetaAhorro} Nueva instancia de MetaAhorro.
      */
@@ -144,8 +160,8 @@ class MetaAhorro {
         return instancia;
     }
 
-     /**
-     * Devuelve un resumen legible de la meta, incluyendo nombre, objetivo, progreso y fecha.
+    /**
+     * Devuelve un resumen legible de la meta.
      * @returns {string} Resumen de la meta.
      */
     getResumen() {

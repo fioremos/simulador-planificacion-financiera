@@ -3,7 +3,7 @@
  * Permite crear movimientos de tipo ingreso, gasto, ahorro o inversión,
  * validar los datos, serializar y generar un resumen.
  */
-class Movimiento {
+export class Movimiento {
     #id;
     #fecha;
     #tipo;

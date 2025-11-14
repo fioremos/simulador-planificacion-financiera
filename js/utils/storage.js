@@ -7,7 +7,8 @@
  *  colecciones de clases con métodos toJSON() y fromJSON().
  */
 
-const StorageUtil = (() => {
+// Export default para entornos con ES Modules
+export const StorageUtil = (() => {
   /**
    * Retorna la instancia de almacenamiento según el tipo especificado.
    * @param {'local'|'session'} tipo - Tipo de storage ('local' o 'session')
@@ -176,6 +177,3 @@ const StorageUtil = (() => {
     existe,
   };
 })();
-
-// Export default para entornos con ES Modules
-//export default StorageUtil;
