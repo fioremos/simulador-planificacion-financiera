@@ -1,41 +1,54 @@
 /**
- * Clase para planificar y gestionar movimientos financieros y metas de ahorro.
- * Permite agregar movimientos, metas de ahorro, generar reportes.
+ * Importación de clases del dominio (módulos ES6)
  */
-class Planificador {
+import { MetaAhorro } from './MetaAhorro.js';
+import { Movimiento } from './Movimiento.js';
+
+/**
+ * Clase para planificar y gestionar movimientos financieros y metas de ahorro.
+ * Permite agregar movimientos, metas de ahorro y generar reportes.
+ */
+export class Planificador {
     #movimientos;
     #metasAhorro;
     #filtros;
 
     /**
-     * Inicializa un nuevo planificador.
+     * Inicializa un nuevo planificador con listas vacías y filtros por defecto.
      */
     constructor() {
         this.#movimientos = [];
         this.#metasAhorro = [];
-        this.#filtros = {   fechaAscii: "",
-                            fechaDesde: "",
-                            fechaHasta: "",
-                            categoria: "Todas",
-                            moneda: "ARS"};
+        this.#filtros = {   
+            fechaAscii: "",
+            fechaDesde: "",
+            fechaHasta: "",
+            categoria: "Todas",
+            moneda: "ARS"
+        };
     }
     
     /* ======== Gestión de Movimientos ======== */
+
     /**
-    * Agrega un nuevo movimiento financiero.
-    * @param {Object} datos - Datos del movimiento: { fecha, tipo, categoria, monto }.
-    * @returns {Movimiento} - Instancia del movimiento agregado.
-    * @throws {Error} - Si los datos son inválidos o falla la creación del movimiento.
-    */
+     * Agrega un nuevo movimiento financiero.
+     * Si el movimiento está asociado a una meta de ahorro, actualiza su progreso.
+     * @param {Object} datos - Datos del movimiento: { fecha, tipo, categoria, monto, objetivo }.
+     * @returns {Movimiento|null} Instancia agregada o null si falla la validación de meta.
+     * @throws {Error} Si los datos son inválidos o falla la creación del movimiento.
+     */
     agregarMovimiento(datos) {
         try {
-            let meta=null;
-            if(datos.objetivo){
+            let meta = null;
+
+            if (datos.objetivo) {
                 meta = this.#metasAhorro.filter(obj => obj.id === datos.objetivo);
-                if(!meta){
+
+                if (!meta) {
                     console.log('Meta de ahorro invalida');
                     return null;
                 }
+
                 meta[0].actualizarMontoActual(datos.monto);
             }
             
@@ -46,45 +59,56 @@ class Planificador {
                 datos.monto,
                 datos.objetivo
             );
+
             this.#movimientos.push(movimiento);
             console.log('Movimiento agregado:', movimiento.toJSON());
             return movimiento;
+
         } catch (error) {
             throw new Error('Error al agregar movimiento: ' + error.message);
         }
     }
 
+    /**
+     * Elimina un movimiento por su ID.
+     * Si el movimiento estaba asociado a una meta, ajusta su monto actual.
+     * @param {string} idAEliminar - ID del movimiento a eliminar.
+     * @returns {boolean} true si fue eliminado, false si no se encontró.
+     * @throws {Error} Si ocurre un error al eliminar.
+     */
     eliminarMovimiento(idAEliminar) {
         try {
             const indice = this.#movimientos.findIndex(m => m.id === idAEliminar);
-            let meta=null;
+            let meta = null;
             let movimiento;
 
-            if (indice !== -1){
+            if (indice !== -1) {
                 movimiento = this.#movimientos[indice];
             
-                if(movimiento.idObjetivo){
+                if (movimiento.idObjetivo) {
                     meta = this.#metasAhorro.filter(obj => obj.id === movimiento.idObjetivo)[0];
                     meta.actualizarMontoActual(-movimiento.monto);    
                 }
                 
                 this.#movimientos.splice(indice, 1);
-                return true; // Eliminado con éxito
+                return true;
             }
 
-            return false; // No se encontró
+            return false;
+
         } catch(error) {
             throw new Error('Error al eliminar movimiento: ' + error.message);
         }
     }
 
     /* ======== Gestión de Metas ======== */
+
     /**
-    * Agrega una nueva meta de ahorro.
-    * @param {Object} datos - Datos de la meta: { nombre, montoObjetivo, fechaObjetivo }.
-    * @returns {MetaAhorro} - Instancia de la meta agregada.
-    * @throws {Error} - Si los datos son inválidos o falla la creación de la meta.
-    */
+     * Agrega una nueva meta de ahorro.
+     * @param {Object} datos - Datos de la meta: { nombre, montoObjetivo, fechaObjetivo }.
+     * @returns {MetaAhorro} Instancia de la meta agregada.
+     * @throws {Error} Si los datos son inválidos o falla su creación.
+     */
     agregarMetaAhorro(datos) {
         try {
             const meta = new MetaAhorro(
@@ -95,26 +119,26 @@ class Planificador {
             this.#metasAhorro.push(meta);
             console.log('Meta agregada:', meta.toJSON());
             return meta;
+
         } catch (error) {
             throw new Error('Error al agregar meta de ahorro: ' + error.message);
         }
     }
 
     /* ======== Reportes ======== */
+
     /**
      * Genera un reporte de movimientos según los filtros recibidos.
-     * @param {Object} filtrosNuevos - Filtros: { fechaDesde, fechaHasta, categoria }.
-     * @param {String} - Fecha en formato ASCII.
-     * @returns {Object} - Reporte con los datos filtrados e indicadores calculados.
-     *                     {
-     *                         filtros,
-     *                         totalMovimientos,
-     *                         ingresos,
-     *                         gastos,
-     *                         ahorro,
-     *                         saldo,
-     *                         porcentajeAhorro
-     *                     }
+     * @param {Object} filtrosNuevos - Filtros: { fechaDesde, fechaHasta, categoria, moneda }.
+     * @param {string} fechaAscii - Fecha en formato ASCII.
+     * @returns {Object} Reporte con datos filtrados e indicadores:
+     * {
+     *   filtrosNuevos,
+     *   datosFiltrados,
+     *   totalMovimientos,
+     *   total: { ingresos, gastos, ahorro, saldo, porcentajeAhorro },
+     *   categorias
+     * }
      */
     generarReporte(filtrosNuevos, fechaAscii) {
         const datosFiltrados = this.#filtrarDatos(filtrosNuevos);
@@ -139,21 +163,17 @@ class Planificador {
      * Filtra los movimientos según un rango de fechas y categoría.
      * @private
      * @param {Object} filtros - Filtros: { fechaDesde, fechaHasta, categoria }.
-     * @returns {Array<Movimiento>} - Movimientos que cumplen los filtros.
+     * @returns {Array<Movimiento>} Movimientos filtrados.
      */
     #filtrarDatos(filtros) {
-        // Asegurar que siempre trabajamos con Date
         const fechaDesde = new Date(filtros.fechaDesde);
         const fechaHasta = new Date(filtros.fechaHasta);
 
-        // Normalizar eliminando hora/milisegundos
         const desde = new Date(fechaDesde.getFullYear(), fechaDesde.getMonth(), fechaDesde.getDate());
         const hasta = new Date(fechaHasta.getFullYear(), fechaHasta.getMonth(), fechaHasta.getDate());
 
         return this.#movimientos.filter(mov => {
-            // Asegurar que siempre trabajamos con Date
             const fechaMov = new Date(mov.fecha);
-            // Normalizar eliminando hora/milisegundos
             const fecha = new Date(fechaMov.getFullYear(), fechaMov.getMonth(), fechaMov.getDate());
 
             const enRango = fecha >= desde && fecha <= hasta;
@@ -170,46 +190,46 @@ class Planificador {
      * Calcula indicadores financieros a partir de un conjunto de movimientos.
      * @private
      * @param {Array<Movimiento>} datos - Movimientos a procesar.
-     * @returns {Object} - Indicadores calculados:   total: { ingresos, gastos, ahorro, saldo, porcentajeAhorro }, categorias.
+     * @returns {Object} Indicadores calculados: 
+     *   {
+     *     total: { ingresos, gastos, ahorro, saldo, porcentajeAhorro },
+     *     categorias
+     *   }
      */
     #calcularIndicadores(datos) {
-    const categorias = {};
+        const categorias = {};
 
-    datos.forEach(d => {
-        if (!categorias[d.categoria]) {
-            // Inicializamos los totales de cada categoría
-            categorias[d.categoria] = { ingreso: 0, gasto: 0, ahorro: 0 };
-        }
+        datos.forEach(d => {
+            if (!categorias[d.categoria]) {
+                categorias[d.categoria] = { ingreso: 0, gasto: 0, ahorro: 0 };
+            }
 
-        // Sumamos el monto según el tipo
-        if (d.tipo === 'ingreso') {
-            categorias[d.categoria].ingreso += d.monto;
-        } else if (d.tipo === 'gasto') {
-            categorias[d.categoria].gasto += d.monto;
-        } else if (d.tipo === 'ahorro') {
-            categorias[d.categoria].ahorro += d.monto;
-        }
-    });
+            if (d.tipo === 'ingreso') {
+                categorias[d.categoria].ingreso += d.monto;
+            } else if (d.tipo === 'gasto') {
+                categorias[d.categoria].gasto += d.monto;
+            } else if (d.tipo === 'ahorro') {
+                categorias[d.categoria].ahorro += d.monto;
+            }
+        });
 
+        const ingresos = datos.filter(d => d.tipo === 'ingreso').reduce((acc, cur) => acc + cur.monto, 0);
+        const gastos = datos.filter(d => d.tipo === 'gasto').reduce((acc, cur) => acc + cur.monto, 0);
+        const ahorro = datos.filter(d => d.tipo === 'ahorro').reduce((acc, cur) => acc + cur.monto, 0);
+        const saldo = ingresos - gastos;
+        const porcentajeAhorro = ingresos > 0 ? (ahorro / ingresos) * 100 : 0;
 
-    // Totales generales
-    const ingresos = datos.filter(d => d.tipo === 'ingreso').reduce((acc, cur) => acc + cur.monto, 0);
-    const gastos = datos.filter(d => d.tipo === 'gasto').reduce((acc, cur) => acc + cur.monto, 0);
-    const ahorro = datos.filter(d => d.tipo === 'ahorro').reduce((acc, cur) => acc + cur.monto, 0);
-    const saldo = ingresos - gastos;
-    const porcentajeAhorro = ingresos > 0 ? (ahorro / ingresos) * 100 : 0;
-
-    return {
-        total: { ingresos, gastos, ahorro, saldo, porcentajeAhorro: porcentajeAhorro.toFixed(2) },
-        categorias
+        return {
+            total: { ingresos, gastos, ahorro, saldo, porcentajeAhorro: porcentajeAhorro.toFixed(2) },
+            categorias
         };
     }
 
-
     /* ======== Serialización ======== */
+
     /**
-     * Serializa el planificador a un objeto JSON.
-     * @returns {Object} - Objeto JSON con movimientos y metas de ahorro.
+     * Serializa movimientos y metas al formato JSON.
+     * @returns {Object} Objeto JSON con movimientos y metas de ahorro.
      */
     localToJSON() {
         return {
@@ -219,8 +239,8 @@ class Planificador {
     }   
 
     /**
-     * Serializa el planificador a un objeto JSON.
-     * @returns {Object} - Objeto JSON con movimientos y metas de ahorro.
+     * Serializa los filtros de reporte.
+     * @returns {Object} Objeto JSON con los filtros del planificador.
      */
     sessionToJSON() {
         return {
@@ -229,9 +249,9 @@ class Planificador {
     }
 
     /**
-     * Crea una instancia de Planificador desde un objeto JSON.
-     * @param {Object} json - Objeto JSON con estructuras de movimientos y metas.
-     * @returns {Planificador} - Instancia reconstruida del planificador.
+     * Crea una instancia de Planificador desde datos almacenados localmente.
+     * @param {Object} json - Objeto con movimientos y metas serializadas.
+     * @returns {Planificador} Instancia reconstruida.
      */
     static localFromJSON(json) {
         const planificador = new Planificador();
@@ -239,45 +259,51 @@ class Planificador {
         if (json){
             planificador.movimientos = json.movimientos.map(m => Movimiento.fromJSON(m));
             planificador.metasAhorro = json.metasAhorro.map(m => MetaAhorro.fromJSON(m));
-        }    
+        }
 
         return planificador;
     }
 
     /**
-     * Crarga la instancia de Planificador desde un objeto JSON.
-     * @param {Object} jsonFiltros - Objeto JSON con estructuras de filtros.
+     * Carga filtros de sesión en el planificador.
+     * @param {Object} jsonFiltros - Objeto con filtros guardados.
      */
     static sessionRepFromJSON(jsonFiltros) {
         if (jsonFiltros)
             this.filtros = jsonFiltros;
     }
 
-
     /* ======== Accesores ======== */
-    /* ======== Setters ======== */
+
+    /** @param {Object} nuevosFiltros - Nuevos filtros de reporte. */
     set filtros(nuevosFiltros) {
         if (nuevosFiltros && typeof nuevosFiltros === 'object')
-        this.#filtros = nuevosFiltros;
+            this.#filtros = nuevosFiltros;
     }
 
+    /** @param {Array<MetaAhorro>} nuevasMetas - Lista de metas. */
     set metasAhorro(nuevasMetas) {
-        if ( nuevasMetas && Array.isArray(nuevasMetas))
+        if (nuevasMetas && Array.isArray(nuevasMetas))
             this.#metasAhorro = nuevasMetas;
     }
     
+    /** @param {Array<Movimiento>} nuevosMovimientos - Lista de movimientos. */
     set movimientos(nuevosMovimientos) {
-        if ( nuevosMovimientos && Array.isArray(nuevosMovimientos))
+        if (nuevosMovimientos && Array.isArray(nuevosMovimientos))
             this.#movimientos = nuevosMovimientos;
     }
 
-    /* ======== Getters ======== */
+    /** @returns {Object} Filtros activos del planificador. */
     get filtros() {
         return this.#filtros;
     }
+
+    /** @returns {Array<MetaAhorro>} Metas de ahorro actuales. */
     get metasAhorro() {
         return this.#metasAhorro;
     }
+
+    /** @returns {Array<Movimiento>} Movimientos actuales. */
     get movimientos() {
         return this.#movimientos;
     }

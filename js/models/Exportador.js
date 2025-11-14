@@ -1,24 +1,27 @@
-class Exportador {
+export class Exportador {
     #filtrosExportacion;
 
     /**
      * Inicializa un nuevo Exportador.
      */
     constructor() {
-        this.#filtrosExportacion = { tipo: [],
-                                    formato: "",
-                                    nombreArchivo: "",
-                                    rutaDestino: "" };
+        this.#filtrosExportacion = { 
+            tipo: [],
+            formato: "",
+            nombreArchivo: "",
+            rutaDestino: "" 
+        };
     }
     
-     /* ======== Exportación ======== */
+    /* ======== Exportación ======== */
+
     /**
-     * Exporta los movimientos o metas de ahorro a un formato y archivo específico.
-     * @param {Array<string>} tipo - Tipo de datos a exportar: ['resumen-cuenta'] o ['metas'].
-     * @param {string} formato - Formato de exportación: 'CSV', 'JSON', 'PDF', 'XLSX'.
-     * @param {string} nombreArchivo - Nombre del archivo a generar.
-     * @param {string} rutaDestino - Ruta o ubicación para guardar el archivo.
-     * @param {planificador} planificador - Contexto de ejecución del planificador
+     * Exporta los movimientos o metas de ahorro a un formato y archivo específicos.
+     * @param {Array<string>} tipo - Tipos de datos a exportar. Ej.: ['resumen-cuenta'] o ['metas'].
+     * @param {string} formato - Formato de exportación: 'CSV', 'JSON', 'PDF' o 'XLSX'.
+     * @param {string} nombreArchivo - Nombre del archivo a generar (sin extensión).
+     * @param {string} rutaDestino - Ruta o carpeta donde guardar el archivo.
+     * @param {Object} planificador - Instancia del planificador que contiene movimientos y metas.
      */
     exportarDatos(tipo, formato, nombreArchivo, rutaDestino, planificador) {
         const datos =
@@ -31,20 +34,23 @@ class Exportador {
         try {
             this.#exportar(datos, config);
             console.log('Exportación exitosa.');
+            return true;
         } catch (error) {
-            console.log('Error al exportar:', error.message);
+            throw new Error('Valide los datos se produjo un error al intentar exportar ', error.message);
         }
     }
 
     /**
-    * Exporta los datos según la configuración recibida.
-    * @param {Array<Object>} datos - Datos a exportar.
-    * @param {Object} config - Configuración: { tipo, formato, nombreArchivo, rutaDestino }.
-    * @returns {boolean} - true si la exportación fue exitosa.
-    * @throws {Error} - Si la configuración o el formato es invalido.
-    */
-   
-    // Método para exportar
+     * Exporta los datos según la configuración recibida.
+     * @param {Array<Object>} datos - Datos listos para exportación.
+     * @param {Object} config - Configuración de exportación.
+     *          {Array<string>} config.tipo - Tipo de contenido exportado.
+     *          {string} config.formato - Formato de archivo.
+     *          {string} config.nombreArchivo - Nombre del archivo.
+     *          {string} config.rutaDestino - Ruta donde se guardará el archivo.
+     * @returns {boolean} true si la exportación fue exitosa.
+     * @throws {Error} Si la configuración es inválida o el formato no es soportado.
+     */
     #exportar(datos, config) {
         if (!Array.isArray(datos) || datos.length === 0){
             console.log("No hay datos para exportar.");
@@ -72,34 +78,30 @@ class Exportador {
                 break;
             default:
                 throw new Error(`Formato no soportado: ${this.filtrosExportacion.formato}`);
-            }
+        }
         
-        // Simulación de exportación (por ahora solo loguea)
+        // Simulación de exportación
         console.log(`Exportando ${this.filtrosExportacion.tipo} en formato ${formatoMayus}`);
         console.log(`Archivo: ${this.filtrosExportacion.rutaDestino}/${this.filtrosExportacion.nombreArchivo}.${formatoMayus.toLowerCase()}`);
         console.log('Contenido generado:', contenido);
 
-        //// Crear un Blob con el contenido generado
+        // Exportación
         const blob = new Blob([contenido], { type: 'text/plain;charset=utf-8' });
-
-        // Crear un enlace temporal para descarga
         const enlace = document.createElement('a');
         enlace.href = URL.createObjectURL(blob);
         enlace.download = `${this.filtrosExportacion.nombreArchivo}.${formatoMayus.toLowerCase()}`;
         enlace.click();
-
-        // Liberar la URL temporal
         URL.revokeObjectURL(enlace.href);
 
         console.log(`Archivo ${this.filtrosExportacion.nombreArchivo}.${formatoMayus.toLowerCase()} descargado correctamente.`);
         return true;
-    }  
+    }
 
     /**
-    * Valida la configuración de exportación.
-    * @param {Object} config
-    * @returns {boolean}
-    */
+     * Valida la configuración de exportación recibida.
+     * @param {Object} config - Configuración de exportación.
+     * @returns {boolean} true si es válida.
+     */
     validarConfiguracion(config) {
         const { formato, nombreArchivo, rutaDestino } = config;
         if (!Exportador.esFormatoValido(formato)) return false;
@@ -108,30 +110,28 @@ class Exportador {
     }
 
     /**
-     * Genera el contenido XLSX simulado (texto plano tabulado).
-     * Devuelve una cadena representando el contenido del archivo Excel.
+     * Genera contenido XLSX simulado como texto plano tabulado.
+     * @param {Array<Object>} datos - Datos a exportar.
+     * @returns {string} Contenido XLSX simulado.
      */
     toXLSX(datos) {
         if (!Array.isArray(datos) || datos.length === 0) return '';
 
-        // Obtener encabezados desde la primera fila
         const encabezados = Object.keys(datos[0]);
-
-        // Construir filas con tabuladores para simular celdas
         const filas = datos.map(obj =>
             encabezados.map(k => obj[k] ?? '').join('\t')
         );
 
-        // Unir encabezados y filas
         const contenido = [encabezados.join('\t'), ...filas].join('\n');
 
-        // Simular estructura típica de archivo Excel
         return `--- XLSX SIMULADO ---\n${contenido}\n--- FIN XLSX ---`;
     }
 
     /**
-    * Genera el contenido CSV.
-    */
+     * Genera contenido CSV.
+     * @param {Array<Object>} datos - Datos a exportar.
+     * @returns {string} Cadena CSV.
+     */
     toCSV(datos) {
         if (!Array.isArray(datos) || datos.length === 0) return '';
         const encabezados = Object.keys(datos[0]);
@@ -140,35 +140,50 @@ class Exportador {
     }
 
     /**
-    * Genera el contenido JSON.
-    */
+     * Genera contenido JSON.
+     * @param {Array<Object>} datos - Datos a exportar.
+     * @returns {string} JSON formateado.
+     */
     toJSON(datos) {
         return JSON.stringify(datos, null, 2);
     }
 
     /**
-    * Simula la generación de PDF (por ahora devuelve texto plano).
-    */
+     * Simula la generación de un PDF (devuelve texto plano).
+     * @param {Array<Object>} datos - Datos a exportar.
+     * @returns {string} Contenido simulando un PDF.
+     */
     toPDF(datos) {
         return `REPORTE FINANCIERO\n--------------------\n${JSON.stringify(datos, null, 2)}`;
     }
 
     /* ===== Métodos estáticos de validación ===== */
 
+    /**
+     * Verifica si el formato recibido es válido.
+     * @param {string} formato - Formato a validar.
+     * @returns {boolean} true si es válido.
+     */
     static esFormatoValido(formato) {
         const formatos = ['CSV', 'JSON', 'PDF', 'XLSX'];
         return formatos.includes(String(formato).trim().toUpperCase());
     }
 
+    /**
+     * Verifica que el nombre del archivo y la ruta sean válidos.
+     * @param {string} nombre - Nombre del archivo sin extensión.
+     * @param {string} ruta - Ruta o directorio.
+     * @returns {boolean} true si ambos son válidos.
+     */
     static sonNombreYRutaValidos(nombre, ruta) {
         return nombre && ruta && !nombre.includes('.') && nombre.trim() !== '' && ruta.trim() !== '';
     }
 
+    /* ======== Serialización de sesión ======== */
 
-    /* ======== Serialización ======== */
-       /**
-     * Serializa el planificador a un objeto JSON.
-     * @returns {Object} - Objeto JSON con movimientos y metas de ahorro.
+    /**
+     * Serializa los filtros del exportador.
+     * @returns {Object} Objeto JSON con los filtros usados.
      */
     sessionToJSON() {
         return {
@@ -177,24 +192,27 @@ class Exportador {
     }
     
     /**
-     * Crarga una instancia de Planificador desde un objeto JSON.
-     * @param {Object} jsonFiltrosExp - Objeto JSON con estructuras de filtros de exportación.
+     * Carga los filtros del exportador desde un objeto JSON.
+     * @param {Object} jsonFiltrosExp - Filtros cargados desde sesión.
      */
     sessionExpFromJSON(jsonFiltrosExp) {
         if (jsonFiltrosExp)
             this.filtrosExportacion = jsonFiltrosExp;
     }
 
-    
     /* ======== Accesores ======== */
-    /* ======== Getters ======== */
+
+    /** @returns {Object} Filtros actuales de exportación. */
     get filtrosExportacion() {
         return this.#filtrosExportacion;
     }
     
-    /* ======== Setters ======== */ 
+    /**
+     * Establece nuevos filtros de exportación.
+     * @param {Object} nuevosFiltros - Filtros a asignar.
+     */
     set filtrosExportacion(nuevosFiltros) {
-            this.#filtrosExportacion = nuevosFiltros;
+        this.#filtrosExportacion = nuevosFiltros;
     }
 
 }

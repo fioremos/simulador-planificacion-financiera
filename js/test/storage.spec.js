@@ -1,3 +1,5 @@
+import { StorageUtil }  from '../utils/storage.js';
+
 describe("StorageUtil - Test Suite Completo", function () {
 
     beforeEach(() => {

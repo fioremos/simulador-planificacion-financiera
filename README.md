@@ -127,14 +127,36 @@ El resultado esperado es un proyecto funcional y estructurado, con la lógica de
 
 ---
 
+## ✅ Objetivos de la cuarta entrega (14/11/2025)
+La cuarta entrega tiene como objetivo transformar el simulador basado en prompt() y alert() en una aplicación web completamente interactiva, utilizando manipulación del DOM, eventos del usuario, Programación Orientada a Objetos y almacenamiento persistente mediante la Storage API. Esta etapa marca el paso desde la programación funcional hacia una arquitectura orientada a objetos, modular y escalable, consolidando además las bases técnicas necesarias para el Segundo Parcial Integrador.
+
+En esta fase se desarrolla una interfaz web moderna que reemplaza todas las entradas y salidas por elementos HTML, integrando formularios, botones y componentes visuales que reaccionan mediante listeners de eventos. La lógica del proyecto se reorganiza en clases dentro de js/models/, mientras que el archivo js/script.js actúa como controlador, gestionando la comunicación entre la interfaz y el modelo. Se implementan validaciones en tiempo real y retroalimentación visual para mejorar la experiencia del usuario.
+
+Además, se incorpora persistencia mediante localStorage y sessionStorage, permitiendo almacenar y recuperar datos del usuario con operaciones CRUD encapsuladas en js/utils/storage.js. La arquitectura se reorganiza en módulos separados para mejorar la responsabilidad, mantenibilidad y escalabilidad del código.
+
+La entrega incluye también la actualización del sistema de testing automatizado con Jasmine, validando las nuevas clases, operaciones de almacenamiento y flujos principales controlados por DOM. Se actualizan los diagramas en PlantUML, incluyendo el diagrama de clases que representa la nueva estructura orientada a objetos.
+
+El repositorio se mantiene organizado con ramas por feature, commits documentados y releases versionadas, integrando además documentación actualizada en el README.md sobre la arquitectura, las tecnologías utilizadas y los recursos generados.
+
+El resultado final es una aplicación web interactiva, modular, persistente y testeada, con una arquitectura más sólida y profesional que da continuidad al desarrollo iniciado en las entregas anteriores.
+
+---
+
+
 ## 👨‍💻 Tecnologías Utilizadas
 - **HTML5** (estructura inicial).  
 - **CSS3** (maquetación principal, estilos de componentes y diseño responsive).  
 - **Bootstrap** (framework para diseño responsive y componentes reutilizables).
-- **JavaScript** implementación de la lógica de negocio mediante:    
+- **JavaScript (ES6+)** implementación de la lógica de negocio mediante:    
   - Algoritmos condicionales y estructuras de control (`if`, `else if`, `switch`, `for`, `while`).
   - Funciones modulares con parámetros y valores de retorno.
   - Simulación de flujos de trabajo interactivos mediante prompt(), alert() y console.log().
+  - Visualización de datos con Chart.js.
+  - Manipulación completa del DOM (creación/actualización/eliminación de elementos).
+  - Manejo de eventos: click, submit, input, change, etc.
+  - Programación Orientada a Objetos (POO): Clases de dominio. Encapsulamiento, métodos internos y relaciones entre clases.
+  - Controlador principal: Manejo de eventos. Coordinación entre vista (DOM) y lógica de negocio.
+  - Storage API (localStorage / sessionStorage): Persistencia de datos con operaciones CRUD. Serialización mediante JSON.
 - **PlantUML** (creación de diagramas de actividades que documentan los flujos principales del sistema).  
 - **Git / GitHub** (control de versiones).  
 - **Herramientas de Testing**  
@@ -156,18 +178,19 @@ El resultado esperado es un proyecto funcional y estructurado, con la lógica de
 - 🗂️ [Índice de Prompts](docs/02-prompts/prompts.md)
 - 🧪 [Índice de Test Cases](docs/03-testing/testing-doc.md)
 - 📊 [Índice de Diagramas de Actividades](docs/04-diagramas/diagramas-doc.md)
+- 📊 [Índice de Diagramas de Clase](docs/04-diagramas/02-diagrama-de-clases/diagrama-clases-doc.md)
 - 🧪 [Índice de Test Cases(Jasmine)](js/test/testing-doc.md)
 - 📜 [Changelog](changelog.md)
 
 ---
 
 ## 👥 Integrantes del Grupo
-|     Nombre completo    | N° de Matrícula | Usuario GitHub |         Rol en esta entrega             |
-|------------------------|-----------------|----------------|-----------------------------------------|
-|    Sol Ailen Kalpuj    |      154106     |   @skalapuj    |      Arquitecto de Diagramas de Actividades         |
-|     Fiorella Mosca     |      154108     |   @fioremos    |      Desarrollador JavaScript     | 
-| Matías Nicolás Escobar |      151251     |   @MNEscobar   |      Coordinador / DevOps         |  
-|     Ulises Capriles    |      146291     |   @UlisesC11   |      Tester JavaScript / QA Engineer         |  
+|     Nombre completo    | N° de Matrícula | Usuario GitHub |         Rol en esta entrega                           |
+|------------------------|-----------------|----------------|-------------------------------------------------------|
+|    Sol Ailen Kalpuj    |      154106     |   @skalapuj    |      Coordinador / DevOps + Tester QA                 | 
+|     Fiorella Mosca     |      154108     |   @fioremos    |      Desarrollador JS Eventos + DOM                   | 
+| Matías Nicolás Escobar |      151251     |   @MNEscobar   |      Desarrollador JS POO (Lógica de Negocio)         |  
+|     Ulises Capriles    |      146291     |   @UlisesC11   |       Desarrollador JS Local y Session Storage        |  
 
 <pre>
 🎓 Datos Académicos

@@ -1,4 +1,13 @@
 // =============================================================
+// Importar clases del dominio (usando módulos ES6)
+// =============================================================
+import { Planificador } from './models/Planificador.js';
+import { Exportador }   from './models/Exportador.js';
+import { StorageUtil }  from './utils/storage.js';
+
+
+
+// =============================================================
 // Variables globales de estado
 // =============================================================
 
@@ -29,7 +38,11 @@ let offcanvasEl;
 /** @type {HTMLElement|null} Exporatador usado por planificador */
 let exportador = new Exportador;
 
+/** @type {HTMLElement} Elemento para mostrar el grafico del reporte */
 let grafico;
+
+
+
 // =============================================================
 // Event Listeners
 // =============================================================
@@ -95,6 +108,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     tipoRadios.forEach(radio => {
         radio.addEventListener("change", function () {
+            if(this.value.name != "tipo")
+                return;
             const tipoSeleccionado = this.value;
             const permitidas = opcionesPorTipo[tipoSeleccionado];
 
@@ -178,6 +193,295 @@ window.addEventListener('resize', () => {
     }
 });
 
+//================= Listener de las secciones ===========================
+
+/**
+ * Inicializa los listeners de los formularios de ingresos y gastos.
+ * Busca los formularios en el DOM y agrega el manejador de envío.
+ */
+
+/** @type {HTMLFormElement|null} Formulario principal de ingresos y gastos */
+if (document.querySelector('#form-ingresos-gastos')) {
+    document.querySelector('#form-ingresos-gastos').addEventListener('submit', manejarMovimientoSubmit);
+}
+
+/** @type {HTMLFormElement|null} Formulario modal de dashboard */
+if (document.querySelector('#form-dashboard-modal')) {
+    document.querySelector('#form-dashboard-modal').addEventListener('submit', manejarMovimientoSubmit);
+}
+
+/**
+ * Inicializa el botón de exportación de datos.
+ */
+
+/** @type {HTMLButtonElement|null} Botón de exportación de datos */
+if (document.querySelector('#exportar-container .btn')) {
+    document.querySelector('#exportar-container .btn').addEventListener('click', manejarExportar);
+}
+
+/**
+ * Inicializa los reportes y configura los filtros por defecto.
+ */
+
+/** @type {HTMLFormElement|null} Formulario de filtros de movimientos */
+if (document.getElementById('movimientos-form')) {
+    document.getElementById('movimientos-form').addEventListener('change', manejarReportes);
+}
+
+/**
+ * Inicializa los formularios de metas y objetivos de ahorro.
+ */
+
+/** @type {HTMLFormElement|null} Formulario modal para metas de ahorro */
+if (document.querySelector('#form-metas-modal')) {
+    document.querySelector('#form-metas-modal').addEventListener('submit', manejarGuardarMeta);
+}
+
+/** @type {HTMLFormElement|null} Formulario modal para objetivos de ahorro */
+if (document.querySelector('#form-objetivo-modal')) {
+    document.querySelector('#form-objetivo-modal').addEventListener('submit', manejarGuardarObjetivo);
+}
+
+/**
+ * Inicializa los listeners de los grupos de radio buttons para el tipo de movimiento.
+ * Si se selecciona "ahorro", abre el combo correspondiente; si no, oculta todos los combos de ahorro.
+ */
+
+/** @type {NodeListOf<HTMLDivElement>} Todos los grupos de radio buttons con la clase 'form-tipo radio-group' */
+if(document.querySelectorAll(".form-tipo.radio-group")){
+    document.querySelectorAll(".form-tipo.radio-group").forEach(grupo => {
+        /** @type {NodeListOf<HTMLInputElement>} Todos los inputs tipo radio dentro del grupo */
+        const radios = grupo.querySelectorAll("input[type='radio']");
+
+        radios.forEach(radio => {
+            radio.addEventListener("change", function() {
+                if (this.checked) {
+                    if (this.value === "ahorro") {
+                        abrirCombo(grupo.id);
+                    } else {
+                        /** @type {HTMLCollectionOf<HTMLElement>} Todos los elementos con clase 'form-ahorro' */
+                        Array.from(document.getElementsByClassName("form-ahorro")).forEach(el => {
+                            el.classList.remove("visible");
+                            el.classList.add("invisible");
+                        });
+                    }
+                }
+            });
+        });
+    });
+}
+
+
+// =============================================================
+//  Funciones de inicialización
+// =============================================================
+/**
+ * Inicializa el formulario de exportación con valores predefinidos.
+ * 
+ * Si se reciben filtros de exportación, marca los inputs correspondientes
+ * (tipo de archivo y datos a exportar) y completa el nombre y la ubicación del archivo.
+ * 
+ * @param {Object} filtrosExportacion - Objeto con los valores de configuración.
+ *        {string} filtrosExportacion.formato - Formato de exportación (ej. "csv", "json").
+ *        {Array<string>} filtrosExportacion.tipo - Tipos de datos a exportar (ej. ["movimientos", "metasAhorro"]).
+ *        {string} filtrosExportacion.nombreArchivo - Nombre del archivo de exportación.
+ *        {string} filtrosExportacion.rutaDestino - Ruta destino donde se guardará el archivo.
+ */
+function initExportador(filtrosExportacion) {
+    if (filtrosExportacion){
+
+        document.querySelector(`#exportar-container input[name="tipoExp"][value="${filtrosExportacion.formato}"]`).checked = true;
+        const checkboxes = document.querySelectorAll('#exportar-container input[name="datos"]');
+
+        checkboxes.forEach(cb => {
+            cb.checked = filtrosExportacion.tipo.includes(cb.value);
+        });
+
+        document.querySelector('#nombre').value = filtrosExportacion.nombreArchivo;
+        document.querySelector('#ubicacion').value = filtrosExportacion.rutaDestino;
+    }
+}
+
+/**
+ * Inicializa los reportes financieros y configura los filtros por defecto o guardados.
+ * 
+ * - Si se proporcionan filtros guardados, rellena los campos del formulario con esos valores.
+ * - Si no, toma los valores actuales de los inputs del DOM.
+ * - Luego actualiza las fechas, genera el reporte, el gráfico y actualiza la sección de gastos.
+ * 
+ * @param {Object|null} [filtrosGuardado=null] - Filtros previamente guardados para inicializar el reporte.
+ * @param {string} filtrosGuardado.fechaAscii - Fecha en formato ASCII para filtrar los movimientos.
+ * @param {string} filtrosGuardado.categoria - Categoría seleccionada para filtrar.
+ * @param {string} filtrosGuardado.moneda - Moneda seleccionada para filtrar.
+ */
+function initReportes(filtrosGuardado = null) {
+    let fechaAscii;
+    if(!filtrosGuardado){
+        fechaAscii = document.getElementById('fechaRyE').value;
+        filtros.categoria = document.getElementById('categoriaRyE').value;
+        filtros.moneda = document.getElementById('moneda').value;
+    } else{
+        document.getElementById('fechaRyE').value = filtrosGuardado.fechaAscii;
+        document.getElementById('categoriaRyE').value = filtrosGuardado.categoria;
+        document.getElementById('moneda').value = filtrosGuardado.moneda;
+
+        fechaAscii = filtrosGuardado.fechaAscii;
+        filtros.categoria = filtrosGuardado.categoria;
+        filtros.moneda = filtrosGuardado.moneda;
+    }
+
+    actualizarFechas(fechaAscii, filtros);
+
+    const datos = planificador.generarReporte(filtros, fechaAscii);
+    generarGrafico(datos.datosFiltrados);
+    actualizarReporteGastos(datos);
+}
+
+
+
+// =============================================================
+//  Funciones manejadoras de eventos
+// =============================================================
+/**
+ * Maneja el evento de envío del formulario de movimientos.
+ * Valida los datos y los envía al planificador.
+ * 
+ * @param {SubmitEvent} event - Evento de envío del formulario.
+ */
+function manejarMovimientoSubmit(event) {
+    event.preventDefault();
+    const form = event.target;
+
+    const datos = {
+        fecha: form.querySelector('input[name="fecha"]').value,
+        tipo: form.querySelector('input[name="tipo"]:checked')?.value || '',
+        categoria: form.querySelector('select[name="categoria"]').value,
+        monto: parseFloat(form.querySelector('input[name="monto"]').value),
+        objetivo: (form.querySelector('select[name="categoria"]').value==='objetivos')? form.querySelector('select[name="objtivos"]').value:null,
+    };
+
+    try {
+        const movimiento = planificador.agregarMovimiento(datos);
+        StorageUtil.actualizar('app:planificador', planificador.localToJSON(), 'local');
+        setFeedback(feedback, 'Movimiento agregado con éxito.', false);
+        crearFilaMovimiento(datos, movimiento);
+        
+        Array.from(document.getElementsByClassName("form-ahorro")).forEach(el => {
+            el.classList.remove("visible");
+            el.classList.add("invisible");
+            });
+    
+
+        if (window.location.hash === "#dashboard") {
+            cerrarModal('miModal');
+        }
+        form.reset();
+    } catch (error) {
+        setFeedback(feedback, error, true);
+    }
+}
+
+/**
+ * Maneja la exportación de datos seleccionados.
+ * 
+ * @param {MouseEvent} event - Evento del clic en el botón de exportar.
+ */
+function manejarExportar(event) {
+    event.preventDefault();
+
+    const checkboxes = document.querySelectorAll('#exportar-container input[name="datos"]:checked');
+    const tipoDatos = Array.from(checkboxes).map(cb => cb.value);
+    const formato = document.querySelector('#exportar-container input[name="tipoExp"]:checked')?.value;
+    const nombre = document.querySelector('#nombre').value.trim();
+    const ubicacion = document.querySelector('#ubicacion').value.trim();
+
+    try {
+        exportador.exportarDatos(tipoDatos, formato, nombre, ubicacion , planificador);
+        StorageUtil.actualizar('app:exportador:config', exportador.sessionToJSON(), 'session');
+        setFeedback(feedback, 'Archivo exportado con éxito.', false);
+    } catch (error) {
+        setFeedback(feedback, error, true);
+    }
+}
+
+/**
+ * Maneja los cambios de filtros en el formulario de reportes.
+ * 
+ * @param {Event} event - Evento de cambio en el formulario.
+ */
+function manejarReportes(event) {
+    const { id, value } = event.target;
+
+    switch (id) {
+        case 'fechaRyE': actualizarFechas(value, filtros); break;
+        case 'categoriaRyE': filtros.categoria = value; break;
+        case 'moneda': filtros.moneda = value; break;
+        default: console.log(`Evento no manejado: ${id}`);
+    }
+
+    try {
+        const datos = planificador.generarReporte(filtros, document.getElementById('fechaRyE').value);
+        StorageUtil.actualizar('app:planificador:filtros', planificador.sessionToJSON().filtros, 'session');
+        generarGrafico(datos.datosFiltrados);
+        actualizarReporteGastos(datos);
+        setFeedback(feedback, 'Reporte generado con éxito.', false);
+    } catch (error) {
+        setFeedback(feedback, error, true);
+    }
+}
+
+/**
+ * Maneja el guardado de una nueva meta de ahorro.
+ * 
+ * @param {SubmitEvent} event - Evento de envío del formulario de metas.
+ */
+function manejarGuardarMeta(event) {
+    event.preventDefault();
+
+    const nombre = document.getElementById('nombre-objetivo').value;
+    const monto = document.getElementById('monto-objetivo').value;
+    const fecha = document.getElementById('fecha-objetivo').value;
+
+    try {
+        const meta = planificador.agregarMetaAhorro({nombre: nombre, montoObjetivo: monto, fechaObjetivo: fecha});
+        StorageUtil.actualizar('app:planificador', planificador.localToJSON(), 'local');
+        crearFilaMeta(meta);
+        actualizarRadiosConMetas();
+        cerrarModal('MetasAhorroModal');
+        setFeedback(feedback, 'Objetivo guardado con éxito', false);
+        event.target.reset();
+    } catch (error) {
+        cerrarModal('MetasAhorroModal');
+        setFeedback(feedback, error, true);
+    }
+}
+
+/**
+ * Maneja la selección y visualización de un objetivo guardado.
+ * 
+ * @param {SubmitEvent} event - Evento de envío del formulario de objetivos.
+ */
+function manejarGuardarObjetivo(event) {
+    event.preventDefault();
+
+    const form = event.target;
+    const radioSeleccionado = form.querySelector('input[name="tipo"]:checked');
+    if (!radioSeleccionado) return setFeedback(feedback, 'Selecciona un objetivo.', true);
+
+    const datosMeta = getDatosMeta(radioSeleccionado.value);
+    if (!datosMeta) {
+        console.log("No hay datos de Meta de Ahorro");
+        cerrarModal('ObjetivosModal');
+        return;
+    }
+
+    actualizarMetaCard(datosMeta);
+    mostrarMetaCard(true);
+    cerrarModal('ObjetivosModal');
+    form.reset();
+}
+
+
 
 // =============================================================
 // Manipulacion del DOM
@@ -233,8 +537,8 @@ function mostrarSeccion(id) {
 
             
             StorageUtil.eliminar('app:exportador:config', 'session');
-            if(document.querySelector('#exportar-container input[name="tipo"]:checked'))
-                document.querySelector('#exportar-container input[name="tipo"]:checked').checked = false;
+            if(document.querySelector('#exportar-container input[name="tipoExp"]:checked'))
+                document.querySelector('#exportar-container input[name="tipoExp"]:checked').checked = false;
             document.querySelectorAll(`#exportar-container input[name="datos"]`).forEach(cb => {cb.checked = false;});  
             document.querySelector('#nombre').value ='';
             document.querySelector('#ubicacion').value = '';
@@ -243,90 +547,14 @@ function mostrarSeccion(id) {
 
 }
 
-// =============================================================
-// 1. Módulo de Movimientos (Ingresos / Gastos)
-// =============================================================
-
 /**
- * Inicializa los listeners del formulario de ingresos y gastos.
- * Busca el formulario en el DOM y agrega el manejador de envío.
- */
-if(document.querySelector('#form-ingresos-gastos'))
-    document.querySelector('#form-ingresos-gastos').addEventListener('submit', manejarMovimientoSubmit);
-
-if(document.querySelector('#form-dashboard-modal'))
-    document.querySelector('#form-dashboard-modal').addEventListener('submit', manejarMovimientoSubmit);
-
-const grupos = document.querySelectorAll(".form-tipo.radio-group");
-
-grupos.forEach(grupo => {
-    const radios = grupo.querySelectorAll("input[type='radio']");
-    radios.forEach(radio => {
-        radio.addEventListener("change", function() {
-            if (this.checked) {
-                if (this.value === "ahorro") {
-                    abrirCombo(grupo.id);
-                } else {
-                    Array.from(document.getElementsByClassName("form-ahorro")).forEach(el => {
-                    el.classList.remove("visible");
-                    el.classList.add("invisible");
-                    });
-                }
-            }
-        });
-    });
-});
-
-/**
- * Lista los movimientos existentes en la tabla al iniciar la sección.
+ * Muestra el combo de metas de ahorro y lo llena con las opciones actuales del planificador.
  * 
- * @param {Array} movimientos - Array de movimientos a listar.
- */
-function ListarMoviminetos(movimientos) {
-    movimientos.forEach(movimiento => {
-        crearFilaMovimiento(movimiento);
-    });
-}
-
-/**
- * Maneja el evento de envío del formulario de movimientos.
- * Valida los datos y los envía al planificador.
+ * Busca todos los elementos `<select>` con el atributo `name="objtivos"` y les agrega
+ * una opción por cada meta de ahorro registrada en `planificador.metasAhorro`.
  * 
- * @param {SubmitEvent} event - Evento de envío del formulario.
+ * Luego, hace visibles todos los elementos con clase `form-ahorro` y oculta la clase `invisible`.
  */
-function manejarMovimientoSubmit(event) {
-    event.preventDefault();
-    const form = event.target;
-
-    const datos = {
-        fecha: form.querySelector('input[name="fecha"]').value,
-        tipo: form.querySelector('input[name="tipo"]:checked')?.value || '',
-        categoria: form.querySelector('select[name="categoria"]').value,
-        monto: parseFloat(form.querySelector('input[name="monto"]').value),
-        objetivo: (form.querySelector('select[name="categoria"]').value==='objetivos')? form.querySelector('select[name="objtivos"]').value:null,
-    };
-
-    try {
-        const movimiento = planificador.agregarMovimiento(datos);
-        StorageUtil.actualizar('app:planificador', planificador.localToJSON(), 'local');
-        setFeedback(feedback, 'Movimiento agregado con éxito.', false);
-        crearFilaMovimiento(datos, movimiento);
-        
-        Array.from(document.getElementsByClassName("form-ahorro")).forEach(el => {
-            el.classList.remove("visible");
-            el.classList.add("invisible");
-            });
-    
-
-        if (window.location.hash === "#dashboard") {
-            cerrarModal('miModal');
-        }
-        form.reset();
-    } catch (error) {
-        setFeedback(feedback, error, true);
-    }
-}
-
 function abrirCombo() {
     const categoriaSelect = document.getElementsByName("objtivos");
     
@@ -346,6 +574,7 @@ function abrirCombo() {
     });
     
 }
+
 /**
  * Crea y agrega una fila en la tabla de movimientos.
  * 
@@ -389,117 +618,19 @@ function crearFilaMovimiento(datos, movimiento) {
     tablaCuerpo.appendChild(fila);
 }
 
-// =============================================================
-// 2. Módulo de Exportar Datos
-// =============================================================
-
 /**
- * Inicializa el botón de exportación de datos.
- */
-if(document.querySelector('#exportar-container .btn'))
-    document.querySelector('#exportar-container .btn').addEventListener('click', manejarExportar);
-
-
-function initExportador(filtrosExportacion) {
-    if (filtrosExportacion){
-
-        document.querySelector(`#exportar-container input[name="tipo"][value="${filtrosExportacion.formato}"]`).checked = true;
-        const checkboxes = document.querySelectorAll('#exportar-container input[name="datos"]');
-
-        checkboxes.forEach(cb => {
-            cb.checked = filtrosExportacion.tipo.includes(cb.value);
-        });
-        /*checkboxes.forEach(cb => {
-            cb.checked = tipoDatos.includes(cb.value);
-        });*/
-
-        document.querySelector('#nombre').value = filtrosExportacion.nombreArchivo;
-        document.querySelector('#ubicacion').value = filtrosExportacion.rutaDestino;
-    }
-}
-/**
- * Maneja la exportación de datos seleccionados.
+ * Genera un gráfico de barras apiladas usando Chart.js a partir de un conjunto de movimientos filtrados.
  * 
- * @param {MouseEvent} event - Evento del clic en el botón de exportar.
- */
-function manejarExportar(event) {
-    event.preventDefault();
-
-    const checkboxes = document.querySelectorAll('#exportar-container input[name="datos"]:checked');
-    const tipoDatos = Array.from(checkboxes).map(cb => cb.value);
-    const formato = document.querySelector('#exportar-container input[name="tipo"]:checked')?.value;
-    const nombre = document.querySelector('#nombre').value.trim();
-    const ubicacion = document.querySelector('#ubicacion').value.trim();
-
-    try {
-        exportador.exportarDatos(tipoDatos, formato, nombre, ubicacion , planificador);
-        StorageUtil.actualizar('app:exportador:config', exportador.sessionToJSON(), 'session');
-        setFeedback(feedback, 'Archivo exportado con éxito.', false);
-    } catch (error) {
-        setFeedback(feedback, error, true);
-    }
-}
-
-// =============================================================
-// 3. Módulo de Reportes
-// =============================================================
-
-/**
- * Inicializa los reportes y configura los filtros por defecto.
- */
-if(document.getElementById('movimientos-form'))
-    document.getElementById('movimientos-form').addEventListener('change', manejarReportes);
-
-function initReportes(filtrosGuardado = null) {
-    let fechaAscii;
-    if(!filtrosGuardado){
-        fechaAscii = document.getElementById('fechaRyE').value;
-        filtros.categoria = document.getElementById('categoriaRyE').value;
-        filtros.moneda = document.getElementById('moneda').value;
-    } else{
-        document.getElementById('fechaRyE').value = filtrosGuardado.fechaAscii;
-        document.getElementById('categoriaRyE').value = filtrosGuardado.categoria;
-        document.getElementById('moneda').value = filtrosGuardado.moneda;
-
-        fechaAscii = filtrosGuardado.fechaAscii;
-        filtros.categoria = filtrosGuardado.categoria;
-        filtros.moneda = filtrosGuardado.moneda;
-    }
-
-    actualizarFechas(fechaAscii, filtros);
-
-    const datos = planificador.generarReporte(filtros, fechaAscii);
-    generarGrafico(datos.datosFiltrados);
-    actualizarReporteGastos(datos);
-}
-
-
-/**
- * Maneja los cambios de filtros en el formulario de reportes.
+ * - Agrupa los movimientos por categoría y fecha.
+ * - Diferencia ingresos y egresos usando los colores definidos en CSS.
+ * - Destruye el gráfico anterior si existe y crea uno nuevo en el canvas con id "reportes-chart".
  * 
- * @param {Event} event - Evento de cambio en el formulario.
- */
-function manejarReportes(event) {
-    const { id, value } = event.target;
-
-    switch (id) {
-        case 'fechaRyE': actualizarFechas(value, filtros); break;
-        case 'categoriaRyE': filtros.categoria = value; break;
-        case 'moneda': filtros.moneda = value; break;
-        default: console.log(`Evento no manejado: ${id}`);
-    }
-
-    try {
-        const datos = planificador.generarReporte(filtros, document.getElementById('fechaRyE').value);
-        StorageUtil.actualizar('app:planificador:filtros', planificador.sessionToJSON().filtros, 'session');
-        generarGrafico(datos.datosFiltrados);
-        actualizarReporteGastos(datos);
-        setFeedback(feedback, 'Reporte generado con éxito.', false);
-    } catch (error) {
-        setFeedback(feedback, error, true);
-    }
-}
-
+ * @param {Array<Object>} datosFiltrados - Lista de movimientos a graficar.
+ *        {string|Date} datosFiltrados[].fecha - Fecha del movimiento.
+ *        {string} datosFiltrados[].tipo - Tipo de movimiento: "ingreso", "gasto" o "ahorro".
+ *        {string} datosFiltrados[].categoria - Categoría del movimiento.
+ *        {number} datosFiltrados[].monto - Monto del movimiento.
+ */      
 function generarGrafico(datosFiltrados) {
     // --- Extraemos los datos para el gráfico ---
     const styles = getComputedStyle(document.documentElement);
@@ -607,99 +738,6 @@ function actualizarReporteGastos(resultados) {
 
     saldoElem.textContent = `$${total.saldo.toLocaleString('es-AR', { minimumFractionDigits: 2 })}`;
     ahorroElem.textContent = `${total.porcentajeAhorro}%`;
-}
-
-/**
- * Actualiza los rangos de fechas según la opción seleccionada.
- * 
- * @param {string} valor - Valor seleccionado (por ejemplo, "Últimos 7 días").
- * @param {Object} filtros - Objeto de filtros que se actualizará.
- */
-function actualizarFechas(valor, filtros) {
-    const hoy = new Date();
-    const desde = new Date(hoy);
-
-    if (valor === 'Últimos 7 días') desde.setDate(hoy.getDate() - 7);
-    else if (valor === 'Último mes') desde.setMonth(hoy.getMonth() - 1);
-    else if (valor === 'Último año') desde.setFullYear(hoy.getFullYear() - 1);
-
-    filtros.fechaDesde = desde.toISOString().split('T')[0];
-    filtros.fechaHasta = hoy.toISOString().split('T')[0];
-}
-
-// =============================================================
-// 4. Módulo de Metas y Objetivos de Ahorro
-// =============================================================
-
-/**
- * Inicializa los formularios de metas y objetivos de ahorro.
- */
-if(document.querySelector('#form-metas-modal'))
-    document.querySelector('#form-metas-modal').addEventListener('submit', manejarGuardarMeta);
-
-if(document.querySelector('#form-objetivo-modal'))
-    document.querySelector('#form-objetivo-modal').addEventListener('submit', manejarGuardarObjetivo);
-  
-/**
- * Lista las metas de ahorro existentes en la tabla al iniciar la sección.
- * 
- * @param {Array} metasAhorro - Array de metas de ahorro a listar.
- */
-function ListarMetas(metasAhorro) {
-    metasAhorro.forEach(metaAhorro => {
-        crearFilaMeta(metaAhorro);
-    });
-}
-
-/**
- * Maneja el guardado de una nueva meta de ahorro.
- * 
- * @param {SubmitEvent} event - Evento de envío del formulario de metas.
- */
-function manejarGuardarMeta(event) {
-    event.preventDefault();
-
-    const nombre = document.getElementById('nombre-objetivo').value;
-    const monto = document.getElementById('monto-objetivo').value;
-    const fecha = document.getElementById('fecha-objetivo').value;
-
-    try {
-        const meta = planificador.agregarMetaAhorro({nombre: nombre, montoObjetivo: monto, fechaObjetivo: fecha});
-        StorageUtil.actualizar('app:planificador', planificador.localToJSON(), 'local');
-        crearFilaMeta(meta);
-        actualizarRadiosConMetas();
-        cerrarModal('MetasAhorroModal');
-        setFeedback(feedback, 'Objetivo guardado con éxito', false);
-        event.target.reset();
-    } catch (error) {
-        cerrarModal('MetasAhorroModal');
-        setFeedback(feedback, error, true);
-    }
-}
-
-/**
- * Maneja la selección y visualización de un objetivo guardado.
- * 
- * @param {SubmitEvent} event - Evento de envío del formulario de objetivos.
- */
-function manejarGuardarObjetivo(event) {
-    event.preventDefault();
-
-    const form = event.target;
-    const radioSeleccionado = form.querySelector('input[name="tipo"]:checked');
-    if (!radioSeleccionado) return setFeedback(feedback, 'Selecciona un objetivo.', true);
-
-    const datosMeta = getDatosMeta(radioSeleccionado.value);
-    if (!datosMeta) {
-        console.log("No hay datos de Meta de Ahorro");
-        cerrarModal('ObjetivosModal');
-        return;
-    }
-
-    actualizarMetaCard(datosMeta);
-    mostrarMetaCard(true);
-    cerrarModal('ObjetivosModal');
-    form.reset();
 }
 
 /**
@@ -831,6 +869,8 @@ function actualizarRadiosConMetas() {
     });
 }
 
+
+
 // =============================================================
 // Funciones auxiliares comunes
 // =============================================================
@@ -933,4 +973,44 @@ function recargarVariablesSession(tipo) {
             break;
         }
     }
+}
+
+/**
+ * Lista los movimientos existentes en la tabla al iniciar la sección.
+ * 
+ * @param {Array} movimientos - Array de movimientos a listar.
+ */
+function ListarMoviminetos(movimientos) {
+    movimientos.forEach(movimiento => {
+        crearFilaMovimiento(movimiento);
+    });
+}
+
+/**
+ * Actualiza los rangos de fechas según la opción seleccionada.
+ * 
+ * @param {string} valor - Valor seleccionado (por ejemplo, "Últimos 7 días").
+ * @param {Object} filtros - Objeto de filtros que se actualizará.
+ */
+function actualizarFechas(valor, filtros) {
+    const hoy = new Date();
+    const desde = new Date(hoy);
+
+    if (valor === 'Últimos 7 días') desde.setDate(hoy.getDate() - 7);
+    else if (valor === 'Último mes') desde.setMonth(hoy.getMonth() - 1);
+    else if (valor === 'Último año') desde.setFullYear(hoy.getFullYear() - 1);
+
+    filtros.fechaDesde = desde.toISOString().split('T')[0];
+    filtros.fechaHasta = hoy.toISOString().split('T')[0];
+}
+
+/**
+ * Lista las metas de ahorro existentes en la tabla al iniciar la sección.
+ * 
+ * @param {Array} metasAhorro - Array de metas de ahorro a listar.
+ */
+function ListarMetas(metasAhorro) {
+    metasAhorro.forEach(metaAhorro => {
+        crearFilaMeta(metaAhorro);
+    });
 }
