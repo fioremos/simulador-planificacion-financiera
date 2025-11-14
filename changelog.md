@@ -24,6 +24,8 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 ### Fixed
 - [feature/hotfix-#154-filtrado-fechas-categorias] Fix Issue #154.  
   PR: [#157](https://github.com/fioremos/simulador-planificacion-financiera/pull/157) — @UlisesC11 (Desarrollador JS Local y Session Storage) 
+- [feature/bugfix-#152-graficos-dinamicos] Fix Issue #152.  
+  PR: [#159](https://github.com/fioremos/simulador-planificacion-financiera/pull/159) — @fioremos (Desarrollador JS Eventos + DOM)
 
 ---
 
