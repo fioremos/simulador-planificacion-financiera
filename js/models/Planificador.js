@@ -121,13 +121,26 @@ class Planificador {
      * @returns {Array<Movimiento>} - Movimientos que cumplen los filtros.
      */
     #filtrarDatos(filtros) {
-        const desde = new Date(filtros.fechaDesde);
-        const hasta = new Date(filtros.fechaHasta);
+        // Asegurar que siempre trabajamos con Date
+        const fechaDesde = new Date(filtros.fechaDesde);
+        const fechaHasta = new Date(filtros.fechaHasta);
+
+        // Normalizar eliminando hora/milisegundos
+        const desde = new Date(fechaDesde.getFullYear(), fechaDesde.getMonth(), fechaDesde.getDate());
+        const hasta = new Date(fechaHasta.getFullYear(), fechaHasta.getMonth(), fechaHasta.getDate());
 
         return this.#movimientos.filter(mov => {
-            const fecha = new Date(mov.fecha);
+            // Asegurar que siempre trabajamos con Date
+            const fechaMov = new Date(mov.fecha);
+            // Normalizar eliminando hora/milisegundos
+            const fecha = new Date(fechaMov.getFullYear(), fechaMov.getMonth(), fechaMov.getDate());
+
             const enRango = fecha >= desde && fecha <= hasta;
-            const categoriaCoincide = filtros.categoria === 'Todas' || mov.categoria.toLowerCase() === filtros.categoria.toLowerCase() || (mov.categoria.toLowerCase() === "sueldo" && mov.tipo.toLowerCase() === "ingreso");
+            const categoriaCoincide =
+                filtros.categoria === 'Todas' ||
+                mov.categoria.toLowerCase() === filtros.categoria.toLowerCase() ||
+                (mov.categoria.toLowerCase() === "sueldo" && mov.tipo.toLowerCase() === "ingreso");
+
             return enRango && categoriaCoincide;
         });
     }
