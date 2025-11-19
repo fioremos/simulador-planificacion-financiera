@@ -49,6 +49,9 @@ let exportador = new Exportador;
 /** @type {HTMLElement} Elemento para mostrar el grafico del reporte */
 let grafico;
 
+/** @type {HTMLElement} Opciones originales de las categorias */
+let categoriaSelects;
+let opcionesOriginales = new Map();
 
 
 // =============================================================
@@ -92,48 +95,13 @@ document.addEventListener('DOMContentLoaded', () => {
         listarMovimientos(planificador.localToJSON().movimientos);
         listarMetas(planificador.localToJSON().metasAhorro);
         actualizarRadiosConMetas();
-    } 
-    
-    // logica para seleccion de movimientos    
-    const tipoRadios = document.querySelectorAll('input[name="tipo"]');
-    const categoriaSelects = document.querySelectorAll('select[name="categoria"]');
+    }  
+
 
     // Guardamos un mapa con las opciones originales de cada select
-    const opcionesOriginales = new Map();
-    
+    categoriaSelects = document.querySelectorAll('select[name="categoria"]');
     categoriaSelects.forEach((select, index) => {
         opcionesOriginales.set(index, Array.from(select.options));
-    });
-
-    // Opciones permitidas según tipo
-    const opcionesPorTipo = planificador.getOpcionesPorTipo();
-
-    tipoRadios.forEach(radio => {
-        radio.addEventListener("change", function () {
-            if(this.name != "tipo")
-                return;
-            const tipoSeleccionado = this.value;
-            const permitidas = opcionesPorTipo[tipoSeleccionado];
-
-            categoriaSelects.forEach((select, index) => {
-                const opciones = opcionesOriginales.get(index);
-
-                // Limpiar opciones
-                select.innerHTML = "";
-
-                // Agregar solo las permitidas
-                opciones.forEach(opt => {
-                    if (permitidas.includes(opt.value)) {
-                        select.appendChild(opt.cloneNode(true));
-                    }
-                });
-
-                // Seleccionar automáticamente la primera opción válida
-                if (select.options.length > 0) {
-                    select.selectedIndex = 0;
-                }
-            });
-        });
     });
 
     // Mostrar la sección inicial
@@ -249,30 +217,53 @@ if (document.querySelector('#form-objetivo-modal')) {
  * Si se selecciona "ahorro", abre el combo correspondiente; si no, oculta todos los combos de ahorro.
  */
 
-/** @type {NodeListOf<HTMLDivElement>} Todos los grupos de radio buttons con la clase 'form-tipo radio-group' */
-if(document.querySelectorAll(".form-tipo.radio-group")){
-    document.querySelectorAll(".form-tipo.radio-group").forEach(grupo => {
-        /** @type {NodeListOf<HTMLInputElement>} Todos los inputs tipo radio dentro del grupo */
-        const radios = grupo.querySelectorAll("input[type='radio']");
 
-        radios.forEach(radio => {
-            radio.addEventListener("change", function() {
-                if (this.checked) {
-                    if (this.value === "ahorro") {
-                        abrirCombo(grupo.id);
-                    } else {
-                        /** @type {HTMLCollectionOf<HTMLElement>} Todos los elementos con clase 'form-ahorro' */
-                        Array.from(document.getElementsByClassName("form-ahorro")).forEach(el => {
-                            el.classList.remove("visible");
-                            el.classList.add("invisible");
-                        });
+if(document.querySelectorAll('input[name="tipo"]')){
+    document.querySelectorAll('input[name="tipo"]').forEach(radio => {
+        radio.addEventListener("change", function() {      
+            // Opciones permitidas según tipo
+            const opcionesPorTipo = { ingreso: ["sueldo"], ahorro: ["objetivos"], inversion: ["inversiones"], gasto: ["hogar", "ocio", "salud"] };
+            const tipoSeleccionado = this.value;
+            const permitidas = opcionesPorTipo[tipoSeleccionado];
+
+            if(this.checked) {
+                if (this.value === "ahorro") {
+                    if(!abrirCombo()){
+                        setFeedback(feedback, 'No hay metas de ahorro disponibles. Por favor, crea una antes de asignar un movimiento de ahorro.', true);
+                        this.checked = false;
+                        return;
                     }
+                } else {
+                    /** @type {HTMLCollectionOf<HTMLElement>} Todos los elementos con clase 'form-ahorro' */
+                    Array.from(document.getElementsByClassName("form-ahorro")).forEach(el => {
+                        el.classList.remove("visible");
+                        el.classList.add("invisible");
+                    });
+                }
+            }
+
+            categoriaSelects.forEach((select, index) => {
+                const opciones = opcionesOriginales.get(index);
+
+                // Limpiar opciones
+                select.innerHTML = "";
+
+                // Agregar solo las permitidas
+                opciones.forEach(opt => {
+                    if (permitidas.includes(opt.value)) {
+                        select.appendChild(opt.cloneNode(true));
+                    }
+                });
+
+                // Seleccionar automáticamente la primera opción válida
+                if (select.options.length > 0) {
+                    select.selectedIndex = 0;
                 }
             });
+
         });
     });
 }
-
 
 // =============================================================
 //  Funciones de inicialización
@@ -377,9 +368,30 @@ function manejarMovimientoSubmit(event) {
         if (window.location.hash === "#dashboard") {
             cerrarModal('miModal');
         }
+
+        //Reseteo el combo de categorias:
+        categoriaSelects.forEach((select, index) => {
+            const opciones = opcionesOriginales.get(index);
+
+            // Limpiar opciones
+            select.innerHTML = "";
+
+            // Agregar solo las permitidas
+            opciones.forEach(opt => {
+                select.appendChild(opt.cloneNode(true));
+ 
+            });
+
+            // Seleccionar automáticamente la primera opción válida
+            if (select.options.length > 0) {
+                select.selectedIndex = 0;
+            }
+        });
+
         form.reset();
     } catch (error) {
         setFeedback(feedback, error, true);
+        cerrarModal('miModal');
     }
 }
 
@@ -558,6 +570,10 @@ function mostrarSeccion(id) {
  */
 function abrirCombo() {
     const categoriaSelect = document.getElementsByName("objetivos");
+
+    if( planificador.metasAhorro.length === 0)
+        return false
+
     
     categoriaSelect.forEach(cat => {
         planificador.metasAhorro.forEach(ma => {
@@ -573,7 +589,7 @@ function abrirCombo() {
     el.classList.add("visible");
     el.classList.remove("invisible");
     });
-    
+    return true;
 }
 
 /**
@@ -897,7 +913,10 @@ function setFeedback(feedback, message, error) {
     const overlay = document.getElementById('overlay');
     if (error) {
         console.log(message);
-        feedback.textContent = `${message.message}`;
+        if(message.message)
+            feedback.textContent = `${message.message}`;
+        else
+            feedback.textContent = `${message}`;
         feedback.classList.remove('success');
         feedback.classList.add('error');
         overlay.classList.remove('invisible');
