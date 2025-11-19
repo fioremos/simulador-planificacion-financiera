@@ -11,8 +11,17 @@ import { StorageUtil }  from './utils/storage.js';
 // Variables globales de estado
 // =============================================================
 
+// Literales
+const trashIcon = 'assets/images/iconos/Trash_2.png';
+const trashIconAlt = 'logo_tacho_borrar';
+
+const reportesOption = 'reportes';
+const exportadorOption = 'exportar';
+const loginOption = 'login'; 
+const metasOption = 'metas';
+
 /** @type {HTMLElement} Elemento para mostrar mensajes de feedback */
-let feedback = document.querySelector('#feedback');
+const feedback = document.querySelector('#feedback');
 
 /** @type {Object|null} Filtros actuales para reportes */
 let filtros = {fechaDesde: "", fechaHasta: "", categoria: "", moneda: ""};
@@ -62,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
     offcanvasEl = document.getElementById('sidebarOffcanvas');
 
     // Determinar la sección inicial a mostrar desde el hash de la URL
-    let hash = window.location.hash.replace('#', '') || 'login';
+    let hash = window.location.hash.replace('#', '') || loginOption;
 
     // Si no hay hash, establecer "login" como predeterminado y limpiar parámetros extra
     if (!window.location.hash) {
@@ -81,8 +90,8 @@ document.addEventListener('DOMContentLoaded', () => {
         planificador = Planificador.localFromJSON(planificadorGuardado);
 
         // Listar movimientos y metas en la interfaz
-        ListarMoviminetos(planificador.localToJSON().movimientos);
-        ListarMetas(planificador.localToJSON().metasAhorro);
+        listarMovimientos(planificador.localToJSON().movimientos);
+        listarMetas(planificador.localToJSON().metasAhorro);
         actualizarRadiosConMetas();
     } else
         planificador = new Planificador();
@@ -357,7 +366,7 @@ function manejarMovimientoSubmit(event) {
         tipo: form.querySelector('input[name="tipo"]:checked')?.value || '',
         categoria: form.querySelector('select[name="categoria"]').value,
         monto: parseFloat(form.querySelector('input[name="monto"]').value),
-        objetivo: (form.querySelector('select[name="categoria"]').value==='objetivos')? form.querySelector('select[name="objtivos"]').value:null,
+        objetivo: (form.querySelector('select[name="categoria"]').value==='objetivos')? form.querySelector('select[name="objetivos"]').value:null,
     };
 
     try {
@@ -504,29 +513,29 @@ function mostrarSeccion(id) {
     });
 
     // Ocultar elementos globales si la vista actual es login
-    const estaEnLogin = id === 'login';
+    const estaEnLogin = id === loginOption;
     if (sidebar) sidebar.classList.toggle('d-none', estaEnLogin);
     if (header) header.classList.toggle('d-none', estaEnLogin);
     if (principalContainer) principalContainer.classList.toggle('solo-contenido', estaEnLogin);
-    if (id === 'reportes') {
+    if (id === reportesOption) {
         if(!planificador.sessionToJSON().filtros.fechaAscii && StorageUtil.obtener('app:planificador:filtros', 'session'))
-            recargarVariablesSession('reportes');
+            recargarVariablesSession(reportesOption);
         else
             initReportes();
     }
     
-    if (id === 'metas') {
+    if (id === metasOption) {
         document.querySelector('.metas-table tbody').innerHTML = '';
-        ListarMetas(planificador.localToJSON().metasAhorro);
+        listarMetas(planificador.localToJSON().metasAhorro);
         mostrarMetaCard(false);
     }
 
-    if (id === 'exportar') {
+    if (id === exportadorOption) {
         if(StorageUtil.obtener('app:exportador:config', 'session'))
-            recargarVariablesSession('exportador');
+            recargarVariablesSession(exportadorOption);
     }
 
-    if (id === 'login') {
+    if (id === loginOption) {
         if(planificador){
             StorageUtil.eliminar('app:planificador:filtros', 'session');
             filtros = {fechaDesde: "", fechaHasta: "", categoria: "", moneda: ""};
@@ -550,13 +559,13 @@ function mostrarSeccion(id) {
 /**
  * Muestra el combo de metas de ahorro y lo llena con las opciones actuales del planificador.
  * 
- * Busca todos los elementos `<select>` con el atributo `name="objtivos"` y les agrega
+ * Busca todos los elementos `<select>` con el atributo `name="objetivos"` y les agrega
  * una opción por cada meta de ahorro registrada en `planificador.metasAhorro`.
  * 
  * Luego, hace visibles todos los elementos con clase `form-ahorro` y oculta la clase `invisible`.
  */
 function abrirCombo() {
-    const categoriaSelect = document.getElementsByName("objtivos");
+    const categoriaSelect = document.getElementsByName("objetivos");
     
     categoriaSelect.forEach(cat => {
         planificador.metasAhorro.forEach(ma => {
@@ -596,8 +605,8 @@ function crearFilaMovimiento(datos, movimiento) {
     const boton = document.createElement('button');
     boton.classList.add('btn', 'small');
     const img = document.createElement('img');
-    img.src = 'assets/images/iconos/Trash_2.png';
-    img.alt = 'logo_tacho_borrar';
+    img.src = trashIcon;
+    img.alt = trashIconAlt;
     boton.appendChild(img);
     tdBoton.appendChild(boton);
     boton.addEventListener('click', () => {
@@ -798,7 +807,13 @@ function mostrarMetaCard(mostrar = true) {
         console.log("'.meta-card-content' no encontrado");
         return;
     }
-    contenido.style.display = mostrar ? 'block' : 'none';
+    if (mostrar) {
+        contenido.classList.add("visible");
+        contenido.classList.remove("invisible");
+    } else {
+        contenido.classList.add("invisible");
+        contenido.classList.remove("visible");
+    }
 }
 
 /**
@@ -922,23 +937,28 @@ function setFeedback(feedback, message, error) {
         feedback.textContent = `${message.message}`;
         feedback.classList.remove('success');
         feedback.classList.add('error');
-        overlay.style.display = "flex";
+        overlay.classList.remove('invisible');
+        overlay.classList.add('visible');
 
         setTimeout(() => {
             feedback.textContent = '';
             feedback.classList.remove('error');
-            overlay.style.display = "none";
+            overlay.classList.remove('visible');
+            overlay.classList.add('invisible');
+
         }, 1000);
     } else {
         feedback.textContent = message;
         feedback.classList.remove('error');
         feedback.classList.add('success');
-        overlay.style.display = "flex";
+        overlay.classList.remove('invisible');
+        overlay.classList.add('visible');
 
         setTimeout(() => {
             feedback.textContent = '';
             feedback.classList.remove('success', 'error');
-            overlay.style.display = "none";
+            overlay.classList.remove('visible');
+            overlay.classList.add('invisible');
         }, 1000);
     }
 }
@@ -952,9 +972,10 @@ function setFeedback(feedback, message, error) {
  *   - `"Reportes"`: Recarga los filtros de reporte del planificador.
  *   - `"exportador"`: Recarga la configuración de exportación.
  */
+
 function recargarVariablesSession(tipo) {
     switch (tipo){
-        case 'reportes': {
+        case reportesOption: {
             const datosGuardados = StorageUtil.obtener('app:planificador:filtros', 'session');
             Planificador.sessionRepFromJSON(datosGuardados);
 
@@ -963,7 +984,7 @@ function recargarVariablesSession(tipo) {
             }
             break;
         }
-        case 'exportador': {
+        case exportadorOption: {
             const datosGuardados = JSON.parse(StorageUtil.obtener('app:exportador:config', 'session').filtrosExportador);
             exportador.sessionExpFromJSON(datosGuardados);
 
@@ -980,7 +1001,7 @@ function recargarVariablesSession(tipo) {
  * 
  * @param {Array} movimientos - Array de movimientos a listar.
  */
-function ListarMoviminetos(movimientos) {
+function listarMovimientos(movimientos) {
     movimientos.forEach(movimiento => {
         crearFilaMovimiento(movimiento);
     });
@@ -1009,7 +1030,7 @@ function actualizarFechas(valor, filtros) {
  * 
  * @param {Array} metasAhorro - Array de metas de ahorro a listar.
  */
-function ListarMetas(metasAhorro) {
+function listarMetas(metasAhorro) {
     metasAhorro.forEach(metaAhorro => {
         crearFilaMeta(metaAhorro);
     });
