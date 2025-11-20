@@ -11,10 +11,18 @@ class Movimiento {
   - tipo: string
   - categoria: string
   - monto: number
-  + constructor(fecha: Date, tipo: string, categoria: string, monto: number)
+  - idObjetivo: uuid;
+  + constructor(fecha: Date, tipo: string, categoria: string, monto: number, idObjetivo: uuid | null)
   + toJSON(): Object
+  + getResumen(): string 
   + {static} validar(datos: Object): boolean
   + {static} fromJSON(json: Object): Movimiento
+  + {static} generarId(): uuid
+  + {static} normalizarTipo(tipo: string): string
+  + {static} normalizarCategoria(categoria: string): string
+  + {static} esFechaValida(fechaInput: Date): boolean
+  + {static} esTipoValido(tipo: string): boolean
+  + {static} esCategoriaValida(categoria: string): boolean
 }
 class MetaAhorro {
     - id : number
@@ -25,20 +33,28 @@ class MetaAhorro {
     + constructor(nombre: string, montoObjetivo: number, fechaObjetivo: Date | null)
     + actualizarMontoActual(monto: number): void
     + toJSON(): Object
+    + getPorcentaje(): number
+    + getResumen(): string 
     + {static} validar(datos: Object): boolean
     + {static} fromJSON(json: Object): MetaAhorro
+    + {static} esNombreValido(nombre: string): boolean
+    + {static} esMontoValido(monto: number): boolean
+    + {static} esFechaFuturaValida(fechaStr: string): boolean
 }
 class Exportador {
     - filtrosExportacion: {tipo, formato, nombreArchivo, rutaDestino}
+    - exportar(datos: Object[], config : Object) : boolean
+    + constructor()
     + exportarDatos(tipo: Array, formato: string, nombreArchivo: string, rutaDestino: string, datos: Object): Object
     + validarConfiguracion(config : Object) : boolean
     + toCSV(datos : Object[]) : string
     + toJSON(datos : Object[]) : string
     + toPDF(datos : Object[]) : string
     + toXLSX(datos : Object[]) : string
+    + sessionExpFromJSON(json: Object)
+    + sessionToJSON(): Object
     + {static} esFormatoValido(formato : string) : boolean
     + {static} sonNombreYRutaValidos(nombre : string, ruta : string) : boolean
-    - exportar(datos: Object[], config : Object) : boolean
 }
 
 ' --- Clase de Lógica de Negocio (Gestor) ---
@@ -48,13 +64,25 @@ class Planificador{
     - filtros:  { fechaAscii, fechaDesde, fechaHasta, categoria , moneda}
     + constructor()
     + agregarMovimiento(datos: Object): Movimiento
+    + eliminarMovimiento(idAEliminar: string): boolean
+    + getOpcionesPorTipo(): Object
     + agregarMetaAhorro(datos: Object): MetaAhorro
-    + generarReporte(filtros: Object): Object
-    + toJSON(): Object
+    + getMetaByName(metaName: string): MetaAhorro | null
+    + getPorcentajeMeta(meta: MetaAhorro): number
+    + generarReporte(filtros: Object, fechaAscii: string): Object
+    + localToJSON(): Object
+    + sessionToJSON(): Object
+    + obtenerVariables(modulo: string, tipo: string): Object
+    + actualizarLocalVariables(tipo: string, modulo: string, objeto: Object): Object
+    + actualizarSessionVariables(tipo: string, modulo: string, objeto: Object): Object
+    + eliminarVariables(modulo: string, tipo: string): Object
+    + {static} localFromJSON(json: Onject): Planificador
+    + {static} sessionRepFromJSON(jsonFiltros: Object)
     + {static} fromJSON(json: Object): Planificador
     - filtrarDatos(filtros: Object): Movimiento[]
     - calcularIndicadores(datos: Movimiento[]): Object
 }
+
 ' --- Relaciones ---
 
 ' Relación de Composición:

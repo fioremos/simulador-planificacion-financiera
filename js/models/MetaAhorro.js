@@ -128,7 +128,7 @@ export class MetaAhorro {
     }
 
     /**
-     * Devuelve un porcentaje acanzado de la meta.
+     * Devuelve un porcentaje alcanzado de la meta.
      * @returns {number} porcentaje alcanxzado de la meta.
      */
     getPorcentaje() {
