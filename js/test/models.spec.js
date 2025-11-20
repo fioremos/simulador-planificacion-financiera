@@ -466,86 +466,70 @@ describe("Model Exportardor", function () {
 
     describe("Exportador.hayDatosSeleccionados()", function () {
         it("debería aceptar tipos de datos disponibles (resumen-cuenta)", function () {
-            const seleccion = "resumen-cuenta";
-            const tiposDisponibles = ['transacciones', 'inversiones', 'performance', 'contribuciones', 'asignaciones', 'balances', 'flujo-fondos', 'descripcion-general', 'resumen-cuenta'];
-            const tiposSeleccionados = seleccion
-                ? seleccion.split(',').map(e => e.trim()).filter(e => tiposDisponibles.includes(e.toLowerCase()))
-                : [];
+            const seleccion = ['resumen-cuenta'];
 
-            expect(exportador.hayDatosSeleccionados(tiposSeleccionados, seleccion.split(','))).toBeTrue();
+            expect(exportador.validarConfiguracion({tipo: seleccion, formato:  "CSV", nombreArchivo: "Archivo", rutaDestino:"C:\\Downloads"})).toBeTrue();
         });
 
         it("debería aceptar varios tipos de datos disponibles (Movimientos, Metas)", function () {
-            const seleccion = "resumen-cuenta, inversiones";
-            const tiposDisponibles = ['transacciones', 'inversiones', 'performance', 'contribuciones', 'asignaciones', 'balances', 'flujo-fondos', 'descripcion-general', 'resumen-cuenta'];
-            const tiposSeleccionados = seleccion
-                ? seleccion.split(',').map(e => e.trim()).filter(e => tiposDisponibles.includes(e.toLowerCase()))
-                : [];
+            const seleccion = ['resumen-cuenta' , 'inversiones'];
 
-            expect(exportador.hayDatosSeleccionados(tiposSeleccionados, seleccion.split(','))).toBeTrue();
+            expect(exportador.validarConfiguracion({tipo: seleccion, formato:  "CSV", nombreArchivo: "Archivo", rutaDestino:"C:\\Downloads"})).toBeTrue();
         });
 
         it("debería rechazar tipos de datos incorrectos (movimientos)", function () {
-            const seleccion = "movimientos";
-            const tiposDisponibles = ['transacciones', 'inversiones', 'performance', 'contribuciones', 'asignaciones', 'balances', 'flujo-fondos', 'descripcion-general', 'resumen-cuenta'];
-            const tiposSeleccionados = seleccion
-                ? seleccion.split(',').map(e => e.trim()).filter(e => tiposDisponibles.includes(e.toLowerCase()))
-                : [];
+            const seleccion = ['movimientos'];
 
-            expect(exportador.hayDatosSeleccionados(tiposSeleccionados, seleccion.split(','))).toBeFalse();
+            expect(exportador.validarConfiguracion({tipo: seleccion, formato:  "CSV", nombreArchivo: "Archivo", rutaDestino:"C:\\Downloads"})).toBeFalse();
         });
 
         it("debería rechazar tipos de datos vacíos", function () {
-            const seleccion = "";
-            const tiposDisponibles = ['transacciones', 'inversiones', 'performance', 'contribuciones', 'asignaciones', 'balances', 'flujo-fondos', 'descripcion-general', 'resumen-cuenta'];
-            const tiposSeleccionados = seleccion
-                ? seleccion.split(',').map(e => e.trim()).filter(e => tiposDisponibles.includes(e.toLowerCase()))
-                : [];
+            const seleccion = [];
 
-            expect(exportador.hayDatosSeleccionados(tiposSeleccionados, seleccion.split(','))).toBeFalse();
+            expect(exportador.validarConfiguracion({tipo: seleccion, formato:  "CSV", nombreArchivo: "Archivo", rutaDestino:"C:\\Downloads"})).toBeFalse();
         });
     });
 
     describe("Exportador.esFormatoValido()", function () {
         it("debería aceptar formatos válidos (CSV, PDF, JSON, XLSX)", function () {
-            expect(exportador.validarConfiguracion({formato:  "CSV", nombreArchivo: "Archivo", rutaDestino:"C:\\Downloads"})).toBeTrue();
-            expect(exportador.validarConfiguracion({formato:  "PDF", nombreArchivo: "Archivo", rutaDestino:"C:\\Downloads"})) .toBeTrue();
-            expect(exportador.validarConfiguracion({formato: "JSON", nombreArchivo: "Archivo", rutaDestino:"C:\\Downloads"})).toBeTrue();
-            expect(exportador.validarConfiguracion({formato: "XLSX", nombreArchivo: "Archivo", rutaDestino:"C:\\Downloads"})).toBeTrue();
+            expect(exportador.validarConfiguracion({tipo: ['resumen-cuenta'], formato:  "CSV", nombreArchivo: "Archivo", rutaDestino:"C:\\Downloads"})).toBeTrue();
+            expect(exportador.validarConfiguracion({tipo: ['resumen-cuenta'], formato:  "PDF", nombreArchivo: "Archivo", rutaDestino:"C:\\Downloads"})) .toBeTrue();
+            expect(exportador.validarConfiguracion({tipo: ['resumen-cuenta'], formato: "JSON", nombreArchivo: "Archivo", rutaDestino:"C:\\Downloads"})).toBeTrue();
+            expect(exportador.validarConfiguracion({tipo: ['resumen-cuenta'], formato: "XLSX", nombreArchivo: "Archivo", rutaDestino:"C:\\Downloads"})).toBeTrue();
         });
 
         it("debería aceptar formatos válidos en minúscula (csv, pdf, json, xlsx)", function () {
-            expect(exportador.validarConfiguracion({formato:  "csv", nombreArchivo: "Archivo", rutaDestino:"C:\\Downloads"})).toBeTrue();
-            expect(exportador.validarConfiguracion({formato:  "pdf", nombreArchivo: "Archivo", rutaDestino:"C:\\Downloads"})).toBeTrue();
-            expect(exportador.validarConfiguracion({formato: "json", nombreArchivo: "Archivo", rutaDestino:"C:\\Downloads"})).toBeTrue();
-            expect(exportador.validarConfiguracion({formato: "xlsx", nombreArchivo: "Archivo", rutaDestino:"C:\\Downloads"})).toBeTrue();
+            expect(exportador.validarConfiguracion({tipo: ['resumen-cuenta'], formato:  "csv", nombreArchivo: "Archivo", rutaDestino:"C:\\Downloads"})).toBeTrue();
+            expect(exportador.validarConfiguracion({tipo: ['resumen-cuenta'], formato:  "pdf", nombreArchivo: "Archivo", rutaDestino:"C:\\Downloads"})).toBeTrue();
+            expect(exportador.validarConfiguracion({tipo: ['resumen-cuenta'], formato: "json", nombreArchivo: "Archivo", rutaDestino:"C:\\Downloads"})).toBeTrue();
+            expect(exportador.validarConfiguracion({tipo: ['resumen-cuenta'], formato: "xlsx", nombreArchivo: "Archivo", rutaDestino:"C:\\Downloads"})).toBeTrue();
         });
 
         it("debería rechazar formatos inválidos (XML, TXT)", function () {
-            expect(exportador.validarConfiguracion({formato:  "XML", nombreArchivo: "Archivo", rutaDestino:"C:\\Downloads"})).toBeFalse();
-            expect(exportador.validarConfiguracion({formato:  "TXT", nombreArchivo: "Archivo", rutaDestino:"C:\\Downloads"})).toBeFalse();
+            expect(exportador.validarConfiguracion({tipo: ['resumen-cuenta'], formato:  "XML", nombreArchivo: "Archivo", rutaDestino:"C:\\Downloads"})).toBeFalse();
+            expect(exportador.validarConfiguracion({tipo: ['resumen-cuenta'], formato:  "TXT", nombreArchivo: "Archivo", rutaDestino:"C:\\Downloads"})).toBeFalse();
         });
 
         it("debería rechazar formatos vacíos", function () {
-            expect(exportador.validarConfiguracion({formato:  "", nombreArchivo: "Archivo", rutaDestino:"C:\\Downloads"})).toBeFalse();
+            expect(exportador.validarConfiguracion({tipo: ['resumen-cuenta'],formato:  "", nombreArchivo: "Archivo", rutaDestino:"C:\\Downloads"})).toBeFalse();
         });
     });
 
     describe("Exportador.sonNombreYRutaValidos()", function () {
         it("debería aceptar nombre y ruta válidos", function () {
-            expect(exportador.validarConfiguracion({formato:  "CSV", nombreArchivo: "reporte", rutaDestino:"C:\\Downloads"})).toBeTrue();
+            expect(exportador.validarConfiguracion({tipo: ['resumen-cuenta'], formato:  "CSV", nombreArchivo: "reporte", rutaDestino:"C:\\Downloads"})).toBeTrue();
         });
 
         it("debería rechazar nombre vacío", function () {
-            expect(exportador.validarConfiguracion({formato:  "CSV", nombreArchivo: "", rutaDestino:"C:\\Downloads"})).toBeFalse();
+            expect(exportador.validarConfiguracion({tipo: ['resumen-cuenta'], formato:  "CSV", nombreArchivo: "", rutaDestino:"C:\\Downloads"})).toBeFalse();
         });
 
         it("debería rechazar ruta vacía", function () {
-            expect(exportador.validarConfiguracion({formato:  "CSV", nombreArchivo: "reporte", rutaDestino:""})).toBeFalse();
+            expect(exportador.validarConfiguracion({tipo: ['resumen-cuenta'], formato:  "CSV", nombreArchivo: "reporte", rutaDestino:""})).toBeFalse();
         });
 
         it("debería rechazar nombre con extensión (reporte.pdf)", function () {
-            expect(exportador.validarConfiguracion({formato:  "CSV", nombreArchivo: "reporte.pdf", rutaDestino:"C:\\Downloads"})).toBeFalse();
+            expect(exportador.validarConfiguracion({tipo: ['resumen-cuenta'], formato:  "CSV", nombreArchivo: "reporte.pdf", rutaDestino:"C:\\Downloads"})).toBeFalse();
         });
     });
 
