@@ -76,7 +76,7 @@ describe("Flujo de ejecución", function () {
             planificador.agregarMovimiento(movimiento);
 
             spyOn(console, 'log'); // Espejeamos la salida de log
-            exportador.exportarDatos('resumen-cuenta', 'CSV', 'mi-reporte', 'C:\\Exports', planificador);
+            exportador.exportarDatos(['resumen-cuenta'], 'CSV', 'mi-reporte', 'C:\\Exports', planificador);
 
             expect(console.log).toHaveBeenCalledWith("Exportación exitosa.");
         });
@@ -85,22 +85,22 @@ describe("Flujo de ejecución", function () {
             let movimiento = { tipo: 'Ahorro', categoria: 'Objetivos', fecha: '2025-01-15', monto: 200 };
             planificador.agregarMovimiento(movimiento);
 
-            spyOn(console, 'log'); // Espejeamos la salida de log
-            exportador.exportarDatos('resumen-cuenta', 'XML', 'mi-reporte', 'C:\\Exports', planificador);
-
             // Verificamos que el mensaje de error sea el esperado por un formato inválido
-            expect(console.log).not.toContain("Exportación exitosa.");
-
+            expect(function() {
+                    exportador.exportarDatos(['resumen-cuenta'], 'XML', 'mi-reporte', 'C:\\Exports', planificador);
+                    }).toThrowError('Valide los datos se produjo un error al intentar exportar: Configuración de exportación inválida');   
         });
 
         it("debería rechazar exportación con configuración inválida (ruta vacía)", function () {
             let movimiento = { tipo: 'Ahorro', categoria: 'Objetivos', fecha: '2025-01-15', monto: 200 };
             planificador.agregarMovimiento(movimiento);
 
-            spyOn(console, 'log');
-            exportador.exportarDatos('resumen-cuenta', 'XML', 'mi-reporte', '', planificador);
+           
             
-            expect(console.log).not.toContain("Exportación exitosa.");
+            // Verificamos que el mensaje de error sea el esperado por un formato inválido
+            expect(function() {
+                     exportador.exportarDatos(['resumen-cuenta'], 'XML', 'mi-reporte', '', planificador);
+                    }).toThrowError('Valide los datos se produjo un error al intentar exportar: Configuración de exportación inválida'); 
         });
 
     });
