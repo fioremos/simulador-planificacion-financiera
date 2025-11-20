@@ -578,7 +578,11 @@ function abrirCombo() {
     if( planificador.metasAhorro.length === 0)
         return false
 
-    categoriaSelect.innerHTML = "";
+    for (let i = 0; i < categoriaSelect.length; i++) {
+        if (categoriaSelect[i] && categoriaSelect[i].innerHTML !== undefined) {
+            categoriaSelect[i].innerHTML = '';
+        }
+    }
     
     categoriaSelect.forEach(cat => {
         planificador.metasAhorro.forEach(ma => {
