@@ -117,7 +117,7 @@ export class Movimiento {
      */
     static esCategoriaValida(categoria) {
         if (!categoria) return false;
-        const categoriasValidas = ['hogar', 'ocio', 'salud', 'sueldo', 'objetivos', 'otros'];
+        const categoriasValidas = ['hogar', 'ocio', 'salud', 'sueldo', 'objetivos', 'otros', 'inversiones'];
         return categoriasValidas.includes(String(categoria).trim().toLowerCase());
     }
 

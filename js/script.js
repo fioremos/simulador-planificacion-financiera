@@ -3,7 +3,6 @@
 // =============================================================
 import { Planificador } from './models/Planificador.js';
 import { Exportador }   from './models/Exportador.js';
-import { StorageUtil }  from './utils/storage.js';
 
 
 
@@ -27,7 +26,7 @@ const feedback = document.querySelector('#feedback');
 let filtros = {fechaDesde: "", fechaHasta: "", categoria: "", moneda: ""};
 
 /** @type {Planificador} Instancia principal del planificador */
-let planificador;
+let planificador = new Planificador();
 
 /** @type {NodeListOf<HTMLElement>} Lista de secciones principales del contenido */
 let secciones;
@@ -85,16 +84,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     //Cargo las variables locales si existen
-    const planificadorGuardado = StorageUtil.obtener('app:planificador', 'local');
-    if (planificadorGuardado){
-        planificador = Planificador.localFromJSON(planificadorGuardado);
+    let datosLocales = planificador.obtenerVariables('planificador', 'local');
+    if (datosLocales){
+        planificador = Planificador.localFromJSON(datosLocales);
 
         // Listar movimientos y metas en la interfaz
         listarMovimientos(planificador.localToJSON().movimientos);
         listarMetas(planificador.localToJSON().metasAhorro);
         actualizarRadiosConMetas();
-    } else
-        planificador = new Planificador();
+    } 
     
     // logica para seleccion de movimientos    
     const tipoRadios = document.querySelectorAll('input[name="tipo"]');
@@ -108,12 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Opciones permitidas según tipo
-    const opcionesPorTipo = {
-        ingreso: ["sueldo"],
-        ahorro: ["objetivos"],
-        inversion: ["inversiones"],
-        gasto: ["hogar", "ocio", "salud"]
-    };
+    const opcionesPorTipo = planificador.getOpcionesPorTipo();
 
     tipoRadios.forEach(radio => {
         radio.addEventListener("change", function () {
@@ -371,7 +364,7 @@ function manejarMovimientoSubmit(event) {
 
     try {
         const movimiento = planificador.agregarMovimiento(datos);
-        StorageUtil.actualizar('app:planificador', planificador.localToJSON(), 'local');
+        planificador.actualizarLocalVariables('planificador', 'planificador', null);
         setFeedback(feedback, 'Movimiento agregado con éxito.', false);
         crearFilaMovimiento(datos, movimiento);
         
@@ -406,7 +399,7 @@ function manejarExportar(event) {
 
     try {
         exportador.exportarDatos(tipoDatos, formato, nombre, ubicacion , planificador);
-        StorageUtil.actualizar('app:exportador:config', exportador.sessionToJSON(), 'session');
+        planificador.actualizarSessionVariables('exportador', 'exportador:config', exportador);
         setFeedback(feedback, 'Archivo exportado con éxito.', false);
     } catch (error) {
         setFeedback(feedback, error, true);
@@ -430,7 +423,7 @@ function manejarReportes(event) {
 
     try {
         const datos = planificador.generarReporte(filtros, document.getElementById('fechaRyE').value);
-        StorageUtil.actualizar('app:planificador:filtros', planificador.sessionToJSON().filtros, 'session');
+        planificador.actualizarSessionVariables('planificador', 'planificador:filtros', null);
         generarGrafico(datos.datosFiltrados);
         actualizarReporteGastos(datos);
         setFeedback(feedback, 'Reporte generado con éxito.', false);
@@ -453,7 +446,7 @@ function manejarGuardarMeta(event) {
 
     try {
         const meta = planificador.agregarMetaAhorro({nombre: nombre, montoObjetivo: monto, fechaObjetivo: fecha});
-        StorageUtil.actualizar('app:planificador', planificador.localToJSON(), 'local');
+        planificador.actualizarLocalVariables('planificador', 'planificador', null);
         crearFilaMeta(meta);
         actualizarRadiosConMetas();
         cerrarModal('MetasAhorroModal');
@@ -477,9 +470,8 @@ function manejarGuardarObjetivo(event) {
     const radioSeleccionado = form.querySelector('input[name="tipo"]:checked');
     if (!radioSeleccionado) return setFeedback(feedback, 'Selecciona un objetivo.', true);
 
-    const datosMeta = getDatosMeta(radioSeleccionado.value);
+    const datosMeta = planificador.getMetaByName(radioSeleccionado.value);
     if (!datosMeta) {
-        console.log("No hay datos de Meta de Ahorro");
         cerrarModal('ObjetivosModal');
         return;
     }
@@ -518,7 +510,7 @@ function mostrarSeccion(id) {
     if (header) header.classList.toggle('d-none', estaEnLogin);
     if (principalContainer) principalContainer.classList.toggle('solo-contenido', estaEnLogin);
     if (id === reportesOption) {
-        if(!planificador.sessionToJSON().filtros.fechaAscii && StorageUtil.obtener('app:planificador:filtros', 'session'))
+        if(!planificador.sessionToJSON().filtros.fechaAscii && planificador.obtenerVariables('planificador:filtros', 'session'))
             recargarVariablesSession(reportesOption);
         else
             initReportes();
@@ -531,21 +523,21 @@ function mostrarSeccion(id) {
     }
 
     if (id === exportadorOption) {
-        if(StorageUtil.obtener('app:exportador:config', 'session'))
+        if(planificador.obtenerVariables('exportador:config', 'session'))
             recargarVariablesSession(exportadorOption);
     }
 
     if (id === loginOption) {
         if(planificador){
-            StorageUtil.eliminar('app:planificador:filtros', 'session');
+            planificador.eliminarVariables('planificador:filtros', 'session');
             filtros = {fechaDesde: "", fechaHasta: "", categoria: "", moneda: ""};
 
-            document.getElementById('fechaRyE').value = "Últimos 7 días";
+            document.getElementById('fechaRyE').value = "semana";
             document.getElementById('categoriaRyE').value = "Todas";
             document.getElementById('moneda').value = "ARS";
 
             
-            StorageUtil.eliminar('app:exportador:config', 'session');
+            planificador.eliminarVariables('exportador:config', 'session');
             if(document.querySelector('#exportar-container input[name="tipoExp"]:checked'))
                 document.querySelector('#exportar-container input[name="tipoExp"]:checked').checked = false;
             document.querySelectorAll(`#exportar-container input[name="datos"]`).forEach(cb => {cb.checked = false;});  
@@ -612,7 +604,7 @@ function crearFilaMovimiento(datos, movimiento) {
     boton.addEventListener('click', () => {
         planificador.eliminarMovimiento(fila.dataset.movimientoId);
         fila.remove();
-        StorageUtil.actualizar('app:planificador', planificador.localToJSON(), 'local');
+        planificador.actualizarLocalVariables('planificador', 'planificador', null);
     });
 
     // Celdas
@@ -671,8 +663,6 @@ function generarGrafico(datosFiltrados) {
     backgroundColor:
         porCategoria[cat].tipo === "ingreso" ? colorIngreso : colorEgreso
     }));
-
-    console.log(datasets)
 
     if (grafico) {
         grafico.destroy();
@@ -750,46 +740,23 @@ function actualizarReporteGastos(resultados) {
 }
 
 /**
- * Obtiene los datos de una meta específica desde la tabla.
- * 
- * @param {string} objetivo - Nombre de la meta a buscar.
- * @returns {Object|null} Datos de la meta o null si no se encuentra.
- */
-function getDatosMeta(objetivo) {
-    const filas = document.querySelectorAll('.metas-table tbody tr');
-
-    for (const fila of filas) {
-        const celdas = fila.querySelectorAll('td');
-        const nombreMeta = celdas[0]?.textContent.trim();
-        if (nombreMeta === objetivo) {
-            return {
-                nombre: nombreMeta,
-                ahorrado: parseInt(celdas[1].textContent.replace(/\D/g, '')),
-                restante: parseInt(celdas[2].textContent.replace(/\D/g, ''))
-            };
-        }
-    }
-    return null;
-}
-
-/**
  * Actualiza la tarjeta (card) de la meta seleccionada.
  * 
  * @param {Object} datosMeta - Datos de la meta de ahorro.
  */
 function actualizarMetaCard(datosMeta) {
     document.querySelector('#meta-nombre').textContent = datosMeta.nombre;
-    document.querySelector('#meta-ahorrado').textContent = `$${datosMeta.ahorrado.toLocaleString()}`;
+    document.querySelector('#meta-ahorrado').textContent = `${datosMeta.montoActual}`;
     document.querySelector('#meta-mensaje').innerHTML = `
-        Este mes ingresaste $${datosMeta.ahorrado.toLocaleString()}, alcanzaste un 
-        ${Math.round((datosMeta.ahorrado / (datosMeta.ahorrado + datosMeta.restante)) * 100)}% 
+        Este mes ingresaste ${datosMeta.montoActual}, alcanzaste un 
+        ${Math.round((datosMeta.montoActual / datosMeta.montoObjetivo) * 100)}% 
         de tu meta de ahorro.<br>
         <span class="highlight bold">
-            Solo te faltan $${datosMeta.restante.toLocaleString()}. ¡Vas por muy buen camino!
+            Solo te faltan ${datosMeta.montoObjetivo - datosMeta.montoActual}. ¡Vas por muy buen camino!
         </span>
     `;
 
-    const porcentaje = Math.round((datosMeta.ahorrado / (datosMeta.ahorrado + datosMeta.restante)) * 100);
+    const porcentaje = planificador.getPorcentajeMeta(datosMeta);
     const progress = document.querySelector('#meta-ahorro');
     const porcentajeElem = document.querySelector('#meta-porcentaje');
     progress.value = porcentaje;
@@ -804,7 +771,6 @@ function actualizarMetaCard(datosMeta) {
 function mostrarMetaCard(mostrar = true) {
     const contenido = document.querySelector('.meta-card-content');
     if (!contenido) {
-        console.log("'.meta-card-content' no encontrado");
         return;
     }
     if (mostrar) {
@@ -850,14 +816,12 @@ function crearFilaMeta(meta) {
 function actualizarRadiosConMetas() {
     const tbody = document.querySelector('.metas-table tbody');
     if (!tbody) {
-        console.log(".metas-table tbody no encontrado");
         return;
     }
 
     const radioGroup1 = document.querySelector('#form-objetivo-modal .radio-group');
 
     if (!radioGroup1) {
-        console.log("'.radio-group' no encontrado");
         return;
     }
 
@@ -866,7 +830,6 @@ function actualizarRadiosConMetas() {
     tbody.querySelectorAll('tr').forEach((fila) => {
         const objetivo = fila.querySelector('td')?.textContent.trim();
         if (!objetivo) {
-            console.log("No se encontró ningún objetivo");
             return;
         }
 
@@ -976,7 +939,7 @@ function setFeedback(feedback, message, error) {
 function recargarVariablesSession(tipo) {
     switch (tipo){
         case reportesOption: {
-            const datosGuardados = StorageUtil.obtener('app:planificador:filtros', 'session');
+            const datosGuardados = JSON.parse(planificador.obtenerVariables('planificador:filtros', 'session').filtros);
             Planificador.sessionRepFromJSON(datosGuardados);
 
             if (datosGuardados) {
@@ -985,7 +948,7 @@ function recargarVariablesSession(tipo) {
             break;
         }
         case exportadorOption: {
-            const datosGuardados = JSON.parse(StorageUtil.obtener('app:exportador:config', 'session').filtrosExportador);
+            const datosGuardados = JSON.parse(planificador.obtenerVariables('exportador:config', 'session').filtrosExportador);
             exportador.sessionExpFromJSON(datosGuardados);
 
             if (datosGuardados) {
@@ -1017,9 +980,9 @@ function actualizarFechas(valor, filtros) {
     const hoy = new Date();
     const desde = new Date(hoy);
 
-    if (valor === 'Últimos 7 días') desde.setDate(hoy.getDate() - 7);
-    else if (valor === 'Último mes') desde.setMonth(hoy.getMonth() - 1);
-    else if (valor === 'Último año') desde.setFullYear(hoy.getFullYear() - 1);
+    if (valor === 'semana') desde.setDate(hoy.getDate() - 7);
+    else if (valor === 'mes') desde.setMonth(hoy.getMonth() - 1);
+    else if (valor === 'año') desde.setFullYear(hoy.getFullYear() - 1);
 
     filtros.fechaDesde = desde.toISOString().split('T')[0];
     filtros.fechaHasta = hoy.toISOString().split('T')[0];
