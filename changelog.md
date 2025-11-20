@@ -8,6 +8,19 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 
 ### Added
 
+
+### Changed
+
+
+
+### Fixed
+- [feature/bugfix-#153-validacion-exportacion] Fix test exportacion.   
+  PR: [#166](https://github.com/fioremos/simulador-planificacion-financiera/pull/166) — @skalapuj (Dev AJAX)
+
+## [Unreleased]
+
+### Added
+
 - [feature/dev-storage] Diseño y documentación de estrategia de almacenamiento.  
   PR: [#155](https://github.com/fioremos/simulador-planificacion-financiera/pull/155) — @UlisesC11 (Desarrollador JS Local y Session Storage)  
 
