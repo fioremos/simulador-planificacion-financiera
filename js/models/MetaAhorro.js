@@ -127,6 +127,13 @@ export class MetaAhorro {
         return fecha > hoy;
     }
 
+    /**
+     * Devuelve un porcentaje acanzado de la meta.
+     * @returns {number} porcentaje alcanxzado de la meta.
+     */
+    getPorcentaje() {
+        return Math.round((this.#montoActual / this.#montoObjetivo) * 100);
+    }
     /* ===== Serialización ===== */
 
     /**

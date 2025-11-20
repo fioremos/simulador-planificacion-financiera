@@ -3,6 +3,7 @@
  */
 import { MetaAhorro } from './MetaAhorro.js';
 import { Movimiento } from './Movimiento.js';
+import { StorageUtil }  from '../utils/storage.js';
 
 /**
  * Clase para planificar y gestionar movimientos financieros y metas de ahorro.
@@ -101,6 +102,15 @@ export class Planificador {
         }
     }
 
+    getOpcionesPorTipo() {
+        return {
+            ingreso: ["sueldo"],
+            ahorro: ["objetivos"],
+            inversion: ["inversiones"],
+            gasto: ["hogar", "ocio", "salud"]
+        };
+    }
+
     /* ======== Gestión de Metas ======== */
 
     /**
@@ -111,18 +121,40 @@ export class Planificador {
      */
     agregarMetaAhorro(datos) {
         try {
-            const meta = new MetaAhorro(
-                datos.nombre,
-                datos.montoObjetivo,
-                datos.fechaObjetivo
-            );
-            this.#metasAhorro.push(meta);
-            console.log('Meta agregada:', meta.toJSON());
-            return meta;
-
+            const existe = this.#metasAhorro.some(meta => meta.nombre.toLowerCase() === datos.nombre.toLowerCase() );
+            if (!existe) {
+                const meta = new MetaAhorro(
+                    datos.nombre,
+                    datos.montoObjetivo,
+                    datos.fechaObjetivo
+                );
+                this.#metasAhorro.push(meta);
+                console.log('Meta agregada:', meta.toJSON());
+                return meta;
+            } else {
+                throw new Error('Meta de ahorro ya existente');
+            }
         } catch (error) {
             throw new Error('Error al agregar meta de ahorro: ' + error.message);
         }
+    }
+
+    /**
+     * Obtiene una meta del arerglo Metasde ahorro por nombre.
+     * @param {Object} metaName - Nombre de la meta.
+     * @returns {MetaAhorro|null} Instancia de la meta agregada.
+     */
+    getMetaByName(metaName) {
+        return this.#metasAhorro.filter( meta => meta.nombre === metaName )[0];
+    }
+
+    /**
+     * Devuelve un porcentaje acanzado de la meta.
+     * @param {MetaAhorro} meta - nombre ed la meta.
+     * @returns {number} porcentaje alcanxzado de la meta.
+     */
+    getPorcentajeMeta(meta) {
+        return meta.getPorcentaje();
     }
 
     /* ======== Reportes ======== */
@@ -271,6 +303,40 @@ export class Planificador {
     static sessionRepFromJSON(jsonFiltros) {
         if (jsonFiltros)
             this.filtros = jsonFiltros;
+    }
+
+    /* ======= Storage Util ====== */
+
+    //Cargo las variables si existen
+    obtenerVariables(modulo, tipo) {
+        return StorageUtil.obtener('app:'+ modulo, tipo);
+    }
+    
+    actualizarLocalVariables(tipo, modulo, objeto) {
+        switch (tipo) {
+            case 'planificador':
+                return StorageUtil.actualizar('app:' + modulo, this.localToJSON(), 'local');
+            case 'exportador':
+                return StorageUtil.actualizar('app:' + modulo, objeto.localToJSON(), 'local');
+            default:
+                return null;                
+        }
+    }
+
+    
+    actualizarSessionVariables(tipo, modulo, objeto) {
+        switch (tipo) {
+            case 'planificador':
+                return StorageUtil.actualizar('app:' + modulo, this.sessionToJSON(), 'session');
+            case 'exportador':
+                return StorageUtil.actualizar('app:' + modulo, objeto.sessionToJSON(), 'session');
+            default:
+                return null;                
+        }
+    }
+
+    eliminarVariables(modulo, tipo) {
+        StorageUtil.eliminar('app:' + modulo, tipo);
     }
 
     /* ======== Accesores ======== */
