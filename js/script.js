@@ -48,6 +48,7 @@ let exportador = new Exportador;
 
 /** @type {HTMLElement} Elemento para mostrar el grafico del reporte */
 let grafico;
+let metaGrafico;
 
 /** @type {HTMLElement} Opciones originales de las categorias */
 let categoriaSelects;
@@ -209,7 +210,7 @@ if (document.querySelector('#form-metas-modal')) {
 
 /** @type {HTMLFormElement|null} Formulario modal para objetivos de ahorro */
 if (document.querySelector('#form-objetivo-modal')) {
-    document.querySelector('#form-objetivo-modal').addEventListener('submit', manejarGuardarObjetivo);
+    document.querySelector('#form-objetivo-modal').addEventListener('submit', manejarMostrarObjetivo);
 }
 
 /**
@@ -326,7 +327,7 @@ function initReportes(filtrosGuardado = null) {
     actualizarFechas(fechaAscii, filtros);
 
     const datos = planificador.generarReporte(filtros, fechaAscii);
-    generarGrafico(datos.datosFiltrados);
+    generarGraficoReporte(datos.datosFiltrados);
     actualizarReporteGastos(datos);
 }
 
@@ -436,7 +437,7 @@ function manejarReportes(event) {
     try {
         const datos = planificador.generarReporte(filtros, document.getElementById('fechaRyE').value);
         planificador.actualizarSessionVariables('planificador', 'planificador:filtros', null);
-        generarGrafico(datos.datosFiltrados);
+        generarGraficoReporte(datos.datosFiltrados);
         actualizarReporteGastos(datos);
         setFeedback(feedback, 'Reporte generado con éxito.', false);
     } catch (error) {
@@ -475,20 +476,23 @@ function manejarGuardarMeta(event) {
  * 
  * @param {SubmitEvent} event - Evento de envío del formulario de objetivos.
  */
-function manejarGuardarObjetivo(event) {
+function manejarMostrarObjetivo(event) {
     event.preventDefault();
 
     const form = event.target;
     const radioSeleccionado = form.querySelector('input[name="tipo"]:checked');
     if (!radioSeleccionado) return setFeedback(feedback, 'Selecciona un objetivo.', true);
 
-    const datosMeta = planificador.getMetaByName(radioSeleccionado.value);
-    if (!datosMeta) {
+    const datosMeta = planificador.obtenerMovimientosPorMeta(radioSeleccionado.value);
+    const meta = planificador.getMetaById(radioSeleccionado.value);  
+    if (!datosMeta || !meta) {
+        console.log("No hay datos de Meta de Ahorro");
         cerrarModal('ObjetivosModal');
         return;
     }
 
-    actualizarMetaCard(datosMeta);
+    actualizarMetaCard(meta, datosMeta);
+    generarGraficoMeta(datosMeta);
     mostrarMetaCard(true);
     cerrarModal('ObjetivosModal');
     form.reset();
@@ -648,7 +652,7 @@ function crearFilaMovimiento(datos, movimiento) {
  *        {string} datosFiltrados[].categoria - Categoría del movimiento.
  *        {number} datosFiltrados[].monto - Monto del movimiento.
  */      
-function generarGrafico(datosFiltrados) {
+function generarGraficoReporte(datosFiltrados) {
     // --- Extraemos los datos para el gráfico ---
     const styles = getComputedStyle(document.documentElement);
     const colorIngreso = styles.getPropertyValue("--success").trim();
@@ -714,6 +718,80 @@ function generarGrafico(datosFiltrados) {
     });
 }
 
+function generarGraficoMeta(movimientosMEta) {
+  const ahorrosPorMes = {};
+  const meses = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
+
+  // 1. Agrupar y sumar montos por Mes/Año
+  movimientosMEta.forEach(m => {
+    const date = m.fecha;
+    // Clave: "Año-Mes" para ordenamiento (EJEMPLO "2025-10")
+    const key = `${date.getFullYear()}-${date.getMonth().toString().padStart(2, '0')}`;
+    
+    if (!ahorrosPorMes[key]) {
+    ahorrosPorMes[key] = {
+        montoTotal: 0,
+        label: `${meses[date.getMonth()]} ${date.getFullYear()}` // Etiqueta para el gráfico
+    };
+    }
+    ahorrosPorMes[key].montoTotal += m.monto;
+  });
+
+  // 2. Preparar los datos y etiquetas para Chart.js
+  const datosOrdenados = Object.keys(ahorrosPorMes)
+    .sort() // Ordena cronológicamente (gracias al formato "YYYY-MM")
+    .map(key => ahorrosPorMes[key]);
+
+  const labels = datosOrdenados.map(d => d.label);
+  const data = datosOrdenados.map(d => d.montoTotal);
+
+  if (metaGrafico) {
+        metaGrafico.destroy();
+    }
+
+  metaGrafico = new Chart(document.getElementById("meta-chart").getContext("2d"), {
+    type: 'line',
+    data: {
+      labels: labels,
+      datasets: [{
+        label: 'Ahorro Total por Mes',
+        data: data,
+        backgroundColor: [
+          getComputedStyle(document.documentElement).getPropertyValue("--success").trim(), 
+        ],
+        borderColor: [
+          getComputedStyle(document.documentElement).getPropertyValue("--success").trim(),
+        ],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      responsive: true,
+      scales: {
+        y: {
+          beginAtZero: true,
+          title: {
+            display: true,
+            text: 'Monto Ahorrado ($)'
+          }
+        },
+        x: {
+          title: {
+            display: true,
+            text: 'Período'
+          }
+        }
+      },
+      plugins: {
+        title: {
+          display: true,
+          text: 'Ahorro Acumulado por Mes'
+        }
+      }
+    }
+  });
+}
+
 /**
  * Actualiza la sección visual del reporte de gastos.
  * 
@@ -760,23 +838,34 @@ function actualizarReporteGastos(resultados) {
  * 
  * @param {Object} datosMeta - Datos de la meta de ahorro.
  */
-function actualizarMetaCard(datosMeta) {
+function actualizarMetaCard(datosMeta, movimientosMeta) {
+    let ahorradoMes = 0;
+    const porcentaje = planificador.getPorcentajeMeta(datosMeta);
+    movimientosMeta.forEach(mov => {
+        const fechaMovimiento = new Date(mov.fecha);
+        const fechaActual = new Date();
+        if (fechaMovimiento.getMonth() === fechaActual.getMonth() &&
+            fechaMovimiento.getFullYear() === fechaActual.getFullYear()) {
+            ahorradoMes += mov.monto;
+        }
+    });
+
     document.querySelector('#meta-nombre').textContent = datosMeta.nombre;
-    document.querySelector('#meta-ahorrado').textContent = `${datosMeta.montoActual}`;
+    document.querySelector('#meta-ahorrado').textContent = `$ ${datosMeta.montoActual}`;
+
     document.querySelector('#meta-mensaje').innerHTML = `
-        Este mes ingresaste ${datosMeta.montoActual}, alcanzaste un 
-        ${Math.round((datosMeta.montoActual / datosMeta.montoObjetivo) * 100)}% 
+        Este mes ingresaste $ ${ahorradoMes}, alcanzaste un 
+        ${porcentaje}% 
         de tu meta de ahorro.<br>
         <span class="highlight bold">
-            Solo te faltan ${datosMeta.montoObjetivo - datosMeta.montoActual}. ¡Vas por muy buen camino!
+            Solo te faltan $${datosMeta.montoObjetivo - datosMeta.montoActual}. ¡Vas por muy buen camino!
         </span>
     `;
 
-    const porcentaje = planificador.getPorcentajeMeta(datosMeta);
     const progress = document.querySelector('#meta-ahorro');
     const porcentajeElem = document.querySelector('#meta-porcentaje');
     progress.value = porcentaje;
-    porcentajeElem.textContent = `${porcentaje}% completado`;
+    porcentajeElem.textContent = `${porcentaje} % completado`;
 }
 
 /**
@@ -843,17 +932,14 @@ function actualizarRadiosConMetas() {
 
     radioGroup1.innerHTML = '';
 
-    tbody.querySelectorAll('tr').forEach((fila) => {
-        const objetivo = fila.querySelector('td')?.textContent.trim();
-        if (!objetivo) {
-            return;
-        }
+    planificador.metasAhorro.forEach(meta => {
+        const objetivo = meta.nombre;
 
         const label = document.createElement('label');
         const input = document.createElement('input');
         input.type = 'radio';
         input.name = 'tipo';
-        input.value = objetivo;
+        input.value = meta.id;
 
         const span = document.createElement('span');
         span.classList.add('radio-cuadrado', 'horizontal');

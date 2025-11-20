@@ -557,12 +557,9 @@
                                 <h3 class="subtitle" id="meta-nombre">Objetivo</h3>
                                 <h3 class="subtitle" id="meta-ahorrado">$0</h3>
                             </div>
-                            <!-- Gráfico temporalmente representado como imagen estática. 
-                                                    En el futuro, será generado dinámicamente con JavaScript, 
-                                                    o bien integrará una solución externa para 
-                                                    mostrar datos actualizados y personalizados en tiempo real. -->
                             <div class="container-chart">
-                                <img src="assets/images/metasAhorro/Graph.png" class="metas-chart w-50" alt="Gráfico metas de ahorro" loading="lazy" id="meta-grafico">
+                                <canvas id="meta-chart">
+                                </canvas>   
                             </div>
 
                             <div class="card metas-card-label p-2 text-center">
@@ -583,7 +580,7 @@
                             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="ObjetivosModalLabel">Nuevo Objetivo</h1>
+                                        <h1 class="modal-title fs-5" id="ObjetivosModalLabel">Mostrar Objetivo</h1>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
@@ -601,7 +598,7 @@
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="CerrarObjetivo">Cerrar</button>
                                         <div class="form-actions">
-                                        <button type="submit" form="form-objetivo-modal" class="btn btn-primary">Guardar</button>
+                                        <button type="submit" form="form-objetivo-modal" class="btn btn-primary">Listar</button>
                                         </div>
                                     </div>
                                 </div>

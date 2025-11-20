@@ -161,6 +161,13 @@ export class Planificador {
         return meta.getPorcentaje();
     }
 
+    obtenerMovimientosPorMeta(idMeta) {
+        return this.#movimientos.filter(mov => mov.idObjetivo === idMeta);
+    }
+
+    getMetaById(idMeta) {
+        return this.#metasAhorro.filter(meta => meta.id === idMeta)[0];
+    }
     /* ======== Reportes ======== */
 
     /**
