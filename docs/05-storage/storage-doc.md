@@ -101,57 +101,32 @@ A continuación se presentan los **schemas JSON** utilizados por cada tipo de en
 ###  Guardar una colección de movimientos
 
 ```js
-// Supongamos que tenemos una lista de instancias de Movimiento
+// Supongamos que tenemos un planificador con la lista de instancias de Movimiento
 const movimientos = [
   new Movimiento('2025-11-01', 'ingreso', 'sueldo', 150000),
   new Movimiento('2025-11-02', 'gasto', 'hogar', 25000)
 ];
 
-// Guardar en localStorage usando la función auxiliar
-StorageUtil.guardarColeccion('app:movimientos', movimientos);
-```
-
-###  Recuperar los movimientos desde el almacenamiento
-```js
-// Cargar la lista y reconstruir las instancias originales
-const movimientosGuardados = StorageUtil.cargarColeccion('app:movimientos', Movimiento);
-
-console.log(movimientosGuardados[0] instanceof Movimiento); // true
-console.log(movimientosGuardados[0].tipo); // "ingreso"
-```
-
-###  Guardar metas de ahorro
-```js
+// Y lista de instancias de metas
 const metas = [
   new MetaAhorro('Auto nuevo', 3000000, '2026-06-01'),
   new MetaAhorro('Emergencias', 500000)
 ];
 
-StorageUtil.guardarColeccion('app:metas', metas);
+// llamamos al metodo de logica de negocio
+actualizarLocalVariables('planificador', 'planificador', null)
+
+// la cual utiliza la funcion 
+StorageUtil.actualizar('app:planificador', this.localToJSON(), 'local');
 ```
 
-###  Recuperar metas guardadas
+###  Recuperar los movimientos desde el almacenamiento
 ```js
-const metasGuardadas = StorageUtil.cargarColeccion('app:metas', MetaAhorro);
-console.log(metasGuardadas[0].nombre()); // "Auto nuevo"
-```
+// Cargar la lista y reconstruir las instancias originales
+const movimientosGuardados = planificador.obtenerVariables('planificador', 'local')
 
-###  Guardar el estado temporal del planificador
-```js
-const filtrosActivos = {
-  fechaDesde: '2025-10-01',
-  fechaHasta: '2025-10-31',
-  categoria: 'Todas',
-  moneda: 'ARS'
-};
-
-StorageUtil.guardar('app:planificador:filtros', filtrosActivos, 'session');
-```
-
-### Cargar estado del planificador
-```js
-const filtros = StorageUtil.obtener('app:planificador:filtros', 'session');
-console.log(filtros.categoria); // "Todas"
+// la cual utiliza la funcion 
+StorageUtil.obtener('app:planificador', 'local');
 ```
 
 ### Guardar configuración de exportación
@@ -162,13 +137,19 @@ const configActivo = {
   nombreArchivo: "resumen_financiero",
   rutaDestino: "/exportaciones"
 }
-StorageUtil.guardar('app:exportador:config', configActivo, 'session');
+
+planificador.actualizarSessionVariables('exportador', 'exportador:config', exportador);
+
+//utiliza
+StorageUtil.actualizar('app:exportador:config', exportador.sessionToJSON(), 'session');
 ```
 
 ### Cargar configuración de exportación
 ```js
-const config = StorageUtil.obtener('app:exportador:config', 'session');
-console.log(config.formato); // "CSV"
+const config = planificador.obtenerVariables('exportador:config', 'session');
+
+//Que utiliza
+StorageUtil.obtener('app:exportador:config', 'session');
 ```
 
 ### Limpieza general del almacenamiento

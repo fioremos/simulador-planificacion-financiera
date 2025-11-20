@@ -102,6 +102,10 @@ export class Planificador {
         }
     }
 
+    /**
+     * Indica como son la relaciones entre categorias y tipos
+     * @returns {Object} diccionario de relaciones.
+     */
     getOpcionesPorTipo() {
         return {
             ingreso: ["sueldo"],
@@ -141,7 +145,7 @@ export class Planificador {
 
     /**
      * Obtiene una meta del arerglo Metasde ahorro por nombre.
-     * @param {Object} metaName - Nombre de la meta.
+     * @param {string} metaName - Nombre de la meta.
      * @returns {MetaAhorro|null} Instancia de la meta agregada.
      */
     getMetaByName(metaName) {
@@ -307,11 +311,23 @@ export class Planificador {
 
     /* ======= Storage Util ====== */
 
-    //Cargo las variables si existen
+    /**
+     * Carga las variables si existen.
+     * @param {string} modulo - modulo del que se quiere obtener variables.
+     * @param {string} tipo - tipo de variable (local/session)
+     * @returns {Object} JSON de variables
+     */
     obtenerVariables(modulo, tipo) {
         return StorageUtil.obtener('app:'+ modulo, tipo);
     }
     
+    /**
+     * Actualiza las variables locales existentes.
+     * @param {string} tipo - tipo de modulo que lo requiere
+     * @param {string} modulo - modulo del que se quiere obtener variables.
+     * @param {Object} objeto - bjetoque debe actualizar variables.
+     * @returns {Object} JSON de variables
+     */
     actualizarLocalVariables(tipo, modulo, objeto) {
         switch (tipo) {
             case 'planificador':
@@ -323,7 +339,13 @@ export class Planificador {
         }
     }
 
-    
+    /**
+     * Actualiza las variables de sesion existentes.
+     * @param {string} tipo - tipo de modulo que lo requiere
+     * @param {string} modulo - modulo del que se quiere obtener variables.
+     * @param {Object} objeto - bjetoque debe actualizar variables.
+     * @returns {Object} JSON de variables
+     */
     actualizarSessionVariables(tipo, modulo, objeto) {
         switch (tipo) {
             case 'planificador':
@@ -335,6 +357,12 @@ export class Planificador {
         }
     }
 
+    /**
+     * Elimina las variables existentes.
+     * @param {string} modulo - modulo del que se quiere obtener variables.
+     * @param {string} tipo - tipo de variable (local/session)
+     * @returns {Object} JSON de variables
+     */
     eliminarVariables(modulo, tipo) {
         StorageUtil.eliminar('app:' + modulo, tipo);
     }

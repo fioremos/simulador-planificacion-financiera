@@ -12,6 +12,10 @@ Este diagrama define la arquitectura de lógica de negocio (POO) para el simulad
 * **Métodos Clave:**
     * `validar(datos)`: Método estático para validar datos *antes* de crear una instancia. Mueve la lógica de `esFechaValida`, `esTipoValido`, etc.
     * `toJSON() / fromJSON()`: Métodos para la serialización (guardado/carga) con el Storage.
+    * `generarId()`: Genera un ID único para el movimiento. 
+    * `normalizarTipo(tipo)`: Normaliza el tipo a minúsculas y elimina espacios.
+    * `normalizarCategoria(categoria)`: Normaliza la categoría a minúsculas y elimina espacios.
+    * `getResumen()`: Genera un resumen legible del movimiento.
 
 ### 2. MetaAhorro
 * **Responsabilidad:** Representa un único objetivo de ahorro.
@@ -20,6 +24,9 @@ Este diagrama define la arquitectura de lógica de negocio (POO) para el simulad
     * `validar(datos)`: Método estático para validar datos *antes* de crear la instancia. Mueve la lógica de `esNombreValido`, `esFechaFuturaValida`, etc.
     * `actualizarMontoActual(monto)`: Permite incrementar el monto ahorrado hasta alcanzar el objetivo. Si el progreso supera el monto objetivo, se ajusta automáticamente al valor máximo permitido.
     * `toJSON() / fromJSON()`: Métodos para la serialización.
+    * `generarId()`: Genera un ID único de la Meta de Ahorro.
+    * `getPorcentaje()`: Devuelve un porcentaje alcanzado de la meta.
+    * `getResumen()`: Genera un resumen legible de la meta.
 
 ### 3. Exportador
 - **Responsabilidad:** Gestiona el proceso de exportación de datos financieros del sistema hacia distintos formatos (CSV, JSON y PDF). Se encarga de validar las configuraciones de exportación, generar el contenido adecuado según el formato solicitado y simular la creación del archivo final en la ruta destino. 
@@ -36,6 +43,8 @@ Internamente usa los métodos estáticos `esFormatoValido()`, `sonNombreYRutaVal
   - `toXLSX(datos)`: Convierte los datos en una hoja de cálculo Excel.
   - `esFormatoValido(formato)`:Método estático que comprueba si el formato indicado está dentro de los formatos permitidos.   
   - `sonNombreYRutaValidos(nombre, ruta)`: Método estático que verifica que el nombre de archivo y la ruta sean correctos y seguros.
+  * `sessionToJSON()`: Serializa los filtros del exportador.
+  * `sessionEpFromJSON(jsonFiltrosExp)`: Carga los filtros del exportador desde un objeto JSON.
 
 ### 4. Planificador
 * **Responsabilidad:** Es la clase principal y el "cerebro" de la aplicación. Orquesta la lógica de negocio y gestiona las listas de movimientos y metas.
@@ -45,8 +54,20 @@ Internamente usa los métodos estáticos `esFormatoValido()`, `sonNombreYRutaVal
     * `filtros: { fechaAscii, fechaDesde, fechaHasta, categoria , moneda}`: Diccionario del último filtro útilizado para generar un reporte.
 * **Métodos Públicos (Interfaz):**
     * `agregarMovimiento(datos)`: Valida datos, crea un `Movimiento` y lo añade a la lista.
+    * `eliminarMovimiento(idAEliminar)`: Elimina un `Movimiento` por su ID.
+    * `getOpcionesPorTipo()`: Indica como son la relaciones entre categorias y tipos.
     * `agregarMetaAhorro(datos)`: Valida datos, crea una `MetaAhorro` y la añade a la lista.
+    * `getMetaByName(metaName)`: Obtiene una `MetaAhorro` del arerglo metas de Ahorro por nombre.
+    * `getPorcentajeMeta(meta)`: Devuelve un porcentaje acanzado de una `MetaAhorro`.
     * `generarReporte(filtros)`: Procesa la lista de movimientos y devuelve un objeto con los resultados.
+    * `localToJSON()`: Serializa movimientos y metas al formato JSON.
+    * `sessionToJSON()`: Serializa los filtros de reporte.
+    * `localFromJSON(json)`: Crea una instancia de Planificador desde datos almacenados localmente.
+    * `sessionRepFromJSON(jsonFiltros)`: Carga filtros de sesión en el planificador.
+    * `obtenerVariables(modulo, tipo)`: Carga las variables si existen.
+    * `actualizarLocalVariables(tipo, modulo, objeto)`: Actualiza las variables locales existentes.
+    * `actualizarSessionVariables(tipo, modulo, objeto)`: Actualiza las variables de sesion existentes.
+    * `eliminarVariables(modulo, tipo)`: Elimina las variables existentes.
 * **Métodos Privados (Lógica Interna):**
     * `filtrarDatos(...)`: Lógica migrada de la función global `filtrarDatos`.
     * `calcularIndicadores(...)`: Lógica migrada de la función global `calcularIndicadores`.
