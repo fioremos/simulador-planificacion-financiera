@@ -3,6 +3,18 @@
 Este archivo se actualiza con cada Pull Request para registrar avances y correcciones.
 
 ---
+## [Unreleased]
+
+### Added
+
+
+### Changed
+
+
+
+### Fixed
+- [feature/bugfix-#156-grafico-metas-ahorro] Fix grafico metas ahorro.   
+  PR: [#165](https://github.com/fioremos/simulador-planificacion-financiera/pull/165) — @skalapuj (Dev AJAX)
 
 ## [Unreleased]
 
@@ -47,6 +59,7 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   PR: [#160](https://github.com/fioremos/simulador-planificacion-financiera/pull/160) - @fioremos (Desarrollador JS Eventos + DOM)
 - [feature/hotfix-coord-objetivos-movimientos] Fix relación entre objetivos y movimientos.   
   PR: [#163](https://github.com/fioremos/simulador-planificacion-financiera/pull/163) — @skalapuj (Coordinador / DevOps + Tester QA)
+
 
 ---
 
