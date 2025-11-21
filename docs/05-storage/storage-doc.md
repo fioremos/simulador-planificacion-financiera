@@ -99,6 +99,7 @@ A continuación se presentan los **schemas JSON** utilizados por cada tipo de en
 ## Ejemplos de uso
 
 ###  Guardar una colección de movimientos
+[Ejemplo en proyecto](../../js/script.js#L942)
 
 ```js
 // Supongamos que tenemos un planificador con la lista de instancias de Movimiento
@@ -121,6 +122,8 @@ StorageUtil.actualizar('app:planificador', this.localToJSON(), 'local');
 ```
 
 ###  Recuperar los movimientos desde el almacenamiento
+
+[Ejemplo en proyecto](../../js/script.js#L367)
 ```js
 // Cargar la lista y reconstruir las instancias originales
 const movimientosGuardados = planificador.obtenerVariables('planificador', 'local')
@@ -130,6 +133,7 @@ StorageUtil.obtener('app:planificador', 'local');
 ```
 
 ### Guardar configuración de exportación
+[Ejemplo en proyecto](../../js/script.js#L402)
 ```js
 const configActivo = {
   tipo: ["movimientos"],
@@ -145,18 +149,10 @@ StorageUtil.actualizar('app:exportador:config', exportador.sessionToJSON(), 'ses
 ```
 
 ### Cargar configuración de exportación
+[Ejemplo en proyecto](../../js/script.js#L526)
 ```js
 const config = planificador.obtenerVariables('exportador:config', 'session');
 
 //Que utiliza
 StorageUtil.obtener('app:exportador:config', 'session');
-```
-
-### Limpieza general del almacenamiento
-```js
-// Limpia datos persistentes
-StorageUtil.limpiar('local');
-
-// Limpia datos de sesión
-StorageUtil.limpiar('session');
 ```

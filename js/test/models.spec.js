@@ -5,6 +5,74 @@ import { Exportador }   from '../models/Exportador.js';
 
 describe("Model Movimiento", function () {
 
+    describe("Constructor Movimientos", function () {
+        it("debería crear un movimient correctamente", function () {
+            let movimiento = { tipo: 'Ingreso', categoria: 'Salud', fecha: '2025-01-15', monto: 200 };
+            
+            const mov = new Movimiento(                
+                movimiento.fecha,
+                movimiento.tipo,
+                movimiento.categoria,
+                movimiento.monto,
+                movimiento.objetivo);
+
+            expect(mov instanceof Movimiento).toBeTrue();
+            expect(mov.categoria).toBe('salud');  
+            expect(mov.tipo).toBe('ingreso');  
+            expect(mov.fecha).toEqual(new Date('2025-01-15'));  
+            expect(mov.monto).toBe(200);  
+        });
+
+
+        it("No debería crear un movimiento por tipo invalido", function () {
+            let movimiento = { tipo: 'Ingresar', categoria: 'Salud', fecha: '2025-01-15', monto: 200 };
+            
+            expect(() => new Movimiento(                
+                movimiento.fecha,
+                movimiento.tipo,
+                movimiento.categoria,
+                movimiento.monto,
+                movimiento.objetivo))
+                .toThrowError(/Datos de movimiento inválidos/);
+        });
+
+        it("No debería crear un movimiento por categoria invalido", function () {
+            let movimiento = { tipo: 'Ingreso', categoria: 'Salida', fecha: '2025-01-15', monto: 200 };
+            
+            expect(() => new Movimiento(                
+                movimiento.fecha,
+                movimiento.tipo,
+                movimiento.categoria,
+                movimiento.monto,
+                movimiento.objetivo))
+                .toThrowError(/Datos de movimiento inválidos/);
+        });
+
+        it("No debería crear un movimiento por fecha invalido", function () {
+            let movimiento = { tipo: 'Ingreso', categoria: 'Salud', fecha: '2025-12-15', monto: 200 };
+            
+            expect(() => new Movimiento(                
+                movimiento.fecha,
+                movimiento.tipo,
+                movimiento.categoria,
+                movimiento.monto,
+                movimiento.objetivo))
+                .toThrowError(/Datos de movimiento inválidos/);
+        });
+
+        it("No debería crear un movimiento por monto invalido", function () {
+            let movimiento = { tipo: 'Ingreso', categoria: 'Salud', fecha: '2025-01-15', monto: -300 };
+            
+            expect(() => new Movimiento(                
+                movimiento.fecha,
+                movimiento.tipo,
+                movimiento.categoria,
+                movimiento.monto,
+                movimiento.objetivo))
+                .toThrowError(/Datos de movimiento inválidos/);
+        });
+    });
+
      describe("Movimiento.esFechaValida()", function () {
         it("debería aceptar una fecha pasada", function () {
             const pasado = "2025-10-01";
@@ -97,11 +165,117 @@ describe("Model Movimiento", function () {
             expect(Movimiento.validar(datos)).toBeFalse();
         });
     });
-    
+
+    describe("serialización", function () {
+        describe('Movimiento.toJSON()', () => {
+            it('debería serializar correctamente el movimiento', function () {
+                const fecha = new Date("2024-05-10");
+                const mov = new Movimiento(fecha, "ingreso", "sueldo", 5000, 12);
+
+                const json = mov.toJSON();
+
+                expect(json).toEqual({
+                    id: mov.id,
+                    fecha: "2024-05-10",
+                    tipo: "ingreso",
+                    categoria: "sueldo",
+                    monto: 5000,
+                    idObjetivo: 12
+                });
+            });
+
+        });
+
+
+        describe('Movimiento.fromJSON()', () => {
+            it('debería reconstruir instancia desde JSON preservando datos', function () {
+                const data = {
+                    id: 10,
+                    fecha: "2024-04-22",
+                    tipo: "gasto",
+                    categoria: "salud",
+                    monto: 350,
+                    idObjetivo: 5
+                };
+
+                const mov = Movimiento.fromJSON(data);
+
+                expect(mov).toBeInstanceOf(Movimiento);
+                expect(mov.toJSON()).toEqual(data);
+            });
+
+            it('debería asignar null a idObjetivo si no viene en el JSON', function () {
+                const data = {
+                    id: 10,
+                    fecha: "2024-04-22",
+                    tipo: "gasto",
+                    categoria: "salud",
+                    monto: 350,
+                };
+
+                const mov = Movimiento.fromJSON(data);
+
+                const json = mov.toJSON();
+                expect(json.idObjetivo).toBe(null);
+            });
+
+        });
+    });
+        
 });
 
 describe("Model Metas de Ahorro", function () {
     
+    describe("Constructor Metas Ahorro", function () {
+        it("debería crear un meta ahorro correctamente", function () {
+            let mDeAhorro = { nombre: "Estudios", montoObjetivo: 10000, fechaObjetivo: "2026-05-01" };
+            
+            const mda = new MetaAhorro(                
+                mDeAhorro.nombre,
+                mDeAhorro.montoObjetivo,
+                mDeAhorro.fechaObjetivo);
+
+            expect(mda instanceof MetaAhorro).toBeTrue();
+            expect(mda.nombre).toBe('Estudios');  
+            expect(mda.montoObjetivo).toBe(10000);  
+            expect(mda.fechaObjetivo).toEqual(new Date('2026-05-01'));  
+        });
+
+
+        it("No debería crear una meta por nombre invalido", function () {
+            let mDeAhorro = { nombre: "E", montoObjetivo: 10000, fechaObjetivo: "2026-05-01" };
+
+            
+            expect(() => new MetaAhorro(                
+                mDeAhorro.nombre,
+                mDeAhorro.montoObjetivo,
+                mDeAhorro.fechaObjetivo))
+                .toThrowError(/Datos de meta de ahorro inválidos/);
+        });
+
+                it("No debería crear una meta por montoObjetivo invalido", function () {
+            let mDeAhorro = { nombre: "Estudio", montoObjetivo: 0, fechaObjetivo: "2026-05-01" };
+
+            
+            expect(() => new MetaAhorro(                
+                mDeAhorro.nombre,
+                mDeAhorro.montoObjetivo,
+                mDeAhorro.fechaObjetivo))
+                .toThrowError(/Datos de meta de ahorro inválidos/);
+        });
+
+        it("No debería crear una meta por fecha invalido", function () {
+            let mDeAhorro = { nombre: "Estudio", montoObjetivo: 10000, fechaObjetivo: "2025-05-01" };
+
+            
+            expect(() => new MetaAhorro(                
+                mDeAhorro.nombre,
+                mDeAhorro.montoObjetivo,
+                mDeAhorro.fechaObjetivo))
+                .toThrowError(/Datos de meta de ahorro inválidos/);
+        });
+    });
+
     describe("MetaAhorro.esNombreValido()", function () {
         it("debería aceptar nombres con 2 o más caracteres", function () {
             expect(MetaAhorro.esNombreValido("Vacaciones")).toBeTrue();
@@ -188,6 +362,86 @@ describe("Model Metas de Ahorro", function () {
         });
     });
 
+    describe("serialización", function () {
+        describe('MetaAhorro.toJSON()', () => {
+            it('debería serializar correctamente la meta de ahorro', function () {
+                const fecha = "2026-05-10";
+                const mov = new MetaAhorro("Viaje", 5000, fecha);
+
+                const json = mov.toJSON();
+
+                expect(json).toEqual({
+                    id: mov.id,
+                    nombre: "Viaje",
+                    montoObjetivo: 5000,
+                    fechaObjetivo: "2026-05-10",
+                    montoActual: 0
+                });
+            });
+
+            it('debería serializar correctamente la meta de ahorro sin fecha', function () {
+                const mov = new MetaAhorro("Viaje", 5000);
+
+                const json = mov.toJSON();
+
+                expect(json).toEqual({
+                    id: mov.id,
+                    nombre: "Viaje",
+                    montoObjetivo: 5000,
+                    fechaObjetivo: null,
+                    montoActual: 0
+                });
+            });
+
+        });
+
+        describe('MetaAhorro.fromJSON()', () => {
+            it('debería reconstruir instancia desde JSON preservando datos', function () {
+                const data = {
+                    id: 10,
+                    nombre: "Auto nuevo",
+                    montoObjetivo: 20000,
+                    fechaObjetivo: "2026-03-15",
+                    montoActual: 5000
+                };
+
+                const mov = MetaAhorro.fromJSON(data);
+
+                expect(mov).toBeInstanceOf(MetaAhorro);
+                expect(mov.toJSON()).toEqual(data);
+            });
+
+            it('debería genera un id automáticamente si no se envía uno', function () {
+                const data = {
+                    nombre: "Auto nuevo",
+                    montoObjetivo: 20000,
+                    fechaObjetivo: "2026-03-15",
+                    montoActual: 5000
+                };
+
+                const mov = MetaAhorro.fromJSON(data);
+
+                expect(mov).toBeInstanceOf(MetaAhorro);
+                expect(mov.id).not.toBeNull();
+            });
+
+            it('asigna montoActual = 0 si no viene en el JSON', function () {
+                const data = {
+                    id: 10,
+                    nombre: "Auto nuevo",
+                    montoObjetivo: 20000,
+                    fechaObjetivo: "2026-03-15",
+                };
+
+                const mov = MetaAhorro.fromJSON(data);
+
+                expect(mov).toBeInstanceOf(MetaAhorro);
+                expect(mov.montoActual).toBe(0);
+            });
+
+        });
+    });
+
 });
 
 describe("Model Exportardor", function () {
@@ -195,6 +449,19 @@ describe("Model Exportardor", function () {
 
     beforeEach(function () {
         exportador = new Exportador();
+    });
+
+    describe("Constructor Exportador", function () {
+        it("debería crear un exportador correctamente", function () {
+            
+            expect(exportador instanceof Exportador).toBeTrue();
+            expect(exportador.filtrosExportacion).toEqual({ 
+                tipo: [],
+                formato: "",
+                nombreArchivo: "",
+                rutaDestino: "" 
+            });  
+        });
     });
 
     describe("Exportador.hayDatosSeleccionados()", function () {
@@ -282,6 +549,41 @@ describe("Model Exportardor", function () {
         });
     });
 
+    describe("serialización", function () {
+        describe('Exportador.toJSON()', () => {
+            it('serializa correctamente los filtros', function () {
+                const exp = new Exportador();
+                exp.filtrosExportacion = { a: 1, b: 2 };
+
+                const json = exp.sessionToJSON();
+
+                expect(json).toEqual({
+                    filtrosExportador: JSON.stringify({ a: 1, b: 2 })
+                });
+            });
+        });
+
+        describe('Exportador.sessionExpFromJSON()', () => {
+            it('carga correctamente los filtros cuando se pasa un objeto', function () {
+                const exp = new Exportador();
+
+                const filtros = { x: 10, y: 20 };
+                exp.sessionExpFromJSON(filtros);
+
+                expect(exp.filtrosExportacion).toEqual(filtros);
+            });
+
+            it('no cambia filtrosExportacion si se pasa null', function () {
+                const exp = new Exportador();
+                exp.filtrosExportacion = { inicial: true };
+
+                exp.sessionExpFromJSON(null);
+
+                expect(exp.filtrosExportacion).toEqual({ inicial: true });
+            });
+        });
+    });
+
 });
 
 describe("Model Planificador", function () {
@@ -291,6 +593,21 @@ describe("Model Planificador", function () {
         planificador = new Planificador();  
     });
 
+    describe("Constructor Planificador", function () {
+        it("debería crear un planificador correctamente", function () {
+            
+            expect(planificador instanceof Planificador).toBeTrue();
+            expect(planificador.movimientos).toEqual([]);  
+            expect(planificador.metasAhorro).toEqual([]);  
+            expect(planificador.filtros).toEqual({   
+                fechaAscii: "",
+                fechaDesde: "",
+                fechaHasta: "",
+                categoria: "Todas",
+                moneda: "ARS"
+            });  
+        });
+    });
 
     describe("Función agregarMovimiento()", function () {
         it("debería aceptar movimientos con categoría válida (salud)", function () {
@@ -445,4 +762,157 @@ describe("Model Planificador", function () {
         });
     });
 
+    describe("serialización", function () {
+        describe('MetaAhorro.toJSON()', () => {
+            it('debería serializar correctamente la meta de ahorro', function () {
+                const fecha = "2026-05-10";
+                const mov = new MetaAhorro("Viaje", 5000, fecha);
+
+                const json = mov.toJSON();
+
+                expect(json).toEqual({
+                    id: mov.id,
+                    nombre: "Viaje",
+                    montoObjetivo: 5000,
+                    fechaObjetivo: "2026-05-10",
+                    montoActual: 0
+                });
+            });
+
+            it('debería serializar correctamente la meta de ahorro sin fecha', function () {
+                const mov = new MetaAhorro("Viaje", 5000);
+
+                const json = mov.toJSON();
+
+                expect(json).toEqual({
+                    id: mov.id,
+                    nombre: "Viaje",
+                    montoObjetivo: 5000,
+                    fechaObjetivo: null,
+                    montoActual: 0
+                });
+            });
+
+        });
+
+        describe('MetaAhorro.fromJSON()', () => {
+            it('debería reconstruir instancia desde JSON preservando datos', function () {
+                const data = {
+                    id: 10,
+                    nombre: "Auto nuevo",
+                    montoObjetivo: 20000,
+                    fechaObjetivo: "2026-03-15",
+                    montoActual: 5000
+                };
+
+                const mov = MetaAhorro.fromJSON(data);
+
+                expect(mov).toBeInstanceOf(MetaAhorro);
+                expect(mov.toJSON()).toEqual(data);
+            });
+
+            it('debería genera un id automáticamente si no se envía uno', function () {
+                const data = {
+                    nombre: "Auto nuevo",
+                    montoObjetivo: 20000,
+                    fechaObjetivo: "2026-03-15",
+                    montoActual: 5000
+                };
+
+                const mov = MetaAhorro.fromJSON(data);
+
+                expect(mov).toBeInstanceOf(MetaAhorro);
+                expect(mov.id).not.toBeNull();
+            });
+
+            it('asigna montoActual = 0 si no viene en el JSON', function () {
+                const data = {
+                    id: 10,
+                    nombre: "Auto nuevo",
+                    montoObjetivo: 20000,
+                    fechaObjetivo: "2026-03-15",
+                };
+
+                const mov = MetaAhorro.fromJSON(data);
+
+                expect(mov).toBeInstanceOf(MetaAhorro);
+                expect(mov.montoActual).toBe(0);
+            });
+
+        });
+    });
+
+    describe("serialización", function () {
+        describe('Planificador.localToJSON()', () => {
+            it('serializa correctamente movimientos y metas', function () {
+                const movMock = { toJSON: () => ({ id: 1, tipo: "gasto" }) };
+                const metaMock = { toJSON: () => ({ id: 10, nombre: "Meta 1" }) };
+
+                const plan = new Planificador();
+                plan.movimientos = [movMock];
+                plan.metasAhorro = [metaMock];
+
+                const json = plan.localToJSON();
+
+                expect(json).toEqual({
+                    movimientos: [{ id: 1, tipo: "gasto" }],
+                    metasAhorro: [{ id: 10, nombre: "Meta 1" }]
+                });
+            });
+        });
+
+        describe('Planificador.sessionToJSON()', () => {
+            it('serializa correctamente los filtros', function () {
+                const plan = new Planificador();
+                plan.filtros = { año: 2025, tipo: "ingreso" };
+
+                const json = plan.sessionToJSON();
+
+                expect(json).toEqual({
+                    filtros: JSON.stringify({ año: 2025, tipo: "ingreso" })
+                });
+            });
+        });
+
+        describe("Planificador.localFromJSON()", () => {
+            it('reconstruye movimientos y metas usando los fromJSON correspondientes', function () {
+                const jsonData = {
+                    movimientos: [{ id:1, tipo: 'Ingreso', categoria: 'Salud', fecha: '2025-01-15', monto: 200 }],
+                    metasAhorro: [{ id:2, nombre: "Viaje", montoObjetivo: 5000, fechaObjetivo: "2026-05-10", montoActual: 0 }]
+                };
+
+                const plan = Planificador.localFromJSON(jsonData);
+
+                expect(plan.movimientos.length).toBe(1);
+                expect(plan.metasAhorro.length).toBe(1);
+                expect(plan.movimientos[0] instanceof Movimiento);
+                expect(plan.metasAhorro[0] instanceof MetaAhorro);
+            });
+
+            it('si json es null, devuelve un planificador con arrays vacíos', function () {
+                const plan = Planificador.localFromJSON(null);
+
+                expect(plan.movimientos).toEqual([]);
+                expect(plan.metasAhorro).toEqual([]);
+            });
+        });
+
+        describe("Planificador.sessionRepFromJSON()", () => {
+            it('carga correctamente filtros si se pasa un objeto', function () {
+                const filtros = { mes: "Enero", categoria: "Gastos" };
+
+                Planificador.sessionRepFromJSON(filtros);
+
+                expect(Planificador.filtros).toEqual(filtros);
+            });
+
+            it('no sobrescribe filtros si recibe null', function () {
+                Planificador.filtros = { activo: true };
+
+                Planificador.sessionRepFromJSON(null);
+
+                expect(Planificador.filtros).toEqual({ activo: true });
+            });
+        });
+    });
 });
