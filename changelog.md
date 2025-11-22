@@ -7,19 +7,33 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 ## [Unreleased]
 
 ### Added
-- [nombre-de-la-branch] Descripción breve de la tarea realizada.
-  PR: #1 — @usuario1 (rol asignado)
+
+- [feature/dev-storage] Diseño y documentación de estrategia de almacenamiento.  
+  PR: [#155](https://github.com/fioremos/simulador-planificacion-financiera/pull/155) — @UlisesC11 (Desarrollador JS Local y Session Storage)  
+
+- [feature/dev-poo-logica-negocio] Se refactorizó toda la lógica de negocio a una arquitectura de Programación Orientada a Objetos.   
+  PR: [#150](https://github.com/fioremos/simulador-planificacion-financiera/pull/150) — @MNEscobar (Desarrollador JS POO)
 
 ### Changed
-- [nombre-de-la-branch] Descripción breve de la tarea realizada.
-  PR: #2 — @usuario2 (rol asignado)
+- [feature/dev-eventos-dom] Manipulación de los eventos del DOM.
+  PR:[#131](https://github.com/fioremos/simulador-planificacion-financiera/pull/131) — @fioremos (Desarrollador JS Eventos + DOM)
 
-- [nombre-de-la-branch] Descripción breve de la tarea realizada.
-  PR: #3 — @usuario3 (rol asignado)
+- [feature/tester-qa-specs] Se refactorizó toda la lógica de testing a la nueva arquitectura de Programación Orientada a Objetos.   
+  PR: [#158](https://github.com/fioremos/simulador-planificacion-financiera/pull/158) — @skalapuj (Coordinador / DevOps + Tester QA)
+
+- [feature/coord-devops-cuarta-entrega] Actualización de la documentación del proyecto.   
+  PR: [#162](https://github.com/fioremos/simulador-planificacion-financiera/pull/162) — @skalapuj (Coordinador / DevOps + Tester QA)
+
 
 ### Fixed
-- [nombre-de-la-branch] Descripción breve de la tarea realizada.
-  PR: #4 — @usuario4 (rol asignado)
+- [feature/hotfix-#154-filtrado-fechas-categorias] Fix Issue #154.  
+  PR: [#157](https://github.com/fioremos/simulador-planificacion-financiera/pull/157) — @UlisesC11 (Desarrollador JS Local y Session Storage) 
+- [feature/bugfix-#152-graficos-dinamicos] Fix Issue #152.  
+  PR: [#159](https://github.com/fioremos/simulador-planificacion-financiera/pull/159) — @fioremos (Desarrollador JS Eventos + DOM)
+- [feature/hotfix-#151-datos-asociados] Fix Issue #151
+  PR: [#160](https://github.com/fioremos/simulador-planificacion-financiera/pull/160) - @fioremos (Desarrollador JS Eventos + DOM)
+- [feature/hotfix-coord-objetivos-movimientos] Fix relación entre objetivos y movimientos.   
+  PR: [#163](https://github.com/fioremos/simulador-planificacion-financiera/pull/163) — @skalapuj (Coordinador / DevOps + Tester QA)
 
 ---
 

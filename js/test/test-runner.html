@@ -12,13 +12,23 @@
     <script src = "https://cdnjs.cloudflare.com/ajax/libs/jasmine/5.10.0/jasmine-html.min.js"></script> 
     <script src = "https://cdnjs.cloudflare.com/ajax/libs/jasmine/5.10.0/boot0.min.js"></script> 
     <script src = "https://cdnjs.cloudflare.com/ajax/libs/jasmine/5.10.0/boot1.min.js"></script> 
+
+
+    
+</head>
 </head>
 
 <body> 
-    <!-- Tu código fuente --> 
-    <script src = "../script.js"></script> 
+    <!-- Carga de tests como módulos ES6 -->
+    <script type="module">
+        import "./storage.spec.js";
+        import "./models.spec.js";
+        import "./script.spec.js";
 
-    <!-- Tus tests --> 
-    <script src = "script.spec.js"></script> 
+        // Jasmine boot1 debe correr al final
+        import("https://cdnjs.cloudflare.com/ajax/libs/jasmine/5.10.0/boot1.min.js");
+    </script>
+    
+
 </body> 
 </html>
