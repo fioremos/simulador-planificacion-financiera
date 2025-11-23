@@ -446,22 +446,52 @@
 ---
 ---
 
+### Suite 8: Service ApiService & Planificador (Asincronía)
+
+#### Funciones Testeadas:
+- **`ApiService.fetchData()`**: Valida el consumo de APIs externas, el manejo de estados de carga (loading events) y el procesamiento de respuestas JSON.
+- **`Manejo de Errores y Resiliencia`**: Verifica que el sistema capture errores HTTP (404/500), errores de formato y ejecute lógica de reintentos automáticos ante fallos de red.
+- **`Planificador.obtenerCategorias()`**: Comprueba la integración entre el Modelo y el Servicio, asegurando la delegación correcta y la degradación elegante (retorno de valores por defecto) ante fallos.
+
+#### Test 1: `ApiService.fetchData (Consumo de API)`
+
+**Casos de Prueba:**
+
+| #  | Descripción                                                    | Tipo                  |
+|----|----------------------------------------------------------------|-----------------------|
+| 1  | Debe obtener datos exitosamente y emitir eventos de carga      | Happy Path            |
+| 2  | Debe lanzar error y emitir 'api:error' ante fallo HTTP (404)   | Validación de Errores |
+| 3  | Debe lanzar error si los datos recibidos no son un array       | Validación de Estructura |
+| 4  | Debe reintentar la petición tras un fallo y tener éxito en el segundo intento | Lógica de Negocio (Resiliencia) |
+
+#### Test 2: `Planificador.obtenerCategorias (Delegación)`
+
+**Casos de Prueba:**
+
+| #  | Descripción                                                    | Tipo                  |
+|----|----------------------------------------------------------------|-----------------------|
+| 1  | Debe delegar en ApiService y retornar los datos obtenidos      | Integración           |
+| 2  | Debe manejar errores devolviendo un array vacío y registrando el error | Manejo de Errores (Graceful Degradation) |
+
+---
+---
+
 ## Métricas de Cobertura
 
 ### Resumen General
 | Métrica | Valor |
 |---------|-------|
-| Total de Tests      |155 |
-| Tests Pasando       |155 ✅ |
+| Total de Tests      |161 |
+| Tests Pasando       |161 ✅ |
 | Tests Fallando      |0 ❌ |
 | Porcentaje de Éxito |100% |
 
 ### Cobertura por Tipo de Test
 | Tipo                       | Cantidad | Porcentaje |
 |----------------------------|----------|------------|
-| Happy Path                 | 100       | 64,5%        |
-|Stress Test                 |  3       |       2%|
-| Validación de Errores      | 52       | 33,5%        |
+| Happy Path                 | 106       | 65,8%        |
+|Stress Test                 |  3       |       1,9%
+| Validación de Errores      | 52       | 32,3%        |
 
 ---
 
@@ -478,6 +508,7 @@
 ![Suite Detalle 5](screenshots/suite-detail-5.png)  
 ![Suite Detalle 6](screenshots/suite-detail-6.png)
 ![Suite Detalle 7](screenshots/suite-details-7.png)  
+![Suite Detalle 9](screenshots/suite-details-8.png)
 
 ---
 
