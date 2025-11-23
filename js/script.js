@@ -364,14 +364,19 @@ async function cargarCategoriasActualizarSelects() {
             console.log(`[Categorías UI] Opción disponible: ${opcion}`);
         });
 
+        //Busco los selects de categoria en el DOM
+        let categoriaSelectsInv = Array.from(categoriaSelects);
+        categoriaSelectsInv.push(document.getElementById('categoriaRyE'));
+
 
         if (categoriasData.length === 0) {
             setFeedback(feedback, 'No se pudieron cargar las categorías. Usando fallback de UI.', true); // Dejar el select como 'Sin categorias '.
             return;
         }
 
-        categoriaSelects.forEach((select, index) => {
-            select.innerHTML = ""; 
+        categoriaSelectsInv.forEach((select, index) => {
+            if(select.id !== 'categoriaRyE')
+                select.innerHTML = ""; 
 
  
             categoriasFiltradas.forEach(cat => {             
