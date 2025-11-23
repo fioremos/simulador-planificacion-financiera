@@ -4,6 +4,8 @@
 import { Planificador } from './models/Planificador.js';
 import { Exportador }   from './models/Exportador.js';
 import { AlertUtils }   from './utils/alerts.js';
+import { EventBus } from './utils/eventBus.js';
+
 
 
 // =============================================================
@@ -51,7 +53,6 @@ let metaGrafico;
 let categoriaSelects;
 let opcionesOriginales = new Map();
 
-
 // =============================================================
 // Event Listeners
 // =============================================================
@@ -63,6 +64,16 @@ let opcionesOriginales = new Map();
  * @event DOMContentLoaded
  */
 document.addEventListener('DOMContentLoaded', () => {
+    // Cargo los handle eventos del API
+    EventBus.subscribe('api:loading', handleApiLoading);
+    EventBus.subscribe('api:error', handleApiError);
+
+
+    // Guardamos un mapa con las opciones originales de cada select
+    categoriaSelects = document.querySelectorAll('select[name="categoria"]');
+    // Cargo las categorias y actualizo los selects
+    cargarCategoriasActualizarSelects();
+
     // Cachear selectores para evitar consultas repetidas
     secciones = document.querySelectorAll('.principal-section');
     sidebar = document.querySelector('.sidebar');
@@ -94,13 +105,6 @@ document.addEventListener('DOMContentLoaded', () => {
         listarMetas(planificador.localToJSON().metasAhorro);
         actualizarRadiosConMetas();
     }  
-
-
-    // Guardamos un mapa con las opciones originales de cada select
-    categoriaSelects = document.querySelectorAll('select[name="categoria"]');
-    categoriaSelects.forEach((select, index) => {
-        opcionesOriginales.set(index, Array.from(select.options));
-    });
 
     // Mostrar la sección inicial
     mostrarSeccion(hash);
@@ -220,9 +224,20 @@ if(document.querySelectorAll('input[name="tipo"]')){
     document.querySelectorAll('input[name="tipo"]').forEach(radio => {
         radio.addEventListener("change", function() {      
             // Opciones permitidas según tipo
-            const opcionesPorTipo = { ingreso: ["sueldo"], ahorro: ["objetivos"], inversion: ["inversiones"], gasto: ["hogar", "ocio", "salud"] };
+            const opcionesPorTipo = planificador.diccCategorias;
             const tipoSeleccionado = this.value;
-            const permitidas = opcionesPorTipo[tipoSeleccionado];
+            if(opcionesPorTipo.length === 0){
+                setFeedback(feedback, 'No se pudieron cargar las categorías.', true); 
+                return;
+            }
+            let permitidas = opcionesPorTipo.filter(c =>  c.categoria.toLowerCase() === tipoSeleccionado.toLowerCase())[0];
+            if (permitidas === undefined || permitidas.opciones.length === 0) {
+                setFeedback(feedback, `No hay categorías disponibles para el tipo seleccionado: ${tipoSeleccionado}.`, true);
+                return;
+            }
+
+            // Normalizamos las opciones
+            permitidas = permitidas.opciones.map(op => op.toLowerCase().replace(/\s/g, ''));
 
             if(this.checked) {
                 if (this.value === "ahorro") {
@@ -328,6 +343,59 @@ function initReportes(filtrosGuardado = null) {
     actualizarReporteGastos(datos);
 }
 
+/**
+ * Carga las categorías desde la API y las usa para inicializar 
+ * los elementos <select> de categoría en el DOM.
+ * * Además, pre-procesa las categorías con funciones de orden superior:
+ * - map(): Crea una lista plana de todas las opciones.
+ * - filter(): Excluye la categoría 'Inversión' del select principal (ejemplo de filtro).
+ */
+async function cargarCategoriasActualizarSelects() {
+    try {
+        const categoriasData = await planificador.obtenerCategorias();
+        // Aplicamos filter() para excluir categorías vacías 
+        const categoriasFiltradas = categoriasData.filter(c =>  c.categoria.trim() !== "" );
+        planificador.diccCategorias = categoriasFiltradas;
+
+        // Uso de reduce() para contar el total de opciones disponibles
+        const totalOpcionesDisponibles = categoriasFiltradas.reduce((acumulador, categoria) => { return acumulador + categoria.opciones.length; }, 0);
+        console.log(`[Categorías UI] Total de opciones disponibles en la API: ${totalOpcionesDisponibles}`);
+        categoriasData.map(c => c.opciones).flat().forEach(opcion => {
+            console.log(`[Categorías UI] Opción disponible: ${opcion}`);
+        });
+
+
+        if (categoriasData.length === 0) {
+            setFeedback(feedback, 'No se pudieron cargar las categorías. Usando fallback de UI.', true); // Dejar el select como 'Sin categorias '.
+            return;
+        }
+
+        categoriaSelects.forEach((select, index) => {
+            select.innerHTML = ""; 
+
+ 
+            categoriasFiltradas.forEach(cat => {             
+               // Aplicamos map() para transformar cada opción antes de crear el elemento DOM
+                const opcionesMapeadas = cat.opciones.map(opcion => ({
+                    texto: capitalizar(opcion), // Capitalizamos el texto visible
+                    valor: opcion.toLowerCase().replace(/\s/g, '') // Lo pongo en minuscula para el value
+                }));
+
+                opcionesMapeadas.forEach(op => {
+                    const opt = new Option(op.texto, op.valor);
+                    select.appendChild(opt);
+                    opcionesOriginales.set(index, Array.from(select.options));
+                });
+            });
+                                
+        });
+
+
+    } catch (error) {
+        // El error ya fue manejado por ApiService y Planificador. Simplemente logueamos.
+        console.error("Fallo final al cargar categorías en la UI.");
+    }
+}
 
 
 // =============================================================
@@ -349,6 +417,7 @@ function manejarMovimientoSubmit(event) {
         categoria: form.querySelector('select[name="categoria"]').value,
         monto: parseFloat(form.querySelector('input[name="monto"]').value),
         objetivo: (form.querySelector('select[name="categoria"]').value==='objetivos')? form.querySelector('select[name="objetivos"]').value:null,
+        nombre: form.querySelector('select[name="categoria"]')[form.querySelector('select[name="categoria"]').selectedIndex].text,
     };
 
     try {
@@ -631,7 +700,7 @@ function crearFilaMovimiento(datos, movimiento) {
 
     // Celdas
     const tdFecha = crearCelda(datos.fecha);
-    const tdCategoria = crearCelda(capitalizar(datos.categoria));
+    const tdCategoria = crearCelda(capitalizar((movimiento)? datos.nombre : datos.categoriaNombres));
     const tdMonto = crearCelda(`$${datos.monto.toLocaleString()}`);
     if (datos.tipo.toLowerCase() === 'gasto') tdMonto.classList.add('negative');
     if (datos.tipo.toLowerCase() === 'ahorro') tdMonto.classList.add('saving');
@@ -1079,4 +1148,35 @@ function listarMetas(metasAhorro) {
     metasAhorro.forEach(metaAhorro => {
         crearFilaMeta(metaAhorro);
     });
+}
+
+// =============================================================
+//  Manejo de Eventos del API
+// =============================================================
+
+/**
+ * Muestra/Oculta el estado de carga usando el setFeedback del script.
+ * Se suscribe al evento 'api:loading' del EventBus.
+ * @param {boolean} mostrar - true si se debe mostrar el indicador de carga.
+ */
+function handleApiLoading(mostrar) {
+    if (mostrar) {
+        setFeedback(feedback, 'Cargando datos...', false, true); 
+    } else {
+        // Ocultamos manualmente al finalizar.
+        const overlay = document.getElementById('overlay');
+        feedback.textContent = '';
+        feedback.classList.remove('success', 'error');
+        overlay.classList.remove('visible');
+        overlay.classList.add('invisible');
+    }
+}
+
+/**
+ * Muestra un error persistente usando el setFeedback del script.
+ * Se suscribe al evento 'api:error' del EventBus.
+ * @param {string} message - Mensaje de error a mostrar.
+ */
+function handleApiError(message) {
+    setFeedback(feedback, message, true);
 }
