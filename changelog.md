@@ -6,7 +6,8 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 ## [Unreleased]
 
 ### Added
-
+- [feature/dev-libreria-externa-sweetalert2] Implementación y documentación de librería externa.  
+  PR: [#16X](https://github.com/fioremos/simulador-planificacion-financiera/pull/16X) — @UlisesC11  (Desarrollador JS Librerías Externas)    
 
 ### Changed
 
