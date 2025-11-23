@@ -4,6 +4,7 @@
 import { MetaAhorro } from './MetaAhorro.js';
 import { Movimiento } from './Movimiento.js';
 import { StorageUtil }  from '../utils/storage.js';
+import { ApiService } from '../api/apiService.js';
 
 /**
  * Clase para planificar y gestionar movimientos financieros y metas de ahorro.
@@ -13,6 +14,7 @@ export class Planificador {
     #movimientos;
     #metasAhorro;
     #filtros;
+    #diccCategorias;
 
     /**
      * Inicializa un nuevo planificador con listas vacías y filtros por defecto.
@@ -20,6 +22,7 @@ export class Planificador {
     constructor() {
         this.#movimientos = [];
         this.#metasAhorro = [];
+        this.#diccCategorias = [];
         this.#filtros = {   
             fechaAscii: "",
             fechaDesde: "",
@@ -57,8 +60,11 @@ export class Planificador {
                 datos.fecha,
                 datos.tipo,
                 datos.categoria,
+                datos.nombre,
                 datos.monto,
-                datos.objetivo
+                datos.objetivo,
+                this.diccCategorias.map(cat => cat.categoria).map(op => op.toLowerCase().replace(/\s/g, '')),
+                this.diccCategorias.flatMap(cat => cat.opciones).map(op => op.toLowerCase().replace(/\s/g, ''))
             );
 
             this.#movimientos.push(movimiento);
@@ -103,16 +109,20 @@ export class Planificador {
     }
 
     /**
-     * Indica como son la relaciones entre categorias y tipos
-     * @returns {Object} diccionario de relaciones.
+     * Obtiene las categorías y opciones desde la API mockeada.
+     * @returns {Promise<Array<Object>>} Promesa que resuelve en la lista de categorías.
      */
-    getOpcionesPorTipo() {
-        return {
-            ingreso: ["sueldo"],
-            ahorro: ["objetivos"],
-            inversion: ["inversiones"],
-            gasto: ["hogar", "ocio", "salud"]
-        };
+    async obtenerCategorias() {
+        try {
+            // Utilizamos el endpoint de la API mockeada para categorías
+            const endpoint = './api/categorias.json'; 
+            const categorias = await ApiService.fetchData(endpoint, 2);
+            return categorias;
+        } catch (error) {
+            console.error("Error al cargar categorías desde API:", error.message);
+            // Retorna una estructura vacía o un fallback si la carga falla
+            return [];
+        }
     }
 
     /* ======== Gestión de Metas ======== */
@@ -387,6 +397,11 @@ export class Planificador {
         if (nuevasMetas && Array.isArray(nuevasMetas))
             this.#metasAhorro = nuevasMetas;
     }
+
+    /** @param {Array<Categorias>} lista de categorias */
+    set diccCategorias(categorias) {
+        this.#diccCategorias = categorias;
+    }
     
     /** @param {Array<Movimiento>} nuevosMovimientos - Lista de movimientos. */
     set movimientos(nuevosMovimientos) {
@@ -407,5 +422,10 @@ export class Planificador {
     /** @returns {Array<Movimiento>} Movimientos actuales. */
     get movimientos() {
         return this.#movimientos;
+    }
+
+    /** @returns {Array<Categorias>} lista de categorias. */
+    get diccCategorias() {
+        return this.#diccCategorias;
     }
 }
