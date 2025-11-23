@@ -3,24 +3,15 @@
 Este archivo se actualiza con cada Pull Request para registrar avances y correcciones.
 
 ---
+
 ## [Unreleased]
 
+### Added
 ### Added
 - [feature/dev-libreria-externa-sweetalert2] Implementación y documentación de librería externa.  
-  PR: [#168](https://github.com/fioremos/simulador-planificacion-financiera/pull/168) — @UlisesC11  (Desarrollador JS Librerías Externas)    
-
-### Changed
-
-
-
-### Fixed
-- [feature/bugfix-#156-grafico-metas-ahorro] Fix grafico metas ahorro.   
-  PR: [#165](https://github.com/fioremos/simulador-planificacion-financiera/pull/165) — @skalapuj (Dev AJAX)
-
-## [Unreleased]
-
-### Added
-
+  PR: [#168](https://github.com/fioremos/simulador-planificacion-financiera/pull/168) — @UlisesC11  (Desarrollador JS Librerías Externas)   
+- [feature/dev-async-fetch-api] Integración con la api de categorias.   
+  PR: [#169](https://github.com/fioremos/simulador-planificacion-financiera/pull/169) — @skalapuj (Desarrollador JS Asíncrono - Fetch & APIs)
 
 ### Changed
 
@@ -28,9 +19,11 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 
 ### Fixed
 - [feature/bugfix-#153-validacion-exportacion] Fix test exportacion.   
-  PR: [#166](https://github.com/fioremos/simulador-planificacion-financiera/pull/166) — @skalapuj (Dev AJAX)
+  PR: [#166](https://github.com/fioremos/simulador-planificacion-financiera/pull/166) — @skalapuj (Desarrollador JS Asíncrono - Fetch & APIs)
+- [feature/bugfix-#156-grafico-metas-ahorro] Fix grafico metas ahorro.   
+  PR: [#165](https://github.com/fioremos/simulador-planificacion-financiera/pull/165) — @skalapuj (Desarrollador JS Asíncrono - Fetch & APIs)
 
-## [Unreleased]
+## [Release Cuarta Entrega] - 2025-11-14
 
 ### Added
 

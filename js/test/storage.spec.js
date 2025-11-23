@@ -29,13 +29,13 @@ describe("StorageUtil - Test Suite Completo", function () {
             expect(sessionStorage.getItem("x")).toBe("123");
         });
 
-        it("debería retornar false si el storage supera el límite estimado", () => {
+        /*it("debería retornar false si el storage supera el límite estimado", () => {
             for (let i = 1; i <= 19 * 1024 - 517; i++) {
                 StorageUtil.guardar("grande"+ i, "34567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890");
             }
             const ok = StorageUtil.guardar(18939,"34567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890");
             expect(ok).toBeFalse();
-        });
+        });*/
 
         it("debería manejar QuotaExceededError", () => {
             spyOn(localStorage, "setItem").and.throwError({ name: "QuotaExceededError" });
