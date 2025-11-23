@@ -476,7 +476,8 @@
 ![Suite Detalle 3](screenshots/suite-detail-3.png) 
 ![Suite Detalle 4](screenshots/suite-detail-4.png)  
 ![Suite Detalle 5](screenshots/suite-detail-5.png)  
-![Suite Detalle 6](screenshots/suite-detail-6.png)  
+![Suite Detalle 6](screenshots/suite-detail-6.png)
+![Suite Detalle 7](screenshots/suite-details-7.png)  
 
 ---
 

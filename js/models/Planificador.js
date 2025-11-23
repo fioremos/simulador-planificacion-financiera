@@ -4,6 +4,7 @@
 import { MetaAhorro } from './MetaAhorro.js';
 import { Movimiento } from './Movimiento.js';
 import { StorageUtil }  from '../utils/storage.js';
+import { ApiService } from '../api/apiService.js';
 
 /**
  * Clase para planificar y gestionar movimientos financieros y metas de ahorro.
@@ -372,6 +373,24 @@ export class Planificador {
      */
     eliminarVariables(modulo, tipo) {
         StorageUtil.eliminar('app:' + modulo, tipo);
+    }
+
+    /* ======== Métodos Asíncronos ======== */
+
+    /**
+     * Obtiene las categorías disponibles desde la API externa.
+     * Implementa manejo de errores asíncrono devolviendo array vacío.
+     * @returns {Promise<Array>} Lista de categorías o array vacío si falla.
+     */
+
+    async obtenerCategorias() {
+        try {
+            const data = await ApiService.fetchData('/api/categorias');
+            return data;
+        } catch (error) {
+            console.error('[Planificador] Error recuperando categorías:', error);
+            return [];
+        }
     }
 
     /* ======== Accesores ======== */
