@@ -403,23 +403,65 @@
 ---
 ---
 
+### Suite 7: Util AlertUtils (SweetAlert2 Wrapper)
+
+#### Funciones Testeadas:
+- **`AlertUtils (Inicialización)`**: Verifica que el módulo se importe correctamente y aplique la configuración global (colores, z-index).
+- **`AlertUtils.success()`**: Valida la invocación de alertas de éxito con temporizador.
+- **`AlertUtils.error()` / `.warning()`**: Valida la invocación de alertas de error y advertencia con sus iconos correspondientes.
+- **`Callback Execution`**: Verifica la ejecución de lógica asíncrona tras la confirmación del usuario.
+
+**Casos de Prueba:**
+
+| #  | Descripción                                             | Tipo                  |
+|----|---------------------------------------------------------|-----------------------|
+| 1  | El módulo AlertUtils debe estar definido e importar correctamente | Smoke Test            |
+| 2  | El método .success() debe llamar a Swal con icono 'success' y timer | Happy Path            |
+| 3  | El método .error() debe llamar a Swal con icono 'error' | Happy Path            |
+| 4  | El método .warning() debe llamar a Swal con icono 'warning' | Happy Path            |
+| 5  | Debe respetar la configuración visual por defecto (colores y z-index) | UI Validation         |
+| 6  | Debe ejecutar la función callback cuando el usuario confirma | Lógica Asíncrona      |
+
+#### Test 1: `Inicialización y Configuración`
+
+| #  | Descripción                                                    | Tipo                  |
+|----|----------------------------------------------------------------|-----------------------|
+| 1  | El módulo AlertUtils debe estar definido e importar correctamente | Happy Path (Smoke)    |
+| 2  | Debe respetar la configuración visual por defecto (colores y z-index) | UI Validation         |
+
+#### Test 2: `Métodos de Visualización (.success, .error, .warning)`
+
+| #  | Descripción                                                    | Tipo                  |
+|----|----------------------------------------------------------------|-----------------------|
+| 1  | El método .success() debe llamar a Swal con el icono 'success' y timer | Happy Path            |
+| 2  | El método .warning() debe llamar a Swal con el icono 'warning' | Happy Path            |
+| 3  | El método .error() debe llamar a Swal con el icono 'error'     | Happy Path            |
+
+#### Test 3: `Manejo de Callbacks`
+
+| #  | Descripción                                                    | Tipo                  |
+|----|----------------------------------------------------------------|-----------------------|
+| 1  | Debe ejecutar la función callback cuando el usuario confirma la alerta | Lógica Asíncrona      |
+
+---
+---
+
 ## Métricas de Cobertura
 
 ### Resumen General
 | Métrica | Valor |
 |---------|-------|
-| Total de Tests      |116 |
-| Tests Pasando       |112 ✅ |
-| Tests Fallando      |4 ❌ |
-| Porcentaje de Éxito |96,5% |
+| Total de Tests      |155 |
+| Tests Pasando       |155 ✅ |
+| Tests Fallando      |0 ❌ |
+| Porcentaje de Éxito |100% |
 
 ### Cobertura por Tipo de Test
 | Tipo                       | Cantidad | Porcentaje |
 |----------------------------|----------|------------|
-| Happy Path                 | 62       | 53.5%        |
-|Stress Test                 |  2       |       2%|
-| Validación de Errores      | 52       | 44.5%        |
-
+| Happy Path                 | 100       | 64,5%        |
+|Stress Test                 |  3       |       2%|
+| Validación de Errores      | 52       | 33,5%        |
 
 ---
 

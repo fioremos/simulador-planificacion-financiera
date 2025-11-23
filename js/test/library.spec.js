@@ -3,6 +3,10 @@ import { AlertUtils } from '../utils/alerts.js';
 describe("AlertUtils (Wrapper de SweetAlert2)", function() {
 
     beforeEach(function() {
+        if (typeof AlertUtils === 'undefined') {
+            fail("El módulo AlertUtils no se pudo importar. Verifica que la ruta sea correcta.");
+        }
+
         if (!window.Swal) {
             window.Swal = { fire: function() {} };
         }
