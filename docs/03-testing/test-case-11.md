@@ -38,8 +38,8 @@
 - No se presentan observaciones. La estructura de metadatos y configuración básica es correcta.
 
 ## Issues Generadas
-- [#XX] **Limpieza de Consola y APIs Deprecadas:** Corregir los errores reportados en consola y actualizar APIs antiguas para elevar el puntaje de Best Practices (Actual: 74, Objetivo: >=85).
-- [#XX] **Mejorar Touch Targets:** Aumentar el tamaño o espaciado de elementos interactivos para cumplir con los estándares de accesibilidad móvil.
+- [#169](https://github.com/fioremos/simulador-planificacion-financiera/issues/169#) **Limpieza de Consola y APIs Deprecadas:** Corregir los errores reportados en consola y actualizar APIs antiguas para elevar el puntaje de Best Practices (Actual: 74, Objetivo: >=85).
+- [#170](https://github.com/fioremos/simulador-planificacion-financiera/issues/170#) **Mejorar Touch Targets:** Aumentar el tamaño o espaciado de elementos interactivos para cumplir con los estándares de accesibilidad móvil.
 
 
 ## Conclusiones
