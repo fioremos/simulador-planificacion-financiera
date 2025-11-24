@@ -14,7 +14,7 @@
 
 ## Resultados Obtenidos
 
-### Performance: [98]
+### Performance: 98
 - First Contentful Paint: **0.7 s**
 - Largest Contentful Paint: **1.0 s**
 - Total Blocking Time: **40ms**
@@ -23,18 +23,18 @@
 
 ![Captura Performance](imagenes/test-case-11/lighthouse-baseline-performance.png)
 
-### Accessibility: [95]
+### Accessibility: 95
 - **Touch targets do not have sufficient size or spacing:** (Elementos interactivos demasiado pequeños o muy juntos.)
 - **ARIA IDs are unique (Passed):** (Los IDs de ARIA son únicos)
 
 ![Captura Accessibility](imagenes/test-case-11/lighthouse-baseline-accessibility.png)
 
-### Best Practices: [74] (Por debajo del minimo)
+### Best Practices: 74 (Por debajo del minimo)
 - **Uses deprecated APIs (1 warning):** El código está utilizando métodos de JavaScript o APIs del navegador que ya no se recomiendan y podrían dejar de funcionar en versiones futuras.
 - **Browser errors were logged to the console:** Existen errores no capturados (posibles `throw` sin `catch` o recursos 404) que ensucian la consola y pueden detener la ejecución de scripts.
 - **Issues logged in Chrome DevTools:** Existen problemas generales reportados en el panel de Issues que deben resolverse.
 
-### SEO: [100]
+### SEO: 100
 - No se presentan observaciones. La estructura de metadatos y configuración básica es correcta.
 
 ## Issues Generadas
