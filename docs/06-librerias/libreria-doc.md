@@ -87,17 +87,39 @@ Fragmento de código sobre la función que maneja las alertas. [Link de referenc
  * Muestra un mensaje de feedback (éxito o error) usando SweetAlert2.
  * 
  * @param {string|Error} message - Mensaje a mostrar.
- * @param {boolean} isError - Si es true, se trata de un mensaje de error.
+ * @param {string} typeMessage - Tipo de mensaje: 'Error', 'Éxito', 'Info', 'Warning'.
  * @param {Function} [callback=null] - Función a ejecutar después de cerrar (opcional).
  */
-function setFeedback(message, isError = false, callback = null) {
-    const title = isError ? 'Error' : 'Éxito';
+function setFeedback(message, typeMessage, callback = null) {
     const messageText = message instanceof Error ? message.message : String(message);
 
-    if (isError) {
-        AlertUtils.error(title, messageText, callback);
-    } else {
-        AlertUtils.success(title, messageText, callback);
+    switch (typeMessage) {
+        case 'Error':
+            AlertUtils.error(typeMessage, messageText, callback);
+            break;
+
+        case 'Éxito':
+            AlertUtils.success(typeMessage, messageText, callback);
+            break;
+
+        case 'Info':
+            AlertUtils.info(typeMessage, messageText, callback);
+            break;
+
+        case 'Warning':
+            AlertUtils.warning(typeMessage, messageText, callback);
+            break;
+
+        case 'Loading':
+            AlertUtils.loading(typeMessage, messageText);
+            break;
+
+        case 'closeLoading':
+            AlertUtils.closeLoading(callback);
+        break;
+
+        default:
+            console.warn('Tipo de mensaje desconocido para setFeedback:', typeMessage);
     }
 }
 ```  
@@ -108,7 +130,7 @@ Se llama a la función `setFeedback()` y se pasa el mensaje que se desea visuali
 try {
     const movimiento = planificador.agregarMovimiento(datos);
     planificador.actualizarLocalVariables('planificador', 'planificador', null);
-    setFeedback('Movimiento agregado con éxito.', false);
+    setFeedback('Movimiento agregado con éxito.', 'Éxito');
     crearFilaMovimiento(datos, movimiento);
 }
 ```  
@@ -119,9 +141,9 @@ Se llama a la función `setFeedback()` que captura el error y visualiza el mensa
 try {
     exportador.exportarDatos(tipoDatos, formato, nombre, ubicacion , planificador);
     planificador.actualizarSessionVariables('exportador', 'exportador:config', exportador);
-    setFeedback('Archivo exportado con éxito.', false);
+    setFeedback('Archivo exportado con éxito.', 'Éxito');
 } catch (error) {
-    setFeedback(error, true);
+    setFeedback(error, 'Error');
 }
 ```   
 
