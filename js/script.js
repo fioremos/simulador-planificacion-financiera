@@ -3,7 +3,7 @@
 // =============================================================
 import { Planificador } from './models/Planificador.js';
 import { Exportador }   from './models/Exportador.js';
-
+import { AlertUtils }   from './utils/alerts.js';
 
 
 // =============================================================
@@ -18,9 +18,6 @@ const reportesOption = 'reportes';
 const exportadorOption = 'exportar';
 const loginOption = 'login'; 
 const metasOption = 'metas';
-
-/** @type {HTMLElement} Elemento para mostrar mensajes de feedback */
-const feedback = document.querySelector('#feedback');
 
 /** @type {Object|null} Filtros actuales para reportes */
 let filtros = {fechaDesde: "", fechaHasta: "", categoria: "", moneda: ""};
@@ -230,7 +227,7 @@ if(document.querySelectorAll('input[name="tipo"]')){
             if(this.checked) {
                 if (this.value === "ahorro") {
                     if(!abrirCombo()){
-                        setFeedback(feedback, 'No hay metas de ahorro disponibles. Por favor, crea una antes de asignar un movimiento de ahorro.', true);
+                        setFeedback('No hay metas de ahorro disponibles. Por favor, crea una antes de asignar un movimiento de ahorro.', true);
                         this.checked = false;
                         return;
                     }
@@ -357,7 +354,7 @@ function manejarMovimientoSubmit(event) {
     try {
         const movimiento = planificador.agregarMovimiento(datos);
         planificador.actualizarLocalVariables('planificador', 'planificador', null);
-        setFeedback(feedback, 'Movimiento agregado con éxito.', false);
+        setFeedback('Movimiento agregado con éxito.', false);
         crearFilaMovimiento(datos, movimiento);
         
         Array.from(document.getElementsByClassName("form-ahorro")).forEach(el => {
@@ -391,7 +388,7 @@ function manejarMovimientoSubmit(event) {
 
         form.reset();
     } catch (error) {
-        setFeedback(feedback, error, true);
+        setFeedback(error, true);
         cerrarModal('miModal');
     }
 }
@@ -413,9 +410,9 @@ function manejarExportar(event) {
     try {
         exportador.exportarDatos(tipoDatos, formato, nombre, ubicacion , planificador);
         planificador.actualizarSessionVariables('exportador', 'exportador:config', exportador);
-        setFeedback(feedback, 'Archivo exportado con éxito.', false);
+        setFeedback('Archivo exportado con éxito.', false);
     } catch (error) {
-        setFeedback(feedback, error, true);
+        setFeedback(error, true);
     }
 }
 
@@ -439,9 +436,9 @@ function manejarReportes(event) {
         planificador.actualizarSessionVariables('planificador', 'planificador:filtros', null);
         generarGraficoReporte(datos.datosFiltrados);
         actualizarReporteGastos(datos);
-        setFeedback(feedback, 'Reporte generado con éxito.', false);
+        setFeedback('Reporte generado con éxito.', false);
     } catch (error) {
-        setFeedback(feedback, error, true);
+        setFeedback(error, true);
     }
 }
 
@@ -463,11 +460,11 @@ function manejarGuardarMeta(event) {
         crearFilaMeta(meta);
         actualizarRadiosConMetas();
         cerrarModal('MetasAhorroModal');
-        setFeedback(feedback, 'Objetivo guardado con éxito', false);
+        setFeedback('Objetivo guardado con éxito', false);
         event.target.reset();
     } catch (error) {
         cerrarModal('MetasAhorroModal');
-        setFeedback(feedback, error, true);
+        setFeedback(error, true);
     }
 }
 
@@ -481,7 +478,7 @@ function manejarMostrarObjetivo(event) {
 
     const form = event.target;
     const radioSeleccionado = form.querySelector('input[name="tipo"]:checked');
-    if (!radioSeleccionado) return setFeedback(feedback, 'Selecciona un objetivo.', true);
+    if (!radioSeleccionado) return setFeedback('Selecciona un objetivo.', true);
 
     const datosMeta = planificador.obtenerMovimientosPorMeta(radioSeleccionado.value);
     const meta = planificador.getMetaById(radioSeleccionado.value);  
@@ -994,45 +991,20 @@ function cerrarModal(id) {
 }
 
 /**
- * Muestra un mensaje de feedback (éxito o error) en pantalla.
+ * Muestra un mensaje de feedback (éxito o error) usando SweetAlert2.
  * 
- * @param {HTMLElement} feedback - Elemento del DOM para el mensaje.
  * @param {string|Error} message - Mensaje a mostrar.
- * @param {boolean} error - Si es true, se trata de un mensaje de error.
+ * @param {boolean} isError - Si es true, se trata de un mensaje de error.
+ * @param {Function} [callback=null] - Función a ejecutar después de cerrar (opcional).
  */
-function setFeedback(feedback, message, error) {
-    const overlay = document.getElementById('overlay');
-    if (error) {
-        console.log(message);
-        if(message.message)
-            feedback.textContent = `${message.message}`;
-        else
-            feedback.textContent = `${message}`;
-        feedback.classList.remove('success');
-        feedback.classList.add('error');
-        overlay.classList.remove('invisible');
-        overlay.classList.add('visible');
+function setFeedback(message, isError = false, callback = null) {
+    const title = isError ? 'Error' : 'Éxito';
+    const messageText = message instanceof Error ? message.message : String(message);
 
-        setTimeout(() => {
-            feedback.textContent = '';
-            feedback.classList.remove('error');
-            overlay.classList.remove('visible');
-            overlay.classList.add('invisible');
-
-        }, 1000);
+    if (isError) {
+        AlertUtils.error(title, messageText, callback);
     } else {
-        feedback.textContent = message;
-        feedback.classList.remove('error');
-        feedback.classList.add('success');
-        overlay.classList.remove('invisible');
-        overlay.classList.add('visible');
-
-        setTimeout(() => {
-            feedback.textContent = '';
-            feedback.classList.remove('success', 'error');
-            overlay.classList.remove('visible');
-            overlay.classList.add('invisible');
-        }, 1000);
+        AlertUtils.success(title, messageText, callback);
     }
 }
 
