@@ -2,9 +2,9 @@
 
 ## Información General
 - **Fecha de ejecución:** 23/11/2025
-- **URL testeada:** [Pega aquí la URL de tu Live Server o GitHub Pages si ya está subido]
-- **Rama:** feature/tester-qa-js-testing-suite (sobre base develop)
-- **Navegador:** Chrome [Tu versión, ej: 119.0]
+- **URL testeada:** [Link de Live Server](http://127.0.0.1:5500/index.html#login)
+- **Rama:** feature/tester-qa-js-testing-suite
+- **Navegador:** Chrome 142
 
 ## Umbrales Mínimos Definidos
 - **Performance:** >= 80
