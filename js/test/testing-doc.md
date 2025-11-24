@@ -566,7 +566,7 @@
         });
   ```
 - **GitHub Issue:** [#153](https://github.com/fioremos/simulador-planificacion-financiera/issues/153)
-- **Estado:** Abierto
+- **Estado:** Resuelto
 
 ### Issue #154: Manejo de decimales en montos (porcentajeAhorro) en Reporte Financiero.
 - **Severidad:** Alta
@@ -607,5 +607,5 @@ Estas limitaciones se deben principalmente a las restricciones de tiempo con las
 
 ---
 
-**Última Actualización:** 14/11/2025   
-**Coordinador / DevOps + Tester QA:** @Skalapuj 
+**Última Actualización:** 24/11/2025   
+**Tester QA:** @MNEscobar
