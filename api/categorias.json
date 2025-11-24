@@ -1,0 +1,42 @@
+[
+  {
+    "categoria": "Ingreso",
+    "opciones": [
+      "Sueldo",
+      "Venta de Activos",
+      "Regalo",
+      "Intereses/Dividendos"
+    ]
+  },
+  {
+    "categoria": "Ahorro",
+    "opciones": [
+      "Objetivos"
+    ]
+  },
+  {
+    "categoria": "Inversion",
+    "opciones": [
+      "Acciones",
+      "Bienes Raíces",
+      "Criptomonedas",
+      "Negocio Propio"
+    ]
+  },
+  {
+    "categoria": "Gasto",
+    "opciones": [
+      "Hogar (Alquiler/Hipoteca)",
+      "Servicios (Luz, Agua, Gas)",
+      "Ocio y Entretenimiento",
+      "Comida y Víveres",
+      "Salud y Cuidado Personal",
+      "Transporte"
+    ]
+  },
+  {
+    "categoria": "",
+    "opciones": [
+    ]
+  }
+]

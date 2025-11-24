@@ -8,12 +8,13 @@ describe("Model Movimiento", function () {
 
     describe("Constructor Movimientos", function () {
         it("debería crear un movimient correctamente", function () {
-            let movimiento = { tipo: 'Ingreso', categoria: 'Salud', fecha: '2025-01-15', monto: 200 };
+            let movimiento = { tipo: 'Ingreso', categoria: 'Salud', categoriaNombres: 'Salud', fecha: '2025-01-15', monto: 200 };
             
             const mov = new Movimiento(                
                 movimiento.fecha,
                 movimiento.tipo,
                 movimiento.categoria,
+                movimiento.categoriaNombres,
                 movimiento.monto,
                 movimiento.objetivo);
 
@@ -171,7 +172,7 @@ describe("Model Movimiento", function () {
         describe('Movimiento.toJSON()', () => {
             it('debería serializar correctamente el movimiento', function () {
                 const fecha = new Date("2024-05-10");
-                const mov = new Movimiento(fecha, "ingreso", "sueldo", 5000, 12);
+                const mov = new Movimiento(fecha, "ingreso", "sueldo", "Sueldo", 5000, 12);
 
                 const json = mov.toJSON();
 
@@ -180,6 +181,7 @@ describe("Model Movimiento", function () {
                     fecha: "2024-05-10",
                     tipo: "ingreso",
                     categoria: "sueldo",
+                    categoriaNombres: "Sueldo",
                     monto: 5000,
                     idObjetivo: 12
                 });
@@ -195,6 +197,7 @@ describe("Model Movimiento", function () {
                     fecha: "2024-04-22",
                     tipo: "gasto",
                     categoria: "salud",
+                    categoriaNombres: "Salud",
                     monto: 350,
                     idObjetivo: 5
                 };
@@ -211,6 +214,7 @@ describe("Model Movimiento", function () {
                     fecha: "2024-04-22",
                     tipo: "gasto",
                     categoria: "salud",
+                    categoriaNombres: "Salud",
                     monto: 350,
                 };
 
