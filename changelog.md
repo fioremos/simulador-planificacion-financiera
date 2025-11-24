@@ -11,6 +11,8 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   PR: [#168](https://github.com/fioremos/simulador-planificacion-financiera/pull/168) — @UlisesC11  (Desarrollador JS Librerías Externas)   
 - [feature/dev-async-fetch-api] Integración con la api de categorias.   
   PR: [#172](https://github.com/fioremos/simulador-planificacion-financiera/pull/172) — @skalapuj (Desarrollador JS Asíncrono - Fetch & APIs)
+- [feature/tester-qa-js-testing-suite] testing funcional JavaScript y auditorías de rendimiento/accesibilidad.
+  PR:[#173](https://github.com/fioremos/simulador-planificacion-financiera/pull/173) - @MNEscobar (Tester QA/JS - Testing Avanzado )
 
 ### Changed
 
