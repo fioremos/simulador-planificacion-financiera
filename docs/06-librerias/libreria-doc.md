@@ -32,7 +32,7 @@ Además, usar esta librería mejora la experiencia del usuario (UX) al brindar r
 ## Uso en el Proyecto  
 
 ### Caso de Uso 1: Alerta de éxito/error 
-Fragmento de código para alerta de éxito. [Link de referencia](https://github.com/fioremos/simulador-planificacion-financiera/blob/feature/dev-libreria-externa-sweetalert2/js/utils/alerts.js#L27)  
+Fragmento de código para alerta de éxito. [Link de referencia](/js/utils/alerts.js#L27) 
 ```js
 /**
  * Muestra una alerta de éxito.
@@ -57,7 +57,7 @@ const success = (title, message = '', callback = null) => {
 };
 ```  
 
-Fragmento de código para alerta de error. [Link de referencia](https://github.com/fioremos/simulador-planificacion-financiera/blob/feature/dev-libreria-externa-sweetalert2/js/utils/alerts.js#L49)
+Fragmento de código para alerta de error. [Link de referencia](/js/utils/alerts.js#L49)
 ```js
 /**
  * Muestra una alerta de error.
@@ -81,7 +81,7 @@ const error = (title, message = '', callback = null) => {
 ```  
 
 ### Caso de Uso 2: Función setFeedback 
-Fragmento de código sobre la función que maneja las alertas. [Link de referencia](https://github.com/fioremos/simulador-planificacion-financiera/blob/feature/dev-libreria-externa-sweetalert2/js/script.js#L1003)  
+Fragmento de código sobre la función que maneja las alertas. [Link de referencia](/js/script.js#L1000)  
 ```js
 /**
  * Muestra un mensaje de feedback (éxito o error) usando SweetAlert2.
@@ -103,7 +103,7 @@ function setFeedback(message, isError = false, callback = null) {
 ```  
 
 ### Caso de Uso 3: Agregar Movimiento con éxito
-Se llama a la función `setFeedback()` y se pasa el mensaje que se desea visualizar y "false" para indicar que no es un error. [Link de referencia](https://github.com/fioremos/simulador-planificacion-financiera/blob/feature/dev-libreria-externa-sweetalert2/js/script.js#L360)  
+Se llama a la función `setFeedback()` y se pasa el mensaje que se desea visualizar y "false" para indicar que no es un error. [Link de referencia](/js/script.js#L357)  
 ```js
 try {
     const movimiento = planificador.agregarMovimiento(datos);
@@ -114,7 +114,7 @@ try {
 ```  
 
 ### Caso de Uso 4: Error al exportar datos 
-Se llama a la función `setFeedback()` que captura el error y visualiza el mensaje que devuelve el metodo `exportarDatos()` y "true" para indicar que es un error. [Link de referencia](https://github.com/fioremos/simulador-planificacion-financiera/blob/feature/dev-libreria-externa-sweetalert2/js/script.js#L418)  
+Se llama a la función `setFeedback()` que captura el error y visualiza el mensaje que devuelve el metodo `exportarDatos()` y "true" para indicar que es un error. [Link de referencia](/js/script.js#L415)  
 ```js
 try {
     exportador.exportarDatos(tipoDatos, formato, nombre, ubicacion , planificador);
@@ -125,7 +125,7 @@ try {
 }
 ```   
 
-Mensaje cuando ocurre un error en `exportarDatos()`. [Link de referencia](https://github.com/fioremos/simulador-planificacion-financiera/blob/feature/dev-libreria-externa-sweetalert2/js/models/Exportador.js#L39)  
+Mensaje cuando ocurre un error en `exportarDatos()`. [Link de referencia](/js/models/Exportador.js#L39)  
 ```js
 exportarDatos(tipo, formato, nombreArchivo, rutaDestino, planificador) {
     const datos =
