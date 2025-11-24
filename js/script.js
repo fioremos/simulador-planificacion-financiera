@@ -19,9 +19,6 @@ const exportadorOption = 'exportar';
 const loginOption = 'login'; 
 const metasOption = 'metas';
 
-/** @type {HTMLElement} Elemento para mostrar mensajes de feedback */
-const feedback = document.querySelector('#feedback');
-
 /** @type {Object|null} Filtros actuales para reportes */
 let filtros = {fechaDesde: "", fechaHasta: "", categoria: "", moneda: ""};
 
