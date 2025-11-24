@@ -8,7 +8,11 @@ describe("AlertUtils (Wrapper de SweetAlert2)", function() {
         }
 
         if (!window.Swal) {
-            window.Swal = { fire: function() {} };
+            window.Swal = { 
+                fire: function() {},
+                close: function() {},
+                showLoading: function() {}
+                };
         }
 
         spyOn(window.Swal, 'fire').and.returnValue(Promise.resolve({ 
@@ -77,5 +81,26 @@ describe("AlertUtils (Wrapper de SweetAlert2)", function() {
             cancelButtonColor: '#6c757d',  
             allowOutsideClick: false
         }));
+    });
+    // TEST 7: Indicador de Carga (Loading)
+    it("el método .loading() debe mostrar una alerta sin botón de cierre y con título", function() {
+        AlertUtils.loading("Cargando datos...", "Espere");
+
+        expect(window.Swal.fire).toHaveBeenCalledWith(jasmine.objectContaining({
+            title: "Cargando datos...",
+            text: "Espere",
+            showConfirmButton: false,
+            allowOutsideClick: false,
+            didOpen: jasmine.any(Function) 
+        }));
+    });
+
+    // TEST 8: Cierre de Carga (Close Loading)
+    it("el método .closeLoading() debe cerrar la alerta actual", function() {
+        window.Swal.close = jasmine.createSpy("close");
+
+        AlertUtils.closeLoading();
+
+        expect(window.Swal.close).toHaveBeenCalled();
     });
 });

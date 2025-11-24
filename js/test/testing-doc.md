@@ -409,24 +409,16 @@
 - **`AlertUtils (Inicialización)`**: Verifica que el módulo se importe correctamente y aplique la configuración global (colores, z-index).
 - **`AlertUtils.success()`**: Valida la invocación de alertas de éxito con temporizador.
 - **`AlertUtils.error()` / `.warning()`**: Valida la invocación de alertas de error y advertencia con sus iconos correspondientes.
+- **`AlertUtils.loading()` / `.closeLoading()`**: Verifica la visualización de alertas de carga bloqueantes y su correcto cierre programático.
 - **`Callback Execution`**: Verifica la ejecución de lógica asíncrona tras la confirmación del usuario.
-
-**Casos de Prueba:**
-
-| #  | Descripción                                             | Tipo                  |
-|----|---------------------------------------------------------|-----------------------|
-| 1  | El módulo AlertUtils debe estar definido e importar correctamente | Smoke Test            |
-| 2  | El método .success() debe llamar a Swal con icono 'success' y timer | Happy Path            |
-| 3  | El método .error() debe llamar a Swal con icono 'error' | Happy Path            |
-| 4  | El método .warning() debe llamar a Swal con icono 'warning' | Happy Path            |
-| 5  | Debe respetar la configuración visual por defecto (colores y z-index) | UI Validation         |
-| 6  | Debe ejecutar la función callback cuando el usuario confirma | Lógica Asíncrona      |
 
 #### Test 1: `Inicialización y Configuración`
 
+**Casos de Prueba:**
+
 | #  | Descripción                                                    | Tipo                  |
 |----|----------------------------------------------------------------|-----------------------|
-| 1  | El módulo AlertUtils debe estar definido e importar correctamente | Happy Path (Smoke)    |
+| 1  | El módulo AlertUtils debe estar definido e importar correctamente | Smoke Test    |
 | 2  | Debe respetar la configuración visual por defecto (colores y z-index) | UI Validation         |
 
 #### Test 2: `Métodos de Visualización (.success, .error, .warning)`
@@ -442,6 +434,15 @@
 | #  | Descripción                                                    | Tipo                  |
 |----|----------------------------------------------------------------|-----------------------|
 | 1  | Debe ejecutar la función callback cuando el usuario confirma la alerta | Lógica Asíncrona      |
+
+#### Test 4: `Indicadores de Carga (Loading State)`
+
+**Casos de Prueba:**
+
+| #  | Descripción                                                    | Tipo                  |
+|----|----------------------------------------------------------------|-----------------------|
+| 1  | El método .loading() debe mostrar una alerta bloqueante (sin botón cierre) | UI Validation         |
+| 2  | El método .closeLoading() debe cerrar la alerta actual         | Happy Path            |
 
 ---
 ---
@@ -481,17 +482,17 @@
 ### Resumen General
 | Métrica | Valor |
 |---------|-------|
-| Total de Tests      |161 |
-| Tests Pasando       |161 ✅ |
+| Total de Tests      |163 |
+| Tests Pasando       |163 ✅ |
 | Tests Fallando      |0 ❌ |
 | Porcentaje de Éxito |100% |
 
 ### Cobertura por Tipo de Test
 | Tipo                       | Cantidad | Porcentaje |
 |----------------------------|----------|------------|
-| Happy Path                 | 106       | 65,8%        |
-|Stress Test                 |  3       |       1,9%
-| Validación de Errores      | 52       | 32,3%        |
+| Happy Path                 | 108       | 66,3%        |
+|Stress Test                 |  3       |       1,8%
+| Validación de Errores      | 52       | 31,9%        |
 
 ---
 
