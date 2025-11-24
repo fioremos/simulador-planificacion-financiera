@@ -101,11 +101,38 @@ export const AlertUtils = (() => {
         });
     };
 
+    /**
+     * Muestra una alerta de carga (loading).
+     * @param {string} title - Título del mensaje.
+     * @param {string} [message=''] - Mensaje detallado (opcional).
+     */
+    const loading = (title, message = '') => {
+        Swal.fire({
+            ...defaultConfig,
+            showConfirmButton: false,
+            title: title,
+            text: message,
+            didOpen: () => {
+                Swal.showLoading();
+            }
+        });
+    };
+    
+    /**
+     * Cierra la alerta de carga (loading).
+     */
+    const closeLoading = (callback = null) => {
+        Swal.close();
+        if (callback) callback();
+    };
+
     // Retornar interfaz pública
     return {
         success,
         error,
         warning,
-        info
+        info,
+        loading,
+        closeLoading
     };
 })();
