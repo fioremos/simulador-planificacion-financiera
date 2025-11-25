@@ -6,6 +6,7 @@ import { Movimiento } from './Movimiento.js';
 import { StorageUtil }  from '../utils/storage.js';
 import { ApiService } from '../api/apiService.js';
 
+
 /**
  * Clase para planificar y gestionar movimientos financieros y metas de ahorro.
  * Permite agregar movimientos, metas de ahorro y generar reportes.
@@ -383,6 +384,7 @@ export class Planificador {
     eliminarVariables(modulo, tipo) {
         StorageUtil.eliminar('app:' + modulo, tipo);
     }
+
 
     /* ======== Accesores ======== */
 
