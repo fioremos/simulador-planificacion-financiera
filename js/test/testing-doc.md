@@ -428,6 +428,7 @@
 | 1  | El método .success() debe llamar a Swal con el icono 'success' y timer | Happy Path            |
 | 2  | El método .warning() debe llamar a Swal con el icono 'warning' | Happy Path            |
 | 3  | El método .error() debe llamar a Swal con el icono 'error'     | Happy Path            |
+| 4  | El método .info() debe llamar a Swal con icono 'info'          | Happy Path            |
 
 #### Test 3: `Manejo de Callbacks`
 
