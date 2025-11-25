@@ -14,8 +14,7 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   PR: [#172](https://github.com/fioremos/simulador-planificacion-financiera/pull/172) — @skalapuj (Desarrollador JS Asíncrono - Fetch & APIs) 
 
 ### Changed
-
-- [feature/coord-devops-segundo-parcial] Actualización de la documentación del proyecto.   
+- [feature/coord-devops-segundo-parcial] Actualización de la documentación del proyecto y fixes meores.   
   PR: [#176](https://github.com/fioremos/simulador-planificacion-financiera/pull/176) — @fioremos (Coordinador / DevOps)
 
 ### Fixed

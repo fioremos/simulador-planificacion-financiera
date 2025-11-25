@@ -168,8 +168,11 @@ En esta entrega se busco:
   - Programación Orientada a Objetos (POO): Clases de dominio. Encapsulamiento, métodos internos y relaciones entre clases.
   - Controlador principal: Manejo de eventos. Coordinación entre vista (DOM) y lógica de negocio.
   - Storage API (localStorage / sessionStorage): Persistencia de datos con operaciones CRUD. Serialización mediante JSON.
+  - API Service: Servicio para consumo de API externo.
+  - eventBus: Canal de centralizacion de comunicación
+  - SweetAlert2: Servicio de alertas.
 - **PlantUML** (creación de diagramas de actividades que documentan los flujos principales del sistema).  
-- **Git / GitHub** (control de versiones).  
+- **Git / GitHub** (control de versiones).
 - **Herramientas de Testing**  
   - **BrowserStack** (compatibilidad cross-browser y mobile).  
   - **Lighthouse / PageSpeed Insights** (performance y accesibilidad).  
@@ -191,6 +194,7 @@ En esta entrega se busco:
 - 📊 [Índice de Diagramas de Actividades](docs/04-diagramas/diagramas-doc.md)
 - 📊 [Índice de Diagramas de Clase](docs/04-diagramas/02-diagrama-de-clases/diagrama-clases-doc.md)
 - 🧪 [Índice de Test Cases(Jasmine)](js/test/testing-doc.md)
+- 🧪 [Documentacion de Librerias Implementadas](docs/06-librerias/libreria-doc.md)
 - 📜 [Changelog](changelog.md)
 
 ---
@@ -198,10 +202,10 @@ En esta entrega se busco:
 ## 👥 Integrantes del Grupo
 |     Nombre completo    | N° de Matrícula | Usuario GitHub |         Rol en esta entrega                           |
 |------------------------|-----------------|----------------|-------------------------------------------------------|
-|    Sol Ailen Kalpuj    |      154106     |   @skalapuj    |      Coordinador / DevOps + Tester QA                 | 
-|     Fiorella Mosca     |      154108     |   @fioremos    |      Desarrollador JS Eventos + DOM                   | 
-| Matías Nicolás Escobar |      151251     |   @MNEscobar   |      Desarrollador JS POO (Lógica de Negocio)         |  
-|     Ulises Capriles    |      146291     |   @UlisesC11   |       Desarrollador JS Local y Session Storage        |  
+|    Fiorella Mosca      |      154108     |   @fioremos    |      Coordinador / DevOps + Tester QA                 | 
+|   Sol Ailen Kalapuj    |      154106     |   @skalapuj    |      Desarrollador JS Asíncrono - Fetch & APIs        | 
+| Matías Nicolás Escobar |      151251     |   @MNEscobar   |         Tester QA/JS - Testing Avanzado               |  
+|     Ulises Capriles    |      146291     |   @UlisesC11   |       Desarrollador JS Librerías Externas             |  
 
 <pre>
 🎓 Datos Académicos
