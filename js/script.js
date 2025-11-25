@@ -98,13 +98,18 @@ document.addEventListener('DOMContentLoaded', () => {
     //Cargo las variables locales si existen
     let datosLocales = planificador.obtenerVariables('planificador', 'local');
     if (datosLocales){
-        planificador = Planificador.localFromJSON(datosLocales);
-
-        // Listar movimientos y metas en la interfaz
-        listarMovimientos(planificador.localToJSON().movimientos);
-        listarMetas(planificador.localToJSON().metasAhorro);
-        actualizarRadiosConMetas();
-    }  
+        // Como no existe una versión 'productiva' no es necesaria la migracion de datos antiguos, se purgan lo datos guardados en local.
+        if(datosLocales.movimientos.length !== 0 && datosLocales.movimientos[0].categoriaNombres === undefined)
+            planificador.eliminarVariables('planificador', 'local');
+        else{        
+            planificador = Planificador.localFromJSON(datosLocales);        
+            
+            // Listar movimientos y metas en la interfaz
+            listarMovimientos(planificador.localToJSON().movimientos);
+            listarMetas(planificador.localToJSON().metasAhorro);
+            actualizarRadiosConMetas();
+        }
+    }
 
     // Mostrar la sección inicial
     mostrarSeccion(hash);

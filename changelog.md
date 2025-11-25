@@ -3,8 +3,9 @@
 Este archivo se actualiza con cada Pull Request para registrar avances y correcciones.
 
 ---
+## [Unrelease]
 
-## [Unreleased]
+## [Release Segundo Parcial] - 2025-11-44
 
 ### Added
 - [feature/dev-libreria-externa-sweetalert2] Implementación y documentación de librería externa.  
@@ -15,8 +16,8 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
   PR:[#173](https://github.com/fioremos/simulador-planificacion-financiera/pull/173) - @MNEscobar (Tester QA/JS - Testing Avanzado )
 
 ### Changed
-
-
+- [feature/coord-devops-segundo-parcial] Actualización de la documentación del proyecto y fixes meores.   
+  PR: [#176](https://github.com/fioremos/simulador-planificacion-financiera/pull/176) — @fioremos (Coordinador / DevOps)
 
 ### Fixed
 - [feature/bugfix-#153-validacion-exportacion] Fix test exportacion.   
