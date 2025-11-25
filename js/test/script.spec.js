@@ -1,7 +1,12 @@
 import { Planificador } from '../models/Planificador.js';
 import { Exportador }   from '../models/Exportador.js';
+import { ApiService } from '../api/apiService.js';
+
 
 describe("Flujo de ejecución", function () {
+    beforeEach(function() {
+        spyOn(ApiService, 'fetchData').and.returnValue(Promise.resolve([]));
+    });
     describe("Fuljo 1: Creación de Movimiento con Planificador", function () {
         let planificador;
 
