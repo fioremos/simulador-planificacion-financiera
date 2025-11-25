@@ -142,6 +142,17 @@ El resultado final es una aplicación web interactiva, modular, persistente y te
 
 ---
 
+## ✅ Objetivos del segundo parcial (24/11/2025)
+
+Este segundo parcial busca consolidar los conocimientos de programación web asíncrona, integración de librerías externas y testing automatizado trabajados durante el cuatrimestre. 
+
+En esta entrega se busco:
+- Extender la aplicación web implementando un consumo asíncrono de datos mediante AJAX/Fetch
+- Integrar una librería externa de JavaScript (SweetAlert2)
+- Desarrollar una suite completa e testing que incluya validación de código, pruebas de funcionalidad y auditorías de rendimiento/accesibilidad.
+
+---
+
 
 ## 👨‍💻 Tecnologías Utilizadas
 - **HTML5** (estructura inicial).  

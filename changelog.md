@@ -3,18 +3,20 @@
 Este archivo se actualiza con cada Pull Request para registrar avances y correcciones.
 
 ---
+## [Unrelease]
 
-## [Unreleased]
+## [Release Segundo Parcial] - 2025-11-44
 
 ### Added
 - [feature/dev-libreria-externa-sweetalert2] Implementación y documentación de librería externa.  
   PR: [#168](https://github.com/fioremos/simulador-planificacion-financiera/pull/168) — @UlisesC11  (Desarrollador JS Librerías Externas)   
 - [feature/dev-async-fetch-api] Integración con la api de categorias.   
-  PR: [#172](https://github.com/fioremos/simulador-planificacion-financiera/pull/172) — @skalapuj (Desarrollador JS Asíncrono - Fetch & APIs)
+  PR: [#172](https://github.com/fioremos/simulador-planificacion-financiera/pull/172) — @skalapuj (Desarrollador JS Asíncrono - Fetch & APIs) 
 
 ### Changed
 
-
+- [feature/coord-devops-segundo-parcial] Actualización de la documentación del proyecto.   
+  PR: [#176](https://github.com/fioremos/simulador-planificacion-financiera/pull/176) — @fioremos (Coordinador / DevOps)
 
 ### Fixed
 - [feature/bugfix-#153-validacion-exportacion] Fix test exportacion.   
