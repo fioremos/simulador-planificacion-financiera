@@ -232,12 +232,12 @@ if(document.querySelectorAll('input[name="tipo"]')){
             const opcionesPorTipo = planificador.diccCategorias;
             const tipoSeleccionado = this.value;
             if(opcionesPorTipo.length === 0){
-                setFeedback('No se pudieron cargar las categorías.', 'Error'); 
+                AlertUtils.setFeedback('No se pudieron cargar las categorías.', 'Error'); 
                 return;
             }
             let permitidas = opcionesPorTipo.filter(c =>  c.categoria.toLowerCase() === tipoSeleccionado.toLowerCase())[0];
             if (permitidas === undefined || permitidas.opciones.length === 0) {
-                setFeedback(`No hay categorías disponibles para el tipo seleccionado: ${tipoSeleccionado}.`, 'Warning');
+                AlertUtils.setFeedback(`No hay categorías disponibles para el tipo seleccionado: ${tipoSeleccionado}.`, 'Warning');
                 return;
             }
 
@@ -247,7 +247,7 @@ if(document.querySelectorAll('input[name="tipo"]')){
             if(this.checked) {
                 if (this.value === "ahorro") {
                     if(!abrirCombo()){
-                        setFeedback('No hay metas de ahorro disponibles. Por favor, crea una antes de asignar un movimiento de ahorro.', 'Warning');
+                        AlertUtils.setFeedback('No hay metas de ahorro disponibles. Por favor, crea una antes de asignar un movimiento de ahorro.', 'Warning');
                         this.checked = false;
                         return;
                     }
@@ -433,7 +433,7 @@ function manejarMovimientoSubmit(event) {
     try {
         const movimiento = planificador.agregarMovimiento(datos);
         planificador.actualizarLocalVariables('planificador', 'planificador', null);
-        setFeedback('Movimiento agregado con éxito.', 'Éxito');
+        AlertUtils.setFeedback('Movimiento agregado con éxito.', 'Éxito');
         crearFilaMovimiento(datos, movimiento);
         
         Array.from(document.getElementsByClassName("form-ahorro")).forEach(el => {
@@ -467,7 +467,7 @@ function manejarMovimientoSubmit(event) {
 
         form.reset();
     } catch (error) {
-        setFeedback(error, 'Error');
+        AlertUtils.setFeedback(error, 'Error');
         cerrarModal('miModal');
     }
 }
@@ -487,11 +487,11 @@ function manejarExportar(event) {
     const ubicacion = document.querySelector('#ubicacion').value.trim();
 
     try {
-        exportador.exportarDatos(tipoDatos, formato, nombre, ubicacion , planificador);
+        let [expResult, message] = exportador.exportarDatos(tipoDatos, formato, nombre, ubicacion , planificador);
         planificador.actualizarSessionVariables('exportador', 'exportador:config', exportador);
-        setFeedback('Archivo exportado con éxito.', 'Éxito');
+        AlertUtils.setFeedback(message, expResult);
     } catch (error) {
-        setFeedback(error, 'Error');
+        AlertUtils.setFeedback(error, 'Error');
     }
 }
 
@@ -515,9 +515,8 @@ function manejarReportes(event) {
         planificador.actualizarSessionVariables('planificador', 'planificador:filtros', null);
         generarGraficoReporte(datos.datosFiltrados);
         actualizarReporteGastos(datos);
-        setFeedback('Reporte generado con éxito.', 'Éxito');
     } catch (error) {
-        setFeedback(error, 'Error');
+        AlertUtils.setFeedback(error, 'Error');
     }
 }
 
@@ -539,11 +538,11 @@ function manejarGuardarMeta(event) {
         crearFilaMeta(meta);
         actualizarRadiosConMetas();
         cerrarModal('MetasAhorroModal');
-        setFeedback('Objetivo guardado con éxito', 'Éxito');
+        AlertUtils.setFeedback('Objetivo guardado con éxito', 'Éxito');
         event.target.reset();
     } catch (error) {
         cerrarModal('MetasAhorroModal');
-        setFeedback(error, 'Error');
+        AlertUtils.setFeedback(error, 'Error');
     }
 }
 
@@ -557,7 +556,7 @@ function manejarMostrarObjetivo(event) {
 
     const form = event.target;
     const radioSeleccionado = form.querySelector('input[name="tipo"]:checked');
-    if (!radioSeleccionado) return setFeedback('Selecciona un objetivo.', 'Warning');
+    if (!radioSeleccionado) return AlertUtils.setFeedback('Selecciona un objetivo.', 'Warning');
 
     const datosMeta = planificador.obtenerMovimientosPorMeta(radioSeleccionado.value);
     const meta = planificador.getMetaById(radioSeleccionado.value);  
@@ -1070,46 +1069,6 @@ function cerrarModal(id) {
 }
 
 /**
- * Muestra un mensaje de feedback (éxito o error) usando SweetAlert2.
- * 
- * @param {string|Error} message - Mensaje a mostrar.
- * @param {string} typeMessage - Tipo de mensaje: 'Error', 'Éxito', 'Info', 'Warning'.
- * @param {Function} [callback=null] - Función a ejecutar después de cerrar (opcional).
- */
-function setFeedback(message, typeMessage, callback = null) {
-    const messageText = message instanceof Error ? message.message : String(message);
-
-    switch (typeMessage) {
-        case 'Error':
-            AlertUtils.error(typeMessage, messageText, callback);
-            break;
-
-        case 'Éxito':
-            AlertUtils.success(typeMessage, messageText, callback);
-            break;
-
-        case 'Info':
-            AlertUtils.info(typeMessage, messageText, callback);
-            break;
-
-        case 'Warning':
-            AlertUtils.warning(typeMessage, messageText, callback);
-            break;
-
-        case 'Loading':
-            AlertUtils.loading(typeMessage, messageText);
-            break;
-
-        case 'closeLoading':
-            AlertUtils.closeLoading(callback);
-        break;
-
-        default:
-            console.warn('Tipo de mensaje desconocido para setFeedback:', typeMessage);
-    }
-}
-
-/**
  * Recarga las variables de sesión desde el almacenamiento para un módulo dado.
  *
  * @function recargarVariablesSession
@@ -1187,23 +1146,23 @@ function listarMetas(metasAhorro) {
 // =============================================================
 
 /**
- * Muestra/Oculta el estado de carga usando el setFeedback del script.
+ * Muestra/Oculta el estado de carga usando el AlertUtils.setFeedback.
  * Se suscribe al evento 'api:loading' del EventBus.
  * @param {boolean} mostrar - true si se debe mostrar el indicador de carga.
  */
 function handleApiLoading(mostrar) {
     if (mostrar) {
-        setFeedback('Cargando datos...', 'Loading'); 
+        AlertUtils.setFeedback('Cargando datos...', 'Loading'); 
     } else {
-        setFeedback('', 'closeLoading'); 
+        AlertUtils.setFeedback('', 'closeLoading'); 
     }
 }
 
 /**
- * Muestra un error persistente usando el setFeedback del script.
+ * Muestra un error persistente usando el AlertUtils.setFeedback del script.
  * Se suscribe al evento 'api:error' del EventBus.
  * @param {string} message - Mensaje de error a mostrar.
  */
 function handleApiError(message) {
-    setFeedback(message, 'Error');
+    AlertUtils.setFeedback(message, 'Error');
 }

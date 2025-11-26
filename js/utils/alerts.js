@@ -126,6 +126,46 @@ export const AlertUtils = (() => {
         if (callback) callback();
     };
 
+     /**
+     * Muestra un mensaje de feedback (éxito o error) usando SweetAlert2.
+     * 
+     * @param {string|Error} message - Mensaje a mostrar.
+     * @param {string} typeMessage - Tipo de mensaje: 'Error', 'Éxito', 'Info', 'Warning'.
+     * @param {Function} [callback=null] - Función a ejecutar después de cerrar (opcional).
+     */
+    const setFeedback = (message, typeMessage, callback = null) => {
+        const messageText = message instanceof Error ? message.message : String(message);
+
+        switch (typeMessage) {
+            case 'Error':
+                error(typeMessage, messageText, callback);
+                break;
+
+            case 'Éxito':
+                success(typeMessage, messageText, callback);
+                break;
+
+            case 'Info':
+                info(typeMessage, messageText, callback);
+                break;
+
+            case 'Warning':
+                warning(typeMessage, messageText, callback);
+                break;
+
+            case 'Loading':
+                loading(typeMessage, messageText);
+                break;
+
+            case 'closeLoading':
+                closeLoading(callback);
+            break;
+
+            default:
+                console.warn('Tipo de mensaje desconocido para setFeedback:', typeMessage);
+        }
+    };
+    
     // Retornar interfaz pública
     return {
         success,
@@ -133,6 +173,7 @@ export const AlertUtils = (() => {
         warning,
         info,
         loading,
-        closeLoading
+        closeLoading,
+        setFeedback
     };
 })();
