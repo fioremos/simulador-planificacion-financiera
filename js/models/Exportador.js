@@ -30,11 +30,12 @@ export class Exportador {
             : planificador.metasAhorro.map(m => m.toJSON());
 
         const config = { tipo, formato, nombreArchivo, rutaDestino };
-
+        if (datos.length === 0) {return ["Warning", "No hay datos para exportar"];}
         try {
+            
             this.#exportar(datos, config);
             console.log('Exportación exitosa.');
-            return true;
+            return ['Éxito', 'Proceso de exportación finalizado con éxito'];
         } catch (error) {
             throw new Error('Valide los datos se produjo un error al intentar exportar: '+ error.message);
         }
