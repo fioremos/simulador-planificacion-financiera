@@ -228,57 +228,51 @@ if (document.querySelector('#form-objetivo-modal')) {
 if(document.querySelectorAll('input[name="tipo"]')){
     document.querySelectorAll('input[name="tipo"]').forEach(radio => {
         radio.addEventListener("change", function() {      
-            // Opciones permitidas según tipo
-            const opcionesPorTipo = planificador.diccCategorias;
-            const tipoSeleccionado = this.value;
-            if(opcionesPorTipo.length === 0){
-                AlertUtils.setFeedback('No se pudieron cargar las categorías.', 'Error'); 
-                return;
-            }
-            let permitidas = opcionesPorTipo.filter(c =>  c.categoria.toLowerCase() === tipoSeleccionado.toLowerCase())[0];
-            if (permitidas === undefined || permitidas.opciones.length === 0) {
-                AlertUtils.setFeedback(`No hay categorías disponibles para el tipo seleccionado: ${tipoSeleccionado}.`, 'Warning');
-                return;
-            }
-
-            // Normalizamos las opciones
-            permitidas = permitidas.opciones.map(op => op.toLowerCase().replace(/\s/g, ''));
-
-            if(this.checked) {
-                if (this.value === "ahorro") {
-                    if(!abrirCombo()){
-                        AlertUtils.setFeedback('No hay metas de ahorro disponibles. Por favor, crea una antes de asignar un movimiento de ahorro.', 'Warning');
-                        this.checked = false;
-                        return;
-                    }
-                } else {
-                    /** @type {HTMLCollectionOf<HTMLElement>} Todos los elementos con clase 'form-ahorro' */
-                    Array.from(document.getElementsByClassName("form-ahorro")).forEach(el => {
-                        el.classList.remove("visible");
-                        el.classList.add("invisible");
-                    });
+            try{
+                const tipoSeleccionado = this.value;
+                let permitidas = planificador.categoriasPermitidasPorTipo(tipoSeleccionado);
+                if (!permitidas || permitidas.length === 0) {
+                    AlertUtils.setFeedback(`No hay categorías disponibles para el tipo seleccionado: ${tipoSeleccionado}.`, 'Warning');
+                    return;
                 }
-            }
 
-            categoriaSelects.forEach((select, index) => {
-                const opciones = opcionesOriginales.get(index);
+                if(this.checked) {
+                    if (this.value === "ahorro") {
+                        if(!abrirCombo()){
+                            AlertUtils.setFeedback('No hay metas de ahorro disponibles. Por favor, crea una antes de asignar un movimiento de ahorro.', 'Warning');
+                            this.checked = false;
+                            return;
+                        }
+                    } else {
+                        /** @type {HTMLCollectionOf<HTMLElement>} Todos los elementos con clase 'form-ahorro' */
+                        Array.from(document.getElementsByClassName("form-ahorro")).forEach(el => {
+                            el.classList.remove("visible");
+                            el.classList.add("invisible");
+                        });
+                    }
+                }
 
-                // Limpiar opciones
-                select.innerHTML = "";
+                categoriaSelects.forEach((select, index) => {
+                    const opciones = opcionesOriginales.get(index);
 
-                // Agregar solo las permitidas
-                opciones.forEach(opt => {
-                    if (permitidas.includes(opt.value)) {
-                        select.appendChild(opt.cloneNode(true));
+                    // Limpiar opciones
+                    select.innerHTML = "";
+
+                    // Agregar solo las permitidas
+                    opciones.forEach(opt => {
+                        if (permitidas.includes(opt.value)) {
+                            select.appendChild(opt.cloneNode(true));
+                        }
+                    });
+
+                    // Seleccionar automáticamente la primera opción válida
+                    if (select.options.length > 0) {
+                        select.selectedIndex = 0;
                     }
                 });
-
-                // Seleccionar automáticamente la primera opción válida
-                if (select.options.length > 0) {
-                    select.selectedIndex = 0;
+                } catch (error) {
+                    AlertUtils.setFeedback(error, 'Error');
                 }
-            });
-
         });
     });
 }
