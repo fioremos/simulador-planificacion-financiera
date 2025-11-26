@@ -81,7 +81,7 @@ const error = (title, message = '', callback = null) => {
 ```  
 
 ### Caso de Uso 2: Función setFeedback 
-Fragmento de código sobre la función que maneja las alertas. [Link de referencia](/js/script.js#L1000)  
+Fragmento de código sobre la función que maneja las alertas. [Link de referencia](/js/utils/alerts.js#L136)  
 ```js
 /**
  * Muestra un mensaje de feedback (éxito o error) usando SweetAlert2.
