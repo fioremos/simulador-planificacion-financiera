@@ -3,6 +3,8 @@
 // =============================================================
 import { Planificador } from './models/Planificador.js';
 import { Exportador }   from './models/Exportador.js';
+import { AlertUtils }   from './utils/alerts.js';
+import { EventBus } from './utils/eventBus.js';
 
 
 
@@ -18,9 +20,6 @@ const reportesOption = 'reportes';
 const exportadorOption = 'exportar';
 const loginOption = 'login'; 
 const metasOption = 'metas';
-
-/** @type {HTMLElement} Elemento para mostrar mensajes de feedback */
-const feedback = document.querySelector('#feedback');
 
 /** @type {Object|null} Filtros actuales para reportes */
 let filtros = {fechaDesde: "", fechaHasta: "", categoria: "", moneda: ""};
@@ -48,8 +47,11 @@ let exportador = new Exportador;
 
 /** @type {HTMLElement} Elemento para mostrar el grafico del reporte */
 let grafico;
+let metaGrafico;
 
-
+/** @type {HTMLElement} Opciones originales de las categorias */
+let categoriaSelects;
+let opcionesOriginales = new Map();
 
 // =============================================================
 // Event Listeners
@@ -62,6 +64,16 @@ let grafico;
  * @event DOMContentLoaded
  */
 document.addEventListener('DOMContentLoaded', () => {
+    // Cargo los handle eventos del API
+    EventBus.subscribe('api:loading', handleApiLoading);
+    EventBus.subscribe('api:error', handleApiError);
+
+
+    // Guardamos un mapa con las opciones originales de cada select
+    categoriaSelects = document.querySelectorAll('select[name="categoria"]');
+    // Cargo las categorias y actualizo los selects
+    cargarCategoriasActualizarSelects();
+
     // Cachear selectores para evitar consultas repetidas
     secciones = document.querySelectorAll('.principal-section');
     sidebar = document.querySelector('.sidebar');
@@ -86,55 +98,18 @@ document.addEventListener('DOMContentLoaded', () => {
     //Cargo las variables locales si existen
     let datosLocales = planificador.obtenerVariables('planificador', 'local');
     if (datosLocales){
-        planificador = Planificador.localFromJSON(datosLocales);
-
-        // Listar movimientos y metas en la interfaz
-        listarMovimientos(planificador.localToJSON().movimientos);
-        listarMetas(planificador.localToJSON().metasAhorro);
-        actualizarRadiosConMetas();
-    } 
-    
-    // logica para seleccion de movimientos    
-    const tipoRadios = document.querySelectorAll('input[name="tipo"]');
-    const categoriaSelects = document.querySelectorAll('select[name="categoria"]');
-
-    // Guardamos un mapa con las opciones originales de cada select
-    const opcionesOriginales = new Map();
-    
-    categoriaSelects.forEach((select, index) => {
-        opcionesOriginales.set(index, Array.from(select.options));
-    });
-
-    // Opciones permitidas según tipo
-    const opcionesPorTipo = planificador.getOpcionesPorTipo();
-
-    tipoRadios.forEach(radio => {
-        radio.addEventListener("change", function () {
-            if(this.name != "tipo")
-                return;
-            const tipoSeleccionado = this.value;
-            const permitidas = opcionesPorTipo[tipoSeleccionado];
-
-            categoriaSelects.forEach((select, index) => {
-                const opciones = opcionesOriginales.get(index);
-
-                // Limpiar opciones
-                select.innerHTML = "";
-
-                // Agregar solo las permitidas
-                opciones.forEach(opt => {
-                    if (permitidas.includes(opt.value)) {
-                        select.appendChild(opt.cloneNode(true));
-                    }
-                });
-
-                // Seleccionar automáticamente la primera opción válida
-                if (select.options.length > 0) {
-                    select.selectedIndex = 0;
-                }
-            });
-        });
-    });
+        // Como no existe una versión 'productiva' no es necesaria la migracion de datos antiguos, se purgan lo datos guardados en local.
+        if(datosLocales.movimientos.length !== 0 && datosLocales.movimientos[0].categoriaNombres === undefined)
+            planificador.eliminarVariables('planificador', 'local');
+        else{        
+            planificador = Planificador.localFromJSON(datosLocales);        
+            
+            // Listar movimientos y metas en la interfaz
+            listarMovimientos(planificador.localToJSON().movimientos);
+            listarMetas(planificador.localToJSON().metasAhorro);
+            actualizarRadiosConMetas();
+        }
+    }
 
     // Mostrar la sección inicial
     mostrarSeccion(hash);
@@ -241,7 +216,7 @@ if (document.querySelector('#form-metas-modal')) {
 
 /** @type {HTMLFormElement|null} Formulario modal para objetivos de ahorro */
 if (document.querySelector('#form-objetivo-modal')) {
-    document.querySelector('#form-objetivo-modal').addEventListener('submit', manejarGuardarObjetivo);
+    document.querySelector('#form-objetivo-modal').addEventListener('submit', manejarMostrarObjetivo);
 }
 
 /**
@@ -249,17 +224,25 @@ if (document.querySelector('#form-objetivo-modal')) {
  * Si se selecciona "ahorro", abre el combo correspondiente; si no, oculta todos los combos de ahorro.
  */
 
-/** @type {NodeListOf<HTMLDivElement>} Todos los grupos de radio buttons con la clase 'form-tipo radio-group' */
-if(document.querySelectorAll(".form-tipo.radio-group")){
-    document.querySelectorAll(".form-tipo.radio-group").forEach(grupo => {
-        /** @type {NodeListOf<HTMLInputElement>} Todos los inputs tipo radio dentro del grupo */
-        const radios = grupo.querySelectorAll("input[type='radio']");
 
-        radios.forEach(radio => {
-            radio.addEventListener("change", function() {
-                if (this.checked) {
+if(document.querySelectorAll('input[name="tipo"]')){
+    document.querySelectorAll('input[name="tipo"]').forEach(radio => {
+        radio.addEventListener("change", function() {      
+            try{
+                const tipoSeleccionado = this.value;
+                let permitidas = planificador.categoriasPermitidasPorTipo(tipoSeleccionado);
+                if (!permitidas || permitidas.length === 0) {
+                    AlertUtils.setFeedback(`No hay categorías disponibles para el tipo seleccionado: ${tipoSeleccionado}.`, 'Warning');
+                    return;
+                }
+
+                if(this.checked) {
                     if (this.value === "ahorro") {
-                        abrirCombo(grupo.id);
+                        if(!abrirCombo()){
+                            AlertUtils.setFeedback('No hay metas de ahorro disponibles. Por favor, crea una antes de asignar un movimiento de ahorro.', 'Warning');
+                            this.checked = false;
+                            return;
+                        }
                     } else {
                         /** @type {HTMLCollectionOf<HTMLElement>} Todos los elementos con clase 'form-ahorro' */
                         Array.from(document.getElementsByClassName("form-ahorro")).forEach(el => {
@@ -268,11 +251,31 @@ if(document.querySelectorAll(".form-tipo.radio-group")){
                         });
                     }
                 }
-            });
+
+                categoriaSelects.forEach((select, index) => {
+                    const opciones = opcionesOriginales.get(index);
+
+                    // Limpiar opciones
+                    select.innerHTML = "";
+
+                    // Agregar solo las permitidas
+                    opciones.forEach(opt => {
+                        if (permitidas.includes(opt.value)) {
+                            select.appendChild(opt.cloneNode(true));
+                        }
+                    });
+
+                    // Seleccionar automáticamente la primera opción válida
+                    if (select.options.length > 0) {
+                        select.selectedIndex = 0;
+                    }
+                });
+                } catch (error) {
+                    AlertUtils.setFeedback(error, 'Error');
+                }
         });
     });
 }
-
 
 // =============================================================
 //  Funciones de inicialización
@@ -335,10 +338,68 @@ function initReportes(filtrosGuardado = null) {
     actualizarFechas(fechaAscii, filtros);
 
     const datos = planificador.generarReporte(filtros, fechaAscii);
-    generarGrafico(datos.datosFiltrados);
+    generarGraficoReporte(datos.datosFiltrados);
     actualizarReporteGastos(datos);
 }
 
+/**
+ * Carga las categorías desde la API y las usa para inicializar 
+ * los elementos <select> de categoría en el DOM.
+ * * Además, pre-procesa las categorías con funciones de orden superior:
+ * - map(): Crea una lista plana de todas las opciones.
+ * - filter(): Excluye la categoría 'Inversión' del select principal (ejemplo de filtro).
+ */
+async function cargarCategoriasActualizarSelects() {
+    try {
+        const categoriasData = await planificador.obtenerCategorias();
+        // Aplicamos filter() para excluir categorías vacías 
+        const categoriasFiltradas = categoriasData.filter(c =>  c.categoria.trim() !== "" );
+        planificador.diccCategorias = categoriasFiltradas;
+
+        // Uso de reduce() para contar el total de opciones disponibles
+        const totalOpcionesDisponibles = categoriasFiltradas.reduce((acumulador, categoria) => { return acumulador + categoria.opciones.length; }, 0);
+        console.log(`[Categorías UI] Total de opciones disponibles en la API: ${totalOpcionesDisponibles}`);
+        categoriasData.map(c => c.opciones).flat().forEach(opcion => {
+            console.log(`[Categorías UI] Opción disponible: ${opcion}`);
+        });
+
+        //Busco los selects de categoria en el DOM
+        let categoriaSelectsInv = Array.from(categoriaSelects);
+        categoriaSelectsInv.push(document.getElementById('categoriaRyE'));
+
+
+        if (categoriasData.length === 0) {
+            setFeedback('No se pudieron cargar las categorías. Usando fallback de UI.', 'Error'); // Dejar el select como 'Sin categorias '.
+            return;
+        }
+
+        categoriaSelectsInv.forEach((select, index) => {
+            if(select.id !== 'categoriaRyE')
+                select.innerHTML = ""; 
+
+ 
+            categoriasFiltradas.forEach(cat => {             
+               // Aplicamos map() para transformar cada opción antes de crear el elemento DOM
+                const opcionesMapeadas = cat.opciones.map(opcion => ({
+                    texto: capitalizar(opcion), // Capitalizamos el texto visible
+                    valor: opcion.toLowerCase().replace(/\s/g, '') // Lo pongo en minuscula para el value
+                }));
+
+                opcionesMapeadas.forEach(op => {
+                    const opt = new Option(op.texto, op.valor);
+                    select.appendChild(opt);
+                    opcionesOriginales.set(index, Array.from(select.options));
+                });
+            });
+                                
+        });
+
+
+    } catch (error) {
+        // El error ya fue manejado por ApiService y Planificador. Simplemente logueamos.
+        console.error("Fallo final al cargar categorías en la UI.");
+    }
+}
 
 
 // =============================================================
@@ -360,12 +421,13 @@ function manejarMovimientoSubmit(event) {
         categoria: form.querySelector('select[name="categoria"]').value,
         monto: parseFloat(form.querySelector('input[name="monto"]').value),
         objetivo: (form.querySelector('select[name="categoria"]').value==='objetivos')? form.querySelector('select[name="objetivos"]').value:null,
+        nombre: form.querySelector('select[name="categoria"]')[form.querySelector('select[name="categoria"]').selectedIndex].text,
     };
 
     try {
         const movimiento = planificador.agregarMovimiento(datos);
         planificador.actualizarLocalVariables('planificador', 'planificador', null);
-        setFeedback(feedback, 'Movimiento agregado con éxito.', false);
+        AlertUtils.setFeedback('Movimiento agregado con éxito.', 'Éxito');
         crearFilaMovimiento(datos, movimiento);
         
         Array.from(document.getElementsByClassName("form-ahorro")).forEach(el => {
@@ -377,9 +439,30 @@ function manejarMovimientoSubmit(event) {
         if (window.location.hash === "#dashboard") {
             cerrarModal('miModal');
         }
+
+        //Reseteo el combo de categorias:
+        categoriaSelects.forEach((select, index) => {
+            const opciones = opcionesOriginales.get(index);
+
+            // Limpiar opciones
+            select.innerHTML = "";
+
+            // Agregar solo las permitidas
+            opciones.forEach(opt => {
+                select.appendChild(opt.cloneNode(true));
+ 
+            });
+
+            // Seleccionar automáticamente la primera opción válida
+            if (select.options.length > 0) {
+                select.selectedIndex = 0;
+            }
+        });
+
         form.reset();
     } catch (error) {
-        setFeedback(feedback, error, true);
+        AlertUtils.setFeedback(error, 'Error');
+        cerrarModal('miModal');
     }
 }
 
@@ -398,11 +481,11 @@ function manejarExportar(event) {
     const ubicacion = document.querySelector('#ubicacion').value.trim();
 
     try {
-        exportador.exportarDatos(tipoDatos, formato, nombre, ubicacion , planificador);
+        let [expResult, message] = exportador.exportarDatos(tipoDatos, formato, nombre, ubicacion , planificador);
         planificador.actualizarSessionVariables('exportador', 'exportador:config', exportador);
-        setFeedback(feedback, 'Archivo exportado con éxito.', false);
+        AlertUtils.setFeedback(message, expResult);
     } catch (error) {
-        setFeedback(feedback, error, true);
+        AlertUtils.setFeedback(error, 'Error');
     }
 }
 
@@ -424,11 +507,10 @@ function manejarReportes(event) {
     try {
         const datos = planificador.generarReporte(filtros, document.getElementById('fechaRyE').value);
         planificador.actualizarSessionVariables('planificador', 'planificador:filtros', null);
-        generarGrafico(datos.datosFiltrados);
+        generarGraficoReporte(datos.datosFiltrados);
         actualizarReporteGastos(datos);
-        setFeedback(feedback, 'Reporte generado con éxito.', false);
     } catch (error) {
-        setFeedback(feedback, error, true);
+        AlertUtils.setFeedback(error, 'Error');
     }
 }
 
@@ -450,11 +532,11 @@ function manejarGuardarMeta(event) {
         crearFilaMeta(meta);
         actualizarRadiosConMetas();
         cerrarModal('MetasAhorroModal');
-        setFeedback(feedback, 'Objetivo guardado con éxito', false);
+        AlertUtils.setFeedback('Objetivo guardado con éxito', 'Éxito');
         event.target.reset();
     } catch (error) {
         cerrarModal('MetasAhorroModal');
-        setFeedback(feedback, error, true);
+        AlertUtils.setFeedback(error, 'Error');
     }
 }
 
@@ -463,20 +545,23 @@ function manejarGuardarMeta(event) {
  * 
  * @param {SubmitEvent} event - Evento de envío del formulario de objetivos.
  */
-function manejarGuardarObjetivo(event) {
+function manejarMostrarObjetivo(event) {
     event.preventDefault();
 
     const form = event.target;
     const radioSeleccionado = form.querySelector('input[name="tipo"]:checked');
-    if (!radioSeleccionado) return setFeedback(feedback, 'Selecciona un objetivo.', true);
+    if (!radioSeleccionado) return AlertUtils.setFeedback('Selecciona un objetivo.', 'Warning');
 
-    const datosMeta = planificador.getMetaByName(radioSeleccionado.value);
-    if (!datosMeta) {
+    const datosMeta = planificador.obtenerMovimientosPorMeta(radioSeleccionado.value);
+    const meta = planificador.getMetaById(radioSeleccionado.value);  
+    if (!datosMeta || !meta) {
+        console.log("No hay datos de Meta de Ahorro");
         cerrarModal('ObjetivosModal');
         return;
     }
 
-    actualizarMetaCard(datosMeta);
+    actualizarMetaCard(meta, datosMeta);
+    generarGraficoMeta(datosMeta);
     mostrarMetaCard(true);
     cerrarModal('ObjetivosModal');
     form.reset();
@@ -558,6 +643,15 @@ function mostrarSeccion(id) {
  */
 function abrirCombo() {
     const categoriaSelect = document.getElementsByName("objetivos");
+
+    if( planificador.metasAhorro.length === 0)
+        return false
+
+    for (let i = 0; i < categoriaSelect.length; i++) {
+        if (categoriaSelect[i] && categoriaSelect[i].innerHTML !== undefined) {
+            categoriaSelect[i].innerHTML = '';
+        }
+    }
     
     categoriaSelect.forEach(cat => {
         planificador.metasAhorro.forEach(ma => {
@@ -573,7 +667,7 @@ function abrirCombo() {
     el.classList.add("visible");
     el.classList.remove("invisible");
     });
-    
+    return true;
 }
 
 /**
@@ -609,7 +703,7 @@ function crearFilaMovimiento(datos, movimiento) {
 
     // Celdas
     const tdFecha = crearCelda(datos.fecha);
-    const tdCategoria = crearCelda(capitalizar(datos.categoria));
+    const tdCategoria = crearCelda(capitalizar((movimiento)? datos.nombre : datos.categoriaNombres));
     const tdMonto = crearCelda(`$${datos.monto.toLocaleString()}`);
     if (datos.tipo.toLowerCase() === 'gasto') tdMonto.classList.add('negative');
     if (datos.tipo.toLowerCase() === 'ahorro') tdMonto.classList.add('saving');
@@ -632,7 +726,7 @@ function crearFilaMovimiento(datos, movimiento) {
  *        {string} datosFiltrados[].categoria - Categoría del movimiento.
  *        {number} datosFiltrados[].monto - Monto del movimiento.
  */      
-function generarGrafico(datosFiltrados) {
+function generarGraficoReporte(datosFiltrados) {
     // --- Extraemos los datos para el gráfico ---
     const styles = getComputedStyle(document.documentElement);
     const colorIngreso = styles.getPropertyValue("--success").trim();
@@ -698,6 +792,80 @@ function generarGrafico(datosFiltrados) {
     });
 }
 
+function generarGraficoMeta(movimientosMEta) {
+  const ahorrosPorMes = {};
+  const meses = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
+
+  // 1. Agrupar y sumar montos por Mes/Año
+  movimientosMEta.forEach(m => {
+    const date = m.fecha;
+    // Clave: "Año-Mes" para ordenamiento (EJEMPLO "2025-10")
+    const key = `${date.getFullYear()}-${date.getMonth().toString().padStart(2, '0')}`;
+    
+    if (!ahorrosPorMes[key]) {
+    ahorrosPorMes[key] = {
+        montoTotal: 0,
+        label: `${meses[date.getMonth()]} ${date.getFullYear()}` // Etiqueta para el gráfico
+    };
+    }
+    ahorrosPorMes[key].montoTotal += m.monto;
+  });
+
+  // 2. Preparar los datos y etiquetas para Chart.js
+  const datosOrdenados = Object.keys(ahorrosPorMes)
+    .sort() // Ordena cronológicamente (gracias al formato "YYYY-MM")
+    .map(key => ahorrosPorMes[key]);
+
+  const labels = datosOrdenados.map(d => d.label);
+  const data = datosOrdenados.map(d => d.montoTotal);
+
+  if (metaGrafico) {
+        metaGrafico.destroy();
+    }
+
+  metaGrafico = new Chart(document.getElementById("meta-chart").getContext("2d"), {
+    type: 'line',
+    data: {
+      labels: labels,
+      datasets: [{
+        label: 'Ahorro Total por Mes',
+        data: data,
+        backgroundColor: [
+          getComputedStyle(document.documentElement).getPropertyValue("--success").trim(), 
+        ],
+        borderColor: [
+          getComputedStyle(document.documentElement).getPropertyValue("--success").trim(),
+        ],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      responsive: true,
+      scales: {
+        y: {
+          beginAtZero: true,
+          title: {
+            display: true,
+            text: 'Monto Ahorrado ($)'
+          }
+        },
+        x: {
+          title: {
+            display: true,
+            text: 'Período'
+          }
+        }
+      },
+      plugins: {
+        title: {
+          display: true,
+          text: 'Ahorro Acumulado por Mes'
+        }
+      }
+    }
+  });
+}
+
 /**
  * Actualiza la sección visual del reporte de gastos.
  * 
@@ -744,23 +912,34 @@ function actualizarReporteGastos(resultados) {
  * 
  * @param {Object} datosMeta - Datos de la meta de ahorro.
  */
-function actualizarMetaCard(datosMeta) {
+function actualizarMetaCard(datosMeta, movimientosMeta) {
+    let ahorradoMes = 0;
+    const porcentaje = planificador.getPorcentajeMeta(datosMeta);
+    movimientosMeta.forEach(mov => {
+        const fechaMovimiento = new Date(mov.fecha);
+        const fechaActual = new Date();
+        if (fechaMovimiento.getMonth() === fechaActual.getMonth() &&
+            fechaMovimiento.getFullYear() === fechaActual.getFullYear()) {
+            ahorradoMes += mov.monto;
+        }
+    });
+
     document.querySelector('#meta-nombre').textContent = datosMeta.nombre;
-    document.querySelector('#meta-ahorrado').textContent = `${datosMeta.montoActual}`;
+    document.querySelector('#meta-ahorrado').textContent = `$ ${datosMeta.montoActual}`;
+
     document.querySelector('#meta-mensaje').innerHTML = `
-        Este mes ingresaste ${datosMeta.montoActual}, alcanzaste un 
-        ${Math.round((datosMeta.montoActual / datosMeta.montoObjetivo) * 100)}% 
+        Este mes ingresaste $ ${ahorradoMes}, alcanzaste un 
+        ${porcentaje}% 
         de tu meta de ahorro.<br>
         <span class="highlight bold">
-            Solo te faltan ${datosMeta.montoObjetivo - datosMeta.montoActual}. ¡Vas por muy buen camino!
+            Solo te faltan $${datosMeta.montoObjetivo - datosMeta.montoActual}. ¡Vas por muy buen camino!
         </span>
     `;
 
-    const porcentaje = planificador.getPorcentajeMeta(datosMeta);
     const progress = document.querySelector('#meta-ahorro');
     const porcentajeElem = document.querySelector('#meta-porcentaje');
     progress.value = porcentaje;
-    porcentajeElem.textContent = `${porcentaje}% completado`;
+    porcentajeElem.textContent = `${porcentaje} % completado`;
 }
 
 /**
@@ -827,17 +1006,14 @@ function actualizarRadiosConMetas() {
 
     radioGroup1.innerHTML = '';
 
-    tbody.querySelectorAll('tr').forEach((fila) => {
-        const objetivo = fila.querySelector('td')?.textContent.trim();
-        if (!objetivo) {
-            return;
-        }
+    planificador.metasAhorro.forEach(meta => {
+        const objetivo = meta.nombre;
 
         const label = document.createElement('label');
         const input = document.createElement('input');
         input.type = 'radio';
         input.name = 'tipo';
-        input.value = objetivo;
+        input.value = meta.id;
 
         const span = document.createElement('span');
         span.classList.add('radio-cuadrado', 'horizontal');
@@ -884,46 +1060,6 @@ function cerrarModal(id) {
     const modal = document.getElementById(id);
     const modalBootstrap = bootstrap.Modal.getInstance(modal);
     modalBootstrap?.hide();
-}
-
-/**
- * Muestra un mensaje de feedback (éxito o error) en pantalla.
- * 
- * @param {HTMLElement} feedback - Elemento del DOM para el mensaje.
- * @param {string|Error} message - Mensaje a mostrar.
- * @param {boolean} error - Si es true, se trata de un mensaje de error.
- */
-function setFeedback(feedback, message, error) {
-    const overlay = document.getElementById('overlay');
-    if (error) {
-        console.log(message);
-        feedback.textContent = `${message.message}`;
-        feedback.classList.remove('success');
-        feedback.classList.add('error');
-        overlay.classList.remove('invisible');
-        overlay.classList.add('visible');
-
-        setTimeout(() => {
-            feedback.textContent = '';
-            feedback.classList.remove('error');
-            overlay.classList.remove('visible');
-            overlay.classList.add('invisible');
-
-        }, 1000);
-    } else {
-        feedback.textContent = message;
-        feedback.classList.remove('error');
-        feedback.classList.add('success');
-        overlay.classList.remove('invisible');
-        overlay.classList.add('visible');
-
-        setTimeout(() => {
-            feedback.textContent = '';
-            feedback.classList.remove('success', 'error');
-            overlay.classList.remove('visible');
-            overlay.classList.add('invisible');
-        }, 1000);
-    }
 }
 
 /**
@@ -997,4 +1133,30 @@ function listarMetas(metasAhorro) {
     metasAhorro.forEach(metaAhorro => {
         crearFilaMeta(metaAhorro);
     });
+}
+
+// =============================================================
+//  Manejo de Eventos del API
+// =============================================================
+
+/**
+ * Muestra/Oculta el estado de carga usando el AlertUtils.setFeedback.
+ * Se suscribe al evento 'api:loading' del EventBus.
+ * @param {boolean} mostrar - true si se debe mostrar el indicador de carga.
+ */
+function handleApiLoading(mostrar) {
+    if (mostrar) {
+        AlertUtils.setFeedback('Cargando datos...', 'Loading'); 
+    } else {
+        AlertUtils.setFeedback('', 'closeLoading'); 
+    }
+}
+
+/**
+ * Muestra un error persistente usando el AlertUtils.setFeedback del script.
+ * Se suscribe al evento 'api:error' del EventBus.
+ * @param {string} message - Mensaje de error a mostrar.
+ */
+function handleApiError(message) {
+    AlertUtils.setFeedback(message, 'Error');
 }

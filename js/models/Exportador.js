@@ -30,13 +30,14 @@ export class Exportador {
             : planificador.metasAhorro.map(m => m.toJSON());
 
         const config = { tipo, formato, nombreArchivo, rutaDestino };
-
+        if (datos.length === 0) {return ["Warning", "No hay datos para exportar"];}
         try {
+            
             this.#exportar(datos, config);
             console.log('Exportación exitosa.');
-            return true;
+            return ['Éxito', 'Proceso de exportación finalizado con éxito'];
         } catch (error) {
-            throw new Error('Valide los datos se produjo un error al intentar exportar ', error.message);
+            throw new Error('Valide los datos se produjo un error al intentar exportar: '+ error.message);
         }
     }
 
@@ -54,7 +55,7 @@ export class Exportador {
     #exportar(datos, config) {
         if (!Array.isArray(datos) || datos.length === 0){
             console.log("No hay datos para exportar.");
-            return false;
+            throw new Error('No hay datos para exportar.');
         }
         if (!this.validarConfiguracion(config)) {
             throw new Error('Configuración de exportación inválida');
@@ -103,7 +104,8 @@ export class Exportador {
      * @returns {boolean} true si es válida.
      */
     validarConfiguracion(config) {
-        const { formato, nombreArchivo, rutaDestino } = config;
+        const { tipo, formato, nombreArchivo, rutaDestino } = config;
+        if (!Exportador.hayDatosSeleccionados(tipo)) return false;
         if (!Exportador.esFormatoValido(formato)) return false;
         if (!Exportador.sonNombreYRutaValidos(nombreArchivo, rutaDestino)) return false;
         return true;
@@ -159,6 +161,16 @@ export class Exportador {
 
     /* ===== Métodos estáticos de validación ===== */
 
+    /**
+     * Verifica si hay datos seleccionados para exportar.
+     * @param {Array<string>} tipo - Tipos de datos seleccionados.
+     * @returns {boolean} true si hay datos seleccionados.
+     */
+    static hayDatosSeleccionados(tipo) {
+        const tiposDisponibles = ['transacciones', 'inversiones', 'performance', 'contribuciones', 'asignaciones', 'balances', 'flujo-fondos', 'descripcion-general', 'resumen-cuenta'];
+        return Array.isArray(tipo) && tipo.length > 0 && tipo.every(t => tiposDisponibles.includes(t));
+    }
+    
     /**
      * Verifica si el formato recibido es válido.
      * @param {string} formato - Formato a validar.

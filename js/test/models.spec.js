@@ -2,17 +2,19 @@ import { MetaAhorro } from '../models/MetaAhorro.js';
 import { Movimiento } from '../models/Movimiento.js';
 import { Planificador } from '../models/Planificador.js';
 import { Exportador }   from '../models/Exportador.js';
+import { ApiService } from '../api/apiService.js';
 
 describe("Model Movimiento", function () {
 
     describe("Constructor Movimientos", function () {
         it("debería crear un movimient correctamente", function () {
-            let movimiento = { tipo: 'Ingreso', categoria: 'Salud', fecha: '2025-01-15', monto: 200 };
+            let movimiento = { tipo: 'Ingreso', categoria: 'Salud', categoriaNombres: 'Salud', fecha: '2025-01-15', monto: 200 };
             
             const mov = new Movimiento(                
                 movimiento.fecha,
                 movimiento.tipo,
                 movimiento.categoria,
+                movimiento.categoriaNombres,
                 movimiento.monto,
                 movimiento.objetivo);
 
@@ -170,7 +172,7 @@ describe("Model Movimiento", function () {
         describe('Movimiento.toJSON()', () => {
             it('debería serializar correctamente el movimiento', function () {
                 const fecha = new Date("2024-05-10");
-                const mov = new Movimiento(fecha, "ingreso", "sueldo", 5000, 12);
+                const mov = new Movimiento(fecha, "ingreso", "sueldo", "Sueldo", 5000, 12);
 
                 const json = mov.toJSON();
 
@@ -179,6 +181,7 @@ describe("Model Movimiento", function () {
                     fecha: "2024-05-10",
                     tipo: "ingreso",
                     categoria: "sueldo",
+                    categoriaNombres: "Sueldo",
                     monto: 5000,
                     idObjetivo: 12
                 });
@@ -194,6 +197,7 @@ describe("Model Movimiento", function () {
                     fecha: "2024-04-22",
                     tipo: "gasto",
                     categoria: "salud",
+                    categoriaNombres: "Salud",
                     monto: 350,
                     idObjetivo: 5
                 };
@@ -210,6 +214,7 @@ describe("Model Movimiento", function () {
                     fecha: "2024-04-22",
                     tipo: "gasto",
                     categoria: "salud",
+                    categoriaNombres: "Salud",
                     monto: 350,
                 };
 
@@ -466,86 +471,105 @@ describe("Model Exportardor", function () {
 
     describe("Exportador.hayDatosSeleccionados()", function () {
         it("debería aceptar tipos de datos disponibles (resumen-cuenta)", function () {
-            const seleccion = "resumen-cuenta";
-            const tiposDisponibles = ['transacciones', 'inversiones', 'performance', 'contribuciones', 'asignaciones', 'balances', 'flujo-fondos', 'descripcion-general', 'resumen-cuenta'];
-            const tiposSeleccionados = seleccion
-                ? seleccion.split(',').map(e => e.trim()).filter(e => tiposDisponibles.includes(e.toLowerCase()))
-                : [];
+            const seleccion = ['resumen-cuenta'];
 
-            expect(exportador.hayDatosSeleccionados(tiposSeleccionados, seleccion.split(','))).toBeTrue();
+            expect(exportador.validarConfiguracion({tipo: seleccion, formato:  "CSV", nombreArchivo: "Archivo", rutaDestino:"C:\\Downloads"})).toBeTrue();
         });
 
         it("debería aceptar varios tipos de datos disponibles (Movimientos, Metas)", function () {
-            const seleccion = "resumen-cuenta, inversiones";
-            const tiposDisponibles = ['transacciones', 'inversiones', 'performance', 'contribuciones', 'asignaciones', 'balances', 'flujo-fondos', 'descripcion-general', 'resumen-cuenta'];
-            const tiposSeleccionados = seleccion
-                ? seleccion.split(',').map(e => e.trim()).filter(e => tiposDisponibles.includes(e.toLowerCase()))
-                : [];
+            const seleccion = ['resumen-cuenta' , 'inversiones'];
 
-            expect(exportador.hayDatosSeleccionados(tiposSeleccionados, seleccion.split(','))).toBeTrue();
+            expect(exportador.validarConfiguracion({tipo: seleccion, formato:  "CSV", nombreArchivo: "Archivo", rutaDestino:"C:\\Downloads"})).toBeTrue();
         });
 
         it("debería rechazar tipos de datos incorrectos (movimientos)", function () {
-            const seleccion = "movimientos";
-            const tiposDisponibles = ['transacciones', 'inversiones', 'performance', 'contribuciones', 'asignaciones', 'balances', 'flujo-fondos', 'descripcion-general', 'resumen-cuenta'];
-            const tiposSeleccionados = seleccion
-                ? seleccion.split(',').map(e => e.trim()).filter(e => tiposDisponibles.includes(e.toLowerCase()))
-                : [];
+            const seleccion = ['movimientos'];
 
-            expect(exportador.hayDatosSeleccionados(tiposSeleccionados, seleccion.split(','))).toBeFalse();
+            expect(exportador.validarConfiguracion({tipo: seleccion, formato:  "CSV", nombreArchivo: "Archivo", rutaDestino:"C:\\Downloads"})).toBeFalse();
         });
 
         it("debería rechazar tipos de datos vacíos", function () {
-            const seleccion = "";
-            const tiposDisponibles = ['transacciones', 'inversiones', 'performance', 'contribuciones', 'asignaciones', 'balances', 'flujo-fondos', 'descripcion-general', 'resumen-cuenta'];
-            const tiposSeleccionados = seleccion
-                ? seleccion.split(',').map(e => e.trim()).filter(e => tiposDisponibles.includes(e.toLowerCase()))
-                : [];
+            const seleccion = [];
 
-            expect(exportador.hayDatosSeleccionados(tiposSeleccionados, seleccion.split(','))).toBeFalse();
+            expect(exportador.validarConfiguracion({tipo: seleccion, formato:  "CSV", nombreArchivo: "Archivo", rutaDestino:"C:\\Downloads"})).toBeFalse();
         });
     });
 
     describe("Exportador.esFormatoValido()", function () {
         it("debería aceptar formatos válidos (CSV, PDF, JSON, XLSX)", function () {
-            expect(exportador.validarConfiguracion({formato:  "CSV", nombreArchivo: "Archivo", rutaDestino:"C:\\Downloads"})).toBeTrue();
-            expect(exportador.validarConfiguracion({formato:  "PDF", nombreArchivo: "Archivo", rutaDestino:"C:\\Downloads"})) .toBeTrue();
-            expect(exportador.validarConfiguracion({formato: "JSON", nombreArchivo: "Archivo", rutaDestino:"C:\\Downloads"})).toBeTrue();
-            expect(exportador.validarConfiguracion({formato: "XLSX", nombreArchivo: "Archivo", rutaDestino:"C:\\Downloads"})).toBeTrue();
+            expect(exportador.validarConfiguracion({tipo: ['resumen-cuenta'], formato:  "CSV", nombreArchivo: "Archivo", rutaDestino:"C:\\Downloads"})).toBeTrue();
+            expect(exportador.validarConfiguracion({tipo: ['resumen-cuenta'], formato:  "PDF", nombreArchivo: "Archivo", rutaDestino:"C:\\Downloads"})) .toBeTrue();
+            expect(exportador.validarConfiguracion({tipo: ['resumen-cuenta'], formato: "JSON", nombreArchivo: "Archivo", rutaDestino:"C:\\Downloads"})).toBeTrue();
+            expect(exportador.validarConfiguracion({tipo: ['resumen-cuenta'], formato: "XLSX", nombreArchivo: "Archivo", rutaDestino:"C:\\Downloads"})).toBeTrue();
         });
 
         it("debería aceptar formatos válidos en minúscula (csv, pdf, json, xlsx)", function () {
-            expect(exportador.validarConfiguracion({formato:  "csv", nombreArchivo: "Archivo", rutaDestino:"C:\\Downloads"})).toBeTrue();
-            expect(exportador.validarConfiguracion({formato:  "pdf", nombreArchivo: "Archivo", rutaDestino:"C:\\Downloads"})).toBeTrue();
-            expect(exportador.validarConfiguracion({formato: "json", nombreArchivo: "Archivo", rutaDestino:"C:\\Downloads"})).toBeTrue();
-            expect(exportador.validarConfiguracion({formato: "xlsx", nombreArchivo: "Archivo", rutaDestino:"C:\\Downloads"})).toBeTrue();
+            expect(exportador.validarConfiguracion({tipo: ['resumen-cuenta'], formato:  "csv", nombreArchivo: "Archivo", rutaDestino:"C:\\Downloads"})).toBeTrue();
+            expect(exportador.validarConfiguracion({tipo: ['resumen-cuenta'], formato:  "pdf", nombreArchivo: "Archivo", rutaDestino:"C:\\Downloads"})).toBeTrue();
+            expect(exportador.validarConfiguracion({tipo: ['resumen-cuenta'], formato: "json", nombreArchivo: "Archivo", rutaDestino:"C:\\Downloads"})).toBeTrue();
+            expect(exportador.validarConfiguracion({tipo: ['resumen-cuenta'], formato: "xlsx", nombreArchivo: "Archivo", rutaDestino:"C:\\Downloads"})).toBeTrue();
         });
 
         it("debería rechazar formatos inválidos (XML, TXT)", function () {
-            expect(exportador.validarConfiguracion({formato:  "XML", nombreArchivo: "Archivo", rutaDestino:"C:\\Downloads"})).toBeFalse();
-            expect(exportador.validarConfiguracion({formato:  "TXT", nombreArchivo: "Archivo", rutaDestino:"C:\\Downloads"})).toBeFalse();
+            expect(exportador.validarConfiguracion({tipo: ['resumen-cuenta'], formato:  "XML", nombreArchivo: "Archivo", rutaDestino:"C:\\Downloads"})).toBeFalse();
+            expect(exportador.validarConfiguracion({tipo: ['resumen-cuenta'], formato:  "TXT", nombreArchivo: "Archivo", rutaDestino:"C:\\Downloads"})).toBeFalse();
         });
 
         it("debería rechazar formatos vacíos", function () {
-            expect(exportador.validarConfiguracion({formato:  "", nombreArchivo: "Archivo", rutaDestino:"C:\\Downloads"})).toBeFalse();
+            expect(exportador.validarConfiguracion({tipo: ['resumen-cuenta'],formato:  "", nombreArchivo: "Archivo", rutaDestino:"C:\\Downloads"})).toBeFalse();
         });
     });
 
     describe("Exportador.sonNombreYRutaValidos()", function () {
         it("debería aceptar nombre y ruta válidos", function () {
-            expect(exportador.validarConfiguracion({formato:  "CSV", nombreArchivo: "reporte", rutaDestino:"C:\\Downloads"})).toBeTrue();
+            expect(exportador.validarConfiguracion({tipo: ['resumen-cuenta'], formato:  "CSV", nombreArchivo: "reporte", rutaDestino:"C:\\Downloads"})).toBeTrue();
         });
 
         it("debería rechazar nombre vacío", function () {
-            expect(exportador.validarConfiguracion({formato:  "CSV", nombreArchivo: "", rutaDestino:"C:\\Downloads"})).toBeFalse();
+            expect(exportador.validarConfiguracion({tipo: ['resumen-cuenta'], formato:  "CSV", nombreArchivo: "", rutaDestino:"C:\\Downloads"})).toBeFalse();
         });
 
         it("debería rechazar ruta vacía", function () {
-            expect(exportador.validarConfiguracion({formato:  "CSV", nombreArchivo: "reporte", rutaDestino:""})).toBeFalse();
+            expect(exportador.validarConfiguracion({tipo: ['resumen-cuenta'], formato:  "CSV", nombreArchivo: "reporte", rutaDestino:""})).toBeFalse();
         });
 
         it("debería rechazar nombre con extensión (reporte.pdf)", function () {
-            expect(exportador.validarConfiguracion({formato:  "CSV", nombreArchivo: "reporte.pdf", rutaDestino:"C:\\Downloads"})).toBeFalse();
+            expect(exportador.validarConfiguracion({tipo: ['resumen-cuenta'], formato:  "CSV", nombreArchivo: "reporte.pdf", rutaDestino:"C:\\Downloads"})).toBeFalse();
+        });
+    });
+
+    describe("serialización", function () {
+        describe('Exportador.toJSON()', () => {
+            it('serializa correctamente los filtros', function () {
+                const exp = new Exportador();
+                exp.filtrosExportacion = { a: 1, b: 2 };
+
+                const json = exp.sessionToJSON();
+
+                expect(json).toEqual({
+                    filtrosExportador: JSON.stringify({ a: 1, b: 2 })
+                });
+            });
+        });
+
+        describe('Exportador.sessionExpFromJSON()', () => {
+            it('carga correctamente los filtros cuando se pasa un objeto', function () {
+                const exp = new Exportador();
+
+                const filtros = { x: 10, y: 20 };
+                exp.sessionExpFromJSON(filtros);
+
+                expect(exp.filtrosExportacion).toEqual(filtros);
+            });
+
+            it('no cambia filtrosExportacion si se pasa null', function () {
+                const exp = new Exportador();
+                exp.filtrosExportacion = { inicial: true };
+
+                exp.sessionExpFromJSON(null);
+
+                expect(exp.filtrosExportacion).toEqual({ inicial: true });
+            });
         });
     });
 
@@ -590,6 +614,7 @@ describe("Model Planificador", function () {
      let planificador;
 
     beforeEach(function () {
+        spyOn(ApiService, 'fetchData').and.returnValue(Promise.resolve([]));
         planificador = new Planificador();  
     });
 
@@ -699,6 +724,58 @@ describe("Model Planificador", function () {
             expect(planificador.movimientos.length).toBe(movimientosPrevios - 1);
         });
     });
+
+    describe('Funcion categoriasPermitidasPorTipo()', function () {
+
+        const mockCategorias = [
+            { categoria: 'Ingreso', opciones: ['Sueldo', 'Intereses', 'Venta Activo'] },
+            { categoria: 'Gasto', opciones: ['Alimentos', 'Transporte Público', 'Hipoteca'] },
+            { categoria: 'Ahorro', opciones: [] },
+            { categoria: 'Inversion', opciones: ['Fondo Común', 'Acciones Exterior'] }
+        ];
+
+        it('debe retornar las opciones para un tipo válido', function () {
+            planificador.diccCategorias = mockCategorias;
+            const tipo = 'Ingreso';
+            
+            const resultadoEsperado = ['sueldo', 'intereses', 'ventaactivo'];
+            
+            expect(planificador.categoriasPermitidasPorTipo(tipo)).toEqual(resultadoEsperado);
+        });
+
+        
+        it('debe funcionar correctamente independientemente del case del tipo seleccionado', function () {
+            planificador.diccCategorias = mockCategorias;
+            const tipo = 'iNgReSo';
+            
+            const resultadoEsperado = ['sueldo', 'intereses', 'ventaactivo'];
+            
+            expect(planificador.categoriasPermitidasPorTipo(tipo)).toEqual(resultadoEsperado);
+        });
+
+        it('debe lanzar un error si this.diccCategorias está vacío', function () {
+            planificador.diccCategorias = [];
+            
+            // Se espera que la llamada lance un Error con el mensaje específico
+            expect(() => planificador.categoriasPermitidasPorTipo('Gasto')).toThrowError(/No se pudieron cargar las categorías./);
+        });
+        
+        it('debe retornar null si el tipo seleccionado no se encuentra en las categorías', function () {
+            planificador.diccCategorias = mockCategorias;
+            const tipoInexistente = 'Transferencia';
+            
+            expect(planificador.categoriasPermitidasPorTipo(tipoInexistente)).toBeNull();
+        });
+
+        it('debe retornar null si la categoría existe pero su array de opciones está vacío', function ()  {
+            planificador.diccCategorias = mockCategorias;
+            const tipoVacio = 'Ahorro';
+            
+            // 'Ahorro' existe en mockCategorias, pero sus opciones están vacías []
+            expect(planificador.categoriasPermitidasPorTipo(tipoVacio)).toBeNull();
+        });
+
+    });
     
     describe("Función agregarMetaAhorro()", function () {
         it("debería agregar una meta válida correctamente", function () {
@@ -763,7 +840,7 @@ describe("Model Planificador", function () {
     });
 
     describe("serialización", function () {
-        describe('MetaAhorro.toJSON()', () => {
+        describe('MetaAhorro.toJSON()', function ()  {
             it('debería serializar correctamente la meta de ahorro', function () {
                 const fecha = "2026-05-10";
                 const mov = new MetaAhorro("Viaje", 5000, fecha);
@@ -795,7 +872,7 @@ describe("Model Planificador", function () {
 
         });
 
-        describe('MetaAhorro.fromJSON()', () => {
+        describe('MetaAhorro.fromJSON()', function ()  {
             it('debería reconstruir instancia desde JSON preservando datos', function () {
                 const data = {
                     id: 10,
@@ -843,7 +920,7 @@ describe("Model Planificador", function () {
     });
 
     describe("serialización", function () {
-        describe('Planificador.localToJSON()', () => {
+        describe('Planificador.localToJSON()', function ()  {
             it('serializa correctamente movimientos y metas', function () {
                 const movMock = { toJSON: () => ({ id: 1, tipo: "gasto" }) };
                 const metaMock = { toJSON: () => ({ id: 10, nombre: "Meta 1" }) };
@@ -861,7 +938,7 @@ describe("Model Planificador", function () {
             });
         });
 
-        describe('Planificador.sessionToJSON()', () => {
+        describe('Planificador.sessionToJSON()', function ()  {
             it('serializa correctamente los filtros', function () {
                 const plan = new Planificador();
                 plan.filtros = { año: 2025, tipo: "ingreso" };
@@ -874,7 +951,7 @@ describe("Model Planificador", function () {
             });
         });
 
-        describe("Planificador.localFromJSON()", () => {
+        describe("Planificador.localFromJSON()", function ()  {
             it('reconstruye movimientos y metas usando los fromJSON correspondientes', function () {
                 const jsonData = {
                     movimientos: [{ id:1, tipo: 'Ingreso', categoria: 'Salud', fecha: '2025-01-15', monto: 200 }],
@@ -897,7 +974,7 @@ describe("Model Planificador", function () {
             });
         });
 
-        describe("Planificador.sessionRepFromJSON()", () => {
+        describe("Planificador.sessionRepFromJSON()", function ()  {
             it('carga correctamente filtros si se pasa un objeto', function () {
                 const filtros = { mes: "Enero", categoria: "Gastos" };
 

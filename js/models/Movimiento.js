@@ -8,26 +8,37 @@ export class Movimiento {
     #fecha;
     #tipo;
     #categoria;
+    #categoriaNombres;
     #monto;
     #idObjetivo;
+    #tiposDisponibles;
+    #categoriasDisponibles;
+    #existente;
 
     /**
      * Crea un nuevo movimiento financiero.
      * @param {string|Date} fecha - Fecha del movimiento (YYYY-MM-DD o Date).
      * @param {string} tipo - Tipo de movimiento: 'ingreso', 'gasto', 'ahorro', 'inversión'.
      * @param {string} categoria - Categoría del movimiento: 'hogar', 'ocio', 'salud', 'sueldo', 'objetivos', 'otros'.
+     * @param {string} categoriaNombres - Nombre legible de la categoría.
      * @param {number} monto - Monto del movimiento (positivo).
+     * @param {number|null} idObjetivo - ID del objetivo asociado (opcional).
+     * @param {Array<string>} tiposDisponibles - Tipos válidos para validación (opcional).
+     * @param {Array<string>} categoriasDisponibles - Categorías válidas para validación (opcional).
+     * @param {boolean} existente - Indica si el movimiento ya existe (para omitir validación).
      * @throws {Error} - Si los datos no son válidos.
      */
-    constructor(fecha, tipo, categoria, monto, idObjetivo=null){
-        const datos = { fecha, tipo, categoria, monto };
-        if(!Movimiento.validar(datos)){
+    constructor(fecha, tipo, categoria, categoriaNombres, monto, idObjetivo=null, tiposDisponibles=[], categoriasDisponibles=[], existente=false) {
+        const datos = { fecha, tipo, categoria, categoriaNombres, monto };
+        const validaciones = {tiposDisponibles, categoriasDisponibles};
+        if(!Movimiento.validar(datos, validaciones) &&  !existente){
             throw new Error ("Datos de movimiento inválidos");
         }
         this.#id = Movimiento.generarId();
         this.#fecha = (fecha instanceof Date) ? fecha : new Date(fecha);
         this.#tipo = Movimiento.normalizarTipo(tipo);
         this.#categoria = Movimiento.normalizarCategoria(categoria);
+        this.#categoriaNombres = categoriaNombres;
         this.#monto = Number(monto);
         this.#idObjetivo = idObjetivo;
     }
@@ -74,10 +85,10 @@ export class Movimiento {
      * @param {Object} datos - { fecha, tipo, categoria, monto }
      * @returns {boolean} - true si todos los datos son válidos.
      */
-    static validar({ fecha, tipo, categoria, monto}){
+    static validar({ fecha, tipo, categoria, categoriaNombre, monto}, {tiposDisponibles = [], categoriasDisponibles = []} = {}) {
         if(!Movimiento.esFechaValida(fecha)) return false;
-        if(!Movimiento.esTipoValido(tipo)) return false;
-        if(!Movimiento.esCategoriaValida(categoria)) return false;
+        if(!Movimiento.esTipoValido(tipo, tiposDisponibles)) return false;
+        if(!Movimiento.esCategoriaValida(categoria, categoriasDisponibles)) return false;
         if(isNaN(Number(monto)) || Number(monto) <= 0) return false;
         return true;
     }
@@ -104,9 +115,10 @@ export class Movimiento {
      * @param {string} tipo
      * @returns {boolean}
      */
-    static esTipoValido(tipo) {
+    static esTipoValido(tipo, tiposValidos=[]) {
         if (!tipo) return false;
-        const tiposValidos = ['ingreso', 'ahorro', 'inversión', 'inversion', 'gasto'];
+        if (!tiposValidos || tiposValidos.length === 0) 
+            tiposValidos = ['ingreso', 'ahorro', 'inversión', 'inversion', 'gasto'];
         return tiposValidos.includes(String(tipo).trim().toLowerCase());
     }
 
@@ -115,9 +127,12 @@ export class Movimiento {
      * @param {string} categoria
      * @returns {boolean}
      */
-    static esCategoriaValida(categoria) {
+    static esCategoriaValida(categoria, categoriasValidas=[]) {
         if (!categoria) return false;
-        const categoriasValidas = ['hogar', 'ocio', 'salud', 'sueldo', 'objetivos', 'otros', 'inversiones'];
+
+        if(!categoriasValidas || categoriasValidas.length === 0)
+            categoriasValidas = ['hogar', 'ocio', 'salud', 'sueldo', 'objetivos', 'otros', 'inversiones'];
+
         return categoriasValidas.includes(String(categoria).trim().toLowerCase());
     }
 
@@ -133,6 +148,7 @@ export class Movimiento {
             fecha: this.#fecha.toISOString().split('T')[0],
             tipo: this.#tipo,
             categoria: this.#categoria,
+            categoriaNombres: this.#categoriaNombres,
             monto: this.#monto,
             idObjetivo: this.#idObjetivo
         };
@@ -144,7 +160,7 @@ export class Movimiento {
      * @returns {Movimiento} - Instancia reconstruida.
      */
     static fromJSON(json) {
-        const instancia = new Movimiento(json.fecha, json.tipo, json.categoria, json.monto, json.idObjetivo);
+        const instancia = new Movimiento(json.fecha, json.tipo, json.categoria, json.categoriaNombres, json.monto, json.idObjetivo, [], [], true);
         if (json.id) instancia.#id = json.id;
         return instancia;
     }

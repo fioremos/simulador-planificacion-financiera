@@ -403,22 +403,113 @@
 ---
 ---
 
+### Suite 7: Util AlertUtils (SweetAlert2 Wrapper)
+
+#### Funciones Testeadas:
+- **`AlertUtils (Inicialización)`**: Verifica que el módulo se importe correctamente y aplique la configuración global (colores, z-index).
+- **`AlertUtils.success()`**: Valida la invocación de alertas de éxito con temporizador.
+- **`AlertUtils.error()` / `.warning()`**: Valida la invocación de alertas de error y advertencia con sus iconos correspondientes.
+- **`AlertUtils.loading()` / `.closeLoading()`**: Verifica la visualización de alertas de carga bloqueantes y su correcto cierre programático.
+- **`Callback Execution`**: Verifica la ejecución de lógica asíncrona tras la confirmación del usuario.
+
+#### Test 1: `Inicialización y Configuración`
+
+**Casos de Prueba:**
+
+| #  | Descripción                                                    | Tipo                  |
+|----|----------------------------------------------------------------|-----------------------|
+| 1  | El módulo AlertUtils debe estar definido e importar correctamente | Smoke Test    |
+| 2  | Debe respetar la configuración visual por defecto (colores y z-index) | UI Validation         |
+| 2  | Debe convertir mensajes no-string (como números) a string para setFeedback | Border Validation         |
+
+#### Test 2: `Métodos de Visualización (.success, .error, .warning)`
+
+| #  | Descripción                                                    | Tipo                  |
+|----|----------------------------------------------------------------|-----------------------|
+| 1  | El método .success() debe llamar a Swal con el icono 'success' y timer | Happy Path    |
+| 2  | El método .warning() debe llamar a Swal con el icono 'warning' | Happy Path            |
+| 3  | El método .error() debe llamar a Swal con el icono 'error'     | Happy Path            |
+| 4  | El método .info() debe llamar a Swal con icono 'info'          | Happy Path            |
+| 5  | El método .success() debe llamar a Swal con el icono 'success' y mensaje vacio     | Border Validation           |
+| 6  | El método .loading() debe llamar a Swal con icono 'loading' y mensaje vacio         | Border Validation            |
+
+#### Test 3: `Manejo de Callbacks`
+
+| #  | Descripción                                                    | Tipo                  |
+|----|----------------------------------------------------------------|-----------------------|
+| 1  | Debe ejecutar la función callback cuando el usuario confirma la alerta | Lógica Asíncrona      |
+| 2  | NO debe ejecutar la función callback cuando el usuario descarta/cierra la alerta | Lógica Asíncrona      |
+| 3  | el método .closeLoading() debe cerrar la alerta actual incluso sin un callback | Border Validation      |
+
+#### Test 4: `Indicadores de Carga (Loading State)`
+
+**Casos de Prueba:**
+
+| #  | Descripción                                                    | Tipo                  |
+|----|----------------------------------------------------------------|-----------------------|
+| 1  | El método .loading() debe mostrar una alerta bloqueante (sin botón cierre) | UI Validation         |
+| 2  | El método .closeLoading() debe cerrar la alerta actual         | Happy Path            |
+
+---
+---
+
+### Suite 8: Service ApiService & Planificador (Asincronía)
+
+#### Funciones Testeadas:
+- **`ApiService.fetchData()`**: Valida el consumo de APIs externas, el manejo de estados de carga (loading events) y el procesamiento de respuestas JSON.
+- **`Manejo de Errores y Resiliencia`**: Verifica que el sistema capture errores HTTP (404/500), errores de formato y ejecute lógica de reintentos automáticos ante fallos de red.
+- **`Planificador.obtenerCategorias()`**: Comprueba la integración entre el Modelo y el Servicio, asegurando la delegación correcta y la degradación elegante (retorno de valores por defecto) ante fallos.
+
+#### Test 1: `ApiService.fetchData (Consumo de API)`
+
+**Casos de Prueba:**
+
+| #  | Descripción                                                    | Tipo                  |
+|----|----------------------------------------------------------------|-----------------------|
+| 1  | Debe obtener datos exitosamente y emitir eventos de carga      | Happy Path            |
+| 2  | Debe lanzar error y emitir 'api:error' ante fallo HTTP (404)   | Validación de Errores |
+| 3  | Debe lanzar error si los datos recibidos no son un array       | Validación de Estructura |
+| 4  | Debe reintentar la petición tras un fallo y tener éxito en el segundo intento | Lógica de Negocio (Resiliencia) |
+| 5  | Debe manejar correctamente un Error 500 | Validación de Errores |
+| 6  | Debe fallar y lanzar el error final después de agotar maxRetries (3 intentos, 3 fallos) | Validación de Errores |
+| 7  | Debe lanzar error si los datos recibidos son 'null' | Validación de Errores |
+| 8  | Debe lanzar error si la respuesta .json() es 'undefined' (simulando malformación) | Validación de Errores |
+| 9  | Debe retornar un array vacío si el endpoint es válido pero sin datos | Validación de Errores |
+| 10  | showLoading debe emitir 'api:loading' con 'true' | Lógica de Negocio (Resiliencia) |
+| 11  | hideLoading debe emitir 'api:loading' con 'false' | Lógica de Negocio (Resiliencia) |
+| 12  | showError debe emitir 'api:error' con el mensaje provisto | Lógica de Negocio (Resiliencia) |
+| 13  | debe llamar a ApiService.fetchData con el endpoint '/categorias' | Lógica de Negocio (Resiliencia) |
+| 14  | debe manejar la excepción si fetchData lanza algo que no es un objeto Error | Lógica de Negocio (Resiliencia) |
+
+#### Test 2: `Planificador.obtenerCategorias (Delegación)`
+
+**Casos de Prueba:**
+
+| #  | Descripción                                                    | Tipo                  |
+|----|----------------------------------------------------------------|-----------------------|
+| 1  | Debe delegar en ApiService y retornar los datos obtenidos      | Integración           |
+| 2  | Debe manejar errores devolviendo un array vacío y registrando el error | Manejo de Errores (Graceful Degradation) |
+
+---
+---
+
 ## Métricas de Cobertura
 
 ### Resumen General
 | Métrica | Valor |
 |---------|-------|
-| Total de Tests      |116 |
-| Tests Pasando       |112 ✅ |
-| Tests Fallando      |4 ❌ |
-| Porcentaje de Éxito |96,5% |
+| Total de Tests      |194 |
+| Tests Pasando       |194 ✅ |
+| Tests Fallando      |0 ❌ |
+| Porcentaje de Éxito |100% |
 
 ### Cobertura por Tipo de Test
 | Tipo                       | Cantidad | Porcentaje |
 |----------------------------|----------|------------|
-| Happy Path                 | 62       | 53.5%        |
-|Stress Test                 |  2       |       2%|
-| Validación de Errores      | 52       | 44.5%        |
+| Happy Path                 | 108      | 55,6%      |
+|  Stress Test               |  3       |    0,15%    |
+| Validación de Errores      | 57       | 29,4%      |
+| Border Validation      | 4       | 0,21%      |
 
 
 ---
@@ -434,7 +525,9 @@
 ![Suite Detalle 3](screenshots/suite-detail-3.png) 
 ![Suite Detalle 4](screenshots/suite-detail-4.png)  
 ![Suite Detalle 5](screenshots/suite-detail-5.png)  
-![Suite Detalle 6](screenshots/suite-detail-6.png)  
+![Suite Detalle 6](screenshots/suite-detail-6.png)
+![Suite Detalle 7](screenshots/suite-details-7.png)  
+![Suite Detalle 9](screenshots/suite-details-8.png)
 
 ---
 
@@ -491,7 +584,7 @@
         });
   ```
 - **GitHub Issue:** [#153](https://github.com/fioremos/simulador-planificacion-financiera/issues/153)
-- **Estado:** Abierto
+- **Estado:** Resuelto
 
 ### Issue #154: Manejo de decimales en montos (porcentajeAhorro) en Reporte Financiero.
 - **Severidad:** Alta
@@ -532,5 +625,5 @@ Estas limitaciones se deben principalmente a las restricciones de tiempo con las
 
 ---
 
-**Última Actualización:** 14/11/2025   
-**Coordinador / DevOps + Tester QA:** @Skalapuj 
+**Última Actualización:** 27/11/2025   
+**Tester QA:** @fioremos
