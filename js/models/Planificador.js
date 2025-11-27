@@ -126,6 +126,26 @@ export class Planificador {
         }
     }
 
+    /**
+     * Obtiene las categorías filtradas por tipo seleccionado.
+     * @param {string} tipoSeleccionado Tipo selccionado en el  radio button
+     * @returns {Array<Object>} categorias filtradas
+     */
+    categoriasPermitidasPorTipo(tipoSeleccionado) {
+        // Opciones permitidas según tipo
+        const opcionesPorTipo = this.diccCategorias;
+        if(opcionesPorTipo.length === 0){
+            throw new Error('No se pudieron cargar las categorías.')
+        }
+
+        let permitidas = opcionesPorTipo.filter(c =>  c.categoria.toLowerCase() === tipoSeleccionado.toLowerCase())[0];
+        if (permitidas === undefined || permitidas.opciones.length === 0) {
+            return null;
+        }
+
+        // Normalizamos las opciones
+        return permitidas.opciones.map(op => op.toLowerCase().replace(/\s/g, ''));
+    }
     /* ======== Gestión de Metas ======== */
 
     /**

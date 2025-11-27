@@ -43,3 +43,12 @@ El proyecto ha superado todas las expectativas de calidad tras la integración c
 1. **Performance (96):** Se mantuvo la velocidad de carga pese a añadir librerías visuales pesadas.
 2. **Accesibilidad (100):** Se alcanzó la perfección en este rubro gracias a la corrección de estilos en botones.
 3. **Estabilidad:** La eliminación de errores de consola (Best Practices 96) garantiza un código limpio y mantenible.
+
+## Issues Conocidos
+
+### Issue #195: Baja de Performance.
+- **Severidad:** Baja
+- **Comportamiento Esperado:** Subir la performance.
+- **Comportamiento Obtenido:** Baja de un 2% en la Performance desde el Baselina a la integración con la librería y la API.
+- **GitHub Issue:** [#195](https://github.com/fioremos/simulador-planificacion-financiera/issues/195)
+- **Estado:** Resuelto

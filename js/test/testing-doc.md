@@ -420,21 +420,26 @@
 |----|----------------------------------------------------------------|-----------------------|
 | 1  | El módulo AlertUtils debe estar definido e importar correctamente | Smoke Test    |
 | 2  | Debe respetar la configuración visual por defecto (colores y z-index) | UI Validation         |
+| 2  | Debe convertir mensajes no-string (como números) a string para setFeedback | Border Validation         |
 
 #### Test 2: `Métodos de Visualización (.success, .error, .warning)`
 
 | #  | Descripción                                                    | Tipo                  |
 |----|----------------------------------------------------------------|-----------------------|
-| 1  | El método .success() debe llamar a Swal con el icono 'success' y timer | Happy Path            |
+| 1  | El método .success() debe llamar a Swal con el icono 'success' y timer | Happy Path    |
 | 2  | El método .warning() debe llamar a Swal con el icono 'warning' | Happy Path            |
 | 3  | El método .error() debe llamar a Swal con el icono 'error'     | Happy Path            |
 | 4  | El método .info() debe llamar a Swal con icono 'info'          | Happy Path            |
+| 5  | El método .success() debe llamar a Swal con el icono 'success' y mensaje vacio     | Border Validation           |
+| 6  | El método .loading() debe llamar a Swal con icono 'loading' y mensaje vacio         | Border Validation            |
 
 #### Test 3: `Manejo de Callbacks`
 
 | #  | Descripción                                                    | Tipo                  |
 |----|----------------------------------------------------------------|-----------------------|
 | 1  | Debe ejecutar la función callback cuando el usuario confirma la alerta | Lógica Asíncrona      |
+| 2  | NO debe ejecutar la función callback cuando el usuario descarta/cierra la alerta | Lógica Asíncrona      |
+| 3  | el método .closeLoading() debe cerrar la alerta actual incluso sin un callback | Border Validation      |
 
 #### Test 4: `Indicadores de Carga (Loading State)`
 
@@ -465,6 +470,16 @@
 | 2  | Debe lanzar error y emitir 'api:error' ante fallo HTTP (404)   | Validación de Errores |
 | 3  | Debe lanzar error si los datos recibidos no son un array       | Validación de Estructura |
 | 4  | Debe reintentar la petición tras un fallo y tener éxito en el segundo intento | Lógica de Negocio (Resiliencia) |
+| 5  | Debe manejar correctamente un Error 500 | Validación de Errores |
+| 6  | Debe fallar y lanzar el error final después de agotar maxRetries (3 intentos, 3 fallos) | Validación de Errores |
+| 7  | Debe lanzar error si los datos recibidos son 'null' | Validación de Errores |
+| 8  | Debe lanzar error si la respuesta .json() es 'undefined' (simulando malformación) | Validación de Errores |
+| 9  | Debe retornar un array vacío si el endpoint es válido pero sin datos | Validación de Errores |
+| 10  | showLoading debe emitir 'api:loading' con 'true' | Lógica de Negocio (Resiliencia) |
+| 11  | hideLoading debe emitir 'api:loading' con 'false' | Lógica de Negocio (Resiliencia) |
+| 12  | showError debe emitir 'api:error' con el mensaje provisto | Lógica de Negocio (Resiliencia) |
+| 13  | debe llamar a ApiService.fetchData con el endpoint '/categorias' | Lógica de Negocio (Resiliencia) |
+| 14  | debe manejar la excepción si fetchData lanza algo que no es un objeto Error | Lógica de Negocio (Resiliencia) |
 
 #### Test 2: `Planificador.obtenerCategorias (Delegación)`
 
@@ -483,17 +498,19 @@
 ### Resumen General
 | Métrica | Valor |
 |---------|-------|
-| Total de Tests      |163 |
-| Tests Pasando       |163 ✅ |
+| Total de Tests      |194 |
+| Tests Pasando       |194 ✅ |
 | Tests Fallando      |0 ❌ |
 | Porcentaje de Éxito |100% |
 
 ### Cobertura por Tipo de Test
 | Tipo                       | Cantidad | Porcentaje |
 |----------------------------|----------|------------|
-| Happy Path                 | 108       | 66,3%        |
-|Stress Test                 |  3       |       1,8%
-| Validación de Errores      | 52       | 31,9%        |
+| Happy Path                 | 108      | 55,6%      |
+|  Stress Test               |  3       |    0,15%    |
+| Validación de Errores      | 57       | 29,4%      |
+| Border Validation      | 4       | 0,21%      |
+
 
 ---
 
@@ -608,5 +625,5 @@ Estas limitaciones se deben principalmente a las restricciones de tiempo con las
 
 ---
 
-**Última Actualización:** 24/11/2025   
-**Tester QA:** @MNEscobar
+**Última Actualización:** 27/11/2025   
+**Tester QA:** @fioremos

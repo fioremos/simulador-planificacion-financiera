@@ -573,6 +573,41 @@ describe("Model Exportardor", function () {
         });
     });
 
+    describe("serialización", function () {
+        describe('Exportador.toJSON()', () => {
+            it('serializa correctamente los filtros', function () {
+                const exp = new Exportador();
+                exp.filtrosExportacion = { a: 1, b: 2 };
+
+                const json = exp.sessionToJSON();
+
+                expect(json).toEqual({
+                    filtrosExportador: JSON.stringify({ a: 1, b: 2 })
+                });
+            });
+        });
+
+        describe('Exportador.sessionExpFromJSON()', () => {
+            it('carga correctamente los filtros cuando se pasa un objeto', function () {
+                const exp = new Exportador();
+
+                const filtros = { x: 10, y: 20 };
+                exp.sessionExpFromJSON(filtros);
+
+                expect(exp.filtrosExportacion).toEqual(filtros);
+            });
+
+            it('no cambia filtrosExportacion si se pasa null', function () {
+                const exp = new Exportador();
+                exp.filtrosExportacion = { inicial: true };
+
+                exp.sessionExpFromJSON(null);
+
+                expect(exp.filtrosExportacion).toEqual({ inicial: true });
+            });
+        });
+    });
+
 });
 
 describe("Model Planificador", function () {
@@ -689,6 +724,58 @@ describe("Model Planificador", function () {
             expect(planificador.movimientos.length).toBe(movimientosPrevios - 1);
         });
     });
+
+    describe('Funcion categoriasPermitidasPorTipo()', function () {
+
+        const mockCategorias = [
+            { categoria: 'Ingreso', opciones: ['Sueldo', 'Intereses', 'Venta Activo'] },
+            { categoria: 'Gasto', opciones: ['Alimentos', 'Transporte Público', 'Hipoteca'] },
+            { categoria: 'Ahorro', opciones: [] },
+            { categoria: 'Inversion', opciones: ['Fondo Común', 'Acciones Exterior'] }
+        ];
+
+        it('debe retornar las opciones para un tipo válido', function () {
+            planificador.diccCategorias = mockCategorias;
+            const tipo = 'Ingreso';
+            
+            const resultadoEsperado = ['sueldo', 'intereses', 'ventaactivo'];
+            
+            expect(planificador.categoriasPermitidasPorTipo(tipo)).toEqual(resultadoEsperado);
+        });
+
+        
+        it('debe funcionar correctamente independientemente del case del tipo seleccionado', function () {
+            planificador.diccCategorias = mockCategorias;
+            const tipo = 'iNgReSo';
+            
+            const resultadoEsperado = ['sueldo', 'intereses', 'ventaactivo'];
+            
+            expect(planificador.categoriasPermitidasPorTipo(tipo)).toEqual(resultadoEsperado);
+        });
+
+        it('debe lanzar un error si this.diccCategorias está vacío', function () {
+            planificador.diccCategorias = [];
+            
+            // Se espera que la llamada lance un Error con el mensaje específico
+            expect(() => planificador.categoriasPermitidasPorTipo('Gasto')).toThrowError(/No se pudieron cargar las categorías./);
+        });
+        
+        it('debe retornar null si el tipo seleccionado no se encuentra en las categorías', function () {
+            planificador.diccCategorias = mockCategorias;
+            const tipoInexistente = 'Transferencia';
+            
+            expect(planificador.categoriasPermitidasPorTipo(tipoInexistente)).toBeNull();
+        });
+
+        it('debe retornar null si la categoría existe pero su array de opciones está vacío', function ()  {
+            planificador.diccCategorias = mockCategorias;
+            const tipoVacio = 'Ahorro';
+            
+            // 'Ahorro' existe en mockCategorias, pero sus opciones están vacías []
+            expect(planificador.categoriasPermitidasPorTipo(tipoVacio)).toBeNull();
+        });
+
+    });
     
     describe("Función agregarMetaAhorro()", function () {
         it("debería agregar una meta válida correctamente", function () {
@@ -753,7 +840,7 @@ describe("Model Planificador", function () {
     });
 
     describe("serialización", function () {
-        describe('MetaAhorro.toJSON()', () => {
+        describe('MetaAhorro.toJSON()', function ()  {
             it('debería serializar correctamente la meta de ahorro', function () {
                 const fecha = "2026-05-10";
                 const mov = new MetaAhorro("Viaje", 5000, fecha);
@@ -785,7 +872,7 @@ describe("Model Planificador", function () {
 
         });
 
-        describe('MetaAhorro.fromJSON()', () => {
+        describe('MetaAhorro.fromJSON()', function ()  {
             it('debería reconstruir instancia desde JSON preservando datos', function () {
                 const data = {
                     id: 10,
@@ -833,7 +920,7 @@ describe("Model Planificador", function () {
     });
 
     describe("serialización", function () {
-        describe('Planificador.localToJSON()', () => {
+        describe('Planificador.localToJSON()', function ()  {
             it('serializa correctamente movimientos y metas', function () {
                 const movMock = { toJSON: () => ({ id: 1, tipo: "gasto" }) };
                 const metaMock = { toJSON: () => ({ id: 10, nombre: "Meta 1" }) };
@@ -851,7 +938,7 @@ describe("Model Planificador", function () {
             });
         });
 
-        describe('Planificador.sessionToJSON()', () => {
+        describe('Planificador.sessionToJSON()', function ()  {
             it('serializa correctamente los filtros', function () {
                 const plan = new Planificador();
                 plan.filtros = { año: 2025, tipo: "ingreso" };
@@ -864,7 +951,7 @@ describe("Model Planificador", function () {
             });
         });
 
-        describe("Planificador.localFromJSON()", () => {
+        describe("Planificador.localFromJSON()", function ()  {
             it('reconstruye movimientos y metas usando los fromJSON correspondientes', function () {
                 const jsonData = {
                     movimientos: [{ id:1, tipo: 'Ingreso', categoria: 'Salud', fecha: '2025-01-15', monto: 200 }],
@@ -887,7 +974,7 @@ describe("Model Planificador", function () {
             });
         });
 
-        describe("Planificador.sessionRepFromJSON()", () => {
+        describe("Planificador.sessionRepFromJSON()", function ()  {
             it('carga correctamente filtros si se pasa un objeto', function () {
                 const filtros = { mes: "Enero", categoria: "Gastos" };
 
