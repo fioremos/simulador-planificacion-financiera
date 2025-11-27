@@ -103,4 +103,66 @@ describe("AlertUtils (Wrapper de SweetAlert2)", function() {
 
         expect(window.Swal.close).toHaveBeenCalled();
     });
+
+    describe('AlertUtils.setFeedback', () => {
+        it('debe llamar a error() y pasar el mensaje y callback correctamente para "Error"', () => {
+            const mensaje = 'Error de validación.';
+            
+            AlertUtils.setFeedback(mensaje, 'Error');
+
+            expect(window.Swal.fire).toHaveBeenCalledWith(jasmine.objectContaining({
+                icon: 'error',
+                title: 'Error',
+                text: "Error de validación."
+            }));
+        });
+
+        it('debe llamar a success() para el tipo "Éxito" sin callback', () => {
+            const tipoAlerta = 'Éxito'; // Este es el valor que activa el switch case Y es el título
+            const cuerpoMensaje = 'Operación exitosa.';
+
+            AlertUtils.setFeedback(cuerpoMensaje, tipoAlerta); 
+            
+            expect(window.Swal.fire).toHaveBeenCalledWith(jasmine.objectContaining({
+                title: tipoAlerta,
+                text: cuerpoMensaje,
+                icon: 'success',
+                timer: 2000 
+            }));
+        });
+
+        it('debe extraer el mensaje de un objeto Error para el caso "Error"', () => {
+            const errorObject = new Error('Falló la API.');
+            
+            AlertUtils.setFeedback(errorObject, 'Error');
+            
+            expect(window.Swal.fire).toHaveBeenCalledWith(jasmine.objectContaining({
+                icon: 'error',
+                title: 'Error',
+                text: "Falló la API."
+            }));
+        });
+
+        it('debe llamar a loading() pasando solo el título y el mensaje', () => {
+            AlertUtils.setFeedback('Cargando datos...', 'Loading');
+
+            expect(window.Swal.fire).toHaveBeenCalledWith(jasmine.objectContaining({
+                text: "Cargando datos...",
+                title: "Loading",
+                showConfirmButton: false,
+                allowOutsideClick: false,
+                didOpen: jasmine.any(Function) 
+            }));
+        });
+
+        it('debe llamar a console.warn para un tipo de mensaje no reconocido', () => {
+            const consoleWarnSpy = spyOn(console, 'warn');
+            AlertUtils.setFeedback('Advertencia', 'TipoInvalido');
+            
+            expect(consoleWarnSpy).toHaveBeenCalledWith(
+                'Tipo de mensaje desconocido para setFeedback:', 
+                'TipoInvalido'
+            );
+        });
+    });
 });
