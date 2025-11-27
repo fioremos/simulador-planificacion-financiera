@@ -573,6 +573,41 @@ describe("Model Exportardor", function () {
         });
     });
 
+    describe("serialización", function () {
+        describe('Exportador.toJSON()', () => {
+            it('serializa correctamente los filtros', function () {
+                const exp = new Exportador();
+                exp.filtrosExportacion = { a: 1, b: 2 };
+
+                const json = exp.sessionToJSON();
+
+                expect(json).toEqual({
+                    filtrosExportador: JSON.stringify({ a: 1, b: 2 })
+                });
+            });
+        });
+
+        describe('Exportador.sessionExpFromJSON()', () => {
+            it('carga correctamente los filtros cuando se pasa un objeto', function () {
+                const exp = new Exportador();
+
+                const filtros = { x: 10, y: 20 };
+                exp.sessionExpFromJSON(filtros);
+
+                expect(exp.filtrosExportacion).toEqual(filtros);
+            });
+
+            it('no cambia filtrosExportacion si se pasa null', function () {
+                const exp = new Exportador();
+                exp.filtrosExportacion = { inicial: true };
+
+                exp.sessionExpFromJSON(null);
+
+                expect(exp.filtrosExportacion).toEqual({ inicial: true });
+            });
+        });
+    });
+
 });
 
 describe("Model Planificador", function () {
