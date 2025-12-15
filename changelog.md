@@ -4,6 +4,9 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 
 ---
 ## [Unrelease]
+### Added
+- [feature/anexo-frameworks-node-js] Implementación y documentación de librería externa.  
+  PR: [#199](https://github.com/fioremos/simulador-planificacion-financiera/pull/199) — @skalapuj  (Documentador Técnico Frameworks )  
 
 ## [Release Segundo Parcial] - 2025-11-44
 
