@@ -207,6 +207,15 @@ En esta entrega se busco:
 | Matías Nicolás Escobar |      151251     |   @MNEscobar   |         Tester QA/JS - Testing Avanzado               |  
 |     Ulises Capriles    |      146291     |   @UlisesC11   |       Desarrollador JS Librerías Externas             |  
 
+---
+
+## 🔗 Anexos 
+
+* **Mesa N° 621284 - N° Matricula 154108 - Anexo - "Frameworks y Node JS"**
+    * [Ir al Anexo de Frameworks y Node JS](./anexos-mesa-621284-matricula-154108/anexos.md)
+
+---
+
 <pre>
 🎓 Datos Académicos
 <b>Carrera</b>: Tecnicatura Universitaria en Programación de Sistemas
@@ -215,3 +224,4 @@ En esta entrega se busco:
 </pre>  
 
 ---
+
