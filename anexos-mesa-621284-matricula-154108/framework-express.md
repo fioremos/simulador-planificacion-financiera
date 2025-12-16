@@ -14,7 +14,7 @@ Express.js es un framework minimalista para Node.js que facilita el desarrollo d
 
 ### Motivación y justificación
 
-El uso de Express.js permite organizar el backend de forma más ordenada y mantenible. En lugar de manejar manualmente las peticiones HTTP con Node.js puro, Express facilita la separación de responsabilidades mediante rutas y controladores. Esto resulta especialmente útil en este proyecto que maneja autenticación, formularios y persistencia de datos.
+El uso de Express.js permite organizar el backend de forma más ordenada y mantenible. En lugar de manejar manualmente las peticiones HTTP, Express facilita la separación de responsabilidades mediante rutas y controladores. Esto resulta especialmente útil en este proyecto que maneja autenticación, formularios y persistencia de datos.
 
 Además, Express se integra naturalmente con otras tecnologías del ecosistema JavaScript, como bases de datos NoSQL o SQL, y es ampliamente utilizado en entornos profesionales.
 
@@ -28,8 +28,8 @@ El nivel de dificultad para aprender Express.js es bajo a medio. El framework ut
 
 ### Ejemplo de código – Antes y después
 
-#### Node.js sin Express
-
+#### Antes sin Express
+[extracto](../js/models/Planificador.js#157)
 ```js
 agregarMetaAhorro(datos) {
         try {
@@ -52,7 +52,7 @@ agregarMetaAhorro(datos) {
     }
 ```
 
-#### Node.js con Express
+#### Despues con Express
 
 ```js
 const express = require("express");

@@ -37,7 +37,7 @@ Cambios requeridos:
 ### Ejemplo de código – Antes y después
 
 #### Antes (Vanilla JavaScript)
-
+[extracto](../index.html#440)
 ```html
 <div class="form-actions">
   <button type="submit" class="btn btn-inverse btn-blue">
@@ -45,6 +45,7 @@ Cambios requeridos:
   </button>
 </div>
 ```
+[extracto](../js/script.js#187)
 ```js
 document
   .querySelector("#form-dashboard-modal")
