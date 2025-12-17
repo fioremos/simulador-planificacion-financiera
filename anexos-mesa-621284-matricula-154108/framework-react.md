@@ -53,7 +53,7 @@ document
 ```
 
 #### Despues (React)
-```react
+```jsx
 import { useState } from "react";
 
 function FormMovimiento() {
