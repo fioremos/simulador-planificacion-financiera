@@ -5,6 +5,10 @@ Este archivo se actualiza con cada Pull Request para registrar avances y correcc
 ---
 ## [Unrelease]
 
+### Added
+- [feature/anexo-frameworks-node-js-matricula-151251] Implementación y documentación de librería externa.   
+  PR: [#201](https://github.com/fioremos/simulador-planificacion-financiera/pull/201) - @MNEscobar (Documentador Técnico Frameworks)
+
 ## [Release Segundo Parcial] - 2025-11-44
 
 ### Added

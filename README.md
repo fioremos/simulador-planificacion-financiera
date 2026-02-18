@@ -212,7 +212,7 @@ En esta entrega se busco:
 ## 🔗 Anexos 
 
 * **Mesa N° 630303 - N° Matricula 151251 - Anexo - "Frameworks y Node JS"**
-    * [Ir al Anexo de Frameworks y Node JS](./anexos-mesa-630303-matricula-151251/)
+    * [Ir al Anexo de Frameworks y Node JS](./anexos-mesa-630303-matricula-151251/anexos.md)
 
 ---
 

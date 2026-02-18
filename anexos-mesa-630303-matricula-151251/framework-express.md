@@ -69,7 +69,7 @@ En la arquitectura actual, la clase `Planificador` gestiona el estado en memoria
                 this.diccCategorias.flatMap(cat => cat.opciones).map(op => op.toLowerCase().replace(/\s/g, ''))
             );
 
-            this.#movimientos.push(movimiento);
+            this.#movimientos.push(movimiento); // Persistencia en Array local y LocalStorage
             console.log('Movimiento agregado:', movimiento.toJSON());
             return movimiento;
 
