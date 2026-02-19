@@ -32,8 +32,8 @@ Para demostrar el impacto en la arquitectura de datos, se analiza el método enc
 ### Versión Actual (Persistencia Local - Planificador.js)
 En la arquitectura actual, la clase `Planificador` gestiona el estado en memoria (`this.#movimientos`) y depende de `StorageUtil` para persistir los datos en el navegador del usuario. La lógica de negocio y el almacenamiento están acoplados en el cliente.
 
+**Fuente de código:** [Planificador.js](https://github.com/fioremos/simulador-planificacion-financiera/blob/develop/js/models/Planificador.js#L36-L78)
 ```javascript
-// Fragmento de Planificador.js
 /* ======== Gestión de Movimientos ======== */
 
     /**

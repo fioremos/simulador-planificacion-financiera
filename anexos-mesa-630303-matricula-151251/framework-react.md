@@ -31,9 +31,8 @@ Se toma como caso de estudio la función encargada de generar dinámicamente el 
 ### Versión Actual: (Vanilla JS - Imperativo)
 En la implementación actual, se utiliza manipulación directa del DOM. El desarrollador es responsable de crear los nodos, asignar clases, configurar estilos y limpiar el contenedor manualmente.
 
+**Fuente de código:** [script.js](https://github.com/fioremos/simulador-planificacion-financiera/blob/develop/js/script.js#L869-L908)
 ```javascript
-// Fragmento de script.js
-
 /**
  * Actualiza la sección visual del reporte de gastos.
  * 

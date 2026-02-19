@@ -3,7 +3,7 @@
 Este archivo se actualiza con cada Pull Request para registrar avances y correcciones.
 
 ---
-## [Unrelease]
+## [Release Examen Final] - 2026-02-20
 
 ### Added
 - [feature/anexo-frameworks-node-js-matricula-151251] Implementación y documentación de librería externa.   
